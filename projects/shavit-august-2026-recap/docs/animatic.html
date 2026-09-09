@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shavit — August 2026 recap · 3D animatic timeline</title>
+<style>
+  :root{color-scheme:dark;--bg:#0b0b0a;--surface:#141412;--raised:#1d1c19;--line:#37352e;--ink:#f7f5ef;--muted:#aaa69c;--brass:#ffc000;--ok:#9bc7a3;--warn:#e9a979;--bad:#e07d73}
+  *{box-sizing:border-box}
+  html{background:var(--bg)}
+  body{margin:0 auto;max-width:1240px;padding:26px 26px 80px;background:var(--bg);color:var(--ink);font:400 14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:var(--brass)}
+  h1{margin:0;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.02;letter-spacing:-.03em;text-transform:uppercase}
+  h2{margin:34px 0 12px;padding-top:12px;border-top:1px solid var(--line);font:600 12px/1.3 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+  .sub{margin:6px 0 0;color:var(--muted)}
+  .meta{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 18px}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font:500 11px/1.2 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.04em}
+  .pill.gold{border-color:#826716;color:var(--brass)}
+  .stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,300px);gap:12px;align-items:stretch}
+  .scout,.monitor{position:relative;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#080807}
+  .scout{min-height:520px;cursor:grab}.scout:active{cursor:grabbing}
+  .monitor{aspect-ratio:9/16;max-height:560px;justify-self:center;width:100%}
+  canvas{display:block;width:100%;height:100%}
+  .lbl{position:absolute;z-index:2;left:9px;top:8px;padding:4px 6px;border-radius:4px;background:#090908cc;color:#dad6cb;font:600 10px/1 ui-monospace,monospace;letter-spacing:.05em;pointer-events:none}
+  .lbl.r{left:auto;right:9px}
+  .hint{position:absolute;z-index:2;left:9px;bottom:8px;padding:5px 7px;border-radius:4px;background:#090908d9;color:var(--muted);font:500 9px/1.4 ui-monospace,monospace;pointer-events:none}
+  .readout{position:absolute;z-index:2;right:9px;bottom:8px;padding:5px 7px;border-radius:4px;background:#090908d9;color:var(--brass);font:500 10px/1.25 ui-monospace,monospace;pointer-events:none}
+  /* on-picture typography, July grammar */
+  .ov{position:absolute;inset:0;z-index:3;pointer-events:none;text-shadow:0 2px 14px #000}
+  .ov .copy{position:absolute;left:8%;right:8%;bottom:14%;font-weight:700;font-size:clamp(11px,1.6vw,18px);line-height:1.08;letter-spacing:.02em;text-transform:uppercase}
+  .ov .copy em{display:block;margin-top:5px;color:var(--brass);font:600 clamp(8px,1vw,11px)/1.2 ui-monospace,monospace;font-style:normal;letter-spacing:.07em}
+  .ov .prop{position:absolute;left:7%;bottom:5%;color:#fff;font:700 clamp(8px,1vw,11px)/1 ui-monospace,monospace;letter-spacing:.1em}
+  .ov .city{position:absolute;right:7%;bottom:5%;color:var(--brass);font:600 clamp(7px,.9vw,10px)/1 ui-monospace,monospace;letter-spacing:.08em;text-align:right}
+  .ov .rule{position:absolute;left:8%;bottom:11.5%;height:2px;background:var(--brass);width:0}
+  .ov.card{background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:12%}
+  .ov.card .title{font-weight:800;font-size:clamp(14px,2.2vw,26px);line-height:1.05;letter-spacing:.03em;text-transform:uppercase;text-align:center}
+  .ov.card .rule{position:static;margin-top:12px;height:2px;background:var(--brass)}
+  .ov .tag{position:absolute;left:6%;top:5%;padding:3px 6px;border:1px solid var(--brass);border-radius:4px;background:#000c;color:var(--brass);font:700 8px/1.2 ui-monospace,monospace;letter-spacing:.06em;max-width:88%}
+  .ov .tag.red{border-color:var(--bad);color:#ffb7ae}
+  .ov .split-l,.ov .split-r{position:absolute;bottom:5%;color:#fff;font:700 clamp(7px,.9vw,10px)/1.2 ui-monospace,monospace;letter-spacing:.08em}
+  .ov .split-l{left:4%;width:44%}.ov .split-r{left:52%;width:44%}
+  .ov .split-l em,.ov .split-r em{display:block;color:var(--brass);font-style:normal;font-weight:600}
+  .ov .tile{position:absolute;left:52%;top:75.8%;width:45%;height:22.4%;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--brass);background:#000;color:#fff;font:800 clamp(7px,.85vw,10px)/1.25 ui-monospace,monospace;letter-spacing:.06em;padding:4px}
+  .ov .divider{position:absolute;left:50%;top:0;bottom:0;width:2px;background:#000;transform:translateX(-1px)}
+  .transport{display:grid;grid-template-columns:auto auto auto minmax(0,1fr) auto auto;gap:9px;align-items:center;margin-top:12px}
+  .transport button,.tl-jump button{appearance:none;border:1px solid var(--line);border-radius:8px;background:var(--raised);color:var(--ink);padding:8px 10px;font:600 11px/1 ui-monospace,monospace;cursor:pointer}
+  .transport button.primary{border-color:var(--brass);background:#332a0f;color:var(--brass)}
+  .transport input[type=range]{width:100%;accent-color:var(--brass)}
+  .transport select{appearance:none;border:1px solid var(--line);border-radius:8px;background:var(--raised);color:var(--ink);padding:8px 10px;font:600 11px/1 ui-monospace,monospace}
+  .timecode{min-width:120px;text-align:right;color:var(--muted);font:500 11px/1 ui-monospace,monospace}
+  .tl{position:relative;margin-top:12px;border:1px solid var(--line);border-radius:10px;background:#0e0e0c;padding:8px 8px 6px;overflow:hidden}
+  .tl-ruler{position:relative;height:14px;margin-bottom:4px}
+  .tl-ruler span{position:absolute;top:0;transform:translateX(-50%);color:var(--muted);font:500 8px/1 ui-monospace,monospace}
+  .tl-track{position:relative;display:flex;height:64px;gap:2px}
+  .tl-beat{position:relative;min-width:0;overflow:hidden;border-radius:6px;border:1px solid #2b2a25;background:#1a1916;cursor:pointer;padding:5px 6px;font:600 9px/1.25 ui-monospace,monospace;color:var(--muted)}
+  .tl-beat b{display:block;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tl-beat small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted);font-size:8px}
+  .tl-beat.ai{background:#2a2310;border-color:#5c4a17}
+  .tl-beat.split{background:#16232a;border-color:#2c4a56}
+  .tl-beat.card{background:#0b0b0a;border-color:#2b2a25}
+  .tl-beat.gate{box-shadow:inset 0 0 0 1px #8b3a31}
+  .tl-beat.active{outline:2px solid var(--brass);outline-offset:-1px;color:var(--ink)}
+  .playhead{position:absolute;top:8px;bottom:6px;width:2px;background:var(--brass);box-shadow:0 0 10px var(--brass);pointer-events:none;z-index:3}
+  .tl-jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .now{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin-top:12px}
+  .now>div{padding:13px;border:1px solid var(--line);border-radius:10px;background:#11110f}
+  .eyebrow{display:block;margin-bottom:5px;color:var(--muted);font:600 10px/1 ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase}
+  .now strong{display:block;font-size:15px}
+  .now p{margin:6px 0 0;color:var(--muted);font-size:13px}
+  .now .q{margin-top:8px;padding:8px 10px;border-left:2px solid var(--brass);background:#171408;color:#e8dcb8;font-size:12px}
+  .now .g{margin-top:8px;padding:8px 10px;border:1px solid #7d432f;border-radius:7px;background:#26150f;color:#f2cfbb;font-size:12px}
+  .table-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font:600 10px/1.25 ui-monospace,monospace;letter-spacing:.07em;text-transform:uppercase}
+  .runtime{font:600 12px/1.4 ui-monospace,monospace;color:var(--brass);white-space:nowrap}
+  .method{display:inline-block;padding:3px 5px;border-radius:4px;background:var(--raised);font:600 9px/1 ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .method.ai{background:#332a0f;color:var(--brass)}.method.gate{background:#3a1a15;color:#ffb7ae}
+  .beat-card{cursor:pointer}
+  .note{margin:10px 0 0;color:var(--muted);font-size:12px;max-width:90ch}
+  footer{margin-top:34px;color:var(--muted);font-size:12px}
+  @media(max-width:900px){.stage{grid-template-columns:1fr 210px}.now{grid-template-columns:1fr}}
+  @media(max-width:680px){body{padding:18px 12px 60px}.stage{grid-template-columns:1fr}.scout{min-height:340px}.monitor{width:min(60%,220px);max-height:none}.transport{grid-template-columns:auto auto auto 1fr;grid-auto-rows:auto}}
+</style>
+</head>
+<body data-spec="shavit-august-2026-animatic" data-annot-targets=".stage, .beat-card, .now, h2">
+  <h1>August 2026 in summary · 3D animatic</h1>
+  <p class="sub">How the reel could play, beat by beat, built from your eighteen notes (ten on spec v1.4 at 3:25–3:34 PM, eight on this page 3:48–4:02 PM). Every gallery, collage, and grid photo is shown whole; nothing is cropped. Blocking only: gold proxies stand in for generated motion, real thumbnails stand in for the plates. Back to the <a href="spec.html?v=1.6">spec</a>.</p>
+  <div class="meta"><span class="pill gold">62.83 s · 1885 frames · 30 fps</span><span class="pill">1080 × 1920</span><span class="pill">6 projects · 14 beats</span><span class="pill">no generation · no spend</span></div>
+
+  <div class="stage">
+    <div class="scout" id="scout-wrap"><span class="lbl">3D SCOUT · CAMERA + PROXY</span><span class="lbl r" id="scout-mode">AUTO ORBIT · DRAG TO LOOK</span><canvas id="scout"></canvas><span class="hint" id="hint">DRAG = ORBIT SCOUT · WHEEL = ZOOM</span><span class="readout" id="readout">—</span></div>
+    <div class="monitor"><span class="lbl">9:16 PROGRAM</span><canvas id="mon"></canvas><div class="ov" id="ov"></div></div>
+  </div>
+  <div class="transport">
+    <button id="prev" type="button" title="Previous beat">◀◀</button>
+    <button id="play" type="button" class="primary">PLAY</button>
+    <button id="next" type="button" title="Next beat">▶▶</button>
+    <input id="scrub" type="range" min="0" max="62830" value="0" step="1" aria-label="Timeline position">
+    <select id="speed" aria-label="Playback speed"><option value="1">1×</option><option value="0.5">0.5×</option><option value="0.25">0.25×</option></select>
+    <span class="timecode" id="tc">00:00.00 / 62.83</span>
+  </div>
+  <div class="tl" id="tl"><div class="tl-ruler" id="ruler"></div><div class="tl-track" id="track"></div><div class="playhead" id="playhead"></div></div>
+  <div class="tl-jump" id="jump"></div>
+
+  <div class="now">
+    <div><span class="eyebrow">Now playing</span><strong id="now-name">—</strong><p id="now-pic"></p><p id="now-text"></p><div class="q" id="now-note" hidden></div><div class="g" id="now-gate" hidden></div></div>
+    <div><span class="eyebrow">Method + camera</span><strong id="now-method">—</strong><p id="now-cam"></p><p class="note">Every camera in this animatic is a single-axis move on the real plate, the same rule the spec holds generation to. Crew figures are grey blocking proxies that stand in for real footage; they are never generated into a still.</p></div>
+  </div>
+
+  <h2>Beat map · click a row to jump</h2>
+  <div class="table-wrap"><table><thead><tr><th>Time</th><th>Beat</th><th>Picture + motion</th><th>Text</th><th>Method</th><th>Driven by your note</th></tr></thead><tbody id="beat-table"></tbody></table></div>
+  <footer>Horvitz pipeline · <code>shavit-august-2026-recap</code> · annotate any beat with the + note buttons; notes land in <code>docs/spec-inbox.jsonl</code>. Stage 3 stays owner-gated. No generation, spend, or posting until sign-off.</footer>
+
+<script type="module">
+import * as THREE from './vendor/three.module.min.js';
+const T='../assets/source/recent/thumbs/';
+const RISE={start:[0,2,16],end:[0,7,16],target:[0,2.4,0],fov:38,label:'Pure vertical drone rise'};
+const PUSH={start:[0,3,18],end:[0,3,11.5],target:[0,2.4,0],fov:42,label:'Straight forward drone push'};
+const WALK={start:[0,2.2,9.6],end:[0,2.2,5.4],target:[0,2.1,0],fov:48,label:'Optical-axis walkthrough, moderate pace'};
+const HOLDRISE={start:[0,3,11.5],end:[0,4.2,11.5],target:[0,2.4,0],fov:42,label:'Slow continued rise while the gallery cycles'};
+const NORWOOD=['ROUGH PLUMBING + DRYWALL COMPLETE','FINISHES NEXT'],BARRY=['EXTERIOR + LANDSCAPING COMPLETE','FINISHES UNDERWAY · SEPTEMBER 7 TARGET'],OAK=['STAIRS BUILT · A/C INSTALLED','BATH TILE + FINAL BEDROOM IN PROGRESS'],HOWDER=['PROJECT COMPLETE',''],LUDLAM=['FULLY DEMOLISHED',''],EWING=['FULLY DEMOLISHED · AHEAD OF SCHEDULE','EXTERIOR WORK COMPLETE'];
+const HILL='HILLSDALE, MICHIGAN',SB='SOUTH BEND, INDIANA';
+const HOWDER_PATH={start:[-3,2.2,8],end:[3,2.2,8],target:[0,2.1,0],fov:46,label:'Your recorded left→right path, aim locked on the kitchen, slowed to a person’s pace'};
+const HOWDER_HOLD={start:[3,2.2,8],end:[2.5,2.2,7.6],target:[0,2.1,0],fov:46,label:'Same kitchen shot, barely drifting, while the grid sits right'};
+const SIDE={start:[-4,3.2,16],end:[4,3.2,16],target:[0,2.4,0],fov:40,label:'Drone side to side, constant height and distance, aim locked on the house'};
+const SIDEHOLD={start:[4,3.2,16],end:[4.6,3.4,16],target:[0,2.4,0],fov:40,label:'Same side-to-side shot easing to a stop while the grid sits right'};
+const beats=[
+ {id:'title',t0:0,t1:1.80,type:'card',name:'Title',title:'AUGUST 2026 IN SUMMARY',method:'PALMIER',pic:'Black. Brass rule draws once.',text:'AUGUST 2026 IN SUMMARY'},
+ {id:'barry-drone',t0:1.80,t1:5.30,type:'shot',kind:'exterior',name:'Barry · finished exterior · OPENER',prop:'BARRY',city:HILL,image:'barry-07',cam:RISE,copy:BARRY,method:'HIGGSFIELD · DRONE RISE',tag:'HIGGSFIELD · DRONE RISE · OPENER',pic:'The reel opens on barry-07, the most finished exterior in the package. Vertical rise only.',note:'“a finished exterior should be an opener” (4:01) · “barry 7 which I want as the first shot with the drone shot and exterior”'},
+ {id:'barry-walk',t0:5.30,t1:10.30,type:'walk2',kind:'interior',name:'Barry · walkthrough 02 → 05',prop:'BARRY',city:HILL,images:['barry-02','barry-05'],cam:WALK,copy:BARRY,method:'HIGGSFIELD · WALKTHROUGH',tag:'HIGGSFIELD · WALKTHROUGH 02→05',pic:'One walkthrough: starts in the column room (02), cuts on motion into the hall (05) at the midpoint, keeps walking.',note:'“make sure this is a walkthrough 2-5”'},
+ {id:'barry-collage',t0:10.30,t1:11.80,type:'collage',name:'Barry · collage',prop:'BARRY',city:HILL,images:['barry-01','barry-03','barry-04','barry-06'],copy:BARRY,method:'NATIVE',pic:'Four finish details, full photos, 2×2, slow drift.',note:'“everything else can be a gallery or collage” · “we should be able to see the full photos”'},
+ {id:'oak-drone',t0:11.80,t1:15.80,type:'shot',kind:'exterior',name:'Oak · finished exterior',prop:'OAK',city:HILL,image:'oak-03',cam:SIDE,copy:OAK,method:'HIGGSFIELD · DRONE SIDE TO SIDE',tag:'HIGGSFIELD · DRONE SIDE TO SIDE',pic:'oak-03 side elevation with the new A/C; drone tracks side to side, aim locked.',note:'“I don’t want a drone push for the previous shot I want a drone side to side” (4:02)'},
+ {id:'oak-split',t0:15.80,t1:21.80,type:'split',name:'Oak · half and half',prop:'OAK',city:HILL,left:{type:'shot',kind:'exterior',image:'oak-03',cam:SIDEHOLD,label:'OAK · SAME SHOT'},right:{type:'grid',images:['oak-01','oak-02','oak-04','oak-05'],label:'PROGRESS · GRID'},copy:OAK,method:'HIGGSFIELD + NATIVE · HALF AND HALF',tag:'HALF AND HALF · SAME SHOT LEFT · GRID RIGHT',pic:'Left: the side-to-side shot eases to a stop. Right: stairs, drywall, tile, shower, full photos, stacked.',note:'“the same shot as the previous shot but the other photos should be in grid like fashion to the right” · “if you are going to do a gallery both images we should be able to see”'},
+ {id:'howder-pan',t0:21.80,t1:27.30,type:'shot',kind:'interior',name:'Howder · left to right',prop:'HOWDER',city:HILL,image:'howder-current-02',cam:HOWDER_PATH,copy:HOWDER,method:'HIGGSFIELD · LEFT→RIGHT · YOUR PATH',tag:'YOUR RECORDED PATH · LEFT→RIGHT · EDGE GUARD',pic:'Camera moves left to right across the finished kitchen as if a person is taking the whole room in. Your recorded path, 5.5s.',note:'“the camera should show left to right like you’re viewing the entire kitchen as if you were a person” · the one camera move you gave me',gate:'A lateral move can drift past the photographed edges of the kitchen. Any frame that shows space not in howder-current-02 rejects the take. Fallback: a Palmier pan across the still. No Howder exterior exists in today’s package; ask Shavit for one.'},
+ {id:'howder-ludlam',t0:27.30,t1:35.30,type:'split',name:'Howder | Ludlam · half and half',prop:'HOWDER · LUDLAM',city:HILL,left:{type:'shot',kind:'interior',image:'howder-current-02',cam:HOWDER_HOLD,label:'HOWDER · SAME SHOT',sub:'PROJECT COMPLETE'},right:{type:'grid',images:['howder-current-01','howder-current-04','ludlam-01'],textTile:'LUDLAM<br>FULLY DEMOLISHED',label:'AFTERS + LUDLAM · GRID'},copy:['COMPLETE  |  DEMOLISHED',''],method:'NATIVE · HALF AND HALF / HOLD',tag:'HALF AND HALF · LUDLAM HOLD',pic:'Left: the kitchen shot holds. Right: Howder afters (01, 04) and Ludlam, full photos, with a Ludlam text tile.',note:'“same note as the previous one grid half screen” + “one side’s howder the other is ludlam” · howder-03 cut',gate:'Ludlam’s photo is still not confirmed as this property; if Shavit does not confirm it, the tile stays text only. No Ludlam exterior in today’s package.'},
+ {id:'norwood-exterior',t0:35.30,t1:39.30,type:'shot',kind:'exterior',extend:true,name:'Norwood · exterior',prop:'NORWOOD',city:HILL,image:'norwood-04',cam:RISE,copy:NORWOOD,method:'HIGGSFIELD · EXTEND + RISE',tag:'HIGGSFIELD EXTEND · NEEDS SHAVIT OK',pic:'norwood-04 extended to a full front elevation, then one drone rise. Moved later per your 4:01 note: not finished enough to open.',note:'“these first couple of shots should come later this is not an opener” (4:01) · “get the norwood exterior into a full exterior I guess use higgs”',gate:'Extending the frame invents siding, roof, and lot that were never photographed. Needs Shavit’s OK, or a real full-exterior photo from him. Fallback: rise on norwood-04 as shot.'},
+ {id:'norwood-gallery',t0:39.30,t1:44.30,type:'gallery',name:'Norwood · gallery',prop:'NORWOOD',city:HILL,images:['norwood-01','norwood-02','norwood-03','norwood-06','norwood-08'],copy:NORWOOD,method:'NATIVE',pic:'Five kept stills, full photos, one second each, tiny push on each.',note:'“put first images that I didn’t say to remove into a gallery” · norwood-05 and -07 cut'},
+ {id:'ewing-exterior',t0:44.30,t1:47.80,type:'shot',kind:'exterior',name:'E Ewing · finished exterior',prop:'E EWING',city:SB,image:'ewing-02',cam:PUSH,copy:EWING,method:'HIGGSFIELD · DRONE PUSH',tag:'HIGGSFIELD · DRONE PUSH',pic:'Opens Indiana on ewing-02, the exterior Shavit himself asked for on Sep 2. Straight push (say the word and it becomes side to side too).',note:'“start with the finished exteriors for each project”'},
+ {id:'ewing-walk',t0:47.80,t1:55.30,type:'shot',kind:'interior',crew:true,name:'E Ewing · crew walkthrough',prop:'E EWING',city:SB,image:'ewing-01',cam:{...WALK,start:[0,2.2,10.4],end:[0,2.2,5.2],label:'Long slow walkthrough with crew in frame'},copy:EWING,method:'REAL CREW FOOTAGE · else HIGGSFIELD',tag:'PROXY CREW · REAL FOOTAGE FIRST',pic:'One continuous 7.5s walkthrough on ewing-01 with workers working. Grey figures are blocking proxies.',note:'“I want action shots o a walk through for ewing 1 of workers working”',gate:'People in a generated clip are fabricated people. First choice is the real Ewing 4K walkthrough already in the August Palmier library, or a fresh phone clip from the crew. Generating workers needs Shavit’s OK.'},
+ {id:'summary',t0:55.30,t1:59.80,type:'card',name:'Summary',title:'FIVE PROJECTS · TWO STATES · ONE STANDARD',method:'PALMIER',pic:'Black field, one brass rule.',text:'FIVE PROJECTS · TWO STATES · ONE STANDARD'},
+ {id:'end',t0:59.80,t1:62.83,type:'card',name:'End card',title:'SHAVIT · ROOTMAN',method:'PALMIER',pic:'July lockup behavior: draw once, hold. Final frame is not black.',text:'SHAVIT · ROOTMAN',end:true}
+];
+const TOTAL=62.83;
+const beatIndexAt=t=>{for(let i=beats.length-1;i>=0;i--)if(t>=beats[i].t0)return i;return 0};
+
+/* ---------- three setup ---------- */
+const scoutCanvas=document.getElementById('scout'),monCanvas=document.getElementById('mon');
+const scoutR=new THREE.WebGLRenderer({canvas:scoutCanvas,antialias:true}),monR=new THREE.WebGLRenderer({canvas:monCanvas,antialias:true});
+[scoutR,monR].forEach(r=>{r.setPixelRatio(Math.min(devicePixelRatio,2));r.outputColorSpace=THREE.SRGBColorSpace});
+const loader=new THREE.TextureLoader(),texCache={};
+function tex(name){if(!texCache[name]){const t=loader.load(T+name+'.jpg',t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=monR.capabilities.getMaxAnisotropy();t.needsUpdate=true;views.forEach(v=>v.fit&&v.fit())});texCache[name]=t}return texCache[name]}
+beats.forEach(b=>{(b.images||[]).forEach(tex);if(b.image)tex(b.image);['left','right'].forEach(s=>{if(b[s]){(b[s].images||[]).forEach(tex);if(b[s].image)tex(b[s].image)}})});
+const mat=(color,roughness=.85,opacity=1)=>new THREE.MeshStandardMaterial({color,roughness,transparent:opacity<1,opacity,side:THREE.DoubleSide});
+const marker=new THREE.Group();marker.add(new THREE.Mesh(new THREE.BoxGeometry(.55,.35,.7),new THREE.MeshStandardMaterial({color:0xffc000,roughness:.4})));const lens=new THREE.Mesh(new THREE.ConeGeometry(.22,.5,10),new THREE.MeshStandardMaterial({color:0xffdf66}));lens.rotation.x=Math.PI/2;lens.position.z=-.55;marker.add(lens);
+function baseScene(){const s=new THREE.Scene();s.background=new THREE.Color(0x080807);s.add(new THREE.HemisphereLight(0xfff5dc,0x30343b,2.1));const k=new THREE.DirectionalLight(0xffd777,2.5);k.position.set(8,14,12);s.add(k);return s}
+function photoPlane(){return new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xffffff,side:THREE.DoubleSide}))}
+function fitPlane(plane,t,maxW,maxH){const img=t&&t.image;if(!img||!img.width)return;const a=img.width/img.height;let w=maxW,h=w/a;if(h>maxH){h=maxH;w=h*a}plane.scale.set(w,h,1);plane.material.map=t;plane.material.needsUpdate=true}
+function buildExterior(s,extend){const g=new THREE.Group();s.add(g);
+  const slab=new THREE.Mesh(new THREE.BoxGeometry(12,.35,9),mat(0x47453b));slab.position.y=.18;g.add(slab);
+  const body=new THREE.Mesh(new THREE.BoxGeometry(10,4.8,7),mat(0xb8aa8f));body.position.y=2.75;g.add(body);
+  const roof=new THREE.Mesh(new THREE.ConeGeometry(7.25,3.2,4),mat(0x4b4036));roof.rotation.y=Math.PI/4;roof.scale.z=.72;roof.position.y=6.6;g.add(roof);
+  const porch=new THREE.Mesh(new THREE.BoxGeometry(4.5,.25,2.3),mat(0x6a6154));porch.position.set(0,.55,4.4);g.add(porch);
+  [-1.8,1.8].forEach(x=>{const p=new THREE.Mesh(new THREE.BoxGeometry(.15,2.7,.15),mat(0xd2c7ae));p.position.set(x,2,5);g.add(p)});
+  const grid=new THREE.GridHelper(34,34,0x5e512c,0x24231f);grid.material.opacity=.5;grid.material.transparent=true;g.add(grid);
+  if(extend){const ext=new THREE.Mesh(new THREE.PlaneGeometry(9.2,5.05),new THREE.MeshBasicMaterial({color:0xffc000,transparent:true,opacity:.16,side:THREE.DoubleSide}));ext.position.set(0,3.05,3.55);g.add(ext);const edge=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(9.2,5.05)),new THREE.LineBasicMaterial({color:0xffc000}));edge.position.copy(ext.position);g.add(edge)}
+  const photo=photoPlane();photo.position.set(0,3.05,3.56);g.add(photo);return {group:g,photo,maxW:extend?5.6:9.2,maxH:5.05}}
+function buildInterior(s){const g=new THREE.Group();s.add(g);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(14,14),mat(0x514a3e));floor.rotation.x=-Math.PI/2;g.add(floor);
+  const back=new THREE.Mesh(new THREE.PlaneGeometry(11,6.4),mat(0xa39c8d));back.position.set(0,3.2,0);g.add(back);
+  const left=new THREE.Mesh(new THREE.PlaneGeometry(12,6.4),mat(0x77736a));left.rotation.y=Math.PI/2;left.position.set(-5.5,3.2,6);g.add(left);const right=left.clone();right.position.x=5.5;g.add(right);
+  const portal=new THREE.Mesh(new THREE.BoxGeometry(3.2,4.5,.22),mat(0x272622));portal.position.set(0,2.25,.12);g.add(portal);
+  const photo=photoPlane();photo.position.set(0,3.2,.26);g.add(photo);return {group:g,photo,maxW:10.2,maxH:5.8}}
+function buildStill(s){const g=new THREE.Group();s.add(g);const grid=new THREE.GridHelper(20,20,0x3a3320,0x1c1b18);grid.position.y=-3.2;g.add(grid);const photo=photoPlane();photo.position.set(0,0,0);g.add(photo);return {group:g,photo,maxW:9,maxH:10.5}}
+function crewFigure(x,z){const g=new THREE.Group();const body=new THREE.Mesh(new THREE.CylinderGeometry(.28,.32,1.3,12),mat(0x3a3a38,.9));body.position.y=.95;const head=new THREE.Mesh(new THREE.SphereGeometry(.22,12,10),mat(0x4a4a46,.9));head.position.y=1.85;const hat=new THREE.Mesh(new THREE.CylinderGeometry(.26,.26,.1,12),mat(0xd9a400,.6));hat.position.y=2.02;g.add(body,head,hat);g.position.set(x,0,z);return g}
+const smooth=t=>t*t*(3-2*t);
+/* lay 2×2 planes out to fill whatever the camera actually sees at distance z */
+function layoutGrid(planes,cam,z,names){const visH=2*z*Math.tan(THREE.MathUtils.degToRad(cam.fov)/2),visW=visH*cam.aspect,narrow=cam.aspect<.45,cols=narrow?1:2,rows=narrow?4:2,cw=visW/cols*.94,ch=visH/rows*.94;planes.forEach((p,i)=>{const t=tex(names[i]),img=t&&t.image,a=img&&img.width?img.width/img.height:.75;let w=cw,h=w/a;if(h>ch){h=ch;w=h*a}p.scale.set(w,h,1);const c=i%cols,r=Math.floor(i/cols);p.position.set(-visW/2+visW/cols*(c+.5),visH/2-visH/rows*(r+.5),0);if(img&&img.width&&p.material.map!==t){p.material.map=t;p.material.needsUpdate=true}})}
+/* a single still: fit the WHOLE photo inside what the camera sees at its nearest distance, so a push never crops it */
+function fitStill(plane,cam,zNear,name){const t=tex(name),img=t&&t.image,a=img&&img.width?img.width/img.height:.75,visH=2*zNear*Math.tan(THREE.MathUtils.degToRad(cam.fov)/2)*.96,visW=visH*cam.aspect;let w=visW,h=w/a;if(h>visH){h=visH;w=h*a}plane.scale.set(w,h,1);if(img&&img.width&&plane.material.map!==t){plane.material.map=t;plane.material.needsUpdate=true}}
+/* a "view" = one scene + one camera + an update(p,dt) */
+function makeView(spec,aspect){
+  const s=baseScene(),cam=new THREE.PerspectiveCamera(spec.cam?spec.cam.fov:44,aspect,.1,120),v={scene:s,camera:cam,spec,path:null};
+  if(spec.type==='shot'){const b=spec.kind==='exterior'?buildExterior(s,spec.extend):buildInterior(s);v.fit=()=>fitPlane(b.photo,tex(spec.image),b.maxW,b.maxH);v.fit();
+    const S=new THREE.Vector3(...spec.cam.start),E=new THREE.Vector3(...spec.cam.end),Tg=new THREE.Vector3(...spec.cam.target);
+    v.path=new THREE.Line(new THREE.BufferGeometry().setFromPoints([S,E]),new THREE.LineBasicMaterial({color:0xffc000}));s.add(v.path);
+    v.pathObjs=[v.path];[[S,0x9bc7a3],[E,0xe9a979]].forEach(([p,c])=>{const d=new THREE.Mesh(new THREE.SphereGeometry(.16,14,10),new THREE.MeshBasicMaterial({color:c}));d.position.copy(p);s.add(d);v.pathObjs.push(d)});
+    let crew=[];if(spec.crew){crew=[crewFigure(-2.6,2.6),crewFigure(2.4,3.4)];crew.forEach(c=>s.add(c))}
+    v.update=(p,t)=>{const e=smooth(p);cam.position.lerpVectors(S,E,e);cam.lookAt(Tg);crew.forEach((c,i)=>{c.position.x=(i?2.4:-2.6)+Math.sin(t*.9+i*2)*.9;c.rotation.y=Math.sin(t*.7+i)*.6})}}
+  else if(spec.type==='still'){const b=buildStill(s);v.fit=()=>fitStill(b.photo,cam,8.5,spec.image);v.update=p=>{v.fit();cam.position.set(0,0,9.2-smooth(p)*.7);cam.lookAt(0,0,0)}}
+  else if(spec.type==='gallery'){const b=buildStill(s);let idx=-1;v.fit=()=>fitStill(b.photo,cam,8.7,spec.images[Math.max(0,idx)]);v.update=p=>{const n=spec.images.length,i=Math.min(n-1,Math.floor(p*n)),lp=p*n-i;idx=i;v.fit();cam.position.set(0,0,9.2-smooth(lp)*.5);cam.lookAt(0,0,0);v.current=spec.images[i]}}
+  else if(spec.type==='collage'||spec.type==='grid'){const g=new THREE.Group();s.add(g);const planes=spec.images.map(()=>{const p=photoPlane();g.add(p);return p});const Z=12.2;v.fit=()=>layoutGrid(planes,cam,Z,spec.images);v.update=p=>{v.fit();if(spec.type==='collage'){cam.position.set(Math.sin(p*1.2)*.4,0,Z-smooth(p)*.6)}else cam.position.set(0,0,Z);cam.lookAt(0,0,0)}}
+  else if(spec.type==='walk2'){const b=buildInterior(s);let idx=-1;v.fit=()=>fitPlane(b.photo,tex(spec.images[Math.max(0,idx)]),b.maxW,b.maxH);const S=new THREE.Vector3(...spec.cam.start),E=new THREE.Vector3(...spec.cam.end),Tg=new THREE.Vector3(...spec.cam.target);v.pathObjs=[];const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([S,E]),new THREE.LineBasicMaterial({color:0xffc000}));s.add(line);v.pathObjs.push(line);v.update=p=>{const i=p<.5?0:1,lp=(p*2)%1;if(i!==idx){idx=i;v.fit()}cam.position.lerpVectors(S,E,smooth(lp));cam.lookAt(Tg);v.current=spec.images[i]}}
+  else{v.update=()=>{}}
+  cam.updateProjectionMatrix();return v}
+/* ---------- state ---------- */
+let t=0,playing=false,speed=1,last=performance.now(),cur=-1,views=[],scoutOrbit={yaw:.7,pitch:.38,radius:22},drag=null,autoOrbit=true;
+const scoutCam=new THREE.PerspectiveCamera(40,1,.1,200);
+const ov=document.getElementById('ov');
+function monitorAspect(){const r=monCanvas.getBoundingClientRect();return r.width/r.height}
+function rebuild(i){cur=i;const b=beats[i];views.forEach(v=>v.scene.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material&&!o.material.map)o.material.dispose()}));views=[];
+  if(b.type==='split'){views=[makeView(b.left,monitorAspect()/2),makeView(b.right,monitorAspect()/2)]}else if(b.type==='card'){views=[]}else{views=[makeView(b,monitorAspect())]}
+  renderOverlay(b);renderNow(b);document.querySelectorAll('.tl-beat').forEach((el,k)=>el.classList.toggle('active',k===i))}
+function renderOverlay(b){ov.className='ov'+(b.type==='card'?' card':'');
+  if(b.type==='card'){ov.innerHTML=`<div class="title">${b.title}</div><div class="rule" id="rule"></div>`;return}
+  const tag=b.tag?`<span class="tag${b.gate?' red':''}">${b.tag}</span>`:'';
+  if(b.type==='split'){const tile=b.right.textTile?`<div class="tile">${b.right.textTile}</div>`:'';ov.innerHTML=`${tag}<div class="divider"></div>${tile}<div class="split-l"><em>${b.left.label}</em>${b.left.sub||''}</div><div class="split-r"><em>${b.right.label}</em>${b.right.sub||''}</div>`;return}
+  ov.innerHTML=`${tag}<div class="rule" id="rule"></div><div class="copy">${b.copy[0]}<em>${b.copy[1]||''}</em></div><span class="prop">${b.prop}</span><span class="city">${b.city}</span>`}
+function renderNow(b){const $=id=>document.getElementById(id);$('now-name').textContent=`${b.name} · ${b.t0.toFixed(2)}–${b.t1.toFixed(2)}s (${(b.t1-b.t0).toFixed(2)}s)`;$('now-pic').textContent=b.pic;$('now-text').textContent='On screen: '+(b.text||[b.copy[0],b.copy[1]].filter(Boolean).join(' / '));$('now-method').textContent=b.method;
+  const cams=[];if(b.cam)cams.push(`${b.cam.label} · [${b.cam.start.join(', ')}] → [${b.cam.end.join(', ')}] · aim [${b.cam.target.join(', ')}] · ${b.cam.fov}°`);if(b.left&&b.left.cam)cams.push('Left: '+b.left.cam.label);if(b.type==='gallery')cams.push(`${b.images.length} stills · ${((b.t1-b.t0)/b.images.length).toFixed(2)}s each · micro push`);if(b.type==='collage')cams.push('2×2 grid, slow drift');if(b.type==='walk2')cams.push(`${b.cam.label} · ${b.images[0]} then ${b.images[1]}, cut on motion at ${((b.t0+b.t1)/2).toFixed(2)}s`);if(b.right&&b.right.type==='grid')cams.push('Right: static grid of '+b.right.images.join(', ')+(b.right.textTile?' + text tile':''));if(b.type==='card')cams.push('No camera. Typography only.');
+  $('now-cam').textContent=cams.join(' · ')||'—';$('now-note').hidden=!b.note;$('now-note').textContent=b.note?'Your note: '+b.note:'';$('now-gate').hidden=!b.gate;$('now-gate').textContent=b.gate?'Gate: '+b.gate:''}
+function frame(now){const dt=(now-last)/1000;last=now;if(playing){t+=dt*speed;if(t>=TOTAL){t=TOTAL;playing=false;document.getElementById('play').textContent='PLAY'}document.getElementById('scrub').value=String(Math.round(t*1000))}
+  const i=beatIndexAt(t);if(i!==cur)rebuild(i);const b=beats[i],p=Math.min(1,Math.max(0,(t-b.t0)/(b.t1-b.t0)));
+  views.forEach(v=>v.update(p,t));
+  const rule=document.getElementById('rule');if(rule)rule.style.width=(Math.min(1,p*3)*(b.type==='card'?38:26))+'%';
+  document.getElementById('tc').textContent=`${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')} / ${TOTAL.toFixed(2)}`;
+  document.getElementById('playhead').style.left=`calc(8px + ${(t/TOTAL)*100}% * (100% - 16px) / 100%)`;
+  // monitor
+  const mr=monCanvas.getBoundingClientRect(),mw=Math.max(1,Math.round(mr.width)),mh=Math.max(1,Math.round(mr.height));if(monCanvas.width!==Math.round(mw*monR.getPixelRatio()))monR.setSize(mw,mh,false);
+  monR.setScissorTest(false);monR.setViewport(0,0,mw,mh);views.forEach(v=>v.pathObjs&&v.pathObjs.forEach(o=>o.visible=false));
+  if(views.length===2){monR.setScissorTest(true);views.forEach((v,k)=>{v.camera.aspect=(mw/2)/mh;v.camera.updateProjectionMatrix();monR.setViewport(k*mw/2,0,mw/2,mh);monR.setScissor(k*mw/2,0,mw/2,mh);monR.render(v.scene,v.camera)});monR.setScissorTest(false)}
+  else if(views.length===1){const v=views[0];v.camera.aspect=mw/mh;v.camera.updateProjectionMatrix();monR.render(v.scene,v.camera)}else{monR.setClearColor(0x000000);monR.clear()}
+  views.forEach(v=>v.pathObjs&&v.pathObjs.forEach(o=>o.visible=true));
+  // scout
+  const sr=scoutCanvas.getBoundingClientRect(),sw=Math.max(1,Math.round(sr.width)),sh=Math.max(1,Math.round(sr.height));if(scoutCanvas.width!==Math.round(sw*scoutR.getPixelRatio()))scoutR.setSize(sw,sh,false);
+  if(autoOrbit&&!drag)scoutOrbit.yaw+=dt*.12;const cp=Math.cos(scoutOrbit.pitch);scoutCam.position.set(Math.sin(scoutOrbit.yaw)*cp*scoutOrbit.radius,Math.sin(scoutOrbit.pitch)*scoutOrbit.radius+3,Math.cos(scoutOrbit.yaw)*cp*scoutOrbit.radius);scoutCam.lookAt(0,2.4,1.5);scoutCam.aspect=sw/sh;scoutCam.updateProjectionMatrix();
+  if(views.length){const v=views[0];marker.position.copy(v.camera.position);marker.quaternion.copy(v.camera.quaternion);v.scene.add(marker);marker.visible=true;scoutR.render(v.scene,scoutCam);v.scene.remove(marker);const c=v.camera.position;document.getElementById('readout').textContent=`${b.name.toUpperCase()} · CAM X ${c.x.toFixed(1)} · Y ${c.y.toFixed(1)} · Z ${c.z.toFixed(1)}${views[0].current?' · '+views[0].current:''}`}else{scoutR.setClearColor(0x080807);scoutR.clear();document.getElementById('readout').textContent=b.name.toUpperCase()+' · TYPOGRAPHY BEAT'}
+  requestAnimationFrame(frame)}
+/* ---------- UI ---------- */
+const track=document.getElementById('track'),ruler=document.getElementById('ruler'),jump=document.getElementById('jump'),tbody=document.getElementById('beat-table');
+beats.forEach((b,i)=>{const el=document.createElement('div');el.className='tl-beat '+(b.type==='card'?'card':b.type==='split'?'split':b.method.includes('HIGGSFIELD')?'ai':'native')+(b.gate?' gate':'');el.style.flex=`${b.t1-b.t0} 1 0`;el.innerHTML=`<b>${b.name}</b><small>${b.t0.toFixed(2)}–${b.t1.toFixed(2)}</small><small>${b.method}</small>`;el.title=b.name;el.addEventListener('click',()=>seek(b.t0));track.appendChild(el);
+  const j=document.createElement('button');j.type='button';j.textContent=`${i+1} · ${b.name}`;j.addEventListener('click',()=>seek(b.t0));jump.appendChild(j);
+  const tr=document.createElement('tr');tr.className='beat-card';tr.dataset.annot='beat-'+b.id;tr.innerHTML=`<td class="runtime">${b.t0.toFixed(2)}–${b.t1.toFixed(2)}</td><td><b>${b.name}</b>${b.city?'<br><span style="color:var(--muted)">'+b.city.split(',')[0]+'</span>':''}</td><td>${b.pic}</td><td>${b.text||b.copy.filter(Boolean).join('<br>')}</td><td><span class="method ${b.gate?'gate':b.method.includes('HIGGSFIELD')?'ai':''}">${b.method}</span>${b.gate?'<br><small style="color:#ffb7ae">'+b.gate+'</small>':''}</td><td style="color:var(--muted)">${b.note||'—'}</td>`;tr.addEventListener('click',()=>{seek(b.t0);window.scrollTo({top:0,behavior:'smooth'})});tbody.appendChild(tr)});
+for(let s=0;s<=60;s+=10){const m=document.createElement('span');m.style.left=(s/TOTAL*100)+'%';m.textContent=s+'s';ruler.appendChild(m)}
+function seek(v){t=Math.max(0,Math.min(TOTAL,v));document.getElementById('scrub').value=String(Math.round(t*1000));const i=beatIndexAt(t);if(i!==cur)rebuild(i)}
+document.getElementById('play').addEventListener('click',e=>{if(t>=TOTAL)t=0;playing=!playing;e.target.textContent=playing?'PAUSE':'PLAY';last=performance.now()});
+document.getElementById('scrub').addEventListener('input',e=>{playing=false;document.getElementById('play').textContent='PLAY';seek(Number(e.target.value)/1000)});
+document.getElementById('speed').addEventListener('change',e=>speed=Number(e.target.value));
+document.getElementById('prev').addEventListener('click',()=>{const i=beatIndexAt(t);seek(t-beats[i].t0>.3?beats[i].t0:beats[Math.max(0,i-1)].t0)});
+document.getElementById('next').addEventListener('click',()=>{const i=beatIndexAt(t);seek(beats[Math.min(beats.length-1,i+1)].t0)});
+addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.code==='Space'){e.preventDefault();document.getElementById('play').click()}if(e.code==='ArrowRight')document.getElementById('next').click();if(e.code==='ArrowLeft')document.getElementById('prev').click()});
+scoutCanvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw:scoutOrbit.yaw,pitch:scoutOrbit.pitch};autoOrbit=false;document.getElementById('scout-mode').textContent='MANUAL · DOUBLE-CLICK TO AUTO ORBIT';scoutCanvas.setPointerCapture(e.pointerId)});
+scoutCanvas.addEventListener('pointermove',e=>{if(!drag)return;scoutOrbit.yaw=drag.yaw-(e.clientX-drag.x)*.008;scoutOrbit.pitch=Math.max(-.05,Math.min(1.2,drag.pitch+(e.clientY-drag.y)*.006))});
+scoutCanvas.addEventListener('pointerup',()=>drag=null);scoutCanvas.addEventListener('pointercancel',()=>drag=null);
+scoutCanvas.addEventListener('dblclick',()=>{autoOrbit=true;document.getElementById('scout-mode').textContent='AUTO ORBIT · DRAG TO LOOK'});
+scoutCanvas.addEventListener('wheel',e=>{e.preventDefault();scoutOrbit.radius=Math.max(9,Math.min(48,scoutOrbit.radius+e.deltaY*.025))},{passive:false});
+window.__animatic={beats,seek,get t(){return t},get cur(){return cur},get views(){return views.length}};
+rebuild(0);requestAnimationFrame(frame);
+</script>
+<script src="notes-tab.js"></script>
+<script src="../spec-annotate.js"></script>
+</body>
+</html>

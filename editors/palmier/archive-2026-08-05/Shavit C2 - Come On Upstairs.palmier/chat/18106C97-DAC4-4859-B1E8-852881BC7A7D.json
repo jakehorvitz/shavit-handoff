@@ -1,0 +1,21 @@
+{
+  "id" : "18106C97-DAC4-4859-B1E8-852881BC7A7D",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit C2 - Come On Upstairs"
+        }
+      ],
+      "id" : "EE9513A9-FFC1-4F33-8787-698595DD4997",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:02:47Z"
+}

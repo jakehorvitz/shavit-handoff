@@ -1,0 +1,33 @@
+<!--
+  Shavit Rootman — vendor/partner "Thank You" title card template
+  Usage: duplicate this file, replace the placeholders below, open in a
+  browser at exactly 1080x1350 and take a full-page screenshot.
+    {{LOGO_PATH}}     — absolute file:// path to the vendor/partner's logo
+    {{VENDOR_NAME}}   — vendor/partner name as it should read on-card
+    {{VENDOR_PHONE}}  — vendor/partner phone, only if already public-facing on their own materials
+  Brand tokens (rules/brand.md #8): black canvas, white uppercase Inter type, brass/gold rule.
+-->
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1080px; height:1350px; background:#000; overflow:hidden; font-family:'Inter',sans-serif; }
+  .frame { position:relative; width:1080px; height:1350px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .logo { width:300px; height:300px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 3px #C9A24B; margin-bottom:64px; }
+  .kicker { color:#C9A24B; font-size:24px; font-weight:600; letter-spacing:7px; text-transform:uppercase; margin-bottom:24px; }
+  .headline { color:#fff; font-size:104px; font-weight:900; letter-spacing:2px; text-transform:uppercase; line-height:1; margin-bottom:36px; }
+  .rule { width:80px; height:3px; background:#C9A24B; margin-bottom:36px; }
+  .credit-name { color:#fff; font-size:34px; font-weight:800; letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; }
+  .credit-phone { color:#9a9a9a; font-size:24px; font-weight:400; letter-spacing:2px; }
+</style></head>
+<body>
+  <div class="frame">
+    <img class="logo" src="{{LOGO_PATH}}">
+    <div class="headline">Thank You</div>
+    <div class="rule"></div>
+    <div class="credit-name">{{VENDOR_NAME}}</div>
+    <div class="credit-phone">{{VENDOR_PHONE}}</div>
+  </div>
+</body></html>

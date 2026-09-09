@@ -1,0 +1,205 @@
+#!/usr/bin/env bash
+# check.sh — binding acceptance gate for "The House That Came Back" (spec.html §06).
+# Exit 0 = every check passes. Run from the project root.
+set -uo pipefail
+cd "$(dirname "$0")"
+export NUMBA_CACHE_DIR="${NUMBA_CACHE_DIR:-/tmp/numba-cache}"
+FAIL=0
+ok()   { printf '  ✓ %s\n' "$1"; }
+bad()  { printf '  ✗ %s\n' "$1"; FAIL=1; }
+note() { printf '  · %s\n' "$1"; }
+
+M=deliver/master_9x16.mp4
+
+echo "== 1. Deliverables exist =="
+for f in "$M" deliver/hook_H3.mp4 deliver/hook_H7.mp4 deliver/export_16x9.mp4 deliver/export_4x5.mp4 deliver/poster.jpg deliver/captions.md build/cutlist.json assets/manifest.csv checks/visual_review.md; do
+  [ -s "$f" ] && ok "$f" || bad "missing/empty: $f"
+done
+[ -s "$M" ] || { echo "FATAL: no master — skipping probes"; exit 1; }
+
+echo "== 2. Master container (ffprobe) =="
+probe() { ffprobe -v error -select_streams "$1" -show_entries "$2" -of default=nw=1:nk=1 "$3" 2>/dev/null | head -1; }
+DUR=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$M")
+W=$(probe v:0 stream=width "$M"); H=$(probe v:0 stream=height "$M")
+FPS=$(probe v:0 stream=r_frame_rate "$M"); CODEC=$(probe v:0 stream=codec_name "$M")
+PIX=$(probe v:0 stream=pix_fmt "$M")
+python3 - "$DUR" <<'EOF' && ok "runtime $DUR s in [55,62]" || bad "runtime $DUR s outside [55,62]"
+import sys; d=float(sys.argv[1]); sys.exit(0 if 55<=d<=62 else 1)
+EOF
+[ "$W" = "1080" ] && [ "$H" = "1920" ] && ok "1080x1920" || bad "resolution ${W}x${H} != 1080x1920"
+[ "$FPS" = "30/1" ] && ok "30fps" || bad "fps $FPS != 30/1"
+[ "$CODEC" = "h264" ] && ok "h264" || bad "codec $CODEC != h264"
+[ "$PIX" = "yuv420p" ] && ok "yuv420p" || bad "pix_fmt $PIX != yuv420p"
+# +faststart: moov atom before mdat in first pass of the file
+python3 - "$M" <<'EOF' && ok "faststart (moov before mdat)" || bad "moov not before mdat"
+import sys
+data = open(sys.argv[1],'rb').read(4_000_000)
+mo, md = data.find(b'moov'), data.find(b'mdat')
+sys.exit(0 if (mo != -1 and (md == -1 or mo < md)) else 1)
+EOF
+
+echo "== 3. Loudness (target -14 LUFS ±1.5) =="
+LUFS=$(ffmpeg -hide_banner -i "$M" -af loudnorm=print_format=json -f null - 2>&1 | python3 -c "import sys,json,re; m=re.search(r'\{[^}]*\"input_i\"[^}]*\}', sys.stdin.read(), re.S); print(json.loads(m.group(0))['input_i'] if m else 'NA')")
+python3 - "$LUFS" <<'EOF' && ok "integrated loudness $LUFS LUFS" || bad "loudness $LUFS outside [-15.5,-12.5]"
+import sys
+try: v=float(sys.argv[1])
+except: sys.exit(1)
+sys.exit(0 if -15.5 <= v <= -12.5 else 1)
+EOF
+
+echo "== 4. No-pulse periodicity test (signature segment) =="
+python3 - "$M" "$DUR" <<'EOF' && ok "signature motion is monotonic (no oscillation)" || bad "periodic component detected in signature segment (pulse?)"
+import sys, subprocess, numpy as np
+m, dur = sys.argv[1], float(sys.argv[2])
+t0 = dur - 3.0
+p = subprocess.run(['ffmpeg','-v','error','-ss',str(t0),'-i',m,'-t','3','-vf','scale=108:192,format=gray','-f','rawvideo','-'],capture_output=True)
+frames = np.frombuffer(p.stdout, dtype=np.uint8)
+n = len(frames)//(108*192)
+if n < 30: sys.exit(1)
+fr = frames[:n*108*192].reshape(n,-1).astype(np.float32)
+diff = np.abs(np.diff(fr,axis=0)).mean(axis=1)
+if diff.max() < 0.5: sys.exit(0)          # essentially static: pass
+d = diff - diff.mean()
+spec = np.abs(np.fft.rfft(d))
+spec[0] = 0
+# oscillation = a dominant frequency bin carrying >55% of remaining spectral energy at >=0.5Hz
+freqs = np.fft.rfftfreq(len(d), d=1/30.0)
+band = spec[freqs >= 0.5]
+sys.exit(1 if (band.size and band.max() > 0.55*spec.sum()) else 0)
+EOF
+
+echo "== 5. Beat alignment (cutlist vs independently recomputed beat map, ±80ms) =="
+python3 - "$M" <<'EOF' && ok "all cutlist events within 80ms of a recomputed beat" || bad "cutlist events off-beat (>80ms) or cutlist unreadable"
+import sys, json, subprocess, tempfile, os
+import numpy as np
+m = sys.argv[1]
+try:
+    cl = json.load(open('build/cutlist.json'))
+    events = [float(e) for e in (cl['events'] if isinstance(cl,dict) else cl)]
+    assert events
+except Exception:
+    sys.exit(1)
+wav = tempfile.mktemp(suffix='.wav')
+subprocess.run(['ffmpeg','-v','error','-i',m,'-ac','1','-ar','22050',wav],check=True)
+import librosa
+y, sr = librosa.load(wav, sr=22050); os.unlink(wav)
+_, beats = librosa.beat.beat_track(y=y, sr=sr, units='time')
+if len(beats) < 8: sys.exit(1)
+bad = [e for e in events if min(abs(e-b) for b in beats) > 0.080]
+# allow the engineered silence beat (ch.2 drop-out) to be exempt if flagged
+exempt = set(cl.get('exempt', [])) if isinstance(cl, dict) else set()
+bad = [e for e in bad if e not in exempt]
+sys.exit(1 if bad else 0)
+EOF
+
+echo "== 6. Brand-hex check on pre-composite graphics layers =="
+python3 - <<'EOF' && ok "layer PNGs contain only brand hexes (±tolerance)" || bad "off-brand pixels in graphics layers, or no layers found"
+import sys, glob
+from PIL import Image
+import numpy as np
+BRAND = np.array([[0,0,0],[255,255,255],[176,141,87],[255,192,0]], dtype=np.float32)
+files = sorted(glob.glob('build/layers/*.png'))
+if not files: sys.exit(1)
+for f in files[::max(1,len(files)//12)][:12]:
+    im = np.array(Image.open(f).convert('RGBA'), dtype=np.float32)
+    px = im[im[...,3] > 32][:, :3]          # only visible pixels
+    if px.size == 0: continue
+    d = np.sqrt(((px[:,None,:]-BRAND[None,:,:])**2).sum(-1)).min(1)
+    if (d > 40).mean() > 0.02:              # >2% of visible pixels far from all brand colors
+        print(f, 'off-brand ratio', float((d>40).mean()), file=sys.stderr); sys.exit(1)
+sys.exit(0)
+EOF
+
+echo "== 7. Asset provenance + privacy =="
+python3 - <<'EOF' && ok "manifest complete; no un-cropped desktop screenshots in pipeline" || bad "provenance/privacy check failed"
+import sys, csv, glob, os
+from PIL import Image
+rows = list(csv.DictReader(open('assets/manifest.csv')))
+if not rows: sys.exit(1)
+need = {'file','source','rights'}
+if not need.issubset({k.strip().lower() for k in rows[0]}): sys.exit(1)
+listed = {r['file'].strip() for r in rows}
+used = glob.glob('assets/cropped/*') + glob.glob('assets/upscaled/*')
+for f in used:
+    if os.path.basename(f) not in listed and f not in listed:
+        print('unlisted asset:', f, file=sys.stderr); sys.exit(1)
+    try: w,h = Image.open(f).size
+    except Exception: continue
+    if (w,h) == (2880,1800):
+        print('raw desktop screenshot in pipeline:', f, file=sys.stderr); sys.exit(1)
+sys.exit(0)
+EOF
+
+echo "== 8. Motion + grade arc (design gates) =="
+python3 - "$M" <<'EOF' && ok "chapters have live motion (no static slideshow frames)" || bad "static frames detected mid-chapter (Ken-Burns/pan missing)"
+import sys, subprocess, numpy as np
+m = sys.argv[1]
+def grab(t):
+    p = subprocess.run(['ffmpeg','-v','error','-ss',str(t),'-i',m,'-frames:v','1','-vf','scale=108:192,format=gray','-f','rawvideo','-'],capture_output=True)
+    return np.frombuffer(p.stdout,dtype=np.uint8).astype(np.float32)
+for t in [8,16,28,40,48]:
+    a,b = grab(t), grab(t+1.0)
+    if a.size==0 or b.size==0 or np.abs(a-b).mean() < 0.5:
+        print(f'static at t={t}s', file=sys.stderr); sys.exit(1)
+sys.exit(0)
+EOF
+python3 - "$M" <<'EOF' && ok "grade arc: hook is cool, reward is warm" || bad "grade arc missing (hook not cool and/or reward not warm)"
+import sys, subprocess, numpy as np
+m = sys.argv[1]
+def rgb(t):
+    p = subprocess.run(['ffmpeg','-v','error','-ss',str(t),'-i',m,'-frames:v','1','-vf','scale=54:96','-f','rawvideo','-pix_fmt','rgb24','-'],capture_output=True)
+    a = np.frombuffer(p.stdout,dtype=np.uint8).astype(np.float32)
+    return a.reshape(-1,3).mean(axis=0)
+hook, reward = rgb(1.5), rgb(48)
+cool = hook[2] - hook[0]     # B - R at the hook
+warm = reward[0] - reward[2] # R - B at the reward
+print(f'hook B-R={cool:.1f} reward R-B={warm:.1f}', file=sys.stderr)
+sys.exit(0 if (cool > 2.0 and warm > 2.0) else 1)
+EOF
+
+echo "== 8B. Stage-6 regression gates =="
+# F5: signature must overlay the dimming warm frame, never a pure black card
+python3 - "$M" "$DUR" <<'EOF' && ok "signature overlays imagery (not a black card)" || bad "signature segment is a black card (spec forbids the black-card cut)"
+import sys, subprocess, numpy as np
+m, dur = sys.argv[1], float(sys.argv[2])
+p = subprocess.run(['ffmpeg','-v','error','-ss',str(dur-2.2),'-i',m,'-frames:v','1','-vf','scale=54:96','-f','rawvideo','-pix_fmt','rgb24','-'],capture_output=True)
+a = np.frombuffer(p.stdout,dtype=np.uint8).astype(np.float32).reshape(-1,3)
+# exclude the type/logo pixels (bright); look at the background field
+bg = a[a.mean(1) < 200]
+sys.exit(0 if bg.mean() > 10 and bg.std() > 6 else 1)
+EOF
+# F4: poster must be the warm reward frame with wordmark, not the black signature card
+python3 - <<'EOF' && ok "poster is an image frame (not the black card)" || bad "poster.jpg is mostly black — must be the reward frame + wordmark"
+import sys
+from PIL import Image
+import numpy as np
+a = np.array(Image.open('deliver/poster.jpg').convert('RGB'), dtype=np.float32)
+sys.exit(0 if a.mean() > 28 else 1)
+EOF
+# F3: 16:9 export must use its width (letterboxed plate + re-set type), not pillarbox the 9:16 master
+python3 - <<'EOF' && ok "16:9 export uses the frame (not a pillarboxed 9:16)" || bad "export_16x9 side zones are empty black — pillarboxed master detected"
+import sys, subprocess, numpy as np
+def frame(t):
+    p = subprocess.run(['ffmpeg','-v','error','-ss',str(t),'-i','deliver/export_16x9.mp4','-frames:v','1','-vf','scale=192:108','-f','rawvideo','-pix_fmt','gray','-'],capture_output=True)
+    return np.frombuffer(p.stdout,dtype=np.uint8).astype(np.float32).reshape(108,192)
+bad_t = 0
+for t in [8,20,40]:
+    f = frame(t)
+    sides = np.concatenate([f[:, :40].ravel(), f[:, -40:].ravel()])
+    if sides.mean() < 4 and sides.std() < 3: bad_t += 1
+sys.exit(1 if bad_t >= 2 else 0)
+EOF
+
+echo "== 9. Visual review attestations =="
+grep -q "HOOK-REWARD MATCH: PASS" checks/visual_review.md 2>/dev/null && ok "hook/reward same-property attested" || bad "checks/visual_review.md missing 'HOOK-REWARD MATCH: PASS'"
+grep -qE "AI-MOTION: (NONE|REVIEWED)" checks/visual_review.md 2>/dev/null && ok "AI-motion clips attested" || bad "checks/visual_review.md missing 'AI-MOTION: NONE|REVIEWED'"
+grep -q "NO-ADDRESS OCR: PASS" checks/visual_review.md 2>/dev/null && ok "no-address frame review attested" || bad "checks/visual_review.md missing 'NO-ADDRESS OCR: PASS'"
+grep -q "IG-UI CHROME: NONE" checks/visual_review.md 2>/dev/null && ok "no IG carousel arrows/dots in final frames attested" || bad "checks/visual_review.md missing 'IG-UI CHROME: NONE'"
+grep -q "BEFORE FOOTAGE: USED" checks/visual_review.md 2>/dev/null && ok "genuine before imagery attested in hook + chapters" || bad "checks/visual_review.md missing 'BEFORE FOOTAGE: USED'"
+grep -q "TYPE COLLISION: NONE" checks/visual_review.md 2>/dev/null && ok "tag/headline collision reviewed at every two-line beat" || bad "checks/visual_review.md missing 'TYPE COLLISION: NONE'"
+grep -q "SCRIM: GRADIENT" checks/visual_review.md 2>/dev/null && ok "scrim renders as smooth gradient (no hard seam)" || bad "checks/visual_review.md missing 'SCRIM: GRADIENT'"
+grep -q "CH3 COLLAGE: PRESENT" checks/visual_review.md 2>/dev/null && ok "Ch.3 hero-tile collage attested" || bad "checks/visual_review.md missing 'CH3 COLLAGE: PRESENT'"
+
+echo
+if [ "$FAIL" -eq 0 ]; then echo "ACCEPTANCE: ALL CHECKS PASSED"; else echo "ACCEPTANCE: FAILED"; fi
+exit $FAIL

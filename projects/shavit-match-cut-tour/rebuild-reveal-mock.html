@@ -1,0 +1,130 @@
+<style>
+  :root{--bg:#0a0a0a;--panel:#141414;--ink:#f4f1ea;--dim:#9a948a;--brass:#B08D57;--gold:#FFC000;
+    --line:#2a2722;--red:#d0553f;--green:#5b7a63}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 90px}
+  h1{font-size:26px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 6px;font-weight:800}
+  .sub{color:var(--dim);font-size:13px;max-width:760px}
+  .rule{height:2px;width:60px;background:var(--brass);margin:14px 0 24px}
+  h2{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  /* verdict banner */
+  .banner{display:flex;gap:14px;align-items:flex-start;background:#1a0f0b;border:1px solid #40201a;border-left:4px solid var(--red);border-radius:12px;padding:16px 18px;margin-bottom:8px}
+  .banner .big{font-size:22px;line-height:1}
+  .banner b{color:var(--red)}
+  .banner p{margin:6px 0 0;font-size:13px;color:#e6d8d2}
+  /* the animated concept */
+  .stageWrap{display:grid;grid-template-columns:340px 1fr;gap:22px;align-items:start;margin-top:8px}
+  .stage{position:relative;width:100%;aspect-ratio:9/16;max-height:460px;border-radius:12px;overflow:hidden;background:#000;border:1px solid var(--line)}
+  .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .before{z-index:2;animation:tearOut 7s ease-in-out infinite}
+  .after{z-index:1;animation:riseIn 7s ease-in-out infinite}
+  .dust{position:absolute;inset:-20%;z-index:3;pointer-events:none;opacity:0;
+    background:radial-gradient(circle at 50% 60%, rgba(120,100,80,.9), rgba(60,50,40,.6) 40%, transparent 70%);
+    animation:dust 7s ease-in-out infinite}
+  .phaseLbl{position:absolute;top:8px;left:8px;z-index:5;background:#000b;color:#fff;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid #ffffff22}
+  @keyframes tearOut{
+    0%,26%{opacity:1;transform:scale(1) translateY(0);filter:brightness(1) blur(0)}
+    34%{transform:scale(1.02) translateY(0) rotate(.4deg);filter:brightness(.5) blur(2px)}
+    42%{opacity:.15;transform:scale(.86) translateY(6%);filter:brightness(.2) blur(9px)}
+    50%,100%{opacity:0;transform:scale(.8) translateY(8%)}
+  }
+  @keyframes riseIn{
+    0%,44%{opacity:0;transform:translateY(16%) scale(1.08);filter:brightness(.3) blur(8px)}
+    58%{opacity:1;transform:translateY(4%) scale(1.02);filter:brightness(.8) blur(2px)}
+    70%,100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1) blur(0)}
+  }
+  @keyframes dust{
+    0%,30%{opacity:0} 42%{opacity:.95} 52%{opacity:.8} 66%{opacity:0} 100%{opacity:0}
+  }
+  .story{display:flex;flex-direction:column;gap:10px}
+  .beat{display:grid;grid-template-columns:60px 1fr;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .beat .t{font-variant-numeric:tabular-nums;color:var(--gold);font-size:12px;font-weight:700}
+  .beat h3{margin:0 0 2px;font-size:13px;letter-spacing:.04em}
+  .beat p{margin:0;font-size:12px;color:#cfc9bd}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .box.no{border-color:#40201a} .box.yes{border-color:#254031}
+  .box h3{margin:0 0 8px;font-size:14px;letter-spacing:.06em}
+  .no h3{color:var(--red)} .yes h3{color:#7fb08a}
+  ul{margin:6px 0 0;padding-left:16px} li{font-size:13px;color:#cfc9bd;margin:5px 0}
+  .pill{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:3px 8px;border-radius:4px;margin-bottom:8px}
+  .pill.no{background:var(--red);color:#000} .pill.yes{background:#7fb08a;color:#000}
+  code{background:#000;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px;color:var(--gold)}
+  .music{background:#12100b;border:1px solid #2b2517;border-radius:12px;padding:14px 16px;margin-top:12px;font-size:13px;color:#cfc9bd}
+  .music b{color:var(--gold)}
+  @media(max-width:760px){.stageWrap{grid-template-columns:1fr}.cols{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <div class="sub">bones-pipeline · stage 3 · concept probe (NOT approved)</div>
+  <h1>The Teardown-Rebuild Reveal</h1>
+  <div class="sub">What you asked for — the "AI tears it down and rebuilds it" hype moment — shown honestly, next to the version that survives the brain.</div>
+  <div class="rule"></div>
+
+  <div class="banner">
+    <div class="big">⛔</div>
+    <div>
+      <b>Preflight verdict: NO-GO by default</b> — this is the brain's known-bad <code>B4</code>:
+      "inventing a fake construction state of a real house." It fabricates a teardown/studs state
+      of River Street that <b>never existed on that property</b> → [[no-generated-architecture]],
+      [[frames-mode-real-anchors]].
+      <p>Why it's not just red tape: <b>Shavit himself rejected the v3 and v6 cuts for looking exactly this "AI."</b>
+      The rule is his own reaction encoded. It's overridable — but only with <b>Shavit's explicit yes</b>, not just ours.</p>
+    </div>
+  </div>
+
+  <h2>1 · What it would look like (real frames, faked motion)</h2>
+  <div class="stageWrap">
+    <div class="stage">
+      <span class="phaseLbl">before → teardown → rebuild → after</span>
+      <div class="dust"></div>
+      <img class="before" src="spec-assets/before_ext.jpg" alt="before">
+      <img class="after" src="spec-assets/after_ext.jpg" alt="after">
+    </div>
+    <div class="story">
+      <div class="beat"><div class="t">0.0s</div><div><h3>Hold — the tired house</h3><p>Real before-exterior, slow push. Music bar lands.</p></div></div>
+      <div class="beat"><div class="t">2.2s</div><div><h3>THE TEARDOWN</h3><p>House shakes, darkens, blows apart into a dust/particle burst — the "AI bullshit" hero moment. <b>Every pixel here is invented.</b></p></div></div>
+      <div class="beat"><div class="t">3.0s</div><div><h3>Dust peak</h3><p>Full obscure — the screen is basically a dust cloud. Fabricated framing/studs flash through.</p></div></div>
+      <div class="beat"><div class="t">3.8s</div><div><h3>THE REBUILD</h3><p>The finished house <em>rises</em> out of the dust, brightening into focus.</p></div></div>
+      <div class="beat"><div class="t">4.6s</div><div><h3>Hold — reborn</h3><p>Lands on the real after-exterior. Cut into the room tour.</p></div></div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:10px">↑ loops automatically. CSS approximation — the real Higgsfield/Kling version would be far more violent and detailed
+  (and that detail is exactly the fabricated architecture the rule forbids).</p>
+
+  <h2>2 · The honest trade — same hype, two ways to earn it</h2>
+  <div class="cols">
+    <div class="box no">
+      <span class="pill no">Needs Shavit's yes</span>
+      <h3>A · Fabricated teardown (above)</h3>
+      <ul>
+        <li>Maximum drama, zero shooting — works from the two photos we already have</li>
+        <li>But: invents a construction state that never happened on a real address</li>
+        <li>Reads "AI" — the precise thing the client rejected twice</li>
+        <li>Ship only if Shavit explicitly signs off in writing</li>
+      </ul>
+    </div>
+    <div class="box yes">
+      <span class="pill yes">Brain-approved (G3)</span>
+      <h3>B · Real studs → real finished</h3>
+      <ul>
+        <li>If Shavit has actual <b>gutted / framing / mid-reno photos</b> of River Street, we morph <b>real → real</b> — the generated pixels live only in the motion between two true frames</li>
+        <li>Just as hype (real demolition is <em>more</em> visceral than fake), and 100% legal — this is the brain's known-<b>good</b> G3</li>
+        <li>Fallback: real construction <b>B-roll</b> (even 3s of phone video of the gut job) intercut before the reveal</li>
+        <li>No Shavit override needed — it's already inside the rules</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="music">
+    <b>On the music:</b> you're right that on Instagram the <em>in-app music sticker</em> can license "Small Town"
+    for an <b>organic</b> post on a personal/creator account — so as a pinned organic reel, likely usable.
+    Two honest caveats: (1) it generally <b>blocks paid boosting/ads</b> — you can't promote a post that uses the
+    catalog track ([[boost-eligibility-rules]], [[sound-collection-safe-path]]); (2) business-category accounts
+    sometimes lose full-catalog access. So: great for the pinned organic hero, <b>not</b> for anything you'd put ad
+    spend behind. For those, we'd swap to an original in the same lane.
+  </div>
+
+  <div class="sub" style="margin-top:26px">Decision for the spec: <b>A</b> (I draft the Shavit ask) or <b>B</b> (I hunt the archive for real gut-job frames / we grab B-roll). Gate stays open.</div>
+</div>

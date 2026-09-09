@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carousel slate, eight concepts against real houses</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#2a2a2e;
+    --ink:#f4f2ec; --dim:#a5a29a; --faint:#6f6c64;
+    --brass:#B08D57; --gold:#FFC000; --ok:#7FB88A; --bad:#e0794a; --blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;line-height:1.15;margin:.35em 0 .15em}
+  .sub{color:var(--dim);max-width:76ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:52px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{font-size:21px;margin:0 0 4px;color:var(--ink)}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  td.n{font-family:var(--mono);color:var(--gold);text-align:right}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-watch{background:rgba(224,121,74,.14);color:var(--bad);border:1px solid rgba(224,121,74,.4)}
+  .b-slot{background:rgba(110,163,214,.14);color:var(--blue);border:1px solid rgba(110,163,214,.4)}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog b{color:var(--ink)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .concept{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:16px 0 30px;position:relative}
+  .concept .rank{position:absolute;top:-11px;left:22px;background:var(--bg);border:1px solid var(--brass);color:var(--brass);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:2px 10px;border-radius:6px;text-transform:uppercase}
+  .premise{color:var(--gold);font-size:15.5px;margin:.5em 0 1em;font-style:italic}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .box h5{margin:0 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .slides{counter-reset:s;list-style:none;padding-left:0;margin:.2em 0}
+  .slides li{counter-increment:s;position:relative;padding-left:34px;margin:.45em 0;font-size:14px}
+  .slides li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:5px;background:#000;border:1px solid var(--line);color:var(--brass);font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center}
+  .hook{background:#000;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:14.5px}
+  .hook span{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  .need{color:var(--bad)}
+  .warn{background:rgba(224,121,74,.07);border:1px solid rgba(224,121,74,.35);border-radius:12px;padding:16px 20px;margin:16px 0}
+  .warn h4{margin:0 0 6px;color:var(--bad);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px}
+  .rule{color:var(--faint);font-size:12.5px;font-family:var(--mono)}
+  .chg{box-shadow:0 0 0 1px var(--gold),0 0 22px rgba(255,192,0,.14)}
+  .chg::after{content:"UPDATED";position:absolute;top:-11px;right:20px;background:var(--bg);border:1px solid var(--gold);color:var(--gold);font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:2px 8px;border-radius:6px}
+</style>
+</head>
+<body data-spec="carousel-slate">
+<div class="wrap">
+
+<div class="kicker">Shavit Rootman &middot; content operations</div>
+<h1>Carousel slate, eight concepts against real houses</h1>
+<p class="sub">The East Victoria story carousel landed. This is the follow-up board, built the same way,
+which means every concept below is attached to a specific property and to a photo set that actually exists
+on Drive today. Photo counts were pulled live on 2026-07-24. Nothing here is proposed against a house we
+cannot shoot.</p>
+
+<div class="meta-row">
+  <span class="chip">Slate <b>rev 1</b></span>
+  <span class="chip">Built <b>2026-07-24</b></span>
+  <span class="chip">Concepts <b>8</b></span>
+  <span class="chip">Photos verified <b>405 across 12 folders</b></span>
+  <span class="chip">Cadence <b>Thursday or Friday plus Sunday</b></span>
+</div>
+
+<div class="revlog">
+  <h4>Revision log</h4>
+  <ul>
+    <li><span class="rev">rev 2 &middot; 2026-07-24</span>, folded in Jake's annotations and a photo audit.
+    <b>Concepts A and D are now built as full specs</b>, see
+    <code>kendall-story-2026-07-24.html</code> and <code>work-you-never-see-2026-07-24.html</code>.
+    Concept B rewritten to the transformation angle Jake asked for, rather than the quiet standards list.
+    Concept C downgraded: Saint Joe turned out to hold no process photography. Concept H parked at Jake's
+    call. Answered the verbatim story question in a new section 06.</li>
+    <li><span class="rev">rev 1 &middot; 2026-07-24</span>, first slate. Eight concepts ranked by
+    buildability, each mapped to a live Drive folder and a real photo count. Includes the Ohio photo
+    blocker and the open project photo gaps carried over from the 2026-07-20 reels plan.</li>
+  </ul>
+</div>
+
+<h2 data-annot="s0">00 &middot; Why East Victoria worked, and what to keep</h2>
+<div class="concept" data-annot="what-worked">
+  <p class="d">Before picking the next one, name what actually carried the last post, because the instinct
+  will be to change the format. The format is not the thing to change.</p>
+  <ul>
+    <li><b>It was a story with stakes, not a tour.</b> Foreclosure, auction, a family, a crew, an outcome.
+    Every slide moved the story forward instead of showing another room.</li>
+    <li><b>The before shots landed at the end.</b> They read as proof rather than as a setup, which is the
+    inversion that made it feel like an operator talking rather than a listing.</li>
+    <li><b>Real partners were named.</b> Naming the lender and the general contractor is what makes a
+    lender audience believe the rest of it.</li>
+    <li><b>The people came before the property.</b> The slide about helping the occupants transition sat
+    ahead of any renovation slide.</li>
+  </ul>
+  <p class="d">So the slate below keeps the arc and swaps the story. Brand rule ten says templated formats
+  win. Three of these concepts reuse the East Victoria arc directly. The others exist because they say
+  something the story arc cannot.</p>
+</div>
+
+<h2 data-annot="s1">01 &middot; Photo reality, pulled live today</h2>
+<p class="d">Every folder under the shared property tree, image files only, screenshots excluded. This is
+the constraint layer. A concept is only as good as the folder behind it.</p>
+<table>
+  <tr><th>Property</th><th>State</th><th>Bucket</th><th style="text-align:right">Photos</th><th>Status</th></tr>
+  <tr><td>Kendall</td><td>Indiana</td><td>Past project</td><td class="n">106</td><td><span class="badge b-real">Never used</span></td></tr>
+  <tr><td>East Victoria</td><td>Indiana</td><td>Past project</td><td class="n">101</td><td><span class="badge b-watch">Shipped</span></td></tr>
+  <tr><td>River Street</td><td>Michigan</td><td>Past project</td><td class="n">32</td><td><span class="badge b-watch">Used in the film</span></td></tr>
+  <tr><td>Waldron</td><td>Michigan</td><td>Past project</td><td class="n">27</td><td><span class="badge b-real">Never used</span></td></tr>
+  <tr><td>Howder, unit two</td><td>Michigan</td><td>Open project</td><td class="n">25</td><td><span class="badge b-watch">Reel approved</span></td></tr>
+  <tr><td>West South, the short term rental</td><td>Michigan</td><td>Past project</td><td class="n">24</td><td><span class="badge b-real">Never used</span></td></tr>
+  <tr><td>Budlong</td><td>Michigan</td><td>Past project</td><td class="n">20</td><td><span class="badge b-real">Never used</span></td></tr>
+  <tr><td>South Norwood, local luxury</td><td>Michigan</td><td>Open project</td><td class="n">19</td><td><span class="badge b-real">Never used</span></td></tr>
+  <tr><td>Lo Presto</td><td>Michigan</td><td>Past project</td><td class="n">18</td><td><span class="badge b-real">Never used</span></td></tr>
+  <tr><td>East Saint Joe, duplex</td><td>Michigan</td><td>Open project</td><td class="n">16</td><td><span class="badge b-real">Never used</span></td></tr>
+  <tr><td>Howder, duplex</td><td>Michigan</td><td>Open project</td><td class="n">16</td><td><span class="badge b-watch">Reel approved</span></td></tr>
+  <tr><td>Cedar Street</td><td>Filed under Indiana</td><td>Open project</td><td class="n">1</td><td><span class="badge b-slot">Not shootable</span></td></tr>
+</table>
+
+<div class="warn" data-annot="ohio-blocker">
+  <h4>Two blockers worth raising before anything else</h4>
+  <p style="margin:.3em 0"><b>Ohio has zero photos.</b> All five Ohio past projects and the Ohio open
+  projects folder are empty. Shavit has asked more than once to feature Ohio. It cannot be built, at all,
+  until photos arrive. This is the highest value ask on the list.</p>
+  <p style="margin:.6em 0 0"><b>The open project photo gaps did not move.</b> The three unit Trio, the
+  Ewing project, and Cedar Street were flagged as photo blockers in the 2026-07-20 reels plan. Four days
+  later they still hold zero, zero, and one photo. Any concept that needs the full open project lineup is
+  short three houses.</p>
+</div>
+
+<h2 data-annot="s2">02 &middot; The slate</h2>
+<p class="d">Ranked by how fast each one can ship. Concepts A through C need one story input from Shavit.
+Concepts D through F can be built without waiting on him at all, which matters given the Tuesday check in
+sits between now and the next post.</p>
+
+<div class="concept" data-annot="concept-a">
+  <div class="rank">Concept A &middot; the direct sequel</div>
+  <h3>Kendall, South Bend, Indiana <span class="badge b-real">106 photos on hand</span></h3>
+  <p class="premise">Run the exact arc that just worked, on the house nobody has seen yet.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">It is the largest untouched photo set in the entire portfolio,
+        it sits in the same city as the post that just performed, and it was uploaded in the same batch.
+        Running the story arc twice in the same city is what turns one good post into a body of work.
+        Indiana stops reading as a one off and starts reading as a program.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        Kendall, South Bend, Indiana. The second house we rebuilt on this side of town, and the one nobody
+        has seen yet.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, ten slides</h5>
+      <ol class="slides">
+        <li>Cover, the finished front, one stake line</li>
+        <li>What it was when we found it</li>
+        <li>How the deal came to us <span class="need">(needs the story)</span></li>
+        <li>The people, before any renovation slide</li>
+        <li>The work nobody photographs, mechanical and rough in</li>
+        <li>The crew and the partners, named</li>
+        <li>The finish, kitchen and bath</li>
+        <li>Who lives there now</li>
+        <li>The before shots, held to the end as proof</li>
+        <li>Closing card and mark</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, one item: the story of this house, in his words, on the Tuesday call.
+  Ten minutes. Also confirm the street suffix, since the folder name does not carry it, and confirm the
+  city is South Bend.</p>
+</div>
+
+<div class="concept chg" data-annot="concept-b">
+  <div class="rank">Concept B &middot; from wreck to local luxury</div>
+  <h3>South Norwood, local luxury, Michigan <span class="badge b-real">19 photos on hand</span></h3>
+  <p class="premise">How a house this rough became the nicest one on the block. Transformation first,
+  standards underneath it.</p>
+  <p class="d" style="border-left:2px solid var(--gold);padding-left:12px;margin:0 0 12px"><b>Jake's note,
+  folded in:</b> the quiet standards list was too cold. The post leads with the turn instead, the state it
+  was found in against what it became, and the standards become the proof of how rather than the subject.
+  One constraint holds and actually helps: brand rule two lets us be brutal about the condition of the
+  house and says nothing critical about the street or the town. So the language goes hard at the building,
+  never at the neighbourhood. <b>Photo check still required</b> before this is scheduled, because it is not
+  yet confirmed that the Norwood folder contains genuinely rough intake frames rather than finished ones.
+  If it turns out finished only, the way Saint Joe did, this concept collapses into a standards post after
+  all.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">Shavit already named this house local luxury himself, so the
+        hook is his, not ours. The brand rule that bans dollar figures is usually a constraint. Here it is
+        the whole idea. A luxury post that never mentions money has to argue on craft instead, which is
+        exactly the read the account is built for. It is also an open project, which matches his direct
+        instruction from the twenty second to document process rather than stage a reveal.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        This house was a wreck. It is now the nicest one on the block. Luxury in a town this size is not a
+        price, it is a decision.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, eight slides</h5>
+      <ol class="slides">
+        <li>Cover, the house, and the phrase local luxury</li>
+        <li>Standard one, the layout decision</li>
+        <li>Standard two, the kitchen specification</li>
+        <li>Standard three, the bath</li>
+        <li>Standard four, what is behind the wall</li>
+        <li>Standard five, the finish level we hold everywhere</li>
+        <li>Honest state, this one is still open</li>
+        <li>Closing, this is the standard on every house, not just this one</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, one item: what makes this one the luxury build, in his words. Five
+  specifics beat one adjective.</p>
+</div>
+
+<div class="concept chg" data-annot="concept-c">
+  <div class="rank">Concept C &middot; the housing math, now blocked</div>
+  <h3>East Saint Joe duplex, Michigan <span class="badge b-watch">16 photos, all finished</span></h3>
+  <p class="d" style="border-left:2px solid var(--bad);padding-left:12px;margin:0 0 12px"><b>Photo audit,
+  2026-07-24:</b> every one of the sixteen Saint Joe frames is a finished listing photograph, including
+  what appears to be a real exterior before and after pair. There is no process photography at all. The
+  premise below assumed an open project could be documented mid work, and that is not possible from this
+  folder. Either Shavit sends progress photos, or this becomes a straight before and after post using the
+  pair that already exists. The argument itself is still the best one on the board, so it is worth the ask
+  rather than the drop.</p>
+  <p class="premise">One roof, two families. The post that argues for what the company actually does.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">Every other concept shows work. This one makes an argument, and
+        the argument is the one lenders and sellers care about. A duplex takes one lot and produces two
+        homes. Framed as housing supply rather than as a unit count, it is the most quotable post on the
+        board, and it stays entirely inside the reputation lane. It is open, so it documents progress
+        honestly instead of promising a finish.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        One roof. Two families. The math on a duplex is the most useful thing we can show you about how we
+        pick a house.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, eight slides</h5>
+      <ol class="slides">
+        <li>Cover, the roofline, and the one roof two families line</li>
+        <li>What the building was doing before</li>
+        <li>Side one, current state</li>
+        <li>Side two, current state</li>
+        <li>The shared systems, what has to be doubled</li>
+        <li>What this adds to the town, in plain words</li>
+        <li>Where it stands today, dated honestly</li>
+        <li>Closing, two doors is the whole point</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, two items: current stage and expected completion, plus a yes on
+  framing it as housing supply rather than as a rental unit count.</p>
+</div>
+
+<div class="concept" data-annot="concept-d">
+  <div class="rank">Concept D &middot; ships without waiting on anyone</div>
+  <h3>The work you never see, across four houses <span class="badge b-real">Photos already on hand</span></h3>
+  <p class="premise">A carousel with no pretty rooms in it. Only the parts of a renovation that nobody
+  photographs.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">Every rehab account posts the kitchen. Almost nobody posts the
+        rough in, because it does not photograph well, which is precisely why it reads as real. This pulls
+        electrical, plumbing, heating, insulation, and drywall frames from Kendall, East Victoria, Howder,
+        and Saint Joe, uses photos that would otherwise never leave the folder, and needs zero new story
+        input. It is the strongest post on this board for a lender audience, and it is the one that can go
+        out this Sunday without a call.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        Nobody posts this part. New wire, new pipe, new heat, new insulation. It is most of the budget and
+        none of the photos.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, nine slides</h5>
+      <ol class="slides">
+        <li>Cover, a stud wall, and the line about what nobody posts</li>
+        <li>Electrical, one house</li>
+        <li>Plumbing, another house</li>
+        <li>Heating and cooling</li>
+        <li>Insulation</li>
+        <li>Drywall, the moment it stops looking like a job site</li>
+        <li>The same sequence, a different town, to show it is a system</li>
+        <li>What this buys the family who moves in</li>
+        <li>Closing, the work you never see is the work we sell</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, nothing. Needs from us: pull the Kendall folder to disk, build contact
+  sheets, and pick the frames by eye. Half a day.</p>
+</div>
+
+<div class="concept" data-annot="concept-e">
+  <div class="rank">Concept E &middot; lowest lift on the board</div>
+  <h3>Howder duplex, both units, Michigan <span class="badge b-real">41 photos, already approved</span></h3>
+  <p class="premise">The before and after that is already signed off, rebuilt as a carousel.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">Howder is the approved before and after template and it already
+        has a captioned reel. Turning it into a carousel costs almost nothing, needs no new inputs, and
+        gives the cadence a filler slot for any week where Shavit does not come back with a story. Keep the
+        rule he set on the fourteenth: the word before stays on every before photo.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        Two units, one building, both taken down to the studs. Swipe for what each side looked like when we
+        got the keys.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, eight slides</h5>
+      <ol class="slides">
+        <li>Cover, the finished building</li>
+        <li>Unit one, after</li>
+        <li>Unit one, before, labeled</li>
+        <li>Unit two, after</li>
+        <li>Unit two, before, labeled</li>
+        <li>The detail we are proudest of</li>
+        <li>Availability, routed to the site</li>
+        <li>Closing card and mark</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, one confirmation: that the Howder reel actually posted, so this does
+  not double up on the same audience within a fortnight.</p>
+</div>
+
+<div class="concept" data-annot="concept-f">
+  <div class="rank">Concept F &middot; the different lane</div>
+  <h3>West South, the short term rental, Michigan <span class="badge b-real">24 photos on hand</span></h3>
+  <p class="premise">What happens after the renovation ends. The only asset in the portfolio with a second
+  life.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">Every other post ends at the finish line. This one starts there.
+        A finished house in a small Michigan town that hosts people rather than housing them is a different
+        argument, and it speaks to the part of the audience that is deciding whether to partner rather than
+        whether to rent. The folder also goes back to the middle of 2024, which means it can show a
+        finished asset that has held up over two years rather than one photographed the week the paint
+        dried.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        Most of our houses become somebody's home. This one became somewhere to stay, and it has held up
+        for two years.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, seven slides</h5>
+      <ol class="slides">
+        <li>Cover, the finished exterior</li>
+        <li>What the building was before</li>
+        <li>Why this one became a stay rather than a rental</li>
+        <li>The rooms, as guests see them</li>
+        <li>What two years of use looks like, honestly</li>
+        <li>What it means for the town, visitors with somewhere to go</li>
+        <li>Closing card and mark</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, two items: confirm the short term rental is currently operating, and a
+  yes on featuring it publicly. Hold this concept if either answer is no.</p>
+</div>
+
+<div class="concept" data-annot="concept-g">
+  <div class="rank">Concept G &middot; the one that makes sellers call</div>
+  <h3>Before we ever pick up a hammer, portfolio wide <span class="badge b-slot">Photo selection needed</span></h3>
+  <p class="premise">How a house actually gets bought. The acquisition story, told once, so the next seller
+  knows what to expect.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">Every post on the account shows the renovation. None of them
+        show the part a seller cares about, which is what it is like to sell to this company. Built from the
+        intake and winter walk through frames that already exist across the portfolio, it is the one post
+        on this board aimed squarely at deal flow rather than at reputation alone.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        A house reaches us four different ways. Here is what each one looks like from the seller's side of
+        the table.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, eight slides</h5>
+      <ol class="slides">
+        <li>Cover, a winter intake photo, and the four ways line</li>
+        <li>Route one, the auction</li>
+        <li>Route two, bank owned</li>
+        <li>Route three, a direct seller</li>
+        <li>Route four <span class="need">(needs his fourth channel)</span></li>
+        <li>What the first walk through is like</li>
+        <li>How fast we can actually close, described without figures</li>
+        <li>Closing, a direct line for anyone with a house to move</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, one item: his actual acquisition channels, in order, and whether he
+  wants inbound seller traffic pointed at the site or at a person.</p>
+</div>
+
+<div class="concept chg" data-annot="concept-h">
+  <div class="rank">Concept H &middot; parked</div>
+  <h3>Wonder how we do it, the team <span class="badge b-watch">Parked at Jake's call</span></h3>
+  <p class="d" style="border-left:2px solid var(--gold);padding-left:12px;margin:0 0 12px"><b>Jake's note,
+  folded in:</b> later. Dropping it out of the working set and off the ask list, so the Tuesday check in
+  does not spend its short window chasing six names. Keeping the concept written up so it is ready when the
+  arc comes back around. Worth noting that the mechanical carousel answers the wonder how we do it question
+  in a different way, and it ships this week without anyone's names.</p>
+  <p class="premise">The payoff to his own hook, shipped as a carousel rather than waiting on a reel.</p>
+  <div class="grid2">
+    <div>
+      <div class="box">
+        <h5>Why this one</h5>
+        <p style="font-size:14px;margin:0">This is Shavit's own stated content arc from the seventeenth,
+        open projects first and then the team that does the work. He already sent the six crew photos. The
+        reel version has been parked on missing names for a week. A carousel needs no timing, no music, and
+        no edit, so the same payoff can ship the moment he sends names and roles. It is also the warmest
+        post available, and the account is short on warmth.</p>
+      </div>
+      <div class="hook">
+        <span>Opening line, first 125 characters</span>
+        You asked how we do it. This is the answer, and it is not a system. It is these people.
+      </div>
+    </div>
+    <div class="box">
+      <h5>Slide arc, nine slides</h5>
+      <ol class="slides">
+        <li>Callback card, you asked how we do it</li>
+        <li>Meet the team</li>
+        <li>Crew member one, name and role <span class="need">(needs names)</span></li>
+        <li>Crew member two</li>
+        <li>Crew member three</li>
+        <li>Crew member four</li>
+        <li>Crew member five</li>
+        <li>Shavit, and the line about who does the work</li>
+        <li>Closing card and mark</li>
+      </ol>
+    </div>
+  </div>
+  <p class="rule">Needs from Shavit, one item, still the same one: a name, a role, and an order for each of
+  the six photos. This has been the only blocker since the seventeenth. Note the brand rule on
+  de-identifying people applies to tenants and neighbours, not to crew who consent to being featured, so
+  confirm each person is happy to appear.</p>
+</div>
+
+<h2 data-annot="s3">03 &middot; Recommended sequence</h2>
+<div class="concept" data-annot="sequence">
+  <p class="d">Two posts a week, Thursday or Friday plus Sunday, Sunday being the stronger day. This
+  sequence deliberately puts the no dependency concept first so the next post does not hang on the Tuesday
+  call landing well.</p>
+  <table>
+    <tr><th>Slot</th><th>Concept</th><th>Why here</th><th>Blocked on</th></tr>
+    <tr><td>Sunday 26 July</td><td><b>D, the work you never see</b></td><td>Needs nothing from Shavit, uses
+    photos already on hand, and the strongest post for the lender audience</td><td><span class="badge b-real">Nothing</span></td></tr>
+    <tr><td>Thursday 30 July</td><td><b>A, Kendall</b></td><td>Story collected at the Tuesday noon check in,
+    two days to build, same arc as the post that just worked</td><td><span class="badge b-watch">His story</span></td></tr>
+    <tr><td>Sunday 2 August</td><td><b>B, local luxury</b></td><td>Different register from the two before
+    it, and the specifics come from the same Tuesday call</td><td><span class="badge b-watch">Five specifics</span></td></tr>
+    <tr><td>Reserve</td><td><b>E, Howder</b></td><td>Drop in any week a story does not arrive, since it needs
+    no new input</td><td><span class="badge b-real">Nothing</span></td></tr>
+  </table>
+  <p class="rule">Held back deliberately: concept C wants the duplex further along before it can show a
+  current state worth showing, concept F is gated on the short term rental being live, concept G wants his
+  acquisition channels, and concept H has been waiting on six names since the seventeenth.</p>
+</div>
+
+<h2 data-annot="s4">04 &middot; What to get from Shavit at the Tuesday check in</h2>
+<div class="concept" data-annot="asks">
+  <ol>
+    <li><b>Ohio photos.</b> All six Ohio folders are empty. He has asked for Ohio coverage repeatedly and
+    it is the only thing standing in the way. Highest value item on this list.</li>
+    <li><b>The Kendall story.</b> How the deal came to us, what shape it was in, who lives there now.
+    Ten minutes unlocks concept A.</li>
+    <li><b>Five specifics on Norwood.</b> What makes it the luxury build, in his words, not adjectives.</li>
+    <li><b>Saint Joe progress photos.</b> The folder is finished shots only, so the duplex post cannot
+    document work in progress. Ask for job site photos, or run it as a straight before and after.</li>
+    <li><b>Open project photos.</b> The Trio, Ewing, and Cedar Street have zero, zero, and one. The open
+    project lineup cannot be shown until these arrive.</li>
+    <li><b>The short term rental.</b> Is it operating, and does he want it featured.</li>
+    <li><b>Carried over from East Victoria.</b> The dollar figure override on the numbers slide, and
+    whether the lender and the general contractor want tags or plain credit.</li>
+  </ol>
+</div>
+
+<h2 data-annot="s5">05 &middot; Rules every concept above already obeys</h2>
+<div class="concept" data-annot="rules">
+  <ul>
+    <li>No dollar figures anywhere, on screen or in caption.</li>
+    <li>Street names and project nicknames only, never a number leading an address.</li>
+    <li>Michigan, Ohio, and Indiana always spelled out.</li>
+    <li>Criticise the condition of a house, never the street or the neighbourhood it sits on.</li>
+    <li>Tenants and neighbours de-identified, crew featured only with consent.</li>
+    <li>Real photographs of the real property, no portal imagery and no generated architecture.</li>
+    <li>No contractions and no dashes in any drafted copy.</li>
+    <li>Two to three posts a week, ceiling, with the pinned brand film left in place.</li>
+  </ul>
+</div>
+
+<h2 data-annot="s6">06 &middot; Do we have any other case stories verbatim from Shavit</h2>
+<div class="concept chg" data-annot="verbatim-stories">
+  <p class="premise">Short answer, no. East Victoria is the only property Shavit has ever told us the story
+  of on the record.</p>
+  <p class="d">Checked on 2026-07-24, four places:</p>
+  <ul>
+    <li><b>Fireflies.</b> Eight recorded calls with him since the thirtieth of June. Only one, the Shavit
+    Reel call on the twenty third of July, carries property story content, and its own recap tags are
+    property acquisition and foreclosure renovation. That is the East Victoria call. Every other recorded
+    call is website, branding, launch, or the weekly scorecard.</li>
+    <li><b>The self dictated transcript</b> emailed on the twenty second is the scorecard call and the
+    website walkthrough. It names East Victoria as this week's property and gives that hook. No other
+    house.</li>
+    <li><b>The pipeline itself.</b> No mention of Kendall, Norwood, Waldron, Howder or Lo Presto anywhere
+    in the working files, in any story sense.</li>
+    <li><b>Texts.</b> No Shavit thread is in scope on this machine, so nothing to mine there.</li>
+  </ul>
+  <p class="d">What that means practically: every concept on this board that depends on a story is
+  bottlenecked on the same ten minute conversation, and there is no archive to fall back on. Two things
+  follow. First, the mechanical carousel is the right post to lead with, because it is the only strong one
+  that needs no story at all. Second, the Tuesday check in is worth restructuring: rather than asking about
+  one house, get him talking through three, Kendall, Norwood and the duplex, and record it. One call would
+  unblock the next month of posts instead of the next post.</p>
+  <p class="rule">Worth noting the Fireflies workspace was at ninety percent storage on the thirteenth of
+  July and the free transcription credits are exhausted, so recordings may stop being summarised. If those
+  calls are the only archive of his stories, that is a real risk to the content pipeline.</p>
+</div>
+
+<footer>Carousel slate &middot; rev 2 &middot; 2026-07-24 &middot; shavit-pipeline &middot; photo counts
+pulled live from the shared property tree on 2026-07-24. Annotate any concept above, notes save to the
+pipeline inbox when this page is served through <code>serve.py</code>.</footer>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

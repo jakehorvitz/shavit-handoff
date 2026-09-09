@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder reference photos</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#0b0b0c;color:#f4f2ec;font-family:"Inter",system-ui,sans-serif}
+  .wrap{max-width:1280px;margin:0 auto;padding:30px 18px 90px}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:#a5a29a;font-size:13px;margin:0 0 10px}
+  h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#B08D57;margin:34px 0 10px;padding-bottom:7px;border-bottom:1px solid #2a2a2e}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  figure{margin:0;background:#141416;border:1px solid #2a2a2e;border-radius:10px;overflow:hidden}
+  figure img{width:100%;display:block;cursor:zoom-in}
+  figcaption{font:600 11px/1.4 ui-monospace,Menlo,monospace;color:#a5a29a;padding:7px 10px}
+  figcaption b{color:#FFC000}
+  .big{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+  .big.on{display:flex}
+  .big img{max-width:96vw;max-height:96vh;object-fit:contain}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>43 Howder, every reference photo</h1>
+<p class="sub">Click any photo for full size. Anchor rows tell you which reel beat settles on that exact image.</p>
+
+<h2>Finished unit, the 16 raws</h2>
+<div class="grid" id="afters"></div>
+
+<h2>Befores, the 7 raws</h2>
+<div class="grid" id="befores"></div>
+
+<h2>Anchors the reel settles on</h2>
+<div class="grid">
+  <figure><img src="clips/end_outpaint.png"><figcaption><b>end_outpaint</b> · drone landing + final push-in close (edges generated)</figcaption></figure>
+  <figure><img src="clips/stairs_outpaint.png"><figcaption><b>stairs_outpaint</b> · staircase beat settle (from u1-06, ceiling/floor generated)</figcaption></figure>
+  <figure><img src="clips/sink_outpaint.png"><figcaption><b>sink_outpaint</b> · sink beat settle (from u1-09, ceiling/floor generated)</figcaption></figure>
+  <figure><img src="build2/s5w.jpg"><figcaption><b>s5w</b> · shower pull-back settle (straight crop of u1-13, all real)</figcaption></figure>
+  <figure><img src="unit1/raw/u1-08.jpg"><figcaption><b>u1-08</b> · kitchen pan settle (real photo)</figcaption></figure>
+</div>
+</div>
+<div class="big" id="big"><img id="bigimg"></div>
+<script>
+  var af=document.getElementById("afters"),be=document.getElementById("befores");
+  for(var i=1;i<=16;i++){var n="u1-"+String(i).padStart(2,"0");
+    af.insertAdjacentHTML("beforeend",'<figure><img src="unit1/raw/'+n+'.jpg"><figcaption><b>'+n+'</b></figcaption></figure>');}
+  for(var i=17;i<=23;i++){var n="u1-"+String(i).padStart(2,"0");
+    be.insertAdjacentHTML("beforeend",'<figure><img src="unit1/raw/'+n+'.png"><figcaption><b>'+n+'</b> · before</figcaption></figure>');}
+  var big=document.getElementById("big"),bi=document.getElementById("bigimg");
+  document.addEventListener("click",function(e){
+    if(e.target.tagName==="IMG"&&e.target.id!=="bigimg"){bi.src=e.target.src;big.classList.add("on");}
+    else if(big.classList.contains("on")){big.classList.remove("on");}
+  });
+</script>
+</body>
+</html>

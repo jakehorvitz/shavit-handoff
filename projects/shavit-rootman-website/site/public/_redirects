@@ -1,0 +1,8 @@
+/companies / 301
+/contact /#reach 301
+# Shavit 8/31: "Can you remove the # from the name on URL?" — /case-studies is
+# now a REAL prerendered page (dist/case-studies/index.html), so it must NOT be
+# redirected to /#case-studies any more. These two only feed it.
+# /casestudies (no hyphen) is the URL the approved teaser reel says out loud.
+/casestudies /case-studies 301
+/case-studies/60-s-norwood /case-studies 301

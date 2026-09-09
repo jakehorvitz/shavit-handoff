@@ -1,0 +1,126 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Mead teaser — inserts renderer</title>
+<style>
+/* Inserts for the Mead Street teaser, built in REEL 1's system:
+   black canvas + gold hairline/eyebrow + hard-cornered cards & device mockups.
+   Source of truth for the look: ../../reel1/reel1.html (gold #FFC000, 800 weight,
+   uppercase, .24em tracking on the eyebrow). Captions live at centerY .72 in the
+   Palmier timeline, so nothing here may drop below y=1300. */
+:root{--gold:#FFC000;--font:-apple-system,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:#000;overflow:hidden;font-family:var(--font);color:#fff;-webkit-font-smoothing:antialiased}
+.stage{position:relative;width:1080px;height:1920px;perspective:2600px;background:radial-gradient(120% 60% at 50% 30%,#141414 0%,#000 60%)}
+.hair{position:absolute;left:72px;top:78px;height:2px;background:var(--gold);width:var(--hw,0)}
+.eyebrow{position:absolute;left:72px;top:96px;font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;gap:18px;align-items:center;opacity:var(--eo,1)}
+.eyebrow::before{content:"";width:56px;height:2px;background:var(--gold)}
+
+/* --- minis: the Instagram post case studies as cards --- */
+.cluster{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:scale(var(--cs,1))}
+.card{position:absolute;background:#111;overflow:hidden;
+  box-shadow:0 30px 70px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.10);
+  opacity:var(--o,0);transform:translateY(var(--ty,30px)) scale(var(--s,.88)) rotate(var(--rot,0deg));transform-origin:50% 50%}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card.lead{box-shadow:0 30px 70px rgba(0,0,0,.85),0 0 0 2px var(--gold)}
+
+/* --- mead: 3:2 photos held at their true aspect over a blurred bed --- */
+.bed{position:absolute;inset:0;overflow:hidden}
+.bed img{position:absolute;left:50%;top:50%;width:180%;height:180%;transform:translate(-50%,-50%);
+  object-fit:cover;filter:blur(46px) brightness(.42) saturate(.85);opacity:var(--o,1)}
+.fill{position:absolute;inset:0;overflow:hidden;opacity:var(--o,0)}
+.fill img{width:100%;height:100%;object-fit:cover;object-position:var(--px,50%) 50%;
+  display:block;transform:scale(var(--s,1))}
+
+/* --- device mockups (verbatim from reel1.html) --- */
+.mac{position:absolute;left:50%;top:44%;width:1000px;height:640px;margin:-320px 0 0 -500px;
+  transform:translateY(var(--ty,0)) rotateY(var(--ry,-10deg)) rotateX(var(--rx,10deg)) rotateZ(var(--rz,-2deg)) scale(var(--s,1));transform-style:preserve-3d;opacity:var(--o,1)}
+.mac .lid{position:absolute;inset:0 0 64px 0;border-radius:26px 26px 12px 12px;background:#0b0b0b;box-shadow:0 0 0 2px #2a2a2a,inset 0 0 0 1px rgba(255,255,255,.10),0 60px 120px rgba(0,0,0,.85)}
+.mac .screen{position:absolute;inset:16px 16px 80px 16px;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 0 120px rgba(255,192,0,.10)}
+.mac .screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:brightness(1.08)}
+.mac .notch{position:absolute;top:16px;left:50%;width:120px;height:18px;margin-left:-60px;border-radius:0 0 10px 10px;background:#0b0b0b}
+.mac .base{position:absolute;left:-40px;right:-40px;bottom:0;height:64px;border-radius:0 0 22px 22px;background:linear-gradient(#3a3a3a 0,#1a1a1a 6%,#0e0e0e);box-shadow:0 30px 60px rgba(0,0,0,.7)}
+.mac .base::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.28),rgba(255,255,255,.05))}
+.mac .foot{position:absolute;left:50%;bottom:40px;width:180px;height:8px;margin-left:-90px;border-radius:0 0 8px 8px;background:#050505}
+</style></head><body><div class="stage" id="stage"></div>
+<script>
+const q=new URLSearchParams(location.search);
+const scene=q.get('scene')||'minis', f=parseInt(q.get('f')||'0');
+const S=document.getElementById('stage');
+const clamp=x=>x<0?0:x>1?1:x, ss=x=>{x=clamp(x);return x*x*(3-2*x)};
+const pad=n=>String(n).padStart(4,'0');
+const FT=(dir,i,max)=>`../../reel1/footage/${dir}/${pad(Math.max(0,Math.min(max,Math.round(i))))}.jpg`;
+let html='';
+
+if(scene==='minis'){
+  // 135 frames -> timeline 292..427, under "case studies ... are the economics and
+  // all the investment numbers behind everything we do." Ends on the frame he
+  // starts saying the URL, so web2 hard-cuts in with no overlap.
+  const N=135;
+  const CARDS=[
+    {src:'covers/01-east-victoria.jpg', x:52,  y:360, w:308, rot:-1.4},
+    {src:'covers/03-clarendon.jpg',     x:386, y:360, w:308, rot:0.9},
+    {src:'covers/04-howder-unitb.jpg',  x:720, y:360, w:308, rot:-0.7},
+    {src:'covers/02-kendall.jpg',       x:177, y:779, w:348, rot:1.2},
+    {src:'covers/05-howder-ac.jpg',     x:555, y:779, w:348, rot:-1.1},
+  ];
+  const eo=ss(f/10);
+  html+=`<div class="hair" style="--hw:${(ss(f/16)*160).toFixed(0)}px"></div>`;
+  html+=`<div class="eyebrow" style="--eo:${eo}">Our projects</div>`;
+  const cs=(1.0+0.05*ss(f/N)).toFixed(4);           // slow cluster push-in
+  html+=`<div class="cluster" style="--cs:${cs}">`;
+  CARDS.forEach((c,i)=>{
+    const u=ss((f-(6+i*11))/15);                     // staggered build, ~0.37s apart
+    const h=Math.round(c.w*1.25);                    // covers are 4:5
+    html+=`<div class="card${c.lead?' lead':''}" style="left:${c.x}px;top:${c.y}px;width:${c.w}px;height:${h}px;`+
+          `--o:${u.toFixed(3)};--ty:${(30*(1-u)).toFixed(1)}px;--s:${(0.88+0.12*u).toFixed(3)};--rot:${(c.rot*u).toFixed(2)}deg">`+
+          `<img src="${c.src}"></div>`;
+  });
+  html+=`</div>`;
+}
+
+if(scene==='web1'){
+  // 80 frames -> timeline 88..167, under "go check our website, shavitrootman.com"
+  const N=80, u=ss(f/N);
+  html+=`<div class="hair" style="--hw:${(ss(f/14)*160).toFixed(0)}px"></div>`;
+  html+=`<div class="eyebrow" style="--eo:${ss(f/10)}">shavitrootman.com</div>`;
+  html+=`<div class="mac" style="--s:${(0.92+0.10*u).toFixed(3)};--rx:${(14-6*u).toFixed(2)}deg;--ry:${(-14+6*u).toFixed(2)}deg;--rz:-2deg;--ty:-20px;--o:${ss(f/8)}">`+
+        `<div class="lid"><div class="screen"><img src="${FT('desktop-hero-push',5+f,89)}"></div><div class="notch"></div></div>`+
+        `<div class="base"></div><div class="foot"></div></div>`;
+}
+
+if(scene==='web2'){
+  // 76 frames -> timeline 427..503, under "shavitrootman.com/casestudies"
+  // Footage 82..149 is the scroll landing on the live Deal Case Studies grid.
+  const N=76, u=ss(f/N);
+  html+=`<div class="hair" style="--hw:${(ss(f/14)*160).toFixed(0)}px"></div>`;
+  html+=`<div class="eyebrow" style="--eo:${ss(f/10)}">Deal case studies</div>`;
+  html+=`<div class="mac" style="--s:${(0.94+0.09*u).toFixed(3)};--rx:${(12-5*u).toFixed(2)}deg;--ry:${(-14+7*u).toFixed(2)}deg;--rz:2deg;--ty:-20px;--o:${ss(f/8)}">`+
+        `<div class="lid"><div class="screen"><img src="${FT('desktop-to-case-studies',82+f*(149-82)/(N-1),149)}"></div><div class="notch"></div></div>`+
+        `<div class="base"></div><div class="foot"></div></div>`;
+}
+
+if(scene==='mead'){
+  // 291 frames -> timeline 555..846, the three Mead AFTER photos. They are 3600x2400
+  // (3:2). The old Palmier cut stretched them into 9:16 — its fit transform was
+  // stored but the scale keyframes overrode it. Here they are object-fit:cover, so
+  // the aspect is right by construction, and each one slowly pans across so the
+  // full width of the room still reads inside a vertical frame.
+  const SHOTS=[
+    {src:'mead/p1-exterior.jpeg', a:0,   b:105, px:[55,42]},  // drift onto the house
+    {src:'mead/p2-kitchen.jpeg',  a:93,  b:198, px:[30,55]},  // stove -> sink -> counter
+    {src:'mead/p3-living.jpeg',   a:186, b:291, px:[62,30]},  // doorway -> window
+  ];
+  const FADE=12;
+  const alpha=(sh)=>{
+    if(f<sh.a||f>=sh.b) return 0;
+    return Math.min(ss((f-sh.a)/FADE), 1-ss((f-(sh.b-FADE))/FADE));
+  };
+  SHOTS.forEach(sh=>{
+    const v=alpha(sh); if(v<=0) return;
+    const k=clamp((f-sh.a)/(sh.b-sh.a));
+    const px=(sh.px[0]+(sh.px[1]-sh.px[0])*k).toFixed(2);
+    html+=`<div class="fill" style="--o:${v.toFixed(3)}">`+
+          `<img src="${sh.src}" style="--px:${px}%;--s:${(1.0+0.05*k).toFixed(4)}"></div>`;
+  });
+}
+
+S.innerHTML=html;
+</script></body></html>

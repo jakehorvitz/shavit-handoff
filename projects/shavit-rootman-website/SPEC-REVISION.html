@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spec — shavitrootman.com Revision: Tenant-Facing Inventory Hub</title>
+<style>
+  :root{--navy:#15192a;--orange:#e8722a;--ink:#1a1a1a;--mut:#5b6472;--line:#e3e6ec;--bg:#f7f8fa;--ok:#0a8a4a;--warn:#b8860b;--stop:#c0392b;}
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  header{background:var(--navy);color:#fff;padding:40px 32px}
+  header .k{color:var(--orange);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+  header h1{margin:8px 0 6px;font-size:30px}
+  header p{margin:0;color:#c7cede}
+  main{max-width:920px;margin:0 auto;padding:32px}
+  section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 28px;margin:0 0 20px}
+  h2{margin:0 0 4px;font-size:21px;color:var(--navy)}
+  h2 .n{color:var(--orange);font-weight:800;margin-right:8px}
+  h3{margin:20px 0 6px;font-size:16px;color:var(--navy)}
+  .sub{color:var(--mut);margin:0 0 16px;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--bg);color:var(--navy)}
+  code{background:#eef1f6;border-radius:4px;padding:1px 6px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  ul,ol{margin:8px 0;padding-left:22px} li{margin:4px 0}
+  .pill{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:99px;color:#fff}
+  .pill.ok{background:var(--ok)} .pill.warn{background:var(--warn)} .pill.stop{background:var(--stop)} .pill.info{background:var(--navy)}
+  .kill{border-left:4px solid var(--orange);padding-left:16px;background:#fff8f2}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:8px;padding:14px}
+  .card h4{margin:0 0 6px;font-size:14px;color:var(--navy)}
+  .muted{color:var(--mut);font-size:13px}
+  .accept li{margin:6px 0}
+  .gate{background:var(--navy);color:#fff;border-radius:10px;padding:20px 24px}
+  .gate h2{color:#fff}.gate a{color:var(--orange)}
+  footer{max-width:920px;margin:0 auto;padding:0 32px 60px;color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="k">Build Spec · Bones Pipeline Stage 3 · shavit-website-revision</div>
+  <h1>shavitrootman.com — Tenant-Facing Inventory Hub</h1>
+  <p>Charger Realty Management, by Shavit Rootman · v1.0 · 2026-07-02 · Visual mock: claude.ai/code/artifact/b9b9c164-c733-4386-a85a-26ad69818f8e</p>
+</header>
+<main>
+
+<section>
+  <h2><span class="n">0</span>What this is</h2>
+  <p><strong>One sentence:</strong> restructure the live site from an investor-partnership pitch into a
+  photo-forward, state-organized (MI / OH / IN) tenant-facing inventory hub — Available Now / Coming Soon —
+  with contact reduced to one-tap links, past work shown only as anonymized proof, and a data model that lets
+  Shavit's weekly Drive uploads become new listings with zero layout work.</p>
+  <table>
+    <tr><th>Item</th><th>Today (live)</th><th>After revision</th></tr>
+    <tr><td>Primary audience</td><td>Investors / partners ("Build your portfolio with me")</td><td>Tenants; secondary: sellers/partners (quiet)</td></tr>
+    <tr><td>Organizing principle</td><td>Company entities (Barootman/Charger/DSR/CPM)</td><td>States → Available Now / Coming Soon</td></tr>
+    <tr><td>Contact</td><td>Supabase form + Turnstile + Resend</td><td>Links only: <code>sms:</code>/<code>tel:</code> 805 number — no form</td></tr>
+    <tr><td>Past projects</td><td>7 named case studies w/ addresses</td><td>Anonymized "The Standard" before/after strip, no addresses</td></tr>
+    <tr><td>LinkedIn/Substack</td><td>Endorsement cards, senator letter, Substack images</td><td>Outbound links only</td></tr>
+    <tr><td>Design system</td><td colspan="2">UNCHANGED — black canvas, #FFC000 gold, hero video/imagery, film grain, motion, SSG infra all kept</td></tr>
+  </table>
+  <p class="muted">Sources: full meeting transcript 2026-07-02 (<code>.bones/inputs/meeting-summary.md</code>),
+  org chart, Drive tree, hormozi-vault consult (<code>.bones/inputs/hormozi-brief.md</code>), codebase map.
+  Owner gate 2 decisions on record: commit + links-only contact + anonymized proof + explicit asks-list.</p>
+</section>
+
+<section>
+  <h2><span class="n">1</span>Information architecture</h2>
+  <p class="sub">One scroll home (Shavit: "a scroll could work too") + trimmed support pages.</p>
+  <table>
+    <tr><th>Route</th><th>Disposition</th><th>Content</th></tr>
+    <tr><td><code>/</code></td><td><span class="pill info">Rebuild</span></td><td>Hero (tenant promise, 1 CTA → inventory) → state bar → #michigan → #ohio → #indiana (each: Available Now / Coming Soon card grids) → #standard (proof strip) → #meet (trimmed) → #reach (links-only) → footer</td></tr>
+    <tr><td><code>/companies</code></td><td><span class="pill stop">Remove</span></td><td>Entity deep-dives, investor FAQ (hold periods, K-1s, distributions) all gone. 301 → <code>/</code></td></tr>
+    <tr><td><code>/case-studies</code></td><td><span class="pill stop">Remove</span></td><td>Addressed ownership inventory gone. 301 → <code>/#standard</code></td></tr>
+    <tr><td><code>/meet</code></td><td><span class="pill warn">Trim</span></td><td>Portrait + 1-2 paragraphs + LinkedIn/IG outbound buttons. Endorsements, senator letter, Substack content removed</td></tr>
+    <tr><td><code>/contact</code></td><td><span class="pill stop">Remove</span></td><td>Form gone. 301 → <code>/#reach</code></td></tr>
+    <tr><td><code>/accessibility</code>, 404</td><td><span class="pill ok">Keep</span></td><td>Update contact info on accessibility page (no info@)</td></tr>
+  </table>
+  <h3>Nav (new)</h3>
+  <p><code>MICHIGAN · OHIO · INDIANA · THE STANDARD · MEET SHAVIT · REACH</code> — anchors on <code>/</code> (+ Meet as page). Wordmark unchanged.</p>
+</section>
+
+<section>
+  <h2><span class="n">2</span>The listings data model (the core new thing)</h2>
+  <p class="sub">Weekly content from Shavit's Drive must become a listing with zero layout work.</p>
+  <pre><code>// site/src/properties.js
+export const PROPERTIES = [
+  {
+    id: 'budlong-street',
+    state: 'MI',                      // MI | OH | IN
+    status: 'available',              // available | coming-soon | hidden
+    name: 'Budlong Street',
+    locale: 'Hillsdale',
+    type: 'Single-family',            // free text: 'Duplex · 2 units', 'Furnished · 30–180 days'
+    line: '3-bed near downtown Hillsdale — everything new inside.',  // destination + timeline, not renovation pride
+    rent: 1150,                       // REQUIRED for available (council H1: omitting price kills tenant conversion)
+    beds: 3, baths: 1,
+    available: 'now',                 // 'now' | 'Aug 1' — the time-delay lever
+    eta: null,                        // coming-soon only: month-level, e.g. 'September' (never bare "Coming Soon")
+    photo: '/assets/listings/budlong-street.jpg',   // uniform house-front crop, ≤250KB
+    cta: 'ask'                        // ask | notify (label + sms body vary)
+  }, ...
+]
+// Cards render a chip row: "$1,150 · 3bd 1ba · Move in now" — three data points, zero prose.</code></pre>
+  <p class="kill"><strong>Hidden ≠ filtered (council T2 — BLOCKER fix).</strong> Vite bundles the whole imported
+  array into dist JS, so <code>status:'hidden'</code> entries WOULD ship as strings. Staged listings therefore live
+  in <code>site/src/properties.staged.js</code> — never imported — with photos in <code>site/staging-assets/</code>
+  (outside <code>public/</code>). Publishing = move the entry + move the photo. The dist sweep checks file NAMES
+  under <code>dist/assets/listings/</code> too, not just bundle strings.</p>
+  <ul>
+    <li>State sections render from this array; empty status groups collapse (no "Coming soon" header with zero cards).</li>
+    <li><code>status:'hidden'</code> keeps an entry staged without publishing — matches Shavit's "only what I say goes up".</li>
+    <li>Photos: one uniform house-front hero per listing at <code>/assets/listings/&lt;id&gt;.jpg</code>, 4:3 crop, consistent treatment (match IG/FB border/color system). Processed from Drive uploads.</li>
+    <li>Card CTA: <code>sms:+18053644415&amp;body=Hi — asking about {name} ({locale})</code> and <code>tel:</code> fallback. Every inbound identifies the property.</li>
+    <li>Seed content (launch set, pending Shavit confirmation via asks-list): MI — Budlong, 34 Mead, 61 Salem (available); 43 Howder Duplex, The Trio, 60 S Norwood (coming soon). OH — Larchmere, Cleveland Heights (available). IN — 2217 Parkview (available); 1114 Cedar, 1902 E Ewing (coming soon).</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">3</span>"The Standard" — anonymized proof strip</h2>
+  <p class="sub">Jake's gate-2 rider: must read fully legit. Hormozi: documented proof is uncopyable — keep it, anonymize it.</p>
+  <ul>
+    <li>Aggregate counter band (approved numbers ONLY): 50+ doors · 3 states · $12M+ · 200 by 2030. Reuses existing <code>Counter</code>/<code>StatsGrid</code> components.</li>
+    <li>2–4 before/after pairs: grayscale-dark "before" ↔ full-color "after", tags only (no addresses, no dates, no entity names). Captions are story-flavored one-liners ("Written off, brought back"), sourced from real Drive "Past Projects" photos.</li>
+    <li>Hard rule: nothing in this section may identify a specific parcel — no addresses, no street-recognizable wide shots paired with locality labels finer than the state.</li>
+  </ul>
+  <h3>Address policy (the whole-site rule — gate-3 amendment)</h3>
+  <ul>
+    <li><strong>Addresses appear ONLY on active rental inventory</strong> (Available Now / Coming Soon) — information that is public the moment a home is listed for rent anywhere. A tenant cannot rent a home without its address; this is Shavit's own "one-stop shop" ask.</li>
+    <li><strong>Never appears anywhere on the site:</strong> past/sold/held holdings by address, which entity owns which property, or any aggregate list from which total holdings could be reconstructed. Entity names appear only as the management face ("Managed by Charger Property Management"), never as owners.</li>
+    <li>When a listing leaves the market, its card flips to <code>hidden</code> — the address leaves the site with it.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">3b</span>Brand architecture (gate-3 amendment — needs Shavit's confirmation)</h2>
+  <p class="sub">Jake: Charger featured, but Shavit Rootman is THE brand. Proposal to put to Shavit:</p>
+  <table>
+    <tr><th>Layer</th><th>Treatment</th></tr>
+    <tr><td><strong>Shavit Rootman</strong> (personal brand)</td><td>The site's brand: domain, hero identity, Meet page, Instagram/LinkedIn continuity. Wordmark shifts to <code>SHAVIT ROOTMAN</code> with tagline "Real estate, operated."</td></tr>
+    <tr><td><strong>Charger Property Management</strong> (operating entity)</td><td>Featured as the management company: "Managed by Charger Property Management" on every MI listing card + footer legal line. In Michigan, ONLY CPM is named (Shavit's ask). Ohio/Indiana entity naming: confirm with Shavit (default: no entity badge outside MI).</td></tr>
+    <tr><td>All other entities (CPH, DSR, Barootman, Charger Realty, Indiana Charger Holdings)</td><td>Never on the site.</td></tr>
+  </table>
+  <p class="muted">Until Shavit confirms, build ships the current "Charger Realty Management, by Shavit Rootman" wordmark — flipping the wordmark is a 2-file change (<code>nav.jsx</code>, <code>footer.jsx</code> + JSON-LD) staged behind his answer (asks-list item 8).</p>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Contact decommission (links-only)</h2>
+  <table>
+    <tr><th>Item</th><th>Action</th></tr>
+    <tr><td>ContactPage form + validation + Turnstile widget</td><td>Delete component; <code>/contact</code> 301 → <code>/#reach</code></td></tr>
+    <tr><td>Supabase edge function <code>submit-lead</code></td><td><strong>Dormant, not deleted</strong>: remove all client callers; leave function + <code>leads</code> table + RLS as-is (zero attack surface growth, instant revival if Shavit changes his mind). Revoke nothing that breaks Supabase project health checks.</td></tr>
+    <tr><td><code>VITE_LEADS_ENDPOINT</code>, <code>VITE_TURNSTILE_SITE_KEY</code></td><td>Remove from <code>.env</code> usage in client; dist must contain zero references</td></tr>
+    <tr><td>Resend notification to info@</td><td>Moot (no callers). info@ removed from ALL page copy — Shavit cannot read that mailbox</td></tr>
+    <tr><td>#reach section</td><td>Two cards, dual audience: tenant (<code>sms:</code> 805) + seller/partner (<code>tel:</code> 805). No email shown.</td></tr>
+    <tr><td>CtaBands ("Build your portfolio with me")</td><td>Delete everywhere — also retires the Reg-D solicitation exposure flagged in the prior audit</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">5</span>What does NOT change</h2>
+  <ul>
+    <li>Design system: <code>design-tokens.css</code> + <code>site.css</code> untouched except additive classes for cards/chips/proof strip. Black/white/#FFC000, LogoIntro, FilmGrain, ScrollProgress, CursorRing, motion primitives all stay.</li>
+    <li>Hero imagery/video: <span class="pill warn">OPEN ITEM</span> Shavit said "keep it like that for now, discuss next week." Hero keeps current video/photo treatment with new tenant-promise copy. Final hero art is explicitly out of scope for this build.</li>
+    <li>Stack: Vite + react-router v6 + vite-react-ssg, nested dirStyle, CSP patch script, Netlify deploy, DNS, email — all untouched.</li>
+    <li>SEO/a11y bar from the migration build: per-route Head metadata (rewritten for tenant intent), JSON-LD (drop the 4-entity list; keep LocalBusiness + areaServed), WCAG-AA patterns, reduced-motion handling.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">6</span>Acceptance criteria (stage 5 gate — executable)</h2>
+  <ul class="accept">
+    <li>Build succeeds; every route in §1 prerenders; removed routes 301 (or meta-refresh + canonical for static hosting) to their targets.</li>
+    <li><code>dist/</code> contains ZERO: <code>&lt;form</code> tags, <code>supabase.co</code>, <code>turnstile</code>, <code>info@shavitrootman.com</code>, "Build your portfolio", entity deep-dive strings ("Barootman Enterprises", "DSR Enterprises" as headings), substackcdn.com image URLs.</li>
+    <li>Home renders 3 state sections from <code>PROPERTIES</code>; each visible card has photo, status chip, and an <code>sms:</code> or <code>tel:</code> CTA; <code>hidden</code> listings absent from dist.</li>
+    <li>"The Standard" contains counters + ≥2 before/after pairs and NO street addresses (regex sweep for the known address list against dist).</li>
+    <li>LinkedIn/Substack appear only as outbound <code>&lt;a href&gt;</code> — no embedded recommendation/letter content on any page.</li>
+    <li>Lighthouse (served per-path): a11y ≥ 95, SEO ≥ 95 on home; zero console errors; reduced-motion respected.</li>
+    <li>Mobile: state sections and card grids readable at 375px; no horizontal scroll.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">7</span>Asks-list for Shavit (Jake's gate-2 rider — send as-is)</h2>
+  <p class="sub">Explicit, checkbox-style. He works best with exact requests.</p>
+  <ol>
+    <li><strong>Confirm the launch inventory list.</strong> Reply to this list with ✅/❌ per property: MI available — Budlong, 34 Mead, 61 Salem · MI coming soon — 43 Howder, The Trio, 60 S Norwood · OH available — Larchmere, Cleveland Heights · IN available — 2217 Parkview · IN coming soon — 1114 Cedar, 1902 E Ewing. Anything ❌ stays off. Anything missing, name it.</li>
+    <li><strong>One house-front photo per confirmed listing</strong> → into the matching Drive folder (State → Ongoing/New → address). Straight-on front of house, daylight, no cars in the driveway if possible. This is the card image.</li>
+    <li><strong>2–4 before/after pairs for "The Standard"</strong> → any Past Projects folder. The before and after must be the SAME angle. We will NOT show addresses — this is the anonymized track-record section we discussed.</li>
+    <li><strong>Confirm the 805 number</strong> (805-364-4415) as the public tap-to-text/call line for all listings, and who answers it.</li>
+    <li><strong>Per available listing, one line of facts:</strong> beds/baths, rent, available date (or "now"). One text message per property is fine.</li>
+    <li><strong>Ohio check:</strong> should Cleveland listings be presented as furnished 30–180-day stays (medical corridor) or standard leases? This changes the card copy.</li>
+    <li><strong>Hero photo conversation</strong> — next week's meeting, as agreed. Until then the current hero stays (gate-3 amendment: hero video is NOT replaced until we have footage that beats it — no downgrade for the sake of change).</li>
+    <li><strong>Brand call:</strong> confirm the wordmark — "SHAVIT ROOTMAN" as the brand with "Managed by Charger Property Management" on Michigan listings, or keep "Charger Realty Management, by Shavit Rootman"? One-word answer is enough.</li>
+  </ol>
+  <p class="muted">A full CONTENT SHOPPING LIST (hero-film footage, per-property b-roll, portrait/lifestyle shots, before/after pairs) is delivered at the Present stage (stage 9) per Jake's gate-3 rider — after the build makes concrete what slots exist to fill.</p>
+</section>
+
+<section>
+  <h2><span class="n">8</span>Council amendments (Stage 4) — BINDING on the build</h2>
+  <p class="sub">Two adversarial critics (Hormozi-vault conversion critic; technical/ops critic verified against the live codebase). All findings below are folded in and gate the build alongside §6.</p>
+
+  <h3>Conversion (Hormozi critic — vault-cited)</h3>
+  <table>
+    <tr><th>#</th><th>Amendment</th></tr>
+    <tr><td>H1</td><td>Schema carries <code>rent/beds/baths/available</code>; every AVAILABLE card shows the chip row. The asks-list already collects this data — now it renders.</td></tr>
+    <tr><td>H2</td><td>Hero headline = the one-stop-shop claim, not Zillow's line: <strong>"Every home we have. One place."</strong> / subline "Available now and coming soon across Michigan, Ohio, and Indiana."</td></tr>
+    <tr><td>H3</td><td>Notify loop must be real (said-do): SMS body self-tags ("Put me on the list for {name} ({locale})"); inbound notify-texts logged per property (shared note/sheet is enough); when a card flips coming-soon→available, the list gets one text-back at publish. If Shavit won't commit to text-backs, microcopy becomes "Text to ask about this one — it's not ready yet" and we never promise notification. → asks-list item 10.</td></tr>
+    <tr><td>H4</td><td>FAQ accordion in #reach above the two cards: 6–8 one-line Q&amp;As (pets, vouchers/Section 8, application steps, deposit, who am I texting, when do coming-soon homes open). Also pre-filters junk texts to the 805 line.</td></tr>
+    <tr><td>H5</td><td>Card <code>line</code> template = destination + shortest honest timeline ("3-bed near downtown Hillsdale — move in Aug 1"). Renovation pride lives in The Standard + IG captions, not the card lead.</td></tr>
+    <tr><td>H6</td><td>Coming-soon chips carry a month-level ETA ("Coming September" / "Coming this fall") — never bare "Coming Soon".</td></tr>
+    <tr><td>H7</td><td>The Standard gains 2–3 de-identified tenant quotes ("M., Hillsdale — tenant since 2023"); person-specific, parcel-anonymous. → asks-list item 9.</td></tr>
+    <tr><td>H8</td><td>Counter band: label the dollar ("$12M+ portfolio"), and move "200 by 2030" to /meet as a one-line ambition. Proof section carries proof only.</td></tr>
+    <tr><td>H9</td><td>#reach seller card gets an offer line: "Selling a house in Hillsdale, Cleveland, or South Bend? Any condition. One call." Tenant card routes back up to listings.</td></tr>
+    <tr><td>H10</td><td>Performance is a gate: Lighthouse perf ≥ 90 (mobile) on home, LCP &lt; 2.5s.</td></tr>
+  </table>
+
+  <h3>Technical / ops (verified against the codebase)</h3>
+  <table>
+    <tr><th>#</th><th>Sev</th><th>Amendment</th></tr>
+    <tr><td>T1</td><td><span class="pill stop">Blocker</span></td><td>Create <code>site/public/_redirects</code>: <code>/companies / 301</code> · <code>/case-studies /#standard 301</code> · <code>/contact /#reach 301</code>. Meta-refresh option struck. Acceptance: <code>curl -sI</code> on all three returns 301 + correct Location.</td></tr>
+    <tr><td>T2</td><td><span class="pill stop">Blocker</span></td><td>Hidden-listings model rewritten (see §2 kill box): <code>properties.staged.js</code> never imported; staged photos outside <code>public/</code>; dist sweep covers filenames.</td></tr>
+    <tr><td>T3</td><td><span class="pill stop">Blocker</span></td><td>Edit <code>site/public/_headers</code>: remove supabase hosts from connect-src and challenges.cloudflare.com from script-src/frame-src (CSP hash-patch script unaffected). §6 greps run repo-wide on dist including _headers.</td></tr>
+    <tr><td>T4</td><td><span class="pill warn">High</span></td><td><strong>Anti-skeleton-rewrite (the gun that fired last time):</strong> new home sections are composed from the existing primitives — VideoHero, Eyebrow, GoldRule, LineReveal, Reveal, Counter, StatsGrid, Btn, band/band__inner/section-head grammar; listing cards extend <code>ccard</code>. No new stylesheet files; additions APPENDED to site.css; site.css only grows. Acceptance: dist CSS ≥ 86KB (current baseline 86,130 B). Stage-5 gate = amended <code>accept.sh</code>, not a fresh script.</td></tr>
+    <tr><td>T5</td><td><span class="pill warn">High</span></td><td>SMS links RFC-5724 correct: <code>sms:+18053644415?body=</code> + <code>encodeURIComponent(...)</code>, generated in the card component. Acceptance regex on every rendered href. Real-device test (1 iPhone + 1 Android) before promote — this is the site's ONLY conversion path.</td></tr>
+    <tr><td>T6</td><td><span class="pill warn">High</span></td><td>Proof-strip assets get neutral names (<code>standard-01-before.jpg</code>…); unused address-named files + senator letter + Substack images DELETED from public/. Address sweep runs on dist file NAMES as well as contents.</td></tr>
+    <tr><td>T7</td><td><span class="pill warn">High</span></td><td>Delete <code>CONTACT.email</code> from data.js (compile error flushes all consumers); drop <code>email</code> from both JSON-LD nodes; prune substackcdn `ss*` keys and unused STOCK entries so the bundle carries zero dead URLs.</td></tr>
+    <tr><td>T8</td><td><span class="pill warn">High</span></td><td>All internal links to removed routes edited: nav.jsx (PATH_BY_KEY, CTA, MenuOverlay), footer.jsx (Navigate + entire Portfolio column), pages.jsx useOnNav. Acceptance: zero <code>href="/(companies|case-studies|contact)"</code> in dist.</td></tr>
+    <tr><td>T9</td><td><span class="pill warn">High</span></td><td>DONE at stage 4: repo-root <code>netlify.toml</code> pins <code>publish = "site/dist"</code> (the CLI-generated config pointed at the repo root, which holds plaintext secrets files). Deploy command lives in RUNBOOK.md.</td></tr>
+    <tr><td>T10</td><td><span class="pill info">Med</span></td><td>Anchor navigation made real: Layout hash-scroll effect; nav anchors absolute (<code>/#michigan</code>); <code>scroll-margin-top</code> = nav height on all section ids; LogoIntro gated to once-per-session via sessionStorage AND skipped when a hash is present. Acceptance: deep-link /#ohio lands in the Ohio section at 375px.</td></tr>
+    <tr><td>T11</td><td><span class="pill info">Med</span></td><td>sitemap.xml pruned to surviving routes; data.js <code>pages</code> + routes.jsx PAGE_LABELS pruned. Acceptance: sitemap URL set == prerendered route set.</td></tr>
+    <tr><td>T12</td><td><span class="pill info">Med</span></td><td>Content-ops made real: <code>scripts/add-listing.mjs</code> (resize 1200×900 q80 ≤250KB, place, stub entry) + RUNBOOK.md with the 6 exact commands (Drive → crop → name → properties.js → build → deploy). Operator: Jake.</td></tr>
+    <tr><td>T13</td><td><span class="pill info">Med</span></td><td><code>loading="lazy"</code> + width/height on all listing/proof images; portrait compressed (~150KB); listing photos ≤250KB enforced (<code>find dist/assets/listings -size +250k</code> = empty); Lighthouse run served per-path (vite preview SPA-fallback poisons results — known from prior pipeline).</td></tr>
+    <tr><td>T14</td><td><span class="pill info">Med</span></td><td>Every brand string routed through data.js <code>BRAND</code>/<code>SUBLINE</code> in this build (intro.jsx letters, Watermark default, nav aria-label, titles, JSON-LD) so the §3b wordmark flip truly becomes a one-file change.</td></tr>
+    <tr><td>T15</td><td><span class="pill info">Med</span></td><td>A state with zero visible listings still renders its header + one fallback card ("Nothing available right now — text us") so nav anchors and the conversion path survive.</td></tr>
+    <tr><td>T16-18</td><td><span class="pill ok">Low</span></td><td>Entity-name grep is plain case-insensitive strings (catches footer column); crawlable-anchors Lighthouse audit exception documented for sms:/tel: before making SEO ≥95 hard; accessibility page lists LinkedIn as a written-contact alternative (phone-only is a weak look on an a11y statement).</td></tr>
+  </table>
+
+  <h3>Asks-list additions (append to §7)</h3>
+  <ol start="9">
+    <li><strong>2–3 tenant quotes</strong> — one line each, first initial + town + tenancy start year ("M., Hillsdale — tenant since 2023"). Texted quotes are fine.</li>
+    <li><strong>Notify commitment:</strong> when a coming-soon home opens, will you (or Jake) text the people who asked about it? Yes/no — if no, we change the button wording so we never promise it.</li>
+    <li><strong>Rent + beds/baths + move-in date per available listing</strong> (was item 5 — now renders directly on the cards, so it's required before a listing can go live as "Available").</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">9</span>Owner amendments (2026-07-02, mid-stage-6) — BINDING, override §8 where they conflict</h2>
+  <table>
+    <tr><th>#</th><th>Amendment (Jake's direction)</th></tr>
+    <tr><td>O1</td><td><strong>Rent/beds/dates:</strong> not requested via email — Shavit isn't thinking about leasing facts yet; those get decided talking to him directly. Executive decision: cards ship WITHOUT rent; chip row shows type/beds when known + "Text for details". H1's rent requirement suspended until Shavit supplies facts. Schema keeps the fields (nullable).</td></tr>
+    <tr><td>O2</td><td><strong>Coming-soon ETA is year-level:</strong> "Coming 2026" — soft, no hard deadline. Overrides H6's month rule; bare "Coming soon" still banned.</td></tr>
+    <tr><td>O3</td><td><strong>Tenant quotes DROPPED</strong> (H7 overridden). The Standard = counters + before/afters only. Any seeded quotes removed from the build.</td></tr>
+    <tr><td>O4</td><td><strong>805 number CONFIRMED</strong> as the public line (asks item 7 answered).</td></tr>
+    <tr><td>O5</td><td><strong>Ohio positioning CONFIRMED:</strong> furnished 30–180-day stays (asks item 9 answered).</td></tr>
+    <tr><td>O6</td><td><strong>BRAND CONFIRMED (§3b resolved):</strong> "Shavit Rootman properties are managed by CPM" — wordmark flips to SHAVIT ROOTMAN this build; "Managed by Charger Property Management" stays as the management face. Titles/JSON-LD/intro letters follow via the data.js BRAND constants (T14).</td></tr>
+    <tr><td>O7</td><td><strong>Before/after asks name specific projects</strong> (already have split-screen/before-after footage for 61 Salem, River Street, East Saint Joe from the June shoot — stills can be extracted; 17 Lo Presto photos exist).</td></tr>
+  </table>
+</section>
+
+<section class="gate">
+  <h2>Stage 3 gate — Jake's sign-off</h2>
+  <p>Review the <a href="https://claude.ai/code/artifact/b9b9c164-c733-4386-a85a-26ad69818f8e">visual mock</a> (toggle "spec notes" in the gold ribbon) and this spec. Amendments fold in before approval; the acceptance list in §6 becomes the stage-5 build gate verbatim.</p>
+</section>
+
+</main>
+<footer>
+  <p>bones: shavit-website-revision · stage 3 · evidence: SPEC-REVISION.html + mock artifact · prior pipeline (shavit-site-migration) archived at <code>.bones-archive-site-migration-20260701</code></p>
+</footer>
+</body>
+</html>

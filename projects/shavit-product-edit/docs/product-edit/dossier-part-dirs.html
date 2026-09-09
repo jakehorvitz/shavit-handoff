@@ -1,0 +1,43 @@
+<section id="directions">
+  <div class="h2row"><h2>Three directions for the edit</h2><p>Your steer: "especially once the deal case studies featured." So the case study is the product. Each direction below is real to build; the recommendation is marked.</p></div>
+  <div class="dir">
+    <article class="card rec">
+      <span class="badge">Recommended · 1-day slice</span>
+      <h3>A · "The Turn" — the case study becomes the product page</h3>
+      <p>Rebuild the top of <code>/case-studies/1919-kendall/</code> as a scroll-driven opener that every future case study inherits. The exterior <em>before</em> holds full-bleed and pinned; as you scroll the <em>after</em> wipes across along a thin gold hairline, the numbers count up in sync ($68,400 → $215,000), then the kitchen and living-room pairs cascade in as chapters. On phones the same pairs render as the drag sliders that already ship, no pin, no filters. The home "Deal Case Studies" band gets the exterior pair as a live wipe card instead of text, linking in.</p>
+      <div class="rail">
+        <div data-t="0vh">Exterior "before" fills the viewport, address + "South Bend, Indiana" set small</div>
+        <div data-t="0–150vh">Pinned. Gold hairline sweeps left→right revealing the "after"; scrub is scroll position, not time</div>
+        <div data-t="150–220vh">Numbers count in the margin as the wipe passes 60%; caption states what changed, in your words</div>
+        <div data-t="220vh+">Kitchen, living room chapters wipe in; BRRRR steps as a strip; gallery; existing sections follow</div>
+      </div>
+      <dl class="two">
+        <dt>Technique</dt><dd>CSS scroll-driven animations for the pin/scrub on Safari 26+/Chrome, JS rAF <code>clip-path</code> fallback elsewhere; zero dependencies; the wipe reuses the case-study slider's own clip-path code</dd>
+        <dt>Assets</dt><dd>Kendall pairs (1400×933) + 1024 derivatives + WebP; published numbers only. Later case studies plug in with 3–4 pairs each</dd>
+        <dt>Phone</dt><dd>Static stacked pairs with the existing drag handle; ≤2 pair images decoded at once; nothing the safe-mode rule strips</dd>
+        <dt>Risk</dt><dd>Low technically (static page, outside the React tree and the phone strip). Product: the page is <code>noindex</code> and one click off home; the edit also fixes its dead prev/next links and CSP-blocked fonts</dd>
+      </dl>
+    </article>
+    <article class="card">
+      <h3>B · "One house, rebuilt" — a pinned chapter under the home hero</h3>
+      <p>Same wipe, but on the home page between the montage hero and the Michigan inventory: a sticky 100svh stage, the exterior pair scrubbing on scroll, numbers, CTA into the case study. Highest reach (it is on <code>/</code>), medium risk: it sits in the crash-history zone, must not trap the <code>/#michigan</code> hash jump, and its copy is new (needs your voice + Shavit's OK).</p>
+      <dl class="two"><dt>Cost</dt><dd>~150 lines JSX + ~120 CSS, 0 deps, +~1.2 MB derivatives</dd><dt>Phone</dt><dd>Static pair, no pin, 1024 variants only</dd></dl>
+    </article>
+    <article class="card">
+      <h3>C · Walkthrough scrub — real camera motion through a finished unit</h3>
+      <p>An 8–12 s muted walkthrough clip (from the reel-slate footage, no people) re-encoded keyframe-per-frame and scrubbed by scroll on desktop; plain inline muted loop on phones, poster in Low Power Mode. The most cinematic option and the only one with actual camera movement, but it depends on footage export and a re-encode pass, and <code>hero.mp4</code> cannot be reused.</p>
+      <dl class="two"><dt>Cost</dt><dd>0 KB JS (scrolly-video pattern), 5–12 MB media</dd><dt>Phone</dt><dd>low–med; one decoded frame resident, autoplay policy handled</dd></dl>
+    </article>
+  </div>
+  <p style="margin-top:16px;color:var(--muted)">Ruled out with reasons: 3D/WebGL/splats (nothing to model, ~190 KB gz, phone memory), canvas image sequences (the 7/21 crash shape), a new video hero (no usable footage yet). A ships first; B is the natural follow-on once A's copy is approved; C is a footage question for Shavit.</p>
+</section>
+<section id="questions">
+  <div class="h2row"><h2>Five questions before the spec</h2><p>Round 1 of the prompt interrogation (score now 51/100; needs ≥85 before the spec). Answer in chat, however briefly.</p></div>
+  <div class="qs">
+    <div class="q"><div><b>Which slice first?</b> A (case-study opener + home teaser), B (home chapter), or C (walkthrough scrub)?<span class="rec"><span>Recommended</span>A. It is where the case studies live, it templates for the next ones, and it is the safest place to go award-tier.</span></div></div>
+    <div class="q"><div><b>Definition of done.</b> Proposed: <code>accept-edit.sh</code> (build green, effect present in built HTML, phone fallback present, no filter/blur/backdrop/will-change in the new CSS, image budget held), an on-device iPhone no-crash check, desktop Lighthouse performance not below today, and your eyeball on a staging preview.<span class="rec"><span>Recommended</span>Yes as listed; add anything you want the gate to prove.</span></div></div>
+    <div class="q"><div><b>Dependencies and phones.</b> Zero-dependency (CSS scroll-timeline + rAF fallback) or allow GSAP+Lenis (~52 KB gz)? Cinema desktop-only with a static phone fallback, or must phones get motion too?<span class="rec"><span>Recommended</span>Zero-dep, desktop-only cinema, phones get the drag pairs. Phone motion means re-opening the crash question on-device.</span></div></div>
+    <div class="q"><div><b>Priority when they conflict.</b> Proposed order: no crash &gt; tenant trust (professional, quiet, honest) &gt; cinema.<span class="rec"><span>Recommended</span>Confirm, or reorder.</span></div></div>
+    <div class="q"><div><b>Taste target.</b> Pick 1–3 references from the shortlist above that feel right for Shavit; name any that feel wrong. Also: does Shavit sign off before it goes live, or after?<span class="rec"><span>Recommended</span>Show him the staging URL before promote; the "not Claude" rule applies to any new copy.</span></div></div>
+  </div>
+</section>

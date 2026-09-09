@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketing Partnership Proposal, Shavit Rootman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --ink:#0E1A2B; --ink-2:#152740; --brass:#DD6420; --brass-d:#B8500F; --brass-l:#F2A062;
+    --bone:#F6F1E7; --bone-2:#FBF8F2; --paper:#FFFFFF; --text:#1C2430; --muted:#6E6354;
+    --line:#E4DBCB; --good:#5C7A6B; --shadow:0 24px 60px -28px rgba(14,26,43,.32);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-family:'Josefin Sans',system-ui,sans-serif;color:var(--text);background:var(--bone);line-height:1.62;font-size:15.5px;-webkit-font-smoothing:antialiased}
+  .doc{max-width:1080px;margin:0 auto;background:var(--paper);box-shadow:var(--shadow)}
+  .page{padding:62px 72px;position:relative}
+  .page + .page{border-top:1px solid var(--line)}
+  h1,h2,h3,.serif{font-family:'Cinzel',serif}
+  .eyebrow{font-family:'Josefin Sans';font-weight:600;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass-d)}
+  .eyebrow.dk{color:var(--brass-l)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
+  .sec-num{font-family:'Cinzel';font-size:13px;color:var(--brass-d);font-weight:600;letter-spacing:.1em}
+  .sec-title{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.1}
+  .kicker{font-family:'Cormorant Garamond',serif;font-size:1.28rem;color:var(--muted);font-style:italic;margin:6px 0 28px;max-width:62ch}
+  p.body{font-size:15.5px;color:var(--text);margin-bottom:14px;max-width:70ch}
+  .lead-p{font-family:'Cormorant Garamond',serif;font-size:1.35rem;line-height:1.5;color:var(--ink);max-width:62ch}
+  .foot{position:absolute;bottom:22px;left:72px;right:72px;display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#A89A85}
+  .rule{height:1px;background:var(--line);border:0;margin:26px 0}
+  b,strong{color:var(--ink)}
+  .brass{color:var(--brass-d)}
+
+  /* COVER */
+  .cover{background:radial-gradient(120% 130% at 82% -10%, #1d3454 0%, var(--ink) 58%);color:#EFE7D8;padding:84px 72px 70px;position:relative;overflow:hidden;min-height:560px;display:flex;flex-direction:column;justify-content:space-between}
+  .cover::after{content:"";position:absolute;right:-130px;top:-110px;width:440px;height:440px;border:1px solid rgba(221,100,32,.22);border-radius:50%}
+  .cover::before{content:"";position:absolute;right:-30px;top:70px;width:300px;height:300px;border:1px solid rgba(221,100,32,.16);border-radius:50%}
+  .cover .mono{font-family:'Josefin Sans';letter-spacing:.3em;font-size:11px;text-transform:uppercase;color:var(--brass-l);font-weight:600}
+  .cover h1{font-size:clamp(2.6rem,5.6vw,4.3rem);font-weight:700;line-height:1.03;letter-spacing:-.01em;color:#FBF6EC;margin-top:20px;max-width:15ch}
+  .cover h1 .em{color:var(--brass-l)}
+  .cover .sub{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#D8CDB8;margin-top:20px;max-width:48ch;position:relative;z-index:2}
+  .cover .meta{display:flex;flex-wrap:wrap;gap:30px;position:relative;z-index:2}
+  .cover .meta .k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-l);font-weight:600}
+  .cover .meta .v{font-size:15px;color:#EFE7D8;margin-top:3px}
+  .cover .meta .item{border-left:2px solid var(--brass);padding-left:13px}
+
+  /* generic cards/grids */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--bone-2);border:1px solid var(--line);border-radius:12px;padding:24px 26px}
+  .card h4{font-family:'Cinzel';font-size:1.06rem;font-weight:600;color:var(--ink);margin-bottom:7px}
+  .card p{font-size:14px;color:var(--muted);line-height:1.55}
+  .card .ic{width:36px;height:36px;border-radius:9px;background:var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .card .ic svg{width:19px;height:19px;stroke:var(--brass-l)}
+
+  .calls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:8px 0 4px}
+  .call{border-top:2px solid var(--brass);padding-top:12px}
+  .call .n{font-family:'Cinzel';color:var(--brass-d);font-size:12px}
+  .call h4{font-family:'Cinzel';font-size:1rem;color:var(--ink);margin:6px 0 5px}
+  .call p{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+  .toc{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;margin-top:8px}
+  .toc .row{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:9px 0;font-size:14px}
+  .toc .row b{font-family:'Cinzel';font-weight:500;color:var(--ink)}
+  .toc .row span{color:var(--brass-d);font-family:'Cinzel'}
+
+  ul.clean{list-style:none;margin:4px 0 8px}
+  ul.clean li{font-size:14.5px;color:var(--text);padding:7px 0 7px 24px;position:relative;max-width:72ch}
+  ul.clean li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:50%;background:var(--brass)}
+  ul.clean li b{font-family:'Cinzel';font-weight:600}
+
+  /* mirror / discovery callout */
+  .mirror{background:var(--ink);color:#EFE7D8;border-radius:14px;padding:32px 38px;margin:6px 0}
+  .mirror .q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;line-height:1.4;color:#FBF6EC}
+  .mirror .a{font-size:14px;color:#C5BBA8;margin-top:12px}
+
+  /* model / flow diagram */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:stretch;margin:10px 0 6px}
+  .flow .step{background:var(--bone-2);border:1px solid var(--line);padding:18px 16px;position:relative}
+  .flow .step:not(:last-child)::after{content:"\2192";position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--brass);font-size:20px;z-index:3;background:var(--paper);width:22px;text-align:center}
+  .flow .step .t{font-family:'Cinzel';font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--brass-d)}
+  .flow .step h4{font-family:'Cinzel';font-size:1rem;color:var(--ink);margin:6px 0 5px}
+  .flow .step p{font-size:12.5px;color:var(--muted);line-height:1.45}
+
+  .checklist{background:var(--bone-2);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:10px;padding:22px 26px}
+  .checklist h4{font-family:'Cinzel';color:var(--ink);font-size:1.05rem;margin-bottom:10px}
+  .checklist ul{list-style:none}
+  .checklist li{font-size:14px;color:var(--text);padding:5px 0 5px 26px;position:relative}
+  .checklist li::before{content:"\2713";position:absolute;left:0;color:var(--brass-d);font-weight:700}
+
+  /* funnel chain */
+  .chain{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0}
+  .chain .lk{background:var(--bone-2);border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center;position:relative}
+  .chain .lk:not(:last-child)::after{content:"\2192";position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--brass);font-size:18px;z-index:3}
+  .chain .lk .t{font-family:'Cinzel';font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-d)}
+  .chain .lk h4{font-family:'Cinzel';font-size:1.02rem;color:var(--ink);margin:6px 0}
+  .chain .lk p{font-size:12px;color:var(--muted);line-height:1.4}
+
+  /* charts */
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px}
+  .chart-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px;box-shadow:0 10px 30px -24px rgba(14,26,43,.5)}
+  .chart-card.full{grid-column:1/-1}
+  .chart-card h4{font-family:'Cinzel';font-size:1.02rem;color:var(--ink);margin-bottom:2px}
+  .chart-card .sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+  .chart-box{position:relative;height:230px}
+
+  /* tables */
+  table.t{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
+  table.t th{font-family:'Cinzel';font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--brass-d);text-align:left;padding:10px 12px;border-bottom:2px solid var(--line)}
+  table.t td{padding:10px 12px;border-bottom:1px solid var(--line);color:var(--text);vertical-align:top}
+  table.t tr:last-child td{border-bottom:none}
+  table.t .em{font-family:'Cinzel';color:var(--ink);font-weight:600}
+  table.t tbody tr:nth-child(even){background:var(--bone-2)}
+
+  /* KPI tiles */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:6px 0}
+  .kpi{background:var(--ink);color:#EFE7D8;border-radius:11px;padding:18px 18px;border-top:3px solid var(--brass)}
+  .kpi .k{font-family:'Cinzel';font-size:.95rem;color:var(--brass-l);font-weight:600}
+  .kpi .l{font-size:12px;color:#C5BBA8;margin-top:6px;line-height:1.4}
+
+  .note{background:var(--bone-2);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:10px;padding:18px 22px;font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;color:var(--ink);margin-top:14px}
+
+  /* pricing */
+  .price-row{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:stretch}
+  .price-card{background:var(--bone-2);border:1px solid var(--line);border-radius:12px;padding:26px 28px}
+  .price-card .label{font-family:'Cinzel';font-size:.9rem;letter-spacing:.05em;color:var(--brass-d);text-transform:uppercase}
+  .price-card .big{font-family:'Cinzel';font-size:2.4rem;color:var(--ink);font-weight:700;line-height:1;margin:8px 0 4px}
+  .price-card .blank{font-family:'Cinzel';font-size:1.7rem;color:var(--brass-d);font-weight:600;line-height:1.1;margin:8px 0 4px}
+  .price-card .strike{font-size:13.5px;color:var(--muted)}
+  .price-card .strike s{color:#A89A85}
+  .price-card ul{list-style:none;margin-top:14px}
+  .price-card li{font-size:13.5px;color:var(--muted);padding:5px 0 5px 20px;position:relative}
+  .price-card li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border-radius:50%;background:var(--brass)}
+
+  /* rubric weights */
+  .rubric-top{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px;align-items:center;margin-bottom:18px}
+  .weights{list-style:none}
+  .weights li{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .weights .sw{width:12px;height:12px;border-radius:3px;flex:none}
+  .weights .nm{font-family:'Cinzel';font-size:14px;color:var(--ink);flex:1}
+  .weights .wt{font-family:'Cinzel';font-size:15px;color:var(--brass-d);font-weight:700}
+
+  .bands{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+  .band{border-radius:10px;padding:16px 16px;border:1px solid var(--line)}
+  .band .r{font-family:'Cinzel';font-size:1.1rem;font-weight:700}
+  .band .nm{font-family:'Cinzel';font-size:.95rem;color:var(--ink);margin:3px 0 5px}
+  .band p{font-size:12px;color:var(--muted);line-height:1.4}
+  .band.b1{background:#FBF2EE;border-color:#E8C9BC}.band.b1 .r{color:#B5683F}
+  .band.b2{background:#FBF8F2}.band.b2 .r{color:var(--muted)}
+  .band.b3{background:#F1F5F1;border-color:#CADAC9}.band.b3 .r{color:var(--good)}
+  .band.b4{background:#0E1A2B}.band.b4{border-color:var(--ink)}.band.b4 .r{color:var(--brass-l)}.band.b4 .nm{color:#FBF6EC}.band.b4 p{color:#C5BBA8}
+
+  /* timeline */
+  .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+  .tl .col{position:relative;padding-top:20px;border-top:2px solid var(--brass)}
+  .tl .col .d{font-family:'Cinzel';color:var(--brass-d);font-size:12px;letter-spacing:.08em}
+  .tl .col h4{font-family:'Cinzel';font-size:1rem;color:var(--ink);margin:6px 0 8px}
+  .tl .col ul{list-style:none}
+  .tl .col li{font-size:13px;color:var(--muted);padding:4px 0 4px 16px;position:relative;line-height:1.4}
+  .tl .col li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--brass)}
+
+  .close{background:var(--ink);color:#EFE7D8;padding:48px 72px}
+  .close h2{font-family:'Cinzel';color:#FBF6EC;font-size:1.9rem;margin:10px 0 8px}
+  .close .signoff{display:flex;justify-content:space-between;align-items:flex-end;margin-top:34px;padding-top:22px;border-top:1px solid rgba(221,100,32,.25);flex-wrap:wrap;gap:14px}
+  .close .name{font-family:'Cinzel';font-size:1.25rem;color:#FBF6EC}
+  .close .sub{font-size:12.5px;color:#B7AC97;margin-top:4px}
+  .close .tn{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--brass-l)}
+
+  .src{font-size:10.5px;color:#A89A85;margin-top:10px;line-height:1.5;font-style:italic}
+
+  @media (max-width:880px){
+    .page,.cover,.close{padding-left:30px;padding-right:30px}
+    .grid-2,.grid-3,.charts,.toc,.calls,.flow,.chain,.kpis,.bands,.tl,.price-row,.rubric-top{grid-template-columns:1fr}
+    .flow .step::after,.chain .lk::after{display:none}
+    .foot{position:static;margin-top:24px;flex-direction:column;gap:4px}
+  }
+  @media print{
+    body{background:#fff}.doc{box-shadow:none;max-width:100%}
+    .page,.cover,.close{page-break-after:always;page-break-inside:avoid}
+    .chart-card,.card,.kpi,.band,.tl .col,.price-card{page-break-inside:avoid}
+    @page{margin:0}
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ============ COVER ============ -->
+  <header class="cover">
+    <div>
+      <div class="mono">Marketing Partnership Proposal · June 2026</div>
+      <h1>Showcasing the Work.<br/><span class="em">Building the Reputation.</span></h1>
+      <p class="sub">A research-backed marketing engine for Shavit Rootman, the strategy, the model, and the scorecard you'll measure me against.</p>
+    </div>
+    <div class="meta">
+      <div class="item"><div class="k">Prepared For</div><div class="v">Shavit · Charger Property Management</div></div>
+      <div class="item"><div class="k">Prepared By</div><div class="v">Jake Horvitz</div></div>
+      <div class="item"><div class="k">Status</div><div class="v">For Your Review</div></div>
+    </div>
+  </header>
+
+  <!-- ============ PAGE 1, EXEC SUMMARY ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">, </span><h2 class="sec-title">Executive Summary</h2></div>
+    <p class="kicker">You asked for three things: what service, what it does for the company, and why me. Here they are in sixty seconds, the rest of this document is the proof.</p>
+    <div class="grid-3" style="margin-bottom:22px">
+      <div class="card"><div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 0 1 0 1.971l-11.54 6.347a1.125 1.125 0 0 1-1.667-.985V5.653Z"/></svg></div><h4>The Service</h4><p>A done-for-you content engine that turns every rehab into proof of your standard, across Instagram, TikTok, and YouTube, on one locked luxury brand.</p></div>
+      <div class="card"><div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/></svg></div><h4>For the Company</h4><p>Reputation, not lead-chasing. Impressions into engagement, a brand that matches your growth from 200 doors to 15+ projects, and one that's ready for the investor room.</p></div>
+      <div class="card"><div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div><h4>Why Me</h4><p>Creative and strategic, reliable, ethical, and invested for the long term, at a student intro rate that sits well below market while I prove it.</p></div>
+    </div>
+    <hr class="rule"/>
+    <p class="body"><b>What's different about this proposal:</b> it's built on benchmarked research, not vibes. Inside you'll find a content-production model that proves the system can actually run, a measurement model that ties awareness to real business value, market pricing so you can see exactly where my rate sits, and, most importantly, <b>a 100-point scorecard I drafted for us to judge me by.</b> If I'm worth the value, the numbers will say so. If I'm not, you'll know early.</p>
+    <div class="toc">
+      <div class="row"><b>01 · The Opportunity</b><span>p.2</span></div>
+      <div class="row"><b>02 · The Reputation Map</b><span>p.3</span></div>
+      <div class="row"><b>03 · The Service</b><span>p.4</span></div>
+      <div class="row"><b>04 · The Operating Model</b><span>p.5</span></div>
+      <div class="row"><b>05 · The Measurement Model</b><span>p.6</span></div>
+      <div class="row"><b>06 · The Investment</b><span>p.7</span></div>
+      <div class="row"><b>07 · The Scorecard</b><span>p.8</span></div>
+    </div>
+    <div class="foot"><span>Marketing Partnership Proposal</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE 2, THE OPPORTUNITY ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">The Opportunity</h2></div>
+    <p class="kicker">Before the plan, what I heard you say, because a proposal is just a presentation of what I discovered.</p>
+    <div class="mirror">
+      <div class="q">"What is it for? We're showcasing our work and the before-and-after, in a more engaging way. It's about reputation, we're not trying to find new clients, we're showing the work we're doing."</div>
+      <div class="a">,  Your words. Everything below is aimed at exactly that, and nothing else.</div>
+    </div>
+    <div class="grid-2" style="margin-top:24px">
+      <div>
+        <h3 style="font-size:1.15rem;color:var(--ink);margin-bottom:10px">Where you are</h3>
+        <ul class="clean">
+          <li><b>Scale.</b> ~200 doors, seven rehab projects running simultaneously, completing by September with 15+ on the horizon.</li>
+          <li><b>A dormant 5,060-follower audience.</b> An established following that has gone quiet for months while the operation accelerated. The audience is already there, just waiting to be re-engaged.</li>
+          <li><b>A surplus of untold stories.</b> Every restored property is a story that isn't being told.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:1.15rem;color:var(--ink);margin-bottom:10px">What you want</h3>
+        <ul class="clean">
+          <li><b>Reputation &amp; luxury positioning</b>, the premium name in property transformation.</li>
+          <li><b>Engagement, not vanity metrics</b>, viewers held to the end, impressions that mean something.</li>
+          <li><b>Proof of a strategic mind</b>, and measurables you can run an honest ROI against.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">The gap isn't talent or material, you have both in surplus. The gap is a <b style="font-style:normal">system</b>: someone to turn seven active projects into a consistent, on-brand stream of proof, and to measure it like an investment. That's the whole job.</div>
+    <p class="src">Approach informed by social-proposal best practice (HubSpot, Proposify, Sendible): open with discovery and the client's own language, not credentials.</p>
+    <div class="foot"><span>01 · The Opportunity</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE, THE REPUTATION MAP ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">The Reputation Map</h2></div>
+    <p class="kicker">Reputation isn't one audience, it's several, each watching for something different. Here's who we're really building for, and what each needs to believe.</p>
+    <table class="t">
+      <thead><tr><th style="width:22%">Who's watching</th><th>What they need to believe</th><th>The proof we show them</th></tr></thead>
+      <tbody>
+        <tr><td class="em">Investors &amp; partners</td><td>A disciplined operator who protects capital and scales without slipping</td><td>Project arcs, portfolio progress, the brand film</td></tr>
+        <tr><td class="em">Property owners</td><td>Their asset is safe, and worth more in your hands</td><td>Before/after transformations, value reels</td></tr>
+        <tr><td class="em">Tenants &amp; buyers</td><td>Quality, pride of place, a name they can trust</td><td>Finished-unit reveals, detail shots, testimonials</td></tr>
+        <tr><td class="em">Brokers &amp; lenders</td><td>Serious, reliable, operating at real scale</td><td>Consistency, project volume, a polished presence</td></tr>
+        <tr><td class="em">Future hires</td><td>Momentum and professionalism worth joining</td><td>Behind-the-build, team features, the standard</td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:18px"><b style="font-style:normal">The real reputation risk isn't a lack of content, it's that your offline credibility is years ahead of your public-facing proof.</b> The job is to make Shavit Rootman look as operationally serious online as it already is on the ground, so anyone who checks sees scale, judgment, quality, and consistency. Every format that follows is built to move one of these audiences.</div>
+    <div class="foot"><span>02 · The Reputation Map</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE, THE SERVICE ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">The Service</h2></div>
+    <p class="kicker">A content engine built around the formats that actually perform for property and rehab brands, the ones with the highest save and share rates.</p>
+    <div class="grid-2">
+      <div class="card"><h4>Signature Brand Film</h4><p>One cinematic, pinned introduction, the first thing anyone sees. "I get it" in sixty seconds, before a word is read.</p></div>
+      <div class="card"><h4>Before / After Reel System</h4><p>The single highest-save format in real estate. Templated split-screen and trending-transition reveals, gutted to finished, duplicable across every project.</p></div>
+      <div class="card"><h4>Restoration Story Arcs</h4><p>Multi-post project storytelling, from neglected to income-ready: strip-out → milestones → finished unit. How the strongest operator accounts build authority.</p></div>
+      <div class="card"><h4>Progress Sequences &amp; Reveals</h4><p>Milestone photos stitched into satisfying progress reels, plus room-by-room finished reveals, a top-performing format, built entirely from stills.</p></div>
+      <div class="card"><h4>ROI &amp; "Behind the Build"</h4><p>"Here's what it became" cost-and-craft reels that show repositioning with discipline, plus crew/testimonial trust content, the reputation drivers in construction.</p></div>
+      <div class="card" style="background:var(--ink);color:#EFE7D8"><h4 style="color:#FBF6EC">A Locked Brand System</h4><p style="color:#C5BBA8">Uniform colors mirroring the website, consistent watermark, clean typography, no pulsing, no gimmicks. Every piece reads the same way: quiet, premium, unmistakably yours.</p></div>
+    </div>
+    <div class="note" style="margin-top:20px">Video earns roughly <b style="font-style:normal">1,200% more shares</b> than static posts, so the engine is built reels-first. Benchmarks to model: <b style="font-style:normal">@banyan_pg</b> (historic → luxury conversions), <b style="font-style:normal">@stephen.roebuck</b> (operator-journey storytelling), <b style="font-style:normal">@renovationsx</b> (before/after mechanics).</div>
+    <p class="src">Sources: reel-e.ai, agentfire.com, insidepropertyinvesting.com, projectmark.com, oceanfront.agency, format performance for real-estate/construction brands.</p>
+    <div class="foot"><span>03 · The Service</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE 4, OPERATING MODEL ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">The Operating Model</h2></div>
+    <p class="kicker">The goal is a consistent, tasteful presence, not virality. The only question is whether the system can keep it effortlessly fed. It can.</p>
+
+    <div class="flow">
+      <div class="step"><div class="t">Step 01</div><h4>Teams Snap Photos</h4><p>Your crews are already on every site. They grab before / progress / after photos on their phones, no extra trips, no new hire.</p></div>
+      <div class="step"><div class="t">Step 02</div><h4>One Shared Folder</h4><p>Photos land in a simple shared folder per project. I direct the shot list; the teams fill it.</p></div>
+      <div class="step"><div class="t">Step 03</div><h4>Batch Edit</h4><p>One weekly block turns each photo set into 8–12 finished posts, before/after reveals, carousels, motion reels.</p></div>
+      <div class="step"><div class="t">Step 04</div><h4>Scheduled Drip</h4><p>Posts released on cadence across IG, TikTok, YouTube, a steady stream, never a scramble.</p></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:22px;align-items:start">
+      <div class="checklist">
+        <h4>Per-Project Photo Set</h4>
+        <ul>
+          <li>"Before" photos, every room + exterior</li>
+          <li>Progress snaps at each milestone</li>
+          <li>"After" photos, same angle as the before</li>
+          <li>3–5 hero detail close-ups of the finish</li>
+          <li>Optional: any quick phone clip from the crew</li>
+        </ul>
+      </div>
+      <div class="chart-card" style="box-shadow:none">
+        <h4>Supply vs. Demand</h4>
+        <div class="sub">Your content surplus, in one chart</div>
+        <div class="chart-box" style="height:200px"><canvas id="supplyChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:20px"><b style="font-style:normal">The math:</b> 7 active projects × 8–12 posts each = <b style="font-style:normal">56–84 posts banked</b>, replenishing as projects advance. At a tasteful 2–3 reels/week you need only ~10–12 a month, so the presence stays effortlessly consistent and never forced. The point isn't volume or virality; it's that the brand simply never goes quiet again.</div>
+
+    <div class="charts" style="margin-top:24px">
+      <div class="chart-card"><h4>Cadence Ramp</h4><div class="sub">Soft launch → steady, sustainable presence</div><div class="chart-box"><canvas id="cadenceChart"></canvas></div></div>
+      <div class="chart-card"><h4>Posting Plan by Phase</h4><div class="sub">Reels/week + always-on stories</div>
+        <table class="t" style="margin-top:0">
+          <thead><tr><th>Phase</th><th>Reels/wk</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td class="em">M1 · Soft launch</td><td>1–2</td><td>Brand film first, set the voice, no rush</td></tr>
+            <tr><td class="em">M2–3 · Rhythm</td><td>2</td><td>Settle into a tasteful, consistent presence</td></tr>
+            <tr><td class="em">M4–6 · Steady</td><td>2–3</td><td>Sustained presence, quality over volume</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:6px">Consistency beats volume, a steady 2–3 tasteful posts/week keeps the brand present without ever feeling forced or inorganic. Sources: truefuturemedia.com, apaya.com, hootsuite.com.</p>
+      </div>
+    </div>
+    <div class="foot"><span>04 · The Operating Model</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE 5, MEASUREMENT MODEL ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">The Measurement Model</h2></div>
+    <p class="kicker">Reputation feels unmeasurable. It isn't. Here's the chain from a post to real business value, and the numbers we track at each link.</p>
+
+    <div class="chain">
+      <div class="lk"><div class="t">Inputs</div><h4>Consistency</h4><p>Cadence, hook rate, the part I control.</p></div>
+      <div class="lk"><div class="t">Awareness</div><h4>Reach</h4><p>Impressions, net-new reach, share of voice.</p></div>
+      <div class="lk"><div class="t">Reputation</div><h4>Engagement</h4><p>Saves, shares, follower growth, trust signals.</p></div>
+      <div class="lk"><div class="t">Value</div><h4>Brand Lift</h4><p>Recall, favorability, inbound interest.</p></div>
+    </div>
+    <div class="note">Brands that measure brand-lift see <b style="font-style:normal">2.3× higher marketing ROI</b> than performance-only peers, and a 1% brand-preference lift predicts a 2–3% lifetime-value lift. We validate with a light periodic brand-lift check, so "reputation" stops being a feeling and becomes a number.</div>
+
+    <h3 style="font-size:1.1rem;color:var(--ink);margin:24px 0 10px">What we track</h3>
+    <div class="kpis">
+      <div class="kpi"><div class="k">Reach</div><div class="l">Unique people reached, net-new reach %, share of voice.</div></div>
+      <div class="kpi"><div class="k">Engagement</div><div class="l">Engagement rate, watch-through %, saves &amp; shares.</div></div>
+      <div class="kpi"><div class="k">Growth</div><div class="l">Follower growth rate across all three platforms.</div></div>
+      <div class="kpi"><div class="k">Consistency</div><div class="l">Posts shipped vs. planned, hook rate, cadence held.</div></div>
+    </div>
+
+    <div class="charts" style="margin-top:22px">
+      <div class="chart-card"><h4>6-Month Presence Trajectory</h4><div class="sub">Targets, not guarantees, steady, healthy presence over reach</div><div class="chart-box"><canvas id="trajChart"></canvas></div></div>
+      <div class="chart-card"><h4>Benchmarks We Aim At</h4><div class="sub">What "good" looks like for a growing account, 2025–26</div>
+        <table class="t" style="margin-top:0">
+          <thead><tr><th>Metric</th><th>Good (small acct)</th></tr></thead>
+          <tbody>
+            <tr><td class="em">Engagement rate</td><td>2.5–5%+ (Reels), 4–7%+ (TikTok)</td></tr>
+            <tr><td class="em">Watch-through</td><td>Hold 80%+ in first 3 sec</td></tr>
+            <tr><td class="em">Avg views/post</td><td>500–2,000 to a focused, engaged audience</td></tr>
+            <tr><td class="em">Follower growth</td><td>Steady &amp; healthy, quality audience over raw numbers</td></tr>
+          </tbody>
+        </table>
+        <p class="src" style="margin-top:6px">Sources: Socialinsider, Emplicit, Predis, Retention Rabbit, Onewrk (small-account benchmarks, not platform medians).</p>
+      </div>
+    </div>
+    <div class="foot"><span>05 · The Measurement Model</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE 6, INVESTMENT ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">The Investment</h2></div>
+    <p class="kicker">The website is the one fixed number here. The marketing runs as my internship with you, no fee while I prove the value, with the scorecard as our shared signal for when it's earned a paid footing.</p>
+
+    <div class="price-row">
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:center">
+        <h4>Website, Value vs. Market</h4>
+        <div class="sub">Design + maintenance, one-time</div>
+        <div class="chart-box" style="height:200px"><canvas id="websiteChart"></canvas></div>
+      </div>
+      <div class="price-card">
+        <div class="label">Website, Design + Maintenance</div>
+        <div class="big">$1,700</div>
+        <div class="strike">Founding rate · comparable scope runs <s>$3,000+</s>, priced to start the relationship</div>
+        <ul>
+          <li>Full design &amp; build, colors mirroring the brand system</li>
+          <li>Ongoing maintenance &amp; updates included, honestly below market</li>
+          <li>ADA-compliant, so you never have to think about it</li>
+          <li>Billed separately from marketing</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><b style="font-style:normal">On the marketing, this is the internship.</b> I'm not putting a price on it while I earn your trust. The scorecard is how we'll both know when it's proven its worth and it's time to talk about what comes next, no risk to you now, and no number to haggle, just the work, measured honestly. The website below is the only price here.</div>
+    <p class="src">Website pricing benchmarks: jim.com, Webstacks (2025–26).</p>
+    <div class="foot"><span>06 · The Investment</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE 7, THE SCORECARD ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">07</span><h2 class="sec-title">The Scorecard</h2></div>
+    <p class="kicker">You said you need measurables to judge me against. So I drafted them, a fair starting point for us to agree on together, then hold me to. Here's how we decide, honestly, whether I'm earning it.</p>
+
+    <div class="rubric-top">
+      <div class="chart-box" style="height:240px"><canvas id="rubricChart"></canvas></div>
+      <ul class="weights">
+        <li><span class="sw" style="background:#0E1A2B"></span><span class="nm">Output &amp; Reach</span><span class="wt">25</span></li>
+        <li><span class="sw" style="background:#C8A35B"></span><span class="nm">Engagement &amp; Quality</span><span class="wt">25</span></li>
+        <li><span class="sw" style="background:#B0894A"></span><span class="nm">Brand &amp; Business Impact</span><span class="wt">20</span></li>
+        <li><span class="sw" style="background:#5C7A6B"></span><span class="nm">Consistency &amp; Reliability</span><span class="wt">20</span></li>
+        <li><span class="sw" style="background:#A9C0D6"></span><span class="nm">Communication &amp; Strategy</span><span class="wt">10</span></li>
+      </ul>
+    </div>
+
+    <table class="t">
+      <thead><tr><th style="width:24%">Category</th><th>How it's scored (each criterion 1–5)</th></tr></thead>
+      <tbody>
+        <tr><td class="em">Output &amp; Reach <span class="brass">· 25</span></td><td>Posting cadence hit vs. agreed calendar (≥90% shipped) · reach/impressions growth quarter-over-quarter · follower growth %.</td></tr>
+        <tr><td class="em">Engagement &amp; Quality <span class="brass">· 25</span></td><td>Engagement rate vs. baseline · saves / shares / comments (intent, not just likes) · top-post performance vs. prior period.</td></tr>
+        <tr><td class="em">Brand &amp; Business Impact <span class="brass">· 20</span></td><td>Inbound interest &amp; DMs attributable to social · brand-lift (recall / favorability) · reputation signal among partners &amp; investors.</td></tr>
+        <tr><td class="em">Consistency &amp; Reliability <span class="brass">· 20</span></td><td>Deadline adherence % · on-brand, error-free rate (revisions needed) · zero unexplained gaps in cadence.</td></tr>
+        <tr><td class="em">Communication &amp; Strategy <span class="brass">· 10</span></td><td>On-time reporting · proactive ideas/experiments proposed per period · responsiveness.</td></tr>
+      </tbody>
+    </table>
+
+    <p class="body" style="margin-top:14px"><b>Cadence:</b> a 15-minute monthly health-check (cadence + reach + engagement), a full quarterly score, and 6- and 12-month decision gates. Each level is anchored to a concrete number we set together at kickoff, so scores are evidence, not opinion.</p>
+
+    <div class="bands">
+      <div class="band b1"><div class="r">&lt; 60</div><div class="nm">Below</div><p>Off-track. 30-day improvement plan with named fixes.</p></div>
+      <div class="band b2"><div class="r">60–74</div><div class="nm">Meets</div><p>Delivering as agreed. Continue, no change.</p></div>
+      <div class="band b3"><div class="r">75–89</div><div class="nm">Exceeds</div><p>Strong &amp; reliable. Continue + comp review.</p></div>
+      <div class="band b4"><div class="r">90–100</div><div class="nm">Outstanding</div><p>Driving real impact. Comp review + expanded scope.</p></div>
+    </div>
+    <div class="note" style="margin-top:16px"><b style="font-style:normal">The fairness rules, for both of us:</b> these targets are set together at kickoff, not imposed. No single bad month triggers a decision (protects against variance), and <b style="font-style:normal">≥75 across two consecutive quarters</b> opens the compensation conversation. It rewards the reliable performer and protects you from paying for luck.</div>
+    <p class="src">Framework synthesized from BSC Designer, Hootsuite OKRs, Sprout Social, Profit.co, PerformYard, Smartsheet, DashThis. Weighting is output/impact-heavy (70/30) by design.</p>
+    <div class="foot"><span>07 · The Scorecard</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ PAGE 8, 90-DAY PLAN ============ -->
+  <section class="page">
+    <div class="sec-head"><span class="sec-num">08</span><h2 class="sec-title">The First 90 Days</h2></div>
+    <p class="kicker">What motion looks like from day one, so you see the system working before the first scorecard.</p>
+    <div class="tl">
+      <div class="col"><div class="d">Weeks 1–2</div><h4>Launch</h4><ul><li>Brand film goes live, pinned</li><li>First site captures + time-lapse cameras placed</li><li>Baseline analytics set with you</li></ul></div>
+      <div class="col"><div class="d">Days 30</div><h4>Rhythm</h4><ul><li>1–2 reels/week, settling in</li><li>2-week content buffer banked</li><li>First monthly health-check</li></ul></div>
+      <div class="col"><div class="d">Days 60</div><h4>Read &amp; Adjust</h4><ul><li>Double down on top format</li><li>2 reels/week + LinkedIn layer</li><li>First full project arc published</li></ul></div>
+      <div class="col"><div class="d">Days 90</div><h4>Steady</h4><ul><li>2–3 reels/week, steady engine</li><li>First quarterly scorecard</li><li>Targets reviewed for next quarter</li></ul></div>
+    </div>
+    <h3 style="font-size:1.1rem;color:var(--ink);margin:26px 0 6px">The simple way to know I'm doing a good job</h3>
+    <p class="body" style="margin-bottom:12px">No guesswork. Each checkpoint pairs a milestone you can see with a number you can check. If these land, on time, I'm earning it, if they don't, you'll know immediately.</p>
+    <table class="t">
+      <thead><tr><th style="width:13%">By when</th><th style="width:28%">Milestone delivered</th><th>The numbers to hit (targets)</th><th style="width:8%">Hit?</th></tr></thead>
+      <tbody>
+        <tr><td class="em">Week 2</td><td>Brand film live &amp; pinned; baseline agreed</td><td>Baseline locked together: <b>5,060</b> followers today, the line we measure everything from</td><td>☐</td></tr>
+        <tr><td class="em">Day 30</td><td>First reels live + Month-1 recap</td><td><b>100%</b> of planned posts shipped · ~5,100–5,200 followers · ~700–1,500 avg views · <b>2–3%</b> engagement</td><td>☐</td></tr>
+        <tr><td class="em">Day 60</td><td>LinkedIn authority layer added</td><td><b>2</b> reels/wk held · ~5,300–5,500 followers · ~1,200–2,500 avg views · <b>3–4%</b> engagement · saves &amp; shares climbing</td><td>☐</td></tr>
+        <tr><td class="em">Day 90</td><td>Steady engine + first scorecard</td><td><b>2–3</b> reels/wk · ~5,600–6,000 followers · ~2,000–4,000 avg views · <b>3–5%</b> engagement · <b>100%</b> cadence · scorecard <b>≥75</b></td><td>☐</td></tr>
+        <tr><td class="em">Month 6</td><td>Full engine + brand-lift read</td><td>~6,200–6,800 followers · ~3,500–6,000 avg views · <b>4–6%</b> engagement · cadence held · scorecard <b>≥75</b> two quarters running</td><td>☐</td></tr>
+      </tbody>
+    </table>
+    <p class="src" style="margin-top:6px">Targets, not guarantees, set together at kickoff and reviewed each quarter. Ranges reflect reactivating an established but dormant 5,060-follower audience (1,007 following), not a cold start. The discipline (cadence and consistency) is the part I fully control.</p>
+    <div class="note" style="margin-top:18px"><b style="font-style:normal">Meeting cadence:</b> a standing weekly check-in for assets and feedback, a monthly 15-minute health-check, and the quarterly scorecard review. You should never have to chase an update, I chase the content.</div>
+    <div class="foot"><span>08 · The First 90 Days</span><span>Shavit Rootman × Jake Horvitz</span></div>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <footer class="close">
+    <div class="eyebrow dk">Next Step</div>
+    <h2>When you're ready, let's begin.</h2>
+    <p style="color:#C5BBA8;max-width:60ch;font-size:15px">Read it the way you read these, once, twice, three times, in different contexts. Whenever the timing's right for you, we'll lock the cadence and agree on the targets behind the scorecard. No rush, no pressure, the work speaks for itself; this is the strategy behind it.</p>
+    <div class="signoff">
+      <div>
+        <div class="name">Jake Horvitz</div>
+        <div class="sub">Marketing &amp; Brand · Shavit Rootman &nbsp;|&nbsp; Prepared June 2026</div>
+      </div>
+      <div class="tn">Tennis and business.</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const ink='#0E1A2B', brass='#DD6420', brassL='#F2A062', brassD='#B8500F', muted='#6E6354', good='#5C7A6B', blue='#A9C0D6';
+  Chart.defaults.font.family="'Josefin Sans', sans-serif";
+  Chart.defaults.font.size=11.5; Chart.defaults.color=muted;
+  const A={duration:0}; const G={color:'rgba(110,99,84,.12)'};
+
+  // Supply vs demand
+  new Chart(document.getElementById('supplyChart'),{type:'bar',
+    data:{labels:['Posts banked','Monthly need'],datasets:[{data:[70,11],backgroundColor:[ink,brass],borderRadius:7,barThickness:70}]},
+    options:{animation:A,responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' posts'}}},
+      scales:{y:{beginAtZero:true,grid:G,title:{display:true,text:'posts',color:muted}},x:{grid:{display:false}}}}});
+
+  // Cadence ramp
+  new Chart(document.getElementById('cadenceChart'),{type:'line',
+    data:{labels:['Wk1','Wk2','M1','M2','M3','M4','M5','M6'],datasets:[{label:'Reels/wk',data:[1,1,2,2,2,2,3,3],
+      borderColor:brassD,borderWidth:2.5,tension:.4,fill:true,backgroundColor:'rgba(221,100,32,.16)',pointBackgroundColor:ink,pointBorderColor:brass,pointRadius:4}]},
+    options:{animation:A,responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:G,ticks:{stepSize:1}},x:{grid:{display:false}}}}});
+
+  // Trajectory (followers + avg views, two axes)
+  new Chart(document.getElementById('trajChart'),{type:'line',
+    data:{labels:['M1','M2','M3','M4','M5','M6'],datasets:[
+      {label:'Followers (cum.)',data:[5060,5130,5250,5450,5750,6400],borderColor:ink,borderWidth:2.5,tension:.4,pointRadius:3,pointBackgroundColor:ink,yAxisID:'y'},
+      {label:'Avg views/post',data:[700,1200,1900,2700,3500,4500],borderColor:brass,borderWidth:2.5,borderDash:[5,4],tension:.4,pointRadius:3,pointBackgroundColor:brass,yAxisID:'y1'}]},
+    options:{animation:A,responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,padding:14}}},
+      scales:{y:{position:'left',beginAtZero:false,grid:G,title:{display:true,text:'followers',color:muted}},
+        y1:{position:'right',beginAtZero:true,grid:{display:false},title:{display:true,text:'avg views',color:muted}},x:{grid:{display:false}}}}});
+
+  // Website
+  new Chart(document.getElementById('websiteChart'),{type:'bar',
+    data:{labels:['Market typical','Your rate'],datasets:[{data:[3000,1700],backgroundColor:['#C9BCA3',brassD],borderRadius:7,barThickness:60}]},
+    options:{animation:A,responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y.toLocaleString()}}},
+      scales:{y:{beginAtZero:true,grid:G,ticks:{callback:v=>'$'+v.toLocaleString()}},x:{grid:{display:false}}}}});
+
+  // Rubric doughnut
+  new Chart(document.getElementById('rubricChart'),{type:'doughnut',
+    data:{labels:['Output & Reach','Engagement & Quality','Brand & Business Impact','Consistency & Reliability','Communication & Strategy'],
+      datasets:[{data:[25,25,20,20,10],backgroundColor:[ink,brass,brassD,good,blue],borderColor:'#fff',borderWidth:2}]},
+    options:{animation:A,responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+' pts'}}}}});
+</script>
+</body>
+</html>

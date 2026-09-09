@@ -1,0 +1,72 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Reel 1 storyboard frame</title>
+<style>
+:root{--gold:#FFC000;--font:-apple-system,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:#000;overflow:hidden;font-family:var(--font);color:#fff;-webkit-font-smoothing:antialiased}
+.stage{position:relative;width:1080px;height:1920px;perspective:2600px;background:radial-gradient(120% 60% at 50% 30%,#141414 0%,#000 60%)}
+.eyebrow{position:absolute;left:72px;top:120px;font-size:22px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;gap:18px;align-items:center}
+.eyebrow::before{content:"";width:48px;height:2px;background:var(--gold)}
+.callout{position:absolute;left:72px;right:72px;bottom:190px;display:flex;flex-direction:column;gap:22px}
+.callout h1{font-size:112px;line-height:.92;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;text-wrap:balance}
+.callout p{font-size:30px;line-height:1.35;color:#bbb;max-width:34ch}
+.rule{width:140px;height:2px;background:var(--gold)}
+.hair{position:absolute;left:0;right:0;height:2px;background:var(--gold);opacity:.9}
+/* phone */
+.phone{position:absolute;left:50%;top:50%;width:640px;height:1386px;margin:-693px 0 0 -320px;border-radius:92px;background:#0a0a0a;
+  box-shadow:0 0 0 2px #2a2a2a,0 0 0 4px #0c0c0c,0 60px 120px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.06);
+  transform:translateY(var(--ty,0)) rotateY(var(--ry,-16deg)) rotateX(var(--rx,4deg)) rotateZ(var(--rz,-4deg)) scale(var(--s,1));transform-style:preserve-3d}
+.phone::before{content:"";position:absolute;inset:14px;border-radius:80px;background:#000;box-shadow:inset 0 0 0 2px #1a1a1a}
+.phone .screen{position:absolute;inset:26px;border-radius:70px;overflow:hidden;background:#000}
+.phone .screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transform:translateY(var(--scroll,0))}
+.phone .island{position:absolute;top:44px;left:50%;width:210px;height:56px;margin-left:-105px;border-radius:40px;background:#000;box-shadow:0 0 0 1px #111}
+.phone .gloss{position:absolute;inset:0;border-radius:92px;background:linear-gradient(115deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 70%,rgba(255,192,0,.08) 100%);pointer-events:none}
+.phone .edge{position:absolute;inset:0;border-radius:92px;box-shadow:inset 3px 0 0 rgba(255,255,255,.10),inset -3px 0 0 rgba(255,255,255,.04)}
+/* laptop-ish wide frame */
+.wide{position:absolute;left:50%;top:50%;width:1000px;height:625px;margin:-312px 0 0 -500px;border-radius:26px;background:#0a0a0a;
+  box-shadow:0 0 0 2px #2a2a2a,0 60px 120px rgba(0,0,0,.8);transform:rotateY(var(--ry,10deg)) rotateX(var(--rx,10deg)) rotateZ(var(--rz,-2deg)) scale(var(--s,1))}
+.wide .screen{position:absolute;inset:14px;border-radius:16px;overflow:hidden;background:#000}
+.wide .screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.wide .bar{position:absolute;left:14px;right:14px;top:14px;height:34px;background:#141414;border-radius:16px 16px 0 0;display:flex;align-items:center;gap:8px;padding-left:16px}
+.wide .bar i{width:10px;height:10px;border-radius:50%;background:#333;display:block}
+.wide .bar span{margin-left:14px;font-size:12px;color:#888;letter-spacing:.06em}
+/* full-bleed beat */
+.bleed{position:absolute;inset:0}
+.bleed img{width:100%;height:100%;object-fit:cover;display:block}
+.bleed .after{clip-path:inset(0 0 0 var(--w,50%))}
+.bleed .edge{position:absolute;top:0;bottom:0;left:var(--w,50%);width:3px;background:var(--gold)}
+.bleed .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.2) 45%,rgba(0,0,0,0) 65%)}
+.tag{position:absolute;top:150px;font-size:24px;letter-spacing:.24em;text-transform:uppercase;padding:14px 20px;border:2px solid rgba(255,255,255,.4);background:rgba(0,0,0,.4)}
+.tag.b{left:72px}.tag.a{right:72px;border-color:var(--gold);color:var(--gold)}
+/* end card */
+.end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;text-align:center}
+.end .mark{width:120px;height:120px;border:3px solid var(--gold);display:grid;place-items:center;font-weight:800;font-size:44px;color:var(--gold)}
+.end h1{font-size:96px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1}
+.end p{font-size:28px;color:#bbb;letter-spacing:.2em;text-transform:uppercase}
+.progress{position:absolute;left:0;top:0;height:6px;background:var(--gold);width:var(--pw,0)}
+</style></head><body><div class="stage" id="stage"></div>
+<script>
+const q=new URLSearchParams(location.search); const shot=q.get('shot')||'1'; const S=document.getElementById('stage');
+const cap=n=>'site-captures/'+n+'.png';
+const shots={
+ '1':`<div class="progress" style="--pw:4%"></div><div class="eyebrow">shavitrootman.com</div>
+      <div class="phone" style="--ry:-18deg;--rx:6deg;--rz:-5deg;--ty:-40px;--s:.98"><div class="screen"><img src="${cap('phone-home-hero')}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+      <div class="callout"><h1>A new home<br>for the homes<br>we manage.</h1><div class="rule"></div><p>Michigan · Ohio · Indiana</p></div>`,
+ '2':`<div class="progress" style="--pw:18%"></div><div class="eyebrow">Available now</div>
+      <div class="phone" style="--ry:14deg;--rx:4deg;--rz:3deg;--ty:-120px;--s:1.02"><div class="screen"><img src="${cap('phone-michigan')}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+      <div class="callout"><h1>Every home,<br>every rent,<br>no forms.</h1><div class="rule"></div><p>Hillsdale, Michigan. Swipe the row, text to see it.</p></div>`,
+ '3':`<div class="progress" style="--pw:32%"></div><div class="eyebrow">Deal case studies</div>
+      <div class="wide" style="--ry:-12deg;--rx:8deg;--rz:2deg;--s:1.02;top:44%"><div class="bar"><i></i><i></i><i></i><span>shavitrootman.com/#case-studies</span></div><div class="screen" style="top:48px"><img src="${cap('desktop-case-studies')}"></div></div>
+      <div class="callout"><h1>Learn more<br>about our<br>numbers.</h1><div class="rule"></div><p>Deal by deal. Documented start to finish.</p></div>`,
+ '4':`<div class="bleed"><img src="../mockup/img/ba-before.jpg"><img class="after" src="../mockup/img/ba-after.jpg" style="--w:46%"><div class="edge" style="--w:46%"></div><div class="scrim"></div></div>
+      <div class="tag b">Before</div><div class="tag a">After</div><div class="progress" style="--pw:52%"></div>
+      <div class="callout"><div class="eyebrow" style="position:static">Kendall Street · South Bend, Indiana</div><h1>Rebuilt.</h1><div class="rule"></div><p>Bought as-is, rebuilt top to bottom, rented. Read the full case study on the site.</p></div>`,
+ '5':`<div class="progress" style="--pw:78%"></div><div class="eyebrow">Tenants Q&amp;A</div>
+      <div class="phone" style="--ry:-10deg;--rx:3deg;--rz:-2deg;--ty:-100px;--s:1"><div class="screen"><img src="${cap('phone-reach')}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+      <div class="callout"><h1>Questions?<br>Text us.</h1><div class="rule"></div><p>805-364-4415 · a person answers.</p></div>`,
+ '6':`<div class="progress" style="--pw:100%"></div><div class="end"><div class="mark">SR</div><h1>Shavit<br>Rootman</h1><div class="rule"></div><p>shavitrootman.com</p><p style="font-size:20px;letter-spacing:.14em;color:#7e7e7e">Managed by Charger Property Management</p></div>`,
+ 'tilt':`<div class="eyebrow">3D device test · CSS perspective</div>
+      <div class="phone" style="--ry:-34deg;--rx:10deg;--rz:-8deg;--ty:-60px;--s:1.04"><div class="screen"><img src="${cap('phone-home-hero')}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+      <div class="callout"><h1>Is this<br>premium<br>enough?</h1><div class="rule"></div><p>Free path: CSS perspective + gloss + shadow, captured as video. Upgrade path: Rotato 3D renders (Mac app, ~$70) or Palmier's 3D layouts.</p></div>`
+};
+S.innerHTML=shots[shot]||shots['1'];
+</script></body></html>

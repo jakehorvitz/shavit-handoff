@@ -1,0 +1,232 @@
+[
+  {
+    "seq": "u1-01",
+    "file": "raw/u1-01.jpg",
+    "drive_title": "B5F64EA5-66B7-4223-A70F-49F48D57317E_1_105_c.jpeg",
+    "room": "Upstairs hallway / landing",
+    "description": "Second-floor hallway with open stair railing on the left, new light wood LVP flooring, looking toward a tiled walk-in shower bathroom at the end.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo."
+  },
+  {
+    "seq": "u1-02",
+    "file": "raw/u1-02.jpg",
+    "drive_title": "8441E3F2-156E-4243-961C-771D679B5CB2_1_105_c.jpeg",
+    "room": "Living room / front room",
+    "description": "Empty front room with white front door (arched fanlight), a window and a second larger window with blinds, recessed lighting plus flush ceiling light, LVP floor.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo."
+  },
+  {
+    "seq": "u1-03",
+    "file": "raw/u1-03.jpg",
+    "drive_title": "D2B94B9E-7616-4C76-A72B-16E4FE9F1D90_1_105_c.jpeg",
+    "room": "Kitchen (angle 1)",
+    "description": "Renovated kitchen: white shaker-style cabinets, black gas Amana range + OTR microwave, butcher-block counter, stainless dishwasher and stainless top-freezer fridge, glass-panel back door to yard.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; same kitchen as u1-05 and u1-08."
+  },
+  {
+    "seq": "u1-04",
+    "file": "raw/u1-04.jpg",
+    "drive_title": "6943B3D9-C034-47B8-9D9C-7E17FB4295B5_1_105_c.jpeg",
+    "room": "Full bathroom (with adjacent laundry)",
+    "description": "Tiled tub/shower with black-framed glass door and black fixtures, floating concrete-look vanity with gold pulls, black-framed mirror, toilet; washer and dryer visible in the adjoining laundry alcove at right.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; same bath as u1-13, laundry also seen in u1-10/u1-12."
+  },
+  {
+    "seq": "u1-05",
+    "file": "raw/u1-05.jpg",
+    "drive_title": "A7EF1278-3631-47D7-97D4-02FCABB2B9D2_1_105_c.jpeg",
+    "room": "Kitchen (angle 2) / eat-in area",
+    "description": "Wider kitchen view showing the appliance run plus open dining/eat-in area to the right with a wall-mounted mini-split AC and glass-panel back door.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; same kitchen as u1-03/u1-08."
+  },
+  {
+    "seq": "u1-06",
+    "file": "raw/u1-06.jpg",
+    "drive_title": "7C364FA3-6178-4651-8FE2-3E921617CA35_1_105_c.jpeg",
+    "room": "Living / family room with staircase",
+    "description": "Empty living room with two windows, wall-mounted mini-split AC, LVP floor, and an enclosed straight-run staircase going up on the right.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; same space as u1-15."
+  },
+  {
+    "seq": "u1-07",
+    "file": "raw/u1-07.jpg",
+    "drive_title": "5740745C-AD47-4A8F-95FA-1BCDEC455E71_1_105_c.jpeg",
+    "room": "Full bathroom (angle) with closet",
+    "description": "Bathroom showing toilet, gray marble-look tiled tub/shower with black-framed glass door, floating vanity edge at right, and an open closet/utility nook with a white six-panel door at left.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo."
+  },
+  {
+    "seq": "u1-08",
+    "file": "raw/u1-08.jpg",
+    "drive_title": "2C23C8C5-2D04-4D67-AD02-6927152B5B37_1_105_c.jpeg",
+    "room": "Kitchen (angle 3, straight-on)",
+    "description": "Head-on kitchen elevation: window over the sink, white cabinets, black gas range, stainless dishwasher and stainless top-freezer fridge, butcher-block counters, tile backsplash.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; same kitchen as u1-03/u1-05."
+  },
+  {
+    "seq": "u1-09",
+    "file": "raw/u1-09.jpg",
+    "drive_title": "C336DD93-6A61-4229-B4C4-E44489990FAB_1_105_c.jpeg",
+    "room": "Bathroom (upstairs) opening to hallway",
+    "description": "Bathroom with floating white vanity, black-framed mirror, toilet, tile floor; open door revealing the upstairs hallway and landing with wood flooring beyond.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; hallway matches u1-01."
+  },
+  {
+    "seq": "u1-10",
+    "file": "raw/u1-10.jpg",
+    "drive_title": "5FD2728E-E057-468D-91FC-34265E04B4B1_1_105_c.jpeg",
+    "room": "Bathroom + hallway + laundry",
+    "description": "Combined view: tiled tub/shower and toilet at left, central hallway leading to a windowed room, and a laundry area with washer/dryer under wire shelving at right.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; ties together bath (u1-04/u1-13) and laundry (u1-12)."
+  },
+  {
+    "seq": "u1-11",
+    "file": "raw/u1-11.jpg",
+    "drive_title": "37E7C8E8-FFA0-4C50-99CA-FA4470F31BB6_1_105_c.jpeg",
+    "room": "Exterior (side/rear 3-quarter)",
+    "description": "Sunny exterior three-quarter view of the white two-story house with black-trimmed covered porch, rear addition, mulched beds, new sapling, white picket fence to the right.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno exterior."
+  },
+  {
+    "seq": "u1-12",
+    "file": "raw/u1-12.jpg",
+    "drive_title": "3D3B77A5-2778-4778-8F24-1453DBE06C1D_1_105_c.jpeg",
+    "room": "Laundry nook / hallway to kitchen",
+    "description": "In-unit laundry with white top-load washer/dryer and wire shelving, looking down the hallway toward the kitchen (stainless fridge and glass back door visible).",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo."
+  },
+  {
+    "seq": "u1-13",
+    "file": "raw/u1-13.jpg",
+    "drive_title": "A039A984-C9DD-4EF1-A8EB-7259017C6091_1_105_c.jpeg",
+    "room": "Full bathroom (angle 2)",
+    "description": "Gray marble-look tiled tub/shower with rain head and black-framed glass door, black towel bars, floating white vanity with gold pulls and black faucet, black-framed mirror.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; same bath as u1-04."
+  },
+  {
+    "seq": "u1-14",
+    "file": "raw/u1-14.jpg",
+    "drive_title": "7D1399D3-FC1C-427A-BEA2-594C659D42EC_1_105_c.jpeg",
+    "room": "Exterior (side/rear angle)",
+    "description": "Sunny exterior showing the side elevation and rear single-story addition, black-trimmed porch, side window, chain-link and white picket fencing, green lawn and mature trees.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno exterior."
+  },
+  {
+    "seq": "u1-15",
+    "file": "raw/u1-15.jpg",
+    "drive_title": "011B16A9-FC2D-4710-8791-D1E586BD08F8_1_105_c.jpeg",
+    "room": "Living / family room (wide)",
+    "description": "Wide empty living room with mini-split AC, LVP floor, sightline through a hallway to the kitchen (stainless fridge, back door), and the enclosed staircase at right.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Professional post-reno photo; same room as u1-06."
+  },
+  {
+    "seq": "u1-16",
+    "file": "raw/u1-16.jpg",
+    "drive_title": "After all pictures to the right.jpeg",
+    "room": "Exterior (front elevation) - DIVIDER MARKER",
+    "description": "Finished front elevation of the white two-story house: black-trimmed covered front porch, black-frame storm door, new front walkway, mulched beds and sapling, sunny sky. This is the divider image Shavit inserted; despite its filename it is itself a usable professional AFTER exterior.",
+    "before_or_after": "after",
+    "quality": "good",
+    "notes": "Divider: everything positioned to the RIGHT of this file in Shavit's manual folder sort is the AFTER (post-reno) set. In this catalog the AFTER set = the professional UUID jpegs (u1-01..u1-15) plus this image; the BEFORE set = the 7 phone screenshots (u1-17..u1-23)."
+  },
+  {
+    "seq": "u1-17",
+    "file": "raw/u1-17.png",
+    "drive_title": "CleanShot 2026-07-05 at 22.34.47@2x.png",
+    "room": "Exterior (front) - BEFORE",
+    "description": "Pre-renovation phone photo of the front: gray-blue siding, satellite dishes bolted to the wall, potted plants and lawn ornaments on the porch, overcast sky. Same house as the after exteriors, un-renovated.",
+    "before_or_after": "before",
+    "quality": "good",
+    "notes": "This is a BEFORE listing photo, NOT a Zillow/comps/pricing screenshot. Screenshotted (CleanShot) from the prior occupied-state listing."
+  },
+  {
+    "seq": "u1-18",
+    "file": "raw/u1-18.png",
+    "drive_title": "CleanShot 2026-07-05 at 22.34.53@2x.png",
+    "room": "Kitchen - BEFORE",
+    "description": "Pre-renovation kitchen: dated white cabinets, old white freestanding gas range, laminate marble-look counter, stainless double sink, occupied clutter (chalkboard calendar, menu board, food on top of fridge), round wood dining table.",
+    "before_or_after": "before",
+    "quality": "good",
+    "notes": "BEFORE photo (occupied). Not a pricing screenshot."
+  },
+  {
+    "seq": "u1-19",
+    "file": "raw/u1-19.png",
+    "drive_title": "CleanShot 2026-07-05 at 22.34.58@2x.png",
+    "room": "Bedroom (kids) - BEFORE",
+    "description": "Pre-renovation kid's bedroom: pink metal bunk/loft bed with stuffed animals and 'Princess' sign, old carpet, occupied/lived-in.",
+    "before_or_after": "before",
+    "quality": "good",
+    "notes": "BEFORE photo (occupied). Not a pricing screenshot."
+  },
+  {
+    "seq": "u1-20",
+    "file": "raw/u1-20.png",
+    "drive_title": "CleanShot 2026-07-05 at 22.35.02@2x.png",
+    "room": "Living room - BEFORE",
+    "description": "Pre-renovation living room: dark/underexposed, brown recliner, coffee table with clutter, TV on stand playing baseball, curtained window, worn carpet, front door with arched fanlight at left.",
+    "before_or_after": "before",
+    "quality": "soft",
+    "notes": "BEFORE photo (occupied); notably dark/underexposed. Not a pricing screenshot."
+  },
+  {
+    "seq": "u1-21",
+    "file": "raw/u1-21.png",
+    "drive_title": "CleanShot 2026-07-05 at 22.35.08@2x.png",
+    "room": "Bathroom - BEFORE",
+    "description": "Pre-renovation bathroom: white tub with cloudy plastic shower curtain, dated raised-panel wall cabinet, worn white toilet, dark bath mats on old vinyl floor.",
+    "before_or_after": "before",
+    "quality": "good",
+    "notes": "BEFORE photo (occupied). Not a pricing screenshot."
+  },
+  {
+    "seq": "u1-22",
+    "file": "raw/u1-22.png",
+    "drive_title": "CleanShot 2026-07-05 at 22.35.30@2x.png",
+    "room": "Bedroom (adult) - BEFORE",
+    "description": "Pre-renovation bedroom: black-covered platform bed with red/pink pillows, framed mirror, shelf with plants, dark curtain, drop-ceiling tiles, carpet, occupied.",
+    "before_or_after": "before",
+    "quality": "good",
+    "notes": "BEFORE photo (occupied). Not a pricing screenshot."
+  },
+  {
+    "seq": "u1-23",
+    "file": "raw/u1-23.png",
+    "drive_title": "CleanShot 2026-07-05 at 22.35.34@2x.png",
+    "room": "Living room (2nd angle) - BEFORE",
+    "description": "Pre-renovation living room: floral-print sofa, coat hooks by the front door (arched fanlight), gallery wall with 'Family Over Everything' decor, drop-ceiling, carpet, occupied.",
+    "before_or_after": "before",
+    "quality": "good",
+    "notes": "BEFORE photo (occupied). Not a pricing screenshot."
+  }
+]

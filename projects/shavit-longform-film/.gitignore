@@ -1,0 +1,10 @@
+assets/before/
+assets/after/
+assets/films/
+assets/heroes/
+assets/cropped/
+assets/upscaled/
+deliver/*.mp4
+.loop/
+node_modules/
+build/frames/

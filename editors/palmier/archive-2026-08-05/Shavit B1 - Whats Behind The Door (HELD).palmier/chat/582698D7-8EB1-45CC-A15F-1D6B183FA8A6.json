@@ -1,0 +1,21 @@
+{
+  "id" : "582698D7-8EB1-45CC-A15F-1D6B183FA8A6",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit B1 - Whats Behind The Door (HELD)"
+        }
+      ],
+      "id" : "C372AB6C-E652-4C30-8D0D-A6039E0545DE",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:08:27Z"
+}

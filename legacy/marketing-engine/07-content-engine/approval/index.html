@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shavit Rootman — Content Approval</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" />
+<style>
+:root{--canvas:#000;--surface:#0d0d0d;--surface-2:#161616;--hairline:#2c2c2c;--brass:#B08D57;--ink:#fff;--body:#bcbcbc;--muted:#7e7e7e;--good:#0fa336;--bad:#c0563b}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--canvas);color:var(--body);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;padding:32px 0 64px}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+h1,h2,h3{color:var(--ink);font-weight:800;letter-spacing:-.4px;text-transform:uppercase}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:1px solid var(--hairline);padding-bottom:16px;margin-bottom:24px}
+.wm{font-size:22px}.wm span{color:var(--brass)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--brass)}
+.empty{color:var(--muted);font-size:14px;padding:40px 0;text-align:center}
+.item{display:grid;grid-template-columns:300px 1fr;gap:24px;background:var(--surface);border:1px solid var(--hairline);padding:20px;margin-bottom:20px}
+.vid{width:100%;background:var(--surface-2);border:1px solid var(--hairline);aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;text-align:center;overflow:hidden}
+.vid video{width:100%;height:100%;object-fit:cover}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--body);border:1px solid var(--hairline);padding:5px 10px}
+.verdict{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 10px;border:1px solid}
+.verdict.pass{color:var(--good);border-color:var(--good)}
+.verdict.fix{color:var(--brass);border-color:var(--brass)}
+.verdict.hold{color:var(--bad);border-color:var(--bad)}
+.caps{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.cap{display:grid;grid-template-columns:90px 1fr;gap:10px;font-size:13px;line-height:1.4;border-bottom:1px solid var(--hairline);padding-bottom:8px}
+.cap b{color:var(--brass);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.timer{font-size:12px;color:var(--muted);margin:12px 0}
+.timer b{color:var(--ink)}
+.actions{display:flex;gap:12px;margin-top:14px}
+.btn{font-family:inherit;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 22px;border:1px solid;cursor:pointer;background:transparent}
+.btn.approve{color:var(--good);border-color:var(--good)}
+.btn.approve:hover{background:var(--good);color:#000}
+.btn.veto{color:var(--bad);border-color:var(--bad)}
+.btn.veto:hover{background:var(--bad);color:#fff}
+.note{font-size:11px;color:var(--muted);border-top:1px solid var(--hairline);padding-top:16px;margin-top:24px;line-height:1.6}
+.note code{color:var(--brass);font-family:ui-monospace,Menlo,monospace}
+@media(max-width:720px){.item{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div><div class="eyebrow">Content engine · approval queue</div><div class="wm">SHAVIT<span>ROOTMAN</span></div></div>
+    <div class="eyebrow" id="count">0 pending</div>
+  </div>
+  <div id="queue"><div class="empty">Loading queue…</div></div>
+  <p class="note">
+    The Make scenario writes pending items to <code>queue.json</code> (same folder). Each item:
+    <code>{ id, market, pillar, video_url, captions{7}, verdict, expires_at }</code>.
+    Approve posts immediately via the scenario's resume webhook; no action before <b>expires_at</b> (24h) auto-posts.
+    Approve/Veto here call <code>POST {webhook}?decision=approve|veto&id=…</code> (set <code>WEBHOOK</code> below).
+  </p>
+</div>
+<script>
+const WEBHOOK = ""; // set to the Make custom-webhook URL; empty = preview/demo mode
+function fmt(ms){ if(ms<=0) return "now"; const h=Math.floor(ms/3.6e6), m=Math.floor(ms%3.6e6/6e4); return h+"h "+m+"m"; }
+function decide(id, decision){
+  if(!WEBHOOK){ alert("Demo mode — would "+decision+" item "+id); return; }
+  fetch(WEBHOOK+"?decision="+decision+"&id="+encodeURIComponent(id),{method:"POST"})
+    .then(()=>render()).catch(e=>alert("Failed: "+e));
+}
+function card(it){
+  const caps = Object.entries(it.captions||{}).map(([k,v])=>`<div class="cap"><b>${k}</b><span>${v||""}</span></div>`).join("");
+  const left = it.expires_at ? (new Date(it.expires_at).getTime()-Date.now()) : 0;
+  const v = (it.verdict||"pass").toLowerCase();
+  return `<div class="item">
+    <div class="vid">${it.video_url?`<video src="${it.video_url}" controls muted playsinline></video>`:"9:16 preview"}</div>
+    <div>
+      <div class="meta"><span class="tag">${it.market||"—"}</span><span class="tag">${it.pillar||"—"}</span><span class="verdict ${v}">${v}</span></div>
+      <div class="caps">${caps||'<div class="cap"><b>captions</b><span>—</span></div>'}</div>
+      <div class="timer">Auto-posts in <b>${fmt(left)}</b> unless vetoed</div>
+      <div class="actions">
+        <button class="btn approve" onclick="decide('${it.id}','approve')">Approve &amp; post</button>
+        <button class="btn veto" onclick="decide('${it.id}','veto')">Veto</button>
+      </div>
+    </div>
+  </div>`;
+}
+function render(){
+  fetch("queue.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(items=>{
+    items = Array.isArray(items)?items:(items.items||[]);
+    document.getElementById("count").textContent = items.length+" pending";
+    document.getElementById("queue").innerHTML = items.length ? items.map(card).join("") : '<div class="empty">Nothing pending. The engine posts on schedule; items needing review appear here.</div>';
+  }).catch(()=>{ document.getElementById("queue").innerHTML='<div class="empty">No queue.json yet — the scenario writes it when a clip is ready.</div>'; });
+}
+render(); setInterval(render, 60000);
+</script>
+</body>
+</html>

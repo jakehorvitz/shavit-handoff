@@ -1,0 +1,252 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Field footage 8/4 — six reels from two properties · slate</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#26262a; --ink:#f2f0ec; --dim:#9d9a94;
+    --brass:#b08d57; --gold:#ffc000; --bone:#edeae3; --bad:#e0674f; --ok:#6fae7b; --blue:#6ea3d6;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;padding:0 0 140px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);padding:44px 0 28px;margin-bottom:8px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+     margin:48px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:20px;margin:0 0 4px}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+        text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);
+        color:var(--dim);margin-right:6px}
+  .pill.hold{color:var(--bad);border-color:rgba(224,103,79,.4)}
+  .pill.new{color:var(--gold);border-color:rgba(255,192,0,.4)}
+  .pill.go{color:var(--ok);border-color:rgba(111,174,123,.45)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .reel{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+        padding:22px 24px;margin:16px 0 28px;position:relative}
+  .reel .rank{position:absolute;top:-11px;left:22px;background:var(--bg);border:1px solid var(--brass);
+        color:var(--brass);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:2px 10px;
+        border-radius:6px;text-transform:uppercase}
+  .reel.blocked{border-color:rgba(224,103,79,.45)}
+  .reel.blocked .rank{border-color:var(--bad);color:var(--bad)}
+  .premise{color:var(--gold);font-size:15.5px;margin:.5em 0 1em;font-style:italic}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .box h5{margin:0 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .box p{font-size:14px;margin:0}
+  .quote{background:var(--bone);color:#121214;border-radius:8px;padding:14px 16px;margin:10px 0 0;
+         font-size:14px;line-height:1.45;font-style:italic;font-weight:600}
+  .quote .attr{display:block;font-style:normal;font-weight:400;font-family:var(--mono);
+         font-size:11px;color:#5c5954;margin-top:8px;letter-spacing:.04em}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
+  .strip img{width:100%;border-radius:6px;display:block;background:#000}
+  .rule{color:var(--dim);font-size:13px;font-family:var(--mono);margin-top:12px}
+  .why{color:var(--dim);font-size:13.5px;margin-top:12px}
+  .why b{color:var(--ink);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  td.k{font-family:var(--mono);color:var(--dim);white-space:nowrap}
+  td.n{font-family:var(--mono);color:var(--gold);text-align:right}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+         padding:2px 8px;border-radius:5px}
+  .b-go{background:rgba(111,174,123,.14);color:var(--ok);border:1px solid rgba(111,174,123,.4)}
+  .b-hold{background:rgba(224,103,79,.14);color:var(--bad);border:1px solid rgba(224,103,79,.4)}
+  .b-ask{background:rgba(110,163,214,.14);color:var(--blue);border:1px solid rgba(110,163,214,.4)}
+
+  .q{border-left:3px solid var(--bad);background:rgba(224,103,79,.06);border-radius:0 10px 10px 0;
+     padding:14px 18px;margin:12px 0}
+  .q b{color:var(--bad)}
+  .q.crit{border-left-color:#ff3b30;background:rgba(255,59,48,.1)}
+  .q.crit b{color:#ff6b60}
+  .q.ok{border-left-color:var(--ok);background:rgba(111,174,123,.06)}
+  .q.ok b{color:var(--ok)}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;
+      overflow-x:auto;font-family:var(--mono);font-size:12.5px;color:var(--dim);white-space:pre-wrap}
+  a{color:var(--gold)}
+</style>
+
+<body data-spec="field-footage-0804">
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Shavit Rootman · vertical talking-head reels · 10 raw items · two properties · two states of play</div>
+  <h1>Six reels out of one afternoon.</h1>
+  <div class="sub">Everything Shavit shot and sent on 2026-08-04 · <span class="pill hold">Awaiting Jake and Shavit</span><span class="pill">Drafts only — Jake posts</span><span class="pill new">First Ewing footage ever</span></div>
+
+  <div class="revlog">
+    <h4>Revision log</h4>
+    <ul>
+      <li class="chg"><span class="rev">rev 3 · 2026-08-05</span> — <b>A1 draft 1 was not shippable and has been replaced.</b> Its last caption read "NEXT WHAT WAS / IT NEXT HOTEL" because <code>seg2</code> was cut at source 41.5s, one word into a self-correction. He actually says "…their next, what was it? Next hotel, or next place where they lived." <b>Draft 2</b> extends the cut and splices out the 2.8s stumble so the line lands as "…helping them to be able to afford their next place where they lived," verified by re-transcribing the render. Also fixed a per-word caption fade that left short captions semi-transparent, and a 90px caption-baseline drift. Render at <code>A1-DRAFT2-Ewing-Tenant-Story.mp4</code>.<br><br><b>A4 is superseded, not blocked.</b> On 8/5 Shavit shot a clip that answers "how does your company meet budgets?" with zero dollar figures and no lender — the same investor value with none of the rule fight. See <code>field-footage-2026-08-05.html</code> for that slate and the merged posting sequence.</li>
+      <li><span class="rev">rev 2 · 2026-08-04</span> — Supersedes <code>mishawaka-scouting-2026-08-04.html</code>, which was written off only the 4 clips that arrived by iMessage. The stuck iCloud share finished uploading and turned out to hold a <b>completely different, earlier shoot</b> — six items, IMG_4679 to IMG_4684, all 4K, at <b>1902 E Ewing in South Bend</b>, not Mishawaka. So today is two properties and ten items, not one property and four. All ten transcribed verbatim. Restructured from a single two-part cut into a six-reel slate.</li>
+      <li><span class="rev">rev 1 · 2026-08-04</span> — First pass, Mishawaka only, 4 clips. Superseded.</li>
+    </ul>
+  </div>
+</header>
+
+<h2 data-annot="sec-source">What actually arrived</h2>
+<p>Two separate shoots, sent by two different mechanisms about half an hour apart, which is why they looked like one batch at first. They are not related and should never be cut together.</p>
+<table>
+  <tr><th>Batch</th><th>Property</th><th>Items</th><th>Quality</th><th>Footage</th></tr>
+  <tr><td class="k">iCloud share<br>sent 12:13 PM</td><td><b>1902 E Ewing</b><br>South Bend, Indiana</td><td>5 videos + 1 photo<br><span class="frame">IMG_4679–4684</span></td><td class="n">3840×2160</td><td class="n">3:53</td></tr>
+  <tr><td class="k">iMessage<br>sent 12:43 PM</td><td><b>Mishawaka</b><br>Indiana, pre-auction</td><td>4 videos<br><span class="frame">IMG_4686–4689</span></td><td class="n">1280×720</td><td class="n">2:38</td></tr>
+</table>
+<p class="rule">Saved to ~/Desktop/Shavit - 2026-08-04 Field Footage/ — 1.8 GB, originals, split A and B. The Ewing batch is the 4K camera roll; the Mishawaka batch is Messages-compressed, so it is a full tier lower in quality and should not sit next to Ewing footage in the same cut.</p>
+
+<div class="q ok" data-annot="q-unblock"><b>This unblocks a standing blocker.</b> 1902 E Ewing has been listed as a zero-photo open project in every planning document since the 2026-07-20 reels plan, and again in the carousel slate on 7/24 ("the Trio, Ewing, and Cedar Street have zero, zero, and one"). It now has four minutes of 4K walkthrough footage with Shavit narrating. It went from the emptiest folder in the portfolio to the best-documented property of the year in one afternoon.</div>
+
+<h2 data-annot="sec-critical">Two things to settle before any of this is cut</h2>
+
+<div class="q crit" data-annot="q-money"><b>1. He states real dollar figures, repeatedly, and names his lender.</b> The standing brand rule is no dollar figures anywhere, on screen or in caption — it is rule one on the carousel slate and it is why the "local luxury" concept had to argue on craft instead of price. Clip IMG_4684 breaks it comprehensively: purchase price, rehab budget, all-in number, after-repair value, and <b>a lender named on a fix-and-flip loan</b>. IMG_4680 and IMG_4681 also both say the rehab budget out loud. This is not a small edit — the entire premise of reel A4 is the numbers. Either the rule bends for the investor audience with Shavit's explicit sign-off, or A4 does not get made and the budget line gets cut from A2 and A3. <b>Jake's call, then Shavit's.</b> The lender being named publicly is a separate question that is theirs to answer, not ours.</div>
+
+<div class="q crit" data-annot="q-occupied"><b>2. The Mishawaka property is occupied, pre-auction, and he reads a phone number off the door.</b> Unchanged from rev 1. "This place is literally occupied right now," a storage-unit sign, and a plan to call the number or knock. Legitimate acquisition work, not obviously postable. Both B reels are held until Shavit says otherwise and until the auction and any tenant transition have resolved. Note this also cuts the other way: the Ewing tenant story in reel A1 is the same situation told <b>after</b> it resolved well, which is exactly why A1 is safe and B is not.</div>
+
+<h2 data-annot="sec-slate">The slate</h2>
+<p class="sub" style="margin-bottom:18px">Six reels, ranked by how fast each can ship. A1 through A3 need nothing from anyone. A4 is blocked on a rule. B1 and B2 are blocked on a person.</p>
+
+<div class="reel" data-annot="reel-a1">
+  <div class="rank">Reel A1 · ship first <span class="badge b-go" style="margin-left:8px">Nothing blocking</span></div>
+  <h3>We bought it with people still living in it. <span class="pill">~45s</span></h3>
+  <p class="premise">The house was occupied when they won the auction. So they sat down with the tenants first.</p>
+  <div class="strip">
+    <img src="field-footage-2026-08-04/frames/IMG_4679_a.jpg" alt=""><img src="field-footage-2026-08-04/frames/IMG_4679_b.jpg" alt="">
+    <img src="field-footage-2026-08-04/frames/IMG_4680_a.jpg" alt=""><img src="field-footage-2026-08-04/frames/IMG_4680_b.jpg" alt="">
+  </div>
+  <div class="quote">"We bought that as a foreclosure, very complicated bid on auction.com. We ended up getting that while it was occupied. Believe it or not, me and my partner, Jonah, ended up coming here, talked to the tenants right here before we stripped that living room. We had a conversation with them right here, and we ended up helping them to be able to afford their next place where they lived."
+  <span class="attr">IMG_4680 · 0:19–0:41 · standing in the room where the conversation happened</span></div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="box"><h5>Why this one first</h5><p>The carousel slate's section 00 named the four things that made East Victoria work, and the top one was "the people came before the property." This is that, except it is not a design decision — it is what actually happened, told by the person it happened to, standing in the room. It needs no b-roll, no story input, and no rule bent. It is also the warmest thing on the account and the account is short on warmth.</p></div>
+    <div class="box"><h5>Build</h5><p>IMG_4679 full (0:00–0:17) as the cold open, hard cut to IMG_4680 0:19–0:41. Drop 4680's first 19 seconds — the exterior-paint and budget talk belongs in A2 and carries a dollar figure. End on "their next place." No end card beyond the standard mark; the line is the ending.</p></div>
+  </div>
+  <p class="rule">Cut the budget figure at IMG_4680 0:12 if any of this clip's head is used. De-identify absolutely: no names, no faces, no unit detail for the tenants. The story is what the company did, never who they were.</p>
+</div>
+
+<div class="reel" data-annot="reel-a2">
+  <div class="rank">Reel A2 <span class="badge b-go" style="margin-left:8px">Nothing blocking</span></div>
+  <h3>Walk it with me before it exists. <span class="pill">~50s</span></h3>
+  <p class="premise">Standing in a closed-off floor plan, describing the open one that replaces it.</p>
+  <div class="strip">
+    <img src="field-footage-2026-08-04/frames/IMG_4681_a.jpg" alt=""><img src="field-footage-2026-08-04/frames/IMG_4681_b.jpg" alt="">
+    <img src="field-footage-2026-08-04/frames/IMG_4681_c.jpg" alt=""><img src="field-footage-2026-08-04/frames/IMG_4682_photo.jpg" alt="">
+  </div>
+  <div class="quote">"This is gonna be an entirely open concept for a kitchen. Speaking of functionality of the house, that's what people like. When I rent my places, when I live in places, I like things to be open… That was a weird three-season room, whatever this thing is. Here's the vision for that. This wall, open it up… I think it's a three-one right now. We're making it a three-two."
+  <span class="attr">IMG_4681 · 0:10–0:49 · walking the ground floor</span></div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="box"><h5>Why this one</h5><p>Nobody in this market posts the vision <i>before</i> the work — they post the after and ask you to imagine the before. This inverts it, and the payoff reel exists automatically the moment the rehab finishes. "When I rent my places, when I live in places, I like things to be open" is him giving the actual reasoning rather than an adjective, which is the register the brand rules keep asking for.</p></div>
+    <div class="box"><h5>Build</h5><p>IMG_4681 0:02–0:49, cutting only the budget figure at the head. IMG_4682, the paint-day still, holds for two beats as the final frame — it is the only still in the batch and it is genuinely mid-work: drop cloths, buckets, hardware-store pails, the front door open behind it.</p></div>
+  </div>
+  <p class="rule">"Three-one to three-two" is bed-bath config language and matches the website convention exactly. Keep it. Cut the "potentially four" aside — it is speculative and the site should never carry a config that is not final.</p>
+</div>
+
+<div class="reel" data-annot="reel-a3">
+  <div class="rank">Reel A3 <span class="badge b-go" style="margin-left:8px">Nothing blocking</span></div>
+  <h3>Brand new windows. I have no idea how. <span class="pill">~50s</span></h3>
+  <p class="premise">The upstairs tour, at speed, with the one genuinely funny beat in four minutes of footage.</p>
+  <div class="strip">
+    <img src="field-footage-2026-08-04/frames/IMG_4683_a.jpg" alt=""><img src="field-footage-2026-08-04/frames/IMG_4683_b.jpg" alt="">
+    <img src="field-footage-2026-08-04/frames/IMG_4683_c.jpg" alt=""><img src="field-footage-2026-08-04/frames/IMG_4681_b.jpg" alt="">
+  </div>
+  <div class="quote">"The good thing about this house, we got brand new windows. The whole house has brand new windows. I have no idea how! There's also an old telephone, so we might just keep it… New flooring. We'll get new bathroom right here. New drywall. And same with the third bathroom."
+  <span class="attr">IMG_4683 · 0:30–1:03 · upstairs</span></div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="box"><h5>Why this one</h5><p>"I have no idea how" is the most human line in the entire batch — a real reaction to inheriting something good in a house that is otherwise a gut job, and the kind of thing that cannot be scripted. The old wall telephone he wants to keep is the same instinct. Pair those two against the punch-list of new drywall, new floors, three new bathrooms and it is a work reel that does not read as a brag.</p></div>
+    <div class="box"><h5>Build</h5><p>IMG_4683 0:30–1:03. Cut the first 30 seconds — it is stair-climbing and an off-camera exchange with no information in it. This one is the fastest cut in the set: he is already moving room to room at reel pace.</p></div>
+  </div>
+  <p class="rule">Audio has another voice off-camera in the head of the clip. Trimming to 0:30 removes it, which also removes the consent question. Verify no other person is audible or visible in the final cut.</p>
+</div>
+
+<div class="reel blocked" data-annot="reel-a4">
+  <div class="rank">Reel A4 · blocked <span class="badge b-hold" style="margin-left:8px">Breaks the money rule</span></div>
+  <h3>The whole BRRRR, start to finish, in one minute. <span class="pill">~55s</span></h3>
+  <p class="premise">He sits on the porch swing and walks through every number on the deal.</p>
+  <div class="strip" style="grid-template-columns:repeat(2,1fr);max-width:50%">
+    <img src="field-footage-2026-08-04/frames/IMG_4684_a.jpg" alt=""><img src="field-footage-2026-08-04/frames/IMG_4684_b.jpg" alt="">
+  </div>
+  <div class="quote">"A lot of people want to know about the financials and the BRRRR method, right, to know how that works. We ended up getting this one for [purchase]… almost 100% finance from [lender] to get a fix and flip loan… We're fixing this for [budget], so we'll be all in for [total], plus closing costs and utilities… I believe that we can get an after repair value of around [ARV]. After we recoup through refinancing, not just that we had the entire previous loan paid for, we're actually going to keep a pretty nice chunk in our hands."
+  <span class="attr">IMG_4684 · 0:00–0:53 · figures redacted here on purpose — see the blocker</span></div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="box"><h5>Why it is worth fighting for</h5><p>This is the single most valuable clip in the batch <i>for the investor audience</i>. A complete BRRRR cycle explained by an operator on a real deal, with a real lender, in under a minute, unscripted. Nothing else in the pipeline comes close for the "partner with us" side of the account, and Shavit has been asking for exactly this kind of content since 7/24.</p></div>
+    <div class="box"><h5>Why it is blocked</h5><p>It breaks the no-dollar-figures rule five times in fifty seconds, and the rule exists for a reason — every prior post argues on craft precisely because numbers invite scrutiny of the deal rather than the work. It also names a lender publicly, which is that firm's decision to make, not ours. Both need explicit clearance.</p></div>
+  </div>
+  <p class="rule">Fallback if the rule holds: recut as "how the BRRRR method works" with every figure replaced by a ratio or a plain-language beat — bought below value, financed the purchase, funded the rehab, refinanced out, kept the property. Same structure, same clip, no numbers. Weaker, but shippable without anyone's permission.</p>
+</div>
+
+<div class="reel blocked" data-annot="reel-b1">
+  <div class="rank">Reel B1 · held <span class="badge b-hold" style="margin-left:8px">Occupied property</span></div>
+  <h3>How do you know what is behind the door? <span class="pill">~52s</span></h3>
+  <p class="premise">Mishawaka, days before the auction, standing outside a house he has never been inside.</p>
+  <div class="strip">
+    <img src="field-footage-2026-08-04/frames/01-clip4686-hook.jpg" alt=""><img src="field-footage-2026-08-04/frames/02-clip4687-property.jpg" alt="">
+    <img src="field-footage-2026-08-04/frames/03-clip4687-porch.jpg" alt=""><img src="field-footage-2026-08-04/frames/04-clip4688-atwindow.jpg" alt="">
+  </div>
+  <div class="quote">"I'm being asked that all the time — Shavit, how do you know that a foreclosed house, a house that belongs to the bank, how do you know that the inside is manageable?… Well, let me show you."
+  <span class="attr">IMG_4686 · 0:00–0:23</span></div>
+  <div class="why"><b>Build:</b> IMG_4686 full + IMG_4687 0:00–0:31 and 0:42–0:56, cutting the dead air in the middle. Ends on "stay tuned." <b>Held</b> pending the occupied-property question above. House number is legible on the porch post and must be cropped or blurred; the phone number on the door never appears.</div>
+</div>
+
+<div class="reel blocked" data-annot="reel-b2">
+  <div class="rank">Reel B2 · held <span class="badge b-hold" style="margin-left:8px">Occupied property</span></div>
+  <h3>We never put each other in an impossible situation. <span class="pill">~53s</span></h3>
+  <p class="premise">The payoff to B1, and the closest thing to a stated philosophy he has ever given on camera.</p>
+  <div class="strip" style="grid-template-columns:repeat(2,1fr);max-width:50%">
+    <img src="field-footage-2026-08-04/frames/05-clip4689-walking.jpg" alt=""><img src="field-footage-2026-08-04/frames/04-clip4688-atwindow.jpg" alt="">
+  </div>
+  <div class="quote">"How do you go and buy these foreclosures? First, I have a team that I know can deal with anything and everything. Secondly, we never set each other to a situation that is impossible… the first story looks absolutely doable. Except for this gigantic tree that we have to treat, but that's another story."
+  <span class="attr">IMG_4689 · 0:34–1:08</span></div>
+  <div class="why"><b>Build:</b> IMG_4688 full + IMG_4689 0:26–1:08. <b>Held with B1</b> — and note the dependency: an unresolved "stay tuned" in B1 that never pays off reads worse than never asking. Ship both or neither.</div>
+</div>
+
+<h2 data-annot="sec-sequence">Recommended sequence</h2>
+<table>
+  <tr><th>Slot</th><th>Reel</th><th>Why here</th><th>Blocked on</th></tr>
+  <tr><td class="k">Thu 6 Aug</td><td><b>A1, the tenants</b></td><td>Warmest, strongest, needs nothing. Leads with people, which is the pattern that worked</td><td><span class="badge b-go">Nothing</span></td></tr>
+  <tr><td class="k">Sun 9 Aug</td><td><b>A2, the vision</b></td><td>Different register, same property, sets up the after reel for whenever the rehab finishes</td><td><span class="badge b-go">Nothing</span></td></tr>
+  <tr><td class="k">Thu 13 Aug</td><td><b>A3, the work</b></td><td>Keeps Ewing running three posts deep without repeating a beat</td><td><span class="badge b-go">Nothing</span></td></tr>
+  <tr><td class="k">Reserve</td><td><b>A4, the numbers</b></td><td>Drops in the week it clears, or ships as the no-figures recut</td><td><span class="badge b-ask">Money rule + lender</span></td></tr>
+  <tr><td class="k">Hold</td><td><b>B1 and B2</b></td><td>Ship as a pair, a few days apart, only after the auction resolves</td><td><span class="badge b-hold">Shavit</span></td></tr>
+</table>
+<p class="rule">Three weeks of content out of one afternoon, with nothing needed from Shavit for the first three. That is the first time this pipeline has been ahead rather than waiting on him.</p>
+
+<h2 data-annot="sec-open">Open questions</h2>
+<div class="q" data-annot="q-1"><b>1. The money rule.</b> Does it bend for the investor audience, or does A4 become the no-figures recut? Jake decides the rule, Shavit clears the specifics, the lender clears its own name.</div>
+<div class="q" data-annot="q-2"><b>2. Mishawaka.</b> New market or fold under Indiana? It has never appeared in any list, folder, or market chip. And confirm the pre-auction property is a different address entirely from Ewing.</div>
+<div class="q" data-annot="q-3"><b>3. The tenant story in A1.</b> Confirm the transition actually resolved the way he describes before it goes public — the reel makes a claim about how the company treated people, and that claim has to be true and verifiable if anyone asks.</div>
+<div class="q" data-annot="q-4"><b>4. Jonah.</b> Named as his partner on camera in A1. He was tagged in the July team post so he is already public, but confirm he is happy to be named in this specific context.</div>
+<div class="q" data-annot="q-5"><b>5. More of this.</b> He shot ten usable items in one afternoon with a phone and no plan. The bottleneck on this account has always been story input from him. Ask him to do exactly this on every site visit and the content problem is structurally solved.</div>
+
+<h2 data-annot="sec-files">Source files</h2>
+<table>
+  <tr><th>Item</th><th>Property</th><th>Duration</th><th>Used in</th></tr>
+  <tr><td class="k">IMG_4679.MOV</td><td>Ewing</td><td class="n">0:17</td><td>A1 cold open</td></tr>
+  <tr><td class="k">IMG_4680.MOV</td><td>Ewing</td><td class="n">0:43</td><td>A1 body</td></tr>
+  <tr><td class="k">IMG_4681.MOV</td><td>Ewing</td><td class="n">0:52</td><td>A2</td></tr>
+  <tr><td class="k">IMG_4682.JPEG</td><td>Ewing</td><td class="n">still</td><td>A2 final frame</td></tr>
+  <tr><td class="k">IMG_4683.MOV</td><td>Ewing</td><td class="n">1:05</td><td>A3</td></tr>
+  <tr><td class="k">IMG_4684.MOV</td><td>Ewing</td><td class="n">0:55</td><td>A4 — blocked</td></tr>
+  <tr><td class="k">IMG_4686.mov</td><td>Mishawaka</td><td class="n">0:23</td><td>B1 — held</td></tr>
+  <tr><td class="k">IMG_4687.mov</td><td>Mishawaka</td><td class="n">0:56</td><td>B1 — held</td></tr>
+  <tr><td class="k">IMG_4688.mov</td><td>Mishawaka</td><td class="n">0:11</td><td>B2 — held</td></tr>
+  <tr><td class="k">IMG_4689.mov</td><td>Mishawaka</td><td class="n">1:08</td><td>B2 — held</td></tr>
+</table>
+<p class="rule">All ten saved at ~/Desktop/Shavit - 2026-08-04 Field Footage/ (A-ewing-1902-south-bend, B-mishawaka-preauction). Transcribed with Whisper via the watch skill, verbatim, no paraphrase. Every quotation on this page is his own audio.</p>
+
+<h2 data-annot="sec-contact">Ewing contact sheet</h2>
+<img src="field-footage-2026-08-04/frames/CONTACT-ewing.jpg" alt="Twelve frames across the five Ewing clips" style="width:100%;border-radius:12px;border:1px solid var(--line);margin-top:8px">
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>

@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Howder Unit B · story post spec (ships 8/25)</title>
+<style>
+  :root{--bg:#0b0b0c;--card:#131315;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a8a49c;
+    --brass:#B08D57;--gold:#FFC000;--mono:ui-monospace,Menlo,monospace}
+  *{box-sizing:border-box}
+  body{margin:0 auto;max-width:1040px;padding:40px 20px 90px;background:var(--bg);
+    color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+    margin:44px 0 14px;padding-top:18px;border-top:1px solid var(--line)}
+  .sub{color:var(--dim);margin:0 0 22px}
+  .sub code{font-family:var(--mono);font-size:12px;color:var(--ink)}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:14px 16px;margin:18px 0 8px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 14px}
+  .quote{border-left:3px solid var(--gold);padding:10px 14px;background:#000a;border-radius:6px;
+    font-size:15px;margin:0}
+  .quote .who{display:block;font:600 11px/1 var(--mono);letter-spacing:.1em;color:var(--dim);
+    text-transform:uppercase;margin-top:8px}
+  .phone{max-width:470px;background:#000;border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;font-size:14.5px;line-height:1.6}
+  .phone .handle{font:700 13px/1 Inter;margin:0 0 12px;color:var(--ink)}
+  .phone .handle span{color:var(--dim);font-weight:400}
+  .phone p{margin:0 0 12px}
+  .phone .span{border-bottom:1px dotted var(--brass);cursor:help}
+  .phone .sig{color:var(--dim)}
+  .fc{max-width:470px;background:#000;border:1px dashed var(--line);border-radius:14px;
+    padding:14px 22px;font:13px/1.7 var(--mono);color:#7aa7d9;margin-top:10px}
+  .fc .lbl{font:600 10.5px/1 var(--mono);letter-spacing:.1em;color:var(--dim);
+    text-transform:uppercase;display:block;margin-bottom:8px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  #slides{grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:16px}
+  #bench{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  #slides .shot .cap{font-size:14px}
+  #slides .shot img{cursor:zoom-in}
+  .shot{position:relative;background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:10px;overflow:hidden}
+  .shot img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:6px;display:block;background:#000}
+  .shot.slide img{aspect-ratio:4/5}
+  .shot .cap{font:600 12px/1.3 Inter,system-ui,sans-serif;margin:8px 0 2px}
+  .shot .src{font-family:var(--mono);font-size:10.5px;color:var(--dim);word-break:break-all}
+  .shot .ord{position:absolute;top:14px;left:14px;background:#000c;color:var(--gold);
+    font:700 11px/1 var(--mono);border-radius:999px;padding:4px 8px}
+  .shot.alt .ord{color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{font:600 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+    text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  td.id{font-family:var(--mono);font-size:12px;color:var(--gold);white-space:nowrap}
+  td.src{font-family:var(--mono);font-size:11.5px;color:var(--dim);white-space:nowrap}
+  .flag{border-left:3px solid var(--gold)}
+  .flag b{color:var(--gold)}
+  pre{background:#000;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+    font:12.5px/1.7 var(--mono);color:var(--ink);overflow-x:auto}
+  .ok{color:#7dc98f}
+  .note{color:var(--dim);font-size:13px}
+  .pill{display:inline-block;vertical-align:middle;margin-left:10px;background:var(--gold);color:#000;
+    font:800 9.5px/1 var(--mono);letter-spacing:.08em;border-radius:4px;padding:4px 6px}
+  .shot[draggable="true"]{cursor:grab}
+  .shot.dragging{opacity:.35}
+  .shot.drop-before{box-shadow:-4px 0 0 var(--gold)}
+  .shot.drop-after{box-shadow:4px 0 0 var(--gold)}
+  #save-order{position:fixed;right:22px;bottom:22px;z-index:60;background:var(--gold);color:#000;
+    border:0;border-radius:999px;padding:12px 18px;font:800 12px/1 var(--mono);letter-spacing:.06em;
+    cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+  #save-order:disabled{background:#7dc98f;cursor:default}
+</style>
+</head>
+<body data-spec="howder-unit-b-post" data-annot-targets=".card, .shot, h2, .phone, .fc">
+
+<h1>Howder Unit B · story post</h1>
+<p class="sub">Instagram · target 2026-08-25 · pipeline id <code>howder-unit-b-story</code> ·
+every sentence Shavit-verbatim (sources: <code>docs/tasks/sources/howder-imessage-story-sources-2026-08-24.txt</code> in the website repo)</p>
+
+<div class="revlog">
+  <h4>Revision log</h4>
+  <ul>
+    <li><span class="rev">r18 · 8/25 12:55 PM</span> · SHAVIT'S FULL COPY REWRITE, from the call + his 12:44 PM text ("Okay, I will break down the text for you"). He approved design and photos and rejected the copy register: no more transcribing what the photo shows ("condensers outside... well, duh"); every slide now argues the competitive advantage, market-specifically, without naming competitors ("a Porsche doesn't need to say I'm better"). All NINE slides re-rendered with his 12:44 text verbatim — A NEW STANDARD (cover) / WE INVEST WHERE OTHERS WALK AWAY / WE FIX WHAT MOST PEOPLE NEVER SEE / A REBUILD, NOT A REMODEL / EVERY SQUARE FOOT COUNTS / CONSISTENCY IS OUR COMPETITIVE ADVANTAGE / BUILT FOR DAILY USE / AIR CONDITIONING IS A DIFFERENCE YOU FEEL / MORE THAN A RENOVATION + the standing end card. Photos, crops, chips: untouched. Only splice: his three em dashes (slides 1, 3, 7) render as commas per the standing rule — confirm at verify. Caption unchanged (his message covered slide text). All nine slides glow gold.</li>
+    <li><span class="rev">r17 · 8/25 1:20 PM</span> · per Jake: the approved AC card joins the DECK as slide 8 of 9 (NEW FEATURE chip, his 11:57 real condenser photo, "EVERY ROOM, AIR CONDITIONED." + the descriptive spec lines); the close moves to 9. The caption takes back one line after the unit mix: "Every room, air conditioned." (fact howder.everyroom, shared with the AC post list). The cover collage is untouched. The standalone AC post is SUPERSEDED by the deck; its Downloads folder is archive-only unless Jake revives it. Slides 8 and 9 glow gold.</li>
+    <li><span class="rev">r16 · 8/25 12:05 PM</span> · per Jake: AIR CONDITIONING IS OUT of this post entirely — no bold spec line on slide 5, no caption sentence, fact howder.ac retired. It becomes its own post (<code>howder-ac-story</code>) built on Shavit's 11:44 condenser photo (two mini splits on the Howder siding), drafted and staged; ships after this carousel. Slide 5 glows gold.</li>
+    <li><span class="rev">r15 · 8/25 11:55 AM</span> · per Jake: the Hillsdale clause is out everywhere. On slide 5 "Air conditioning." is now simply one of the featured specs, set in BOLD ink (DM Sans 700) above the plain gray lines; the caption sentence trims to "The unit also has air conditioning." (fact howder.ac updated). Only slide 5 glows gold.</li>
+    <li><span class="rev">r14 · 8/25 11:40 AM</span> · his 11:34 notes actioned ("We're very close, tho!"). (1) Cover is now a 2x2 COLLAGE of the finished unit — pro living, pro kitchen hero, his corrected bath, regraded bedroom — because "We already had one post featuring this unit from the outside"; the exterior survives only on the close. (2) AIR CONDITIONING featured per his ask: "Air conditioning, something that is not common in Hillsdale." (his sentence, trimmed) leads the slide-5 specs and joins the caption after the unit-mix sentence as new fact howder.ac. The ducted supply vent in his laundry pro shot backs the claim; he confirms at verify. Slides 1 and 5 glow gold.</li>
+    <li><span class="rev">r13 · 8/25 11:00 AM</span> · Shavit's 10:42/10:52 texts actioned. (1) Slide 7 photo replaced with his corrected retouch ("The tile was not aligned on the photo") — saved to photos/43-howder-unit2/full/bath-pro-fixed-0825.png; spec lines unchanged. (2) He rejected the closer text ("I don't like the text of the on the last slide. 'One family. One building…'"), so the close now copies the shipped Clarendon slide-10 pattern per Jake: "Fully leased and professionally managed." + the standing end card. "Refinanced" from the Clarendon line is dropped — verified there, nowhere on record for Howder. NOTE: the "One family" closer still ends the IG caption (his own July language); pull it there too if Shavit wants it gone entirely. Slides 7 and 8 glow gold.</li>
+    <li><span class="rev">r12 · 8/25 10:45 AM</span> · story/spec split per your voice note ("three slides be the story, and then the rest is just you describing the house"): 02&ndash;04 stay the story in his words; 05&ndash;07 are now SPEC slides describing the unit — the Unit 1 reel's own room-plate register, which makes the deck MORE cohesive, not less (caption mirrors the July post, slides mirror the July reel). 05: "Open floor concept." (his 7/13 living plate phrase) + new flooring/trim/paint + 1 bed, 1 bath, ~500 sq ft (listing facts, his 7/16 email). 06 unchanged (already spec). 07: "Glass shower, tiled to the ceiling." + "New black fixtures throughout." (his 7/13 phrase, visibly true of this frame; the tub line stays out). His scope/standard/unit-mix sentences now live in the caption only. 05 and 07 glow gold.</li>
+    <li><span class="rev">r11 · 8/25 10:25 AM</span> · plain pass on slides 1&ndash;4 per your voice note ("make it more plain... more straightforward"): the literary lines are out. 01 now states what the unit is (his unit-mix phrase, "A" prepended &mdash; Unit B is the 1-bed/1-bath per the site + his 7/16 email, on the confirm list). 02 leads with his purchase-condition sentence whole (the "was not" splice is gone with the story opener). 03 states what the photo shows: "Years of deferred maintenance and temporary repairs hidden behind the walls." 04 is trimmed to "We rebuilt it the right way." Still his words throughout, trims only. Slides 01&ndash;04 glow gold; 05&ndash;08 unchanged from r10.</li>
+    <li><span class="rev">r10 · 8/25 10:05 AM</span> · Shavit's 6:40 AM text actioned ("We already uploaded a post of the other unit, so the language has to be cohesive to both"): every composed case-study headline is OUT. All six middle slides now carry his own published 7/15 Unit 1 language, verbatim with trims only — the story opener on 02, "Hidden behind the walls." pulled as the 03 headline, the bandage sentence whole on 04, the scope sentence split across headline and sub on 05, his 7/13 kitchen plate copy on 06 (every feature visible in the pro frame), and the standard line + unit mix on 07. One splice to confirm: "wasn't" &rarr; "was not" on 02. Slides 02&ndash;07 glow gold.</li>
+    <li><span class="rev">r9 · 8/25 12:45 AM</span> · you were right: the site gallery holds Shavit's professional shoot, and the three after slides now use it. Living = pro b01, kitchen = pro b02 (the hero with the full L and gold fixture), and the bedroom slide is replaced by the pro BATHROOM b04 (glass shower, wood vanity), which keeps the scope sentence. The regraded phone shots stay on the bench.</li>
+    <li><span class="rev">r8 · 8/25 12:30 AM</span> · per Jake: befores cut to THREE (framing and roofline slides out, roofline gone for good, framing parked on the bench); the kitchen slide now uses the range shot with a high crop so the empty floor is out of frame; the bedroom slide picked up the scope sentence. Deck is 8 slides. Kitchen and bedroom glow gold.</li>
+    <li><span class="rev">r7 · 8/25 12:20 AM</span> · per your voice note: three FINISHED slides added after the befores (living room, kitchen, bedroom, AFTER chips, regraded MLS frames); the unit-mix sentence moved onto the living-room slide and the deck is now 10 slides, closing on the exterior as before. The three new slides glow gold.</li>
+    <li><span class="rev">r6 · 8/25 12:50 AM</span> · your two sec-8 notes ("replace this photo" /
+      "different photo") actioned: slide 3's brick-chimney gut shot is OUT, replaced with the rear
+      addition open to the sky (u2-07), caption rewritten to match the frame. The chimney shot moved
+      to the bench in case it belongs elsewhere. Only slide 3 glows gold.</li>
+    <li><span class="rev">r5 · 8/25 12:35 AM</span> · em dashes removed everywhere per Jake: the empathy sentence now breaks as two sentences, the scope sentence takes a comma. post.md, the fact values and slides 02/05 re-rendered to match. Gold marks now sit only on what r5 touched.</li>
+    <li><span class="rev">r4 · 8/25 12:25 AM</span> · deck rebuilt per Jake: ONLY before photos in
+      the squares (one full-bleed mid-rehab frame per slide, splits and after-interiors dropped) and
+      band captions rewritten into the CASE-STUDY register (norwood-60 "Condition at Acquisition"
+      style). Shavit's story sentences stay as the sub-lines. New flag 4: the captions are composed
+      in that register and need his OK.</li>
+    <li><span class="rev">r3 · 8/25 12:15 AM</span> · slides displayed BIG (two across, ~3x the area);
+      click any slide to open it full-res in a new tab. Drag still reorders.</li>
+    <li><span class="rev">r2 · 8/25 12:05 AM</span> · the deck is now RENDERED in the Clarendon
+      language Jake pointed at (same renderer, bone band, brass BEFORE/AFTER chips, split frames,
+      gold rule, standing close): 7 slides replacing the raw-photo proposal, befores pulled from
+      Shavit's own mid-rehab Unit 2 shots. Slides are DRAGGABLE · reorder or pull bench frames in,
+      then SAVE ORDER (bottom right). New flag 4: split pairings are stage-representative.</li>
+    <li><span class="rev">r1 · 8/24 11:35 PM</span> · initial spec: caption draft, first-comment hashtags,
+      6-slide carousel proposal, 11-fact registry map, 3 verify flags, ship checklist.</li>
+  </ul>
+</div>
+
+<h2 id="brief">The brief</h2>
+<div class="card">
+  <blockquote class="quote">We can post Howder Unit B tomorrow, but it needs to be telling the story of the unit.
+    <span class="who">Shavit · iMessage 8/24 10:14 PM (r139112) · Jake liked it 10:15 PM</span>
+  </blockquote>
+</div>
+
+<h2 id="caption">Caption, as it posts</h2>
+<p class="note">Dotted underline = a claim span tied to a registry fact (hover for the id).
+Trims from his wording: "43" dropped (no-house-numbers), "MI" spelled out · both match his own 7/14 naming text.</p>
+<div class="phone">
+  <p class="handle">shavitrootman <span>· Hillsdale, Michigan</span></p>
+  <p><span class="span" title="howder.unitb-done · splice of r139112 + r139096, confirm at verify">Howder Unit B is done.</span></p>
+  <p><span class="span" title="prop.howder.street / city / state · r134032, his 7/14 naming instruction">Howder Street | Hillsdale, Michigan</span></p>
+  <p><span class="span" title="howder.condition · r134081">When we purchased this duplex, both units were occupied and in very poor condition.</span>
+     <span class="span" title="howder.empathy · r134081">Navigating that situation required more than construction. It required empathy.</span></p>
+  <p><span class="span" title="howder.demo · r134081">Once demolition started, we quickly discovered years of deferred maintenance and temporary repairs hidden behind the walls. Instead of adding another bandage, we rebuilt it the right way.</span></p>
+  <p><span class="span" title="howder.college · r134081">Located just 0.4 miles from Hillsdale College, we believed this property should reflect the quality and pride of its neighborhood.</span>
+     <span class="span" title="howder.scope · r134081">Nearly every component of the building was replaced or renovated, from the roof and major systems to the kitchens, bathrooms, flooring, trim, paint, and landscaping.</span></p>
+  <p><span class="span" title="howder.units · r134081">Today, the property offers a beautifully renovated 3-bedroom, 2-bath unit and a 1-bedroom, 1-bath unit, built to the standard every family deserves.</span> <span class="span" title="howder.everyroom · Jake wording, Shavit confirms every room has a head">Every room, air conditioned.</span></p>
+  <p><span class="span" title="howder.closer · r134081">One family. One building. One neighborhood at a time.</span></p>
+  <p class="sig">– Charger Property Management</p>
+</div>
+<div class="fc">
+  <span class="lbl">First comment (Shavit's 7/15 list, r134082 · his instruction: hashtags go in the first comment)</span>
+  #ChargerPropertyManagement #HillsdaleMI #HillsdaleCollege #RealEstateInvesting #RentalProperty
+  #PropertyManagement #BRRRR #RealEstateDevelopment #NeighborhoodRevitalization #AffordableHousing
+  #BeforeAndAfter #Renovation #MichiganRealEstate #CommunityFirst #BuildingCommunities
+</div>
+
+<h2 id="carousel">Carousel · rendered deck, drag to reorder<span class="pill">UPDATED · r18</span></h2>
+<p class="note">Since r18 every band line on every slide is Shavit's 12:44 PM copy rewrite, VERBATIM
+(three em-dash-to-comma splices flagged). The register is his storytelling doctrine from the call:
+the photo shows the what, the band argues the why — market-level competitive advantage, no
+comparisons. Photos, crops and chips are unchanged from the deck he approved this morning.
+<b style="color:var(--ink)">Drag any card</b> to reorder, or drag a bench frame into the lineup
+(that means "build a slide from this"), then hit <b style="color:var(--gold)">SAVE ORDER</b>.
+Click a slide for full res. PDF: <a href="howder-unit-b-post-spec/final/Howder-UnitB-Carousel-MASTER.pdf" style="color:var(--gold)">MASTER.pdf</a></p>
+<div class="grid" id="slides">
+  <figure class="shot slide chg"><span class="ord">1</span><img src="howder-unit-b-post-spec/final/01_cover-collage.jpg" alt="Cover: 2x2 collage, A new standard for rental housing" />
+    <figcaption class="cap">Cover · "A NEW STANDARD FOR RENTAL HOUSING." (r18, his 12:44 text)</figcaption><span class="src">01_cover-collage.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">2</span><img src="howder-unit-b-post-spec/final/02_before-gutted-floor.jpg" alt="Before: gutted main floor, We invest where others walk away" />
+    <figcaption class="cap">"WE INVEST WHERE OTHERS WALK AWAY." (r18)</figcaption><span class="src">02_before-gutted-floor.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">3</span><img src="howder-unit-b-post-spec/final/03_before-open-sky.jpg" alt="Before: rear addition open to the sky, We fix what most people never see" />
+    <figcaption class="cap">"WE FIX WHAT MOST PEOPLE NEVER SEE." (r18 · em dash &rarr; comma)</figcaption><span class="src">03_before-open-sky.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">4</span><img src="howder-unit-b-post-spec/final/04_before-studs.jpg" alt="Before: studded-out room, This was a rebuild not a remodel" />
+    <figcaption class="cap">"THIS WAS A REBUILD, NOT A REMODEL." (r18)</figcaption><span class="src">04_before-studs.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">5</span><img src="howder-unit-b-post-spec/final/05_after-living.jpg" alt="After: living room, Every square foot counts" />
+    <figcaption class="cap">"EVERY SQUARE FOOT COUNTS." (r18)</figcaption><span class="src">05_after-living.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">6</span><img src="howder-unit-b-post-spec/final/06_after-kitchen.jpg" alt="After: kitchen hero, Consistency is our competitive advantage" />
+    <figcaption class="cap">"CONSISTENCY IS OUR COMPETITIVE ADVANTAGE." (r18)</figcaption><span class="src">06_after-kitchen.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">7</span><img src="howder-unit-b-post-spec/final/07_after-bath.jpg" alt="After: bathroom, Built for daily use" />
+    <figcaption class="cap">"BUILT FOR DAILY USE." (r18 · em dash &rarr; comma)</figcaption><span class="src">07_after-bath.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">8</span><img src="howder-unit-b-post-spec/final/08_ac-new-feature.jpg" alt="New feature: Air conditioning is a difference you feel, condensers on the siding" />
+    <figcaption class="cap">"AIR CONDITIONING IS A DIFFERENCE YOU FEEL." (r18, his Hillsdale market claim)</figcaption><span class="src">08_ac-new-feature.jpg</span></figure>
+  <figure class="shot slide chg"><span class="ord">9</span><img src="howder-unit-b-post-spec/final/09_exterior-close.jpg" alt="Close: exterior, More than a renovation" />
+    <figcaption class="cap">Close · "MORE THAN A RENOVATION." + end card (r18)</figcaption><span class="src">09_exterior-close.jpg</span></figure>
+</div>
+<p class="note" style="margin-top:14px">Bench · unused frames (drag one into the lineup to request a slide from it; the u2 frames are more befores, the squares are the finished rooms if any belong back in):</p>
+<div class="grid" id="bench">
+  <figure class="shot alt"><span class="ord">alt</span><img src="../assets/43-howder/unit2/raw/u2-04.jpg" alt="Before: new header tied into old framing" />
+    <figcaption class="cap">Before · framing (cut in r8)</figcaption><span class="src">unit2/raw/u2-04.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../assets/43-howder/unit2/raw/u2-09.jpg" alt="Before: framed room with new ceiling" />
+    <figcaption class="cap">Before · framed room, new ceiling</figcaption><span class="src">unit2/raw/u2-09.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../assets/43-howder/unit2/raw/u2-16.jpg" alt="Before: newly framed partition wall" />
+    <figcaption class="cap">Before · framed partition</figcaption><span class="src">unit2/raw/u2-16.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../assets/43-howder/unit2/raw/u2-17.jpg" alt="Before: subfloor with register opening" />
+    <figcaption class="cap">Before · subfloor</figcaption><span class="src">unit2/raw/u2-17.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../photos/43-howder-unit2/square/04_kitchen-range.jpg" alt="Kitchen range detail" />
+    <figcaption class="cap">Kitchen range detail</figcaption><span class="src">square/04_kitchen-range.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../photos/43-howder-unit2/square/06_bedroom-window.jpg" alt="Bedroom window" />
+    <figcaption class="cap">Bedroom window</figcaption><span class="src">square/06_bedroom-window.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../photos/43-howder-unit2/square/07_bedroom-2.jpg" alt="Bedroom angle 2" />
+    <figcaption class="cap">Bedroom angle 2</figcaption><span class="src">square/07_bedroom-2.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../photos/43-howder-unit2/square/08_bathroom.jpg" alt="Bathroom" />
+    <figcaption class="cap">Bathroom</figcaption><span class="src">square/08_bathroom.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../photos/43-howder-unit2/square/09_laundry.jpg" alt="Laundry" />
+    <figcaption class="cap">Laundry</figcaption><span class="src">square/09_laundry.jpg</span></figure>
+  <figure class="shot alt"><span class="ord">alt</span><img src="../photos/43-howder-unit2/square/10_closet-nook.jpg" alt="Closet nook" />
+    <figcaption class="cap">Closet nook</figcaption><span class="src">square/10_closet-nook.jpg</span></figure>
+</div>
+
+<h2 id="flags">Flags to settle at verify</h2>
+<div class="card flag"><b>1 · The hook is a splice.</b> "Howder Unit B is done." joins two of his texts
+  (r139112 "Howder Unit B" + r139096 "second unit is done"). The only near-composed line in the draft.
+  Zero-splice fallback in coach.md: "The second unit is done."</div>
+<div class="card flag"><b>2 · "built to the standard every family deserves"</b> is fair-housing-adjacent
+  (familial status). It is his published July wording, so precedent exists; coach.md has the trimmed version
+  ending at "1-bedroom, 1-bath unit." if either of you wants it out.</div>
+<div class="card flag"><b>3 · 15 hashtags vs the 5–10 playbook ceiling.</b> His explicit 7/15 instruction wins,
+  and they ride in the first comment, not the caption. Trim only if he says so.</div>
+<div class="card flag chg"><b>4 · REWRITTEN at r18 — all nine slides are now his 12:44 PM text, verbatim.</b>
+  The r12 composed spec captions and the r13 close are gone; his message is the source for every band
+  line. Confirm at verify: (a) the three em-dash&rarr;comma splices (slides 1, 3, 7); (b) the market
+  claim "Very few rental properties in Hillsdale provide air conditioning." — his sentence, he owns it;
+  (c) "Every CPM renovation follows the same design standard." and CPM as the on-slide brand
+  abbreviation; (d) "500-square-foot" (consistent with his 7/16 email §2 and the site entry);
+  (e) whether the "One family" closer should also leave the IG caption now that the deck closes on
+  "More than a renovation." — the caption still ends with his July closer.</div>
+
+<h2 id="facts">Registry map · 11 facts, all pending TTY add</h2>
+<table>
+  <tr><th>id</th><th>span (his words, trim only)</th><th>source</th></tr>
+  <tr><td class="id">howder.unitb-done</td><td>Howder Unit B is done.</td><td class="src">r139112 + r139096 · 8/24</td></tr>
+  <tr><td class="id">prop.howder.street</td><td>Howder Street</td><td class="src">r134032 · 7/14</td></tr>
+  <tr><td class="id">prop.howder.city</td><td>Hillsdale</td><td class="src">r134032 · 7/14</td></tr>
+  <tr><td class="id">prop.howder.state</td><td>Michigan</td><td class="src">r134032 · 7/14</td></tr>
+  <tr><td class="id">howder.condition</td><td>When we purchased this duplex, both units were occupied and in very poor condition.</td><td class="src">r134081 · 7/15</td></tr>
+  <tr><td class="id">howder.empathy</td><td>Navigating that situation required more than construction. It required empathy.</td><td class="src">r134081 · 7/15</td></tr>
+  <tr><td class="id">howder.demo</td><td>Once demolition started, we quickly discovered years of deferred maintenance… rebuilt it the right way.</td><td class="src">r134081 · 7/15</td></tr>
+  <tr><td class="id">howder.college</td><td>Located just 0.4 miles from Hillsdale College… quality and pride of its neighborhood.</td><td class="src">r134081 · 7/15</td></tr>
+  <tr><td class="id">howder.scope</td><td>Nearly every component of the building was replaced or renovated…</td><td class="src">r134081 · 7/15</td></tr>
+  <tr><td class="id">howder.units</td><td>Today, the property offers a beautifully renovated 3-bedroom, 2-bath unit and a 1-bedroom, 1-bath unit…</td><td class="src">r134081 · 7/15</td></tr>
+  <tr><td class="id">howder.closer</td><td>One family. One building. One neighborhood at a time.</td><td class="src">r134081 · 7/15</td></tr>
+</table>
+<p class="note">Cross-check: Unit B = the 1-bed/1-bath, ~500 sqft (his 7/16 email §2; matches the site's howder-b entry). r18 adds <code>howder.deck-copy-0825</code> (his 12:44 PM nine-slide text, the source for every band line) — see FACTS-TO-ADD.md block 16; blocks 13/14 are retired there. <span class="ok">Lint: structural rules pass now; goes fully green once the FACTS-TO-ADD blocks are added (LINT-PROOF.md).</span></p>
+
+<h2 id="ship">Ship checklist (TTY, tomorrow)</h2>
+<pre>cd ~/projects/shavit-pipeline
+# 1. add the 11 fact blocks exactly as written in content/howder-unit-b-story/FACTS-TO-ADD.md
+./shavit.sh fact add          # × 11
+# 2. gates, in order
+./shavit.sh lint   howder-unit-b-story
+./shavit.sh verify howder-unit-b-story    # confirm each span against the sources file
+./shavit.sh review howder-unit-b-story
+./shavit.sh ship   howder-unit-b-story --date 2026-08-25   # only on explicit go · Jake posts, never auto</pre>
+
+<button id="save-order" type="button">SAVE ORDER</button>
+<script>
+(function () {
+  var slides = document.getElementById("slides");
+  var bench = document.getElementById("bench");
+  var grids = [slides, bench];
+  var dragged = null;
+  var dirty = false;
+  var btn = document.getElementById("save-order");
+
+  function key(fig) { return fig.querySelector("img").getAttribute("src"); }
+
+  function renumber() {
+    slides.querySelectorAll(".shot").forEach(function (f, i) {
+      f.classList.remove("alt");
+      f.querySelector(".ord").textContent = String(i + 1);
+    });
+    bench.querySelectorAll(".shot").forEach(function (f) {
+      f.classList.add("alt");
+      f.querySelector(".ord").textContent = "alt";
+    });
+  }
+
+  function markDirty() {
+    dirty = true;
+    btn.disabled = false;
+    btn.textContent = "SAVE ORDER";
+  }
+
+  function clearHints() {
+    document.querySelectorAll(".drop-before,.drop-after").forEach(function (f) {
+      f.classList.remove("drop-before", "drop-after");
+    });
+  }
+
+  grids.forEach(function (grid) {
+    grid.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      var over = e.target.closest(".shot");
+      clearHints();
+      if (over && over !== dragged) {
+        var r = over.getBoundingClientRect();
+        over.classList.add(e.clientX < r.left + r.width / 2 ? "drop-before" : "drop-after");
+      }
+    });
+    grid.addEventListener("drop", function (e) {
+      e.preventDefault();
+      if (!dragged) return;
+      var over = e.target.closest(".shot");
+      if (over && over !== dragged) {
+        var r = over.getBoundingClientRect();
+        grid.insertBefore(dragged, e.clientX < r.left + r.width / 2 ? over : over.nextSibling);
+      } else if (!over) {
+        grid.appendChild(dragged);
+      }
+      clearHints();
+      renumber();
+      markDirty();
+    });
+  });
+
+  var justDragged = false;
+  document.querySelectorAll("#slides .shot, #bench .shot").forEach(function (fig) {
+    fig.setAttribute("draggable", "true");
+    fig.addEventListener("dragstart", function () {
+      dragged = fig;
+      justDragged = true;
+      fig.classList.add("dragging");
+    });
+    fig.addEventListener("dragend", function () {
+      fig.classList.remove("dragging");
+      clearHints();
+      dragged = null;
+      setTimeout(function () { justDragged = false; }, 150);
+    });
+  });
+
+  slides.addEventListener("click", function (e) {
+    var img = e.target.closest("img");
+    if (img && !justDragged) window.open(img.getAttribute("src"), "_blank");
+  });
+
+  function order() {
+    return {
+      main: Array.prototype.map.call(slides.querySelectorAll(".shot"), key),
+      bench: Array.prototype.map.call(bench.querySelectorAll(".shot"), key)
+    };
+  }
+
+  function applyOrder(o) {
+    if (!o || !o.main) return;
+    var all = {};
+    document.querySelectorAll("#slides .shot, #bench .shot").forEach(function (f) { all[key(f)] = f; });
+    o.main.forEach(function (k) { if (all[k]) slides.appendChild(all[k]); });
+    (o.bench || []).forEach(function (k) { if (all[k]) bench.appendChild(all[k]); });
+    renumber();
+  }
+
+  btn.disabled = true;
+  btn.textContent = "DRAG TO REORDER";
+  btn.addEventListener("click", function () {
+    if (!dirty) return;
+    var o = order();
+    var human = o.main.map(function (k, i) {
+      return (i + 1) + ". " + k.split("/").pop();
+    }).join("  ");
+    fetch("/annotate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        at: new Date().toISOString().slice(0, 19),
+        section: "howder-unit-b-post/carousel-order",
+        comment: "Slide order: " + human + "  ORDER_JSON:" + JSON.stringify(o)
+      })
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      dirty = false;
+      btn.disabled = true;
+      btn.textContent = "ORDER SAVED ✓";
+    }).catch(function () {
+      btn.textContent = "SAVE FAILED · RETRY";
+    });
+  });
+
+  fetch("/annotations", { cache: "no-store" }).then(function (r) { return r.json(); })
+    .then(function (rows) {
+      var last = null;
+      rows.forEach(function (row) {
+        if (row.section === "howder-unit-b-post/carousel-order") last = row;
+      });
+      if (last) {
+        var m = /ORDER_JSON:(\{.*\})\s*$/.exec(last.comment || "");
+        if (m) {
+          try { applyOrder(JSON.parse(m[1])); } catch (e) {}
+        }
+      }
+    }).catch(function () {});
+})();
+</script>
+<script src="../spec-annotate.js"></script>
+</body>
+</html>

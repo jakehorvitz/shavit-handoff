@@ -1,0 +1,213 @@
+{
+  "events": [
+    3.297234,
+    5.27093,
+    7.918005,
+    9.891701,
+    13.839093,
+    17.809705,
+    21.757097,
+    27.028027,
+    28.351564,
+    30.998639,
+    34.946031,
+    38.243265,
+    43.514195,
+    50.758821
+  ],
+  "exempt": [
+    28.351564
+  ],
+  "clips": [
+    {
+      "beat": "hook",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/salem_clean_after__chrome_clean.jpg",
+      "in": 0.0,
+      "out": 3.297234,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_0_000_salem_clean_after.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_0_000_salem_clean_after.png"
+    },
+    {
+      "beat": "proof",
+      "state": "MI",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/01_river_street_hillsdale__chrome_clean.jpg",
+      "in": 3.297234,
+      "out": 5.27093,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_3_297_river_street.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_3_297_river_street.png"
+    },
+    {
+      "beat": "proof",
+      "state": "OH",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/05_west_side_cleveland__chrome_clean.jpg",
+      "in": 5.27093,
+      "out": 7.918005,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_5_271_west_side_cleveland.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_5_271_west_side_cleveland.png"
+    },
+    {
+      "beat": "proof",
+      "state": "IN",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/03_2217_parkview_south_bend__chrome_clean.jpg",
+      "in": 7.918005,
+      "out": 9.891701,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_7_918_parkview_south_bend.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_7_918_parkview_south_bend.png"
+    },
+    {
+      "beat": "chapter_open",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/before_009__chrome_clean.jpg",
+      "in": 9.891701,
+      "out": 13.839092999999998,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_9_892_before_009.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_9_892_before_009.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/06_61_salem_street_hillsdale__chrome_clean.jpg",
+      "in": 13.839092999999998,
+      "out": 21.757096999999998,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_13_839_61_salem_street.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_13_839_61_salem_street.png"
+    },
+    {
+      "beat": "chapter_open",
+      "source": "footage",
+      "source_kind": "footage",
+      "source_file": "/Users/jakehorvitz/projects/shavit-longform-film/assets/films/Larchmere Duplex \u2014 Showcase.mp4",
+      "in": 21.757096999999998,
+      "out": 27.028026999999998,
+      "motion": "real-footage"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/07_larchmere_duplex_cleveland__chrome_clean.jpg",
+      "in": 27.028026999999998,
+      "out": 28.351563999999996,
+      "motion": "freeze",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_27_028_larchmere_duplex.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_27_028_larchmere_duplex.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "footage",
+      "source_kind": "footage",
+      "source_file": "/Users/jakehorvitz/projects/shavit-longform-film/assets/films/Larchmere Duplex \u2014 Showcase.mp4",
+      "in": 28.351563999999996,
+      "out": 30.998638999999997,
+      "motion": "real-footage"
+    },
+    {
+      "beat": "chapter_open",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/after_038__chrome_clean.jpg",
+      "in": 30.998638999999997,
+      "out": 34.946031,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_30_999_after_038.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_30_999_after_038.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/after_039__chrome_clean.jpg",
+      "in": 34.946031,
+      "out": 38.243265,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_34_946_after_039.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_34_946_after_039.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/after_044__chrome_clean.jpg",
+      "in": 30.998638999999997,
+      "out": 38.243265,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_30_999_after_044.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_30_999_after_044.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/after_051__chrome_clean.jpg",
+      "in": 30.998638999999997,
+      "out": 38.243265,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_30_999_after_051.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_30_999_after_051.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/after_055__chrome_clean.jpg",
+      "in": 30.998638999999997,
+      "out": 38.243265,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_30_999_after_055.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_30_999_after_055.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/09_budlong_street_hillsdale__chrome_clean.jpg",
+      "in": 30.998638999999997,
+      "out": 38.243265,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_30_999_budlong_street.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_30_999_budlong_street.png"
+    },
+    {
+      "beat": "chapter",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/10_second_chance_ranch_hillsdale__chrome_clean.jpg",
+      "in": 30.998638999999997,
+      "out": 38.243265,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_30_999_second_chance_ranch.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_30_999_second_chance_ranch.png"
+    },
+    {
+      "beat": "reward",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/after_019__chrome_clean.jpg",
+      "in": 38.243265,
+      "out": 50.758821,
+      "motion": "camera-move",
+      "path": "/Users/jakehorvitz/projects/shavit-longform-film/build/motion_clips/clip_38_243_after_019.mp4",
+      "diff_path": "/Users/jakehorvitz/projects/shavit-longform-film/checks/motion_diffs/clip_38_243_after_019.png"
+    },
+    {
+      "beat": "signature",
+      "source": "/Users/jakehorvitz/projects/shavit-longform-film/assets/sanitized/after_018__chrome_clean.jpg",
+      "in": 50.758821,
+      "out": 53.429116,
+      "motion": "kb"
+    }
+  ],
+  "music": {
+    "track": "/Users/jakehorvitz/projects/shavit-longform-film/assets/music/candidates/5-heartland-main-title.mp3",
+    "source_start": 60.070023,
+    "runtime": 53.429116,
+    "tempo": 92.285,
+    "energy": 0.255049,
+    "cut_times": [
+      0.0,
+      3.297234,
+      5.27093,
+      7.918005,
+      9.891701,
+      13.839093,
+      17.809705,
+      21.757098,
+      27.028027,
+      28.351565,
+      30.998639,
+      34.946032,
+      38.243265,
+      43.514195,
+      50.758821,
+      53.429116
+    ],
+    "silence_start": 27.851564,
+    "silence_end": 28.851564
+  }
+}

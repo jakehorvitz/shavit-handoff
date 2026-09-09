@@ -1,0 +1,47 @@
+{
+  "id" : "AA01B3FC-89E5-4AAC-84D1-A93A5F940E27",
+  "isOpen" : false,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "BADA97E8-E4E7-4D47-BED3-539524C5D3E0",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    },
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "FBFB0D3E-8E90-4A50-AB1F-72F3D35514D4",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    },
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "382AB7B5-061B-444F-96E0-0D7BFDA7BF78",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-18T21:32:35Z"
+}

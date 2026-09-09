@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shavit Rootman — One Pager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700&display=swap" />
+  <style>
+    :root {
+      --ink: #111;
+      --paper: #fff;
+      --muted: #5c574d;
+      --rule: #ddd8cc;
+      --gold: #8c6e00;        /* darker gold for print contrast on white */
+      --gold-bright: #FFC000; /* screen accent */
+      --display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+      --body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: #e9e6df;
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 11pt;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Toolbar (screen only) */
+    .toolbar {
+      position: fixed; top: 16px; right: 16px; z-index: 50;
+      display: flex; gap: 8px;
+    }
+    .toolbar button, .toolbar a {
+      font-family: var(--display);
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 18px;
+      background: #111; color: #fff;
+      border: 0; cursor: pointer; text-decoration: none;
+      transition: background 200ms ease;
+    }
+    .toolbar button:hover, .toolbar a:hover { background: var(--gold); }
+
+    /* The sheet */
+    .sheet {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 28px auto;
+      background: var(--paper);
+      padding: 0.6in 0.7in;
+      box-shadow: 0 6px 36px rgba(0,0,0,0.16);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top brass rule */
+    .sheet::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: var(--gold-bright);
+    }
+
+    /* ===== Header ===== */
+    .hd { border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+    .hd__kicker {
+      font-family: var(--display);
+      font-size: 9pt; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .hd__name {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 40pt;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    .hd__tagline {
+      font-family: var(--display);
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15pt;
+      color: var(--gold);
+      margin: 0 0 12px;
+    }
+    .hd__lede {
+      font-size: 11.5pt;
+      line-height: 1.55;
+      color: #2c2c2c;
+      max-width: 6.2in;
+      margin: 0;
+    }
+
+    /* ===== Stats strip ===== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--gold-bright);
+      margin: 22px 0;
+    }
+    .stat { padding: 14px 16px; border-right: 1px solid var(--rule); }
+    .stat:last-child { border-right: 0; }
+    .stat__val {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 24pt;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .stat__lbl {
+      font-family: var(--display);
+      font-size: 7.5pt; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ===== Section header ===== */
+    .sec { margin-top: 22px; break-inside: avoid; page-break-inside: avoid; }
+    .sec__hd {
+      display: flex; align-items: baseline; gap: 12px;
+      margin-bottom: 14px;
+    }
+    .sec__num {
+      font-family: var(--display);
+      font-size: 9pt; font-weight: 700; letter-spacing: 2px;
+      color: var(--gold);
+    }
+    .sec__title {
+      font-family: var(--display);
+      font-weight: 700; font-size: 16pt; letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .sec__title-rule { flex: 1; height: 1px; background: var(--rule); }
+
+    /* ===== BRRRR ===== */
+    .brrrr { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .brrrr__item {
+      border-top: 2px solid var(--gold-bright);
+      padding-top: 10px;
+    }
+    .brrrr__k {
+      font-family: var(--display);
+      font-weight: 800; font-size: 30pt; line-height: 0.9;
+      color: var(--gold-bright);
+      letter-spacing: -0.03em;
+      -webkit-text-stroke: 0.4pt var(--gold);
+    }
+    .brrrr__label {
+      font-family: var(--display);
+      font-weight: 700; font-size: 10pt; letter-spacing: 1px;
+      text-transform: uppercase; margin: 8px 0 6px;
+    }
+    .brrrr__desc { font-size: 8.5pt; line-height: 1.45; color: #3a3a3a; }
+
+    /* ===== Bio ===== */
+    .bio { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .bio p { margin: 0 0 10px; font-size: 10.5pt; line-height: 1.55; }
+    .bio p:last-child { margin-bottom: 0; }
+    .bio strong { font-weight: 700; }
+    .bio__aside {
+      background: #faf7ee;
+      border-left: 3px solid var(--gold-bright);
+      padding: 16px 18px;
+    }
+    .bio__aside-hd {
+      font-family: var(--display);
+      font-size: 8pt; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .bio__list { list-style: none; margin: 0; padding: 0; }
+    .bio__list li {
+      position: relative;
+      padding: 7px 0 7px 18px;
+      border-top: 1px solid var(--rule);
+      font-size: 9.5pt;
+      line-height: 1.4;
+    }
+    .bio__list li:first-child { border-top: 0; }
+    .bio__list li::before {
+      content: "→"; position: absolute; left: 0; top: 7px;
+      color: var(--gold); font-weight: 700;
+    }
+
+    /* ===== Footer / Work With Me ===== */
+    .foot {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+    .foot__tracks {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      margin: 14px 0 18px;
+    }
+    .track {
+      border: 1px solid var(--rule);
+      padding: 12px 14px;
+    }
+    .track__lbl {
+      font-family: var(--display);
+      font-weight: 700; font-size: 10pt; letter-spacing: 0.5px;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .track__desc { font-size: 8pt; color: var(--muted); line-height: 1.4; }
+    .foot__goal {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 8px;
+      background: #111; color: #fff;
+      padding: 16px 20px;
+    }
+    .foot__goal-text {
+      font-family: var(--display);
+      font-weight: 700; font-size: 12pt; letter-spacing: 0.2px;
+    }
+    .foot__goal-text .gold { color: var(--gold-bright); }
+    .foot__contact {
+      font-family: var(--display);
+      font-size: 8.5pt; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .foot__meta {
+      margin-top: 12px;
+      font-family: var(--display);
+      font-size: 7.5pt; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--muted);
+      display: flex; justify-content: space-between;
+    }
+
+    /* ===== Print ===== */
+    @page { size: letter; margin: 0.5in; }
+    @media print {
+      html, body { background: #fff; }
+      .toolbar { display: none !important; }
+      .sheet {
+        width: auto; min-height: auto; margin: 0;
+        padding: 0; box-shadow: none;
+      }
+      .sheet::before { height: 5px; }
+      .sec, .brrrr__item, .track, .stat { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button type="button" onclick="window.print();">Print / Save PDF</button>
+    <a href="Shavit Rootman.html">← Main Site</a>
+  </div>
+
+  <main class="sheet">
+    <!-- (1) Header -->
+    <header class="hd">
+      <div class="hd__kicker">Charger Property Management · Operator Profile</div>
+      <h1 class="hd__name">Shavit Rootman</h1>
+      <p class="hd__tagline">Community Impact, Made Profitable.</p>
+      <p class="hd__lede">I invest in overlooked housing across Midwest communities and transform it into long-term homes for families.</p>
+    </header>
+
+    <!-- (2) Stats strip -->
+    <div class="stats">
+      <div class="stat"><div class="stat__val">50+</div><div class="stat__lbl">Doors Operated</div></div>
+      <div class="stat"><div class="stat__val">10+</div><div class="stat__lbl">Operating Entities</div></div>
+      <div class="stat"><div class="stat__val">$12M+</div><div class="stat__lbl">Portfolio Value</div></div>
+      <div class="stat"><div class="stat__val">3</div><div class="stat__lbl">States · MI / OH / IN</div></div>
+    </div>
+
+    <!-- (3) BRRRR -->
+    <section class="sec">
+      <div class="sec__hd">
+        <span class="sec__num">01</span>
+        <h2 class="sec__title">The BRRRR Playbook</h2>
+        <span class="sec__title-rule"></span>
+      </div>
+      <div class="brrrr">
+        <div class="brrrr__item">
+          <div class="brrrr__k">B</div>
+          <div class="brrrr__label">Buy</div>
+          <div class="brrrr__desc">Acquire distressed, overlooked single-family homes in Hillsdale, Cleveland, and South Bend.</div>
+        </div>
+        <div class="brrrr__item">
+          <div class="brrrr__k">R</div>
+          <div class="brrrr__label">Rehab</div>
+          <div class="brrrr__desc">Full top-to-bottom renovation: kitchens, baths, mechanicals, exterior.</div>
+        </div>
+        <div class="brrrr__item">
+          <div class="brrrr__k">R</div>
+          <div class="brrrr__label">Rent</div>
+          <div class="brrrr__desc">Stabilize a long-term tenant: working families, students, medical professionals.</div>
+        </div>
+        <div class="brrrr__item">
+          <div class="brrrr__k">R</div>
+          <div class="brrrr__label">Refinance</div>
+          <div class="brrrr__desc">Pull capital back out at the new appraised value. Conservative leverage.</div>
+        </div>
+        <div class="brrrr__item">
+          <div class="brrrr__k">R</div>
+          <div class="brrrr__label">Repeat</div>
+          <div class="brrrr__desc">Redeploy into the next property. Compound across the portfolio.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (4) Meet the Operator -->
+    <section class="sec">
+      <div class="sec__hd">
+        <span class="sec__num">02</span>
+        <h2 class="sec__title">Meet the Operator</h2>
+        <span class="sec__title-rule"></span>
+      </div>
+      <div class="bio">
+        <div>
+          <p>Shavit Rootman was the <strong>first Israeli student to attend Hillsdale College</strong>, arriving in 2016. He chose Hillsdale over the Ivy League and financed his education through grants, scholarships, and merit-based aid.</p>
+          <p>Before America, he served in <strong>Duvdevan</strong>, an Israeli Defense Forces special operations unit, running counter-terrorism operations. The same operating discipline now runs the portfolio: trained teams, weekly execution sheets, accountability across every trade.</p>
+          <p>He is the founder of <strong>Charger Property Management</strong>: one operator, three housing classes, and a network of 10+ operating entities across Michigan, Ohio, and Indiana.</p>
+        </div>
+        <div class="bio__aside">
+          <div class="bio__aside-hd">Three Housing Classes</div>
+          <ul class="bio__list">
+            <li><strong>Long-Term Residential</strong> — working families across core Midwest markets</li>
+            <li><strong>Mid-Term Professional</strong> — furnished 30–180 day stays, Cleveland</li>
+            <li><strong>Overlooked Assets</strong> — distressed homes, fully renovated</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- (5) Work With Me footer -->
+    <footer class="foot">
+      <div class="sec__hd">
+        <span class="sec__num">03</span>
+        <h2 class="sec__title">Work With Me</h2>
+        <span class="sec__title-rule"></span>
+      </div>
+      <div class="foot__tracks">
+        <div class="track"><div class="track__lbl">Invest</div><div class="track__desc">Deploy capital into stabilized, cash-flowing housing.</div></div>
+        <div class="track"><div class="track__lbl">Learn</div><div class="track__desc">Learn the playbook for out-of-state investing.</div></div>
+        <div class="track"><div class="track__lbl">Sell</div><div class="track__desc">A better exit. Lower fees, faster sales, higher net.</div></div>
+        <div class="track"><div class="track__lbl">Buy</div><div class="track__desc">A different agent. Honest, local-market representation.</div></div>
+      </div>
+      <div class="foot__goal">
+        <div class="foot__goal-text">The 2030 goal: <span class="gold">200 doors</span> and <span class="gold">25 local jobs</span>.</div>
+        <div class="foot__contact">shavitrootman.com · @shavitness</div>
+      </div>
+      <div class="foot__meta">
+        <span>Shavit Rootman · Charger Property Management</span>
+        <span>Hillsdale, MI · Cleveland, OH · South Bend, IN</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

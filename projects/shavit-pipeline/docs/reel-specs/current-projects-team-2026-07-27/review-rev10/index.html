@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rev10 — Oak grid, new order, new transitions</title>
+<style>
+  :root{
+    --bg:oklch(0.15 0.008 60); --surface:oklch(0.20 0.010 60); --raised:oklch(0.26 0.012 60);
+    --line:oklch(0.33 0.014 60); --ink:oklch(0.97 0.004 60); --muted:oklch(0.76 0.010 60);
+    --brass:oklch(0.78 0.115 78); --ok:oklch(0.80 0.110 150); --warn:oklch(0.76 0.130 55);
+    --ease-q:cubic-bezier(0.22,1,0.36,1);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); padding:28px 32px 80px;
+    font:400 15px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{margin:0 0 6px; font-size:clamp(1.4rem,2.4vw,1.85rem); font-weight:600; letter-spacing:-0.02em}
+  .sub{margin:0 0 8px; color:var(--muted); max-width:80ch}
+  .specs{
+    display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 30px;
+    font:500 12px/1 ui-monospace, monospace;
+  }
+  .specs span{background:var(--raised); border:1px solid var(--line); border-radius:6px; padding:7px 9px}
+  h2{
+    font-size:13px; color:var(--muted); letter-spacing:0.05em; font-weight:600;
+    margin:42px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .row{display:flex; gap:22px; flex-wrap:wrap; align-items:flex-start}
+  figure{
+    margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:11px; overflow:hidden; width:270px; flex:0 0 auto;
+  }
+  figure.hero{width:330px; border-color:oklch(0.78 0.115 78/0.5)}
+  figure video{display:block; width:100%; background:#000}
+  figcaption{padding:11px 13px; font-size:13px; color:var(--muted)}
+  figcaption b{color:var(--ink); display:block; font-size:13.5px; margin-bottom:3px}
+  .badge{
+    display:inline-block; background:var(--ok); color:oklch(0.16 0.01 60);
+    font:600 10px/1 ui-monospace,monospace; letter-spacing:0.06em;
+    padding:4px 6px; border-radius:4px; margin-bottom:7px;
+  }
+  .badge.alt{background:var(--raised); color:var(--muted)}
+  .badge.warn{background:var(--warn); color:oklch(0.17 0.01 60)}
+
+  .controls{display:flex; gap:9px; flex-wrap:wrap; margin:0 0 12px}
+  button{
+    font:inherit; color:var(--ink); background:var(--raised); border:1px solid var(--line);
+    border-radius:8px; padding:9px 14px; cursor:pointer;
+    transition:background .15s var(--ease-q), transform .15s var(--ease-q);
+  }
+  button:hover{background:oklch(0.31 0.014 60)}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--brass); border-color:var(--brass); color:oklch(0.17 0.01 60); font-weight:600}
+  button:focus-visible{outline:2px solid var(--brass); outline-offset:2px}
+
+  .scroll{overflow-x:auto; padding-bottom:4px}
+  table{border-collapse:collapse; font-size:13.5px; min-width:640px}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--muted); font-weight:600; font-size:11.5px; letter-spacing:0.04em; text-transform:uppercase}
+  td.n{font:600 12.5px/1.5 ui-monospace,monospace; white-space:nowrap}
+  td.was{color:oklch(0.60 0.010 60)}
+  tr.moved td:first-child{color:var(--brass); font-weight:600}
+
+  .note{
+    max-width:80ch; margin-top:24px; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; padding:16px 18px;
+  }
+  .note.flag{border-color:oklch(0.76 0.130 55/0.5)}
+  .note b{color:var(--ink)}
+  .note + .note{margin-top:14px}
+  img.sheet{max-width:100%; border:1px solid var(--line); border-radius:10px; display:block}
+  @media (prefers-reduced-motion: reduce){ button{transition:none} }
+</style>
+</head>
+<body>
+  <h1>rev10 — Oak grid, re-argued order, five kinds of transition</h1>
+  <p class="sub">
+    Three changes from rev9: 115 Oak becomes all four Drive photos as a grid that flies in and out,
+    the property run is reordered so the aerials build instead of repeat, and the nine identical
+    white flashes become five different transitions chosen for what each one joins.
+  </p>
+  <div class="specs">
+    <span>1080&times;1920</span><span>30 fps</span><span>1749 frames</span>
+    <span>58.30s</span><span>&minus;14.0 LUFS</span><span>&minus;1.3 dBTP</span>
+    <span>0 credits spent</span>
+  </div>
+
+  <div class="controls">
+    <button class="primary" id="playAll" type="button">Play all</button>
+    <button id="slow" type="button">Half speed</button>
+    <button id="normal" type="button">Normal speed</button>
+  </div>
+
+  <h2>The film</h2>
+  <div class="row">
+    <figure class="hero">
+      <video class="v" src="rev10.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge">rev10 &mdash; NEW</span>
+        <b>58.30s</b>
+        Oak grid at 19s, Ewing moved up to 22s, aerials run Cedar &rarr; Ludlam &rarr; Saint Joe.
+        Unmute it: the music bed track had gone muted again and was unmuted on this build.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <video class="v" src="OAK-grid-3s.mp4" muted loop controls playsinline autoplay></video>
+      <figcaption>
+        <span class="badge">THE NEW BIT</span>
+        <b>115 Oak &mdash; four rooms, 3.00s</b>
+        Tiles converge from their own corners staggered 5 frames, hold with a slow group creep, then
+        push out through the frame. All four photos are 3:4 into 3:4 cells, so nothing is cropped.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <video class="v" src="rev9-previous.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge alt">rev9 &mdash; PREVIOUS</span>
+        <b>59.28s</b>
+        For A/B. One Oak still, Saint Joe &rarr; Ludlam &rarr; Cedar, and every join a white flash.
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2>Order — what moved and why</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>rev10</th><th>Shot</th><th>rev9 position</th><th>Reason</th></tr>
+    <tr><td class="n">0:00</td><td>Title</td><td class="was">same</td><td>&mdash;</td></tr>
+    <tr><td class="n">0:02</td><td>S Norwood &times;3</td><td class="was">same</td><td>Roughest work first.</td></tr>
+    <tr><td class="n">0:08</td><td>Howder &times;3</td><td class="was">same</td><td>Structure, and the first people.</td></tr>
+    <tr><td class="n">0:15</td><td>Barry &times;2</td><td class="was">same</td><td>Studs into a finished room. The hinge.</td></tr>
+    <tr><td class="n">0:19</td><td>Oak &times;4</td><td class="was">1 photo, 2.0s</td>
+        <td>Barry showed one finished room; Oak now answers with four. Real escalation.</td></tr>
+    <tr class="moved"><td class="n">0:22</td><td>E Ewing</td><td class="was">was 2nd to last</td>
+        <td>The only live-action motion in the film. It breaks the interiors from the aerials.
+            Behind them it was undercutting the biggest shot.</td></tr>
+    <tr class="moved"><td class="n">0:24</td><td>Cedar &mdash; descends</td><td class="was">was last aerial</td>
+        <td>Leads the aerial run so its weak wide end can be buried in a dissolve.</td></tr>
+    <tr class="moved"><td class="n">0:29</td><td>Ludlam &mdash; descends</td><td class="was">was 2nd aerial</td>
+        <td>Same direction as Cedar, so the two chain into one continuous descent.</td></tr>
+    <tr class="moved"><td class="n">0:34</td><td>Saint Joe &mdash; climbs</td><td class="was">was 1st aerial</td>
+        <td>Inverts the descent and ends on the widest, highest frame in the film &mdash; which is
+            what should hand into "these are the people".</td></tr>
+    <tr><td class="n">0:40</td><td>Team &rarr; outro</td><td class="was">same</td><td>&mdash;</td></tr>
+  </table>
+  </div>
+
+  <div class="note flag">
+    <b>This reverses the aerial order you set earlier</b> &mdash; "have E st joe before ludlam and then
+    lead to cedar". I built my argument instead of your instruction because you asked for a suggestion,
+    and a cut is easier to judge than a paragraph. One line in the build script puts yours back;
+    say the word and it is a two-minute change.
+  </div>
+
+  <h2>Transitions — five kinds, not one</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Join</th><th>rev9</th><th>rev10</th><th>Why</th></tr>
+    <tr><td>Title &rarr; Norwood</td><td class="was">5f flash</td><td class="n">5f flash</td>
+        <td>The opening punch. Kept.</td></tr>
+    <tr><td>Inside Norwood &times;2</td><td class="was">white dip</td><td class="n">hard cut</td>
+        <td>Same house, continuous dolly. The dip was interrupting it.</td></tr>
+    <tr><td>Norwood &rarr; Howder</td><td class="was">5f flash</td><td class="n">12f white bloom</td>
+        <td>Property change that does not need a slam.</td></tr>
+    <tr><td>Inside Howder &times;2</td><td class="was">white dip</td><td class="n">hard cut</td>
+        <td>Same house, continuous crane.</td></tr>
+    <tr><td>Howder &rarr; Barry</td><td class="was">5f flash</td><td class="n">5f flash</td>
+        <td>Real section break. Kept.</td></tr>
+    <tr class="moved"><td>Barry studs &rarr; finished</td><td class="was">white dip</td><td class="n">14f cross-dissolve</td>
+        <td>The before/after IS the story. Best transition in the film now.</td></tr>
+    <tr><td>Barry &rarr; Oak</td><td class="was">5f flash</td><td class="n">hard cut</td>
+        <td>One finished room straight into four.</td></tr>
+    <tr><td>Oak &rarr; Ewing</td><td class="was">5f flash</td><td class="n">5f flash</td>
+        <td>Michigan to Indiana. Earns a slam.</td></tr>
+    <tr><td>Ewing &rarr; Cedar</td><td class="was">5f flash</td><td class="n">12f white bloom</td>
+        <td>Ground to air.</td></tr>
+    <tr class="moved"><td>Cedar &rarr; Ludlam</td><td class="was">5f flash</td><td class="n">20f cross-dissolve</td>
+        <td>Both descend, so they read as one move over two houses.</td></tr>
+    <tr><td>Ludlam &rarr; Saint Joe</td><td class="was">5f flash</td><td class="n">5f flash</td>
+        <td>Direction reverses here. Marked deliberately.</td></tr>
+    <tr class="moved"><td>Saint Joe &rarr; team</td><td class="was">5f flash</td><td class="n">24f dip to black</td>
+        <td>The only chapter break in the film. It should not sound like the others.</td></tr>
+  </table>
+  </div>
+
+  <h2>The four new transitions, in rendered frames</h2>
+  <img class="sheet" src="transitions.jpg" alt="Frame strips through each of the four new transitions">
+
+  <h2>Read before you sign off</h2>
+
+  <div class="note flag">
+    <b>Cedar and Ludlam look alike.</b> Two white houses, blue sky, green lawn, similar sun. Chaining
+    them through a dissolve is the whole idea, but the cost is that for half a second it could read as
+    one house rather than two. The address tags carry the difference. If that bothers you the fix is a
+    5-frame flash between them, and the chained-descent effect goes away with it.
+  </div>
+
+  <div class="note">
+    <b>Oak's grid needed two fixes you cannot see in the source.</b> Inset on all four sides it left a
+    dead band under the address tag that no other shot in the film has, so it now bleeds to both frame
+    edges &mdash; which also bought 51% more tile area. And the kitchen tile is white cabinets exactly
+    where the tag sits, so there is now a bottom scrim; without it the type was white on white. The
+    fourth photo (the arch to the front door) was a low-contrast copy and was the visible fault in the
+    grid, so contrast is stretched on that tile only.
+  </div>
+
+  <div class="note">
+    <b>Still open, unchanged.</b> Howder's clipped carpenter is the oldest defect in the film &mdash;
+    he is cut by the right frame edge for the entire clip and only a regeneration with him centred
+    fixes it, at 7.5 credits against roughly 20 available. 11 Ludlam still has exactly one usable
+    source photo. And the Saint Joe interiors &mdash; finished kitchen with the blue range, the baths,
+    the staircase &mdash; are the best-photographed assets in the library and remain completely unused.
+  </div>
+
+<script>
+  const vs = [...document.querySelectorAll('video.v')];
+  document.getElementById('playAll').onclick = () => vs.forEach(v => { v.currentTime = 0; v.play(); });
+  document.getElementById('slow').onclick    = () => vs.forEach(v => v.playbackRate = 0.5);
+  document.getElementById('normal').onclick  = () => vs.forEach(v => v.playbackRate = 1);
+</script>
+</body>
+</html>

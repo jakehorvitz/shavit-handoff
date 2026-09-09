@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kendall Street — The Turn (previs mockup)</title>
+<style>
+/* Mockup of Direction A "The Turn" for shavitrootman.com/case-studies/1919-kendall/.
+   Honest to the live site's system: black canvas, white uppercase display, gold #FFC000
+   hairlines, system sans (the live site ships no webfont). Real Kendall photos only.
+   Desktop: sticky pinned chapters, wipe driven by scroll position (JS writes --p per
+   chapter; no CSS time-based animation, no filters, no blend modes, no will-change).
+   Phone (<=767px): no pin; each pair renders as a static compare with a drag handle. */
+:root{--gold:#FFC000;--ink:#fff;--body:#bbb;--muted:#7e7e7e;--canvas:#000;--hair:#3c3c3c;
+  --font:-apple-system,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* chrome */
+.nav{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;z-index:50;
+  background:linear-gradient(to bottom,rgba(0,0,0,.72),rgba(0,0,0,0));}
+.nav__brand{display:flex;flex-direction:column;gap:2px}
+.nav__wordmark{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px}
+.nav__sub{font-size:11px;color:var(--body);letter-spacing:.04em}
+.nav__menu{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--body)}
+.nav__cta{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:10px 16px}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0;z-index:60}
+
+/* chapter = tall section with a sticky stage */
+.chapter{position:relative;height:var(--h,320vh)}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#000}
+.stage__media{position:absolute;inset:0}
+.stage__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage__after{clip-path:inset(0 0 0 calc(100% - var(--p,0)*100%))}
+.stage__edge{position:absolute;top:0;bottom:0;left:calc(100% - var(--p,0)*100%);width:2px;background:var(--gold);transform:translateX(-1px);
+  box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.stage__edge::after{content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;
+  transform:translate(-50%,-50%);background:rgba(0,0,0,.45)}
+.stage__scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,0) 70%)}
+.stage__scrim--left{background:linear-gradient(to right,rgba(0,0,0,.72) 0%,rgba(0,0,0,.15) 55%,rgba(0,0,0,0) 80%)}
+.tag{position:absolute;top:104px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:8px 12px;border:1px solid rgba(255,255,255,.35);color:#fff;background:rgba(0,0,0,.35)}
+.tag--before{left:48px}
+.tag--after{right:48px;border-color:var(--gold);color:var(--gold)}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:36px;height:1px;background:var(--gold)}
+.h-mega{font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:.9;font-size:clamp(64px,9vw,152px);color:#fff}
+.h-lg{font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:.95;font-size:clamp(40px,4.6vw,76px);color:#fff}
+.sub{font-size:20px;color:var(--body);max-width:52ch;line-height:1.5}
+.copy{position:absolute;left:48px;bottom:64px;display:flex;flex-direction:column;gap:18px;max-width:900px}
+.copy--top{bottom:auto;top:160px}
+.rule{width:96px;height:1px;background:var(--gold)}
+.reveal{opacity:var(--o,0);transform:translateY(calc((1 - var(--o,0)) * 24px))}
+.hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--body);opacity:var(--hint,1)}
+.hint::after{content:"";display:block;width:1px;height:28px;background:var(--gold);margin:10px auto 0}
+
+/* numbers */
+.numbers{position:absolute;right:48px;bottom:64px;display:grid;grid-template-columns:auto auto;gap:22px 40px;text-align:right;opacity:var(--o,0)}
+.num{display:flex;flex-direction:column;gap:6px}
+.num__k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.num__v{font-weight:800;font-size:44px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.numbers .wide{grid-column:1 / -1}
+.numbers .wide .num__v{font-size:26px;color:var(--body);font-weight:600}
+.numbers .wide .num__v b{color:#fff;font-weight:800}
+
+/* closing */
+.close{min-height:100vh;padding:120px 48px 96px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:end;background:#000}
+.close__head{display:flex;flex-direction:column;gap:22px}
+.close__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.close__grid img{aspect-ratio:3/2;object-fit:cover;width:100%}
+.close__grid img:first-child{grid-column:1 / -1;aspect-ratio:16/9}
+.btn{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:16px 22px;border:1px solid var(--gold);color:var(--gold);width:max-content}
+.btn--solid{background:var(--gold);color:#000;font-weight:700}
+.next{display:flex;flex-wrap:wrap;gap:8px 28px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--hair);padding-top:22px}
+.next span{color:var(--body)}
+.next span::before{content:"→ ";color:var(--gold)}
+
+/* PORTRAIT REEL (1080x1920 capture): numbers top-right so they never collide with the copy */
+@media (min-width:768px) and (max-aspect-ratio:3/4){
+  .numbers{bottom:auto;top:150px;right:56px;grid-template-columns:1fr;gap:26px}
+  .numbers .wide{grid-column:auto} .num__v{font-size:56px} .numbers .wide .num__v{font-size:28px;max-width:26ch}
+  .tag{top:132px;font-size:16px;padding:12px 16px} .tag--before{left:56px}.tag--after{right:56px}
+  .copy{left:56px;bottom:120px;max-width:960px} .h-mega{font-size:150px} .sub{font-size:28px;max-width:30ch}
+  .copy--top{top:auto;bottom:120px} .h-lg{font-size:96px}
+  .nav{padding:0 56px;height:96px} .nav__wordmark{font-size:18px} .nav__sub{font-size:13px} .nav__cta{font-size:14px;padding:12px 18px}
+  .eyebrow{font-size:16px} .stage__edge::after{width:64px;height:64px}
+  .close{grid-template-columns:1fr;padding:180px 56px 120px;gap:48px;height:100vh;overflow:hidden;align-content:start} .close__grid img:first-child{aspect-ratio:3/2}
+  .next{display:none} .close__grid img:not(:first-child){display:none}
+  .numbers{top:212px} .num__v{text-transform:uppercase} .num__k{display:none}
+  .sub{font-size:34px;color:#f2f2f2;max-width:24ch;line-height:1.35}
+  .eyebrow{font-size:22px}
+  .nav__menu,.nav__cta,.progress,.hint{display:none}
+  .stage__edge{opacity:var(--edge,0)}
+  .endcard{position:relative;height:100vh;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px;text-align:center}
+  .endcard .mark{width:150px;height:150px;border:3px solid var(--gold);display:grid;place-items:center;font-weight:800;font-size:56px;color:var(--gold)}
+  .endcard h2{font-weight:800;text-transform:uppercase;font-size:112px;line-height:1;letter-spacing:-.01em}
+  .endcard p{font-size:40px;color:#fff;letter-spacing:.18em;text-transform:uppercase}
+  .endcard small{font-size:28px;color:#9a9a9a}
+}
+/* PHONE: no pin, static compares with a handle at 50%; nothing here animates. */
+@media (max-width:767px){
+  .nav{padding:0 16px;height:56px}
+  .nav__menu,.nav__sub{display:none}
+  .nav__cta{padding:8px 10px;font-size:11px}
+  .chapter{height:auto}
+  .stage{position:relative;height:auto;background:#000;padding-top:56px}
+  .stage__media{position:relative;inset:auto;aspect-ratio:3/2;overflow:hidden}
+  .stage__after{clip-path:inset(0 0 0 50%)}
+  .stage__edge{left:50%}
+  .stage__scrim{display:none}
+  .tag{top:72px;font-size:10px;padding:6px 8px}
+  .tag--before{left:16px}.tag--after{right:16px}
+  .copy,.copy--top{position:static;padding:20px 20px 8px;max-width:none;gap:12px}
+  .h-mega{font-size:44px}.h-lg{font-size:30px}.sub{font-size:15px}
+  .reveal{opacity:1;transform:none}
+  .hint{display:none}
+  .numbers{position:static;opacity:1;text-align:left;padding:8px 20px 28px;grid-template-columns:1fr 1fr;gap:16px}
+  .num__v{font-size:28px}
+  .close{grid-template-columns:1fr;padding:32px 20px 64px;gap:28px;min-height:0}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="nav">
+  <div class="nav__brand"><div class="nav__wordmark">Shavit Rootman</div><div class="nav__sub">Managed by Charger Property Management</div></div>
+  <div class="nav__menu">Menu</div>
+  <a class="nav__cta" href="#">Contact Us</a>
+</header>
+
+<!-- CHAPTER 1 · exterior · the turn -->
+<section class="chapter" id="c1" style="--h:360vh">
+  <div class="stage">
+    <div class="stage__media">
+<img class="stage__img stage__before" src="img/ba-before.jpg" alt="Kendall Street before renovation: grey siding, overgrown shrubs, weathered railing.">
+    <img class="stage__img stage__after" src="img/ba-after.jpg" alt="Kendall Street after renovation: white siding, black trim, black railing, new plantings.">
+    <div class="stage__edge" aria-hidden="true"></div>
+    </div>
+    <div class="stage__scrim"></div>
+    <div class="tag tag--before">Before</div>
+    <div class="tag tag--after">After</div>
+    <div class="copy">
+      <div class="eyebrow">Deal Case Study · Indiana</div>
+      <h1 class="h-mega">Kendall<br>Street</h1>
+      <div class="rule"></div>
+      <p class="sub reveal" data-reveal="cap">South Bend, Indiana. Bought as-is, rebuilt top to bottom, rented. This is what "renovated" means when we say it.</p>
+    </div>
+    <div class="numbers" data-numbers>
+      <div class="num"><div class="num__k">Purchase</div><div class="num__v" data-count="68400" data-prefix="$">$0</div></div>
+      <div class="num"><div class="num__k">Appraised after</div><div class="num__v" data-count="215000" data-prefix="$">$0</div></div>
+      <div class="num wide"><div class="num__v"><b data-count="674" data-scale="10" data-suffix="%">0%</b> equity created · <b>100%+</b> capital returned at refinance</div></div>
+    </div>
+    <div class="hint">Scroll</div>
+  </div>
+</section>
+
+<!-- CHAPTER 2 · kitchen -->
+<section class="chapter" id="c2" style="--h:260vh">
+  <div class="stage">
+    <div class="stage__media">
+<img class="stage__img stage__before" src="img/ba2-before.jpg" alt="Kitchen before: drop ceiling, carpet, dark cabinets.">
+    <img class="stage__img stage__after" src="img/ba2-after.jpg" alt="Kitchen after: white shaker cabinets, butcher block, subway tile, LVP floor.">
+    <div class="stage__edge" aria-hidden="true"></div>
+    </div>
+    <div class="stage__scrim stage__scrim--left"></div>
+    <div class="tag tag--before">Before</div>
+    <div class="tag tag--after">After</div>
+    <div class="copy copy--top">
+      <div class="eyebrow">Chapter 2</div>
+      <h2 class="h-lg">The kitchen</h2>
+      <div class="rule"></div>
+      <p class="sub reveal" data-reveal="cap">Drop ceiling and carpet out. White shaker, butcher block, subway tile and LVP in. Same finish you will find in every home we manage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 3 · living room (during → after, honestly labelled) -->
+<section class="chapter" id="c3" style="--h:260vh">
+  <div class="stage">
+    <div class="stage__media">
+<img class="stage__img stage__before" src="img/ba4-before.jpg" alt="Living room mid-renovation: fireplace and two windows, masking and materials on the floor.">
+    <img class="stage__img stage__after" src="img/ba4-after.jpg" alt="Living room after: same fireplace and windows, finished floors and paint.">
+    <div class="stage__edge" aria-hidden="true"></div>
+    </div>
+    <div class="stage__scrim stage__scrim--left"></div>
+    <div class="tag tag--before">During</div>
+    <div class="tag tag--after">After</div>
+    <div class="copy copy--top">
+      <div class="eyebrow">Chapter 3</div>
+      <h2 class="h-lg">The living room</h2>
+      <div class="rule"></div>
+      <p class="sub reveal" data-reveal="cap">Same fireplace, same two windows. The only "before" of this room was shot mid-job, so that is what we call it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE · hand-off into the existing case study sections (reel: single image; end card follows) -->
+<section class="close" id="close">
+  <div class="close__head">
+    <div class="eyebrow">Finished</div>
+    <h2 class="h-lg">One house,<br>rebuilt.</h2>
+    <p class="sub">The numbers, the process and the timeline are below, exactly as published. If you want to see a home like this in person, text us.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn--solid" href="#">Text 805-364-4415</a>
+      <a class="btn" href="#">See available homes</a>
+    </div>
+    <div class="next"><span>Investment Snapshot</span><span>BRRRR Performance</span><span>Project Story</span><span>Lessons Learned</span><span>Community Impact</span><span>Timeline</span></div>
+  </div>
+  <div class="close__grid">
+    <img src="img/after-02.jpg" alt="Kendall Street after, exterior detail">
+    <img src="img/after-04.jpg" alt="Kendall Street after, interior">
+    <img src="img/after-06.jpg" alt="Kendall Street after, interior">
+  </div>
+</section>
+<section class="endcard" id="endcard"><div class="mark">SR</div><h2>Shavit<br>Rootman</h2><div class="rule"></div><p>shavitrootman.com</p><small>Managed by Charger Property Management</small></section>
+
+<script>
+// Scroll → per-chapter progress. Deterministic (pure function of scrollY) so a headless
+// capture can step it frame by frame. Phones (<=767px) skip all of it: static compares.
+(function(){
+  var phone = window.matchMedia('(max-width: 767px)').matches;
+  var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+  var prog = document.getElementById('progress');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function clamp(x){ return x<0?0:x>1?1:x; }
+  function ease(t){ return t<.5 ? 2*t*t : -1+(4-2*t)*t; }
+  function fmt(n){ return n.toLocaleString('en-US'); }
+  function update(){
+    var y = window.scrollY, vh = window.innerHeight;
+    var doc = document.documentElement.scrollHeight - vh;
+    if (prog) prog.style.width = (doc>0 ? (y/doc)*100 : 0) + '%';
+    if (phone) {
+      document.querySelectorAll('[data-count]').forEach(function(el){
+        var target = +el.getAttribute('data-count'), scale = +(el.getAttribute('data-scale')||1);
+        var s = scale>1 ? (target/scale).toFixed(1) : fmt(target);
+        el.textContent = (el.getAttribute('data-prefix')||'') + s + (el.getAttribute('data-suffix')||'');
+      });
+      return;
+    }
+    chapters.forEach(function(ch){
+      var top = ch.offsetTop, h = ch.offsetHeight - vh;
+      var t = clamp((y - top) / h);           // 0..1 through this chapter
+      var wipe = reduce ? 1 : ease(clamp((t - .30) / .12));   // v1.3: FAST swipe, 30% -> 42% of the pin (holds either side)
+      var stage = ch.querySelector('.stage');
+      stage.style.setProperty('--p', wipe.toFixed(4)); stage.style.setProperty('--edge', (wipe>0.002&&wipe<0.998)?1:0);
+      var cap = clamp((t - .44) / .14);       // caption right after the swipe
+      ch.querySelectorAll('[data-reveal="cap"]').forEach(function(el){ el.style.setProperty('--o', cap.toFixed(3)); });
+      var hint = ch.querySelector('.hint'); if (hint) hint.style.setProperty('--hint', (1 - clamp(t/.06)).toFixed(3));
+      var nums = ch.querySelector('[data-numbers]');
+      if (nums){
+        var k = clamp((t - .70) / .20);       // REBUILT · RENTED lands ~2s after the swipe (second event in the hold)
+        nums.style.setProperty('--o', clamp(k*2).toFixed(3));
+        nums.querySelectorAll('[data-count]').forEach(function(el){
+          var target = +el.getAttribute('data-count'), scale = +(el.getAttribute('data-scale')||1);
+          var v = ease(k) * target;
+          var s = scale>1 ? (v/scale).toFixed(1) : fmt(Math.round(v));
+          el.textContent = (el.getAttribute('data-prefix')||'') + s + (el.getAttribute('data-suffix')||'');
+        });
+      }
+    });
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+  window.__turnUpdate = update;
+  if (/[?&]nonum/.test(location.search)) {
+    var nums = document.querySelector('[data-numbers]');
+    if (nums) nums.innerHTML = '<div class="num"><div class="num__v">Rebuilt</div></div><div class="num"><div class="num__v">Rented</div></div>';
+  }
+})();
+</script>
+</body>
+</html>

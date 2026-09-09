@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder, one more beat · options</title>
+<style>
+  :root{--bg:#0b0b0c;--panel:#141416;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a5a29a;--brass:#B08D57;--gold:#FFC000}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1100px;margin:0 auto;padding:36px 20px 100px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:26px;margin:.3em 0 .1em}
+  .sub{color:var(--dim);font-size:14px;max-width:70ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:26px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .card.reco{border-color:var(--gold)}
+  .frame{aspect-ratio:9/16;overflow:hidden;position:relative}
+  .frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .tag{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.72);border:1px solid var(--line);border-radius:6px;
+       font-size:11px;padding:3px 8px;color:var(--gold);font-weight:600;letter-spacing:.06em}
+  .body{padding:12px 14px}
+  .body h3{margin:0 0 4px;font-size:15px}
+  .body h3 .r{color:var(--gold);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-left:6px}
+  .body p{margin:4px 0;font-size:12.5px;color:var(--dim)}
+  .body b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin:40px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  td b{color:var(--gold)}
+</style>
+</head>
+<body data-spec="43-howder-newbeat">
+<div class="wrap">
+<header>
+  <div class="kicker">Shavit Rootman · 43 Howder reel · one more beat</div>
+  <h1>Add one picture, the four candidates</h1>
+  <p class="sub">Each frame below is the real photograph pre-cropped to 9:16 exactly as it would sit in the reel.
+  The reel currently jumps kitchen &rarr; bathroom and never shows the living space. My pick is A: the staircase is
+  the strongest unshown feature of the house. Annotate any card or just tell me the letter.</p>
+</header>
+
+<div class="grid">
+  <div class="card reco" data-annot="nb-a">
+    <div class="frame"><span class="tag">A, MY PICK</span><img src="unit1/raw/u1-06.jpg" style="object-position:72% 50%"></div>
+    <div class="body">
+      <h3>Living room + staircase<span class="r">u1-06</span></h3>
+      <p><b>Why:</b> the staircase is the one architectural feature the reel never shows, and it instantly reads "two floors, real house, real space."</p>
+      <p><b>Treatment:</b> same recipe as kitchen and bath, slow move generated from this photo, reversed so it settles on the real pixels, warm grade. Slots between the kitchen pan and the bathroom (kitchen &rarr; living &rarr; bath walks like a person).</p>
+    </div>
+  </div>
+  <div class="card" data-annot="nb-b">
+    <div class="frame"><span class="tag">B</span><img src="unit1/raw/u1-02.jpg" style="object-position:60% 50%"></div>
+    <div class="body">
+      <h3>Bright front living room<span class="r">u1-02</span></h3>
+      <p><b>Why:</b> the sunniest interior photo, big windows, light floors, feels move-in ready.</p>
+      <p><b>Treatment:</b> zero-credit subtle push-in on the real photo (no generation at all, guaranteed real), or the full reversed-move recipe.</p>
+    </div>
+  </div>
+  <div class="card" data-annot="nb-c">
+    <div class="frame"><span class="tag">C</span><img src="unit1/raw/u1-14.jpg" style="object-position:45% 50%"></div>
+    <div class="body">
+      <h3>Backyard + side of house<span class="r">u1-14</span></h3>
+      <p><b>Why:</b> a second exterior angle plus the yard, land is part of the value and nothing in the reel shows it.</p>
+      <p><b>Treatment:</b> quick real-photo still right before the closing shot (exterior &rarr; exterior reads as one language), half a second, no credits.</p>
+    </div>
+  </div>
+  <div class="card" data-annot="nb-d">
+    <div class="frame"><span class="tag">D</span><img src="unit1/raw/u1-12.jpg" style="object-position:30% 50%"></div>
+    <div class="body">
+      <h3>Laundry + hallway<span class="r">u1-12</span></h3>
+      <p><b>Why:</b> in-unit laundry is a renter magnet for a duplex, practical selling point over beauty.</p>
+      <p><b>Treatment:</b> fast still, same rhythm as the befores, zero credits. Weakest visually, strongest practically.</p>
+    </div>
+  </div>
+</div>
+
+<h2>Cost + where it lands</h2>
+<table>
+  <tr><th>option</th><th>slot</th><th>added length</th><th>credits</th></tr>
+  <tr><td><b>A</b> staircase, reversed move</td><td>between kitchen and bathroom</td><td>~4.8s (reel &rarr; ~22s)</td><td><b>10</b> (preflighted first)</td></tr>
+  <tr><td><b>B</b> living room push-in</td><td>between kitchen and bathroom</td><td>~3.5s</td><td><b>0</b> (or 10 for the full move)</td></tr>
+  <tr><td><b>C</b> backyard still</td><td>right before the close</td><td>~0.6s</td><td><b>0</b></td></tr>
+  <tr><td><b>D</b> laundry still</td><td>after the bathroom</td><td>~0.6s</td><td><b>0</b></td></tr>
+</table>
+<p class="sub" style="margin-top:14px">Combos work too, A for the wow plus C as a half-second breath before the close is my favorite pairing. Current budget: 128.5 credits.</p>
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+[
+ {
+  "group": "before",
+  "file": "before/basement-before.jpeg",
+  "caption": "Basement before",
+  "orig": "Basement and laundry.jpeg",
+  "sha1": "69a8dfe2ab",
+  "bytes": 67081
+ },
+ {
+  "group": "before",
+  "file": "before/unit1-kitchen-before.jpeg",
+  "caption": "Unit 1 Kitchen",
+  "orig": "Downstairs Kitchen.jpeg",
+  "sha1": "40f505b5a6",
+  "bytes": 121575
+ },
+ {
+  "group": "before",
+  "file": "before/unit1-bedroom-before.jpeg",
+  "caption": "Unit 1 bedroom (caption) / file says 'living room' \u2014 LOOK at it",
+  "orig": "Downstairs Unit living room.jpeg",
+  "sha1": "e21ff7935e",
+  "bytes": 102821
+ },
+ {
+  "group": "before",
+  "file": "before/unit1-common-before.jpeg",
+  "caption": "Unit 1 common area",
+  "orig": "Living room downstairs.jpeg",
+  "sha1": "4c2f689c42",
+  "bytes": 108436
+ },
+ {
+  "group": "before",
+  "file": "before/unit2-common-or-bedroom-before-a.jpeg",
+  "caption": "Unit 2 common area / Unit 2 bedroom (two files, one caption pair)",
+  "orig": "Downstairs Unit 2.jpeg",
+  "sha1": "a19b3ecb9f",
+  "bytes": 110859
+ },
+ {
+  "group": "before",
+  "file": "before/unit2-common-or-bedroom-before-b.jpeg",
+  "caption": "Unit 2 common area / Unit 2 bedroom (two files, one caption pair)",
+  "orig": "Downstairs Unit.jpeg",
+  "sha1": "37f6a61573",
+  "bytes": 115870
+ },
+ {
+  "group": "before",
+  "file": "before/unit3-before-a.jpeg",
+  "caption": "Unit 3",
+  "orig": "Upstairs Unit 2.jpeg",
+  "sha1": "8002c3dd13",
+  "bytes": 85038
+ },
+ {
+  "group": "before",
+  "file": "before/unit3-before-b.jpeg",
+  "caption": "Unit 3",
+  "orig": "Upstairs Unit.jpeg",
+  "sha1": "bef3a564da",
+  "bytes": 74788
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3047.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "6D60AE25-167F-4975-B21E-6487659AC17EIMG_3047.jpeg",
+  "sha1": "1cd89368d2",
+  "bytes": 3548720
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3036.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "055FB86B-6D5A-4E93-9F60-B554FE4806ABIMG_3036.jpeg",
+  "sha1": "a03c8de544",
+  "bytes": 159474
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3041.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "4BF7B292-B1A3-459E-986C-E9D7DEE0DA3CIMG_3041.jpeg",
+  "sha1": "7aeaf3794e",
+  "bytes": 4882749
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3052.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "3EBF487F-0DBB-425D-9E69-A849F10C8F8CIMG_3052.jpeg",
+  "sha1": "b1b75e132c",
+  "bytes": 3484645
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3037.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "5C0FC4D8-6100-4232-AFEB-A2C4A02C68FDIMG_3037.jpeg",
+  "sha1": "678c1b738e",
+  "bytes": 3678581
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3038.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "F7DC1743-B169-4E4E-A273-628F2FC0AC0DIMG_3038.jpeg",
+  "sha1": "9d83d59a57",
+  "bytes": 3414437
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3049.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "18ACC0D3-161F-4295-890D-21A3179A38EEIMG_3049.jpeg",
+  "sha1": "3bd2be94f1",
+  "bytes": 4138271
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3053.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "7F9FB97D-7958-48E5-82C6-11099CD59B32IMG_3053.jpeg",
+  "sha1": "6153135823",
+  "bytes": 195748
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3040.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "B2D3D254-2302-4E20-8193-9BBE0940C40BIMG_3040.jpeg",
+  "sha1": "7eccc41cd7",
+  "bytes": 3822790
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/dsc09364.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "5CF8D12E-ADE8-415F-91FC-4F6E314C7D4CDSC09364.jpeg",
+  "sha1": "0c517f65c9",
+  "bytes": 3554798
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/dsc09352.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "C69527A5-9FFB-433F-80E2-B475400DFBC4DSC09352.jpeg",
+  "sha1": "9574c7952f",
+  "bytes": 4377569
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3045.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "35DEE5C7-AAD8-4811-B264-D3735FF66E72IMG_3045.jpeg",
+  "sha1": "8bede19244",
+  "bytes": 4347550
+ },
+ {
+  "group": "after-unit1",
+  "file": "after-unit1/img_3048.jpeg",
+  "caption": "Unit 1 AFTER",
+  "orig": "1453BCB5-5993-4515-B908-B32721E45B71IMG_3048.jpeg",
+  "sha1": "4a35a4fc15",
+  "bytes": 3612961
+ },
+ {
+  "group": "after-unit2",
+  "file": "after-unit2/dsc09409.jpeg",
+  "caption": "Unit 2 AFTER",
+  "orig": "4904D462-B2C0-4E94-B102-2D6F0362D499DSC09409.jpeg",
+  "sha1": "c4275ef136",
+  "bytes": 3697986
+ },
+ {
+  "group": "after-unit2",
+  "file": "after-unit2/dsc09412.jpeg",
+  "caption": "Unit 2 AFTER",
+  "orig": "C12F9A82-AC44-4866-A125-D9C64A66D7FDDSC09412.jpeg",
+  "sha1": "7394996463",
+  "bytes": 4046304
+ },
+ {
+  "group": "after-unit2",
+  "file": "after-unit2/dsc09394.jpeg",
+  "caption": "Unit 2 AFTER",
+  "orig": "25A09651-C550-4180-B8C3-AD692B9BF6A7DSC09394.jpeg",
+  "sha1": "19da78d2c7",
+  "bytes": 4427434
+ },
+ {
+  "group": "after-unit2",
+  "file": "after-unit2/dsc09403.jpeg",
+  "caption": "Unit 2 AFTER",
+  "orig": "ECAFFDD4-A339-4B61-9552-9C93B96C3C91DSC09403.jpeg",
+  "sha1": "1e8debd760",
+  "bytes": 4107467
+ },
+ {
+  "group": "after-unit2",
+  "file": "after-unit2/dsc09355.jpeg",
+  "caption": "Unit 2 AFTER",
+  "orig": "DAC83E5A-6D11-4675-86B7-856D2EDADC6FDSC09355.jpeg",
+  "sha1": "8c58b0989d",
+  "bytes": 3723888
+ },
+ {
+  "group": "after-unit2",
+  "file": "after-unit2/dsc09391.jpeg",
+  "caption": "Unit 2 AFTER",
+  "orig": "421CCCA6-2EBD-4B91-9E6A-E17C80DE288BDSC09391.jpeg",
+  "sha1": "b95ff71a91",
+  "bytes": 4973194
+ },
+ {
+  "group": "after-unit3",
+  "file": null,
+  "caption": "Unit 3 AFTER",
+  "orig": "C135B5A3-B1C8-40B8-B4DC-906B1D4B492FDSC09412.jpeg",
+  "sha1": "7394996463",
+  "DUPLICATE_OF": "after-unit2/dsc09412.jpeg"
+ },
+ {
+  "group": "after-unit3",
+  "file": "after-unit3/dsc06958.jpeg",
+  "caption": "Unit 3 AFTER",
+  "orig": "06CE13B9-866F-4C72-A98F-B5BD102F1985DSC06958.jpeg",
+  "sha1": "b68e2042b5",
+  "bytes": 3967321
+ },
+ {
+  "group": "after-unit3",
+  "file": "after-unit3/dsc06946.jpeg",
+  "caption": "Unit 3 AFTER",
+  "orig": "3314AB1C-43B1-4E07-BBE4-CF4074056599DSC06946.jpeg",
+  "sha1": "58c09eaf45",
+  "bytes": 2919510
+ },
+ {
+  "group": "after-unit3",
+  "file": "after-unit3/ea720a197c48.png",
+  "caption": "Unit 3 AFTER",
+  "orig": "67E9A24F-19BE-4BB5-8745-8CC0D472775E473e5a6a-2554-482b-89c1-ea720a197c48.png",
+  "sha1": "749fd63e3c",
+  "bytes": 1911811
+ },
+ {
+  "group": "after-unit3",
+  "file": "after-unit3/dsc06937.jpeg",
+  "caption": "Unit 3 AFTER",
+  "orig": "BBA9908F-AC57-4D3C-8520-B76E3539F3DBDSC06937.jpeg",
+  "sha1": "d7ca48d7fd",
+  "bytes": 3064284
+ },
+ {
+  "group": "after-unit3",
+  "file": "after-unit3/dsc06949.jpeg",
+  "caption": "Unit 3 AFTER",
+  "orig": "16D17904-5DD0-412B-AA9C-5D54D5C3EDACDSC06949.jpeg",
+  "sha1": "236526a74d",
+  "bytes": 3198279
+ },
+ {
+  "group": "after-unit3",
+  "file": null,
+  "caption": "Unit 3 AFTER",
+  "orig": "698C1A59-2B14-47AE-812B-93A4D0648ECFDSC09391.jpeg",
+  "sha1": "b95ff71a91",
+  "DUPLICATE_OF": "after-unit2/dsc09391.jpeg"
+ },
+ {
+  "group": "after-unit3",
+  "file": null,
+  "caption": "Unit 3 AFTER",
+  "orig": "544395A0-3FD4-4EC9-95D9-5E4270825087DSC09409.jpeg",
+  "sha1": "c4275ef136",
+  "DUPLICATE_OF": "after-unit2/dsc09409.jpeg"
+ },
+ {
+  "group": "after-unit3",
+  "file": null,
+  "caption": "Unit 3 AFTER",
+  "orig": "EEA035F6-A1FA-4424-BB03-E1F4C69739D3DSC09403.jpeg",
+  "sha1": "1e8debd760",
+  "DUPLICATE_OF": "after-unit2/dsc09403.jpeg"
+ },
+ {
+  "group": "after-unit3",
+  "file": null,
+  "caption": "Unit 3 AFTER",
+  "orig": "50F241CD-F74D-427B-A73C-88737DDB8D4CDSC09403.jpeg",
+  "sha1": "1e8debd760",
+  "DUPLICATE_OF": "after-unit2/dsc09403.jpeg"
+ },
+ {
+  "group": "after-unit3",
+  "file": "after-unit3/dsc06916.jpeg",
+  "caption": "Unit 3 AFTER",
+  "orig": "2221CB3B-3DB0-4C43-8518-C6766C684A66DSC06916.jpeg",
+  "sha1": "2b54ac3844",
+  "bytes": 3419235
+ },
+ {
+  "group": "after-unit3",
+  "file": "after-unit3/dsc06943.jpeg",
+  "caption": "Unit 3 AFTER",
+  "orig": "81D3ACA6-2568-49BA-9ABC-DF5994AAA06DDSC06943.jpeg",
+  "sha1": "758b5a5727",
+  "bytes": 3011750
+ },
+ {
+  "group": "after-unit3",
+  "file": null,
+  "caption": "Unit 3 AFTER",
+  "orig": "1BC65B48-6E54-4E05-B33F-B61726428CBDDSC09355.jpeg",
+  "sha1": "8c58b0989d",
+  "DUPLICATE_OF": "after-unit2/dsc09355.jpeg"
+ },
+ {
+  "group": "after-unit3",
+  "file": null,
+  "caption": "Unit 3 AFTER",
+  "orig": "D8830646-2907-42EC-A89D-0A98E500E3C4DSC09394.jpeg",
+  "sha1": "19da78d2c7",
+  "DUPLICATE_OF": "after-unit2/dsc09394.jpeg"
+ },
+ {
+  "group": "after-exterior",
+  "file": "after-exterior/exterior-after.jpeg",
+  "caption": "Outside (landscape mostly) \u2014 HERO candidate",
+  "orig": "IMG_7691.jpeg",
+  "sha1": "68adf7428b",
+  "bytes": 266558
+ },
+ {
+  "group": "after-basement",
+  "file": "after-basement/basement-after-a.png",
+  "caption": "Basement AFTER (screenshot)",
+  "orig": "CleanShot 2026-08-20 at 22.31.00@2x.png",
+  "sha1": "368dc327df",
+  "bytes": 2023421
+ },
+ {
+  "group": "after-basement",
+  "file": "after-basement/basement-after-b.png",
+  "caption": "Basement AFTER (screenshot)",
+  "orig": "CleanShot 2026-08-20 at 22.31.04@2x.png",
+  "sha1": "a56966672f",
+  "bytes": 2066562
+ }
+]

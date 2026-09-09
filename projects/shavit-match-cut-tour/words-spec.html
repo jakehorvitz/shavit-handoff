@@ -1,0 +1,165 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Manrope:wght@400;600;700;800&display=swap');
+  :root{--bg:#0a0a0a;--panel:#141414;--ink:#f4f1ea;--dim:#9a948a;--gold:#FFC000;--brass:#B08D57;--line:#2a2722;
+    --disp:'Bricolage Grotesque','Manrope',-apple-system,sans-serif;--ivory:rgba(245,239,225,.92)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.5;font-size:15px;padding:40px 22px 90px;max-width:1160px;margin:0 auto}
+  .num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  h1{font-size:27px;letter-spacing:.06em;text-transform:uppercase;margin:6px 0;font-weight:800}
+  .sub{color:var(--dim);font-size:13px;max-width:760px}
+  .rule{height:2px;width:60px;background:var(--gold);margin:14px 0 26px}
+  h2{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:48px 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .h2sub{color:var(--dim);font-size:12.5px;margin-bottom:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .opt{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;position:relative}
+  .opt.rec{border-color:var(--gold)}
+  .tag{position:absolute;top:-9px;right:12px;background:var(--gold);color:#000;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:3px 9px;border-radius:4px}
+  .lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);font-weight:700;margin-bottom:3px}
+  .why{font-size:12px;color:var(--dim);margin:8px 0 0;line-height:1.5}
+  /* phone mock */
+  .ph{position:relative;width:100%;aspect-ratio:9/16;border-radius:12px;overflow:hidden;border:1px solid #262626;background:#000}
+  .ph img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .scrim{position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,transparent, rgba(0,0,0,.62) 70%)}
+  /* ---- Style 1: Website lower-third (scrim, no box) ---- */
+  .s1 .q{position:absolute;left:7%;right:7%;bottom:16%;text-align:left}
+  .s1 .pull{font-family:var(--disp);font-weight:700;text-transform:uppercase;color:#fff;font-size:clamp(15px,4.4cqw,22px);line-height:1.12;letter-spacing:-.02em}
+  .s1 .bar{width:34px;height:2px;background:var(--gold);margin:10px 0 8px}
+  .s1 .attr{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,225,.75)}
+  /* ---- Style 2: Editorial serif quote ---- */
+  .s2 .q{position:absolute;left:8%;right:8%;bottom:15%;text-align:center}
+  .s2 .mark{font-family:Georgia,serif;color:var(--gold);font-size:44px;line-height:.4;display:block;margin-bottom:8px}
+  .s2 .pull{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:var(--ivory);font-size:clamp(14px,4cqw,20px);line-height:1.35;font-weight:400;text-transform:none}
+  .s2 .attr{margin-top:10px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,239,225,.7)}
+  /* ---- Style 3: Brass-edge card (current, refined) ---- */
+  .s3 .q{position:absolute;left:9%;right:9%;bottom:17%}
+  .s3 .card{background:rgba(0,0,0,.66);backdrop-filter:blur(3px);border-left:3px solid var(--gold);padding:13px 16px;border-radius:0 8px 8px 0;text-align:left}
+  .s3 .pull{font-family:var(--disp);font-weight:700;text-transform:uppercase;color:#fff;font-size:clamp(13px,3.8cqw,19px);line-height:1.2;letter-spacing:.02em}
+  .s3 .attr{margin-top:7px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,239,225,.65)}
+  /* ---- Style 4: Bare kinetic display ---- */
+  .s4 .q{position:absolute;left:6%;right:6%;top:12%;text-align:center}
+  .s4 .pull{font-family:var(--disp);font-weight:800;text-transform:uppercase;color:#fff;font-size:clamp(19px,6cqw,30px);line-height:1.02;letter-spacing:-.02em;text-shadow:0 2px 22px rgba(0,0,0,.85)}
+  .s4 .attr{margin-top:9px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-shadow:0 1px 8px #000}
+  /* ---- outro mocks ---- */
+  .o1 .stack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
+  .o1 .eyebrow{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .o1 .wm{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(21px,7cqw,34px);letter-spacing:-.02em;line-height:1;color:#fff}
+  .o1 .wm b{color:var(--gold);font-weight:700}
+  .o1 .subline{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,239,225,.55)}
+  .o1 .cta{margin-top:10px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#000;background:var(--gold);padding:7px 16px;border-radius:3px;font-weight:800}
+  .o2 .stack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center}
+  .o2 .closer{font-family:var(--disp);font-weight:800;text-transform:uppercase;color:#fff;font-size:clamp(15px,4.6cqw,23px);line-height:1.15;letter-spacing:-.01em}
+  .o2 .barh{width:40px;height:2px;background:var(--gold);margin:4px 0}
+  .o2 .wm{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(15px,4.6cqw,22px);letter-spacing:.02em;color:#fff}
+  .o2 .wm b{color:var(--gold)}
+  .o2 .subline{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,239,225,.55)}
+  /* transition demos */
+  .t .ph{cursor:default}
+  .tA .bg2{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:tA 6s ease-in-out infinite}
+  @keyframes tA{0%,40%{opacity:0}55%,95%{opacity:1}100%{opacity:0}}
+  .tB .bg{animation:tB 6s ease-in infinite}
+  @keyframes tB{0%,45%{transform:scale(1) translateY(0)}100%{transform:scale(.42) translateY(-36%);filter:brightness(.85)}}
+  .tC .white{position:absolute;inset:0;background:#fff;opacity:0;animation:tC 6s ease-in-out infinite}
+  .tC .bg2{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:tC2 6s ease-in-out infinite}
+  @keyframes tC{0%,46%{opacity:0}50%{opacity:1}54%,100%{opacity:0}}
+  @keyframes tC2{0%,50%{opacity:0}54%,100%{opacity:1}}
+  .q4{background:#12100b;border:1px solid #2b2517;border-radius:12px;padding:14px 16px;margin-top:14px;font-size:13px;color:#cfc9bd}
+  .q4 b{color:var(--gold)}
+</style>
+
+<div class="num">bones-pipeline · stage 5 revision spec · words &amp; polish · 2026-07-05</div>
+<h1>Words, Outro &amp; Transition — pick your looks</h1>
+<div class="sub">Everything below uses the <b>real website design language</b> I pulled from the shavitrootman.com codebase:
+Bricolage Grotesque display, "Shavit <span style="color:var(--gold)">Rootman</span>" split-gold wordmark, gold #FFC000, eyebrow tracking, warm-ivory body.
+All mocked on real frames from the cut. Nothing gets implemented until you pick.</div>
+<div class="rule"></div>
+
+<h2>1 · Testimonial style — four options</h2>
+<div class="h2sub">Same quote mocked over the real hearth shot. The current version's boxy plate is what you didn't like.</div>
+<div class="grid">
+  <div class="opt rec"><span class="tag">Recommended</span>
+    <div class="lbl">S1 · Website lower-third</div>
+    <div class="ph s1"><img class="bg" src="spec-assets/bg_fireplace.jpg"><div class="scrim"></div>
+      <div class="q"><div class="pull">A MAN OF<br>HIS WORD.</div><div class="bar"></div><div class="attr">NICKY — CLEVELAND INVESTOR</div></div>
+    </div>
+    <p class="why">No box at all — type sits on a soft bottom scrim, gold rule, eyebrow attribution. This is literally the site's hero/qcard grammar. Cleanest, most premium.</p>
+  </div>
+  <div class="opt">
+    <div class="lbl">S2 · Editorial serif quote</div>
+    <div class="ph s2"><img class="bg" src="spec-assets/bg_fireplace.jpg"><div class="scrim"></div>
+      <div class="q"><span class="mark">&ldquo;</span><div class="pull">Extensive knowledge, remarkable attention to detail — a man of his word.</div><div class="attr">NICKY · CLEVELAND INVESTOR</div></div>
+    </div>
+    <p class="why">Longer real quote, italic serif, gold quotation mark. Reads like a magazine pull-quote — warmer, more "testimonial."</p>
+  </div>
+  <div class="opt">
+    <div class="lbl">S3 · Brass-edge card (refined current)</div>
+    <div class="ph s3"><img class="bg" src="spec-assets/bg_fireplace.jpg">
+      <div class="q"><div class="card"><div class="pull">A MAN OF HIS WORD.</div><div class="attr">NICKY · CLEVELAND INVESTOR</div></div></div>
+    </div>
+    <p class="why">Keeps a card but fixes it: gold left edge instead of full outline, attribution inside, frosted glass. The professional version of what's there now.</p>
+  </div>
+  <div class="opt">
+    <div class="lbl">S4 · Bare display (kinetic)</div>
+    <div class="ph s4"><img class="bg" src="spec-assets/bg_fireplace.jpg">
+      <div class="q"><div class="pull">A MAN OF<br>HIS WORD.</div><div class="attr">NICKY · CLEVELAND INVESTOR</div></div>
+    </div>
+    <p class="why">Big type at the top, no container, heavy shadow. Most modern-IG; boldest, least "corporate."</p>
+  </div>
+</div>
+
+<h2>2 · Outro — website-matched, two options</h2>
+<div class="h2sub">Both use the real wordmark treatment ("Shavit" white + "Rootman" gold), Bricolage, eyebrow subline — over the dimming sky.</div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+  <div class="opt rec"><span class="tag">Recommended</span>
+    <div class="lbl">O1 · Site footer replica</div>
+    <div class="ph o1"><img class="bg" src="spec-assets/bg_sky.jpg">
+      <div class="stack">
+        <div class="eyebrow">BUILT IN MICHIGAN, OHIO &amp; INDIANA</div>
+        <div class="wm">SHAVIT <b>ROOTMAN</b></div>
+        <div class="subline">MADE IN AMERICA · LOCAL TO THE MIDWEST</div>
+        <div class="cta">WORK WITH ME</div>
+      </div>
+    </div>
+    <p class="why">The website's footer, as a video outro: gold eyebrow closer, split-gold wordmark, subline, and the site's gold "Work With Me" CTA button. Anyone who's seen the site instantly recognizes it.</p>
+  </div>
+  <div class="opt">
+    <div class="lbl">O2 · Minimal wordmark</div>
+    <div class="ph o2"><img class="bg" src="spec-assets/bg_sky.jpg">
+      <div class="stack">
+        <div class="closer">BUILT IN MICHIGAN,<br>OHIO &amp; INDIANA.</div>
+        <div class="barh"></div>
+        <div class="wm">SHAVIT <b>ROOTMAN</b></div>
+        <div class="subline">MADE IN AMERICA · LOCAL TO THE MIDWEST</div>
+      </div>
+    </div>
+    <p class="why">Closer as the hero line, gold rule, wordmark below. Quieter — no CTA button.</p>
+  </div>
+</div>
+
+<h2>3 · The transition after the final house — three fixes</h2>
+<div class="h2sub">Right now: payoff → 0.4s crossfade → sky-rise. Tell me which of these is what you want instead (mini-demos loop).</div>
+<div class="grid t">
+  <div class="opt">
+    <div class="lbl">T1 · No cut at all — one continuous shot</div>
+    <div class="ph tB"><img class="bg" src="spec-assets/bg_payoff.jpg"></div>
+    <p class="why">Kill the crossfade: the title/address play ON the sky-rise clip itself while the house is still full-frame, then it just lifts off. One unbroken move — no seam anywhere.</p>
+  </div>
+  <div class="opt">
+    <div class="lbl">T2 · Dip-to-white</div>
+    <div class="ph tC"><img class="bg" src="spec-assets/bg_payoff.jpg"><div class="white"></div><img class="bg2" src="spec-assets/bg_sky.jpg"></div>
+    <p class="why">Quick white flash between payoff and rise — matches the flipbook's shutter-flash grammar from the opening. Bookends the video.</p>
+  </div>
+  <div class="opt">
+    <div class="lbl">T3 · Longer luxe dissolve</div>
+    <div class="ph tA"><img class="bg" src="spec-assets/bg_payoff.jpg"><img class="bg2" src="spec-assets/bg_sky.jpg"></div>
+    <p class="why">Keep a dissolve but slow it to ~1.2s — reads intentional instead of abrupt.</p>
+  </div>
+</div>
+
+<h2>4 · Music — how to wire it in</h2>
+<div class="q4"><b>The licensing reality:</b> I can't legally burn "Small Town" into the file — Mellencamp's master would get the post muted/flagged and can never be boosted. Two clean ways to have audio actually in the video:
+<br><br><b>M1 · Original heartland bed (recommended):</b> I generate a Mellencamp-lane instrumental (warm guitar, upright bass, Americana build) with Higgsfield audio (~10–15 cr), mix it under the cut with a swell at the reveal and a resolve at the signature. The file has real music everywhere it plays, boostable, yours forever.
+<br><br><b>M2 · Sticker plan (current):</b> masters stay silent; you add the real "Small Town" via Instagram's music sticker on the organic pin. Real Mellencamp, but silent file everywhere else + no boosting.
+<br><br><b>M3 · Both:</b> M1 burned in for the file + you can still overlay the sticker on IG if you want the real track there.</div>
+
+<h2>5 · The blurry square (B) — fix locked</h2>
+<div class="q4">That's my crude door-number blur patch. Fix (no approval needed, it's a defect): I paint the numbers out of the source stills pixel-cleanly (sampled from surrounding siding — invisible) and use ffmpeg's edge-blending <b>delogo</b> on the video shots instead of a hard blur box. No more square.</div>

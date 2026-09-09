@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shavitrootman.com/the-house-that-came-back/sitemap.xml

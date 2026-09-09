@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shavit Rootman — Strategy &amp; Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --navy:#0A2A4A; --navy2:#13386B; --cream:#F6F1E7; --gold:#C9A24A;
+    --charcoal:#2B2B2B; --muted:#6b7280; --line:rgba(10,42,74,.12);
+    --card:#ffffff; --good:#2e7d4f; --bad:#b23b3b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Roboto',system-ui,sans-serif;color:var(--charcoal);
+    background:var(--cream);-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Lora',Georgia,serif}
+  .eyebrow{font-family:'Roboto';font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  button{font-family:'Roboto';cursor:pointer;border:none;border-radius:8px;font-weight:500}
+  input,select{font-family:'Roboto';font-size:.95rem}
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
+    padding:14px 26px;background:var(--navy);color:#fff;
+    box-shadow:0 2px 14px rgba(0,0,0,.18)
+  }
+  .brand{font-family:'Lora';font-weight:600;font-size:1.15rem;letter-spacing:.01em}
+  .brand .dot{color:var(--gold)}
+  .tabs{display:flex;gap:6px;margin-left:8px}
+  .tab{background:transparent;color:#cdd7e4;padding:8px 16px;font-size:.9rem;border-radius:999px}
+  .tab.active{background:var(--gold);color:var(--navy);font-weight:700}
+  .spacer{flex:1}
+  .iobtn{background:rgba(255,255,255,.1);color:#fff;padding:8px 14px;font-size:.82rem}
+  .iobtn:hover{background:rgba(255,255,255,.2)}
+
+  /* ---- dashboard ---- */
+  .wrap{max-width:1180px;margin:0 auto;padding:34px 26px 80px}
+  .page-head{margin-bottom:26px}
+  .page-head h1{font-size:2.1rem;color:var(--navy);font-weight:600;margin-top:4px}
+  .page-head p{color:var(--muted);margin-top:6px;max-width:640px}
+
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:16px;margin-bottom:30px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px;box-shadow:0 1px 3px rgba(10,42,74,.05)}
+  .kpi .lab{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .kpi .val{font-family:'Lora';font-size:1.85rem;color:var(--navy);font-weight:600;margin-top:6px}
+  .kpi .delta{font-size:.8rem;margin-top:4px;font-weight:500}
+  .kpi .delta.up{color:var(--good)} .kpi .delta.down{color:var(--bad)} .kpi .delta.flat{color:var(--muted)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:880px){.grid2{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 1px 3px rgba(10,42,74,.05);margin-bottom:22px}
+  .panel h3{color:var(--navy);font-size:1.05rem;font-weight:600;display:flex;align-items:center;gap:10px}
+  .panel h3::before{content:"";width:22px;height:3px;background:var(--gold);border-radius:2px;display:inline-block}
+  .panel .sub{color:var(--muted);font-size:.82rem;margin:4px 0 16px}
+  .chart-box{position:relative;height:280px}
+  .empty{display:flex;align-items:center;justify-content:center;height:280px;color:var(--muted);font-size:.9rem;text-align:center;border:1px dashed var(--line);border-radius:10px}
+
+  /* forms */
+  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px 18px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label{font-size:.76rem;color:var(--muted);font-weight:500;letter-spacing:.02em}
+  .field input,.field select{padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--charcoal)}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--gold)}
+  .form-actions{display:flex;gap:12px;margin-top:18px;align-items:center}
+  .btn-primary{background:var(--navy);color:#fff;padding:11px 22px;font-weight:500}
+  .btn-primary:hover{background:var(--navy2)}
+  .btn-ghost{background:transparent;color:var(--navy);padding:11px 16px;border:1px solid var(--line)}
+  .hint{color:var(--muted);font-size:.8rem}
+
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{text-align:right;padding:9px 10px;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+  .del{color:var(--bad);background:none;font-size:.8rem;padding:2px 6px}
+
+  /* ---- deck ---- */
+  #deck{display:none}
+  .deck-stage{background:var(--navy);min-height:calc(100vh - 56px);position:relative;overflow:hidden}
+  .slide{display:none;min-height:calc(100vh - 56px);padding:64px 7vw;flex-direction:column;justify-content:center;position:relative}
+  .slide.active{display:flex;animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .slide *{color:var(--cream)}
+  .slide .eyebrow{color:var(--gold)}
+  .slide h2{font-size:clamp(1.8rem,4.4vw,3.4rem);font-weight:600;line-height:1.08;margin:10px 0 14px}
+  .slide .lead{font-size:clamp(1rem,1.6vw,1.25rem);color:#cdd7e4;max-width:760px;line-height:1.55}
+  .slide .gold-rule{width:64px;height:4px;background:var(--gold);border-radius:2px;margin:6px 0 4px}
+  .stat-row{display:flex;flex-wrap:wrap;gap:38px;margin-top:34px}
+  .stat .n{font-family:'Lora';font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;color:#fff;line-height:1}
+  .stat .l{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-top:8px}
+  .cols{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;margin-top:18px}
+  @media(max-width:860px){.cols{grid-template-columns:1fr;gap:26px}}
+  .deck-chart{background:rgba(255,255,255,.05);border:1px solid rgba(201,162,74,.3);border-radius:14px;padding:18px;height:360px;position:relative}
+  .deck-empty{display:flex;align-items:center;justify-content:center;height:360px;color:#9fb0c4;border:1px dashed rgba(255,255,255,.2);border-radius:14px;text-align:center;font-size:.92rem;padding:0 24px}
+  .bullets{margin-top:18px;list-style:none}
+  .bullets li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;gap:14px;align-items:flex-start;font-size:1.02rem;color:#dde5ee}
+  .bullets li b{color:#fff}
+  .bullets li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:9px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+  @media(max-width:860px){.three{grid-template-columns:1fr}}
+  .three .c{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:22px}
+  .three .c h4{font-family:'Lora';color:#fff;font-size:1.2rem;margin-bottom:8px}
+  .three .c p{color:#cdd7e4;font-size:.92rem;line-height:1.5}
+  .hero-img{width:100%;height:100%;min-height:340px;object-fit:cover;border-radius:14px;border:1px solid rgba(201,162,74,.35)}
+  .imgwrap{height:100%;border-radius:14px;overflow:hidden;position:relative}
+  .imgwrap .cap{position:absolute;left:0;bottom:0;right:0;padding:14px 16px;background:linear-gradient(transparent,rgba(7,24,42,.85));font-size:.8rem;color:#dde5ee}
+
+  /* deck title slide */
+  #s0{justify-content:center}
+  #s0 .kicker{font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  #s0 h1{font-family:'Lora';font-size:clamp(2.4rem,6vw,4.4rem);color:#fff;font-weight:700;line-height:1.05;margin:18px 0}
+  #s0 .by{color:#cdd7e4;font-size:1.05rem;margin-top:8px}
+
+  /* deck controls */
+  .deck-ctrl{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:60;
+    display:flex;align-items:center;gap:14px;background:rgba(7,24,42,.82);backdrop-filter:blur(6px);
+    border:1px solid rgba(201,162,74,.3);border-radius:999px;padding:8px 14px}
+  .deck-ctrl button{background:transparent;color:#cdd7e4;font-size:1.1rem;padding:4px 10px}
+  .deck-ctrl button:hover{color:var(--gold)}
+  .deck-ctrl .count{color:#9fb0c4;font-size:.82rem;min-width:54px;text-align:center}
+  .deck-ctrl .pf{font-size:.78rem;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:5px 12px}
+
+  /* print / pdf */
+  @media print{
+    .topbar,.deck-ctrl{display:none!important}
+    #dashboard{display:none!important}
+    #deck{display:block!important}
+    .deck-stage{background:var(--navy)}
+    .slide{display:flex!important;page-break-after:always;min-height:96vh;animation:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">Shavit Rootman <span class="dot">·</span> Strategy &amp; Analytics</div>
+  <div class="tabs">
+    <button class="tab active" id="tab-dash" onclick="showView('dashboard')">Dashboard</button>
+    <button class="tab" id="tab-deck" onclick="showView('deck')">Strategy Deck</button>
+  </div>
+  <div class="spacer"></div>
+  <button class="iobtn" onclick="loadSample()">Load sample</button>
+  <button class="iobtn" onclick="exportData()">Export</button>
+  <button class="iobtn" onclick="document.getElementById('importFile').click()">Import</button>
+  <button class="iobtn" onclick="clearData()">Clear</button>
+  <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importData(event)">
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="dashboard">
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">Performance Tracker</div>
+    <h1>Marketing Dashboard</h1>
+    <p>Log your numbers each week. Charts update live, and they feed straight into the Strategy Deck. Your data stays on this machine (browser storage) — Export anytime for a backup or to hand to an automated puller later.</p>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="panel">
+    <h3>Log this week</h3>
+    <div class="sub">Enter what you have — blanks are fine. Pick the week-ending date.</div>
+    <form id="logForm" onsubmit="saveEntry(event)">
+      <div class="form-grid">
+        <div class="field"><label>Week ending</label><input type="date" id="f_date" required></div>
+        <div class="field"><label>Instagram followers</label><input type="number" id="f_ig_followers" min="0" placeholder="@shavitness"></div>
+        <div class="field"><label>Instagram reach</label><input type="number" id="f_ig_reach" min="0" placeholder="accounts reached"></div>
+        <div class="field"><label>Posts published</label><input type="number" id="f_ig_posts" min="0" placeholder="this week"></div>
+        <div class="field"><label>LinkedIn followers</label><input type="number" id="f_li_followers" min="0" placeholder="2631"></div>
+        <div class="field"><label>Substack subscribers</label><input type="number" id="f_sub_subs" min="0"></div>
+        <div class="field"><label>Website visits</label><input type="number" id="f_web_visits" min="0"></div>
+        <div class="field"><label>Leads / inquiries</label><input type="number" id="f_leads" min="0" placeholder="Partner &amp; Equity"></div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Save week</button>
+        <span class="hint">Saving a date that already exists overwrites it.</span>
+      </div>
+    </form>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>Audience growth</h3>
+      <div class="sub">Followers / subscribers over time across channels.</div>
+      <div class="chart-box" id="box-audience"><canvas id="c_audience"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Reach &amp; engagement</h3>
+      <div class="sub">Instagram accounts reached and posting cadence.</div>
+      <div class="chart-box" id="box-reach"><canvas id="c_reach"></canvas></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>Leads &amp; inquiries</h3>
+      <div class="sub">Partner &amp; Equity interest captured each week.</div>
+      <div class="chart-box" id="box-leads"><canvas id="c_leads"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3>Website traffic</h3>
+      <div class="sub">Visits to shavitrootman.com.</div>
+      <div class="chart-box" id="box-web"><canvas id="c_web"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Vision &amp; portfolio targets</h3>
+    <div class="sub">Drives the projection charts in the deck. Edit as the real splits firm up.</div>
+    <form id="visionForm" onsubmit="saveVision(event)">
+      <div class="form-grid">
+        <div class="field"><label>Current doors</label><input type="number" id="v_doors" min="0"></div>
+        <div class="field"><label>Target doors</label><input type="number" id="v_doors_target" min="0"></div>
+        <div class="field"><label>Target year</label><input type="number" id="v_target_year" min="2026"></div>
+        <div class="field"><label>AUM ($M)</label><input type="number" id="v_aum" min="0" step="0.1"></div>
+        <div class="field"><label>Jobs created (target)</label><input type="number" id="v_jobs" min="0"></div>
+        <div class="field"><label>Homes revitalized (target)</label><input type="number" id="v_homes" min="0"></div>
+        <div class="field"><label>Doors — Michigan</label><input type="number" id="v_mi" min="0"></div>
+        <div class="field"><label>Doors — Ohio</label><input type="number" id="v_oh" min="0"></div>
+        <div class="field"><label>Doors — Indiana</label><input type="number" id="v_in" min="0"></div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Save targets</button>
+        <span class="hint">Estimates are fine — mark as real once confirmed.</span>
+      </div>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h3>Logged weeks</h3>
+    <div class="sub">Most recent first.</div>
+    <div style="overflow-x:auto"><table id="entriesTable"></table></div>
+  </div>
+</div>
+</div>
+
+<!-- ============ DECK ============ -->
+<div id="deck">
+<div class="deck-stage">
+
+  <section class="slide active" id="s0">
+    <div class="kicker">Marketing &amp; Growth Strategy</div>
+    <h1>Building communities,<br>profitably.</h1>
+    <div class="gold-rule"></div>
+    <div class="by">Shavit Rootman · BRRRR, done differently · MI · OH · IN</div>
+  </section>
+
+  <section class="slide" id="s1">
+    <div class="eyebrow">The operation is real</div>
+    <h2>A track record, not a pitch.</h2>
+    <p class="lead">Fifty doors across three states, an in-house rehab and management engine, and a company spun up per cycle for clean legal separation. The marketing job is to make that operation <em>visible</em>.</p>
+    <div class="stat-row" id="opStats"></div>
+  </section>
+
+  <section class="slide" id="s2">
+    <div class="eyebrow">Where the doors are</div>
+    <h2>Three states, one operator.</h2>
+    <div class="cols">
+      <div>
+        <p class="lead">Hillsdale &amp; Jackson, Michigan. Cleveland, Ohio. South Bend, Indiana. The story is geographic focus, not scatter — out-of-state investing done with boots on the ground.</p>
+        <ul class="bullets">
+          <li><b>Michigan</b> — long-term &amp; student/faculty housing; the home base.</li>
+          <li><b>Ohio</b> — short / mid-term in Cleveland.</li>
+          <li><b>Indiana</b> — newest expansion, South Bend.</li>
+        </ul>
+      </div>
+      <div class="deck-chart"><canvas id="d_states"></canvas></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s3">
+    <div class="eyebrow">The vision</div>
+    <h2>50 doors today. 200 by 2030.</h2>
+    <div class="cols">
+      <div>
+        <p class="lead">The growth curve is the narrative. Every rehab, every closing, every new job is a data point on the way to 200 doors, 100 homes revitalized in Hillsdale, and 25 local jobs.</p>
+        <div class="stat-row" id="visionStats"></div>
+      </div>
+      <div class="deck-chart"><canvas id="d_doors"></canvas></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s4">
+    <div class="eyebrow">The people who matter</div>
+    <h2>Three audiences. One story.</h2>
+    <div class="three">
+      <div class="c"><h4>Passive investors</h4><p>Want returns without operating. We show them the machine works — consistent, documented, de-risked.</p></div>
+      <div class="c"><h4>Aspiring investors</h4><p>Want to learn the playbook. We teach in public — BRRRR, pre-foreclosure exits, in-house rehab.</p></div>
+      <div class="c"><h4>Community &amp; partners</h4><p>Tenants, towns, equity partners. We prove we revitalize, not extract.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s5">
+    <div class="eyebrow">The method</div>
+    <h2>Document the work.</h2>
+    <div class="cols">
+      <div>
+        <p class="lead">The content strategy is not "post more." It's to turn the operation already happening into a steady feed of proof.</p>
+        <ul class="bullets">
+          <li><b>One rehab = a series.</b> Before, during, after — the same property, multiple posts.</li>
+          <li><b>Local, useful, visible.</b> Hillsdale-first content that the town actually cares about.</li>
+          <li><b>Operator voice.</b> Plainspoken, confident, story-driven — never salesy.</li>
+          <li><b>Repurpose down-channel.</b> Substack long-form → LinkedIn → Instagram cut-downs.</li>
+        </ul>
+      </div>
+      <div class="imgwrap"><img class="hero-img" src="website/assets/photos/03_second_chance_house.jpeg" alt="" onerror="this.parentElement.innerHTML='<div class=deck-empty>Property photo</div>'"><div class="cap">Second Chance house — a rehab is a content series.</div></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s6">
+    <div class="eyebrow">Channels</div>
+    <h2>Each channel has one job.</h2>
+    <div class="three">
+      <div class="c"><h4>Instagram <span style="color:var(--gold)">@shavitness</span></h4><p>The shop window. Rehab progress, before/afters, short operator clips. Reach &amp; discovery.</p></div>
+      <div class="c"><h4>LinkedIn</h4><p>Credibility &amp; investors. The track record, the numbers, the thinking. ~2.6k following already.</p></div>
+      <div class="c"><h4>Substack</h4><p>Depth. Long-form on deals, lessons, and the road to 200 doors — the owned audience.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s7">
+    <div class="eyebrow">Live · audience growth</div>
+    <h2>The numbers, tracked.</h2>
+    <div class="cols">
+      <div>
+        <p class="lead">This isn't a static slide. It reads straight from the dashboard — every week you log, this curve extends. Strategy you can hold accountable.</p>
+        <ul class="bullets">
+          <li><b>One source of truth.</b> Log once, it shows everywhere.</li>
+          <li><b>Channel by channel.</b> See which audience is compounding.</li>
+        </ul>
+      </div>
+      <div class="deck-chart"><canvas id="d_audience"></canvas><div id="d_audience_empty"></div></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s8">
+    <div class="eyebrow">Live · pipeline</div>
+    <h2>Attention → inquiries.</h2>
+    <div class="cols">
+      <div>
+        <p class="lead">Reach is vanity until it converts. We track Partner &amp; Equity inquiries against the content we ship, so we know what actually moves the needle.</p>
+      </div>
+      <div class="deck-chart"><canvas id="d_leads"></canvas><div id="d_leads_empty"></div></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s9">
+    <div class="eyebrow">How we run it</div>
+    <h2>One dashboard. No guesswork.</h2>
+    <div class="cols">
+      <div>
+        <p class="lead">A single private dashboard tracks every channel weekly. Manual today; wired so an automated puller can feed the same numbers tomorrow. No third-party tools, no PII, no forms.</p>
+        <ul class="bullets">
+          <li><b>Weekly cadence.</b> Five minutes to log, charts update instantly.</li>
+          <li><b>Built to grow.</b> Hybrid by design — manual now, API-ready later.</li>
+        </ul>
+      </div>
+      <div class="imgwrap"><img class="hero-img" src="website/assets/photos/01_hillsdale_17_lo_presto.jpeg" alt="" onerror="this.parentElement.innerHTML='<div class=deck-empty>Flagship property</div>'"><div class="cap">17 Lo Presto Ave, Hillsdale MI — the flagship.</div></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s10">
+    <div class="kicker" style="font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700">The throughline</div>
+    <h2 style="max-width:14ch">Building communities, profitably.</h2>
+    <div class="gold-rule"></div>
+    <p class="lead">Make the operation visible. Document the work. Track everything. The growth tells its own story.</p>
+    <div class="by" style="color:#cdd7e4;margin-top:22px">info@shavitrootman.com · @shavitness · shavitrootman.substack.com</div>
+  </section>
+
+</div>
+
+<div class="deck-ctrl">
+  <button onclick="deckPrev()" title="Previous (←)">‹</button>
+  <span class="count" id="slideCount">1 / 11</span>
+  <button onclick="deckNext()" title="Next (→)">›</button>
+  <button class="pf" onclick="window.print()" title="Export to PDF">PDF</button>
+  <button class="pf" onclick="goFullscreen()" title="Fullscreen (F)">⛶</button>
+</div>
+</div>
+
+<script>
+/* ============================================================
+   DATA LAYER  — single source of truth in localStorage.
+   Schema is plain JSON so a future API puller can write the
+   same shape (the "hybrid" hook).
+   ============================================================ */
+const KEY = 'shavit_metrics_v1';
+const BLANK = {
+  entries: [],
+  vision: { doors:50, doors_target:200, target_year:2030, aum:12, jobs:25, homes:100, mi:32, oh:11, in:7 }
+};
+let DB = load();
+
+function load(){
+  try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r&&r.entries) return Object.assign(structuredClone(BLANK), r); }catch(e){}
+  return structuredClone(BLANK);
+}
+function persist(){ localStorage.setItem(KEY, JSON.stringify(DB)); }
+function sortedEntries(){ return [...DB.entries].sort((a,b)=> a.date < b.date ? -1 : 1); }
+
+/* ---- entry CRUD ---- */
+function saveEntry(e){
+  e.preventDefault();
+  const g = id => { const v = document.getElementById(id).value; return v===''? null : (id==='f_date'? v : Number(v)); };
+  const row = {
+    date:g('f_date'), ig_followers:g('f_ig_followers'), ig_reach:g('f_ig_reach'),
+    ig_posts:g('f_ig_posts'), li_followers:g('f_li_followers'), sub_subs:g('f_sub_subs'),
+    web_visits:g('f_web_visits'), leads:g('f_leads')
+  };
+  DB.entries = DB.entries.filter(x=>x.date!==row.date);
+  DB.entries.push(row); persist();
+  document.getElementById('logForm').reset();
+  renderAll();
+}
+function delEntry(date){ DB.entries = DB.entries.filter(x=>x.date!==date); persist(); renderAll(); }
+
+function saveVision(e){
+  e.preventDefault();
+  const n = id => Number(document.getElementById(id).value)||0;
+  DB.vision = { doors:n('v_doors'), doors_target:n('v_doors_target'), target_year:n('v_target_year'),
+    aum:n('v_aum'), jobs:n('v_jobs'), homes:n('v_homes'), mi:n('v_mi'), oh:n('v_oh'), in:n('v_in') };
+  persist(); renderAll();
+}
+
+/* ---- import / export / sample / clear ---- */
+function exportData(){
+  const blob = new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'shavit_metrics.json'; a.click();
+}
+function importData(ev){
+  const f = ev.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => { try{ DB = Object.assign(structuredClone(BLANK), JSON.parse(r.result)); persist(); renderAll(); }catch(e){ alert('Could not read that file.'); } };
+  r.readAsText(f); ev.target.value='';
+}
+function clearData(){ if(confirm('Clear all logged data? Vision targets reset too.')){ DB = structuredClone(BLANK); persist(); renderAll(); } }
+function loadSample(){
+  const weeks = ['2026-04-13','2026-04-20','2026-04-27','2026-05-04','2026-05-11','2026-05-18','2026-05-25','2026-06-01','2026-06-08'];
+  const ig=[820,860,910,980,1040,1130,1210,1320,1410];
+  const reach=[3200,3600,4100,5200,4800,6300,7100,8200,9000];
+  const posts=[2,3,2,4,3,4,3,5,4];
+  const li=[2510,2540,2560,2580,2600,2615,2631,2660,2700];
+  const sub=[40,55,70,95,120,150,190,230,280];
+  const web=[210,260,240,330,410,520,480,610,720];
+  const leads=[0,1,0,2,1,3,2,4,3];
+  DB.entries = weeks.map((d,i)=>({date:d,ig_followers:ig[i],ig_reach:reach[i],ig_posts:posts[i],li_followers:li[i],sub_subs:sub[i],web_visits:web[i],leads:leads[i]}));
+  persist(); renderAll();
+  alert('Sample data loaded so you can preview the charts. Hit "Clear" then log your real numbers when ready.');
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const charts = {};
+function fmt(n){ return n==null? '—' : Number(n).toLocaleString(); }
+const NAVY='#0A2A4A', NAVY2='#13386B', GOLD='#C9A24A', CHAR='#2B2B2B', MUT='#6b7280';
+
+function destroy(id){ if(charts[id]){ charts[id].destroy(); delete charts[id]; } }
+
+function lineCfg(labels, datasets, dark){
+  const grid = dark? 'rgba(255,255,255,.08)':'rgba(10,42,74,.08)';
+  const tick = dark? '#cdd7e4':MUT;
+  return { type:'line', data:{labels,datasets},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{labels:{color:tick,usePointStyle:true,boxWidth:8,font:{family:'Roboto'}}}},
+      scales:{x:{grid:{color:grid},ticks:{color:tick,font:{family:'Roboto',size:10}}},
+              y:{grid:{color:grid},ticks:{color:tick,font:{family:'Roboto'}},beginAtZero:true}}}};
+}
+function ds(label,data,color,fill){ return {label,data,borderColor:color,backgroundColor:fill||color+'22',tension:.34,borderWidth:2.5,pointRadius:3,pointBackgroundColor:color,fill:!!fill,spanGaps:true}; }
+
+function toggleEmpty(boxId,canvasId,emptyId,hasData,msg){
+  const box=document.getElementById(boxId); if(!box) return hasData;
+  const cv=document.getElementById(canvasId);
+  let em=emptyId?document.getElementById(emptyId):box.querySelector('.empty-flag');
+  if(!hasData){
+    cv.style.display='none';
+    if(!em){ em=document.createElement('div'); em.className = box.closest('#deck')?'deck-empty':'empty'; if(emptyId) em.id=emptyId; else em.classList.add('empty-flag'); box.appendChild(em); }
+    em.style.display='flex'; em.textContent=msg;
+    return false;
+  } else { cv.style.display=''; if(em) em.style.display='none'; return true; }
+}
+
+function renderKPIs(){
+  const E = sortedEntries();
+  const last = E[E.length-1]||{}, prev = E[E.length-2]||{};
+  const defs = [
+    ['Instagram','ig_followers'],['LinkedIn','li_followers'],['Substack','sub_subs'],
+    ['Website / wk','web_visits'],['IG reach','ig_reach'],['Leads / wk','leads']
+  ];
+  document.getElementById('kpis').innerHTML = defs.map(([lab,k])=>{
+    const v=last[k], p=prev[k];
+    let d='', cls='flat';
+    if(v!=null&&p!=null){ const diff=v-p; cls=diff>0?'up':diff<0?'down':'flat'; d=(diff>0?'▲ +':diff<0?'▼ ':'')+fmt(Math.abs(diff))+' vs prior'; }
+    else if(v!=null){ d='first entry'; }
+    return `<div class="kpi"><div class="lab">${lab}</div><div class="val">${fmt(v)}</div><div class="delta ${cls}">${d||'—'}</div></div>`;
+  }).join('');
+}
+
+function renderEntries(){
+  const E = sortedEntries().reverse();
+  const t = document.getElementById('entriesTable');
+  if(!E.length){ t.innerHTML='<tr><td style="color:var(--muted);text-align:center;padding:24px">No weeks logged yet. Use the form above, or "Load sample" to preview.</td></tr>'; return; }
+  t.innerHTML = '<tr><th>Week</th><th>IG</th><th>Reach</th><th>Posts</th><th>LinkedIn</th><th>Substack</th><th>Web</th><th>Leads</th><th></th></tr>'+
+    E.map(r=>`<tr><td>${r.date}</td><td>${fmt(r.ig_followers)}</td><td>${fmt(r.ig_reach)}</td><td>${fmt(r.ig_posts)}</td><td>${fmt(r.li_followers)}</td><td>${fmt(r.sub_subs)}</td><td>${fmt(r.web_visits)}</td><td>${fmt(r.leads)}</td><td><button class="del" onclick="delEntry('${r.date}')">delete</button></td></tr>`).join('');
+}
+
+function fillVisionForm(){
+  const v=DB.vision;
+  const set=(id,val)=>{const el=document.getElementById(id); if(el&&document.activeElement!==el) el.value=val;};
+  set('v_doors',v.doors); set('v_doors_target',v.doors_target); set('v_target_year',v.target_year);
+  set('v_aum',v.aum); set('v_jobs',v.jobs); set('v_homes',v.homes);
+  set('v_mi',v.mi); set('v_oh',v.oh); set('v_in',v.in);
+}
+
+function renderDashCharts(){
+  const E = sortedEntries();
+  const labels = E.map(r=>r.date.slice(5));
+
+  destroy('c_audience');
+  if(toggleEmpty('box-audience','c_audience',null, E.some(r=>r.ig_followers!=null||r.li_followers!=null||r.sub_subs!=null),'Log a week to see audience growth.')){
+    charts.c_audience = new Chart(c_audience, lineCfg(labels,[
+      ds('Instagram',E.map(r=>r.ig_followers),GOLD),
+      ds('LinkedIn',E.map(r=>r.li_followers),NAVY),
+      ds('Substack',E.map(r=>r.sub_subs),'#7a9bbf')
+    ],false));
+  }
+
+  destroy('c_reach');
+  if(toggleEmpty('box-reach','c_reach',null, E.some(r=>r.ig_reach!=null),'Log Instagram reach to populate.')){
+    charts.c_reach = new Chart(c_reach,{type:'bar',
+      data:{labels,datasets:[{label:'Reach',data:E.map(r=>r.ig_reach),backgroundColor:GOLD+'cc',borderRadius:5},
+        {label:'Posts',data:E.map(r=>r.ig_posts),type:'line',borderColor:NAVY,backgroundColor:NAVY,yAxisID:'y1',tension:.34,borderWidth:2.5,pointRadius:3}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:MUT,usePointStyle:true,boxWidth:8}}},
+        scales:{x:{grid:{display:false},ticks:{color:MUT,font:{size:10}}},
+          y:{beginAtZero:true,grid:{color:'rgba(10,42,74,.08)'},ticks:{color:MUT}},
+          y1:{position:'right',beginAtZero:true,grid:{display:false},ticks:{color:NAVY},title:{display:true,text:'posts',color:MUT}}}}});
+  }
+
+  destroy('c_leads');
+  if(toggleEmpty('box-leads','c_leads',null, E.some(r=>r.leads!=null),'Log inquiries to populate.')){
+    charts.c_leads = new Chart(c_leads,{type:'bar',
+      data:{labels,datasets:[{label:'Leads / inquiries',data:E.map(r=>r.leads),backgroundColor:NAVY,borderRadius:5}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{x:{grid:{display:false},ticks:{color:MUT,font:{size:10}}},y:{beginAtZero:true,grid:{color:'rgba(10,42,74,.08)'},ticks:{color:MUT,precision:0}}}}});
+  }
+
+  destroy('c_web');
+  if(toggleEmpty('box-web','c_web',null, E.some(r=>r.web_visits!=null),'Log website visits to populate.')){
+    charts.c_web = new Chart(c_web, lineCfg(labels,[ds('Visits',E.map(r=>r.web_visits),GOLD,GOLD+'33')],false));
+  }
+}
+
+function renderDeckCharts(){
+  const v=DB.vision, E=sortedEntries();
+
+  // operation stats
+  document.getElementById('opStats').innerHTML = [
+    [fmt(v.doors)+'+','Doors'],['$'+fmt(v.aum)+'M+','Assets'],['3','States'],[fmt(v.jobs),'Local jobs (target)']
+  ].map(([n,l])=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+  document.getElementById('visionStats').innerHTML = [
+    [fmt(v.doors_target),'Doors by '+v.target_year],[fmt(v.homes),'Homes revitalized'],[fmt(v.jobs),'Local jobs']
+  ].map(([n,l])=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+
+  // doors by state (doughnut)
+  destroy('d_states');
+  charts.d_states = new Chart(document.getElementById('d_states'),{type:'doughnut',
+    data:{labels:['Michigan','Ohio','Indiana'],datasets:[{data:[v.mi,v.oh,v.in],backgroundColor:[GOLD,'#e6c87f','#7a9bbf'],borderColor:NAVY,borderWidth:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#cdd7e4',usePointStyle:true,boxWidth:10,padding:16,font:{family:'Roboto',size:13}}}}}});
+
+  // doors projection (now -> target)
+  destroy('d_doors');
+  const y0=2026, yT=v.target_year, years=[], proj=[];
+  for(let y=y0;y<=yT;y++){ years.push(y); const t=(y-y0)/Math.max(1,(yT-y0)); proj.push(Math.round(v.doors+(v.doors_target-v.doors)*t)); }
+  charts.d_doors = new Chart(document.getElementById('d_doors'), {type:'line',
+    data:{labels:years,datasets:[{label:'Doors (path to target)',data:proj,borderColor:GOLD,backgroundColor:GOLD+'22',fill:true,tension:.3,borderWidth:3,pointRadius:4,pointBackgroundColor:GOLD}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#cdd7e4',usePointStyle:true,boxWidth:8}}},
+      scales:{x:{grid:{color:'rgba(255,255,255,.08)'},ticks:{color:'#cdd7e4'}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,.08)'},ticks:{color:'#cdd7e4'}}}}});
+
+  // live audience (deck)
+  destroy('d_audience');
+  const labels=E.map(r=>r.date.slice(5));
+  if(toggleEmpty('d_audience','d_audience','d_audience_empty', E.some(r=>r.ig_followers!=null||r.li_followers!=null||r.sub_subs!=null),'Log weeks in the Dashboard — this chart fills itself.')){
+    charts.d_audience = new Chart(document.getElementById('d_audience'), lineCfg(labels,[
+      ds('Instagram',E.map(r=>r.ig_followers),GOLD),
+      ds('LinkedIn',E.map(r=>r.li_followers),'#e6c87f'),
+      ds('Substack',E.map(r=>r.sub_subs),'#7a9bbf')
+    ],true));
+  }
+
+  // live leads (deck)
+  destroy('d_leads');
+  if(toggleEmpty('d_leads','d_leads','d_leads_empty', E.some(r=>r.leads!=null||r.ig_reach!=null),'Log inquiries in the Dashboard to populate.')){
+    charts.d_leads = new Chart(document.getElementById('d_leads'),{type:'bar',
+      data:{labels,datasets:[
+        {label:'Reach',data:E.map(r=>r.ig_reach),backgroundColor:'rgba(201,162,74,.35)',yAxisID:'y1',borderRadius:4},
+        {label:'Inquiries',data:E.map(r=>r.leads),backgroundColor:GOLD,borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#cdd7e4',usePointStyle:true,boxWidth:8}}},
+        scales:{x:{grid:{display:false},ticks:{color:'#cdd7e4',font:{size:10}}},
+          y:{beginAtZero:true,position:'left',grid:{color:'rgba(255,255,255,.08)'},ticks:{color:'#cdd7e4',precision:0},title:{display:true,text:'inquiries',color:'#9fb0c4'}},
+          y1:{beginAtZero:true,position:'right',grid:{display:false},ticks:{color:'#9fb0c4'},title:{display:true,text:'reach',color:'#9fb0c4'}}}}});
+  }
+}
+
+function renderAll(){ renderKPIs(); renderEntries(); fillVisionForm(); renderDashCharts(); if(deckVisible) renderDeckCharts(); }
+
+/* ============================================================
+   VIEW + DECK NAV
+   ============================================================ */
+let deckVisible=false, cur=0;
+const SLIDES=11;
+function showView(v){
+  deckVisible = v==='deck';
+  document.getElementById('dashboard').style.display = deckVisible?'none':'block';
+  document.getElementById('deck').style.display = deckVisible?'block':'none';
+  document.getElementById('tab-dash').classList.toggle('active',!deckVisible);
+  document.getElementById('tab-deck').classList.toggle('active',deckVisible);
+  if(deckVisible){ renderDeckCharts(); gotoSlide(0); }
+}
+function gotoSlide(i){
+  cur=Math.max(0,Math.min(SLIDES-1,i));
+  document.querySelectorAll('.slide').forEach((s,idx)=>s.classList.toggle('active',idx===cur));
+  document.getElementById('slideCount').textContent=(cur+1)+' / '+SLIDES;
+}
+function deckNext(){ gotoSlide(cur+1); }
+function deckPrev(){ gotoSlide(cur-1); }
+function goFullscreen(){ const el=document.getElementById('deck'); if(!document.fullscreenElement) el.requestFullscreen?.(); else document.exitFullscreen?.(); }
+document.addEventListener('keydown',e=>{
+  if(!deckVisible) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') { e.preventDefault(); deckNext(); }
+  if(e.key==='ArrowLeft'||e.key==='PageUp') { e.preventDefault(); deckPrev(); }
+  if(e.key.toLowerCase()==='f') goFullscreen();
+});
+
+/* default the date field to today */
+(function init(){
+  const d=new Date(); const iso=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const df=document.getElementById('f_date'); if(df) df.value=iso;
+  renderAll();
+})();
+</script>
+</body>
+</html>

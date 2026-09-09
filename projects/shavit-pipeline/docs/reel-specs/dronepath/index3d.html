@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drone blocking — 15 E Saint Joe</title>
+<style>
+  /* Dark surround on purpose: the whole point is judging a photographic plate
+     and a lit viewport. Light chrome would spill onto both. Brass accent is the
+     Shavit end-card colour, carried through rather than invented. */
+  :root{
+    --bg:      oklch(0.15 0.008 60);
+    --surface: oklch(0.20 0.010 60);
+    --raised:  oklch(0.26 0.012 60);
+    --line:    oklch(0.33 0.014 60);
+    --ink:     oklch(0.97 0.004 60);
+    --muted:   oklch(0.75 0.010 60);
+    --brass:   oklch(0.78 0.115 78);
+    --brass-d: oklch(0.62 0.105 78);
+    --end:     oklch(0.80 0.110 150);
+    --ease-q:  cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:400 14.5px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{display:grid; grid-template-columns:minmax(0,1fr) 336px; height:100%}
+  @media (max-width:1000px){
+    html,body{overflow:auto}
+    .app{grid-template-columns:minmax(0,1fr); height:auto}
+    .scout{height:60vh}
+  }
+
+  /* ---------- scout view ---------- */
+  .scout{position:relative; background:oklch(0.12 0.006 60)}
+  .scout canvas{display:block; width:100%; height:100%; touch-action:none; cursor:grab}
+  .scout canvas:active{cursor:grabbing}
+  .scoutHud{
+    position:absolute; top:14px; left:16px; pointer-events:none;
+    display:flex; flex-direction:column; gap:5px;
+  }
+  .scoutHud h1{
+    margin:0; font-size:16px; font-weight:600; letter-spacing:-0.01em;
+    text-shadow:0 1px 10px oklch(0 0 0/0.85);
+  }
+  .scoutHud p{margin:0; font-size:12.5px; color:var(--muted); text-shadow:0 1px 10px oklch(0 0 0/0.85)}
+  .proxy{
+    position:absolute; bottom:14px; left:16px; pointer-events:none;
+    font-size:11.5px; color:var(--muted); max-width:44ch;
+    text-shadow:0 1px 10px oklch(0 0 0/0.9);
+  }
+
+  /* ---------- panel ---------- */
+  .panel{
+    background:var(--surface); border-left:1px solid var(--line);
+    overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:14px;
+  }
+  @media (max-width:1000px){ .panel{border-left:none; border-top:1px solid var(--line)} }
+
+  .shotWrap{align-self:center; width:min(100%, 208px)}
+  .shot{
+    position:relative; aspect-ratio:9/16; width:100%;
+    background:oklch(0.10 0.004 60); border:1px solid var(--line);
+    border-radius:7px; overflow:hidden;
+  }
+  .shot canvas{display:block; width:100%; height:100%}
+  .shotLabel{
+    text-align:center; font:600 11px/1 ui-monospace, monospace;
+    color:var(--muted); letter-spacing:0.07em; margin-top:7px;
+  }
+
+  fieldset{border:1px solid var(--line); border-radius:9px; padding:12px; margin:0}
+  legend{
+    padding:0 6px; font-size:12px; font-weight:600; color:var(--muted);
+    letter-spacing:0.04em;
+  }
+  .sl{margin:9px 0}
+  .sl .lab{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px}
+  .sl .lab span:first-child{font-size:13px; color:var(--muted)}
+  .sl .lab span:last-child{font:600 12.5px/1 ui-monospace, monospace}
+  input[type=range]{width:100%; accent-color:var(--brass); margin:0}
+
+  .keys{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  button{
+    font:inherit; color:var(--ink); background:var(--raised);
+    border:1px solid var(--line); border-radius:7px; padding:8px 10px; cursor:pointer;
+    transition:background .15s var(--ease-q), border-color .15s var(--ease-q), transform .15s var(--ease-q);
+  }
+  button:hover{background:oklch(0.31 0.014 60); border-color:oklch(0.44 0.018 60)}
+  button:active{transform:translateY(1px)}
+  button.setStart{border-color:oklch(0.78 0.115 78/0.55)}
+  button.setEnd{border-color:oklch(0.80 0.110 150/0.55)}
+  button.primary{background:var(--brass); border-color:var(--brass); color:oklch(0.17 0.01 60); font-weight:600}
+  button.primary:hover{background:var(--brass-d); border-color:var(--brass-d)}
+  button:focus-visible{outline:2px solid var(--brass); outline-offset:2px}
+  .stateDot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:6px; vertical-align:1px}
+  .stateDot.set{background:var(--end)}
+  .stateDot.unset{background:oklch(0.45 0.01 60)}
+
+  .verdict{border:1px solid var(--line); border-radius:8px; padding:11px}
+  .verdict.free{background:oklch(0.80 0.110 150/0.13); border-color:oklch(0.80 0.110 150/0.5)}
+  .verdict.paid{background:oklch(0.72 0.150 45/0.13); border-color:oklch(0.72 0.150 45/0.5)}
+  .verdict b{display:block; font-size:13.5px; margin-bottom:3px}
+  .verdict span{font-size:12.5px; color:var(--muted)}
+  .moveRead{
+    font-size:13px; color:var(--ink); background:oklch(0.13 0.006 60);
+    border:1px solid var(--line); border-radius:7px; padding:10px; margin-top:9px;
+  }
+
+  textarea{
+    width:100%; min-height:120px; resize:vertical; font:12px/1.5 ui-monospace, monospace;
+    background:oklch(0.12 0.006 60); border:1px solid var(--line); border-radius:7px;
+    padding:10px; color:var(--ink);
+  }
+  .copied{color:var(--end); font-size:12.5px}
+  kbd{
+    background:oklch(0.17 0.01 60); border:1px solid oklch(0.42 0.02 78);
+    border-bottom-width:2px; border-radius:4px; padding:1px 5px;
+    font:11px/1.4 ui-monospace, monospace;
+  }
+  @media (prefers-reduced-motion: reduce){ button{transition:none} }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="scout">
+    <canvas id="scoutCanvas"></canvas>
+    <div class="scoutHud">
+      <h1>Drone blocking — 15 E Saint Joe</h1>
+      <p>
+        <b>Drag the brass drone to fly it</b> &middot; <b>Shift</b>-drag it to aim &middot;
+        drag empty space to orbit the scene &middot; scroll to zoom
+      </p>
+    </div>
+    <p class="proxy">
+      The massing is a blocking proxy, not a survey. The real photograph is mapped onto the front
+      elevation so you can judge framing; depth and roof pitch are approximate.
+    </p>
+  </div>
+
+  <div class="panel">
+    <div class="shotWrap">
+      <div class="shot"><canvas id="shotCanvas"></canvas></div>
+      <div class="shotLabel">WHAT THE DRONE SEES &middot; 9:16</div>
+    </div>
+
+    <fieldset>
+      <legend>Camera</legend>
+      <div class="sl"><div class="lab"><span>Distance</span><span id="oDist">22 m</span></div>
+        <input type="range" id="dist" min="6" max="60" step="0.5" value="22"></div>
+      <div class="sl"><div class="lab"><span>Height</span><span id="oHeight">4 m</span></div>
+        <input type="range" id="height" min="0.5" max="40" step="0.5" value="4"></div>
+      <div class="sl"><div class="lab"><span>Orbit around house</span><span id="oAz">0&deg;</span></div>
+        <input type="range" id="az" min="-90" max="90" step="1" value="0"></div>
+      <div class="sl"><div class="lab"><span>Tilt (pitch)</span><span id="oPitch">0&deg;</span></div>
+        <input type="range" id="pitch" min="-85" max="45" step="1" value="0"></div>
+      <div class="sl"><div class="lab"><span>Aim off-centre (yaw)</span><span id="oYaw">0&deg;</span></div>
+        <input type="range" id="yaw" min="-60" max="60" step="1" value="0"></div>
+      <div class="sl"><div class="lab"><span>Lens</span><span id="oFov">40&deg;</span></div>
+        <input type="range" id="fov" min="14" max="90" step="1" value="40"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Keyframes</legend>
+      <div class="keys">
+        <button class="setStart" id="setStart" type="button">Set START</button>
+        <button class="setEnd" id="setEnd" type="button">Set END</button>
+        <button id="goStart" type="button"><span class="stateDot unset" id="dotStart"></span>Go START</button>
+        <button id="goEnd" type="button"><span class="stateDot unset" id="dotEnd"></span>Go END</button>
+      </div>
+      <div class="sl" style="margin-top:12px">
+        <div class="lab"><span>Duration</span><span id="oDur">2.5s</span></div>
+        <input type="range" id="dur" min="1" max="6" step="0.1" value="2.5">
+      </div>
+      <button class="primary" id="play" type="button" style="width:100%;margin-top:4px">
+        Preview move &nbsp;<kbd>Space</kbd>
+      </button>
+    </fieldset>
+
+    <div>
+      <div class="verdict paid" id="verdict">
+        <b id="vTitle">Set both keyframes</b>
+        <span id="vBody">Position the drone, hit Set START, move it, hit Set END.</span>
+      </div>
+      <div class="moveRead" id="moveRead">No move yet.</div>
+    </div>
+
+    <fieldset>
+      <legend>Spec — paste back to Claude</legend>
+      <textarea id="spec" readonly spellcheck="false">Set both keyframes first.</textarea>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:9px">
+        <button class="primary" id="copy" type="button">Copy spec</button>
+        <span class="copied" id="copied" role="status" aria-live="polite"></span>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from './three.module.min.js';
+
+// ---------- house proxy dimensions, in metres, eyeballed off the photograph
+const H = { w: 11.0, storey: 3.2, gable: 2.6, depth: 12.0, porchDepth: 2.6, porchH: 3.1 };
+const FACADE_H = H.storey * 2 + H.gable;          // 9.0 m to the ridge
+
+const scoutCv = document.getElementById('scoutCanvas');
+const shotCv  = document.getElementById('shotCanvas');
+
+const renderer = new THREE.WebGLRenderer({canvas:scoutCv, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const shotRenderer = new THREE.WebGLRenderer({canvas:shotCv, antialias:true});
+shotRenderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d1520);
+
+// sky dome, so the drone view has something above the roofline
+scene.add(new THREE.Mesh(
+  new THREE.SphereGeometry(200, 32, 16),
+  new THREE.ShaderMaterial({
+    side: THREE.BackSide,
+    vertexShader:`varying vec3 vP;
+      void main(){ vP = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+    fragmentShader:`varying vec3 vP;
+      void main(){
+        float h = clamp(normalize(vP).y * 0.5 + 0.5, 0.0, 1.0);
+        vec3 low  = vec3(0.66, 0.76, 0.86);
+        vec3 high = vec3(0.16, 0.42, 0.74);
+        gl_FragColor = vec4(mix(low, high, pow(h, 0.85)), 1.0);
+      }`,
+  })
+));
+
+scene.add(new THREE.HemisphereLight(0xdfe9f5, 0x4a5a3a, 1.05));
+const sun = new THREE.DirectionalLight(0xfff2dc, 1.5);
+sun.position.set(-24, 32, 26);
+scene.add(sun);
+
+// ground
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(500, 500),
+  new THREE.MeshLambertMaterial({color:0x5c7a3f})
+);
+ground.rotation.x = -Math.PI/2;
+scene.add(ground);
+
+// driveway strip: a landmark so orbit direction stays legible
+const drive = new THREE.Mesh(
+  new THREE.PlaneGeometry(3.4, 46),
+  new THREE.MeshLambertMaterial({color:0x9a9a92})
+);
+drive.rotation.x = -Math.PI/2;
+drive.position.set(H.w/2 + 3.4, 0.02, 14);
+scene.add(drive);
+
+const house = new THREE.Group();
+scene.add(house);
+
+const wallMat = new THREE.MeshLambertMaterial({color:0xf2f2ee});
+const trimMat = new THREE.MeshLambertMaterial({color:0x21201e});
+
+// main mass
+const body = new THREE.Mesh(new THREE.BoxGeometry(H.w, H.storey*2, H.depth), wallMat);
+body.position.set(0, H.storey, -H.depth/2);
+house.add(body);
+
+// gable roof, ridge running front to back
+const roofShape = new THREE.Shape();
+roofShape.moveTo(-H.w/2 - 0.35, 0);
+roofShape.lineTo( H.w/2 + 0.35, 0);
+roofShape.lineTo( 0, H.gable);
+roofShape.closePath();
+const roof = new THREE.Mesh(
+  new THREE.ExtrudeGeometry(roofShape, {depth:H.depth, bevelEnabled:false}), trimMat
+);
+roof.position.set(0, H.storey*2, -H.depth);
+house.add(roof);
+
+// covered porch across the front
+const porchRoof = new THREE.Mesh(new THREE.BoxGeometry(H.w + 0.6, 0.32, H.porchDepth), trimMat);
+porchRoof.position.set(0, H.porchH, H.porchDepth/2);
+house.add(porchRoof);
+for (const px of [-H.w/2 + 0.5, -1.9, 1.9, H.w/2 - 0.5]){
+  const col = new THREE.Mesh(new THREE.BoxGeometry(0.22, H.porchH, 0.22), wallMat);
+  col.position.set(px, H.porchH/2, H.porchDepth - 0.15);
+  house.add(col);
+}
+const deck = new THREE.Mesh(new THREE.BoxGeometry(H.w + 0.6, 0.5, H.porchDepth), trimMat);
+deck.position.set(0, 0.25, H.porchDepth/2);
+house.add(deck);
+
+// the real photograph mapped onto the front elevation, so framing is judged
+// against actual pixels rather than grey boxes
+const tex = new THREE.TextureLoader().load('saintjoe.jpg', () => draw());
+tex.colorSpace = THREE.SRGBColorSpace;
+const facadeW = H.w * 1.52;
+const facade = new THREE.Mesh(
+  new THREE.PlaneGeometry(facadeW, facadeW / 1.638),
+  new THREE.MeshBasicMaterial({map:tex})
+);
+facade.position.set(0, facadeW / 1.638 / 2, H.porchDepth + 0.06);
+house.add(facade);
+
+// ---------- drone rig
+const droneCam = new THREE.PerspectiveCamera(40, 9/16, 0.1, 600);
+const gizmo = new THREE.Mesh(
+  new THREE.BoxGeometry(0.9, 0.3, 0.9),
+  new THREE.MeshBasicMaterial({color:0xf0c46a})
+);
+scene.add(gizmo);
+const frustum = new THREE.CameraHelper(droneCam);
+scene.add(frustum);
+
+// Altitude is the hardest thing to read in a perspective view, so the drone
+// carries a dashed plumb line down to a ring on the ground. Without these two
+// you cannot tell 4 m from 14 m while dragging.
+const dropLine = new THREE.Line(
+  new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]),
+  new THREE.LineDashedMaterial({color:0xf0c46a, dashSize:0.6, gapSize:0.45, transparent:true, opacity:0.75})
+);
+scene.add(dropLine);
+const pad = new THREE.Mesh(
+  new THREE.RingGeometry(0.55, 0.8, 28),
+  new THREE.MeshBasicMaterial({color:0xf0c46a, side:THREE.DoubleSide, transparent:true, opacity:0.85})
+);
+pad.rotation.x = -Math.PI/2;
+scene.add(pad);
+
+// picking + drag maths for grabbing the drone directly
+const ray = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+const dragPlane = new THREE.Plane();
+const hitPoint = new THREE.Vector3();
+
+let pathLine = null;
+const pathMat = new THREE.LineBasicMaterial({color:0xf0c46a});
+
+// ---------- scout orbit camera
+const scout = new THREE.PerspectiveCamera(46, 1, 0.1, 900);
+const orbit = {az:0.62, el:0.30, r:52, target:new THREE.Vector3(0, 4.5, 0)};
+function placeScout(){
+  scout.position.set(
+    orbit.target.x + orbit.r * Math.cos(orbit.el) * Math.sin(orbit.az),
+    orbit.target.y + orbit.r * Math.sin(orbit.el),
+    orbit.target.z + orbit.r * Math.cos(orbit.el) * Math.cos(orbit.az)
+  );
+  scout.lookAt(orbit.target);
+}
+
+let dragging = null, mode = null;
+
+function setNdc(e){
+  const r = scoutCv.getBoundingClientRect();
+  ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+}
+function overDrone(e){
+  setNdc(e); ray.setFromCamera(ndc, scout);
+  return ray.intersectObject(gizmo, false).length > 0;
+}
+
+scoutCv.addEventListener('pointerdown', e => {
+  if (overDrone(e)){
+    // Shift turns the grab into an aim, so one handle does position and angle.
+    mode = e.shiftKey ? 'aim' : 'drone';
+    if (mode === 'drone'){
+      // Drag on a plane parallel to the screen through the drone, so the drone
+      // simply follows the cursor in depth-correct 3D rather than sliding along
+      // one world axis.
+      dragPlane.setFromNormalAndCoplanarPoint(
+        scout.getWorldDirection(new THREE.Vector3()).negate(),
+        droneCam.position.clone()
+      );
+    }
+    dragging = {x:e.clientX, y:e.clientY, pose:readPose()};
+  } else {
+    mode = 'orbit';
+    dragging = {x:e.clientX, y:e.clientY, az:orbit.az, el:orbit.el};
+  }
+  scoutCv.setPointerCapture(e.pointerId);
+});
+
+scoutCv.addEventListener('pointermove', e => {
+  if (!dragging){
+    scoutCv.style.cursor = overDrone(e) ? 'move' : 'grab';
+    return;
+  }
+  if (mode === 'orbit'){
+    orbit.az = dragging.az - (e.clientX - dragging.x) * 0.006;
+    orbit.el = Math.max(-0.12, Math.min(1.45, dragging.el + (e.clientY - dragging.y) * 0.005));
+    placeScout();
+  } else if (mode === 'drone'){
+    setNdc(e); ray.setFromCamera(ndc, scout);
+    if (ray.ray.intersectPlane(dragPlane, hitPoint)){
+      writePose(worldToPose(hitPoint, dragging.pose));
+      applyPose(readPose());
+    }
+  } else if (mode === 'aim'){
+    const p = {...dragging.pose};
+    p.yaw   = clampRange('yaw',   dragging.pose.yaw   + (e.clientX - dragging.x) * 0.25);
+    p.pitch = clampRange('pitch', dragging.pose.pitch - (e.clientY - dragging.y) * 0.25);
+    writePose(p);
+    applyPose(readPose());
+  }
+  draw();
+});
+const stopDrag = () => { dragging = null; mode = null; };
+scoutCv.addEventListener('pointerup', stopDrag);
+scoutCv.addEventListener('pointercancel', stopDrag);
+scoutCv.addEventListener('wheel', e => {
+  e.preventDefault();
+  orbit.r = Math.max(12, Math.min(170, orbit.r * (1 + Math.sign(e.deltaY) * 0.09)));
+  placeScout(); draw();
+}, {passive:false});
+
+// ---------- pose model
+const ctl = id => document.getElementById(id);
+const IDS = ['dist','height','az','pitch','yaw','fov'];
+const readPose = () => ({
+  dist:+ctl('dist').value, height:+ctl('height').value, az:+ctl('az').value,
+  pitch:+ctl('pitch').value, yaw:+ctl('yaw').value, fov:+ctl('fov').value,
+});
+const writePose = p => { for (const k of IDS) ctl(k).value = p[k]; syncLabels(); };
+function syncLabels(){
+  const p = readPose();
+  ctl('oDist').textContent   = p.dist.toFixed(1) + ' m';
+  ctl('oHeight').textContent = p.height.toFixed(1) + ' m';
+  ctl('oAz').textContent     = p.az + '°';
+  ctl('oPitch').textContent  = p.pitch + '°';
+  ctl('oYaw').textContent    = p.yaw + '°';
+  ctl('oFov').textContent    = p.fov + '°';
+}
+
+const poseWorld = p => {
+  const a = p.az * Math.PI/180;
+  return new THREE.Vector3(Math.sin(a)*p.dist, p.height, Math.cos(a)*p.dist + H.porchDepth);
+};
+
+// Sliders own the legal range, so clamp against them rather than duplicating
+// the bounds and letting the two drift apart.
+const clampRange = (id, v) => {
+  const el = ctl(id);
+  return Math.min(+el.max, Math.max(+el.min, v));
+};
+
+// Inverse of poseWorld: a dragged world point becomes distance, height and
+// orbit angle. Pitch, yaw and lens are carried over from the pose being edited.
+function worldToPose(pt, base){
+  const dx = pt.x, dz = pt.z - H.porchDepth;
+  return {
+    ...base,
+    dist:   clampRange('dist',   Math.hypot(dx, dz)),
+    height: clampRange('height', pt.y),
+    az:     clampRange('az',     Math.atan2(dx, dz) * 180 / Math.PI),
+  };
+}
+
+// pose -> world transform. Azimuth orbits the house; pitch and yaw aim the lens
+// relative to a straight-on look at the facade.
+function applyPose(p){
+  droneCam.position.copy(poseWorld(p));
+  droneCam.fov = p.fov;
+  droneCam.lookAt(0, FACADE_H * 0.45, H.porchDepth);
+  droneCam.rotateX(p.pitch * Math.PI/180);
+  droneCam.rotateY(p.yaw  * Math.PI/180);
+  droneCam.updateProjectionMatrix();
+  droneCam.updateMatrixWorld(true);
+  gizmo.position.copy(droneCam.position);
+  gizmo.quaternion.copy(droneCam.quaternion);
+  frustum.update();
+
+  const gp = droneCam.position;
+  dropLine.geometry.setFromPoints([gp.clone(), new THREE.Vector3(gp.x, 0.03, gp.z)]);
+  dropLine.computeLineDistances();          // required or the dashes will not show
+  pad.position.set(gp.x, 0.04, gp.z);
+}
+
+const KF = {start:null, end:null};
+const lerp = (a,b,t) => a + (b-a)*t;
+const lerpPose = (A,B,t) => ({
+  dist:lerp(A.dist,B.dist,t), height:lerp(A.height,B.height,t), az:lerp(A.az,B.az,t),
+  pitch:lerp(A.pitch,B.pitch,t), yaw:lerp(A.yaw,B.yaw,t), fov:lerp(A.fov,B.fov,t),
+});
+function drawPath(){
+  if (pathLine){ scene.remove(pathLine); pathLine.geometry.dispose(); pathLine = null; }
+  if (!KF.start || !KF.end) return;
+  const pts = [];
+  for (let i = 0; i <= 32; i++) pts.push(poseWorld(lerpPose(KF.start, KF.end, i/32)));
+  pathLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), pathMat);
+  scene.add(pathLine);
+}
+
+// ---------- describe + cost
+function describe(){
+  const A = KF.start, B = KF.end;
+  const v = ctl('verdict');
+  if (!A || !B){
+    v.className = 'verdict paid';
+    ctl('vTitle').textContent = 'Set both keyframes';
+    ctl('vBody').textContent = 'Position the drone, hit Set START, move it, hit Set END.';
+    ctl('moveRead').textContent = 'No move yet.';
+    ctl('spec').value = 'Set both keyframes first.';
+    return;
+  }
+  const d = k => B[k] - A[k];
+  const words = [];
+  if (d('height') >  0.6) words.push(`rises ${A.height.toFixed(1)}m to ${B.height.toFixed(1)}m`);
+  if (d('height') < -0.6) words.push(`descends ${A.height.toFixed(1)}m to ${B.height.toFixed(1)}m`);
+  if (d('dist')   < -0.6) words.push(`pushes in ${A.dist.toFixed(0)}m to ${B.dist.toFixed(0)}m`);
+  if (d('dist')   >  0.6) words.push(`pulls back ${A.dist.toFixed(0)}m to ${B.dist.toFixed(0)}m`);
+  if (Math.abs(d('az'))    > 2) words.push(`orbits ${Math.abs(d('az')).toFixed(0)}° ${d('az') > 0 ? 'right' : 'left'}`);
+  if (Math.abs(d('pitch')) > 2) words.push(`tilts ${d('pitch') < 0 ? 'down' : 'up'} ${Math.abs(d('pitch')).toFixed(0)}°`);
+  if (Math.abs(d('yaw'))   > 2) words.push(`pans ${d('yaw') > 0 ? 'right' : 'left'} ${Math.abs(d('yaw')).toFixed(0)}°`);
+  if (Math.abs(d('fov'))   > 2) words.push(`lens ${A.fov}° to ${B.fov}°`);
+  if (!words.length) words.push('holds still');
+
+  const moved = ['dist','height','az','pitch','yaw'].some(k => Math.abs(d(k)) > 0.6);
+  if (moved){
+    v.className = 'verdict paid';
+    ctl('vTitle').textContent = 'Needs generating — 8.75 credits per attempt';
+    ctl('vBody').textContent = 'The camera changes position, so the house has to shift against its '
+      + 'background. Kling holds about two seconds on a real still before it invents architecture, '
+      + 'so this generates at 5s and keeps the first 2s.';
+  } else {
+    v.className = 'verdict free';
+    ctl('vTitle').textContent = 'Free — keyframed in Palmier';
+    ctl('vBody').textContent = 'Lens only, camera stays put. That is a crop animation on the real '
+      + 'photo, exact and repeatable. No credits.';
+  }
+  ctl('moveRead').textContent = 'Drone ' + words.join(', ') + '.';
+
+  ctl('spec').value = JSON.stringify({
+    shot:'saintjoe-drone',
+    plate:'drive/saintjoe/000 (1634x998)',
+    units:'metres and degrees; azimuth 0 = straight on, + = camera moves right',
+    start:A, end:B,
+    durationSec:+ctl('dur').value,
+    ease:'linear',
+    mode: moved ? 'generate' : 'keyframes',
+    move:'Drone ' + words.join(', ') + '.',
+  }, null, 2);
+}
+
+// ---------- render
+function resize(){
+  const w = scoutCv.clientWidth, h = scoutCv.clientHeight;
+  if (w && h){
+    renderer.setSize(w, h, false);
+    scout.aspect = w / h; scout.updateProjectionMatrix();
+  }
+  const sw = shotCv.clientWidth, sh = shotCv.clientHeight;
+  if (sw && sh) shotRenderer.setSize(sw, sh, false);
+}
+function draw(){
+  resize();
+  frustum.visible = gizmo.visible = dropLine.visible = pad.visible = true;
+  if (pathLine) pathLine.visible = true;
+  renderer.render(scene, scout);
+  // never shoot the rig: the gizmo, frustum, plumb line, pad and path are
+  // blocking aids and must not appear in the frame being judged
+  frustum.visible = gizmo.visible = dropLine.visible = pad.visible = false;
+  if (pathLine) pathLine.visible = false;
+  shotRenderer.render(scene, droneCam);
+}
+
+// ---------- wiring
+for (const id of IDS){
+  ctl(id).addEventListener('input', () => { syncLabels(); applyPose(readPose()); draw(); });
+}
+ctl('setStart').addEventListener('click', () => {
+  KF.start = readPose(); ctl('dotStart').className = 'stateDot set'; drawPath(); describe(); draw();
+});
+ctl('setEnd').addEventListener('click', () => {
+  KF.end = readPose(); ctl('dotEnd').className = 'stateDot set'; drawPath(); describe(); draw();
+});
+ctl('goStart').addEventListener('click', () => {
+  if (KF.start){ writePose(KF.start); applyPose(KF.start); draw(); }
+});
+ctl('goEnd').addEventListener('click', () => {
+  if (KF.end){ writePose(KF.end); applyPose(KF.end); draw(); }
+});
+ctl('dur').addEventListener('input', () => {
+  ctl('oDur').textContent = (+ctl('dur').value).toFixed(1) + 's'; describe();
+});
+
+let raf = null;
+function play(){
+  if (!KF.start || !KF.end || raf) return;
+  const ms = +ctl('dur').value * 1000, t0 = performance.now();
+  const step = now => {
+    const t = Math.min(1, (now - t0) / ms);
+    const p = lerpPose(KF.start, KF.end, t);
+    applyPose(p); syncLabelsFrom(p); draw();
+    raf = t < 1 ? requestAnimationFrame(step) : null;
+  };
+  raf = requestAnimationFrame(step);
+}
+// during playback the sliders would fight the animation, so labels update from
+// the interpolated pose and the sliders are only re-seated when it finishes
+function syncLabelsFrom(p){
+  ctl('oDist').textContent   = p.dist.toFixed(1) + ' m';
+  ctl('oHeight').textContent = p.height.toFixed(1) + ' m';
+  ctl('oAz').textContent     = p.az.toFixed(0) + '°';
+  ctl('oPitch').textContent  = p.pitch.toFixed(0) + '°';
+  ctl('oYaw').textContent    = p.yaw.toFixed(0) + '°';
+  ctl('oFov').textContent    = p.fov.toFixed(0) + '°';
+}
+ctl('play').addEventListener('click', play);
+window.addEventListener('keydown', e => {
+  if (e.code === 'Space' && e.target.tagName !== 'TEXTAREA'){ e.preventDefault(); play(); }
+});
+ctl('copy').addEventListener('click', async () => {
+  const t = ctl('spec'); t.select();
+  try { await navigator.clipboard.writeText(t.value); } catch { document.execCommand('copy'); }
+  ctl('copied').textContent = 'copied';
+  setTimeout(() => ctl('copied').textContent = '', 1600);
+});
+window.addEventListener('resize', () => { placeScout(); draw(); });
+
+syncLabels(); placeScout(); applyPose(readPose()); describe(); draw();
+</script>
+</body>
+</html>

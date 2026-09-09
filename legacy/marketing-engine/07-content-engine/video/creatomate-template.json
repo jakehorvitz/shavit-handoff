@@ -1,0 +1,162 @@
+{
+  "output_format": "mp4",
+  "width": 1080,
+  "height": 1920,
+  "frame_rate": 30,
+  "duration": 10,
+  "_comment": "Shavit Rootman 9:16 short. Carries the website theme exactly: black #000000 canvas, brass #B08D57 accent, Inter uppercase, sharp rectangles, 4px brass stripe, SHAVIT/ROOTMAN wordmark end card. Make's Creatomate module passes modifications keyed by element name: image_url, beat_hook, beat_proof, beat_cta, caption_track.",
+  "elements": [
+    {
+      "type": "shape",
+      "name": "background",
+      "width": "100%",
+      "height": "100%",
+      "fill_color": "#000000"
+    },
+    {
+      "type": "image",
+      "name": "image_url",
+      "dynamic": true,
+      "source": "{{ image_url }}",
+      "x": "50%",
+      "y": "38%",
+      "width": "100%",
+      "height": "62%",
+      "fit": "cover",
+      "animations": [
+        { "type": "scale", "start_scale": "100%", "end_scale": "108%", "easing": "linear", "time": 0, "duration": 10 }
+      ]
+    },
+    {
+      "type": "shape",
+      "name": "scrim",
+      "y": "78%",
+      "height": "44%",
+      "width": "100%",
+      "fill_color": "rgba(0,0,0,0.55)"
+    },
+    {
+      "type": "shape",
+      "name": "brass_stripe",
+      "x": "12%",
+      "y": "58%",
+      "width": "120px",
+      "height": "4px",
+      "fill_color": "#B08D57"
+    },
+    {
+      "type": "text",
+      "name": "beat_hook",
+      "dynamic": true,
+      "text": "BOUGHT IN HILLSDALE.",
+      "x": "8%",
+      "y": "64%",
+      "width": "84%",
+      "x_alignment": "0%",
+      "font_family": "Inter",
+      "font_weight": "800",
+      "font_size": "82px",
+      "letter_spacing": "-2%",
+      "text_transform": "uppercase",
+      "fill_color": "#FFFFFF",
+      "time": 0,
+      "duration": 2.2,
+      "animations": [ { "type": "fade", "time": 0, "duration": 0.3 } ]
+    },
+    {
+      "type": "text",
+      "name": "beat_proof",
+      "dynamic": true,
+      "text": "THE REAL NUMBERS.",
+      "x": "8%",
+      "y": "64%",
+      "width": "84%",
+      "x_alignment": "0%",
+      "font_family": "Inter",
+      "font_weight": "800",
+      "font_size": "78px",
+      "letter_spacing": "-2%",
+      "text_transform": "uppercase",
+      "fill_color": "#B08D57",
+      "time": 2.2,
+      "duration": 4.8,
+      "animations": [ { "type": "fade", "time": 2.2, "duration": 0.3 } ]
+    },
+    {
+      "type": "text",
+      "name": "beat_cta",
+      "dynamic": true,
+      "text": "OPENINGS IN BIO",
+      "x": "8%",
+      "y": "64%",
+      "width": "84%",
+      "x_alignment": "0%",
+      "font_family": "Inter",
+      "font_weight": "800",
+      "font_size": "74px",
+      "letter_spacing": "-2%",
+      "text_transform": "uppercase",
+      "fill_color": "#FFFFFF",
+      "time": 7,
+      "duration": 3,
+      "animations": [ { "type": "fade", "time": 7, "duration": 0.3 } ]
+    },
+    {
+      "type": "text",
+      "name": "caption_track",
+      "dynamic": true,
+      "transcript_source": "auto",
+      "transcript_effect": "highlight",
+      "transcript_color": "#B08D57",
+      "x": "50%",
+      "y": "90%",
+      "width": "90%",
+      "x_alignment": "50%",
+      "font_family": "Inter",
+      "font_weight": "700",
+      "font_size": "46px",
+      "text_transform": "uppercase",
+      "fill_color": "#FFFFFF"
+    },
+    {
+      "type": "composition",
+      "name": "end_card",
+      "time": 8.6,
+      "duration": 1.4,
+      "width": "100%",
+      "height": "100%",
+      "animations": [ { "type": "fade", "time": 8.6, "duration": 0.3 } ],
+      "elements": [
+        { "type": "shape", "width": "100%", "height": "100%", "fill_color": "#000000" },
+        { "type": "shape", "x": "50%", "y": "44%", "width": "120px", "height": "4px", "fill_color": "#B08D57" },
+        {
+          "type": "text",
+          "x": "50%",
+          "y": "50%",
+          "width": "90%",
+          "x_alignment": "50%",
+          "font_family": "Inter",
+          "font_weight": "800",
+          "font_size": "80px",
+          "letter_spacing": "-2%",
+          "text_transform": "uppercase",
+          "fill_color": "#FFFFFF",
+          "rich_text": "<span>SHAVIT</span><span fill-color=\"#B08D57\">ROOTMAN</span>"
+        },
+        {
+          "type": "text",
+          "x": "50%",
+          "y": "57%",
+          "width": "90%",
+          "x_alignment": "50%",
+          "font_family": "Inter",
+          "font_weight": "400",
+          "font_size": "34px",
+          "letter_spacing": "1px",
+          "fill_color": "#BBBBBB",
+          "text": "link in bio"
+        }
+      ]
+    }
+  ]
+}

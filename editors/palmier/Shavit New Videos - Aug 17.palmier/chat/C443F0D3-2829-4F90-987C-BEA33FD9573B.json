@@ -1,0 +1,60 @@
+{
+  "id" : "C443F0D3-2829-4F90-987C-BEA33FD9573B",
+  "isOpen" : false,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "8BEA228B-EA76-47A1-A57A-A626A0133EB2",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    },
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "3B3C2D15-2C71-4304-8BAD-C40FF247F171",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    },
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "3EEDFD20-E8CB-4F0D-9A83-23E63AC1C6CC",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    },
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "F412393C-C289-4D04-835D-C3909902046E",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-18T20:36:03Z"
+}

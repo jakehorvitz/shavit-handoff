@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder, Kitchen Bird's-Eye · shot spec</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#2a2a2e;
+    --ink:#f4f2ec; --dim:#a5a29a; --faint:#6f6c64;
+    --brass:#B08D57; --gold:#FFC000; --ok:#7FB88A; --bad:#e0794a; --blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;line-height:1.1;margin:.35em 0 .15em}
+  h1 .num{color:var(--faint);font-weight:400}
+  .sub{color:var(--dim);max-width:74ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  a{color:var(--brass)}
+  .decision{background:linear-gradient(180deg,rgba(110,163,214,.1),transparent);border:1px solid rgba(110,163,214,.35);border-left:3px solid var(--blue);border-radius:10px;padding:14px 16px;margin:14px 0}
+  .decision h4{margin:0 0 6px;color:var(--blue);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .warn{background:linear-gradient(180deg,rgba(224,121,74,.1),transparent);border:1px solid rgba(224,121,74,.35);border-left:3px solid var(--bad);border-radius:10px;padding:14px 16px;margin:14px 0}
+  .warn h4{margin:0 0 6px;color:var(--bad);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .diagram{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+  .diagram svg{width:100%;height:auto;display:block}
+  .figc{font-size:11px;color:var(--faint);font-family:var(--mono);margin-top:8px;text-align:center}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:12px}
+</style>
+</head>
+<body data-spec="43-howder">
+<div class="wrap">
+
+<header>
+  <div class="kicker">Shavit Rootman · shavit-pipeline · 43 Howder reel · single-shot spec</div>
+  <h1>Kitchen Bird's-Eye <span class="num">,  replaces the walkthrough</span></h1>
+  <p class="sub">Your brief: the whole kitchen pictured at once, seen from above. This page specs the shot before any generation:
+  the layout diagram, the camera, the two-step build (still first, you approve it, then motion), the cost, and the honesty risk.
+  Annotate anything on this page.</p>
+  <div class="meta-row">
+    <span class="chip">Slot: <b>beat 6, 4.8s</b> (walkthrough parked)</span>
+    <span class="chip">Build: <b>2-step, still shown first</b></span>
+    <span class="chip">Est. cost: <b>image gen + 10 cr video</b>, preflighted</span>
+    <span class="chip">Status: <b>awaiting your two answers below</b></span>
+  </div>
+</header>
+
+<h2 data-annot="be-layout">The kitchen from above, layout diagram</h2>
+<p class="d">Assembled from the three kitchen photos (u1-03, u1-05, u1-08). The camera has never seen this room from above, this drawing is my reconstruction and <b>Shavit should confirm it in one glance</b> before we generate, so the AI overhead matches the real room.</p>
+
+<div class="diagram" data-annot="be-diagram">
+<svg viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace,Menlo,monospace">
+  <rect x="80" y="60" width="600" height="440" fill="#1b1b1e" stroke="#f4f2ec" stroke-width="6"/>
+  <rect x="240" y="52" width="130" height="16" fill="#6ea3d6"/>
+  <text x="305" y="40" fill="#6ea3d6" font-size="15" text-anchor="middle">WINDOW</text>
+  <rect x="672" y="130" width="16" height="110" fill="#7FB88A"/>
+  <text x="700" y="180" fill="#7FB88A" font-size="15" writing-mode="tb">BACK DOOR</text>
+  <rect x="200" y="492" width="180" height="16" fill="#0b0b0c"/>
+  <text x="290" y="535" fill="#a5a29a" font-size="15" text-anchor="middle">OPEN TO LIVING / ENTRY</text>
+  <rect x="86" y="66" width="380" height="80" fill="#2a2a2e" stroke="#B08D57" stroke-width="2"/>
+  <rect x="255" y="78" width="100" height="52" fill="#141416" stroke="#f4f2ec" stroke-width="2"/>
+  <text x="305" y="110" fill="#f4f2ec" font-size="16" text-anchor="middle">SINK</text>
+  <rect x="86" y="146" width="80" height="270" fill="#2a2a2e" stroke="#B08D57" stroke-width="2"/>
+  <rect x="92" y="170" width="68" height="80" fill="#141416" stroke="#f4f2ec" stroke-width="2"/>
+  <text x="126" y="215" fill="#f4f2ec" font-size="15" text-anchor="middle">STOVE</text>
+  <rect x="92" y="280" width="68" height="70" fill="#141416" stroke="#f4f2ec" stroke-width="2"/>
+  <text x="126" y="320" fill="#f4f2ec" font-size="14" text-anchor="middle">DW</text>
+  <rect x="580" y="150" width="90" height="110" fill="#141416" stroke="#f4f2ec" stroke-width="2"/>
+  <text x="625" y="212" fill="#f4f2ec" font-size="15" text-anchor="middle">FRIDGE</text>
+  <rect x="466" y="66" width="208" height="80" fill="#2a2a2e" stroke="#B08D57" stroke-width="2"/>
+  <text x="565" y="112" fill="#a5a29a" font-size="14" text-anchor="middle">COUNTER</text>
+  <text x="270" y="185" fill="#B08D57" font-size="14">BUTCHER-BLOCK COUNTER, L-RUN</text>
+  <text x="420" y="360" fill="#6f6c64" font-size="15" text-anchor="middle">WARM VINYL PLANK FLOOR</text>
+  <rect x="120" y="30" width="520" height="500" fill="none" stroke="#FFC000" stroke-width="3" stroke-dasharray="14 10" rx="10"/>
+  <text x="380" y="22" fill="#FFC000" font-size="16" text-anchor="middle">CAMERA FRAME 9:16, WHOLE KITCHEN IN SHOT, STRAIGHT DOWN</text>
+  <line x1="380" y1="120" x2="380" y2="300" stroke="#FFC000" stroke-width="4" marker-end="url(#arr)"/>
+  <defs><marker id="arr" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFC000"/></marker></defs>
+  <text x="398" y="220" fill="#FFC000" font-size="15">DESCEND: BIRD'S-EYE DOWN TO PERSON'S VIEW</text>
+</svg>
+<div class="figc">top-down reconstruction, north wall at top (sink + window) · west wall left (stove, dishwasher) · fridge beside the back door · open to living at bottom · gold dashes = the shot</div>
+</div>
+
+<h2 data-annot="be-shot">The shot</h2>
+<table>
+  <tr><th>property</th><th>spec</th></tr>
+  <tr><td>Framing</td><td>Straight-down overhead, the ENTIRE kitchen inside frame, both counter runs, sink, stove, dishwasher, fridge, back door, floor field.</td></tr>
+  <tr><td>Move</td><td><b>TOP DOWN, descending (rev 2, your correction):</b> opens on the full bird's-eye of the whole kitchen, then descends and tilts up through one continuous move, settling on a person's eye-level view of the kitchen, ending on the REAL photograph's pixels, which is what makes the shot read real and match the other photos.</td></tr>
+  <tr><td>Duration</td><td>Generated at 5s, retimed into the 4.8s beat-6 slot. Grade + grain pass like the rest of the reel.</td></tr>
+  <tr><td>Seams</td><td>Luma fade in from the drone descent (aerial → aerial reads as one language), white flash out to the vanity.</td></tr>
+</table>
+
+<h2 data-annot="be-build">The build, two steps, one gate each</h2>
+<ul>
+  <li><b>Step 1, the overhead still.</b> Nano Banana Pro edit from the kitchen-wide photo: "top-down view of this exact kitchen, all appliances and counters in their true positions, matching this diagram." I show you the still against this diagram. Nothing animates until you approve it.</li>
+  <li><b>Step 2, the motion.</b> Approved still → one 5s generation, slow drift + settle, 10 credits preflighted. Grade, grain, slot into the reel as v4.</li>
+</ul>
+
+<div class="warn" data-annot="be-risk">
+  <h4>Honesty flag, this is the most invented shot in the reel</h4>
+  <ul style="margin:6px 0 0">
+    <li>No photo looks down into this room; the AI must invent the entire overhead geometry, counter depths, floor area, everything above eye level.</li>
+    <li>The diagram above is the control: if the generated still contradicts it (or the diagram contradicts the real room), we catch it BEFORE it moves. One glance from Shavit at the diagram closes the loop.</li>
+    <li>An interior "drone hovering under the ceiling" is also physically impossible to film, stylized, not documentary. It reads as a cool graphic beat, which fits the reel; it just should not be mistaken for a real capture.</li>
+  </ul>
+</div>
+
+<div class="decision" data-annot="be-decisions">
+  <h4>Your two answers</h4>
+  <ul style="margin:6px 0 0">
+    <li><b>1, Is the diagram right?</b> Annotate anything wrong with the layout (or send it to Shavit for the one-glance check).</li>
+    <li><b>2, Go on step 1?</b> The overhead still generates only after your yes; the video only after you approve the still.</li>
+  </ul>
+</div>
+
+<footer>kitchen-birdseye · spec rev 2 (direction corrected: top-down → person's view, ends on real pixels) · Jul 12 2026 · walkthrough clip parked in clips/ · annotations land under <code>43-howder/be-*</code></footer>
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

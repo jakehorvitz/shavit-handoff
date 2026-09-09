@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Reel 1 renderer</title>
+<style>
+:root{--gold:#FFC000;--font:-apple-system,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:#000;overflow:hidden;font-family:var(--font);color:#fff;-webkit-font-smoothing:antialiased}
+.stage{position:relative;width:1080px;height:1920px;perspective:2600px;background:radial-gradient(120% 60% at 50% 30%,#141414 0%,#000 60%)}
+.eyebrow{position:absolute;left:72px;top:96px;font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;gap:18px;align-items:center;opacity:var(--eo,1)}
+.eyebrow::before{content:"";width:56px;height:2px;background:var(--gold)}
+.callout{position:absolute;left:72px;right:72px;bottom:190px;display:flex;flex-direction:column;gap:22px;opacity:var(--co,1);transform:translateY(calc((1 - var(--co,1))*30px))}
+.callout h1{font-size:104px;line-height:.92;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;text-wrap:balance}
+.callout p{font-size:30px;line-height:1.35;color:#bbb;max-width:34ch}
+.rule{width:140px;height:2px;background:var(--gold)}
+.phone{position:absolute;left:50%;top:50%;width:640px;height:1386px;margin:-693px 0 0 -320px;border-radius:92px;background:#0a0a0a;
+  box-shadow:0 0 0 2px #2a2a2a,0 0 0 4px #0c0c0c,0 60px 120px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.06);
+  transform:translateY(var(--ty,0)) rotateY(var(--ry,-16deg)) rotateX(var(--rx,4deg)) rotateZ(var(--rz,-4deg)) scale(var(--s,1));transform-style:preserve-3d;opacity:var(--o,1)}
+.phone::before{content:"";position:absolute;inset:14px;border-radius:80px;background:#000;box-shadow:inset 0 0 0 2px #1a1a1a}
+.phone .screen{position:absolute;inset:26px;border-radius:70px;overflow:hidden;background:#000}
+.phone .screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.phone .island{position:absolute;top:44px;left:50%;width:210px;height:56px;margin-left:-105px;border-radius:40px;background:#000;box-shadow:0 0 0 1px #111}
+.phone .gloss{position:absolute;inset:0;border-radius:92px;background:linear-gradient(115deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 70%,rgba(255,192,0,.08) 100%)}
+.phone .edge{position:absolute;inset:0;border-radius:92px;box-shadow:inset 3px 0 0 rgba(255,255,255,.10),inset -3px 0 0 rgba(255,255,255,.04)}
+.mac{position:absolute;left:50%;top:40%;width:1000px;height:640px;margin:-320px 0 0 -500px;transform:translateY(var(--ty,0)) rotateY(var(--ry,-10deg)) rotateX(var(--rx,10deg)) rotateZ(var(--rz,-2deg)) scale(var(--s,1));transform-style:preserve-3d;opacity:var(--o,1)}
+.mac .lid{position:absolute;inset:0 0 64px 0;border-radius:26px 26px 12px 12px;background:#0b0b0b;box-shadow:0 0 0 2px #2a2a2a,inset 0 0 0 1px rgba(255,255,255,.10),0 60px 120px rgba(0,0,0,.85)}
+.mac .screen{position:absolute;inset:16px 16px 80px 16px;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 0 120px rgba(255,192,0,.10)}
+.mac .screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:brightness(1.08)}
+.mac .notch{position:absolute;top:16px;left:50%;width:120px;height:18px;margin-left:-60px;border-radius:0 0 10px 10px;background:#0b0b0b}
+.mac .base{position:absolute;left:-40px;right:-40px;bottom:0;height:64px;border-radius:0 0 22px 22px;background:linear-gradient(#3a3a3a 0,#1a1a1a 6%,#0e0e0e);box-shadow:0 30px 60px rgba(0,0,0,.7)}
+.mac .base::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.28),rgba(255,255,255,.05))}
+.mac .foot{position:absolute;left:50%;bottom:40px;width:180px;height:8px;margin-left:-90px;border-radius:0 0 8px 8px;background:#050505}
+.bleed{position:absolute;inset:0;opacity:var(--o,1)} .bleed img{width:100%;height:100%;object-fit:cover;display:block}
+.end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px;text-align:center;opacity:var(--o,1)}
+.end .mark{width:150px;height:150px;border:3px solid var(--gold);display:grid;place-items:center;font-weight:800;font-size:56px;color:var(--gold);clip-path:inset(0 calc(100% - var(--d,100%)) 0 0)}
+.end h1{font-size:112px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1}
+.end p{font-size:40px;color:#fff;letter-spacing:.18em;text-transform:uppercase}
+.progress{position:absolute;left:0;top:0;height:6px;background:var(--gold);width:var(--pw,0)}
+.hair{position:absolute;left:72px;top:78px;height:2px;background:var(--gold);width:var(--hw,0)}
+</style></head><body><div class="stage" id="stage"></div>
+<script>
+const q=new URLSearchParams(location.search); const t=parseFloat(q.get('t')||'0'); const S=document.getElementById('stage');
+const clamp=x=>x<0?0:x>1?1:x, ss=x=>{x=clamp(x);return x*x*(3-2*x)}, pad=n=>String(n).padStart(4,'0');
+const F=(dir,i,max)=>`${dir}/${pad(Math.max(0,Math.min(max,i)))}.jpg`;
+const fr=(t0,fps=30)=>Math.floor((t-t0)*fps);
+let html='';
+if (t<2){ // Mac hero push-in
+  const u=ss(t/2); const o=ss(t/0.5);
+  html+=`<div class="hair" style="--hw:${(u*160).toFixed(0)}px"></div><div class="eyebrow" style="--eo:${o}">shavitrootman.com</div>
+  <div class="mac" style="--s:${(1.02+0.12*u).toFixed(3)};--rx:${(14-6*u).toFixed(2)}deg;--ry:${(-14+6*u).toFixed(2)}deg;--rz:-2deg;--ty:-40px;--o:1"><div class="lid"><div class="screen"><img src="${F('footage/desktop-hero-push',fr(0),89)}"></div><div class="notch"></div></div><div class="base"></div><div class="foot"></div></div>
+  <div class="callout" style="--co:${ss((t-0.6)/0.8)}"><h1>Introducing<br>our new<br>website.</h1><div class="rule"></div><p style="color:#fff;font-size:36px;letter-spacing:.06em">shavitrootman.com</p></div>`;
+} else if (t<4){ // phone rises
+  const u=ss((t-2)/1.4);
+  html+=`<div class="hair" style="--hw:160px"></div><div class="eyebrow">shavitrootman.com</div>
+  <div class="phone" style="--ty:${(80-300*u).toFixed(0)}px;--ry:${(-26+10*u).toFixed(2)}deg;--rx:${(10-4*u).toFixed(2)}deg;--rz:-5deg;--s:.82;--o:1"><div class="screen"><img src="${F('footage/phone-home-to-michigan',0,149)}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+  <div class="callout"><h1>Introducing<br>our new<br>website.</h1><div class="rule"></div><p style="color:#fff;font-size:36px;letter-spacing:.06em">shavitrootman.com</p></div>`;
+} else if (t<11){ // available now: scroll to michigan (4–7.5) then swipe (7.5–11)
+  const u=ss((t-4)/1.2); const img = t<7.5 ? F('footage/phone-home-to-michigan',45+fr(4),149) : F('footage/phone-michigan-swipe',24+fr(7.5),119);
+  html+=`<div class="hair" style="--hw:160px"></div><div class="eyebrow">Available Units</div>
+  <div class="phone" style="--ty:${(-230-40*u).toFixed(0)}px;--ry:${(-12+18*u).toFixed(2)}deg;--rx:${(6-2*u).toFixed(2)}deg;--rz:${(-4+5*u).toFixed(2)}deg;--s:${(0.80+0.03*u).toFixed(3)}"><div class="screen"><img src="${img}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+  <div class="callout" style="--co:${ss((t-4.6)/0.8)}"><h1>Available<br>Units.</h1><div class="rule"></div><p>Hillsdale, Michigan</p></div>`;
+} else if (t<14){ // Mac → case studies (trimmed to 11–14, QC C4)
+  const u=ss((t-11)/1.0);
+  html+=`<div class="hair" style="--hw:160px"></div><div class="eyebrow">Deal case studies</div>
+  <div class="mac" style="--s:${(1.10+0.08*u).toFixed(3)};--rx:${(12-4*u).toFixed(2)}deg;--ry:${(-16+8*u).toFixed(2)}deg;--rz:2deg;--ty:-40px;--o:1"><div class="lid"><div class="screen"><img src="${F('footage/desktop-to-case-studies',45+fr(11),149)}"></div><div class="notch"></div></div><div class="base"></div><div class="foot"></div></div>
+  <div class="callout" style="--co:${ss((t-11.8)/0.8)}"><h1>Deal Case<br>Studies.</h1><div class="rule"></div><p>Michigan · Ohio · Indiana</p></div>`;
+} else if (t<24){ // The Turn v1.3: the LIVE case-study page on the phone, scrolling, each slider swiping fast
+  const u=ss((t-14)/0.8);
+  html+=`<div class="phone" style="--ty:${(-190).toFixed(0)}px;--ry:${(-6+6*u).toFixed(2)}deg;--rx:${(4-3*u).toFixed(2)}deg;--rz:0deg;--s:${(1.02+0.08*u).toFixed(3)};--o:1"><div class="screen"><img src="${F('footage/phone-casestudy-swipes',Math.min(fr(14),284),299)}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+  <div class="callout" style="--co:${ss((t-16.6)/0.6)};bottom:120px"><h1 style="font-size:88px">Kendall Street.</h1><div class="rule"></div><p>Deal Case Study · South Bend, Indiana</p></div>`;
+} else if (t<29.4){ // Text us (crossfades out into the end card, QC C2)
+  const u=ss((t-24)/1.0); const oo = t<28.8 ? 1 : 1-ss((t-28.8)/0.6);
+  html+=`<div class="hair" style="--hw:160px;opacity:${oo}"></div><div class="eyebrow" style="--eo:${oo}">Contact Us</div>
+  <div class="phone" style="--ty:${(-260).toFixed(0)}px;--ry:${(-24+14*u).toFixed(2)}deg;--rx:${(8-5*u).toFixed(2)}deg;--rz:-2deg;--s:.90;--o:${oo}"><div class="screen"><img src="${F('footage/phone-to-reach',Math.min(fr(24),64),119)}"></div><div class="island"></div><div class="edge"></div><div class="gloss"></div></div>
+  <div class="callout" style="--co:${Math.min(ss((t-24.8)/0.8),oo)}"><h1>Contact Us.</h1><div class="rule"></div><p>805-364-4415</p></div>`;
+}
+if (t>=29.4){ // the known Shavit title card (shared end card from the slate), 4.5s then hold
+  html+=`<div class="bleed"><img src="${F('footage/endcard',1+fr(29.4),135)}"></div>`;
+}
+S.innerHTML=html;
+</script></body></html>

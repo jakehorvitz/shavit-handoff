@@ -1,0 +1,453 @@
+/* ============================================================
+   Shavit Rootman — Design Tokens
+   Single source of truth for color, type, spacing, radii, motion.
+
+   Font substitution note: BMW Type Next Latin (proprietary) is
+   substituted with Inter from Google Fonts. Adjust display
+   tracking to -0.5px to approximate BMW Type's tighter spacing.
+   Alt: uncomment the Saira Condensed import for a more
+   architectural headline feel.
+   ============================================================ */
+
+/*  */
+
+:root {
+  /* ------- Font families ------- */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Alt headline family — swap --font-display to this for a more architectural cut */
+  --font-display-alt: 'Saira Condensed', 'Inter', sans-serif;
+
+  /* ------- Colors :: Brand / Accent ------- */
+  --color-primary:        #ffffff;
+  --color-brass:          #B08D57;  /* Replaces BMW M tricolor. Divider/underscore ONLY. */
+  --color-brass-soft:     #8a6e44;  /* Brass at 70% lightness — for printed/photo overlays only */
+
+  /* ------- Colors :: Surface ------- */
+  --color-canvas:           #000000;
+  --color-surface-soft:     #0d0d0d;
+  --color-surface-card:     #1a1a1a;
+  --color-surface-elevated: #262626;
+
+  /* ------- Colors :: Hairlines & Borders ------- */
+  --color-hairline:        #3c3c3c;
+  --color-hairline-strong: #262626;
+
+  /* ------- Colors :: Text ------- */
+  --color-ink:         #ffffff;  /* aka on-dark */
+  --color-body:        #bbbbbb;
+  --color-body-strong: #e6e6e6;
+  --color-muted:       #7e7e7e;
+
+  /* ------- Colors :: Semantic (used rarely) ------- */
+  --color-warning: #f4b400;
+  --color-success: #0fa336;
+
+  /* ------- Typography :: Scale ------- */
+  --type-display-xl-size: 80px;
+  --type-display-lg-size: 56px;
+  --type-display-md-size: 40px;
+  --type-display-sm-size: 32px;
+  --type-title-lg-size:   24px;
+  --type-title-md-size:   20px;
+  --type-title-sm-size:   18px;
+  --type-label-size:      14px;
+  --type-body-md-size:    16px;
+  --type-body-sm-size:    14px;
+  --type-caption-size:    12px;
+  --type-button-size:     14px;
+  --type-nav-size:        14px;
+
+  /* ------- Spacing ------- */
+  --space-xxs:     4px;
+  --space-xs:      8px;
+  --space-sm:     12px;
+  --space-md:     16px;
+  --space-lg:     24px;
+  --space-xl:     40px;
+  --space-xxl:    64px;
+  --space-section: 96px;
+
+  /* ------- Radius ------- */
+  --radius-none: 0px;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-full: 9999px;
+
+  /* ------- Motion ------- */
+  --ease-house: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   200ms;
+  --dur-base:   300ms;
+  --dur-med:    400ms;
+  --dur-slow:   600ms;
+  --dur-slower: 800ms;
+
+  /* ------- Layout ------- */
+  --container-max: 1440px;
+  --nav-height: 64px;
+  --brass-stripe-height: 4px;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-body);
+  font-size: var(--type-body-md-size);
+  font-weight: 300;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; }
+
+::selection { background: var(--color-brass); color: var(--color-canvas); }
+
+/* ============================================================
+   Type :: semantic
+   ============================================================ */
+
+.display-xl,
+.display-lg,
+.display-md,
+.display-sm,
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-ink);
+  text-transform: uppercase;
+  letter-spacing: -0.5px;   /* approximate BMW Type's cap density */
+  margin: 0;
+}
+
+.display-xl, h1 { font-size: var(--type-display-xl-size); line-height: 1.0; }
+.display-lg, h2 { font-size: var(--type-display-lg-size); line-height: 1.05; }
+.display-md, h3 { font-size: var(--type-display-md-size); line-height: 1.1; }
+.display-sm, h4 { font-size: var(--type-display-sm-size); line-height: 1.15; }
+
+.title-lg, .title-md, .title-sm {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.title-lg { font-size: var(--type-title-lg-size); font-weight: 700; line-height: 1.3; }
+.title-md { font-size: var(--type-title-md-size); font-weight: 400; line-height: 1.4; }
+.title-sm { font-size: var(--type-title-sm-size); font-weight: 400; line-height: 1.4; }
+
+p, .body-md {
+  font-family: var(--font-body);
+  font-size: var(--type-body-md-size);
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--color-body);
+  margin: 0 0 1em 0;
+}
+.body-md--strong { color: var(--color-body-strong); }
+.body-sm {
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm-size);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--color-body);
+}
+
+.label-uppercase {
+  font-family: var(--font-display);
+  font-size: var(--type-label-size);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.caption {
+  font-family: var(--font-display);
+  font-size: var(--type-caption-size);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--color-muted);
+}
+
+/* ============================================================
+   Components :: Brass stripe (the brand signature)
+   Used as a 4px horizontal underscore / divider ONLY.
+   Never a button fill. Never a background. Never a type color.
+   ============================================================ */
+.brass-stripe {
+  display: block;
+  height: var(--brass-stripe-height);
+  width: 64px;
+  background: var(--color-brass);
+  border: 0;
+}
+.brass-stripe--wide   { width: 120px; }
+.brass-stripe--full   { width: 100%; }
+.brass-stripe--draw   { transform-origin: left center; animation: brass-draw var(--dur-slow) var(--ease-house) both; }
+
+@keyframes brass-draw {
+  from { transform: scaleX(0.02); }
+  to   { transform: scaleX(1); }
+}
+
+/* ============================================================
+   Components :: Buttons
+   Sharp rectangles, uppercase 1.5px tracked, 48px height.
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 32px;
+  border: 1px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--type-button-size);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-none);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-house),
+              color      var(--dur-fast) var(--ease-house);
+}
+.btn:hover, .btn:focus-visible {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  outline: none;
+}
+.btn--primary { background: var(--color-canvas); }
+.btn--outline { background: transparent; }
+.btn--on-light {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  border-color: var(--color-canvas);
+}
+.btn--on-light:hover { background: transparent; color: var(--color-canvas); border-color: var(--color-canvas); }
+
+.btn-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-card);
+  color: var(--color-ink);
+  border: 0;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-house);
+}
+.btn-icon:hover { background: var(--color-surface-elevated); }
+
+.text-link {
+  font-family: var(--font-display);
+  font-size: var(--type-label-size);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.text-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: var(--color-ink);
+  transform: scaleX(0.02);
+  transform-origin: left center;
+  transition: transform var(--dur-fast) var(--ease-house);
+}
+.text-link:hover::after { transform: scaleX(1); }
+
+/* ============================================================
+   Components :: Cards / Containers
+   ============================================================ */
+.card {
+  background: var(--color-surface-card);
+  border-radius: var(--radius-none);
+  padding: var(--space-lg);
+  color: var(--color-ink);
+}
+.card--feature { background: var(--color-surface-card); padding: 0; }
+.card--model   { background: var(--color-canvas); padding: 0; }
+.card--magazine{ background: var(--color-canvas); border: 1px solid var(--color-hairline); padding: 0; }
+
+.spec-cell {
+  background: var(--color-surface-soft);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.spec-cell__value {
+  font-family: var(--font-display);
+  font-size: var(--type-display-sm-size);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: var(--color-ink);
+}
+.spec-cell__label {
+  font-family: var(--font-display);
+  font-size: var(--type-label-size);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-body);
+}
+
+/* ============================================================
+   Components :: Inputs
+   ============================================================ */
+.input {
+  display: block;
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  background: var(--color-surface-card);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-none);
+  font-family: var(--font-body);
+  font-size: var(--type-body-md-size);
+  font-weight: 300;
+  transition: border-color var(--dur-fast) var(--ease-house);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-ink);
+  border-width: 2px;
+}
+.input::placeholder { color: var(--color-muted); }
+
+/* ============================================================
+   Components :: Hairlines
+   ============================================================ */
+.hairline    { border: 0; border-top: 1px solid var(--color-hairline); margin: 0; }
+.hairline-v  { border: 0; border-left: 1px solid var(--color-hairline); }
+
+/* ============================================================
+   Components :: Top nav
+   ============================================================ */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-height);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-hairline-strong);
+}
+
+.nav-link {
+  font-family: var(--font-display);
+  font-size: var(--type-nav-size);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding: 12px 0;
+  position: relative;
+}
+.nav-link:hover { color: var(--color-body-strong); }
+.nav-link--active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: var(--color-brass);
+}
+
+/* ============================================================
+   Layout helpers
+   ============================================================ */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+.section { padding: var(--space-section) 0; }
+.bleed { width: 100%; }
+
+/* ============================================================
+   Photography conventions
+   ============================================================ */
+.photo-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-canvas);
+}
+.photo-band__media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-band__media--reveal {
+  animation: photo-reveal var(--dur-slower) var(--ease-house) both;
+}
+@keyframes photo-reveal {
+  from { transform: scale(1.05); opacity: 0; }
+  to   { transform: scale(1.00); opacity: 1; }
+}
+
+/* Placeholder block for missing photography */
+.photo-placeholder {
+  background:
+    linear-gradient(135deg, rgba(176,141,87,0.08), rgba(176,141,87,0) 50%),
+    repeating-linear-gradient(
+      45deg,
+      #111 0 12px,
+      #161616 12px 24px
+    );
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-hairline-strong);
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+  }
+}

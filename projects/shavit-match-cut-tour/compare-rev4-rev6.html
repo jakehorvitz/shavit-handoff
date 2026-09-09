@@ -1,0 +1,49 @@
+<style>
+  :root{--brass:#B08D57;--gold:#FFC000;--ink:#f4f1ea;--dim:#9a948a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0a0a0a;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:16px;padding:32px 20px 60px}
+  h1{font-size:20px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+  .sub{color:var(--dim);font-size:13px;text-align:center;max-width:680px;line-height:1.6}
+  .sub b{color:var(--ink)}
+  .rule{height:2px;width:60px;background:var(--gold)}
+  h2{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-top:18px}
+  .row{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+  .card{display:flex;flex-direction:column;gap:8px;align-items:center}
+  .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;padding:4px 12px;border-radius:5px}
+  .tag.r4{background:#1c130b;color:#c9773f;border:1px solid #3a2a1c}
+  .tag.r6{background:#0e1712;color:#7fb08a;border:1px solid #1f3a2a}
+  video{width:min(40vw,330px);aspect-ratio:9/16;border-radius:14px;border:1px solid #2a2722;background:#000;
+    box-shadow:0 14px 44px #000a;object-fit:cover}
+  .cap{font-size:12px;color:var(--dim);max-width:330px;text-align:center;line-height:1.5}
+  @media(max-width:760px){video{width:min(86vw,330px)}}
+</style>
+
+<h1>Rev 4 vs Rev 6 — point at what's bugging you</h1>
+<div class="sub">🔊 Sound on all four. <b>Rev 4</b> = the cut you said was close (old exterior shots, family plate rides into the dissolve).
+<b>Rev 6</b> = current (clean exteriors, family plate clears before the dissolve, title waits). Tell me the timestamp + which version does it right.</div>
+<div class="rule"></div>
+
+<h2>Version A — showcase</h2>
+<div class="row">
+  <div class="card">
+    <span class="tag r4">REV 4 · A · 36.1s</span>
+    <video src="build/A_rev4.mp4" loop playsinline controls preload="metadata"></video>
+  </div>
+  <div class="card">
+    <span class="tag r6">REV 6 · A · 36.1s</span>
+    <video src="build/A_showcase.mp4" loop playsinline controls preload="metadata"></video>
+  </div>
+</div>
+
+<h2>Version B — safe</h2>
+<div class="row">
+  <div class="card">
+    <span class="tag r4">REV 4 · B · 38.0s</span>
+    <video src="build/B_rev4.mp4" loop playsinline controls preload="metadata"></video>
+  </div>
+  <div class="card">
+    <span class="tag r6">REV 6 · B · 38.2s</span>
+    <video src="build/B_safe.mp4" loop playsinline controls preload="metadata"></video>
+  </div>
+</div>

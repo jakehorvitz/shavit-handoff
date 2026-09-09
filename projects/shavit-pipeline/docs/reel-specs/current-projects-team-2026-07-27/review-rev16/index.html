@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rev16 — Oak, no grid</title>
+<style>
+  :root{
+    --bg:oklch(0.15 0.008 60); --surface:oklch(0.20 0.010 60); --raised:oklch(0.26 0.012 60);
+    --line:oklch(0.33 0.014 60); --ink:oklch(0.97 0.004 60); --muted:oklch(0.76 0.010 60);
+    --brass:oklch(0.82 0.155 85); --ok:oklch(0.80 0.110 150); --warn:oklch(0.76 0.130 55);
+    --ease-q:cubic-bezier(0.22,1,0.36,1);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); padding:28px 32px 80px;
+    font:400 15px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{margin:0 0 6px; font-size:clamp(1.4rem,2.4vw,1.85rem); font-weight:600; letter-spacing:-0.02em}
+  .sub{margin:0; color:var(--muted); max-width:80ch}
+  .specs{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 30px; font:500 12px/1 ui-monospace, monospace}
+  .specs span{background:var(--raised); border:1px solid var(--line); border-radius:6px; padding:7px 9px}
+  h2{
+    font-size:13px; color:var(--muted); letter-spacing:0.05em; font-weight:600;
+    margin:42px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .row{display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start}
+  figure{
+    margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:11px; overflow:hidden; width:210px; flex:0 0 auto;
+  }
+  figure.hero{width:330px; border-color:oklch(0.82 0.155 85/0.5)}
+  figure.mid{width:250px}
+  figure video, figure img.card{display:block; width:100%; background:#000}
+  figcaption{padding:10px 12px; font-size:12.5px; color:var(--muted)}
+  figcaption b{color:var(--ink); display:block; font-size:13px; margin-bottom:3px}
+  .badge{
+    display:inline-block; background:var(--ok); color:oklch(0.16 0.01 60);
+    font:600 10px/1 ui-monospace,monospace; letter-spacing:0.06em;
+    padding:4px 6px; border-radius:4px; margin-bottom:6px;
+  }
+  .badge.alt{background:var(--raised); color:var(--muted)}
+
+  .controls{display:flex; gap:9px; flex-wrap:wrap; margin:0 0 12px}
+  button{
+    font:inherit; color:var(--ink); background:var(--raised); border:1px solid var(--line);
+    border-radius:8px; padding:9px 14px; cursor:pointer;
+    transition:background .15s var(--ease-q), transform .15s var(--ease-q);
+  }
+  button:hover{background:oklch(0.31 0.014 60)}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--brass); border-color:var(--brass); color:oklch(0.17 0.01 60); font-weight:600}
+  button:focus-visible{outline:2px solid var(--brass); outline-offset:2px}
+
+  .note{
+    max-width:80ch; margin-top:22px; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; padding:16px 18px;
+  }
+  .note.flag{border-color:oklch(0.76 0.130 55/0.5)}
+  .note b{color:var(--ink)}
+  .note + .note{margin-top:13px}
+  img.sheet{max-width:100%; border:1px solid var(--line); border-radius:10px; display:block}
+  .scroll{overflow-x:auto; padding-bottom:4px}
+  table{border-collapse:collapse; font-size:13.5px; min-width:560px}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--muted); font-weight:600; font-size:11.5px; letter-spacing:0.04em; text-transform:uppercase}
+  td.n{font:600 12.5px/1.5 ui-monospace,monospace; white-space:nowrap}
+  @media (prefers-reduced-motion: reduce){ button{transition:none} }
+</style>
+</head>
+<body>
+  <h1>rev16 — Oak, no grid</h1>
+  <p class="sub">
+    Four ordinary full-screen shots, one camera move each, joined by cross-dissolves. Oak now behaves
+    like every other property in the film.
+  </p>
+  <div class="specs">
+    <span>1080&times;1920</span><span>30 fps</span><span>1775 frames</span>
+    <span>59.17s</span><span>&minus;14.1 LUFS</span><span>&minus;1.3 dBTP</span>
+    <span>0 credits spent</span>
+  </div>
+
+  <div class="controls">
+    <button class="primary" id="playAll" type="button">Play all</button>
+    <button id="slow" type="button">Half speed</button>
+    <button id="normal" type="button">Normal speed</button>
+  </div>
+
+  <h2>The film</h2>
+  <div class="row">
+    <figure class="hero">
+      <video class="v" src="rev16.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge">rev16 &mdash; NEW</span>
+        <b>59.17s</b>
+        Unmute it. Oak runs 0:22 to 0:27.
+      </figcaption>
+    </figure>
+
+    <figure class="mid">
+      <video class="v" src="rev15-previous.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge alt">rev15 &mdash; PREVIOUS</span>
+        <b>The grid version</b>
+        For A/B.
+      </figcaption>
+    </figure>
+
+    <figure class="mid">
+      <img class="card" src="CARD-brand.png" alt="Branded black title card with the SHAVIT ROOTMAN lockup">
+      <figcaption>
+        <span class="badge alt">UNCHANGED</span>
+        <b>Title card art</b>
+        Black, white type, gold stake line, SHAVIT ROOTMAN lockup.
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2>The four Oak shots on their own</h2>
+  <div class="row">
+    <figure>
+      <video class="v" src="OAK-1-ladder.mp4" muted loop controls playsinline autoplay></video>
+      <figcaption><b>1 &mdash; ladder room</b>Push in, pan right. Anchored left so the left-hand
+        window survives the 9:16 crop.</figcaption>
+    </figure>
+    <figure>
+      <video class="v" src="OAK-2-green.mp4" muted loop controls playsinline></video>
+      <figcaption><b>2 &mdash; green room</b>Pull back, pan left &mdash; the inverse of shot 1, so two
+        adjacent shots never move the same way.</figcaption>
+    </figure>
+    <figure>
+      <video class="v" src="OAK-3-arch.mp4" muted loop controls playsinline></video>
+      <figcaption><b>3 &mdash; arch to the front door</b>Push in, pan left. Contrast lifted; this was a
+        low-contrast copy and read as a fault beside the others.</figcaption>
+    </figure>
+    <figure>
+      <video class="v" src="OAK-4-kitchen.mp4" muted loop controls playsinline></video>
+      <figcaption><b>4 &mdash; kitchenette</b>Pull back, pan right. Last on purpose: strongest photo,
+        and it holds the full 1.47s with no dissolve out.</figcaption>
+    </figure>
+  </div>
+
+  <h2>The block, frame by frame</h2>
+  <img class="sheet" src="oak-frames.jpg" alt="Fifteen frames through the four Oak shots and their three dissolves">
+
+  <div class="note">
+    <b>Dissolves rather than cuts, deliberately.</b> These are four rooms of <em>one</em> house. A hard
+    cut between them reads as four separate properties; a dissolve reads as moving through a building.
+    It is the same call as Barry's studs dissolving into the finished room. Three 10-frame dissolves,
+    so the block is 4&times;44 minus 30 frames of overlap = 4.87s.
+  </div>
+
+  <div class="note">
+    <b>Why these are pre-rendered instead of keyframed in Palmier.</b> The editor can only push into
+    pixels the conformed clip already contains, and these are horizontal <em>pans</em>. A 3:4 photo
+    cropped to 9:16 throws away 25% of its width, and the pan spends exactly that discarded strip
+    &mdash; so nothing is ever upscaled past 1:1. A Palmier keyframe would have had to fake the pan
+    with a zoom.
+  </div>
+
+  <h2>Where the film stands</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Time</th><th>Shot</th><th>Out on</th></tr>
+    <tr><td class="n">0:02</td><td>Ludlam &mdash; your opener, descends onto a finished house</td><td class="n">12f cross-dissolve</td></tr>
+    <tr><td class="n">0:06</td><td>S Norwood &times;3</td><td class="n">hard cuts, 8f bloom</td></tr>
+    <tr><td class="n">0:12</td><td>Howder &times;3</td><td class="n">hard cuts, 5f flash</td></tr>
+    <tr><td class="n">0:19</td><td>Barry &times;2 &mdash; studs into finished room</td><td class="n">10f cross-dissolve</td></tr>
+    <tr><td class="n">0:22</td><td>Oak &times;4 &mdash; four rooms, three dissolves</td><td class="n">5f flash</td></tr>
+    <tr><td class="n">0:27</td><td>E Ewing &mdash; the only live-action shot</td><td class="n">8f bloom</td></tr>
+    <tr><td class="n">0:30</td><td>Cedar &mdash; descends</td><td class="n">5f flash</td></tr>
+    <tr><td class="n">0:35</td><td>Saint Joe &mdash; climbs to the widest frame</td><td class="n">16f dip to black</td></tr>
+    <tr><td class="n">0:41</td><td>Team card &rarr; seven names &rarr; outro</td><td class="n">hard cuts</td></tr>
+  </table>
+  </div>
+
+  <div class="note flag">
+    <b>Two trims are still in place from the last pass, and you may want one back.</b> Howder's crew
+    shot is at 1.67s instead of 2.50s, and Norwood's third shot is at 1.33s instead of 1.90s. Those
+    bought the frames for a longer Oak block and they are still doing that job &mdash; Oak is 4.87s.
+    Both are one-line reverts. The Howder trim I would keep regardless: that clip has the carpenter
+    cut off by the right frame edge in every frame, so less of it on screen is better.
+  </div>
+
+  <div class="note">
+    <b>Still open.</b> Howder's clipped carpenter needs a regeneration at 7.5 credits against roughly
+    20 available &mdash; the single best remaining spend on this film. Ludlam opens on its only usable
+    photo, which shows gas meters on the side elevation. And the Saint Joe interiors are still unused.
+  </div>
+
+<script>
+  const vs = [...document.querySelectorAll('video.v')];
+  document.getElementById('playAll').onclick = () => vs.forEach(v => { v.currentTime = 0; v.play(); });
+  document.getElementById('slow').onclick    = () => vs.forEach(v => v.playbackRate = 0.5);
+  document.getElementById('normal').onclick  = () => vs.forEach(v => v.playbackRate = 1);
+</script>
+</body>
+</html>

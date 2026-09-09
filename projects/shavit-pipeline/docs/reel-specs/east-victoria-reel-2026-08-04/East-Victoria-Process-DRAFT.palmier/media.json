@@ -1,0 +1,191 @@
+{
+ "folders": [
+  {
+   "id": "360C7926-DC68-4443-B120-14AF108E8793",
+   "name": "east-victoria-2026-08-04"
+  }
+ ],
+ "entries": [
+  {
+   "name": "01_asfound_front",
+   "id": "F4F280A1-DC82-4A5D-B9FD-3FDFC08A7DB3",
+   "type": "image",
+   "sourceWidth": 1024,
+   "sourceHeight": 768,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-foreclosure.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "02_asfound_side",
+   "id": "C8956DD5-DADC-4D1F-8961-4851FFA95947",
+   "type": "image",
+   "sourceWidth": 600,
+   "sourceHeight": 800,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-exterior-snow.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "03_asfound_window",
+   "id": "03CC726E-6B5C-46BD-B612-73D8745D4C59",
+   "type": "image",
+   "sourceWidth": 600,
+   "sourceHeight": 800,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-window.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "04_asfound_octagon",
+   "id": "8E34B4E3-FE2A-416A-AD8E-D08C5028CF94",
+   "type": "image",
+   "sourceWidth": 600,
+   "sourceHeight": 800,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-countdown-2026-07-22/assets/gable-octagon-window.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "05_work_gutted",
+   "id": "3A619EF3-BA72-40C6-87CC-CB35693540AE",
+   "type": "image",
+   "sourceWidth": 1086,
+   "sourceHeight": 724,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/during-gutted.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "06_work_interior",
+   "id": "F118B0E4-6C19-464D-834E-9D1B0CCF60FB",
+   "type": "image",
+   "sourceWidth": 876,
+   "sourceHeight": 1174,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/during-interior-work.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "07_work_stairwell",
+   "id": "7A95A445-CCBF-47EF-AD7A-5D924D4F1D04",
+   "type": "image",
+   "sourceWidth": 600,
+   "sourceHeight": 800,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-countdown-2026-07-22/assets/renovation-progress.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "08_now_front",
+   "id": "22631326-823C-435F-BFBA-4F389B52F64C",
+   "type": "image",
+   "sourceWidth": 1086,
+   "sourceHeight": 724,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-front-hero.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "09_now_kitchen",
+   "id": "75B66E75-25C8-4B4E-9D6E-417128DF1627",
+   "type": "image",
+   "sourceWidth": 1086,
+   "sourceHeight": 724,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-kitchen-hero.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "10_now_bath",
+   "id": "7FB7C8A1-4515-47C1-8256-E0AD5267E0D6",
+   "type": "image",
+   "sourceWidth": 1086,
+   "sourceHeight": 724,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-bath.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "11_now_living",
+   "id": "CF57DC67-53C1-4554-82CC-67DB7A7F645A",
+   "type": "image",
+   "sourceWidth": 1086,
+   "sourceHeight": 724,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-living-fireplace.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  },
+  {
+   "name": "12_now_basement",
+   "id": "F7E7D7D7-A0B9-42FA-919F-3B9B9AC117C3",
+   "type": "image",
+   "sourceWidth": 1086,
+   "sourceHeight": 724,
+   "hasAudio": false,
+   "duration": 5,
+   "source": {
+    "external": {
+     "absolutePath": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-basement-2.jpg"
+    }
+   },
+   "folderId": "360C7926-DC68-4443-B120-14AF108E8793"
+  }
+ ],
+ "version": 2
+}

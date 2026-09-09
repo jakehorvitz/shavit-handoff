@@ -1,0 +1,16 @@
+### clarendon-deal-story — markers stripped to text (proves prose passes every machine rule)
+$ ./shavit.sh lint _lintcheck-clarendon-deal-story
+lint ok
+
+### clarendon-deal-story — real post.md (expected: unknown-fact until Jake runs fact add)
+$ ./shavit.sh lint clarendon-deal-story
+unknown-fact: clarendon.strategy is not in facts; run shavit.sh fact add
+
+### clarendon-triplex-fb — markers stripped to text (proves prose passes every machine rule)
+$ ./shavit.sh lint _lintcheck-clarendon-triplex-fb
+lint ok
+
+### clarendon-triplex-fb — real post.md (expected: unknown-fact until Jake runs fact add)
+$ ./shavit.sh lint clarendon-triplex-fb
+unknown-fact: clarendon.impact is not in facts; run shavit.sh fact add
+

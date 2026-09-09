@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Current Projects, then the Team, reel spec</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#2a2a2e;
+    --ink:#f4f2ec; --dim:#a5a29a; --faint:#6f6c64;
+    --brass:#B08D57; --gold:#FFC000; --ok:#7FB88A; --bad:#e0794a; --blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;line-height:1.15;margin:.35em 0 .15em}
+  .sub{color:var(--dim);max-width:74ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:48px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{font-size:20px;margin:0 0 4px;color:var(--ink)}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  ol{margin:.4em 0;padding-left:1.3em} ol li{margin:.5em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-watch{background:rgba(224,121,74,.14);color:var(--bad);border:1px solid rgba(224,121,74,.4)}
+  .b-open{background:rgba(110,163,214,.14);color:var(--blue);border:1px solid rgba(110,163,214,.4)}
+  .b-new{background:rgba(255,192,0,.14);color:var(--gold);border:1px solid rgba(255,192,0,.45)}
+
+  /* changed-this-revision highlight, cleared next rev */
+  .chg{position:relative;box-shadow:0 0 0 1px rgba(255,192,0,.5),0 0 22px rgba(255,192,0,.09);border-color:rgba(255,192,0,.45)!important}
+  .chg::before{content:"UPDATED";position:absolute;top:-9px;right:12px;background:#000;color:var(--gold);
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;padding:2px 8px;border:1px solid rgba(255,192,0,.5);border-radius:4px;z-index:3}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog b{color:var(--ink)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .segment{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0 28px}
+  .segment .hdr{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px}
+  .segment .desc{color:var(--dim);font-size:14px;margin:2px 0 16px}
+  .stagebar{display:flex;align-items:center;gap:10px;margin:34px 0 6px}
+  .stagebar .n{font-family:var(--mono);font-size:11px;color:#000;background:var(--brass);border-radius:4px;padding:2px 8px;font-weight:700}
+  .stagebar .t{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);font-weight:700}
+  .stagebar .r{flex:1;height:1px;background:linear-gradient(90deg,var(--brass),transparent)}
+
+  .shotgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0}
+  .shotgrid.trio{grid-template-columns:repeat(3,1fr)}
+  .shotgrid.quad{grid-template-columns:repeat(4,1fr)}
+  .shot{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;overflow:hidden}
+  .shot img{width:100%;height:300px;object-fit:cover;border-radius:7px;display:block;border:1px solid var(--line);background:#000}
+  .shot video{width:100%;height:300px;object-fit:cover;border-radius:7px;display:block;border:1px solid var(--line);background:#000}
+  .motion-tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:#0b0b0c;background:var(--ok);border-radius:4px;padding:2px 8px;font-weight:700}
+  .shot.people img{object-position:center 30%}
+  .shot.plate img{object-fit:contain;background:#000}
+  .shot .tag{font-family:var(--mono);font-size:11px;color:var(--gold);margin-top:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .shot .tag .lbl{color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-size:10px}
+  .shot .note{font-size:12px;color:var(--dim);margin:6px 0 0}
+  .shot .mv{font-family:var(--mono);font-size:11px;color:var(--blue);margin:6px 0 0}
+
+  .cap-wrap{position:relative;border-radius:7px;overflow:hidden}
+  .cap-mock{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 14px;pointer-events:none;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.72) 50%,rgba(0,0,0,.9))}
+  .cap-mock .cap-rule{display:block;width:26px;height:2px;background:var(--brass);margin:0 0 8px}
+  .cap-mock .cap-sub{display:block;font-family:"Inter",system-ui,sans-serif;font-weight:600;
+    text-transform:uppercase;letter-spacing:.16em;color:var(--brass);font-size:9.5px;margin:0 0 5px;
+    text-shadow:0 1px 3px rgba(0,0,0,.8)}
+  .cap-mock .cap-txt{display:block;font-family:"Inter",system-ui,sans-serif;font-weight:700;
+    text-transform:uppercase;letter-spacing:.03em;color:#fff;font-size:14px;line-height:1.4;
+    text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  /* rev 4: massive title cards, per "needs to be bigger massive title card" */
+  .title-card.big .cap-txt{font-size:34px;line-height:1.1;letter-spacing:-.01em}
+  .title-card.big .cap-rule{width:40px;height:3px;margin-bottom:18px}
+  .prog{position:absolute;left:0;bottom:0;height:2px;background:var(--brass);z-index:4}
+  .title-card{border:1px solid var(--line);border-radius:10px;min-height:300px;display:flex;
+    flex-direction:column;justify-content:center;align-items:center;padding:22px 18px;text-align:center;background:#000}
+  .title-card .cap-txt{font-family:"Inter",system-ui,sans-serif;font-weight:700;text-transform:uppercase;
+    letter-spacing:.03em;color:#fff;font-size:20px;line-height:1.35}
+  .title-card .cap-rule{display:block;width:26px;height:2px;background:var(--brass);margin:0 auto 14px}
+  .title-card .sml{font-size:12px;color:var(--dim);margin-top:14px;text-transform:none;letter-spacing:0;font-weight:400}
+
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+  .box.warn{border-left:3px solid var(--bad)}
+  .box.open{border-left:3px solid var(--blue)}
+  .box.rule{border-left:3px solid var(--brass)}
+  .box h4{margin:0 0 8px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+  .box.warn h4{color:var(--bad)} .box.open h4{color:var(--blue)}
+  .quote{border-left:2px solid var(--line);padding-left:14px;color:var(--dim);font-style:italic;margin:10px 0}
+  .jn{border-left:2px solid var(--gold);padding-left:14px;color:#d8d3c6;font-size:13px;margin:8px 0;font-style:italic}
+  .ledger td:first-child{font-family:var(--mono);color:var(--gold);white-space:nowrap}
+  .kill{color:var(--bad);font-weight:600}
+  .keep{color:var(--ok);font-weight:600}
+</style>
+</head>
+<body data-spec="current-projects-team">
+<div class="wrap">
+
+<header>
+  <div class="kicker">Shavit Rootman &middot; shavit-pipeline &middot; Instagram Reel</div>
+  <h1>Current Projects, then the Team <span style="color:var(--faint);font-weight:400">, reel spec</span></h1>
+  <p class="sub">A roughly 43 second vertical reel. Rev 3 throws out the five stage structure and stops mixing
+  finished houses with jobsites. Section A is now <b>eleven frames of nothing but active work</b> across the three
+  properties that actually have construction coverage, ordered so the mess escalates. Then it names the people who
+  do it.</p>
+  <div class="meta-row">
+    <span class="chip"><b>~43s</b> total &middot; 9:16 &middot; stills only</span>
+    <span class="chip"><b>3 properties</b> &middot; 11 stills</span>
+    <span class="chip">8 team slots</span>
+    <span class="chip">Music: <b>wildflower.mp3, candidate</b></span>
+    <span class="chip" style="border-color:var(--gold);color:var(--gold)">Status: <b>rev 4, awaiting review</b></span>
+  </div>
+  <div class="revlog">
+    <h4>Revision log, newest first</h4>
+    <ul>
+      <li><span class="rev">rev 4 &middot; 2026-07-27</span>, built against your ten notes from 19:44 to 19:57.
+      The headline change is that <b>every frame now says what is being made, not which street it is on</b>. You
+      were right that "Building Barry Street" is implied and carries nothing, so the street name drops to a small
+      brass line and the big line is the work itself, for example "Opening up the chimney breast". Both title
+      cards are now massive, card one is <b>We Love Building Houses</b> in your words, and the question card
+      becomes the statement <b>These are the people that make it possible</b>. The Barry frame you rejected is
+      swapped, Howder gains a whole building exterior so the four interiors have something to sit under, and the
+      two new South Norwood framing frames that landed at 19:50 are in. Changed blocks carry a gold UPDATED mark.</li>
+      <li><span class="rev">rev 3 &middot; 2026-07-27</span>, rebuilt against the nine rev 2 annotations. Rev 2 kept
+      losing you because of a supply problem, not a writing problem, and that is now stated plainly in
+      <b>Why the story kept failing</b> below. <b>Every finished house is out of section A.</b> Saint Joe, Oak,
+      Cedar and Ludlam are cut. Every frame you flagged is gone: both weak Howder frames, the pressure washer shot
+      taken from a roof, the blank drywall. Section A is eleven all construction frames from South Norwood, Barry
+      and Howder, ordered by escalation instead of by stage, captioned with your own line, <b>Building X Street</b>.
+      The intro is now the two card open you described. Drive was pulled for Norwood, Howder unit 2, Howder duplex
+      and Cedar, and your 33 Barry and 115 Oak uploads from 19:22 tonight were pulled too. Team, transitions
+      philosophy and outro carry forward from rev 2 unchanged.</li>
+      <li><span class="rev">rev 2 &middot; 2026-07-27</span>, five stage pipeline walk, stripped to structure to
+      surfaces to finished to leased. Rejected: the stages were invisible to a viewer and half the frames were
+      finished listing photos.</li>
+      <li><span class="rev">rev 1 &middot; 2026-07-27</span>, initial draft. Eight properties in a row. Rejected as
+      a list with no story.</li>
+    </ul>
+  </div>
+</header>
+
+<h2>Rev 5, one house</h2>
+<div class="segment chg">
+  <div class="hdr"><h3>South Norwood Street, start to now</h3><span class="chip">35.6s</span><span class="chip">1 property</span><span class="badge b-new">watch this instead</span></div>
+  <p class="desc">Rev 4 was a collage because every cut jumped to a different address, so nothing accumulated.
+  This follows <b>one house</b>, which turns every cut into continuity — the viewer stands in the same building
+  for the whole film. Script is <code>_scripts/reel_rev5.py</code>.</p>
+  <div class="shotgrid">
+    <div class="shot">
+      <video src="current-projects-team-2026-07-27/reel/rev5-onehouse-norwood.mp4"
+             controls autoplay loop muted playsinline preload="auto"></video>
+      <div class="tag"><span class="lbl">one house &middot; 0.0 to 35.6</span><span>reel/rev5-onehouse-norwood.mp4</span></div>
+    </div>
+    <div class="shot title-card" style="min-height:auto;padding:18px">
+      <p class="d" style="margin:0 0 8px;font-size:13px"><b>The time-lapse is in, and it is real.</b> Eight
+      photographs of the same house at different stages, six frames each, cut back to back with no caption over
+      them. That is a genuine photographic time-lapse, not a generated one, and it is the burst you have been
+      asking for since 20:12.</p>
+      <p class="d" style="margin:0;font-size:13px"><b>Emotion is pacing, not adjectives.</b> Slow and warm on the
+      exterior for nearly three seconds, then the burst, then a dead stop of 3.2 seconds on the new stud wall,
+      then faces. The silence after the noise is the feeling. Shavit's register bans emotional captions, so it
+      has to live in the cut and the music.</p>
+    </div>
+  </div>
+</div>
+
+<h2>The cut</h2>
+<div class="segment chg">
+  <div class="hdr"><h3>Rev 4, rendered</h3><span class="chip">42.0s</span><span class="chip">1080 &times; 1920</span><span class="chip">1260 frames</span><span class="badge b-new">watch this first</span></div>
+  <p class="desc">Rendered the way the studio renders them, frame by frame in PIL then piped to ffmpeg, not
+  assembled by hand on a timeline. Script is <code>_scripts/reel_rev4.py</code>, modelled on
+  <code>reel_full.py</code> from the Kendall cut: cubic ease-out on every move, type revealing by alpha plus a
+  small rise staggered line by line, a cumulative brass progress rule, contrast 1.06 on every plate.</p>
+  <div class="shotgrid">
+    <div class="shot">
+      <video src="current-projects-team-2026-07-27/reel/current-projects-team-rev4.mp4"
+             controls autoplay loop muted playsinline preload="auto"></video>
+      <div class="tag"><span class="lbl">full cut &middot; 0.0 to 42.0</span><span>reel/current-projects-team-rev4.mp4</span></div>
+    </div>
+    <div class="shot title-card" style="min-height:auto;padding:18px">
+      <p class="d" style="margin:0 0 8px;font-size:13px"><b>What the Palmier pass was missing.</b> Clips were in
+      the right order but nothing had craft on it: no eases, no type animation, no scrim, no progress rule. Every
+      still sat frozen. That is what read as broken.</p>
+      <p class="d" style="margin:0;font-size:13px"><b>Two defects I can see and you should judge.</b> The team
+      crops are too wide, so the faces sit small in frame and the payoff does not land. And the Barry and
+      Howder plates are still the soft sub-1080 sources from open item 3.</p>
+    </div>
+  </div>
+</div>
+
+<h2>Why the story kept failing</h2>
+<div class="box warn">
+  <h4>You asked me to walk you through it, so here it is straight</h4>
+  <p style="margin:0 0 10px">Rev 1 and rev 2 did not fail because the writing was weak. They failed because
+  <b>we only have real construction coverage for three of the eight properties</b>, and every draft tried to
+  carry eight on three. That is why the cut kept flipping between a gutted jobsite and a staged living room, and
+  that flip is the thing that read as "no story."</p>
+  <table class="ledger">
+    <tr><th>Property</th><th>What we actually have</th><th>Rev 3 call</th></tr>
+    <tr><td>South Norwood</td><td>19 Drive frames, gutted rooms, staged materials, debris, delivery on the steps</td><td class="keep">IN, 4 frames</td></tr>
+    <tr><td>Howder, unit 2</td><td>25 Drive frames, roof deck rebuild, open rafters, new framing, crew on site</td><td class="keep">IN, 5 frames</td></tr>
+    <tr><td>33 Barry</td><td>7 texted plus 7 Drive, floor going in, exposed chimney, tools out</td><td class="keep">IN, 2 frames</td></tr>
+    <tr><td>East Saint Joe</td><td>11 frames, every one a finished listing photo. Zero construction.</td><td class="kill">CUT from section A</td></tr>
+    <tr><td>115 Oak</td><td>4 texted plus 4 Drive, same rooms, all essentially finished, a ladder in one</td><td class="kill">CUT from section A</td></tr>
+    <tr><td>East Ewing</td><td>2 frames. One is you and a colleague out front, one is the pressure washer shot taken from a roof. Drive folder is empty.</td><td class="kill">CUT from section A</td></tr>
+    <tr><td>Cedar Street</td><td>1 frame texted, 1 in Drive. Same photo. Cannot carry a beat.</td><td class="kill">CUT from section A</td></tr>
+    <tr><td>11 Ludlam</td><td>1 frame, not the finished house. Drive folder created 19:24 tonight and is still empty.</td><td class="kill">CUT, pending upload</td></tr>
+  </table>
+  <p class="d" style="margin:10px 0 0">So the honest reel we can cut tonight is a <b>three property construction
+  reel</b>, not an eight property survey. That is the trade, and it is the one thing in this spec I need a yes or
+  no on before anything gets placed in Palmier. See open item 1 for the alternative.</p>
+</div>
+<div class="jn">Jake, rev 2: "I'm just confused like how are we getting to these steps like I don't get it like we
+need to revise this story I just don't like the story" and "I want Shavit to showcase his current projects in a
+way that isn't awkward and is captivating ... especially if some are unfinished and some are finished it just
+looks kind of weird."</div>
+
+<h2>The story</h2>
+<div class="box rule">
+  <h4>Question, evidence, people. No stages.</h4>
+  <p style="margin:0 0 8px">The new spine is not a timeline. Rev 2 asked the viewer to track five stages of a job
+  they have never seen, which is why you kept asking how we got to a step. <b>Rev 3 asks a question, buries the
+  viewer in evidence, then answers with faces.</b> There is nothing to follow and nothing to lose.</p>
+  <p style="margin:0 0 8px">Two cards open it, in your words: <b>Building houses is hard.</b> Then <b>Ever wonder
+  how it actually happens?</b> What follows is eleven frames of real mess, and the only on screen text is your
+  own subtext idea, <b>Building South Norwood Street</b>, <b>Building Barry Street</b>, <b>Building Howder
+  Street</b>. Same verb every time. That repetition is the whole argument: this is not a portfolio, this is a
+  Tuesday.</p>
+  <p style="margin:0 0 8px"><b>The captivating part is the escalation.</b> The frames are not in job order, they
+  are in intensity order. It opens quiet, a pallet of material sitting on the front steps, and it ends loud, a
+  man in a hi-vis vest standing in a house with its roof open to the sky. The cuts get shorter as it goes. By the
+  time the black card asks how we do it, the viewer has just watched a crew and wants the names.</p>
+  <p class="d" style="margin:0">And because every frame is a jobsite, nothing is awkward. No finished kitchen
+  interrupts a demolition. That was the actual defect.</p>
+</div>
+
+<h2>Timing at a glance</h2>
+<table>
+  <tr><th>#</th><th>Section</th><th>In and out</th><th>Length</th><th>Content</th><th>On-screen text</th></tr>
+  <tr><td>A0a</td><td>Card one</td><td>0.0 to 2.0</td><td>2.0s</td><td>black, huge type</td><td>We Love Building Houses</td></tr>
+  <tr><td>A0b</td><td>Card two</td><td>2.0 to 4.2</td><td>2.2s</td><td>black, huge type</td><td>Ever wonder how it actually happens?</td></tr>
+  <tr><td>A1&ndash;A5</td><td>South Norwood</td><td>4.2 to 14.0</td><td>9.8s</td><td>5 stills</td><td>what is being made, per frame</td></tr>
+  <tr><td>A6&ndash;A7</td><td>Barry Street</td><td>14.0 to 17.6</td><td>3.6s</td><td>2 stills</td><td>what is being made, per frame</td></tr>
+  <tr><td>A8&ndash;A10</td><td>Howder Street</td><td>17.6 to 23.2</td><td>5.6s</td><td>3 stills</td><td>what is being made, per frame</td></tr>
+  <tr><td>B</td><td>The turn</td><td>23.2 to 26.2</td><td>3.0s</td><td>black, huge type</td><td>These are the people that make it possible</td></tr>
+  <tr><td>C</td><td>The team</td><td>26.2 to 39.0</td><td>12.8s</td><td>8 slots</td><td>name only, plus closing line</td></tr>
+  <tr><td>D</td><td>Outro plate</td><td>39.0 to 42.0</td><td>3.0s</td><td>shipped plate</td><td>Live with us. Work with us.</td></tr>
+</table>
+
+<h2>Section A, the work</h2>
+
+<div class="box rule chg">
+  <h4>The caption rule, rewritten in rev 4</h4>
+  <p style="margin:0 0 8px">You killed the old caption in one line: the street is implied, so naming it tells the
+  viewer nothing. <b>Every frame in section A now answers "what are you making".</b> The grammar is two lines:</p>
+  <ul style="margin:0 0 8px">
+    <li><b>Small brass line, the address.</b> Nine and a half point, letterspaced, almost a footnote.</li>
+    <li><b>Big white line, the work.</b> The actual thing being built or torn out, named plainly with the
+    material or the room, no adjectives. "New subfloor going down." "Opening up the chimney breast."</li>
+  </ul>
+  <p class="d" style="margin:0">This also puts the reel back inside Shavit's own standing rule from the Howder
+  review, facts not emotion, describe the room and the material. The caption is now doing the work the street
+  name was pretending to do.</p>
+</div>
+<div class="jn">Jake, rev 3: "use this photo but I need to see a sub caption here, what are you building",
+"same shit here, what are you building", "its implied you're building Barry street, what are you making."</div>
+
+<div class="segment chg">
+  <div class="hdr"><h3>A0. The two card open</h3><span class="chip">4.2s</span><span class="badge b-new">both cards rewritten and enlarged</span></div>
+  <p class="desc">Card one flips from a complaint to a statement of love, in your words. Card two is the hook.
+  Both are set very large, close to edge to edge, so they read as a statement and not as a title sequence.</p>
+  <div class="shotgrid">
+    <div class="shot">
+      <div class="title-card big"><span class="cap-rule"></span><span class="cap-txt">We Love<br>Building<br>Houses</span></div>
+      <div class="tag"><span class="lbl">A0a &middot; 0.0 to 2.0</span><span class="badge b-new">new line</span></div>
+      <p class="mv">MOTION: text is on screen at frame one. No fade. Type fills the frame width with a small
+      margin, roughly 120px cap height at 1080 wide.</p>
+    </div>
+    <div class="shot">
+      <div class="title-card big"><span class="cap-rule"></span><span class="cap-txt">Ever wonder<br>how it<br>happens?</span></div>
+      <div class="tag"><span class="lbl">A0b &middot; 2.0 to 4.2</span><span class="badge b-new">enlarged</span></div>
+      <p class="mv">MOTION: hard cut from card one, no dissolve. Music enters here.</p>
+      <p class="note">Shortened from "how it actually happens" so it can be set at the same size as card one and
+      still breathe. No contractions, per the standing rule.</p>
+    </div>
+  </div>
+  <div class="jn">Jake: "do something else other than this also this needs to be bigger in fact do the opposite do
+  something like We Love Building Houses" and "needs to be bigger massive title card."</div>
+</div>
+
+<div class="stagebar"><span class="n">BLOCK 1</span><span class="t">South Norwood Street</span><span class="r"></span></div>
+<div class="segment">
+  <div class="hdr"><h3>A1 to A5. The job arrives, gets torn apart, then goes back up</h3><span class="chip">5 stills</span><span class="chip">9.8s</span><span class="badge b-new">A5 added, all captions rewritten</span></div>
+  <p class="desc">The block now runs a full arc rather than stopping at demolition: material lands, the house is
+  stripped, then new walls go up. A5 is one of the two frames that landed in Drive at 19:50 tonight, and it is
+  the strongest action frame in the whole set. Every frame carries its own "what are you making" line.</p>
+  <div class="jn">Jake on the Norwood register: "yes these are the photos I'm talking about if we can apply that
+  to everyone everything that would be great." And: "there should be like shit in the photo like the work should
+  be like really cluttered and stuff."</div>
+  <div class="shotgrid trio">
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/01-norwood-delivery.jpg" alt="Material delivered on the front steps">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">South Norwood Street</span><span class="cap-txt">Drywall and flooring,<br>delivered</span></div>
+        <div class="prog" style="width:9%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A1 &middot; 4.2 to 6.4</span><span>norwood/002</span></div>
+      <p class="note">Shrink wrapped pallet on the front steps. The quietest frame in the reel and the correct
+      place to start, because nothing has happened yet.</p>
+      <p class="mv">MOTION: static, 2.2s. Longest hold in section A.</p>
+    </div>
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/02-norwood-materials.jpg" alt="Drywall and compound staged in the garage">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">South Norwood Street</span><span class="cap-txt">Board and compound,<br>staged</span></div>
+        <div class="prog" style="width:18%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A2 &middot; 6.4 to 8.4</span><span>norwood/001</span></div>
+      <p class="note">Stacked drywall, buckets of joint compound, boxes, staged in the garage.</p>
+      <p class="mv">MOTION: push, 100 to 102 percent, anchored on the stack.</p>
+    </div>
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/03-norwood-stripped.jpg" alt="Interior stripped to brick with a wheelbarrow">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">South Norwood Street</span><span class="cap-txt">Down to the brick<br>and the studs</span></div>
+        <div class="prog" style="width:27%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A3 &middot; 8.4 to 10.4</span><span>norwood/000</span></div>
+      <p class="note">Stripped to the brick chimney, wheelbarrow parked mid room, insulation rolls against the
+      wall. This is the frame that makes the reel.</p>
+      <p class="mv">MOTION: push, 100 to 103 percent, anchored on the wheelbarrow.</p>
+    </div>
+  </div>
+  <div class="shotgrid">
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/04-norwood-debris.jpg" alt="Torn out plaster on the floor">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">South Norwood Street</span><span class="cap-txt">Tearing out<br>plaster and lath</span></div>
+        <div class="prog" style="width:36%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A4 &middot; 10.4 to 12.2</span><span>norwood/017</span></div>
+      <p class="note">Plaster and board torn down across the floor, foil faced insulation exposed overhead.</p>
+      <p class="mv">MOTION: static. The cut into this one is the first hard hit.</p>
+    </div>
+    <div class="shot">
+      <div class="cap-wrap">
+        <video src="current-projects-team-2026-07-27/motion/A5-norwood-framing-TRIM2s.mp4"
+               poster="current-projects-team-2026-07-27/raw/pick3/14-norwood-framing-916.jpg"
+               controls autoplay loop muted playsinline preload="auto"></video>
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">South Norwood Street</span><span class="cap-txt" style="color:var(--gold)">Framing the new<br>[ ROOM &mdash; PENDING ]</span></div>
+        <div class="prog" style="width:45%"></div>
+      </div>
+      <p class="mv" style="margin-top:8px"><span class="motion-tag">▶ live motion test</span> the real 2.0s
+      Higgsfield move, with the caption treatment over it. Press play. Compare against the 5s version at
+      <code>motion/A5-norwood-framing-v2.mp4</code>, which drifts after 2s.</p>
+      <div class="tag"><span class="lbl">A5 &middot; 12.2 to 14.0</span><span>norwood/n000</span><span class="badge b-watch">placeholder caption</span></div>
+      <p class="note"><b>Caption is a deliberate placeholder in gold until Shavit says what that room becomes.</b>
+      You were right that "framing the new walls" says nothing, and I will not invent a room. One word from him,
+      bedroom, bathroom, second unit, and it reads "Framing the new bedroom". Nothing else in the block moves.</p>
+      <p class="note">New stud wall standing inside the gutted room, R13 insulation, a contractor bag, coiled
+      wire and a broom across the OSB subfloor. Landed in Drive at 19:50 and it is the most action in any frame
+      we have. Sister frame <code>n001</code> is staged at <code>pick3/15</code> if you prefer that angle.</p>
+      <p class="mv">MOTION: push, 100 to 103 percent, anchored on the new studs. 5712px wide, no upscale needed.</p>
+    </div>
+  </div>
+</div>
+
+<div class="stagebar"><span class="n">BLOCK 2</span><span class="t">Barry Street</span><span class="r"></span></div>
+<div class="segment">
+  <div class="hdr"><h3>A6 to A7. Opened up</h3><span class="chip">2 stills</span><span class="chip">3.6s</span><span class="badge b-new">A7 swapped, captions rewritten</span></div>
+  <p class="desc">The shop vacuum frame is out. You called it short on action, and you were right: a parked
+  vacuum on a finished floor is a still life. A7 is the replacement, the ceiling opened to the joists with the
+  paint and trays spread underneath, which reads as a room mid job rather than a room at rest.</p>
+  <div class="jn">Jake, rev 3, on the shop vacuum frame: "pick a different photo needs more action."</div>
+  <div class="shotgrid">
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/05-barry-chimney.jpg" alt="Exposed brick chimney and torn out floor">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">Barry Street</span><span class="cap-txt">Opening up the<br>chimney breast</span></div>
+        <div class="prog" style="width:54%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A6 &middot; 14.0 to 15.8</span><span>barry/07</span></div>
+      <p class="note">Brick chimney opened up, navy wainscot, old stone pattern tile torn back to the subfloor.</p>
+      <p class="mv">MOTION: push, 100 to 102.5 percent, into the chimney.</p>
+    </div>
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/12-barry-supplies.jpg" alt="Ceiling opened to the joists with paint and supplies below">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">Barry Street</span><span class="cap-txt">Ceiling open<br>to the joists</span></div>
+        <div class="prog" style="width:63%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A7 &middot; 15.8 to 17.6</span><span>barry/03</span><span class="badge b-new">swapped</span></div>
+      <p class="note">Raw joists exposed overhead, paint cans, trays and boxes stacked on the torn floor. This is
+      the most cluttered Barry frame that exists in either batch.</p>
+      <p class="mv">MOTION: push up, 100 to 103 percent, anchored on the open joists.</p>
+    </div>
+  </div>
+</div>
+
+<div class="stagebar"><span class="n">BLOCK 3</span><span class="t">Howder Street</span><span class="r"></span></div>
+<div class="segment">
+  <div class="hdr"><h3>A8 to A10. The loud end</h3><span class="chip">3 stills</span><span class="chip">5.6s</span><span class="badge b-new">exterior cut, interiors only</span></div>
+  <p class="desc">Your call was option c, so the exterior is out and Howder runs interiors only. Worth recording
+  why, because it is a real constraint and not a preference: <b>we have no whole-house Howder exterior with work
+  happening in it.</b> Every full front elevation in the Drive folder is a finished listing photo from the reel
+  that already shipped on 2026-07-15, and the only exteriors showing live work are cropped, which is exactly the
+  "looks weird" you called out. Interiors only is the honest version.</p>
+  <div class="jn">Jake, rev 4: "I like this but I would like the whole house in it it just kind of looks weird
+  right now." Decision on the follow up: option c, cut it.</div>
+  <div class="shotgrid">
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/07-howder-joists.jpg" alt="Floor opened to the joists">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">Howder Street</span><span class="cap-txt">New floor over<br>open joists</span></div>
+        <div class="prog" style="width:72%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A8 &middot; 17.6 to 19.4</span><span>howder-unit2/007</span></div>
+      <p class="note">Floor pulled up to the joists, bare dirt visible underneath.</p>
+      <p class="mv">MOTION: static, hard cut in.</p>
+    </div>
+    <div class="shot title-card" style="min-height:auto;padding:18px">
+      <p class="d" style="margin:0;font-size:13px">The cut exterior is still staged at
+      <code>pick3/13-howder-exterior.jpg</code> if you change your mind. It is the frame with the green ladder
+      against the side of the house.</p>
+    </div>
+  </div>
+  <div class="shotgrid">
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/09-howder-rafters.jpg" alt="Roof opened to the sky">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">Howder Street</span><span class="cap-txt">Setting the new<br>roof rafters</span></div>
+        <div class="prog" style="width:86%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A9 &middot; 19.4 to 21.2</span><span>howder-unit2/016</span></div>
+      <p class="note">Roof open, new rafters against the sky. The single most striking frame in the batch.</p>
+      <p class="mv">MOTION: push up, 100 to 104 percent, anchored high on the rafters. The biggest move in the
+      reel, and it is the only frame that earns it. Second candidate for a real Higgsfield camera move once the
+      768px source is upscaled, per open item 3.</p>
+    </div>
+    <div class="shot">
+      <div class="cap-wrap">
+        <img src="current-projects-team-2026-07-27/raw/pick3/10-howder-crew.jpg" alt="Crew member on site with new subfloor">
+        <div class="cap-mock"><span class="cap-rule"></span><span class="cap-sub">Howder Street</span><span class="cap-txt">New subfloor<br>going down</span></div>
+        <div class="prog" style="width:100%"></div>
+      </div>
+      <div class="tag"><span class="lbl">A10 &middot; 21.2 to 23.2</span><span>howder-unit2/023</span><span class="badge b-new">people</span></div>
+      <p class="note">A man in a hi-vis vest at the back of frame, new sheathing down, jacks and tools across the
+      opening. The only human in section A, and he lands three seconds before the team block.</p>
+      <p class="mv">MOTION: slight handheld drift, 100 to 102 percent with a two pixel wobble. The only unsteady
+      frame in the cut, and it breaks the locked off grammar exactly where a person appears.</p>
+    </div>
+  </div>
+</div>
+
+<h2>Transitions and motion</h2>
+<div class="box rule">
+  <h4>How this thing actually moves</h4>
+  <p style="margin:0 0 8px">The rule for the whole reel is that <b>movement is decisive and it settles</b>. Nothing
+  drifts. Carried forward from rev 2, with the escalation rules added.</p>
+  <ul style="margin:0">
+    <li><b>The anchored push, not Ken Burns.</b> Ken Burns is a slow linear crawl across a still for the whole
+    duration, and it reads as filler. Every push here is short, eased out, and anchored on the subject: it starts
+    moving, decelerates, and comes to rest before the cut. Range is 2 to 4 percent, never more.</li>
+    <li><b>Motion escalates with the cut length.</b> Block 1 is mostly static and holds 2.0 to 2.2s. Block 3 runs
+    1.6s with pushes on nearly every frame. The reel physically speeds up without a single speed ramp.</li>
+    <li><b>One handheld frame only,</b> A10, the crew. Two pixels of wobble. It is the only frame that breaks the
+    locked off grammar, and it breaks it exactly where a person appears.</li>
+    <li><b>Cuts land on the beat,</b> hard, no dissolves anywhere in section A.</li>
+    <li><b>Property blocks change on a texture match.</b> Norwood ends on torn plaster, Barry opens on torn tile.
+    Barry ends on a laid floor, Howder opens on a floor pulled up. Same surface, opposite state, so the block
+    change feels like a cut inside one job rather than a jump to a new address.</li>
+    <li><b>The progress rule.</b> A two pixel brass line sits at the very bottom of frame and fills left to right
+    across the whole of section A, empty at the first card and full on the last framing frame. Almost subliminal,
+    and it is what makes three addresses read as one continuous run.</li>
+    <li><b>Hard cut to black</b> into the question card. No dissolve, no fade. The silence of the cut is what makes
+    the question land.</li>
+    <li><b>Team block settle.</b> Each portrait enters at 104 percent and settles to 100 over 10 frames, with the
+    name fading up 4 frames after the image lands, so the face registers before the text does.</li>
+    <li><b>The outro does not move.</b> The plate holds dead still for the full 3 seconds.</li>
+  </ul>
+  <div class="jn" style="margin-top:12px">Jake: "I can't have be a Ken's Burns I need to be like an actual like
+  emotional movement ... like I'm Christopher Nolan in this bitch make this like the best fucking current project
+  ever."</div>
+</div>
+
+<div class="box warn chg">
+  <h4>Higgsfield: tested tonight, and here is exactly where it works</h4>
+  <p style="margin:0 0 8px">Two real generations against the A5 Norwood still, 15 credits spent, 77.5 remaining.
+  Preflight was walked in full before either. Findings, evidenced by extracted frames in
+  <code>review/motion-A5_0.jpg</code> and <code>review/motion-A5v2_0.jpg</code>:</p>
+  <ul style="margin:0 0 8px">
+    <li><b>A five second dolly-in fails.</b> By roughly 3.5s the black contractor bag and the broom dissolve, the
+    R13 bag relocates onto the stud wall, and the framing layout changes. The camera travels past what the still
+    can support and the model invents. That is checklist 1.3 and 1.4.</li>
+    <li><b>A restrained push holds for about two seconds.</b> Verified at 0s, 1s, 2s and 2.5s: every object stays
+    put, the move is real and gentle. Degradation begins after that.</li>
+    <li><b>Two seconds is exactly what this reel needs</b>, because every section A hold is 1.6 to 2.2s. So the
+    working recipe is: generate five seconds, keep the first two, throw the rest away.</li>
+  </ul>
+  <p style="margin:0 0 8px"><b>Delivered:</b> <code>motion/A5-norwood-framing-TRIM2s.mp4</code>, a real 2.0s
+  camera move on the real photo, nothing invented. Source crop is
+  <code>raw/pick3/14-norwood-framing-916.jpg</code>.</p>
+  <p class="d" style="margin:0"><b>The honest caveat:</b> for a 2 to 4 percent anchored push, a deterministic
+  transform in the edit gives the identical result for zero credits and zero invention risk. Higgsfield earns its
+  place on the bigger moves, and the bigger the move the more it breaks. Recommend generative motion only where
+  the move genuinely exceeds what a transform can do, for example the rafters parallax at A9.</p>
+</div>
+
+<h2>Section B, the turn</h2>
+<div class="segment chg">
+  <div class="hdr"><h3>The hand off card</h3><span class="chip">3.0s</span><span class="chip">no photo</span><span class="badge b-new">line changed and enlarged</span></div>
+  <p class="desc">No longer a question. Your line states it instead of asking, which is stronger because the reel
+  has already shown the work and does not need to fish. Hard cut from the crew frame to black, set at the same
+  huge size as the opening cards. The music bed continues underneath so it reads as a beat, not a stop.</p>
+  <div class="shotgrid">
+    <div class="shot">
+      <div class="title-card big"><span class="cap-rule"></span><span class="cap-txt">These are<br>the people<br>that make<br>it possible</span></div>
+      <div class="tag"><span class="lbl">B1 &middot; 24.6 to 27.6</span><span class="badge b-new">your line</span></div>
+      <p class="mv">MOTION: text is on screen at the cut, no fade. Card is static for the full 3 seconds.</p>
+    </div>
+    <div class="shot title-card" style="min-height:auto;padding:18px">
+      <p class="d" style="margin:0;font-size:13px">Four lines at 34px is the ceiling before it stops reading as a
+      statement and starts reading as a paragraph. If you want it bigger still, the fix is to cut it to "These are
+      the people" and let the faces finish the sentence. Annotate if you want that version.</p>
+    </div>
+  </div>
+  <div class="jn">Jake: "Way bigger" and "But I would acc say These are the people that make it possible."</div>
+</div>
+
+<h2>Section C, the team</h2>
+<p class="d">Eight slots, name only, 1.6s each. Shavit's own roster order, with the team photo moved to the end
+as the payoff and Tito and Jonah placed before it so the block reads Michigan crew, then Indiana crew, then
+everyone. Unchanged from rev 2.</p>
+
+<div class="box warn">
+  <h4>The name to face mapping is verified, and still needs Shavit's eyes</h4>
+  <p style="margin:0">Recovered from the transfer identifiers embedded in Shavit's roster message, in document
+  order, then confirmed against the images. The obvious approach, sorting by database row, produced a completely
+  wrong mapping. Names on faces is the one thing here that cannot be wrong.</p>
+</div>
+
+<div class="segment">
+  <div class="hdr"><h3>Michigan crew</h3><span class="chip">6 slots</span></div>
+  <div class="shotgrid trio">
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/staff-named/01-allan-wiggins.jpg" alt="Allan Wiggins">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt">Allan Wiggins</span></div></div>
+      <div class="tag"><span class="lbl">C1 &middot; 27.0 to 28.6</span></div>
+    </div>
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/staff-named/02-pamela-montez.jpg" alt="Pamela Montez">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt">Pamela Montez</span></div></div>
+      <div class="tag"><span class="lbl">C2 &middot; 28.6 to 30.2</span></div>
+    </div>
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/staff-named/03-jon-rutan.jpg" alt="Jon Rutan">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt">Jon Rutan</span></div></div>
+      <div class="tag"><span class="lbl">C3 &middot; 30.2 to 31.8</span></div>
+    </div>
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/staff-named/05-darrin-hannibal.jpg" alt="Darrin Hannibal">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt">Darrin Hannibal</span></div></div>
+      <div class="tag"><span class="lbl">C4 &middot; 31.8 to 33.4</span></div>
+    </div>
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/staff-named/06-monte-rimer.jpg" alt="Monte Rimer">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt">Monte Rimer</span></div></div>
+      <div class="tag"><span class="lbl">C5 &middot; 33.4 to 35.0</span></div>
+    </div>
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/staff-named/07-riana-beardsley.jpg" alt="Riana Beardsley">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt">Riana Beardsley</span></div></div>
+      <div class="tag"><span class="lbl">C6 &middot; 35.0 to 36.6</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="segment">
+  <div class="hdr"><h3>Indiana, then everyone</h3><span class="chip">2 slots</span></div>
+  <p class="desc">Shavit's own slot stays removed, per your rev 1 note. The frame he sent under his name was a
+  screenshot of a video player with his name burned in as an overlay, not a portrait. He still appears in the team
+  photo, so nothing is lost.</p>
+  <div class="shotgrid">
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/tito-jonah/01.jpg" alt="Tito and Jonah">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt">Tito and Jonah</span></div></div>
+      <div class="tag"><span class="lbl">C7 &middot; 36.6 to 38.2</span></div>
+    </div>
+    <div class="shot people">
+      <div class="cap-wrap"><img src="current-projects-team-2026-07-27/raw/staff-named/04-team-photo.jpg" alt="Team photo">
+      <div class="cap-mock"><span class="cap-rule"></span><span class="cap-txt" style="font-weight:500;text-transform:none;font-size:15px">So thankful for my team</span></div></div>
+      <div class="tag"><span class="lbl">C8 &middot; 38.2 to 39.8</span></div>
+      <p class="mv">MOTION: settle from 104 percent, caption fades up last, holds into the outro.</p>
+    </div>
+  </div>
+</div>
+
+<div class="box warn">
+  <h4>The team caption needs a decision from Shavit, not just from us</h4>
+  <p style="margin:0 0 6px">You asked for something warm here and "So thankful for my team" is exactly what you
+  described. It is also the one line in the reel that breaks Shavit's own standing rule, which he enforced hard
+  and repeatedly across the Howder review: facts, not emotion, no adjectives.</p>
+  <p class="d" style="margin:0"><b>Why it may survive anyway:</b> the rule was aimed at property captions, where
+  he wanted rooms described plainly instead of sold. This line is Shavit speaking about his own people in first
+  person, which is a different register from ad copy. Flagging it so it is a deliberate override and not a
+  surprise in review. Alternatives if he pushes back: "Our team." or "The people who build it."</p>
+</div>
+
+<h2>Section D, the outro</h2>
+<div class="segment">
+  <div class="hdr"><h3>Shavit's signature plate</h3><span class="chip">3.0s</span></div>
+  <p class="desc">Not designed fresh and not a mockup. This is the actual outro plate from the shipped Howder
+  Street reel, already 1080 by 1920, so the close is pixel identical to the last post rather than a lookalike.</p>
+  <div class="shotgrid">
+    <div class="shot plate">
+      <img src="current-projects-team-2026-07-27/assets/outro.png" alt="Shipped outro plate">
+      <div class="tag"><span class="lbl">D1 &middot; 39.8 to 42.8</span><span>assets/outro.png</span></div>
+      <p class="mv">MOTION: none. Dead still for the full 3 seconds.</p>
+    </div>
+    <div class="shot title-card" style="min-height:auto;padding:18px">
+      <p class="d" style="margin:0;font-size:13px">Sourced from <code>assets/43-howder/plates/outro.png</code>.
+      You asked for the signature outro and for the title card to look sexy. Using the real shipped plate is the
+      strongest version of that, because it is the one people already associate with the brand. If you want it
+      restyled rather than reused, annotate here and I will treat it as a design task instead of a match.</p>
+    </div>
+  </div>
+</div>
+
+<h2>Open items</h2>
+<div class="box open">
+  <h4>1. Three properties or eight. Still the gate, and the 19:50 upload did not move it.</h4>
+  <p style="margin:0 0 8px">The rescan after your upload took Drive from 96 images to 127. Honest read on the 31
+  new ones:</p>
+  <ul style="margin:0 0 8px">
+    <li><b>South Norwood, plus 2. Genuinely useful.</b> Both are new framing going up with material and a
+    contractor bag on the floor. One is now A5, the other is staged as a swap.</li>
+    <li><b>Howder, plus 15. Not usable.</b> They are the same blank drywall ceilings and grey shingle close ups
+    you rejected on 2026-07-27 at 16:16, re-uploaded from the same camera roll.</li>
+    <li><b>Saint Joe, plus 11.</b> Still finished listing photography, so it still cannot enter a construction cut.</li>
+    <li><b>Ewing, plus 2.</b> Duplicates of the two frames we already had, including the pressure washer shot
+    taken from a roof that you rejected twice.</li>
+    <li><b>Cedar, plus 1. Ludlam, unchanged at one photo.</b></li>
+  </ul>
+  <p style="margin:0">So the answer is unchanged: <b>three properties tonight</b>, or someone walks Saint Joe,
+  Oak, Ewing, Cedar and Ludlam with a phone and shoots the work in progress. Nothing in the new batch changes it.</p>
+</div>
+<div class="box open chg">
+  <h4>2. There is no scaffolding photo, so the 360 cannot be built from what we have</h4>
+  <p style="margin:0 0 8px">You asked for a 360 around the scaffolding. I looked through all 127 Drive frames and
+  all 52 texted frames: <b>scaffolding does not appear in a single one.</b> The closest thing is the green ladder
+  in A8. I am not going to fake it, and generating it would break the real-photos-only rule.</p>
+  <p style="margin:0">Two honest options: <b>one</b>, a 2.5D parallax move on A10, the open rafters, which is a
+  real camera move derived from the actual photo and gets most of the way to the feeling you described. <b>Two</b>,
+  someone shoots a slow walk around the scaffolding on site and it becomes the centrepiece of the Howder block.
+  Tell me which and I will build it.</p>
+</div>
+<div class="box open">
+  <h4>3. Six of the eleven frames are under 1080 wide</h4>
+  <p style="margin:0">The Norwood debris frame, the Barry ceiling frame at 886px, and all four Howder frames came
+  out of Drive at 768 by 1024 or smaller, which is below the 1080 the reel needs. They will be soft if placed as
+  is. Cheapest fix is a 2x upscale on those six before assembly. The other five are 1920 wide or better and need
+  nothing.</p>
+</div>
+<div class="box open">
+  <h4>4. Music</h4>
+  <p style="margin:0"><code>_pool/music/wildflower.mp3</code> already exists in the pipeline and is the working
+  candidate. Direction on file is Americana and heartland rock, scored from one continuous section. Needs a
+  listen and a confirmation that it is copyright clear for this post.</p>
+</div>
+<div class="box open">
+  <h4>5. Jake and Eli are still not in the cut</h4>
+  <p style="margin:0">Shavit asked for the entire staff "including you and Eli" and neither photo batch contains
+  either of them. Decision on 2026-07-27 was to ship the crew Shavit sent and add the two of them later.</p>
+</div>
+<div class="box open">
+  <h4>6. State names on the labels</h4>
+  <p style="margin:0">Labels carry street names only. Shavit wants Indiana and Ohio visible in the work, but the
+  state for each property is not confirmed anywhere and guessing is how a cut gets rejected. Send the state per
+  property and they go on, as "Building South Norwood Street, Indiana".</p>
+</div>
+<div class="box open">
+  <h4>7. This reel supersedes the portfolio montage</h4>
+  <p style="margin:0"><code>portfolio-montage-2026-07-22.html</code> sits at rev 3 in draft and reuses South
+  Norwood. Shipping both within a week repeats a property. <b>Proposed:</b> park it. Still needs a yes.</p>
+</div>
+<div class="box open">
+  <h4>8. Howder is in by deliberate override</h4>
+  <p style="margin:0">Howder shipped its own reel on 2026-07-15 and was pulled from the portfolio montage on that
+  basis. Shavit sent Howder photos for this reel anyway and you named it, so it stays. Rev 3 uses unit 2, a
+  structural rebuild that the finished Howder reel never showed, so there is no repeated footage.</p>
+</div>
+
+<h2>Build notes</h2>
+<ul>
+  <li>Section A is 11 stills across 3 properties. Selected frames are staged, rotation corrected, at
+  <code>raw/pick3/</code> with readable names in cut order.</li>
+  <li>Drive pulls this session: Norwood 19, Howder unit 2 25, Howder duplex 23, Cedar 1, plus your 33 Barry 7 and
+  115 Oak 4 uploads from 19:22 tonight. Fourteen files arrived as HEIC with a .jpg extension and were converted,
+  otherwise they would have silently dropped out of every contact sheet.</li>
+  <li>Howder duplex turned out to be a before and after listing set, not process photography, so nothing from it
+  is used.</li>
+  <li>Contact sheets for every folder are in <code>review/</code>. <code>pick3_0.jpg</code> is the final eleven in
+  cut order.</li>
+  <li>Cut in rev 3 and not used anywhere: all 15 texted Howder frames, both Ewing frames, all 11 Saint Joe frames,
+  all Oak frames, Cedar, Ludlam.</li>
+  <li>Assembly target is Palmier Pro, project <b>Shavit Montage of Current Project Reels</b>, still empty at
+  Timeline 1. Nothing has been placed yet. This spec remains the gate.</li>
+</ul>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

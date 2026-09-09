@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drone shots — Saint Joe + Ludlam</title>
+<style>
+  :root{
+    --bg:oklch(0.15 0.008 60); --surface:oklch(0.20 0.010 60); --raised:oklch(0.26 0.012 60);
+    --line:oklch(0.33 0.014 60); --ink:oklch(0.97 0.004 60); --muted:oklch(0.75 0.010 60);
+    --brass:oklch(0.78 0.115 78); --ok:oklch(0.80 0.110 150);
+    --ease-q:cubic-bezier(0.22,1,0.36,1);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); padding:26px 30px 70px;
+    font:400 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{margin:0 0 4px; font-size:clamp(1.35rem,2.3vw,1.75rem); font-weight:600; letter-spacing:-0.02em}
+  .sub{margin:0 0 22px; color:var(--muted); font-size:14px; max-width:82ch}
+  h2{
+    font-size:13px; color:var(--muted); letter-spacing:0.05em; font-weight:600;
+    margin:38px 0 12px; padding-bottom:7px; border-bottom:1px solid var(--line);
+  }
+
+  .row{display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start}
+  figure{
+    margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:11px; overflow:hidden; width:252px; flex:0 0 auto;
+  }
+  figure.wide{width:300px}
+  figure video, figure img{display:block; width:100%; background:#000}
+  figcaption{padding:10px 12px; font-size:12.5px; color:var(--muted)}
+  figcaption b{color:var(--ink); display:block; font-size:13px; margin-bottom:2px}
+  figure.pick{border-color:oklch(0.80 0.110 150/0.65); box-shadow:0 0 0 1px oklch(0.80 0.110 150/0.3)}
+  .badge{
+    display:inline-block; background:var(--ok); color:oklch(0.16 0.01 60);
+    font:600 10px/1 ui-monospace,monospace; letter-spacing:0.06em;
+    padding:4px 6px; border-radius:4px; margin-bottom:6px;
+  }
+  .badge.alt{background:var(--raised); color:var(--muted)}
+
+  .controls{display:flex; gap:9px; flex-wrap:wrap; margin:0 0 8px}
+  button{
+    font:inherit; color:var(--ink); background:var(--raised); border:1px solid var(--line);
+    border-radius:8px; padding:9px 14px; cursor:pointer;
+    transition:background .15s var(--ease-q), transform .15s var(--ease-q);
+  }
+  button:hover{background:oklch(0.31 0.014 60)}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--brass); border-color:var(--brass); color:oklch(0.17 0.01 60); font-weight:600}
+  button:focus-visible{outline:2px solid var(--brass); outline-offset:2px}
+
+  .note{
+    max-width:78ch; margin-top:26px; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; padding:15px 17px; font-size:14px;
+  }
+  .note b{color:var(--ink)}
+  table{border-collapse:collapse; max-width:620px; width:100%; font-size:13.5px; margin-top:4px}
+  th,td{text-align:left; padding:8px 11px; border-bottom:1px solid var(--line)}
+  th{color:var(--muted); font-weight:600; font-size:12px; letter-spacing:0.03em}
+  td.n{font:600 13px/1 ui-monospace,monospace}
+  @media (prefers-reduced-motion: reduce){ button{transition:none} }
+</style>
+</head>
+<body>
+  <h1>Drone shots — Saint Joe and Ludlam</h1>
+  <p class="sub">
+    Both generated at 10s from vertically full-frame plates, then cut to 5s. Native 9:16,
+    1080x1920 edge to edge, no letterbox. Each opens or closes on the real photograph.
+  </p>
+
+  <div class="controls">
+    <button class="primary" id="playAll" type="button">Play all</button>
+    <button id="slow" type="button">Half speed</button>
+    <button id="normal" type="button">Normal speed</button>
+  </div>
+
+  <h2>Going in the film</h2>
+  <div class="row">
+    <figure class="pick">
+      <video class="v" src="saintjoe-5s.mp4" muted loop controls playsinline autoplay></video>
+      <figcaption>
+        <span class="badge">APPROVED</span>
+        <b>15 E Saint Joe — 5s</b>
+        Rises, pulls back, orbits to a high three-quarter. Opens on the real photo. Cuts to white.
+      </figcaption>
+    </figure>
+
+    <figure class="pick">
+      <video class="v" src="LUDLAM-drone-5s.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge">THE OPPOSITE</span>
+        <b>11 Ludlam — 5s, reversed</b>
+        Descends and pushes in, landing on the real photo. Mirror of Saint Joe, as you asked.
+        Zero invented pixels in the plate — a straight crop of a portrait original.
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2>Alternates and sources</h2>
+  <div class="row">
+    <figure>
+      <video class="v" src="LUDLAM-drone-5s-forward.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge alt">ALTERNATE</span>
+        <b>Ludlam — forward</b>
+        Same generation un-reversed, so it rises like Saint Joe. Here in case you would rather both
+        houses move the same way.
+      </figcaption>
+    </figure>
+
+    <figure class="wide">
+      <video class="v" src="saintjoe-916.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge alt">FULL 10s</span>
+        <b>Saint Joe — whole generation</b>
+        The complete move before the 5s cut, if you want to reconsider where it lands.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="saintjoe-plate916.jpg" alt="Vertically outpainted Saint Joe plate">
+      <figcaption>
+        <span class="badge alt">PLATE</span>
+        <b>Saint Joe full-frame plate</b>
+        Real photo extended vertically — sky above, lawn below, house untouched. Check the video
+        against it for invented detail.
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2>Runtime effect</h2>
+  <table>
+    <tr><th>Block</th><th>Was</th><th>Now</th></tr>
+    <tr><td>15 E Saint Joe</td><td class="n">2.33s still</td><td class="n">5.00s aerial</td></tr>
+    <tr><td>11 Ludlam</td><td class="n">1.83s still</td><td class="n">5.00s aerial</td></tr>
+    <tr><td><b>Whole reel</b></td><td class="n">49.3s</td><td class="n">~55.1s</td></tr>
+  </table>
+
+  <div class="note">
+    <b>What made these work.</b> Duration, not wording. At 5s Kling compressed a 13-metre climb and a
+    52-degree swing into a tilt — the same failure as GEN1 back in rev6. Generating at 10s gave the
+    move room to develop, then the best 5s got cut out. Both plates are honest: Ludlam is a plain crop
+    of a portrait original, and Saint Joe's outpaint only added sky and lawn. Neither invented
+    structures, unlike the Cedar attempt that fabricated a garage and a driveway.
+    <br><br>
+    <b>Cedar is next</b> — outpaint first at 2 credits, and you see the plate before I spend 17.5 on
+    the generation.
+  </div>
+
+<script>
+  const vs = [...document.querySelectorAll('video.v')];
+  document.getElementById('playAll').onclick = () => vs.forEach(v => { v.currentTime = 0; v.play(); });
+  document.getElementById('slow').onclick    = () => vs.forEach(v => v.playbackRate = 0.5);
+  document.getElementById('normal').onclick  = () => vs.forEach(v => v.playbackRate = 1);
+</script>
+</body>
+</html>

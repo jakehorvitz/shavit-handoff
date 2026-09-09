@@ -1,0 +1,289 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Kendall Street — Every Home Has A Second Chance · carousel spec</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --line:#26262a; --ink:#f2f0ec; --dim:#9d9a94;
+    --brass:#b08d57; --gold:#ffc000; --bone:#edeae3; --bad:#e0674f; --ok:#6fae7b;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+       padding:0 0 140px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);padding:44px 0 28px;margin-bottom:8px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+     margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+        text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);
+        color:var(--dim);margin-right:6px}
+  .pill.hold{color:var(--bad);border-color:rgba(224,103,79,.4)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .shot{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:start;
+        background:var(--panel);border:1px solid var(--line);border-radius:14px;
+        padding:18px;margin:16px 0;position:relative}
+  .shot img{width:100%;border-radius:8px;display:block;background:#000}
+  .num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--brass);text-transform:uppercase}
+  .copy{background:var(--bone);color:#121214;border-radius:8px;padding:16px 18px;margin:10px 0 0}
+  .copy .hl{font-weight:800;font-size:19px;line-height:1.25;letter-spacing:-.01em;text-transform:uppercase}
+  .copy .sl{color:#5c5954;font-size:14px;margin-top:8px}
+  .copy .cta{color:#8a6e40;font-weight:700;letter-spacing:.02em;margin-top:12px;
+             border-bottom:3px solid #b08d57;display:inline-block;padding-bottom:3px}
+  .why{color:var(--dim);font-size:13.5px;margin-top:12px}
+  .why b{color:var(--ink);font-weight:600}
+  .frame{font-family:var(--mono);font-size:11.5px;color:var(--brass)}
+
+  /* Gold "UPDATED" glow on anything that moved in this revision. Drop these
+     marks on the revision after Jake has seen them. */
+  .chg{box-shadow:0 0 0 1px rgba(255,192,0,.5),0 0 26px rgba(255,192,0,.13)}
+  .chg::after{content:"UPDATED";position:absolute;top:-9px;right:14px;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;background:var(--gold);
+    color:#191500;padding:2px 8px;border-radius:999px;font-weight:700}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  td.k{font-family:var(--mono);color:var(--dim);white-space:nowrap}
+  .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:420px}
+  .grid6 figure{margin:0}
+  .grid6 img{width:100%;border-radius:4px;display:block}
+  .grid6 figcaption{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px}
+  .q{border-left:3px solid var(--bad);background:rgba(224,103,79,.06);border-radius:0 10px 10px 0;
+     padding:14px 18px;margin:12px 0}
+  .q b{color:var(--bad)}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;
+      overflow-x:auto;font-family:var(--mono);font-size:12.5px;color:var(--dim);white-space:pre-wrap}
+  a{color:var(--gold)}
+  @media (max-width:760px){ .shot{grid-template-columns:1fr} }
+</style>
+
+<body data-spec="kendall-second-chance">
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Shavit Rootman · Instagram carousel · 10 slides · 1080 × 1350</div>
+  <h1>Every home has a second chance.</h1>
+  <div class="sub">Kendall Street, South Bend, Indiana · built 2026-08-03 · <span class="pill hold">Awaiting Jake</span><span class="pill">Drafts only — Jake posts</span></div>
+
+  <div class="revlog">
+    <h4>Revision log</h4>
+    <ul>
+      <li><span class="rev">rev 5 · 2026-08-03</span> — Back to Shavit's original running order and his original headlines on slides 1 and 2. The single departure from his script is photographic: slide 1 carries the FINISHED exterior rather than the before, and the before exterior sits in the collage. Ten slides, no copy of his altered or dropped.</li>
+      <li><span class="rev">rev 4 · 2026-08-03</span> — Jake cut the standalone before-exterior slide and folded that photo into the collage, which grew from six tiles to nine at 3 × 3. The collage now carries "every home has a second chance" as its headline with "we do not start with paint" as its first subline — deleting the slide outright would have lost one of Shavit's ten headlines. Back to ten slides.</li>
+      <li><span class="rev">rev 3 · 2026-08-03</span> — Shavit rejected a before photo leading. Restructured to eleven slides: 01 is now a cover carrying the address over the finished exterior, 02 is "every home has a second chance" over the before exterior at the same angle, 03 is the before collage. Slide 10 moved off the exterior to frame 030 per Jake's "don't reuse the same image" — no photo now appears twice. Also fixed the review sheet, which was hardcoded to two rows and was silently dropping slide 11.</li>
+      <li><span class="rev">rev 2 · 2026-08-03</span> — Jake: "no addresses". House number off slide 01 and off the caption; street name and city stay, per the standing no-house-numbers rule. Slide 10 subline is now "Proudly revitalizing South Bend, Indiana." — the 46613 / 46614 ZIPs are cut, which also retires the unverified-claim flag. UPDATED marks now show only the two slides that moved.</li>
+      <li><span class="rev">rev 1 · 2026-08-03</span> — Rebuilt from the 6-card "work you never see" set into 10 slides. Copy replaced wholesale with Shavit's 8/2 22:08 text. New slide 2 before-collage. Treatment moved from rev 12 (type on ceiling) to rev 11 in bone. Frames re-picked across the board.</li>
+      <li><span class="rev">prior</span> — <a href="work-you-never-see-2026-07-24/final/REVIEW-sheet.jpg">6-card set, 7/25</a>, superseded.</li>
+    </ul>
+  </div>
+</header>
+
+<h2 data-annot="sec-source">Where this came from</h2>
+<p>Two inputs, both from 8/2. Neither is paraphrased anywhere in the build.</p>
+<table>
+  <tr><th>Source</th><th>What it decided</th></tr>
+  <tr><td class="k">Phone call<br>8/2 evening</td><td>Premise stays ("the premise is good"). Photos stay ("I like the photos a lot"). One thing missing: <b>"all the photos you have are from during the process"</b> — add the before state. And explicitly <b>one collage page, not seven slides</b>: "I do not think people have the energy to go watch like seven before photos."</td></tr>
+  <tr><td class="k">iMessage<br>8/2 22:08</td><td>The full slide-by-slide rewrite, slide 1 through 10. This is the copy source of truth. It arrived truncated through the normal tooling and was decoded in full from the message store.</td></tr>
+</table>
+
+<h2 data-annot="sec-slides">The ten slides</h2>
+
+<div class="shot chg" data-annot="slide-01">
+  <img src="work-you-never-see-2026-07-24/final-0803/01_019.jpg" alt="Slide 1">
+  <div>
+    <div class="num">Slide 01 · <span class="frame">frame 019 · finished exterior</span></div>
+    <div class="copy">
+      <div class="hl">Every home has a second chance.</div>
+      <div class="sl">Kendall Street. South Bend, Indiana.</div>
+    </div>
+    <div class="why"><b>The cover.</b> Shavit's original slide 1 copy, unchanged. The only departure from his script anywhere in the deck is the photograph: this is the FINISHED exterior, because he rejected a before photo leading the carousel. It is the only finished exterior in the entire dump, which is why it appears here and nowhere else.</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-02">
+  <img src="work-you-never-see-2026-07-24/final-0803/02_collage.jpg" alt="Slide 2">
+  <div>
+    <div class="num">Slide 02 · <span class="frame">collage · 9 before rooms</span></div>
+    <div class="copy">
+      <div class="hl">We do not start with paint.</div>
+      <div class="sl">We begin by understanding the structure, the systems, and everything behind the walls.</div>
+    </div>
+    <div class="why"><b>This is the slide Shavit asked for.</b> Jake folded the before exterior in here rather than giving it a slide of its own, so the before state is seen without ever leading. Nine tiles at 3 × 3, because the photo area is 1080 × 866 and a nine-up tile is 356 × 285 — an aspect of 1.25 against the source photos' 1.33, so almost nothing is cropped. Brass BEFORE chip top-left; without it the grid reads as after-thumbnails. Not one tile shows a belonging.</div>
+    <div class="grid6" style="margin-top:12px">
+      <figure><img src="kendall-2026-07-24/_drive-dump/045_1BBvm5tglnbEWWLnETrLINxnvYsmWD3Od.jpg" alt=""><figcaption>045 kitchen</figcaption></figure>
+      <figure><img src="kendall-2026-07-24/_drive-dump/006_1LSMXBnM5NU089HkXeSx8abjljRldAcNW.jpg" alt=""><figcaption>006 bedroom</figcaption></figure>
+      <figure><img src="kendall-2026-07-24/_drive-dump/038_1t61_tmVW4xlCIk7_AGU_yDpUSkLiSpGi.jpg" alt=""><figcaption>038 sunroom</figcaption></figure>
+    </div>
+    <div class="why" style="margin-top:8px">Tile order reads outside-in, left to right: 004 exterior · 045 kitchen · 102 living room / 038 sunroom · 033 bath · 043 wainscot room / 006 bedroom · 084 bedroom · 087 carpeted room.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-03">
+  <img src="work-you-never-see-2026-07-24/final-0803/03_078.jpg" alt="Slide 3">
+  <div>
+    <div class="num">Slide 03 · <span class="frame">frame 078 · mechanical rough-in</span></div>
+    <div class="copy">
+      <div class="hl">Every decision has a purpose.</div>
+      <div class="sl">Electrical. Plumbing. HVAC. Insulation. Framing.<br>If it matters to the family living here, it matters to us.</div>
+    </div>
+    <div class="why"><b>Fixed on the second pass.</b> The first crop pushed the pipework off-frame and left a brown wall captioned "plumbing". Crop biased hard left so the vent stack, copper line and framed header are all in shot.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-04">
+  <img src="work-you-never-see-2026-07-24/final-0803/04_091.jpg" alt="Slide 4">
+  <div>
+    <div class="num">Slide 04 · <span class="frame">frame 091 · ceiling opened</span></div>
+    <div class="copy">
+      <div class="hl">Quality is built long before the finishes.</div>
+      <div class="sl">The best renovations are not measured by what you can see. They are measured by what will never become a problem later.</div>
+    </div>
+    <div class="why"><b>Why this frame.</b> Open ceiling with the duct visible down a finished-looking hallway is the literal picture of "what you can see" versus what is above it.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-05">
+  <img src="work-you-never-see-2026-07-24/final-0803/05_026.jpg" alt="Slide 5">
+  <div>
+    <div class="num">Slide 05 · <span class="frame">frame 026 · rebuild in progress</span></div>
+    <div class="copy">
+      <div class="hl">Then we rebuild.</div>
+      <div class="sl">New layout. New kitchen. New flooring. New lighting.<br>Every improvement is intentional.</div>
+    </div>
+    <div class="why"><b>Why this frame.</b> The pivot slide needs to be visibly mid-build, not finished. Protected floors and fresh drywall read as "rebuild" without repeating the tool-clutter shots from slides 3 and 4.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-06">
+  <img src="work-you-never-see-2026-07-24/final-0803/06_066.jpg" alt="Slide 6">
+  <div>
+    <div class="num">Slide 06 · <span class="frame">frame 066 · finished kitchen</span></div>
+    <div class="copy">
+      <div class="hl">Every detail represents a decision.</div>
+      <div class="sl">Cabinets. Trim. Tile. Paint. Lighting.<br>Hundreds of decisions come together to create one home.</div>
+    </div>
+    <div class="why"><b>Why this frame.</b> His list names five things and this frame contains all five at once: cabinets, trim, subway tile, paint and the can lighting.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-07">
+  <img src="work-you-never-see-2026-07-24/final-0803/07_060.jpg" alt="Slide 7">
+  <div>
+    <div class="num">Slide 07 · <span class="frame">frame 060 · finished bath</span></div>
+    <div class="copy">
+      <div class="hl">The goal is simple.</div>
+      <div class="sl">Build a home we would proudly hand to our own family.<br>Nothing less.</div>
+    </div>
+    <div class="why"><b>Open to challenge.</b> A bath is a defensible "nothing less" proof but it is the coldest room in the deck. The warmer alternative is 036 (living room with the finished fireplace), which costs a near-repeat against slide 10. Flagged below.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-08">
+  <img src="work-you-never-see-2026-07-24/final-0803/08_018.jpg" alt="Slide 8">
+  <div>
+    <div class="num">Slide 08 · <span class="frame">frame 018 · finished open plan</span></div>
+    <div class="copy">
+      <div class="hl">When the work is finished,</div>
+      <div class="sl">the renovation disappears.<br>What remains is a home that feels natural, comfortable, and ready for its next chapter.</div>
+    </div>
+    <div class="why"><b>Why this frame.</b> The widest finished interior in the set. "The renovation disappears" needs a room with no evidence left in it.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-09">
+  <img src="work-you-never-see-2026-07-24/final-0803/09_030.jpg" alt="Slide 9">
+  <div>
+    <div class="num">Slide 09 · <span class="frame">frame 030 · finished living, front windows</span></div>
+    <div class="copy">
+      <div class="hl">This is why we invest.</div>
+      <div class="sl">Not simply to renovate houses.<br>To strengthen neighborhoods, preserve housing, and create places families are proud to call home.</div>
+    </div>
+    <div class="why"><b>Jake, 8/3: do not reuse the same image.</b> The exterior appears once, on the cover. This frame carries the line instead because the front windows look straight out at the neighbouring houses — the literal picture of "strengthen neighborhoods" — and it repeats no other room in the deck.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-10">
+  <img src="work-you-never-see-2026-07-24/final-0803/10_098.jpg" alt="Slide 10">
+  <div>
+    <div class="num">Slide 10 · <span class="frame">frame 098 · end card</span></div>
+    <div class="copy">
+      <div class="hl">One home. One family. One neighborhood at a time.</div>
+      <div class="sl">Proudly revitalizing South Bend, Indiana.</div>
+      <div class="cta">Live with us. Work with us.</div>
+    </div>
+    <div class="why"><b>Fixed on the second pass.</b> The brass rule under the tagline was cutting through the type as a strikethrough — Bricolage reports a tight cap-height box, so the rule is now anchored off the type size instead. Closes inside the house rather than on a second exterior.</div>
+  </div>
+</div>
+
+<h2 data-annot="sec-caption">Caption</h2>
+<pre>Every home has a second chance.
+
+Kendall Street. South Bend, Indiana.
+
+Swipe to the second slide and you will see where this one started. Wood cabinets,
+drop ceilings, carpet in every room. That is the part almost nobody posts.
+
+We do not start with paint. We start behind the walls: electrical, plumbing, HVAC,
+insulation, framing. None of it is visible once the walls close, and all of it
+decides whether the house is still sound in ten years.
+
+Then we rebuild. New layout. New kitchen. New flooring. New lighting. Hundreds of
+decisions come together to create one home.
+
+When the work is finished, the renovation disappears. What remains is a home that
+feels natural, comfortable, and ready for its next chapter.
+
+One home. One family. One neighborhood at a time.
+
+Live with us. Work with us.
+
+.
+.
+#beforeandafter #rehab #renovation #brrrr #realestateinvesting #southbend
+#southbendindiana #indianarealestate #michiganrealestate #midwestrealestate
+#fixandflip #homerenovation #propertyrehab #realestateinvestor</pre>
+<div class="why">Hashtags answer his 7/30 ask for "the best real estate hashtags and Michigan and Indiana hashtags". Every factual claim in the caption is either his own words or visible in the before frames.</div>
+
+<h2 data-annot="sec-open">Open — needs Jake before this ships</h2>
+
+<div class="q" data-annot="q-photos"><b>1. His photos never downloaded.</b> Shavit texted before / during / after batches at 21:30–21:33 on 8/2. The attachment folders exist on this machine but the files are still in iCloud. The collage therefore uses six verified befores from the Drive dump, not his. Open the thread on your phone to pull his down and they can be swapped in.</div>
+
+<div class="q" data-annot="q-fairhousing2" style="border-left-color:#6fae7b;background:rgba(111,174,123,.06)"><b style="color:#6fae7b">Settled 8/3 — no addresses.</b> House number off slide 01 and the caption, street name and city retained. Slide 10 ZIPs cut. Was open items 2 and 4.</div>
+
+<div class="q" data-annot="q-fairhousing"><b>2. Fair housing, three mentions.</b> "the family living here" (03), "hand to our own family" (07), "places families are proud to call home" (09). All three describe the standard of work rather than screening an occupant, so they are left as written — but familial status is a protected class and this is his copy, not mine. Worth one look before it is public.</div>
+
+<div class="q" data-annot="q-cover"><b>3. Cover choice.</b> Currently the before exterior, because the headline needs it. The finished exterior is the stronger thumbnail in a cold grid. Say the word and rev 2 swaps 1 and 9.</div>
+
+<h2 data-annot="sec-excluded">Excluded on purpose</h2>
+<p>Dump frames <span class="frame">051, 067, 069, 088, 097</span> show the prior occupants' belongings piled through the house. None are used, in the collage or anywhere else. This is the same call that removed the dog-breeding slide from East Victoria: the post is about the house, never about who lived in it.</p>
+
+<h2 data-annot="sec-build">Build</h2>
+<table>
+  <tr><th>Item</th><th>Path</th></tr>
+  <tr><td class="k">Renderer</td><td>_scripts/render_kendall_secondchance.py — Shavit's text verbatim in <span class="frame">CARDS</span>, which is the copy source of truth, not this page</td></tr>
+  <tr><td class="k">Output</td><td>work-you-never-see-2026-07-24/final-0803/ — 10 JPEGs, CAPTION.txt, Kendall-Second-Chance-MASTER.pdf, REVIEW-sheet.jpg</td></tr>
+  <tr><td class="k">Treatment</td><td>rev 11 in bone. reel_full.py records the standing split: bone is the carousel system, black is the film system. His copy runs to three tiers, which rev 12's type-on-ceiling cannot hold without covering the room.</td></tr>
+  <tr><td class="k">Band</td><td>484px uniform (36% of frame), measured across all ten so the baseline never moves between slides</td></tr>
+  <tr><td class="k">Type</td><td>SF Pro headline + DM Sans subline, brass #b08d57 on bone #edeae3</td></tr>
+  <tr><td class="k">Re-render</td><td><span class="frame">python3.13 render_kendall_secondchance.py</span> (system python3 has no Pillow)</td></tr>
+</table>
+
+<h2 data-annot="sec-sheet">Contact sheet</h2>
+<img src="work-you-never-see-2026-07-24/final-0803/REVIEW-sheet.jpg" alt="All ten slides" style="width:100%;border-radius:12px;border:1px solid var(--line);margin-top:8px">
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>

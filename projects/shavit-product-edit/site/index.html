@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1115" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <!-- First-paint cover (spec §1 bug fix): the prerendered hero used to flash
+         a listing photo before the client-only intro mounted. This static cover
+         paints instantly, then intro.jsx removes it the moment it takes over.
+         The inline timeout is a safety net so a JS failure can't strand it. -->
+    <div id="boot-cover" aria-hidden="true" style="position:fixed;inset:0;z-index:9999;background:#0b0b0c;"></div>
+    <noscript><style>#boot-cover{display:none!important}</style></noscript>
+    <script>setTimeout(function(){var c=document.getElementById('boot-cover');if(c)c.remove()},8000)</script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Shavit footage triage — smash or pass</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#0b0b0c;--panel:#141416;--panel2:#1b1b1e;--line:#26262a;--ink:#f2f0ec;--dim:#9d9a94;
+ --brass:#b08d57;--gold:#ffc000;--ok:#6fae7b;--bad:#e0674f;--blue:#6ea3d6;
+ --mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+header{border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+h1{font-size:15px;margin:0;letter-spacing:-.01em}
+.count{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.tally b{font-family:var(--mono)}
+.tally .k{color:var(--ok)}.tally .p{color:var(--bad)}
+.bar{height:3px;background:var(--line);border-radius:2px;flex:1;min-width:120px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brass);width:0}
+main{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:26px;padding:26px 24px 40px;max-width:1240px;margin:0 auto}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+.stage{background:#000;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center;aspect-ratio:9/16;max-height:72vh;margin:0 auto;width:100%}
+.stage video,.stage iframe{width:100%;height:100%;border:0;display:block;object-fit:contain}
+.meta{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.meta h2{font-size:19px;margin:0 0 2px;font-family:var(--mono)}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+ padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--dim);margin:0 6px 6px 0}
+.pill.gold{color:var(--gold);border-color:rgba(255,192,0,.4)}
+.pill.bad{color:var(--bad);border-color:rgba(224,103,79,.45)}
+.pill.blue{color:var(--blue);border-color:rgba(110,163,214,.45)}
+.pill.ok{color:var(--ok);border-color:rgba(111,174,123,.45)}
+.said{background:#edeae3;color:#121214;border-radius:9px;padding:12px 14px;margin:12px 0 0;font-size:13.5px;font-style:italic;font-weight:600}
+.said span{display:block;font-style:normal;font-weight:400;font-family:var(--mono);font-size:10.5px;color:#5c5954;margin-top:7px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px;margin:14px 0 0}
+dt{color:var(--dim);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;align-self:center}
+dd{margin:0}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+button{font:inherit;font-weight:650;padding:13px 10px;border-radius:10px;border:1px solid var(--line);
+ background:var(--panel2);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--brass)}
+button.keep{border-color:rgba(111,174,123,.5);color:var(--ok)}
+button.pass{border-color:rgba(224,103,79,.5);color:var(--bad)}
+button kbd{font-family:var(--mono);font-size:10px;color:var(--dim);display:block;font-weight:400;margin-top:2px}
+.mini{display:flex;gap:8px;margin-top:10px}
+.mini button{flex:1;padding:8px;font-size:12.5px;font-weight:500}
+.film{display:flex;gap:6px;overflow-x:auto;padding:14px 24px 22px;border-top:1px solid var(--line)}
+.film figure{margin:0;flex:0 0 62px;cursor:pointer;opacity:.4;transition:opacity .15s}
+.film figure.on{opacity:1;outline:2px solid var(--brass);border-radius:6px}
+.film figure.keep{opacity:1;outline:2px solid var(--ok);border-radius:6px}
+.film figure.pass{opacity:.3;outline:2px solid var(--bad);border-radius:6px}
+.film img,.film .ph{width:62px;height:110px;object-fit:cover;border-radius:5px;display:block;background:#1b1b1e}
+.film figcaption{font-family:var(--mono);font-size:9px;color:var(--dim);text-align:center;margin-top:3px}
+.done{padding:26px 24px;font-family:var(--mono);font-size:13px;color:var(--dim);white-space:pre-wrap}
+</style>
+
+<header>
+  <h1>Shavit footage triage</h1>
+  <span class="count" id="pos"></span>
+  <div class="bar"><i id="fill"></i></div>
+  <span class="tally"><b class="k" id="nk">0</b> keep &nbsp;<b class="p" id="np">0</b> pass</span>
+</header>
+
+<main>
+  <div class="stage" id="stage"></div>
+  <div class="meta">
+    <h2 id="name"></h2>
+    <div id="pills"></div>
+    <div id="said"></div>
+    <dl id="facts"></dl>
+    <div class="acts">
+      <button class="pass" onclick="decide('pass')">Pass<kbd>← or X</kbd></button>
+      <button class="keep" onclick="decide('keep')">Smash<kbd>→ or K</kbd></button>
+    </div>
+    <div class="mini">
+      <button onclick="step(-1)">Back</button>
+      <button onclick="decide('maybe')">Maybe</button>
+      <button onclick="report()">Results</button>
+    </div>
+  </div>
+</main>
+
+<div class="film" id="film"></div>
+<div class="done" id="done"></div>
+
+<script>
+let items = [], i = 0, dec = {};
+
+const fmt = s => s ? `${Math.floor(s/60)}:${String(Math.round(s%60)).padStart(2,'0')}` : '—';
+
+async function boot(){
+  items = (await (await fetch('manifest.json')).json()).items;
+  dec = await (await fetch('decisions.json')).json();
+  const first = items.findIndex(it => !dec[it.sig]);
+  i = first < 0 ? 0 : first;
+  film(); show();
+}
+
+function film(){
+  document.getElementById('film').innerHTML = items.map((it,n)=>`
+    <figure data-n="${n}" onclick="go(${n})">
+      ${it.poster?`<img src="${it.poster}">`:'<div class="ph"></div>'}
+      <figcaption>${it.name.replace(/IMG_|\.(mov|MOV|mp4)/g,'')}</figcaption>
+    </figure>`).join('');
+}
+
+function show(){
+  if(i>=items.length) return report();
+  const it = items[i];
+  document.getElementById('stage').innerHTML = it.driveOnly
+    ? `<iframe src="https://drive.google.com/file/d/${it.driveId}/preview" allow="autoplay"></iframe>`
+    : `<video id="v" src="/media/${it.sig}" controls autoplay muted playsinline></video>`;
+
+  document.getElementById('name').textContent = it.name;
+  document.getElementById('pos').textContent = `${i+1} of ${items.length}`;
+  document.getElementById('fill').style.width = (i/items.length*100)+'%';
+
+  const p = [];
+  p.push(`<span class="pill gold">#${it.order} in sequence</span>`);
+  if(it.driveOnly) p.push('<span class="pill blue">Drive only — never reached the Mac</span>');
+  if(it.sizeMismatch) p.push(`<span class="pill bad">Drive copy is only ${it.driveSizeMB}MB vs ${it.sizeMB}MB here</span>`);
+  if(it.dupeCount) p.push(`<span class="pill">${it.dupeCount} duplicate copies collapsed</span>`);
+  if(dec[it.sig]) p.push(`<span class="pill ${dec[it.sig]==='keep'?'ok':'bad'}">already ${dec[it.sig]}</span>`);
+  document.getElementById('pills').innerHTML = p.join('');
+
+  document.getElementById('said').innerHTML = it.caption
+    ? `<div class="said">${it.caption.replace(/</g,'&lt;')}<span>what Shavit typed with it</span></div>` : '';
+
+  document.getElementById('facts').innerHTML = `
+    <dt>sent</dt><dd>${it.sent || 'not via Messages'}</dd>
+    <dt>length</dt><dd>${fmt(it.duration)}</dd>
+    <dt>size</dt><dd>${it.sizeMB} MB${it.width?` · ${it.width}×${it.height}`:''}</dd>`;
+
+  [...document.querySelectorAll('#film figure')].forEach((f,n)=>{
+    f.className = n===i ? 'on' : (dec[items[n].sig]||'');
+    if(n===i) f.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  });
+  document.getElementById('done').textContent = '';
+}
+
+function tally(){
+  const v = Object.values(dec);
+  document.getElementById('nk').textContent = v.filter(x=>x==='keep').length;
+  document.getElementById('np').textContent = v.filter(x=>x==='pass').length;
+}
+
+async function decide(verdict){
+  const it = items[i];
+  dec[it.sig] = verdict;
+  tally();
+  fetch('/decide',{method:'POST',body:JSON.stringify({[it.sig]:verdict})});
+  step(1);
+}
+
+function step(d){ i = Math.max(0, Math.min(items.length, i+d)); show(); }
+function go(n){ i = n; show(); }
+
+function report(){
+  const pick = k => items.filter(it=>dec[it.sig]===k);
+  const line = it => `  #${it.order}  ${it.name.padEnd(16)} ${fmt(it.duration).padStart(5)}  ${it.caption.slice(0,54)}`;
+  document.getElementById('done').textContent =
+    `SMASH (${pick('keep').length})\n` + pick('keep').map(line).join('\n') +
+    `\n\nMAYBE (${pick('maybe').length})\n` + pick('maybe').map(line).join('\n') +
+    `\n\nPASS (${pick('pass').length})\n` + pick('pass').map(line).join('\n') +
+    `\n\nsaved to triage/decisions.json`;
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key==='k') decide('keep');
+  else if(e.key==='ArrowLeft'||e.key==='x') decide('pass');
+  else if(e.key==='m') decide('maybe');
+  else if(e.key==='b') step(-1);
+  else if(e.key===' '){ const v=document.getElementById('v'); if(v){ e.preventDefault(); v.paused?v.play():v.pause(); } }
+});
+
+boot().then(tally);
+</script>

@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>East Victoria Street, the story, carousel spec</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#2a2a2e;
+    --ink:#f4f2ec; --dim:#a5a29a; --faint:#6f6c64;
+    --brass:#B08D57; --gold:#FFC000; --ok:#7FB88A; --bad:#e0794a; --blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;line-height:1.15;margin:.35em 0 .15em}
+  .sub{color:var(--dim);max-width:74ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:48px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{font-size:20px;margin:0 0 4px;color:var(--ink)}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-watch{background:rgba(224,121,74,.14);color:var(--bad);border:1px solid rgba(224,121,74,.4)}
+  .b-slot{background:rgba(110,163,214,.14);color:var(--blue);border:1px solid rgba(110,163,214,.4)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog b{color:var(--ink)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .segment{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0 28px}
+  .segment .hdr{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px}
+  .segment .desc{color:var(--dim);font-size:14px;margin:2px 0 16px}
+  .chg{position:relative}
+  .chg::after{content:"UPDATED";position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--gold);
+    border:1px solid rgba(255,192,0,.4);border-radius:5px;padding:2px 7px;background:rgba(255,192,0,.06);box-shadow:0 0 14px rgba(255,192,0,.15)}
+
+  .shotgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .shotgrid.single{grid-template-columns:1fr;max-width:340px}
+  .shotgrid.trio{grid-template-columns:repeat(3,1fr);max-width:none}
+  .shot{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;overflow:hidden}
+  .shot img{width:100%;height:360px;object-fit:cover;border-radius:7px;display:block;border:1px solid var(--line)}
+  .shot .tag{font-family:var(--mono);font-size:11px;color:var(--gold);margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+  .shot .tag .lbl{color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-size:10px}
+
+  .cap-wrap{position:relative;border-radius:7px;overflow:hidden}
+  .cap-mock{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 16px;pointer-events:none;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.74) 52%,rgba(0,0,0,.92))}
+  .cap-mock.top{top:0;bottom:auto;padding:16px 16px 30px;
+    background:linear-gradient(0deg,transparent,rgba(0,0,0,.74) 52%,rgba(0,0,0,.92))}
+  .cap-mock .cap-rule{display:block;width:26px;height:2px;background:var(--brass);margin:0 0 8px}
+  .cap-mock .cap-txt{display:block;font-family:"Inter",system-ui,sans-serif;font-weight:700;
+    text-transform:uppercase;letter-spacing:.03em;color:#fff;font-size:15px;line-height:1.4;
+    text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .cap-mock .cap-txt+.cap-txt{margin-top:3px;font-weight:500;font-size:12.5px;color:#e8e5dc;text-transform:none;letter-spacing:0}
+  .cap-mock .step{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.12em;margin-bottom:6px}
+
+  .title-card{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 18px;text-align:center}
+  .title-card .tc-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .title-card .tc-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(0,0,0,.9) 74%)}
+  .title-card .tc-content{position:relative;z-index:2}
+  .title-card .cap-rule{margin:0 auto 12px;display:block;width:30px;height:2px;background:var(--brass)}
+  .title-card .cap-txt{font-family:"Inter",system-ui,sans-serif;font-weight:700;text-transform:uppercase;
+    letter-spacing:.03em;color:#fff;font-size:17px;line-height:1.5;display:block;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .title-card .cap-txt+.cap-txt{margin-top:6px;font-weight:500;font-size:13px;color:#e8e5dc}
+  .title-card .mark{margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+
+  /* numbers card */
+  .num-card{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:360px;
+    display:flex;flex-direction:column;justify-content:center;padding:26px 20px;text-align:center}
+  .num-card .tc-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .num-card .tc-scrim{position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.72)}
+  .num-card .tc-content{position:relative;z-index:2}
+  .num-card .cap-rule{margin:0 auto 14px;display:block;width:30px;height:2px;background:var(--brass)}
+  .num-card .nrow{display:flex;justify-content:space-between;align-items:baseline;max-width:230px;margin:0 auto;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  .num-card .nrow:last-of-type{border-bottom:none}
+  .num-card .nlbl{font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#cfccc4}
+  .num-card .nval{font-family:"Inter",sans-serif;font-weight:700;font-size:17px;color:#fff}
+  .num-card .nval.arv{color:var(--gold)}
+  .num-card .ntitle{font-family:"Inter",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:#fff;font-size:15px;margin-bottom:6px}
+
+  .placeholder-shot{position:relative;background:repeating-linear-gradient(45deg,#141416,#141416 10px,#17171a 10px,#17171a 20px);
+    border:1px dashed var(--blue);border-radius:10px;min-height:360px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:22px;overflow:hidden}
+  .placeholder-shot .ph-icon{font-size:26px;margin-bottom:10px;opacity:.7}
+  .placeholder-shot .ph-k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .placeholder-shot .ph-t{font-size:13px;color:var(--dim);max-width:26ch}
+  .placeholder-shot .cap-mock{background:linear-gradient(180deg,transparent,rgba(0,0,0,.6) 60%,rgba(0,0,0,.85))}
+
+  .overlay-box{background:#000;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;margin:14px 0;font-size:14px}
+  .overlay-box .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+  .overlay-box .txt{font-size:15px;color:var(--ink)}
+  .overlay-box .txt .line{display:block;margin:2px 0}
+  .overlay-box .small{font-size:12px;color:var(--faint);margin-top:6px}
+
+  .prodnote{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px;color:var(--dim)}
+  .prodnote .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:5px}
+  .prodnote b{color:var(--ink)}
+
+  .flag{background:rgba(224,121,74,.09);border:1px solid rgba(224,121,74,.4);border-left:3px solid var(--bad);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px;color:#f0c9b8}
+  .flag .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bad);display:block;margin-bottom:5px}
+  .flag b{color:#fff}
+
+  .capbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+  .capbox .cap-body{white-space:pre-wrap;font-size:14.5px;color:var(--ink);line-height:1.65}
+  .capbox .tags{margin-top:12px;color:var(--blue);font-size:13px;font-family:var(--mono)}
+
+  .checklist{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+  .checklist li{list-style:none;margin:8px 0;padding-left:1.6em;position:relative;font-size:14px;color:var(--dim)}
+  .checklist li::before{content:"\2610";position:absolute;left:0;color:var(--brass);font-size:15px}
+  .checklist li b{color:var(--ink)}
+  .checklist li.open::before{content:"\2691";color:var(--bad)}
+  .checklist li.done::before{content:"\2611";color:var(--ok)}
+
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:12px}
+  @media(max-width:700px){.shotgrid{grid-template-columns:1fr}.shotgrid.trio{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-spec="east-victoria-story">
+<div class="wrap">
+
+<header class="segment chg">
+  <div class="kicker">Shavit Rootman &middot; shavit-pipeline &middot; Instagram Carousel</div>
+  <h1>East Victoria Street, the story <span style="color:var(--faint);font-weight:400">, carousel spec</span></h1>
+  <p class="sub">A full rewrite of the East Victoria post. The prior draft was a light &ldquo;4 surprises we found
+  when we got the keys&rdquo; countdown, built before Shavit told the whole story on the 2026-07-23 call. That
+  countdown is now retired. This version is the arc Shavit told in his own words: a foreclosure that came back to
+  the bank, won at auction, the displaced family the team helped, the partners who moved fast to finance and
+  rebuild it, and the local family living there now. It is still a swipeable photo carousel, not a reel, because
+  Shavit said a photo post with a clean font will outperform a faceless reel for this account. Per his direction,
+  the rough before photos move to the end, not the front. The deal numbers he dictated on the call
+  (buy, renovation, after-repair value) are included on a dedicated slide at Jake and Shavit&rsquo;s explicit
+  request, which is a deliberate override of the standing no-dollar-figures brand rule and needs Shavit&rsquo;s
+  final sign-off before ship.</p>
+  <div class="meta-row">
+    <span class="chip">~10 slides &middot; <b>story arc, before-at-end</b></span>
+    <span class="chip">Format: <b>photo carousel, not a reel</b></span>
+    <span class="chip"><b>All 101 Drive photos sorted &middot; 8 finished heroes wired in</b></span>
+    <span class="chip">Numbers slide: <b>brand-rule override, needs Shavit OK</b></span>
+    <span class="chip">Post target: <b>tomorrow (Fri) or Sunday</b></span>
+    <span class="chip" style="border-color:var(--gold);color:var(--gold)">REV 2 (photos wired)</span>
+  </div>
+  <div class="revlog">
+    <h4>Revision log, newest first</h4>
+    <ul>
+      <li><span class="rev">rev 4 &middot; 2026-07-23</span>, second annotation round. Hook and closing now use a centered full-front photo showing the entire house (Jake: &ldquo;I need to see the entire house&rdquo;); the mailbox house number was cloned out so it stays a real photo. Slide 4 caption rewritten to lead with people before property rather than stating the obvious. Slide 5 names Dominion Financial explicitly as the lending partner. The dog-breeding basement slide was moved up to sit right after &ldquo;what we took on,&rdquo; before any renovation is shown (Jake: &ldquo;this needs to be before we see any type of renovation&rdquo;). Closing title card kept, now on the full house.</li>
+      <li><span class="rev">rev 3 &middot; 2026-07-23</span>, folded in Jake&rsquo;s spec-inbox annotations (two rounds).
+      Hook (slide 1) recentered on the full finished front as a cover, with the foreclosure now delivering the
+      real hook on slide 2. Slide 3 reframed to &ldquo;won it, then saw what we took on&rdquo; on a gutted
+      interior. Slide 4 given a different, non-reused before frame. Slide 5 (Dominion) reworded to &ldquo;with
+      Dominion moving fast we were able to take it on&rdquo; on a rough intake photo, per &ldquo;find a shittier
+      photo of the house.&rdquo; Slide 6 caption changed to &ldquo;revived&rdquo; (Jake: &ldquo;perfect love
+      this&rdquo;). Slide 8 kept as-is (Jake: &ldquo;perfect&rdquo;). The standalone before-grid (old slide 9)
+      was cut for reading as a portfolio/montage device, and that slot now carries the dog-breeding basement
+      detail Jake asked to name. Closing card flagged for Shavit&rsquo;s exact signature outro. Every photo in
+      the story run is now distinct, no frame is reused across slides.</li>
+      <li><span class="rev">rev 2 &middot; 2026-07-23</span>, all 101 photos from the <code>514 E Victoria</code>
+      Drive folder were downloaded, viewed, and sorted before/after. Eight finished heroes were wired into the
+      carousel, each viewed at full resolution first: the finished front (slides 1, 7, 10; the mailbox house
+      number was cropped out), the new exterior AC on slide 5, the finished kitchen on slide 6, and the finished
+      living room on slide 8. Also copied into assets but not yet placed: a wide kitchen angle, the finished
+      bathroom, and the octagon-window room. Excluded on the standing rules: two finished-front frames showing
+      the mailbox house number, and four exterior frames with a person visible mid-landscaping. The three pending
+      slots are now real photos, not placeholders.</li>
+      <li><span class="rev">rev 1 &middot; 2026-07-23</span>, new spec, replacing the retired
+      <code>east-victoria-countdown-2026-07-22</code>. Rebuilt from the 2026-07-23 Charger call transcript. Six
+      structural changes from the countdown: (1) reframed from a defects countdown to Shavit&rsquo;s foreclosure
+      -to-finished story arc; (2) added the family-help beat (hotel for the week, outreach to local churches) as
+      a reputation beat, de-identified, property-and-work only; (3) added partner features for Dominion
+      Financial (fast loan close) and Tito the general contractor (full rebuild); (4) added a deal-numbers slide
+      at Jake&rsquo;s request, flagged as a no-dollar-rule override; (5) moved the rough before photos to a
+      single &ldquo;where it started&rdquo; section at the end per Shavit; (6) leads on the finished house since
+      the renovation is complete, not on the intake condition. The old basement dog-breeding hook is held out of
+      this version and flagged below, it conflicts with the compassionate family-help framing Shavit gave on
+      this call and carries fair-housing risk. Only one genuinely finished photo is on hand so far (new siding,
+      new windows, new exterior AC); every finished-interior slide is a marked PENDING slot until the fresh Drive
+      batch is pulled and sorted.</li>
+    </ul>
+  </div>
+  <div class="flag">
+    <span class="k">Read me first, two open decisions</span>
+    <b>1. Numbers slide is a brand-rule override.</b> rules/brand.md rule 5 is &ldquo;no dollar figures anywhere.&rdquo;
+    The buy / renovation / after-repair-value slide is in because Jake asked for it and the figures come straight
+    from Shavit&rsquo;s dictated call, but it still needs Shavit to say yes to putting dollars on the public feed.
+    <br><br>
+    <b>2. Finished photos are now wired in.</b> All 101 photos from the <code>514 E Victoria</code> folder were
+    downloaded and sorted; slides 5, 6 and 8 now carry real finished frames (new exterior AC, finished kitchen,
+    finished living room), and the hook, numbers, and closing cards use the finished front (mailbox house number
+    cropped out). Every finished claim is now backed by a real photo viewed at full resolution.
+  </div>
+</header>
+
+<h2 class="chg">Running order, ~10 slides</h2>
+<table class="chg">
+  <tr><th>#</th><th>slide</th><th>photo status</th><th>on-screen text, short</th></tr>
+  <tr><td>1</td><td>Hook / cover</td><td class="b-real">real, finished exterior</td><td>&ldquo;The bank wrote this one off. We didn&rsquo;t.&rdquo;</td></tr>
+  <tr><td>2</td><td>It was a foreclosure</td><td class="b-real">real, distressed before</td><td>The hook, gone back to the bank</td></tr>
+  <tr><td>3</td><td>Won it, took it on</td><td class="b-real">real, gutted interior</td><td>Won the auction, saw what we took on</td></tr>
+  <tr><td>4</td><td>We helped the family</td><td class="b-real">real, before exterior (alt)</td><td>Found them a place for the week, reached out to local churches</td></tr>
+  <tr><td>5</td><td>Financed fast, Dominion</td><td class="b-real">real, rough intake</td><td>With Dominion, we were able to take it on</td></tr>
+  <tr><td>6</td><td>Rebuilt, Tito the GC</td><td class="b-real">real, finished kitchen</td><td>Our GC Tito rebuilt it, everything new</td></tr>
+  <tr><td>7</td><td>The numbers <span class="badge b-watch">OVERRIDE</span></td><td class="b-real">real finished bg + text</td><td>Buy / renovation / after-repair value</td></tr>
+  <tr><td>8</td><td>Who lives there now</td><td class="b-real">real, finished living room</td><td>A local family, their first home with central air</td></tr>
+  <tr><td>9</td><td>The part no one expects</td><td class="b-real">real, basement before</td><td>Basement was a dog breeding operation (per Jake)</td></tr>
+  <tr><td>10</td><td>Closing card</td><td class="b-real">real finished bg</td><td>Live with us. Work with us.</td></tr>
+</table>
+<p class="d">Arc logic: the countdown led with what was wrong; this leads with the finished house and earns the
+before shots by the end. The middle is the operator story Shavit told, condition &rarr; auction &rarr; the family
+&rarr; the partners who moved fast &rarr; who lives there now. Every claim traces to the 2026-07-23 transcript or
+to a real photo. Slides 5, 6 and 8 carry the partner and finished-house beats but do not yet have their finished
+photos, so they are marked as pending slots, not faked.</p>
+
+<h2>Slides</h2>
+
+<!-- SLIDE 1 -->
+<div class="segment" data-annot="slide-1">
+  <div class="hdr"><h3>1. Hook / cover</h3><span class="chip">real, finished exterior</span></div>
+  <p class="desc">Open on the finished house, not the damage. The one genuinely finished exterior on hand: new
+  white lap siding, new black-framed windows, a new exterior AC condenser, fresh mulch and grass. The hook names
+  the tension Shavit himself leads with, that this was a property the bank had written off, and undercuts it with
+  the finished result.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide1-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/after-front-hero.jpg" alt="East Victoria Street, finished exterior, new white siding, new windows, new exterior AC unit, fresh mulch">
+        <div class="cap-mock" style="text-align:center">
+          <span class="cap-rule" style="margin-left:auto;margin-right:auto"></span>
+          <span class="cap-txt">East Victoria Street, Indiana</span>
+          <span class="cap-txt" style="text-transform:none;font-weight:500">The house the bank gave up on.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">finished exterior, new siding + AC</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">East Victoria Street, Indiana</span><span class="line">The house the bank gave up on.</span></span>
+    <span class="small">Centered on the full finished front per Jake&rsquo;s note. This is the cover; slide 2 delivers the
+    real hook (the foreclosure). Jake floated opening on a Shavit quote instead, drop his exact words in here if
+    he wants the cover to carry a quote rather than this teaser line.</span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Real finished photo, verified by eye: new siding, new windows, new exterior condenser, mulch bed, green
+    grass. No person, no house number visible. This is the strongest finished frame currently on hand and it
+    doubles as proof the renovation is genuinely complete.
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="segment" data-annot="slide-2">
+  <div class="hdr"><h3>2. It was a foreclosure</h3><span class="chip">real, before exterior</span></div>
+  <p class="desc">Now the story turns back. The intake exterior, olive-green siding, snow on the ground, December
+  2025. Plain statement of how the property came to the team: a foreclosure that reverted to the bank.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide2-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/before-foreclosure.jpg" alt="East Victoria Street, distressed intake condition, snow, debris in the yard, December 2025">
+        <div class="cap-mock">
+          <span class="step">the story</span>
+          <span class="cap-rule"></span>
+          <span class="cap-txt">It started as a foreclosure.</span>
+          <span class="cap-txt">The home had gone back to the bank.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">intake exterior, winter</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">It started as a foreclosure.</span><span class="line">The home had come back to the bank.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Transcript, Shavit verbatim: &ldquo;It was a foreclosure property... after foreclosure it actually went back
+    to the bank. So it was a bank owned property.&rdquo; Caption states only the property&rsquo;s status, nothing
+    about the prior occupants as people. Fair-housing safe.
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="segment" data-annot="slide-3">
+  <div class="hdr"><h3>3. Won at auction</h3><span class="chip">real, before detail</span></div>
+  <p class="desc">The acquisition beat. Shavit qualified to bid at the bank auction, entered the bidding war, and
+  won it. A real before detail photo grounds the slide in the property&rsquo;s intake condition.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide3-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/during-gutted.jpg" alt="East Victoria Street, mid-renovation, gutted interior down to the studs">
+        <div class="cap-mock">
+          <span class="step">the story</span>
+          <span class="cap-rule"></span>
+          <span class="cap-txt">We won it at the auction.</span>
+          <span class="cap-txt">Then we saw what we had taken on.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">intake detail, window</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">We qualified to bid at the auction.</span><span class="line">Then we won it.</span></span>
+    <span class="small">Note: &ldquo;accredited investor&rdquo; and &ldquo;proof of funds, all cash&rdquo; are in the transcript but kept OUT of the on-screen text, they read as jargon and the caption can carry that nuance instead.</span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Transcript: Shavit qualified to bid on the auction on proof of funds to buy cash, went into a bidding war,
+    and won the bid. On-screen text stays plain. If a finished detail photo is preferred here over the cracked
+    window, swap once the Drive batch is sorted.
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="segment chg" data-annot="slide-9">
+  <div class="hdr"><h3>The part no one expects (before any of the work)</h3><span class="chip">real, basement before</span><span class="chip badge b-watch">handle with care</span></div>
+  <p class="desc">Per Jake&rsquo;s note, the standalone before-grid is cut (it read as a portfolio/montage
+  device). This slot now carries the detail Jake asked to name: before the team took over, the basement had been
+  used as a dog breeding operation. Stated as a plain fact about the property&rsquo;s prior use, never about the
+  prior residents as people. Moved here per Jake, so it lands before any renovation is shown, not after.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide9-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/before-basement-2.jpg" alt="Basement before renovation, unfinished, foundation wall, stairs and mechanicals">
+        <div class="cap-mock">
+          <span class="step">the part no one expects</span>
+          <span class="cap-rule"></span>
+          <span class="cap-txt">Before we took over, the basement had been used as a dog breeding operation.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">basement, before</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">Before we took over, the basement had been used as a dog breeding operation.</span></span>
+  </div>
+  <div class="flag">
+    <span class="k">Fair-housing / de-identify guard</span>
+    Jake asked for this detail to be named (annotation: &ldquo;I want you to mention this though&rdquo;). It is a
+    confirmed fact from an earlier Shavit note. Keep it strictly about the <b>property&rsquo;s prior use</b>,
+    never about the prior residents as people, never implying anything about who lived there. This sits in
+    tension with the &ldquo;we helped the family&rdquo; beat on slide 4 (two versions of the same prior
+    occupants), so if both run, confirm with Shavit that they are consistent before ship.
+  </div>
+</div>
+
+
+<!-- SLIDE 4 -->
+<div class="segment" data-annot="slide-4">
+  <div class="hdr"><h3>4. We helped the family</h3><span class="chip">real, before exterior</span><span class="chip badge b-watch">handle with care</span></div>
+  <p class="desc">The reputation beat, and the one Shavit clearly cares about. The family living there was in a hard
+  situation; the team helped them find a place for about a week and reached out to local churches in the
+  community. This is exactly the kind of standing-over-virality content the account exists for. It must stay
+  strictly about what the team did, never characterize the family.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide4-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/before-exterior-alt.jpg" alt="East Victoria Street, exterior, winter, before renovation, alternate angle">
+        <div class="cap-mock">
+          <span class="step">the story</span>
+          <span class="cap-rule"></span>
+          <span class="cap-txt">Before we fixed a single wall, we took care of the people.</span>
+          <span class="cap-txt">The family here was in a hard spot, so we found them a place and called on local churches.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">before exterior</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">Before we fixed a single wall, we took care of the people.</span><span class="line">The family here was in a hard spot, so we found them a place and called on local churches.</span></span>
+  </div>
+  <div class="flag">
+    <span class="k">Fair-housing / de-identify guard</span>
+    Transcript, Shavit verbatim: &ldquo;The tenants there were a family in a horrible situation and we actually
+    ended up helping them. We help them find local hotel for like a week... we try to do a little bit of a reach
+    out within the community to local churches to see if they can be helped.&rdquo; <b>The caption says only what
+    the team did.</b> It does not call the prior tenants evicted, does not describe them, does not show them. No
+    person appears in the photo. Keep it that way through ship, this is the same line the website tenant Q&amp;A
+    already has to hold.
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="segment" data-annot="slide-5">
+  <div class="hdr"><h3>5. Financed fast, Dominion Financial</h3><span class="chip badge b-slot">PENDING finished photo</span></div>
+  <p class="desc">First partner feature. Shavit explicitly wanted to credit Dominion Financial for moving quickly
+  to close the hard-money loan. Pair it with a finished photo that reads as &ldquo;this got done&rdquo;, a
+  finished mechanical or exterior-system shot works well here.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide5-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/before-rough-house.jpg" alt="East Victoria Street, rough exterior condition at intake, chain link fence, snow">
+        <div class="cap-mock">
+          <span class="step">partner</span>
+          <span class="cap-rule"></span>
+          <span class="cap-txt">Our lending partner, Dominion Financial, moved fast to close.</span>
+          <span class="cap-txt">That is the only reason we could take this on.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">rough intake, took it on</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">Our lending partner, Dominion Financial, moved fast to close.</span><span class="line">That is the only reason we could take this on.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Transcript: &ldquo;I also want to feature Dominion Financial for being able to act quickly and help us close
+    on the loan on a hard money loan.&rdquo; Confirm the exact partner name spelling and whether Shavit wants
+    them @-tagged on IG. No dollar figure on this slide, the numbers live on slide 7.
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="segment" data-annot="slide-6">
+  <div class="hdr"><h3>6. Rebuilt, Tito the GC</h3><span class="chip badge b-slot">PENDING finished photo</span></div>
+  <p class="desc">Second partner feature and the transformation beat. Tito, the general contractor, did
+  essentially everything new. Pair with the strongest finished interior, a kitchen or bath reads best as
+  &ldquo;everything new.&rdquo;</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide6-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/after-kitchen.jpg" alt="Finished kitchen, white shaker cabinets, butcher block counter, stainless range, microwave, refrigerator and dishwasher">
+        <div class="cap-mock">
+          <span class="step">partner</span>
+          <span class="cap-rule"></span>
+          <span class="cap-txt">Then Tito, our GC, revived it.</span>
+          <span class="cap-txt">New kitchen. New systems. New everything.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">finished kitchen</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">Our GC, Tito, rebuilt it.</span><span class="line">New kitchen. New systems. New everything.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Transcript: &ldquo;Tito, our general contractor, helped us do pretty much everything new at this property.&rdquo;
+    Confirm whether Tito wants a full name or business @-tag, or just the first name. The &ldquo;new kitchen /
+    new systems&rdquo; line must match whatever finished photo actually lands here, do not claim a new kitchen on
+    a bathroom photo.
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="segment" data-annot="slide-7">
+  <div class="hdr"><h3>7. The numbers</h3><span class="chip">real finished bg + text</span><span class="chip badge b-watch">BRAND-RULE OVERRIDE</span></div>
+  <p class="desc">The deal, in figures, on a dark card over the finished exterior. Shavit dictated these on the
+  call and floated introducing them to the public. Including them overrides the no-dollar-figures rule, so this
+  slide only ships if Shavit says yes to dollars on the feed.</p>
+  <div class="shotgrid single">
+    <div class="num-card" data-annot="slide7-img">
+      <img class="tc-bg" src="east-victoria-story-2026-07-23/assets/after-front-hero.jpg" alt="Finished exterior background">
+      <div class="tc-scrim"></div>
+      <div class="tc-content">
+        <span class="cap-rule"></span>
+        <div class="ntitle">The deal</div>
+        <div class="nrow"><span class="nlbl">Purchase</span><span class="nval">$82,000</span></div>
+        <div class="nrow"><span class="nlbl">Renovation</span><span class="nval">$58,000</span></div>
+        <div class="nrow"><span class="nlbl">All in</span><span class="nval">$140,000</span></div>
+        <div class="nrow"><span class="nlbl">After-repair value</span><span class="nval arv">$215,000</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">The deal, purchase $82,000. Renovation $58,000. All in $140,000.</span><span class="line">After-repair value $215,000.</span></span>
+  </div>
+  <div class="flag">
+    <span class="k">Override, confirm before ship</span>
+    Numbers are Shavit&rsquo;s own from the transcript: &ldquo;we bought this property for 82,000... fixed it for
+    58,000 which give you a total of 140... after repair value were able to bring it to a value of 215,000.&rdquo;
+    brand rule 5 says no dollar figures anywhere; this slide is the exception Jake asked for. <b>Do not ship dollars
+    on the public feed without Shavit&rsquo;s explicit yes.</b> If he passes, the fallback is a no-figure proof
+    line: &ldquo;Bought below value. Rebuilt. Worth far more now.&rdquo;
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="segment" data-annot="slide-8">
+  <div class="hdr"><h3>8. Who lives there now</h3><span class="chip badge b-slot">PENDING finished interior</span></div>
+  <p class="desc">The landing. A local family lives there now, their first home with central air, an updated
+  kitchen and shower, a garage, in a neighborhood the team is committed to, block by block. Pair with a warm
+  finished-interior frame, ideally a living space or the kitchen.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide8-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-story-2026-07-23/assets/after-living.jpg" alt="Bright finished living room, light wood floor, large front window, recessed light, white door">
+        <div class="cap-mock">
+          <span class="step">now</span>
+          <span class="cap-rule"></span>
+          <span class="cap-txt">A local family lives here now.</span>
+          <span class="cap-txt">Their first home with central air, an updated kitchen, and a garage.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">finished living room</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">A local family lives here now.</span><span class="line">Their first home with central air, an updated kitchen, and a garage.</span></span>
+  </div>
+  <div class="flag">
+    <span class="k">De-identify guard</span>
+    Transcript describes the new residents as a blue-collar family, first time in a home like this. <b>The post
+    must not name them, describe their occupation, or show them.</b> &ldquo;A local family&rdquo; is the ceiling.
+    Do not put the $1,840/month rent on this slide, rent figures are the sharpest version of the no-dollar rule
+    and were not part of what Shavit floated making public.
+  </div>
+</div>
+
+<!-- SLIDE 9 -->
+<!-- SLIDE 10 -->
+<div class="segment" data-annot="slide-10">
+  <div class="hdr"><h3>10. Closing card</h3><span class="chip">real finished bg</span></div>
+  <p class="desc">Close on the finished house and the standing tagline, matching the sibling reel&rsquo;s end
+  card. The DM keyword call-to-action Shavit approved on the call routes inquiries to the site.</p>
+  <div class="shotgrid single">
+    <div class="title-card" data-annot="slide10-img">
+      <img class="tc-bg" src="east-victoria-story-2026-07-23/assets/after-front-hero.jpg" alt="East Victoria Street, finished exterior, closing card background">
+      <div class="tc-scrim"></div>
+      <div class="tc-content">
+        <span class="cap-rule"></span>
+        <span class="cap-txt">Live with us. Work with us.</span>
+        <span class="cap-txt">DM &ldquo;LIVE WITH US&rdquo; to get in touch.</span>
+        <div class="mark">Shavit Rootman</div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">Live with us. Work with us.</span><span class="line">DM &ldquo;LIVE WITH US&rdquo; to get in touch.</span></span>
+  </div>
+  <div class="flag">
+    <span class="k">Revise per Jake, needs his input</span>
+    Jake&rsquo;s note: &ldquo;bad ending card revise that shit&rdquo; and &ldquo;center and make sure it mimics
+    his signature closing outro.&rdquo; The card is now centered. &ldquo;Live with us. Work with us.&rdquo; is the
+    standing tagline from the prior reels, kept as the anchor, but <b>Shavit&rsquo;s exact signature sign-off is
+    not documented in the pipeline yet</b>. Drop his real outro wording in here (or point me at the post it comes
+    from) and I will match it exactly. The &ldquo;LIVE WITH US&rdquo; DM keyword is the auto-response he approved
+    on the call.
+  </div>
+</div>
+
+<h2 class="chg">Caption draft</h2>
+<div class="capbox chg">
+  <div class="cap-body">East Victoria Street, Indiana. The house the bank gave up on.
+
+It came to us as a foreclosure, a home that had gone back to the bank. We won it at the auction, and then we saw what we had taken on. The basement had been used as a dog breeding operation before we ever got the keys.
+
+There was also a family living here, in a hard spot. Before anything else, we helped them find a place for the week and reached out to local churches in the community.
+
+With Dominion Financial moving fast to close, we were able to take it on. Then Tito, our general contractor, revived it, new kitchen, new systems, new everything. Today a local family lives here, their first home with central air, an updated kitchen, and a garage.
+
+One property at a time, in one neighborhood, we are changing what these blocks look like.
+
+Live with us. Work with us. DM &ldquo;LIVE WITH US&rdquo; and we will point you the right way.</div>
+  <div class="tags">#realestateinvesting #rehab #renovation #indianarealestate #midwestrealestate #propertymanagement #beforeandafter</div>
+</div>
+<div class="prodnote">
+  <span class="k">Caption notes</span>
+  First 125 characters, through &ldquo;we won it,&rdquo; carry the hook before the &ldquo;more&rdquo; fold. No
+  contractions rule: &ldquo;didn&rsquo;t&rdquo; and &ldquo;we&rsquo;re&rdquo; are contractions and violate the
+  standing style, they are flagged here and the final caption should spell them out (&ldquo;did not,&rdquo;
+  &ldquo;we are&rdquo;) unless Jake wants the looser register on this one. No dollar figures in the caption body
+  even if the numbers slide ships, the figures stay contained to that one slide. Hashtags go in the first
+  comment, spelled-out state, no mega-tags.
+</div>
+
+<h2 class="chg">Dog-breeding detail: now IN, per Jake (was held)</h2>
+<div class="segment chg" data-annot="held-basement">
+  <p class="desc">Jake overrode the earlier hold: annotation on this section reads &ldquo;I want you to mention
+  this though.&rdquo; So the dog-breeding fact is now named on slide 9 (&ldquo;the part no one expects&rdquo;),
+  on a real basement before photo. It is written strictly as a fact about the property&rsquo;s prior use.
+  <b>One thing still needs Shavit:</b> this fact came from an earlier note where he also said the team
+  &ldquo;never met the people there,&rdquo; which is in tension with the &ldquo;we helped the family&rdquo; beat
+  on slide 4 (same prior occupants, two versions). Both currently run in the carousel. Before ship, confirm with
+  Shavit that both are accurate, or drop whichever one he says is wrong, they cannot both be literally true as
+  written.</p>
+</div>
+
+<h2 class="chg">Open items before this ships</h2>
+<div class="checklist segment chg">
+  <ul>
+    <li class="done"><b>Finished photos pulled and sorted.</b> All 101 photos in the <code>514 E Victoria</code>
+    folder were downloaded, viewed, and sorted before/after. Slides 5, 6 and 8 now hold real finished frames
+    (new exterior AC, finished kitchen, finished living room), each viewed at full resolution. Spare heroes in
+    assets not yet placed: wide kitchen, finished bathroom, octagon-window room.</li>
+    <li class="open"><b>Numbers slide, Shavit&rsquo;s call.</b> Dollars on the public feed is a brand-rule
+    override. Get his explicit yes, or drop to the no-figure proof line.</li>
+    <li class="open"><b>Partner tags.</b> Confirm exact names and whether Dominion Financial and Tito want an
+    @-tag or a plain-text credit. Confirm Jonah Davey is intentionally held for a later post, the transcript
+    puts him &ldquo;once we get there,&rdquo; not this one.</li>
+    <li class="open"><b>Dog-breeding hook.</b> Held out. Only add it back if Shavit reconciles it with the
+    family-help beat, see the section above.</li>
+    <li class="done"><b>Format confirmed.</b> Photo carousel, not a reel, per Shavit on the call.</li>
+    <li class="done"><b>Before-at-the-end confirmed.</b> Rough intake shots live in slide 9, not up front, per
+    Shavit.</li>
+    <li class="done"><b>De-identify check on used photos.</b> The four before/finished photos in this spec were
+    viewed by eye, no person and no house number in any of them. The one intake photo with a person visible is
+    excluded and noted on slide 9.</li>
+    <li class="open"><b>No-contractions pass.</b> Spell out &ldquo;didn&rsquo;t&rdquo; and &ldquo;we&rsquo;re&rdquo;
+    in the on-screen text and caption before ship, per the standing style, unless Jake overrides for this post.</li>
+    <li class="open"><b>Post date.</b> Shavit pushed for tomorrow (Friday) if the draft lands tonight, Sunday as
+    the backup, Sunday being the higher-engagement day.</li>
+  </ul>
+</div>
+
+<footer>East Victoria Street story carousel spec &middot; rev 1 &middot; 2026-07-23 &middot; shavit-pipeline
+&middot; replaces the retired east-victoria-countdown. Annotate any slide above, notes save to the pipeline
+inbox when served through <code>serve.py</code>.</footer>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

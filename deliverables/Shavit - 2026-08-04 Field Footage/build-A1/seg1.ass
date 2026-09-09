@@ -1,0 +1,61 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Cap,Montserrat ExtraBold,96,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,1,0,1,7,4,2,60,60,620,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:00.00,0:00:00.44,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}EAST {\c&H00FFFFFF}EWING
+Dialogue: 0,0:00:00.44,0:00:00.74,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}EAST {\c&H0000C0FF}EWING
+Dialogue: 0,0:00:01.00,0:00:01.18,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}ONE {\c&H00FFFFFF}OF {\c&H00FFFFFF}OUR
+Dialogue: 0,0:00:01.18,0:00:01.26,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}ONE {\c&H0000C0FF}OF {\c&H00FFFFFF}OUR
+Dialogue: 0,0:00:01.26,0:00:01.52,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}ONE {\c&H00FFFFFF}OF {\c&H0000C0FF}OUR
+Dialogue: 0,0:00:01.42,0:00:01.60,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}LATEST {\c&H00FFFFFF}PROPERTIES {\c&H00FFFFFF}IN
+Dialogue: 0,0:00:01.60,0:00:01.98,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}LATEST {\c&H0000C0FF}PROPERTIES {\c&H00FFFFFF}IN
+Dialogue: 0,0:00:01.98,0:00:02.32,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}LATEST {\c&H00FFFFFF}PROPERTIES {\c&H0000C0FF}IN
+Dialogue: 0,0:00:02.22,0:00:02.66,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}INDIANA
+Dialogue: 0,0:00:03.36,0:00:03.60,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}IT {\c&H00FFFFFF}WASN'T {\c&H00FFFFFF}AN
+Dialogue: 0,0:00:03.60,0:00:03.70,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}IT {\c&H0000C0FF}WASN'T {\c&H00FFFFFF}AN
+Dialogue: 0,0:00:03.70,0:00:04.08,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}IT {\c&H00FFFFFF}WASN'T {\c&H0000C0FF}AN
+Dialogue: 0,0:00:03.98,0:00:04.08,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}EASY {\c&H00FFFFFF}PROJECT {\c&H00FFFFFF}TO
+Dialogue: 0,0:00:04.08,0:00:04.42,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}EASY {\c&H0000C0FF}PROJECT {\c&H00FFFFFF}TO
+Dialogue: 0,0:00:04.42,0:00:04.76,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}EASY {\c&H00FFFFFF}PROJECT {\c&H0000C0FF}TO
+Dialogue: 0,0:00:04.66,0:00:04.84,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}GET {\c&H00FFFFFF}INTO
+Dialogue: 0,0:00:04.84,0:00:05.32,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}GET {\c&H0000C0FF}INTO
+Dialogue: 0,0:00:05.80,0:00:05.86,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}NOT {\c&H00FFFFFF}AN {\c&H00FFFFFF}EASY
+Dialogue: 0,0:00:05.86,0:00:06.06,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}NOT {\c&H0000C0FF}AN {\c&H00FFFFFF}EASY
+Dialogue: 0,0:00:06.06,0:00:06.28,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}NOT {\c&H00FFFFFF}AN {\c&H0000C0FF}EASY
+Dialogue: 0,0:00:06.18,0:00:06.48,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}PROJECT {\c&H00FFFFFF}TO {\c&H00FFFFFF}MANAGE
+Dialogue: 0,0:00:06.48,0:00:06.96,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}PROJECT {\c&H0000C0FF}TO {\c&H00FFFFFF}MANAGE
+Dialogue: 0,0:00:06.96,0:00:07.06,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}PROJECT {\c&H00FFFFFF}TO {\c&H0000C0FF}MANAGE
+Dialogue: 0,0:00:07.06,0:00:07.12,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}AND {\c&H00FFFFFF}YOU {\c&H00FFFFFF}KNOW
+Dialogue: 0,0:00:07.12,0:00:07.22,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}AND {\c&H0000C0FF}YOU {\c&H00FFFFFF}KNOW
+Dialogue: 0,0:00:07.22,0:00:07.46,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}AND {\c&H00FFFFFF}YOU {\c&H0000C0FF}KNOW
+Dialogue: 0,0:00:07.36,0:00:07.60,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}THOSE {\c&H00FFFFFF}FORECLOSURES {\c&H00FFFFFF}ARE
+Dialogue: 0,0:00:07.60,0:00:08.28,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}THOSE {\c&H0000C0FF}FORECLOSURES {\c&H00FFFFFF}ARE
+Dialogue: 0,0:00:08.28,0:00:08.86,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}THOSE {\c&H00FFFFFF}FORECLOSURES {\c&H0000C0FF}ARE
+Dialogue: 0,0:00:08.76,0:00:09.02,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}NEVER {\c&H00FFFFFF}AN {\c&H00FFFFFF}EASY
+Dialogue: 0,0:00:09.02,0:00:09.40,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}NEVER {\c&H0000C0FF}AN {\c&H00FFFFFF}EASY
+Dialogue: 0,0:00:09.40,0:00:09.66,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}NEVER {\c&H00FFFFFF}AN {\c&H0000C0FF}EASY
+Dialogue: 0,0:00:09.56,0:00:10.08,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}SUBJECT {\c&H00FFFFFF}TO {\c&H00FFFFFF}DELVE
+Dialogue: 0,0:00:10.08,0:00:10.52,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}SUBJECT {\c&H0000C0FF}TO {\c&H00FFFFFF}DELVE
+Dialogue: 0,0:00:10.52,0:00:10.68,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}SUBJECT {\c&H00FFFFFF}TO {\c&H0000C0FF}DELVE
+Dialogue: 0,0:00:10.58,0:00:10.94,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}INTO
+Dialogue: 0,0:00:11.14,0:00:11.34,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}LET {\c&H00FFFFFF}ME {\c&H00FFFFFF}SHOW
+Dialogue: 0,0:00:11.34,0:00:11.48,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}LET {\c&H0000C0FF}ME {\c&H00FFFFFF}SHOW
+Dialogue: 0,0:00:11.48,0:00:11.72,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}LET {\c&H00FFFFFF}ME {\c&H0000C0FF}SHOW
+Dialogue: 0,0:00:11.62,0:00:11.76,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}YOU {\c&H00FFFFFF}A {\c&H00FFFFFF}LITTLE
+Dialogue: 0,0:00:11.76,0:00:11.94,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}YOU {\c&H0000C0FF}A {\c&H00FFFFFF}LITTLE
+Dialogue: 0,0:00:11.94,0:00:12.04,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}YOU {\c&H00FFFFFF}A {\c&H0000C0FF}LITTLE
+Dialogue: 0,0:00:11.94,0:00:12.08,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}BIT {\c&H00FFFFFF}WHAT {\c&H00FFFFFF}WE'RE
+Dialogue: 0,0:00:12.08,0:00:12.20,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}BIT {\c&H0000C0FF}WHAT {\c&H00FFFFFF}WE'RE
+Dialogue: 0,0:00:12.20,0:00:12.66,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}BIT {\c&H00FFFFFF}WHAT {\c&H0000C0FF}WE'RE
+Dialogue: 0,0:00:12.56,0:00:12.70,Cap,,0,0,0,,{\fad(60,60)}{\t(0,110,\fscx112\fscy112)}{\t(110,190,\fscx100\fscy100)}{\c&H0000C0FF}DOING {\c&H00FFFFFF}LET'S {\c&H00FFFFFF}GO
+Dialogue: 0,0:00:12.70,0:00:13.08,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}DOING {\c&H0000C0FF}LET'S {\c&H00FFFFFF}GO
+Dialogue: 0,0:00:13.08,0:00:13.42,Cap,,0,0,0,,{\fad(60,60)}{\c&H00FFFFFF}DOING {\c&H00FFFFFF}LET'S {\c&H0000C0FF}GO

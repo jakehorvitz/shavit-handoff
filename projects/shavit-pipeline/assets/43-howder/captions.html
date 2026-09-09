@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder caption spec (12 River system)</title>
+<style>
+  @font-face{font-family:Bricolage;src:url('fonts/Bricolage.ttf');font-weight:100 900}
+  @font-face{font-family:Manrope;src:url('fonts/Manrope.ttf');font-weight:100 900}
+  :root{--bg:#0b0b0c;--panel:#141416;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a5a29a;--brass:#B08D57;--gold:#FFC000;--ivory:#F5EFE1}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1160px;margin:0 auto;padding:36px 20px 110px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:26px;margin:.3em 0 .1em}
+  .sub{color:var(--dim);font-size:14px;max-width:76ch}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin:42px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .shot{position:relative;aspect-ratio:9/16;background:#000;overflow:hidden}
+  .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .scrim{position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(180deg,transparent, rgba(0,0,0,.71))}
+  /* geometry: 1080-canvas values scaled; sizes in cqw against the 9:16 card */
+  .plate{position:absolute;inset:0;container-type:size}
+  .head{position:absolute;left:8%;top:66.5%;font-family:Bricolage;font-weight:800;font-size:7.8cqw;color:#fff;
+        -webkit-text-stroke:.28px #fff;text-shadow:0 1px 4px rgba(0,0,0,.8);letter-spacing:.01em;line-height:1}
+  .rule{position:absolute;left:8%;width:5.2%;height:.16%;min-height:2px;background:var(--gold)}
+  .body-sub{position:absolute;left:8%;right:6%;font-family:Manrope;font-weight:600;font-size:3.05cqw;line-height:1.33;color:#fff;
+        -webkit-text-stroke:.2px #fff;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+  .addr{position:absolute;left:0;right:0;top:44%;text-align:center;font-family:Bricolage;font-weight:800;font-size:9.2cqw;color:#fff;
+        text-shadow:0 3px 10px rgba(0,0,0,.65);line-height:1}
+  .addr-rule{position:absolute;left:calc(50% - 3.2%);width:6.4%;height:.2%;min-height:2.6px;background:var(--gold)}
+  .addr-sub{position:absolute;left:0;right:0;text-align:center;font-family:Manrope;font-weight:700;font-size:2.8cqw;
+        letter-spacing:.55em;text-indent:.55em;color:var(--ivory);text-shadow:0 1px 4px rgba(0,0,0,.7)}
+  .before-tag{position:absolute;left:8%;top:82%;font-family:Manrope;font-weight:700;font-size:2.8cqw;letter-spacing:.55em;
+        color:var(--ivory);text-shadow:0 1px 4px rgba(0,0,0,.8)}
+  .cta1{position:absolute;left:0;right:0;top:44%;text-align:center;font-family:Bricolage;font-weight:800;font-size:9.6cqw;color:#fff;text-shadow:0 3px 10px rgba(0,0,0,.65)}
+  .cta2{position:absolute;left:0;right:0;top:53%;text-align:center;font-family:Bricolage;font-weight:800;font-size:9.6cqw;color:var(--gold);text-shadow:0 3px 10px rgba(0,0,0,.65)}
+  .meta{padding:12px 14px}
+  .meta h3{margin:0 0 3px;font-size:14px}
+  .meta h3 .t{color:var(--gold);font-size:11px;font-family:ui-monospace,Menlo,monospace;margin-left:8px}
+  .meta p{margin:3px 0;font-size:12.5px;color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  td b{color:var(--gold)} code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  .decision{background:linear-gradient(180deg,rgba(110,163,214,.1),transparent);border:1px solid rgba(110,163,214,.35);border-left:3px solid #6ea3d6;border-radius:10px;padding:14px 16px;margin:14px 0}
+  .decision h4{margin:0 0 6px;color:#6ea3d6;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .decision ul{margin:.3em 0;padding-left:1.1em}.decision li{font-size:13.5px;margin:.3em 0}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:#6f6c64;font-size:12px}
+  .card.chg{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+  .chip{display:inline-block;background:var(--gold);color:#0b0b0c;font-size:10px;font-weight:700;letter-spacing:.08em;
+        border-radius:5px;padding:2px 7px;margin-left:8px;vertical-align:2px}
+  .was{color:#6f6c64;text-decoration:line-through}
+</style>
+</head>
+<body data-spec="43-howder-captions">
+<div class="wrap">
+<header>
+  <div class="kicker">Shavit Rootman · 43 Howder reel · caption spec · rev 6: Shavit's Jul 13 copy notes applied; changes outlined in gold</div>
+  <h1>Captions: same system as the River Street reel</h1>
+  <p class="sub">Every card below is a REAL frame from howder_v15 with the caption rendered in the actual fonts at true geometry.
+  The system is lifted 1:1 from the River Street build: <b>Bricolage Grotesque 800</b> headlines with a hairline white stroke over a bottom scrim,
+  <b>Manrope</b> tracked small caps for secondary lines, gold <code>#FFC000</code> accent rules, ivory <code>#F5EFE1</code> secondary color,
+  soft-shadow centered address plates, 0.4s alpha fade in/out. Register: facts only, no adjective fluff, no dollar figures, full state name.
+  Annotate any card or word.</p>
+</header>
+
+<h2 data-annot="cap-shots">The seven plates on real frames</h2>
+<div class="grid">
+
+  <div class="card" data-annot="cap-1-before">
+    <div class="shot"><img src="capfr/f1.0.jpg"></div>
+    <div class="meta"><h3>1 · Befores<span class="t">0.0-2.05s</span></h3>
+    <p><b>No caption</b> (your note, <span class="was">BEFORE tag</span>). The four stills run clean; the address plate on the drone settle is the first text on screen.</p></div>
+  </div>
+
+  <div class="card chg" data-annot="cap-2-addr">
+    <div class="shot"><img src="capfr/f3.9.jpg"><div class="plate">
+      <div class="addr">HILLSDALE</div><div class="addr-rule" style="top:52.4%"></div><div class="addr-sub" style="top:54.4%">MICHIGAN</div>
+    </div></div>
+    <div class="meta"><h3>2 · Drone settle<span class="t">2.45-5.85s</span><span class="chip">CHANGED · REV 6</span></h3>
+    <p>Shavit 7/13: <span class="was">HOWDER STREET</span> removed from the top plate; now HILLSDALE / MICHIGAN (his "Hillsdale, Michigan" note, D1 resolved). His "take more time to see the outside" note: the drone beat now runs 4.2s instead of 2.6s, same clip at a gentler speed.</p></div>
+  </div>
+
+  <div class="card chg" data-annot="cap-3-living">
+    <div class="shot"><img src="capfr/f6.8.jpg"><div class="scrim"></div><div class="plate">
+      <div class="head">LIVING ROOM</div><div class="rule" style="top:73.4%"></div>
+      <div class="body-sub" style="top:75.4%">Open floor concept, recessed lighting, mini splits throughout.</div>
+    </div></div>
+    <div class="meta"><h3>3 · Staircase<span class="t">6.45-8.88s</span><span class="chip">CHANGED · REV 6</span></h3>
+    <p>Shavit 7/13, his exact line: <span class="was">Wide plank vinyl floors, recessed lighting, mini split climate control.</span> → "Open floor concept, recessed lighting, mini splits throughout." (no hyphen per your standing rule).</p></div>
+  </div>
+
+  <div class="card chg" data-annot="cap-4-kitchen">
+    <div class="shot"><img src="capfr/f12.5.jpg"><div class="scrim"></div><div class="plate">
+      <div class="head">KITCHEN</div><div class="rule" style="top:73.4%"></div>
+      <div class="body-sub" style="top:75.4%">White cabinetry, butcher block counter tops.</div>
+      <div class="body-sub" style="top:79.2%;opacity:.55">Stainless steel appliances, large tile backsplash.</div>
+    </div></div>
+    <div class="meta"><h3>4 · Kitchen pan<span class="t">9.7-14.48s</span><span class="chip">CHANGED · REV 6</span></h3>
+    <p>Shavit 7/13, his exact lines. Line A <span class="was">White shaker cabinets, butcher block counters.</span> → "White cabinetry, butcher block counter tops." 9.7-12.0s cross-fades to line B <span class="was">Stainless appliances, grey tile backsplash.</span> → "Stainless steel appliances, large tile backsplash." 12.2-14.48s.</p></div>
+  </div>
+
+  <div class="card chg" data-annot="cap-5-bath2">
+    <div class="shot"><img src="capfr/f17.3.jpg"><div class="scrim"></div><div class="plate">
+      <div class="head">BATHROOM</div><div class="rule" style="top:73.4%"></div>
+      <div class="body-sub" style="top:75.4%">Floating vanity, new black fixtures throughout.</div>
+    </div></div>
+    <div class="meta"><h3>5 · Sink beat<span class="t">15.28-19.08s</span><span class="chip">CHANGED · REV 6</span></h3>
+    <p>Shavit 7/13 rule: no obvious color calls, color only as a concept. <span class="was">White floating vanity sink, brass pulls, grey tile floors.</span> → "Floating vanity, new black fixtures throughout." ("black fixtures" stays; it explains the concept). His full text line is split across the two bath beats.</p></div>
+  </div>
+
+  <div class="card chg" data-annot="cap-6-bath1">
+    <div class="shot"><img src="capfr/f21.8.jpg"><div class="scrim"></div><div class="plate">
+      <div class="head">BATHROOM</div><div class="rule" style="top:73.4%"></div>
+      <div class="body-sub" style="top:75.4%">Tub to ceiling tile design.</div>
+    </div></div>
+    <div class="meta"><h3>6 · Shower pull-back<span class="t">19.88-23.58s</span><span class="chip">CHANGED · REV 6</span></h3>
+    <p>Second half of Shavit's bath line: <span class="was">White tub shower, black framed glass doors, tile to the ceiling.</span> → "Tub to ceiling tile design." (his "tub-to-ceiling", hyphens out per your rule). BATHROOM headline still carries across both beats.</p></div>
+  </div>
+
+  <div class="card chg" data-annot="cap-7-close">
+    <div class="shot"><img src="capfr/f24.7.jpg"><div class="plate">
+      <div class="cta1">LIVE WITH US</div><div class="cta2">WORK WITH US</div>
+    </div></div>
+    <div class="meta"><h3>7 · Close push-in<span class="t">24.28-27.18s</span><span class="chip">CHANGED · REV 6</span></h3>
+    <p>Shavit 7/13: <span class="was">HOWDER STREET</span> removed from the end. CTA pair only, white then gold, then the brand outro card rides the same continuous push-in. No address anywhere in the reel now.</p></div>
+  </div>
+
+</div>
+
+<h2 data-annot="cap-tokens">Style tokens (1080×1920 canvas, exact values from the River Street build)</h2>
+<table>
+  <tr><th>element</th><th>font</th><th>size / weight</th><th>color</th><th>notes</th></tr>
+  <tr><td>Room headline</td><td>Bricolage</td><td>84px fitted to 84% W · 800</td><td>white</td><td>hairline stroke 1px white, x=8%W, y=66.5%H, over scrim</td></tr>
+  <tr><td>Room facts line</td><td>Manrope</td><td>33px · 600, line 44px</td><td>white</td><td>hairline stroke, wraps at 86% W</td></tr>
+  <tr><td>Gold rule</td><td>n/a</td><td>56×3px (room) / 70×4px (address)</td><td><b>#FFC000</b></td><td>sits between headline and facts</td></tr>
+  <tr><td>Address plate</td><td>Bricolage</td><td>100px fitted to 86% W · 800</td><td>white</td><td>centered y=44%H, soft blurred shadow, no box</td></tr>
+  <tr><td>Tracked caps (MICHIGAN, BEFORE)</td><td>Manrope</td><td>30px · 700, tracking +6</td><td>ivory #F5EFE1</td><td>centered under rule / lower-left for BEFORE</td></tr>
+  <tr><td>CTA lines</td><td>Bricolage</td><td>110px fitted · 800</td><td>white → <b>#FFC000</b></td><td>centered, animates white line to gold line</td></tr>
+  <tr><td>Scrim</td><td>n/a</td><td>bottom 50% of frame</td><td>black, peak α≈180</td><td>power-curve gradient, room plates only</td></tr>
+  <tr><td>Timing</td><td>n/a</td><td>fade in 0.4s / out 0.4s (alpha)</td><td>n/a</td><td>enters after the shot settles; fully out before every white flash</td></tr>
+</table>
+
+<div class="decision" data-annot="cap-decisions">
+  <h4>Your calls before I render</h4>
+  <ul>
+    <li><b>D1: Town name — RESOLVED.</b> Shavit confirmed Hillsdale (7/13 text); the plate now reads HILLSDALE / MICHIGAN with the street removed.</li>
+    <li><b>D2: Ending.</b> CTA pair on the close (shown) vs the address plate again vs a 3s River-Street-style brand outro (adds length, credits the CPM team). CPM credit currently has no home in this cut.</li>
+    <li><b>D3: Copy.</b> Reword any facts line above, every word is annotatable. Register stays: work done, no adjectives, no numbers I cannot verify.</li>
+  </ul>
+</div>
+<footer>captions · rev 7 · Jul 13 2026 · revlog: rev 7 (video v20) = caption type bumped for phone legibility (headline 84->104px, body 33->40px, block raised), drone exterior extended again 4.2s->5.8s, all timings reflowed (+1.6s, reel 30.4s->32.0s); copy unchanged from rev 6 · rev 6 = Shavit's call + text notes: no obvious color descriptions (color only as concept), his exact room lines dropped in, HOWDER removed from open and close, plate now HILLSDALE / MICHIGAN, drone exterior extended 2.6s→4.2s, all timings reflowed (+1.6s, reel 28.8s→30.4s) · rev 5 = no hyphens in any on-screen line (wide plank, butcher block, grey tile floors, black framed glass, tile to the ceiling) · rev 4 = HOWDER STREET added above the CTA pair on the close · rev 3 = colors in kitchen and both bath lines, "then:" prefix cut, befores carry no caption · rev 2 = kitchen gets two sequenced facts lines (+optional 0.8s hold), bath headline unified to BATHROOM persisting across both beats, bath 2 line now sink+tile · rev 1 = initial system lift from shavit-match-cut-tour/build/build_final.py · fonts embedded (Bricolage, Manrope) · frames from howder_v15 · annotations land under <code>43-howder-captions/*</code></footer>
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

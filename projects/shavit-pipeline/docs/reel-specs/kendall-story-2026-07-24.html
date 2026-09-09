@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kendall, the story, carousel spec</title>
+<style>
+  :root{--bg:#0b0b0c;--panel:#141416;--panel2:#1b1b1e;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a5a29a;--faint:#6f6c64;
+    --brass:#B08D57;--gold:#FFC000;--ok:#7FB88A;--bad:#e0794a;--blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;--sans:"Inter",system-ui,-apple-system,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;line-height:1.15;margin:.35em 0 .15em}
+  .sub{color:var(--dim);max-width:76ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:52px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{font-size:19px;margin:0 0 4px}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-watch{background:rgba(224,121,74,.14);color:var(--bad);border:1px solid rgba(224,121,74,.4)}
+  .b-slot{background:rgba(110,163,214,.14);color:var(--blue);border:1px solid rgba(110,163,214,.4)}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .slide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0 28px;position:relative;display:grid;grid-template-columns:340px 1fr;gap:22px}
+  @media(max-width:820px){.slide{grid-template-columns:1fr}}
+  .slide .num{position:absolute;top:-11px;left:20px;background:var(--bg);border:1px solid var(--brass);color:var(--brass);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:2px 10px;border-radius:6px;text-transform:uppercase}
+  .shot{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#000}
+  .shot img{display:block;width:100%;height:auto}
+  .shot .cap{font-family:var(--mono);font-size:11px;color:var(--faint);padding:6px 8px;border-top:1px solid var(--line)}
+  .pending{border:1px dashed var(--blue);border-radius:10px;background:rgba(110,163,214,.06);color:var(--blue);padding:40px 16px;text-align:center;font-size:13px}
+  .ost{background:#000;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px;letter-spacing:.01em}
+  .ost span{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  .alt{color:var(--dim);font-size:13px;margin:.5em 0 0}
+  .caption{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:18px 20px;white-space:pre-wrap;font-size:14.5px;line-height:1.7}
+  .warn{background:rgba(224,121,74,.07);border:1px solid rgba(224,121,74,.35);border-radius:12px;padding:16px 20px;margin:16px 0}
+  .warn h4{margin:0 0 6px;color:var(--bad);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px}
+</style>
+</head>
+<body data-spec="kendall-story">
+<div class="wrap">
+
+<div class="kicker">Shavit Rootman &middot; carousel spec</div>
+<h1>Kendall, the story</h1>
+<p class="sub">The sequel to East Victoria, same city, same arc, on the house nobody has seen. Every frame
+below is a real photograph pulled from the Kendall folder on 2026-07-24 and viewed by eye. The story beats
+marked pending are the only thing standing between this and a finished post.</p>
+
+<div class="meta-row">
+  <span class="chip">Rev <b>1</b></span>
+  <span class="chip">Built <b>2026-07-24</b></span>
+  <span class="chip">Slides <b>10</b></span>
+  <span class="chip">Source photos <b>106, all reviewed</b></span>
+  <span class="chip">Frames chosen <b>19</b></span>
+  <span class="chip">Target <b>Thursday 30 July</b></span>
+</div>
+
+<div class="revlog">
+  <h4>Revision log</h4>
+  <ul>
+    <li><span class="rev">rev 1 &middot; 2026-07-24</span>, first build. All 106 photos pulled to disk and
+    reviewed on contact sheets. Real before, mid-renovation, mechanical, and finished frames selected and
+    slotted. Story beats on slides 3 and 5 held pending Shavit.</li>
+  </ul>
+</div>
+
+<div class="warn" data-annot="exterior-provenance">
+  <h4>Provenance caution on the cover, raised 2026-07-24</h4>
+  <p style="margin:.3em 0">Jake asked whether the finished exterior is actually this house or a compilation.
+  Straight answer: every frame in both Kendall specs came out of the one Drive folder Shavit named Kendall,
+  under Indiana, Past Projects. Nothing is pulled from another property. <b>But the folder holds at least
+  three visibly different exteriors</b>: a grey house in snow with a large enclosed glass porch, a blue grey
+  house in summer with mature hedges, and this white house with a black roof. They share a stone retaining
+  wall and a similar ranch footprint, and a full renovation does change siding, roof, railings and planting.
+  It is plausible they are one house at three stages. It is not proven, and a folder is not evidence.</p>
+  <p style="margin:.6em 0 0"><b>Do not ship this cover until Shavit confirms</b> that the white house with
+  the black roof is the same building as the grey house with the enclosed porch, and that both are Kendall.
+  One question, no cost. The interior frames in this spec are internally consistent and are not affected.</p>
+</div>
+
+<div class="warn" data-annot="pending-story">
+  <h4>What is pending, and why it is only two things</h4>
+  <p style="margin:.3em 0">The photography carries eight of the ten slides on its own. Two slides need
+  Shavit, and they are the two that made East Victoria work: <b>how the deal came to us</b> and <b>who was
+  in the house before</b>. Everything else is built.</p>
+  <p style="margin:.6em 0 0"><b>Also confirm:</b> the street suffix, since the folder name does not carry
+  one, and that the city is South Bend. Neither is invented anywhere below; the on-screen copy currently
+  says Kendall and Indiana only.</p>
+</div>
+
+<h2 data-annot="s-slides">The ten slides</h2>
+
+<div class="slide" data-annot="slide-1">
+  <div class="num">Slide 1 &middot; cover</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/after-front.jpg" alt="Finished front of the Kendall house, white siding, black roof, landscaped bed and stone retaining wall">
+    <div class="cap">019 &middot; finished front, full house in frame</div></div>
+  <div>
+    <h3>The finished house, whole, in one frame</h3>
+    <div class="ost"><span>On screen</span>KENDALL &middot; SOUTH BEND, INDIANA<br>THE HOUSE NOBODY SAW</div>
+    <p class="d">The whole house sits inside the frame with no crop, which was the note on the last cover.
+    No house number is visible anywhere in this photograph. Landscaping and the stone retaining wall read as
+    finished work rather than as a listing photo.</p>
+    <p class="d" style="border-left:2px solid var(--bad);padding-left:12px"><b>Correction, rev 1 was wrong
+    about this.</b> Frame 004 was exported as an alternate finished front. Viewed at full size it is not:
+    grey blue siding, an older railing and overgrown planting against the same stone wall and the same
+    roofline. It is <b>this house before the exterior work</b>, photographed in summer. That makes 004 and
+    019 a genuine summer to summer before and after pair, which is better material than an alternate, and
+    it is exactly the kind of relabel this project has been burned by once already. <b>Verify the pair at
+    full resolution before either frame ships as a pair</b>, and never present them as one until that check
+    is written down.</p>
+    <p class="alt"><b>Alt text.</b> The finished Kendall house seen from the street, white siding, black
+    roof, new landscaping along a stone retaining wall.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-2">
+  <div class="num">Slide 2 &middot; what we took on</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/before-debris.jpg" alt="Interior before renovation, floor buried under discarded belongings and construction debris">
+    <div class="cap">067 &middot; intake, main room</div></div>
+  <div>
+    <h3>The room, on the day we got the keys</h3>
+    <div class="ost"><span>On screen</span>THIS IS THE SAME HOUSE</div>
+    <p class="d">This is the strongest single image in the folder. The floor is not visible under what was
+    left behind. It earns the whole carousel, because slide one and slide two are the same building and the
+    viewer has to stop to work that out. Note the brand line holds: the photograph criticises the condition
+    of the house, and says nothing about the street.</p>
+    <p class="alt"><b>Alt text.</b> The interior before work began, the floor completely covered with
+    discarded belongings and debris.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-3">
+  <div class="num">Slide 3 &middot; how it came to us</div>
+  <div class="pending">PENDING &middot; Shavit's story<br><br>Frame is ready: the winter intake exterior
+  (017). The line is his to give.</div>
+  <div>
+    <h3>How the deal reached us</h3>
+    <div class="ost"><span>On screen, placeholder</span>PENDING &middot; auction, bank owned, or direct
+    seller, in his words</div>
+    <p class="d">On East Victoria this slide was the foreclosure auction, and it was the beat that made the
+    post read as an operator rather than a renovator. Do not invent a route for Kendall. Ten minutes on the
+    Tuesday call fills this. The winter exterior is already exported and slots straight in.</p>
+    <p class="alt"><b>Alt text.</b> The house photographed in deep snow before any work began.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-4">
+  <div class="num">Slide 4 &middot; the condition</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/before-floor-hole.jpg" alt="Before renovation, a section of floor opened showing rot and damage beneath the surface">
+    <div class="cap">015 &middot; floor, opened</div></div>
+  <div>
+    <h3>What deferred maintenance actually looks like</h3>
+    <div class="ost"><span>On screen</span>NOT A COSMETIC JOB</div>
+    <p class="d">A specific, physical failure rather than a general mess. This is the slide that tells a
+    lender the scope was structural. Two alternates are exported if this reads too rough for the feed: the
+    original bathtub with the plumbing exposed (072) and the original kitchen (074).</p>
+    <p class="alt"><b>Alt text.</b> A section of floor opened before renovation, showing damage below the
+    surface.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-5">
+  <div class="num">Slide 5 &middot; people before property</div>
+  <div class="pending">PENDING &middot; who was in the house<br><br>No frame will be used here. This slide
+  is type on black if the answer is sensitive.</div>
+  <div>
+    <h3>The people, ahead of any renovation slide</h3>
+    <p class="d">On East Victoria this sat before a single finished room was shown, and Shavit was explicit
+    that people come first. The same beat belongs here, but only if there is a true one. If nobody was
+    living at Kendall, say that plainly and move the slide to the crew instead. <b>Do not reuse the East
+    Victoria language.</b> Fair housing caution applies: anything about former occupants stays about the
+    property and the process, never about them as people.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-6">
+  <div class="num">Slide 6 &middot; the work nobody sees</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/mech-duct-copper.jpg" alt="Utility space during renovation showing new ductwork, copper supply lines and gas piping">
+    <div class="cap">078 &middot; duct, copper, gas</div></div>
+  <div>
+    <h3>New duct, new copper, new gas</h3>
+    <div class="ost"><span>On screen</span>MOST OF THE BUDGET. NONE OF THE PHOTOS.</div>
+    <p class="d">Real mechanical work, photographed mid-job. This is the slide that separates the account
+    from every other renovation feed, and it is the reason the standalone mechanical carousel is worth
+    building as its own post. Alternate exported: the wall opened to the studs around a window (056).</p>
+    <p class="alt"><b>Alt text.</b> New ductwork, copper supply lines and gas piping installed during the
+    renovation.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-7">
+  <div class="num">Slide 7 &middot; systems, finished</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/mech-laundry-panel.jpg" alt="Finished laundry area with new water heater, electrical panel, copper lines and new washer and dryer">
+    <div class="cap">062 &middot; utility and laundry, finished</div></div>
+  <div>
+    <h3>The same corner, finished</h3>
+    <div class="ost"><span>On screen</span>NEW HEAT. NEW WATER. NEW PANEL.</div>
+    <p class="d">A rare frame: the mechanical work and the finished room in one photograph, with the panel
+    and the water heater visible next to a finished floor and new machines. It proves the previous slide
+    rather than asking anyone to take it on faith.</p>
+    <p class="alt"><b>Alt text.</b> The finished utility and laundry area with a new water heater,
+    electrical panel and new machines.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-8">
+  <div class="num">Slide 8 &middot; the finish</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/after-kitchen.jpg" alt="Finished kitchen with white cabinets, butcher block counters, subway tile and stainless appliances">
+    <div class="cap">066 &middot; finished kitchen</div></div>
+  <div>
+    <h3>Kitchen and bath, finished</h3>
+    <div class="ost"><span>On screen</span>BUILT TO THE STANDARD WE HOLD EVERYWHERE</div>
+    <p class="d">White cabinets, butcher block, subway tile, stainless. The finished bathroom (060, white
+    tile and black fixtures) is exported and can either share this slide as a pair or take slide 8b if the
+    carousel runs to eleven. Note the finish level here matches the local luxury concept on the slate,
+    which is an argument for running that one next.</p>
+    <p class="alt"><b>Alt text.</b> The finished kitchen with white cabinetry, butcher block counters,
+    subway tile and stainless appliances.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-9">
+  <div class="num">Slide 9 &middot; the befores, held to the end</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/before-kitchen.jpg" alt="The original kitchen before renovation, dark dated cabinets and heavily worn surfaces">
+    <div class="cap">074 &middot; original kitchen &middot; pairs with 066</div></div>
+  <div>
+    <h3>Now go back and look at what it was</h3>
+    <div class="ost"><span>On screen</span>BEFORE</div>
+    <p class="d">This is the inversion that carried East Victoria, and Shavit set the rule himself on the
+    fourteenth: the word BEFORE stays on every before photograph. Run three here in sequence, kitchen (074)
+    against the finished kitchen, hallway (084), and the original bathtub (072). They read as proof at this
+    position rather than as a setup.</p>
+    <p class="alt"><b>Alt text.</b> The original kitchen before renovation, with dark dated cabinets and
+    worn surfaces.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-10">
+  <div class="num">Slide 10 &middot; close</div>
+  <div class="shot"><img src="kendall-2026-07-24/assets/after-open.jpg" alt="Finished open living space looking through to the new kitchen">
+    <div class="cap">073 &middot; finished, looking through</div></div>
+  <div>
+    <h3>Somebody lives here now</h3>
+    <div class="ost"><span>On screen</span>LIVE WITH US. WORK WITH US.</div>
+    <p class="d">Closing card carries the mark and the standing line. If Shavit confirms the house is
+    occupied, the closing line becomes about the family rather than about us, which is the stronger ending
+    and the one East Victoria used.</p>
+    <p class="alt"><b>Alt text.</b> The finished open living space looking through into the new kitchen.</p>
+  </div>
+</div>
+
+<h2 data-annot="s-caption">Caption draft</h2>
+<div class="caption" data-annot="caption">Kendall, South Bend, Indiana. The house nobody has seen yet.
+
+When we got the keys, the floor was not visible. Years of deferred maintenance meant this was never going to be a cosmetic job, and the work started underneath everything anyone would ever see.
+
+The house received new mechanical throughout, new heat, new water, a new panel, along with a new kitchen, a new bathroom, new flooring and paint. The parts that carry the most cost are the parts that photograph the worst.
+
+[PENDING, Shavit: how the deal came to us.]
+
+[PENDING, Shavit: who was in the house, and how that was handled.]
+
+Today it is finished, and it is somebody's home.
+
+Live with us. Work with us.
+
+.
+.
+#southbend #indianarealestate #rehab #renovation #realestateinvesting #midwestrealestate #beforeandafter</div>
+<p class="d" style="margin-top:10px">First 125 characters carry the post, and they land on the house and
+the tension before the cut. No contractions, no dashes, no dollar figures, street name only, state spelled
+out. Hashtags sit at the end, niche and geographic, mega tags skipped.</p>
+
+<h2 data-annot="s-checks">Pre-ship checks</h2>
+<div class="box" data-annot="checks">
+  <ul>
+    <li><span class="badge b-real">Done</span> <b>Every frame viewed by eye.</b> All 106 photographs
+    reviewed on contact sheets. The 19 exported frames were confirmed individually.</li>
+    <li><span class="badge b-real">Done</span> <b>No people in any chosen frame.</b> Checked on every one
+    of the 19. Several intake photographs in the folder do show furniture and belongings but no person
+    appears in the selected set.</li>
+    <li><span class="badge b-real">Done</span> <b>No house number visible</b> in the cover or the closing
+    frame. Confirmed at full resolution.</li>
+    <li><span class="badge b-real">Done</span> <b>No fabricated pairs.</b> The kitchen before and after are
+    the same room, confirmed by the window position and the wall run.</li>
+    <li><span class="badge b-watch">Open</span> <b>Two story beats</b> on slides 3 and 5.</li>
+    <li><span class="badge b-watch">Open</span> <b>Street suffix and city</b> confirmation.</li>
+    <li><span class="badge b-watch">Open</span> <b>Partner credit.</b> If a lender or a general contractor
+    worked this house, they belong in the caption the way Dominion Financial and Tito were named on East
+    Victoria. Ask who.</li>
+  </ul>
+</div>
+
+<footer>Kendall story carousel spec &middot; rev 1 &middot; 2026-07-24 &middot; shavit-pipeline &middot;
+frames sourced from the Kendall Drive folder, pulled and reviewed 2026-07-24. Annotate any slide above,
+notes save to the pipeline inbox when served through <code>serve.py</code>.</footer>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

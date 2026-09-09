@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder, Storyboard · rev 11</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#2a2a2e;
+    --ink:#f4f2ec; --dim:#a5a29a; --faint:#6f6c64;
+    --brass:#B08D57; --gold:#FFC000; --ok:#7FB88A; --bad:#e0794a; --blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:32px;line-height:1.1;margin:.35em 0 .15em}
+  h1 .num{color:var(--faint);font-weight:400}
+  .sub{color:var(--dim);max-width:74ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  a{color:var(--brass)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-ai{background:rgba(110,163,214,.14);color:var(--blue);border:1px solid rgba(110,163,214,.42)}
+  .b-watch{background:rgba(224,121,74,.14);color:var(--bad);border:1px solid rgba(224,121,74,.4)}
+  .shot{display:grid;grid-template-columns:74px 150px 1fr;gap:16px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .shot .id{font-family:var(--mono);color:var(--gold);font-size:13px;font-weight:600}
+  .shot .id .time{display:block;color:var(--faint);font-size:11px;margin-top:4px}
+  .shot .id .dur{display:block;color:var(--dim);font-size:11px;margin-top:2px}
+  .shot img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:7px;display:block;border:1px solid var(--line)}
+  .room{font-weight:600;font-size:14px}
+  .desc{color:var(--dim);font-size:13px;margin:4px 0 8px}
+  .attrs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .attr{font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:3px 8px}
+  .attr b{color:var(--ink)}
+  .attr.fx{border-color:rgba(110,163,214,.45);color:var(--blue)} .attr.fx b{color:#bcd8f2}
+  .decision{background:linear-gradient(180deg,rgba(110,163,214,.1),transparent);border:1px solid rgba(110,163,214,.35);border-left:3px solid var(--blue);border-radius:10px;padding:14px 16px;margin:14px 0}
+  .decision h4{margin:0 0 6px;color:var(--blue);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog b{color:var(--ink)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .chg{position:relative;box-shadow:0 0 0 2px var(--gold),0 0 22px -6px var(--gold);border-radius:12px}
+  .chg::after{content:"UPDATED";position:absolute;top:-9px;left:14px;background:var(--gold);color:#0b0b0c;font:700 9px/1 var(--mono);letter-spacing:.1em;padding:3px 7px;border-radius:5px;z-index:6}
+  .sheet{width:100%;border:1px solid var(--line);border-radius:10px;display:block;margin:10px 0}
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:12px}
+  @media(max-width:760px){.shot{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-spec="43-howder">
+<div class="wrap">
+
+<header>
+  <div class="kicker">Shavit Rootman · shavit-pipeline · 43 Howder reel</div>
+  <h1>43 Howder <span class="num">,  storyboard · rev 11</span></h1>
+  <p class="sub">Both rev-10 notes applied. <b>Every beat now has its own card with the actual 43 Howder photo</b>, the reference-video frame that slipped onto the rev-10 before card is gone (you were right, that was Joel's house; my error). The full running order is explicit, <b>numbered 1-10, each with a named professional camera movement</b>. NO captions. Annotate anything.</p>
+  <div class="meta-row">
+    <span class="chip"><b>18.0s</b> · 9:16 · 1080×1920 @30fps</span>
+    <span class="chip">10 beats · <b>5 real cuts, 5 AI clips</b></span>
+    <span class="chip"><b>NO captions</b></span>
+    <span class="chip">Music: <b>Hurts So Good, full band</b></span>
+    <span class="chip">Spent: <b>20 cr</b> · quoted: <b>~50 cr</b> · balance <b>272.5</b></span>
+    <span class="chip">Status: <b>awaiting D1 · T1 pick · go</b></span>
+  </div>
+  <div class="revlog">
+    <h4>Revision log, newest first</h4>
+    <ul>
+      <li><span class="rev">rev 11.1 · Jul 12</span>, <b>Your note folded:</b> "don't do the zoom just have it be fast stills" (befores only, confirmed) → beats 1-4 are pure static stills, snap-zooms removed; arrival, tour moves, and close unchanged. Draft rebuilt as <code>animatic_v4</code>.</li>
+      <li><span class="rev">rev 11 · Jul 12</span>, <b>Your 2 notes folded:</b> "we know this isn't the house… where are the befores" → wrong-house thumbnail removed, every before is its own card with its real photo, hand-cropped 9:16 · "I need to specifically see the order… and professional movement" → numbered 1-10 running order, one named camera move per beat (moves vary, pushes and rises only, per the pro-tour rules).</li>
+      <li><span class="rev">rev 10 · Jul 12</span>, befores open + end on before-exterior; tour is the prize; T1 re-pick opened.</li>
+      <li><span class="rev">rev 9 · Jul 12</span>, before → arrival → tour structure; codex review folded; morph killed.</li>
+      <li><span class="rev">rev 1-8 · Jul 11-12</span>, earlier boards (parked).</li>
+    </ul>
+  </div>
+</header>
+
+<h2 data-annot="r11-order">Running order, 18.0s, 10 beats</h2>
+<table>
+  <tr><th>#</th><th>beat</th><th>time</th><th>source photo</th><th>camera movement</th><th>seam in</th></tr>
+  <tr><td>1</td><td>Before, kitchen</td><td>0:00-0.5</td><td>u1-18</td><td>fast still, no movement</td><td>, </td></tr>
+  <tr><td>2</td><td>Before, living</td><td>0.5-1.0</td><td>u1-23</td><td>fast still, no movement</td><td>shutter hit</td></tr>
+  <tr><td>3</td><td>Before, bath</td><td>1.0-1.6</td><td>u1-21</td><td>fast still, no movement</td><td>shutter hit</td></tr>
+  <tr><td>4</td><td>Before, EXTERIOR</td><td>1.6-2.6</td><td>u1-17</td><td>fast still, holds the extra beat</td><td>shutter hit</td></tr>
+  <tr><td>5</td><td>ARRIVAL, new exterior</td><td>2.6-5.2</td><td>u1-16 → AI</td><td><b>D1: top-down drone OR rising reveal</b></td><td>riser + white flash</td></tr>
+  <tr><td>6</td><td>Tour, room 1</td><td>5.2-7.6</td><td><b>your pick (D2)</b> → AI</td><td>slow dolly-in, eye level</td><td>luma fade</td></tr>
+  <tr><td>7</td><td>Tour, kitchen wide</td><td>7.6-10.0</td><td>u1-05 (s3) → AI</td><td>lateral track left→right past the island line</td><td>whip pan</td></tr>
+  <tr><td>8</td><td>Tour, vanity</td><td>10.0-12.4</td><td>u1-04 (s5) → AI</td><td>slow push with slight rise</td><td>white flash</td></tr>
+  <tr><td>9</td><td>Tour, shower</td><td>12.4-14.8</td><td>u1-13 (s6) → AI</td><td>dolly-in, settles before the cut</td><td>hard cut on beat</td></tr>
+  <tr><td>10</td><td>CLOSE, the photograph</td><td>14.8-18.0</td><td>u1-16 matte (s7)</td><td>near-static settle</td><td>white flash · riser → hard cut to silence</td></tr>
+</table>
+<p class="d">Movement logic: befores stay still (they are evidence, not experience) · the house moves like a pro tour, every move a push, track, or rise; no orbits, no fast zooms, no repeated move back-to-back · AI clips are retimed so ramps land on beats, blur passed, never shown at raw speed.</p>
+
+<h2>Beats, each with its real photo</h2>
+
+<div class="shot chg" data-annot="r11-b1">
+  <div class="id">1<span class="time">0:00-0.5</span><span class="dur">0.5s</span></div>
+  <img src="anim/b1.jpg">
+  <div>
+    <div class="room">Before, kitchen <span class="badge b-real">REAL · u1-18</span></div>
+    <div class="desc">The old stove wall. Desaturated grade, solo fast still on the first beat, no movement, per your note.</div>
+    <div class="attrs"><span class="attr">move <b>fast still</b></span><span class="attr fx">cost <b>0</b></span></div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="r11-b2">
+  <div class="id">2<span class="time">0.5-1.0</span><span class="dur">0.5s</span></div>
+  <img src="anim/b2.jpg">
+  <div>
+    <div class="room">Before, living <span class="badge b-real">REAL · u1-23</span></div>
+    <div class="desc">The floral couch room. Same treatment: shutter-hit cut in, fast still, out fast.</div>
+    <div class="attrs"><span class="attr">move <b>fast still</b></span><span class="attr fx">cost <b>0</b></span></div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="r11-b3">
+  <div class="id">3<span class="time">1.0-1.6</span><span class="dur">0.6s</span></div>
+  <img src="anim/b3.jpg">
+  <div>
+    <div class="room">Before, bath <span class="badge b-real">REAL · u1-21</span></div>
+    <div class="desc">The old tub and shower curtain. Third solo hit, a hair longer to let the beat land.</div>
+    <div class="attrs"><span class="attr">move <b>fast still</b></span><span class="attr fx">cost <b>0</b></span></div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="r11-b4">
+  <div class="id">4<span class="time">1.6-2.6</span><span class="dur">1.0s</span></div>
+  <img src="anim/b4.jpg">
+  <div>
+    <div class="room">Before, the EXTERIOR, closing the act <span class="badge b-real">REAL · u1-17</span></div>
+    <div class="desc">The house as it was, grey siding, old porch. Held a full second, still, no push, so the act ends where the transformation begins, per your note. Shipping crop will pull slightly wider than this thumb to keep the full roofline.</div>
+    <div class="attrs"><span class="attr">move <b>slow push</b></span><span class="attr fx">cost <b>0</b></span></div>
+  </div>
+</div>
+
+<div class="shot" data-annot="r11-a1">
+  <div class="id">5<span class="time">2.6-5.2</span><span class="dur">2.6s</span></div>
+  <img src="anim/a1.jpg">
+  <div>
+    <div class="room">ARRIVAL, the new house <span class="badge b-ai">AI · from u1-16</span> <span class="badge b-watch">DECISION D1</span></div>
+    <div class="desc">Before-exterior → riser + white flash → the finished house in motion. Same building, one flash apart. Move is your call: top-down drone (10-credit test first, roof honesty judged) or rising reveal (recommended). Reveal ramps onto the beat drop.</div>
+    <div class="attrs"><span class="attr">move <b>D1 open</b></span><span class="attr fx">est. <b>10 cr</b></span></div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="r11-t1">
+  <div class="id">6<span class="time">5.2-7.6</span><span class="dur">2.4s</span></div>
+  <img src="thumbs2/s2_living.jpg">
+  <div>
+    <div class="room">Tour room 1 <span class="badge b-ai">AI</span> <span class="badge b-watch">PHOTO PICK D2</span></div>
+    <div class="desc">First interior after arrival, person-logic says entry/living level. You flagged the stairs photo as not interesting; the thumb shown is the old default. <b>Pick the photo from <a href="anim/afters.jpg">the finished sheet</a></b> and I hand-crop it and show you before it joins the batch. Movement locked either way: slow eye-level dolly-in.</div>
+    <div class="attrs"><span class="attr">move <b>slow dolly-in</b></span><span class="attr fx">est. <b>10 cr</b></span></div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="r11-t2">
+  <div class="id">7<span class="time">7.6-10.0</span><span class="dur">2.4s</span></div>
+  <img src="thumbs2/s3_kitchen.jpg">
+  <div>
+    <div class="room">Tour, kitchen wide <span class="badge b-ai">AI · from u1-05</span></div>
+    <div class="desc">The signed kitchen-wide crop in motion: lateral track left-to-right along the island line, the one non-push move, placed mid-tour for variety. Whip pan in from room 1.</div>
+    <div class="attrs"><span class="attr">move <b>lateral track L→R</b></span><span class="attr fx">est. <b>10 cr</b></span></div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="r11-t3">
+  <div class="id">8<span class="time">10.0-12.4</span><span class="dur">2.4s</span></div>
+  <img src="thumbs2/s5_bath.jpg">
+  <div>
+    <div class="room">Tour, vanity <span class="badge b-ai">AI · from u1-04</span></div>
+    <div class="desc">Slow push with a slight rise toward the mirror line. White flash in from the kitchen.</div>
+    <div class="attrs"><span class="attr">move <b>push + slight rise</b></span><span class="attr fx">est. <b>10 cr</b></span></div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="r11-t4">
+  <div class="id">9<span class="time">12.4-14.8</span><span class="dur">2.4s</span></div>
+  <img src="thumbs2/s6_bath2.jpg">
+  <div>
+    <div class="room">Tour, shower <span class="badge b-ai">AI · from u1-13</span></div>
+    <div class="desc">Final tour beat: dolly-in that settles just before the cut, so the close does not fight motion. Hard cut on the beat.</div>
+    <div class="attrs"><span class="attr">move <b>dolly-in, settle</b></span><span class="attr fx">est. <b>10 cr</b></span></div>
+  </div>
+</div>
+
+<div class="shot" data-annot="r11-c1">
+  <div class="id">10<span class="time">14.8-18.0</span><span class="dur">3.2s</span></div>
+  <img src="thumbs2/s7_close_matte.jpg">
+  <div>
+    <div class="room">CLOSE, the untouched photograph <span class="badge b-real">REAL · u1-16 matte</span></div>
+    <div class="desc">Unchanged: the real exterior photo on black with the gold rule, near-static settle, riser into a hard cut to silence. Brand card still deferred with captions.</div>
+    <div class="attrs"><span class="attr">move <b>near-static settle</b></span><span class="attr fx">cost <b>0</b></span></div>
+  </div>
+</div>
+
+<h2 data-annot="r11-decisions">Decisions, annotate or reply</h2>
+<div class="decision" data-annot="r11-d1">
+  <h4>D1 · Arrival move</h4>
+  <ul style="margin:6px 0 0"><li><b>"drone test"</b> (one 10-cr test, roof judged honestly) or <b>"rise"</b> (recommended, drone energy, zero invented geometry).</li></ul>
+</div>
+<div class="decision" data-annot="r11-d2">
+  <h4>D2 · Tour room 1 photo</h4>
+  <ul style="margin:6px 0 0"><li>Name a u1-number from <a href="anim/afters.jpg">the finished sheet</a>. Used already: u1-05, u1-04, u1-13, u1-16.</li></ul>
+</div>
+<div class="decision" data-annot="r11-d3">
+  <h4>D3 · Generation go</h4>
+  <ul style="margin:6px 0 0"><li>~50 credits (beats 5-9), each preflighted, raws shown before assembly. 20 spent to date; balance 272.5.</li></ul>
+</div>
+
+<h2 data-annot="r11-next">Build order after your answers</h2>
+<ul>
+  <li>1 · Free animatic v3 of this exact order (real crops + sketch arrival), judged in reel.html first.</li>
+  <li>2 · D1 arrival move, shown raw.</li>
+  <li>3 · Four tour dollies, raws shown as a batch before assembly.</li>
+  <li>4 · Full assembly: matched grades, beat ramps, blur pass, seams, riser ending.</li>
+  <li>5 · Your review → export → <code>outbox/</code>.</li>
+</ul>
+
+<footer>storyboard · rev 11 · Jul 12 2026 · every beat carries its real 43 Howder photo · annotations land under <code>43-howder/r11-*</code> · gold glow = changed this rev</footer>
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

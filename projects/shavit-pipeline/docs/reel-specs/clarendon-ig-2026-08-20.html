@@ -1,0 +1,369 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Clarendon Road — Instagram carousel + Facebook · spec rev 3</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --line:#26262a; --ink:#f2f0ec; --dim:#9d9a94;
+    --brass:#b08d57; --gold:#ffc000; --bone:#edeae3; --bad:#e0674f; --ok:#6fae7b;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+       padding:0 0 140px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);padding:44px 0 28px;margin-bottom:8px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+     margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:15px;margin:26px 0 8px;color:var(--ink)}
+  p{max-width:74ch}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+        text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);
+        color:var(--dim);margin-right:6px}
+  .pill.hold{color:var(--bad);border-color:rgba(224,103,79,.4)}
+  .pill.go{color:var(--ok);border-color:rgba(111,174,123,.4)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .shot{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:start;
+        background:var(--panel);border:1px solid var(--line);border-radius:14px;
+        padding:18px;margin:16px 0;position:relative}
+  .shot img{width:100%;border-radius:8px;display:block;background:#000;min-height:120px}
+  .num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--brass);text-transform:uppercase}
+  .copy{background:var(--bone);color:#121214;border-radius:8px;padding:16px 18px;margin:10px 0 0}
+  .copy .hl{font-weight:800;font-size:19px;line-height:1.25;letter-spacing:-.01em;text-transform:uppercase}
+  .copy .sl{color:#5c5954;font-size:14px;margin-top:8px}
+  .copy .cta{color:#8a6e40;font-weight:700;letter-spacing:.02em;margin-top:12px;
+             border-bottom:3px solid #b08d57;display:inline-block;padding-bottom:3px}
+  .copy .mark{font-family:var(--mono);font-size:10px;letter-spacing:.17em;color:#8a6e40;margin-top:10px}
+  .src{font-family:var(--mono);font-size:11px;color:var(--brass);margin-top:8px}
+  .why{color:var(--dim);font-size:13.5px;margin-top:12px}
+  .why b{color:var(--ink);font-weight:600}
+  .frame{font-family:var(--mono);font-size:11.5px;color:var(--brass)}
+  .note{color:var(--gold);font-size:13px;margin-top:6px}
+
+  /* Gold "UPDATED" glow on anything that moved in THIS revision (rev 3).
+     The rev 2 marks are dropped. Drop these on rev 4 after Jake has seen them. */
+  .chg{box-shadow:0 0 0 1px rgba(255,192,0,.5),0 0 26px rgba(255,192,0,.13)}
+  .chg::after{content:"UPDATED";position:absolute;top:-9px;right:14px;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;background:var(--gold);
+    color:#191500;padding:2px 8px;border-radius:999px;font-weight:700}
+  section.chg{position:relative;border-radius:14px;padding:4px 14px 14px;margin:16px -14px 0}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  td.k{font-family:var(--mono);color:var(--dim);white-space:nowrap}
+  .q{border-left:3px solid var(--bad);background:rgba(224,103,79,.06);border-radius:0 10px 10px 0;
+     padding:14px 18px;margin:12px 0;position:relative}
+  .q b{color:var(--bad)}
+  .ok{border-left:3px solid var(--ok);background:rgba(111,174,123,.06);border-radius:0 10px 10px 0;
+      padding:14px 18px;margin:12px 0;position:relative}
+  .ok b{color:var(--ok)}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;
+      overflow-x:auto;font-family:var(--mono);font-size:12.5px;color:var(--dim);white-space:pre-wrap}
+  a{color:var(--gold)}
+  .cap{background:var(--bone);color:#121214;border-radius:10px;padding:18px 20px;
+       max-width:60ch;white-space:pre-wrap;font-size:14.5px;line-height:1.55}
+  .cap .tags{color:#5c5954;font-size:13px}
+  .fbgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+  .fbgrid figure{margin:0}
+  .fbgrid img{width:100%;border-radius:6px;display:block;background:#000;min-height:80px}
+  .fbgrid figcaption{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px}
+  @media (max-width:760px){ .shot{grid-template-columns:1fr} .fbgrid{grid-template-columns:repeat(2,1fr)} }
+</style>
+
+<body data-spec="clarendon-ig">
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Shavit Rootman · Instagram carousel 10 × 1080 × 1350 + Facebook photo post</div>
+  <h1>Clarendon Road.</h1>
+  <div class="sub">Cleveland Heights, Ohio · rev 3 · 2026-08-21 · <span class="pill hold">Awaiting Jake</span><span class="pill">Drafts only — Jake posts</span><span class="pill">IG Sun 8/23 · FB Mon 8/24</span><span class="pill go">Copy: Shavit's words only</span></div>
+
+  <div class="revlog">
+    <h4>Revision log</h4>
+    <ul>
+      <li><span class="rev">rev 3 · 2026-08-21 · Jake's six voice notes on rev 2 (09:06–09:09)</span> — <b>slide-01</b> "One more than I like the other option … definitely this one is good" → cover A stays in the MASTER; 01b rendered for the record but out of the send set. <b>slide-02</b> "You would need to put like the before photo here" + <b>alt-02</b> "Yes, this is exactly what I'm talking about for slide two … I love that" → slide 02 is the before collage (4 × 2, watermark cropped) INSIDE the deck and the MASTER; the MLS-rights question moves up the confirm list, it is no longer a reason to keep the collage out. <b>slide-03</b> "The transition to this photo would need to be if it's a before to an after one" + <b>slide-04</b> "Instagram can't do gifs, so there needs to be a better before and after representation" → slides 03 to 07 are SPLIT frames, before left, after right, bone gutter, brass BEFORE / AFTER chips, one per docx category (kitchens, bathrooms, living areas, bedrooms, basement &amp; mechanical). <b>slide-10</b> "We ended with an exterior of the house, but I know we used it twice" → slide 10 closes on the exterior at a clearly different crop from 01 (tight on porch, entry and gable); the exterior appears twice by Jake's call, a second exterior from Shavit is a drop-in. Copy unchanged: Shavit docx 2 wording only. Renderer extended with <span class="frame">split()</span>, not forked. The rev 2 UPDATED marks are dropped; every slide that moved carries one now, and the slide-copy column matches the rendered images word for word.</li>
+      <li><span class="rev">rev 2 · 2026-08-21 · Jake voice note 01:11</span> — Copy is Shavit wording only: every slide line, both headline options, the IG caption and the Facebook post are his sentences or phrases, verbatim from docx 2, trimmed for length or with a dollar figure / percentage / house number removed, never rewritten, reordered or composed. Only non-docx words: the standing end card, "Proudly revitalizing Cleveland Heights, Ohio.", chips, mark, hashtags. Rendered after the bones-guard state was sealed (08:48). Committed as 2d5b561.</li>
+      <li><span class="rev">rev 2 · 2026-08-21 · build 01:10</span> — Rebuild from docx 2 (8/20 21:08) and Shavit's ≈45 after photos; Kendall photo system; the phone-call memo superseded.</li>
+      <li><span class="rev">rev 1 · 2026-08-20</span> — First build from the first memo (phone call, type only) plus the gated Cleveland-team spec. Superseded in full.</li>
+    </ul>
+  </div>
+</header>
+
+<section>
+<h2 data-annot="sec-source">Where this came from</h2>
+<table>
+  <tr><th>Source</th><th>What it decided</th></tr>
+  <tr><td class="k">docx 2<br>8/20 21:08</td><td><span class="frame">~/projects/shavit-rootman-website/docs/tasks/sources/clarendon-docx-2-rd-case-study-0820-9pm.txt</span> — the Kendall-style case study. <b>Source of truth and the only source of words.</b> Line numbers (L<i>n</i>) below refer to that file. Its numbers are the website's payload and appear nowhere here.</td></tr>
+  <tr><td class="k">Voice note<br>8/21 01:11</td><td>Jake, on this spec: use only his wording. Every line on this page that is not the end card, the Proudly-revitalizing close, a chip or a hashtag is a docx 2 quote.</td></tr>
+  <tr><td class="k">Voice notes<br>8/21 09:06–09:09</td><td>Jake's six notes on the rendered rev 2, transcribed in <a href="clarendon-ig-2026-08-20/final/ANNOTATIONS-2026-08-21.md">ANNOTATIONS-2026-08-21.md</a>; the rev 3 changes are listed note by note in the revlog above.</td></tr>
+  <tr><td class="k">Photos<br>8/20 21:15–21:31</td><td>≈45 files, captioned per unit, staged read-only at <span class="frame">~/projects/shavit-rootman-website/docs/case-studies/clarendon-3220/_drop/</span>. One finished exterior. Eight MLS-watermarked befores (now in the deck, watermark cropped). <b>Every candidate was opened and looked at</b>; every split pairing was confirmed by room type, not by caption (captions and filenames disagree in places). Frame log: <a href="clarendon-ig-2026-08-20/final/FRAMES.md">FRAMES.md</a>.</td></tr>
+  <tr><td class="k">Precedent</td><td><a href="kendall-second-chance-2026-08-03.html">Kendall · Every Home Has A Second Chance</a> (shipped 8/3): the carousel system reused verbatim. <span class="frame">_scripts/render_kendall_secondchance.py</span> → <span class="frame">_scripts/render_clarendon.py</span> (rev 3 adds <span class="frame">split()</span> next to <span class="frame">collage()</span>).</td></tr>
+</table>
+</section>
+
+<section class="chg">
+<h2 data-annot="sec-rules">The rules this build threads</h2>
+<table>
+  <tr><th>Rule</th><th>How it lands here</th></tr>
+  <tr><td class="k">his words only</td><td>Every line is a docx 2 quote, trimmed or with a figure / the house number removed. Composed lines are gone; suggestions live in the two coach.md files only.</td></tr>
+  <tr><td class="k">zero figures</td><td>No dollar figure, no percentage anywhere. L36 is used with its two figures removed. Caption bodies contain <b>zero digits</b> (his dated lines "late 2025" and "June 2026" appear only on slides 02 and 08).</td></tr>
+  <tr><td class="k">naming</td><td>"Clarendon Road" (L2 with the number removed; L23, L43), "Cleveland Heights, Ohio" (L3). Never the house number. His L69 says "relocating to Cleveland" and is used verbatim on Facebook; flagged.</td></tr>
+  <tr><td class="k">facts, not emotion</td><td>Every adjective is his. No em dashes, no contractions, no bait, no emoji.</td></tr>
+  <tr><td class="k">real photographs</td><td>Every frame is one of his photographs or one of the MLS befores. <b>Rev 3: the befores are in the deck by Jake's decision</b> (slide 02 collage, 03 to 07 left halves), watermark cropped out; brand rule 7 is knowingly set aside for them pending Shavit's confirmation. The exterior appears twice (01 and, at a different crop, 10) by Jake's call. No other frame is used twice. The person at the edge of unit1-bedroom-before is excluded by crop. Nothing generated.</td></tr>
+  <tr><td class="k">end card</td><td>Slide 10 = his L78 headline over the exterior, then Kendall 10 in structure: "Proudly revitalizing Cleveland Heights, Ohio." · LIVE WITH US. WORK WITH US. with the brass rule · SHAVIT ROOTMAN.</td></tr>
+  <tr><td class="k">fair housing</td><td>The people sentences are his L37 and L69, who did lease.</td></tr>
+  <tr><td class="k">people</td><td>No crew or tenant names. The Cleveland-team post stays gated and unbuilt.</td></tr>
+</table>
+</section>
+
+<section>
+<h2 data-annot="sec-slides">The ten slides</h2>
+<p>Hook exterior → the before collage → his five BEFORE &amp; AFTER categories as split frames (before left, after right) → the after → the hold → his status line over the exterior + mark. Uniform bone band at the Kendall metric (484 px).</p>
+
+<div class="shot" data-annot="slide-01">
+  <img src="clarendon-ig-2026-08-20/final/01_exterior.jpg" alt="Slide 1: finished exterior, A complete multifamily transformation using the BRRRR investment strategy.">
+  <div>
+    <div class="num">Slide 01 · cover A (Jake 09:06: stays) · <span class="frame">after-exterior/exterior-after.jpeg</span></div>
+    <div class="copy">
+      <div class="hl">A complete multifamily transformation using the BRRRR investment strategy.</div>
+      <div class="sl">Clarendon Road. Cleveland Heights, Ohio.</div>
+      <div class="mark">SHAVIT ROOTMAN</div>
+      <div class="src">docx L4 verbatim · L2 "3220 CLARENDON ROAD" (number removed) · L3</div>
+    </div>
+    <div class="why"><b>Unchanged from rev 2.</b> The only finished exterior he sent (886 × 886, upscaled 1.22×). Full house, a sliver of sky above the gable peak, porch steps at the bottom. The file <span class="frame">01b_exterior.jpg</span> (his L72 as the headline) is still rendered for the record but is no longer in the MASTER or the Desktop set.</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-02">
+  <img src="clarendon-ig-2026-08-20/final/02_before-collage.jpg" alt="Slide 2: eight before photos in a 4 by 2 grid, BEFORE chip, A vacant triplex in poor but inhabitable condition.">
+  <div>
+    <div class="num">Slide 02 · before collage · <span class="frame">before/*.jpeg × 8 · 4 × 2 · bottom 9% cropped</span></div>
+    <div class="copy">
+      <div class="hl">A vacant triplex in poor but inhabitable condition.</div>
+      <div class="sl">Its location within Cleveland Heights and proximity to the medical, educational, and employment centers surrounding University Circle.<br>Acquired: Late 2025.</div>
+      <div class="src">docx L23 (head of each sentence trimmed) · L74 verbatim</div>
+    </div>
+    <div class="why"><b>Jake 09:07 / 09:09: "this is exactly what I'm talking about for slide two."</b> The rev 2 ALT_02 composition, moved into the numbered deck and the MASTER. The MLS Now watermark never reaches a tile; the <span class="frame">unit1-bedroom-before</span> tile is biased right so the person at its left edge is outside the tile. These are the prior sale-listing photos: confirming with Shavit that they are his to publish is now the first item on the list.</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-03">
+  <img src="clarendon-ig-2026-08-20/final/03_split-kitchen.jpg" alt="Slide 3: before kitchen left, after kitchen right, Kitchens.">
+  <div>
+    <div class="num">Slide 03 · split · <span class="frame">before/unit1-kitchen-before.jpeg | after-unit1/img_3052.jpeg</span></div>
+    <div class="copy">
+      <div class="hl">Kitchens.</div>
+      <div class="sl">The kitchens were modernized with cohesive finishes, updated cabinetry and surfaces, new fixtures, appliances, lighting, and durable flooring designed for long-term rental use.</div>
+      <div class="src">docx L49 header · L50 verbatim</div>
+    </div>
+    <div class="why"><b>Jake 09:07: "the transition to this photo would need to be … a before to an after one."</b> Instagram has no motion in a carousel, so the before-to-after read is one frame: before left (the oak-cabinet, green-wall kitchen), after right (the slice of img_3052 that holds the sink, the range and the microwave whole), brass chips on each half.</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-04">
+  <img src="clarendon-ig-2026-08-20/final/04_split-bath.jpg" alt="Slide 4: before bathroom left, after bathroom right, Bathrooms.">
+  <div>
+    <div class="num">Slide 04 · split · <span class="frame">before/unit3-before-b.jpeg | after-unit3/dsc06937.jpeg</span></div>
+    <div class="copy">
+      <div class="hl">Bathrooms.</div>
+      <div class="sl">Bathrooms throughout the property received substantial updates, replacing dated finishes with clean, durable materials and modern fixtures consistent with the standards used throughout our portfolio.</div>
+      <div class="src">docx L51 header · L52 verbatim</div>
+    </div>
+    <div class="why"><b>Jake 09:08: "there needs to be a better before and after representation."</b> Before: the clawfoot-tub bathroom among the unit3 befores (confirmed bathroom by eye). After: the one portrait after frame in the drop, the glass shower with the hex floor, vanity and window, which fits a 537 × 866 half almost uncropped; it replaces rev 2's tub-wall frame.</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-05">
+  <img src="clarendon-ig-2026-08-20/final/05_split-living.jpg" alt="Slide 5: before living room left, after living room right, Living areas.">
+  <div>
+    <div class="num">Slide 05 · split · <span class="frame">before/unit1-common-before.jpeg | after-unit1/img_3045.jpeg</span></div>
+    <div class="copy">
+      <div class="hl">Living areas.</div>
+      <div class="sl">Living areas were refreshed with new flooring, drywall repairs, paint, lighting, and finish work.<br>A consistent standard throughout the building.</div>
+      <div class="src">docx L53 header · L54 first sentence · L54 tail phrase</div>
+    </div>
+    <div class="why">Before: the downstairs living room (couch, plants at the curtained window wall). After: the three-front-windows slice of img_3045, against the before's window wall.</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-06">
+  <img src="clarendon-ig-2026-08-20/final/06_split-bedroom.jpg" alt="Slide 6: before bedroom left, after bedroom right, Comfortable and functional homes.">
+  <div>
+    <div class="num">Slide 06 · split · <span class="frame">before/unit2-common-or-bedroom-before-b.jpeg | after-unit1/img_3040.jpeg</span></div>
+    <div class="copy">
+      <div class="hl">Comfortable and functional homes.</div>
+      <div class="sl">Durable materials, cohesive finishes, functional layouts, and an emphasis on creating housing we would be comfortable living in ourselves.</div>
+      <div class="src">docx L54 second sentence, trimmed at both ends · L34 tail</div>
+    </div>
+    <div class="why"><b>Bedrooms, as a split.</b> There is no hallway or stair before, so the rev 2 after-only stair slide would have been the odd one among five splits; the brief preferred the split. Before: the unit2 bedroom (bed, stuffed animals; confirmed bedroom). After: img_3040, door, small windows and the sputnik light. Copy is his, true of bedrooms. The stair frame is dropped, not moved to Facebook (the FB playbook caps a post at five photos and the set is already five).</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-07">
+  <img src="clarendon-ig-2026-08-20/final/07_split-basement.jpg" alt="Slide 7: before basement left, after basement right, Basement and mechanical systems.">
+  <div>
+    <div class="num">Slide 07 · split · <span class="frame">before/basement-before.jpeg | after-basement/basement-after-b.png</span></div>
+    <div class="copy">
+      <div class="hl">Basement &amp; mechanical systems.</div>
+      <div class="sl">The basement underwent substantial cleanup and moisture treatment.<br>Mechanical and plumbing systems were also substantially improved.</div>
+      <div class="src">docx L57 header · L58 both sentences, tails trimmed</div>
+    </div>
+    <div class="why">Before: the dark laundry, lifted so it reads. After: the slice of the CleanShot laundry frame with the utility sink, the panel, the PEX manifold and the dryers (appliances span the whole source, so one washer sits at the slice's left edge; no slice avoids that).</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-08">
+  <img src="clarendon-ig-2026-08-20/final/08_unit3-wide.jpg" alt="Slide 8: attic unit wide, Following renovation, the three units were leased.">
+  <div>
+    <div class="num">Slide 08 · <span class="frame">after-unit3/ea720a197c48.png</span></div>
+    <div class="copy">
+      <div class="hl">Following renovation, the three units were leased.</div>
+      <div class="sl">The property attracted tenants including medical residents relocating from outside the area.<br>Leased / Stabilized: June 2026.</div>
+      <div class="src">docx L36 (dollar figures removed) · L37 first sentence · L76</div>
+    </div>
+    <div class="why"><b>Unchanged from rev 2.</b> The one frame that shows a whole unit.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="slide-09">
+  <img src="clarendon-ig-2026-08-20/final/09_img_3048.jpg" alt="Slide 9: dining room looking through to the front windows, Refinancing rather than selling.">
+  <div>
+    <div class="num">Slide 09 · <span class="frame">after-unit1/img_3048.jpeg</span></div>
+    <div class="copy">
+      <div class="hl">Refinancing rather than selling.</div>
+      <div class="sl">Rather than selling the property and realizing the value created as a one-time gain, we retained Clarendon Road as part of the long-term portfolio.</div>
+      <div class="src">docx L64 head · L43 (house number removed)</div>
+    </div>
+    <div class="why"><b>Unchanged from rev 2.</b> His lesson over his REPEAT sentence.</div>
+  </div>
+</div>
+
+<div class="shot chg" data-annot="slide-10">
+  <img src="clarendon-ig-2026-08-20/final/10_exterior-close.jpg" alt="Slide 10: end card over the exterior, tight on the porch and gable, Fully leased, refinanced, and professionally managed. Proudly revitalizing Cleveland Heights, Ohio. Live with us. Work with us.">
+  <div>
+    <div class="num">Slide 10 · end card · <span class="frame">after-exterior/exterior-after.jpeg</span> at zoom 1.35</div>
+    <div class="copy">
+      <div class="hl">Fully leased, refinanced, and professionally managed.</div>
+      <div class="sl">Proudly revitalizing Cleveland Heights, Ohio.</div>
+      <div class="cta">Live with us. Work with us.</div>
+      <div class="mark">SHAVIT ROOTMAN</div>
+      <div class="src">docx L78 trimmed at both ends · then the standing close, tagline, mark</div>
+    </div>
+    <div class="why"><b>Jake 09:08: "We ended with an exterior of the house, but I know we used it twice."</b> The deck now closes on the exterior. Only one exterior exists, so it is the cover frame at a clearly different crop: zoom 1.35, held to the roofline so the gable peak stays in, biased onto the porch and entry, lifted a touch. The exterior appears twice by Jake's call; a second exterior from Shavit drops in at the same path.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<h2 data-annot="sec-caption">Instagram caption — his sentences only (unchanged from rev 2)</h2>
+<p>Lines: L4 · L2/L3 · L23 · L33 · L36 (figures removed) + L37 · L43 (number removed) + L44 · the end card · hashtags. About 1,300 characters, zero digits, zero dollar signs. <a href="clarendon-ig-2026-08-20/final/CAPTION.txt">CAPTION.txt</a>.</p>
+<div class="cap">A complete multifamily transformation using the BRRRR investment strategy.
+
+Clarendon Road. Cleveland Heights, Ohio.
+
+A vacant triplex in poor but inhabitable condition. The opportunity was driven not only by the building itself, but by its location within Cleveland Heights and proximity to the medical, educational, and employment centers surrounding University Circle.
+
+The work included updated kitchens and bathrooms, flooring, drywall and paint, lighting and fixtures, plumbing improvements, portions of the electrical system, mechanical improvements, select window replacement, common-area improvements, basement moisture treatment and finishing work, driveway repairs, landscaping, and porch improvements.
+
+Following renovation, the three units were leased. The property attracted tenants including medical residents relocating from outside the area.
+
+Rather than selling the property and realizing the value created as a one-time gain, we retained Clarendon Road as part of the long-term portfolio. The returned capital can be redeployed into future acquisitions and renovations while Clarendon continues producing rental income and building equity over time.
+
+Live with us. Work with us.
+
+.
+.
+<span class="tags">#beforeandafter #clevelandheights #universitycircle #clevelandrealestate #ohiorealestate #brrrr #rehab #renovation #propertymanagement #realestateinvesting #midwestrealestate #multifamily #homerenovation #propertyrehab</span></div>
+<div class="why"><span class="frame">#beforeandafter</span> added 8/21 on Jake's word, now that the befores ship on slide 02 and 03 to 07. Fourteen tags. Suggested post day: Sunday 8/23.</div>
+</section>
+
+<section>
+<h2 data-annot="sec-fb">Facebook post · Monday 8/24 — his sentences only (unchanged from rev 2)</h2>
+<p>Lines: L67 · L23 · L48 · L33 + L56 · L68 · L69 · L70 · L71 · L43 (number removed) · L72 · the end card. About 255 words. The Facebook playbook CTA is not his wording and is out of the body (posting-time option noted in <a href="clarendon-ig-2026-08-20/fb/CAPTION.txt">fb/CAPTION.txt</a>). Tag the City of Cleveland Heights page in the composer; no address anywhere. Five landscape photos ≤ 2048 wide, exterior then rooms; the FB set did not change in rev 3.</p>
+<div class="fbgrid" data-annot="fb-photos">
+  <figure><img src="clarendon-ig-2026-08-20/fb/01_exterior.jpg" alt=""><figcaption>01 exterior (square, native)</figcaption></figure>
+  <figure><img src="clarendon-ig-2026-08-20/fb/02_kitchen.jpg" alt=""><figcaption>02 kitchen · dsc09409</figcaption></figure>
+  <figure><img src="clarendon-ig-2026-08-20/fb/03_front-room.jpg" alt=""><figcaption>03 front room · img_3041</figcaption></figure>
+  <figure><img src="clarendon-ig-2026-08-20/fb/04_bathroom.jpg" alt=""><figcaption>04 bath · dsc09364</figcaption></figure>
+  <figure><img src="clarendon-ig-2026-08-20/fb/05_upper-kitchen.jpg" alt=""><figcaption>05 attic kitchen · dsc06916</figcaption></figure>
+</div>
+<div class="cap" data-annot="fb-caption" style="margin-top:14px">Returned a vacant and underperforming multifamily property to productive use in Cleveland Heights.
+
+A vacant triplex in poor but inhabitable condition. The opportunity was driven not only by the building itself, but by its location within Cleveland Heights and proximity to the medical, educational, and employment centers surrounding University Circle.
+
+The exterior was refreshed while preserving the existing character of the property. Landscaping, selective repairs, driveway patching, porch improvements, and general exterior cleanup improved the presentation of the building without unnecessary replacement of serviceable components.
+
+The work included updated kitchens and bathrooms, flooring, drywall and paint, lighting and fixtures, plumbing improvements, portions of the electrical system, mechanical improvements, select window replacement, common-area improvements, basement moisture treatment and finishing work, driveway repairs, landscaping, and porch improvements. The common hallways and stairways received the same attention as the individual units.
+
+Created three professionally renovated and managed homes in a prime location serving the greater University Circle employment and educational corridor. Provided quality housing for medical residents and other professionals relocating to Cleveland from outside the region. Improved the physical condition, presentation, and long-term viability of an existing Cleveland Heights property. Demonstrated that older housing stock can be thoughtfully repositioned while preserving the character of the existing building.
+
+Rather than selling the property and realizing the value created as a one-time gain, we retained Clarendon Road as part of the long-term portfolio.
+
+Created homes that we would be proud to live in ourselves.
+
+Live with us. Work with us.</div>
+</section>
+
+<section>
+<h2 data-annot="sec-facts">What Jake has to type</h2>
+<p>The registry (<span class="frame">facts/</span>) still does not exist and is TTY-only. Thirteen facts, every value his verbatim sentence with the docx line quoted, are in
+<a href="../../content/clarendon-deal-story/FACTS-TO-ADD.md">content/clarendon-deal-story/FACTS-TO-ADD.md</a>.</p>
+<pre>cd ~/projects/shavit-pipeline
+./shavit.sh fact add      # × 13, answers in FACTS-TO-ADD.md
+./shavit.sh lint   clarendon-deal-story   &amp;&amp; ./shavit.sh lint   clarendon-triplex-fb
+./shavit.sh verify clarendon-deal-story   &amp;&amp; ./shavit.sh verify clarendon-triplex-fb    # TTY
+./shavit.sh review clarendon-deal-story   &amp;&amp; ./shavit.sh review clarendon-triplex-fb
+./shavit.sh ship   clarendon-deal-story --date 2026-08-23    # only on explicit go
+./shavit.sh ship   clarendon-triplex-fb  --date 2026-08-24</pre>
+<div class="ok"><p style="margin:0"><b>Lint status: the prose passes every machine rule.</b> <a href="../../content/clarendon-deal-story/LINT-PROOF.md">LINT-PROOF.md</a> applies each rule by hand; FINISH.sh ran <span class="frame">shavit.sh lint</span> on marker-stripped copies: <span class="frame">lint ok</span> for both (<a href="clarendon-ig-2026-08-20/final/LINT-OUTPUT.txt">final/LINT-OUTPUT.txt</a>). On the real posts it stops at <span class="frame">unknown-fact</span> until the registry exists, which is the design.</p></div>
+</section>
+
+<section class="chg">
+<h2 data-annot="sec-confirm">Three things to confirm with Shavit</h2>
+<table>
+  <tr><th>#</th><th>Question</th><th>Why it matters</th></tr>
+  <tr><td class="k">one</td><td><b>Are the before photos his to publish?</b> They carry the MLS Now watermark (the prior sale listing's photography).</td><td><b>More important in rev 3, not less:</b> by Jake's decision they are now IN the deck (slide 02 collage, the left halves of 03 to 07) and in the MASTER. If the answer is no, slide 02 reverts to the rev 2 type-led frame and 03 to 07 revert to after-only; the renderer keeps both paths.</td></tr>
+  <tr><td class="k">two</td><td>"Clarendon Road" and "Cleveland Heights", as in docx 2.</td><td>Rev 1, memo 1 and the old post said Avenue and Cleveland. The website case study says Road and Cleveland Heights. His own L69 ("relocating to Cleveland from outside the region") is used verbatim on Facebook.</td></tr>
+  <tr><td class="k">three</td><td>May the posts describe the tenants with his L37 / L69 sentences?</td><td>His own lines, phrased as who did lease, never who should. Still his tenants; still his call.</td></tr>
+</table>
+</section>
+
+<section class="chg">
+<h2 data-annot="sec-build">Build</h2>
+<table>
+  <tr><th>Item</th><th>Path</th></tr>
+  <tr><td class="k">Renderer</td><td><span class="frame">_scripts/render_clarendon.py</span> — Kendall system verbatim; rev 3 adds <span class="frame">split()</span> beside <span class="frame">collage()</span> and clears stale slide files on run. Re-render: <span class="frame">python3.13 _scripts/render_clarendon.py</span>.</td></tr>
+  <tr><td class="k">Output</td><td><span class="frame">clarendon-ig-2026-08-20/final/</span> — 01_exterior, 02_before-collage, 03_split-kitchen, 04_split-bath, 05_split-living, 06_split-bedroom, 07_split-basement, 08_unit3-wide, 09_img_3048, 10_exterior-close .jpg · 01b_exterior.jpg (record only) · CAPTION.txt · Clarendon-Carousel-MASTER.pdf (10 slides) · REVIEW-sheet.jpg (11 tiles, labelled) · <a href="clarendon-ig-2026-08-20/final/FRAMES.md">FRAMES.md</a> · <a href="clarendon-ig-2026-08-20/final/NOTES.txt">NOTES.txt</a> · FINISH.sh · LINT-OUTPUT.txt · ANNOTATIONS-2026-08-21.md.</td></tr>
+  <tr><td class="k">Facebook</td><td><span class="frame">clarendon-ig-2026-08-20/fb/</span> — 01_exterior … 05_upper-kitchen .jpg (≤ 2048 wide), CAPTION.txt. Unchanged.</td></tr>
+  <tr><td class="k">Desktop</td><td><span class="frame">~/Desktop/Shavit - Clarendon Carousel/</span> (+ <span class="frame">facebook/</span>), replaced in full by FINISH.sh: the ten slides, MASTER, REVIEW-sheet, captions, FRAMES, NOTES. No 01b, no ALT.</td></tr>
+  <tr><td class="k">Pipeline</td><td><span class="frame">content/clarendon-deal-story/</span> post.md (IG, fact spans), coach.md, FACTS-TO-ADD.md, LINT-PROOF.md · <span class="frame">content/clarendon-triplex-fb/</span> post.md (platform: facebook), coach.md, state. Unchanged in rev 3 except a coach note.</td></tr>
+  <tr><td class="k">Not built</td><td>The Cleveland-team post — still gated. Nothing posted. Nothing written into the website repo.</td></tr>
+  <tr><td class="k">Treatment</td><td>Bone, the carousel system. Band 484 (36% of frame) uniform across all eleven cards, SF Pro headline + DM Sans subline, brass #b08d57 on bone #edeae3, Bricolage tagline with the brass rule anchored off the type size. Split halves 537 × 866 with a 6 px bone gutter and brass chips.</td></tr>
+  <tr><td class="k">Spec server</td><td>Port 8766: <span class="frame">http://localhost:8766/docs/reel-specs/clarendon-ig-2026-08-20.html</span>. Annotations append to <span class="frame">docs/spec-inbox.jsonl</span> as data.</td></tr>
+</table>
+</section>
+
+<section class="chg">
+<h2 data-annot="sec-sheet">Contact sheet</h2>
+<img src="clarendon-ig-2026-08-20/final/REVIEW-sheet.jpg" alt="All eleven cards: ten slides plus 01b" style="width:100%;border-radius:12px;border:1px solid var(--line);margin-top:8px;background:#000;min-height:120px">
+</section>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>

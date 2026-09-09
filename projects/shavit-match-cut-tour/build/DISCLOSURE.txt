@@ -1,0 +1,33 @@
+DISCLOSURE & PROVENANCE — Shavit match-cut tour build
+=====================================================
+Date: 2026-07-05
+
+AI-ASSISTED LABEL
+Both cuts carry an "AI-assisted motion" disclosure per Meta's AI disclosure
+mandate. Version A additionally depicts a FABRICATED teardown/construction
+sequence (no such state existed on the property).
+
+SHIP GATES
+- Version B (safe): camera motion on real photographs only; dissolves are
+  edit-side ffmpeg crossfades. Clears video-brain preflight. Ships on Shavit's
+  normal taste sign-off.
+- Version A (AI showcase): known-bad B4 override — REQUIRES SHAVIT'S EXPLICIT
+  WRITTEN YES BEFORE PUBLISHING. Rendered as a pitch artifact on Jake Horvitz's
+  instruction ("Love it perfecto generate both", 2026-07-05).
+
+SOURCE PROVENANCE
+- All property imagery: instagram.com/@shavitness post DWIChZzD0Bm
+  (client-owned social posts; see anchors/manifest.csv). MichRIC watermark
+  cropped from the before-exterior prior to any generation.
+- Upscales: bytedance_image_upscale to 4K (jobs c2b1050f, 8aa43f62).
+- Generation: Higgsfield/Kling — A hero e7181bb0 (kling3_0 pro, start+end),
+  B push-ins 98bde546 / 1aa438c6 (kling3_0_turbo, single slow move each).
+
+MUSIC
+John Mellencamp — "Small Town": ORGANIC Instagram post only, licensed via the
+in-app music sticker at post time. NOT cleared for boosted/paid distribution;
+swap to an original Americana bed for any promoted use.
+
+ON-SCREEN TEXT REGISTER
+No dollar figures; full state names; street + city + state with NO house
+number; static brass logo (no pulse); closer "Built in Michigan, Ohio & Indiana."

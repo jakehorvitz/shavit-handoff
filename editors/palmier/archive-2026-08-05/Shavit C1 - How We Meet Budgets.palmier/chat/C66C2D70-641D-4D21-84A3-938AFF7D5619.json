@@ -1,0 +1,21 @@
+{
+  "id" : "C66C2D70-641D-4D21-84A3-938AFF7D5619",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit C1 - How We Meet Budgets"
+        }
+      ],
+      "id" : "C15AEF18-4CFF-40F8-93D8-30E61EB531F0",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:01:21Z"
+}

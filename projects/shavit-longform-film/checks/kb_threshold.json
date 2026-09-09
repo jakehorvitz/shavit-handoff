@@ -1,0 +1,10 @@
+{
+  "threshold": 0.057726917807773864,
+  "metric": "median LK-affine residual px @480w, frame pairs i,i+3",
+  "kb_residual": 0.04161694975011015,
+  "kb_clip": "checks/calibration/kb_deliberate.mp4",
+  "kb_still": "assets/heroes/06_61_salem_street_hillsdale.jpg",
+  "camera_residual": 0.08007307262052907,
+  "camera_clip": "checks/calibration/kling_camera_move.mp4",
+  "camera_still": "assets/heroes/06_61_salem_street_hillsdale.jpg"
+}

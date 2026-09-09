@@ -1,0 +1,21 @@
+{
+  "id" : "A2A83013-9A07-457C-8E3A-6AAD4FCA2017",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit C3 - The Admin Week"
+        }
+      ],
+      "id" : "9BF44C07-1976-40ED-9ABB-176455E25BCA",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:03:50Z"
+}

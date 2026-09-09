@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shavit Rootman — The Operator's Marketing Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=Manrope:wght@300;400;500;600;700&display=swap"/>
+<style>
+  :root{ --gold:#FFC000; --ink:#0a0a0a; --iron:#141414; --line:#242424; --mute:rgba(255,255,255,.55); --mute2:rgba(255,255,255,.72); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--ink);color:#fff;font-family:'Manrope',sans-serif;overflow:hidden}
+  .deck{height:100%;position:relative}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:7vh 8vw;opacity:0;pointer-events:none;transition:opacity .55s ease;overflow:hidden}
+  .slide.active{opacity:1;pointer-events:auto}
+  .slide--iron{background:var(--iron)}
+  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:22px}
+  h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,7.2vw,104px);line-height:.97;text-transform:uppercase;letter-spacing:-.01em}
+  h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,5vw,68px);line-height:1.0;text-transform:uppercase;letter-spacing:-.01em}
+  h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(17px,1.5vw,22px);text-transform:uppercase;letter-spacing:.02em}
+  .gold{color:var(--gold)}
+  .rule{width:72px;height:3px;background:var(--gold);margin:30px 0}
+  .sub{font-size:clamp(15px,1.35vw,19px);line-height:1.65;color:var(--mute2);max-width:760px;font-weight:400}
+  .grid{display:grid;gap:22px;margin-top:38px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+  .card{border:1px solid var(--line);padding:24px 22px;background:rgba(255,255,255,.015)}
+  .card .k{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;color:var(--gold);margin-bottom:10px}
+  .card h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;font-weight:700}
+  .card p{font-size:13.5px;line-height:1.6;color:var(--mute)}
+  .stat .n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(38px,4.6vw,64px);color:#fff}
+  .stat .n em{color:var(--gold);font-style:normal}
+  .stat .l{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);margin-top:8px}
+  .tag{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:7px 14px;font-weight:700;margin:0 8px 8px 0}
+  .foot{position:absolute;bottom:26px;left:8vw;right:8vw;display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.32)}
+  .nav{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+  .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:.3s}
+  .dot.on{background:var(--gold);transform:scale(1.25)}
+  .arrowhint{position:fixed;top:24px;right:26px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);z-index:10}
+  .rev{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .active .rev{opacity:1;transform:none}
+  .active .d1{transition-delay:.15s}.active .d2{transition-delay:.3s}.active .d3{transition-delay:.45s}.active .d4{transition-delay:.6s}.active .d5{transition-delay:.75s}.active .d6{transition-delay:.9s}
+  .flow{display:flex;align-items:stretch;gap:0;margin-top:40px}
+  .fstep{flex:1;border:1px solid var(--line);padding:22px 18px;position:relative;background:rgba(255,255,255,.015)}
+  .fstep:not(:last-child):after{content:"→";position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:18px;z-index:2;background:var(--ink);padding:2px}
+  .slide--iron .fstep:not(:last-child):after{background:var(--iron)}
+  .fstep h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:700}
+  .fstep p{font-size:12.5px;line-height:1.55;color:var(--mute)}
+  .bars{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+  .bar{display:grid;grid-template-columns:170px 1fr 64px;gap:14px;align-items:center;font-size:12px}
+  .bar .lbl{letter-spacing:.08em;text-transform:uppercase;color:var(--mute2)}
+  .bar .trk{height:9px;background:rgba(255,255,255,.07)}
+  .bar .fil{height:100%;background:var(--gold);width:0;transition:width 1.1s ease .4s}
+  .active .bar .fil{width:var(--w)}
+  .bar .val{color:var(--gold);font-weight:700;text-align:right}
+  .two{display:grid;grid-template-columns:1.05fr .95fr;gap:7vw;align-items:center}
+  ul.tick{list-style:none;margin-top:26px}
+  ul.tick li{padding:13px 0 13px 34px;position:relative;font-size:15px;line-height:1.55;color:var(--mute2);border-bottom:1px solid var(--line)}
+  ul.tick li:before{content:"";position:absolute;left:2px;top:19px;width:14px;height:14px;border:2px solid var(--gold);transform:rotate(45deg)}
+  ul.tick li strong{color:#fff}
+  .big-x{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--gold);font-size:clamp(60px,9vw,130px);line-height:1}
+  .kpi-row{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+  .kpi{border:1px solid var(--line);padding:10px 14px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute2)}
+  .kpi b{color:var(--gold)}
+  @media (max-width:900px){ .g3,.g4,.g5,.g2,.two{grid-template-columns:1fr}.flow{flex-direction:column}.fstep:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-14px;transform:translateX(-50%)} }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 · TITLE -->
+<section class="slide">
+  <div class="eyebrow rev">Prepared by Jake Horvitz · June 2026</div>
+  <h1 class="rev d1">The Operator's<br/><span class="gold">Marketing</span><br/>Playbook.</h1>
+  <div class="rule rev d2"></div>
+  <p class="sub rev d3">Building communities, profitably — and making sure the right people see it. A complete strategy with the numbers to prove it's working.</p>
+  <div style="margin-top:34px" class="rev d4">
+    <span class="tag">No LinkedIn</span><span class="tag">Instagram + YouTube</span><span class="tag">3 Markets</span><span class="tag">Measured Monthly</span>
+  </div>
+  <div class="foot"><span>Shavit Rootman</span><span>01 / 12</span></div>
+</section>
+
+<!-- 2 · WHERE WE STAND -->
+<section class="slide slide--iron">
+  <div class="eyebrow rev">The Starting Position</div>
+  <h2 class="rev d1">The operation is real.<br/>The audience isn't — <span class="gold">yet.</span></h2>
+  <div class="rule rev d2"></div>
+  <div class="grid g4">
+    <div class="stat rev d2"><div class="n">50<em>+</em></div><div class="l">Doors Owned &amp; Operated</div></div>
+    <div class="stat rev d3"><div class="n"><em>$</em>12M<em>+</em></div><div class="l">Portfolio Value</div></div>
+    <div class="stat rev d4"><div class="n">3</div><div class="l">States · MI · OH · IN</div></div>
+    <div class="stat rev d5"><div class="n">200</div><div class="l">Door Goal · 2030</div></div>
+  </div>
+  <p class="sub rev d5" style="margin-top:38px">The new website is live-ready: one operation, three states, openings and tenant pages, zero fluff. Now the job is attention — pointed at the work, not at hype.</p>
+  <div class="foot"><span>Where We Stand</span><span>02 / 12</span></div>
+</section>
+
+<!-- 3 · THE THESIS -->
+<section class="slide">
+  <div class="eyebrow rev">The Thesis</div>
+  <h2 class="rev d1">Document the work.<br/><span class="gold">Don't create content.</span></h2>
+  <div class="rule rev d2"></div>
+  <div class="grid g3">
+    <div class="card rev d2"><div class="k">01</div><h4>The work already exists</h4><p>Every rehab, every turnover, every closing is footage. Marketing becomes a byproduct of operating — not a second job.</p></div>
+    <div class="card rev d3"><div class="k">02</div><h4>Trust before asks</h4><p>No pitch, no "invest with me." Proof, repeated weekly, until tenants, sellers, and future partners come warm.</p></div>
+    <div class="card rev d4"><div class="k">03</div><h4>Content compounds</h4><p>Ads stop when you stop paying. A library of before/afters and operator notes keeps working for years.</p></div>
+  </div>
+  <div class="foot"><span>The Thesis</span><span>03 / 12</span></div>
+</section>
+
+<!-- 4 · WHY NOT LINKEDIN -->
+<section class="slide slide--iron">
+  <div class="two">
+    <div>
+      <div class="eyebrow rev">The Channel Call</div>
+      <h2 class="rev d1">The people who matter<br/><span class="gold">aren't on LinkedIn.</span></h2>
+      <div class="rule rev d2"></div>
+      <ul class="tick">
+        <li class="rev d2"><strong>Tenants</strong> in Hillsdale, Cleveland, and South Bend find homes on Instagram and Google — not a professional network.</li>
+        <li class="rev d3"><strong>Sellers</strong> — owners with a tired property or a deadline — respond to local trust and word of mouth, not feed posts for professionals.</li>
+        <li class="rev d4"><strong>Real estate is visual.</strong> A 20-second before/after says more than any text post ever will.</li>
+        <li class="rev d5"><strong>The movers and shakers</strong> in these markets are at city council, the closing table, and the jobsite. That's where we show up.</li>
+      </ul>
+    </div>
+    <div style="text-align:center"><div class="big-x rev d3">IG<span style="color:#fff">+</span>YT</div><p class="sub rev d4" style="margin-top:18px;text-align:center">Visual proof at scale,<br/>plus a local ground game.</p></div>
+  </div>
+  <div class="foot"><span>Why Not LinkedIn</span><span>04 / 12</span></div>
+</section>
+
+<!-- 5 · THREE GOALS -->
+<section class="slide">
+  <div class="eyebrow rev">What This Is For</div>
+  <h2 class="rev d1">Three goals.<br/><span class="gold">In order.</span></h2>
+  <div class="rule rev d2"></div>
+  <div class="grid g3">
+    <div class="card rev d2"><div class="k">1</div><h4>Operator Awareness</h4><p>Become the known, trusted operator in each market — so when partnership inquiries reopen, the audience is already warm.</p></div>
+    <div class="card rev d3"><div class="k">2</div><h4>Tenant Demand</h4><p>Every opening filled faster. Reels and market walks route renters to the Openings page and one email.</p></div>
+    <div class="card rev d4"><div class="k">3</div><h4>Direct Sellers</h4><p>Owners who want a clean, no-agent exit — including before foreclosure — know exactly who to email.</p></div>
+  </div>
+  <p class="sub rev d5" style="margin-top:34px">Note what's missing: raising capital. Nothing public asks for money. That's deliberate — legally and strategically.</p>
+  <div class="foot"><span>Goals</span><span>05 / 12</span></div>
+</section>
+
+<!-- 6 · INSTAGRAM -->
+<section class="slide slide--iron">
+  <div class="eyebrow rev">Channel 01 · @shavitness</div>
+  <h2 class="rev d1">Instagram:<br/><span class="gold">the operator feed.</span></h2>
+  <div class="rule rev d2"></div>
+  <div class="grid g5">
+    <div class="card rev d2"><h4>Before / After</h4><p>15–30s rehab clips. "Cleveland unit: subfloor, plumbing, paint, rent-ready."</p></div>
+    <div class="card rev d3"><h4>Operator Notes</h4><p>One lesson per post — acquisitions, sequencing, turnovers, inspections.</p></div>
+    <div class="card rev d4"><h4>Numbers, No Hype</h4><p>Purchase, scope, timeline, rent range. Never return claims.</p></div>
+    <div class="card rev d5"><h4>Market Walks</h4><p>Streets, schools, employers — Hillsdale, Cleveland, South Bend.</p></div>
+    <div class="card rev d6"><h4>Openings Spotlight</h4><p>Clean walkthrough, rent, neighborhood, one email CTA.</p></div>
+  </div>
+  <div class="kpi-row rev d6">
+    <span class="kpi">Floor cadence: <b>2 reels + 1 carousel / week</b></span>
+    <span class="kpi">Each reel: <b>&lt; 30 min with AI pipeline</b></span>
+    <span class="kpi">Posted by market, tagged by market</span>
+  </div>
+  <div class="foot"><span>Instagram</span><span>06 / 12</span></div>
+</section>
+
+<!-- 7 · YOUTUBE + LOCAL -->
+<section class="slide">
+  <div class="two">
+    <div>
+      <div class="eyebrow rev">Channel 02 · YouTube</div>
+      <h2 class="rev d1">The <span class="gold">proof library.</span></h2>
+      <div class="rule rev d2"></div>
+      <p class="sub rev d2">One long-form video a month — phone footage, real numbers, no studio. Deal Debriefs, Rehab Breakdowns, a Market Dispatch per quarter. It ranks, it compounds, and it feeds the reels.</p>
+    </div>
+    <div>
+      <div class="eyebrow rev d3">Channel 03 · On The Ground</div>
+      <h3 class="rev d3" style="margin-bottom:18px">Local, useful, visible.</h3>
+      <ul class="tick">
+        <li class="rev d3"><strong>Hillsdale:</strong> reputation density — council meetings, trades, campus-adjacent housing cycles.</li>
+        <li class="rev d4"><strong>Cleveland:</strong> neighborhood-specific — estate attorneys, CDCs, code officials, wholesalers.</li>
+        <li class="rev d5"><strong>South Bend:</strong> Notre Dame &amp; healthcare-adjacent rental trust, employer relationships.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>YouTube + Local</span><span>07 / 12</span></div>
+</section>
+
+<!-- 8 · CONTENT ENGINE -->
+<section class="slide slide--iron">
+  <div class="eyebrow rev">The Engine</div>
+  <h2 class="rev d1">One rehab =<br/><span class="gold">a month of content.</span></h2>
+  <div class="rule rev d2"></div>
+  <div class="flow">
+    <div class="fstep rev d2"><h4>Capture</h4><p>Phone clips on every site visit. 5 minutes, no setup. Walk the property, narrate what's broken and what's planned.</p></div>
+    <div class="fstep rev d3"><h4>AI Assembly</h4><p>Higgsfield animates stills into cinematic motion; auto-captions and cuts do the editing. ~30 min per reel, not 3 hours.</p></div>
+    <div class="fstep rev d4"><h4>Publish</h4><p>2 reels + 1 carousel weekly. Best clips stitch into the monthly YouTube debrief.</p></div>
+    <div class="fstep rev d5"><h4>Route</h4><p>Every caption ends with one tagged link or email — openings, owners, or the story.</p></div>
+    <div class="fstep rev d6"><h4>Measure</h4><p>Every click lands in the dashboard. Double down on what moves; kill what doesn't.</p></div>
+  </div>
+  <div class="foot"><span>Content Engine</span><span>08 / 12</span></div>
+</section>
+
+<!-- 9 · FUNNEL -->
+<section class="slide">
+  <div class="eyebrow rev">From Views To Doors</div>
+  <h2 class="rev d1">No forms. <span class="gold">No friction.</span><br/>One email per intent.</h2>
+  <div class="rule rev d2"></div>
+  <div class="flow">
+    <div class="fstep rev d2"><h4>See</h4><p>Reel, short, or local word of mouth. The work does the talking.</p></div>
+    <div class="fstep rev d3"><h4>Tap</h4><p>Bio link hub → Openings · Tenants · For Owners · The Story. Every button UTM-tagged.</p></div>
+    <div class="fstep rev d4"><h4>Email</h4><p>rentals@ for openings · owners@ for direct sales. Subject lines pre-written by market.</p></div>
+    <div class="fstep rev d5"><h4>Logged</h4><p>Every inquiry lands in the Lead Log — market, source, type, outcome.</p></div>
+  </div>
+  <p class="sub rev d6" style="margin-top:34px">The site stays minimal on purpose: it converts attention into one conversation, privately — exactly how Shavit works.</p>
+  <div class="foot"><span>The Funnel</span><span>09 / 12</span></div>
+</section>
+
+<!-- 10 · ANALYTICS -->
+<section class="slide slide--iron">
+  <div class="two">
+    <div>
+      <div class="eyebrow rev">Measured, Not Guessed</div>
+      <h2 class="rev d1">One dashboard.<br/><span class="gold">Updated monthly.</span></h2>
+      <div class="rule rev d2"></div>
+      <p class="sub rev d2">GA4 + tag events on the site, native Instagram and YouTube stats, and a Lead Log of every real inquiry — all wired into a single Looker Studio page Shavit opens from one link. Free stack. No agency.</p>
+      <div class="kpi-row rev d4">
+        <span class="kpi">GA4 + Tag Manager</span><span class="kpi">IG + YT Insights</span><span class="kpi">Lead Log Sheet</span><span class="kpi"><b>Looker Studio</b></span>
+      </div>
+    </div>
+    <div class="card rev d3" style="padding:30px">
+      <h4 style="color:var(--gold);margin-bottom:20px">Dashboard Preview · Monthly</h4>
+      <div class="bars">
+        <div class="bar"><span class="lbl">IG Reach</span><div class="trk"><div class="fil" style="--w:78%"></div></div><span class="val">+38%</span></div>
+        <div class="bar"><span class="lbl">YT Watch Time</span><div class="trk"><div class="fil" style="--w:54%"></div></div><span class="val">+21%</span></div>
+        <div class="bar"><span class="lbl">Openings Visits</span><div class="trk"><div class="fil" style="--w:66%"></div></div><span class="val">412</span></div>
+        <div class="bar"><span class="lbl">Tenant Inquiries</span><div class="trk"><div class="fil" style="--w:45%"></div></div><span class="val">17</span></div>
+        <div class="bar"><span class="lbl">Seller Conversations</span><div class="trk"><div class="fil" style="--w:30%"></div></div><span class="val">3</span></div>
+      </div>
+      <p style="font-size:10.5px;color:rgba(255,255,255,.35);margin-top:18px;letter-spacing:.08em">ILLUSTRATIVE NUMBERS · LIVE DATA FROM GA4 + LEAD LOG</p>
+    </div>
+  </div>
+  <div class="foot"><span>Analytics</span><span>10 / 12</span></div>
+</section>
+
+<!-- 11 · 90 DAYS -->
+<section class="slide">
+  <div class="eyebrow rev">The First 90 Days</div>
+  <h2 class="rev d1">What <span class="gold">good</span> looks like.</h2>
+  <div class="rule rev d2"></div>
+  <div class="grid g3">
+    <div class="card rev d2"><h4 style="color:var(--gold)">Awareness</h4><p>Posting floor hit 80%+ of weeks · 5–10% follower growth per month · YouTube retention climbing · site traffic from social, tracked.</p></div>
+    <div class="card rev d3"><h4 style="color:var(--gold)">Tenant Demand</h4><p>Every opening has trackable traffic · 3–5 qualified inquiries per available unit · 70%+ of inquiries source-attributed.</p></div>
+    <div class="card rev d4"><h4 style="color:var(--gold)">Seller Flow</h4><p>1–3 credible direct-owner conversations per month across the three markets · one content format proven to drive owner-page visits.</p></div>
+  </div>
+  <p class="sub rev d5" style="margin-top:34px">Days 1–30: foundation (links hub, tracking, first batch of content). Days 31–60: rhythm. Days 61–90: the first real dashboard review — numbers, not vibes.</p>
+  <div class="foot"><span>90 Days</span><span>11 / 12</span></div>
+</section>
+
+<!-- 12 · WHY THIS WINS / CLOSE -->
+<section class="slide slide--iron">
+  <div class="eyebrow rev">Why This Strategy Wins</div>
+  <h2 class="rev d1">Built like the<br/>portfolio: <span class="gold">to compound.</span></h2>
+  <div class="rule rev d2"></div>
+  <ul class="tick" style="max-width:860px">
+    <li class="rev d2"><strong>It fits the operator.</strong> Content is documented from work already happening — sustainable for years, not a sprint that dies in week three.</li>
+    <li class="rev d3"><strong>It fits the audience.</strong> Tenants and sellers are local and visual. IG + YouTube + ground game reaches them where they actually are.</li>
+    <li class="rev d4"><strong>It fits the law.</strong> Nothing public solicits capital. Awareness compounds while partnerships stay private, one-on-one.</li>
+    <li class="rev d5"><strong>It's measured.</strong> One dashboard, monthly, with targets agreed up front. If a format doesn't move a number, it dies. No vanity metrics.</li>
+  </ul>
+  <p class="sub rev d6" style="margin-top:36px"><span class="gold" style="font-weight:700">Building communities, profitably.</span> Now with an audience watching it happen.</p>
+  <div class="foot"><span>Shavit Rootman · Prepared by Jake Horvitz</span><span>12 / 12</span></div>
+</section>
+
+</div>
+<div class="nav" id="nav"></div>
+<div class="arrowhint">← → · Space · Click</div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),i=0,nav=document.getElementById('nav');
+  slides.forEach(function(_,k){var d=document.createElement('div');d.className='dot';d.onclick=function(e){e.stopPropagation();go(k)};nav.appendChild(d)});
+  var dots=[].slice.call(nav.children);
+  function go(k){i=Math.max(0,Math.min(slides.length-1,k));slides.forEach(function(s,j){s.classList.toggle('active',j===i)});dots.forEach(function(d,j){d.classList.toggle('on',j===i)})}
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(i+1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1)});
+  document.addEventListener('click',function(){go(i+1)});
+  var sx=null;document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX});
+  document.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(dx<-40)go(i+1);if(dx>40)go(i-1);sx=null});
+  go(0);
+})();
+</script>
+</body>
+</html>

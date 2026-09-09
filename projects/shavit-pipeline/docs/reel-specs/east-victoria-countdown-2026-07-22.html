@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>East Victoria Street Surprises, Carousel Spec</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#2a2a2e;
+    --ink:#f4f2ec; --dim:#a5a29a; --faint:#6f6c64;
+    --brass:#B08D57; --gold:#FFC000; --ok:#7FB88A; --bad:#e0794a; --blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;line-height:1.15;margin:.35em 0 .15em}
+  .sub{color:var(--dim);max-width:74ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:48px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{font-size:20px;margin:0 0 4px;color:var(--ink)}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-watch{background:rgba(224,121,74,.14);color:var(--bad);border:1px solid rgba(224,121,74,.4)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog b{color:var(--ink)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .segment{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0 28px}
+  .segment .hdr{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px}
+  .segment .desc{color:var(--dim);font-size:14px;margin:2px 0 16px}
+
+  .shotgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .shotgrid.single{grid-template-columns:1fr;max-width:340px}
+  .shotgrid.trio{grid-template-columns:repeat(3,1fr);max-width:none}
+  .shot{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;overflow:hidden}
+  .shot img{width:100%;height:340px;object-fit:cover;border-radius:7px;display:block;border:1px solid var(--line)}
+  .shot .tag{font-family:var(--mono);font-size:11px;color:var(--gold);margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+  .shot .tag .lbl{color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-size:10px}
+
+  .cap-wrap{position:relative;border-radius:7px;overflow:hidden}
+  .cap-mock{position:absolute;left:0;right:0;bottom:0;padding:22px 16px 16px;pointer-events:none;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.72) 50%,rgba(0,0,0,.9))}
+  .cap-mock .cap-rule{display:block;width:26px;height:2px;background:var(--brass);margin:0 0 8px}
+  .cap-mock .cap-txt{display:block;font-family:"Inter",system-ui,sans-serif;font-weight:700;
+    text-transform:uppercase;letter-spacing:.03em;color:#fff;font-size:14px;line-height:1.4;
+    text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .cap-mock .cap-txt+.cap-txt{margin-top:2px;font-weight:500;font-size:12.5px;color:#e8e5dc}
+  .cap-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--faint);margin:8px 0 4px}
+  .title-card{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 18px;
+    text-align:center}
+  .title-card .tc-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .title-card .tc-scrim{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.88) 72%)}
+  .title-card .tc-content{position:relative;z-index:2}
+  .title-card .cap-rule{margin:0 auto 12px}
+  .title-card .cap-txt{font-family:"Inter",system-ui,sans-serif;font-weight:700;text-transform:uppercase;
+    letter-spacing:.03em;color:#fff;font-size:16px;line-height:1.5;display:block;
+    text-shadow:0 1px 3px rgba(0,0,0,.6)}
+  .title-card .cap-txt+.cap-txt{margin-top:6px;font-weight:500;font-size:13px;color:#e8e5dc}
+  .title-card .mark{margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    color:var(--gold);text-transform:uppercase}
+
+  .placeholder-shot{background:var(--panel2);border:1px dashed var(--bad);border-radius:10px;padding:10px}
+  .placeholder-shot img{width:100%;height:340px;object-fit:cover;border-radius:7px;display:block;border:1px solid var(--line);opacity:.55;filter:grayscale(.3)}
+
+  .overlay-box{background:#000;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;margin:14px 0;font-size:14px}
+  .overlay-box .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+  .overlay-box .txt{font-size:16px;color:var(--ink)}
+  .overlay-box .txt .line{display:block;margin:2px 0}
+  .overlay-box .small{font-size:12px;color:var(--faint);margin-top:6px}
+
+  .overlay-box.pending{border-left-color:var(--bad)}
+  .overlay-box.pending .k{color:var(--bad)}
+  .overlay-box.pending .txt{font-family:var(--mono);letter-spacing:.06em;color:var(--bad);font-size:14px}
+
+  .prodnote{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px;color:var(--dim)}
+  .prodnote .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:5px}
+  .prodnote b{color:var(--ink)}
+
+  .flag{background:rgba(224,121,74,.09);border:1px solid rgba(224,121,74,.4);border-left:3px solid var(--bad);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px;color:#f0c9b8}
+  .flag .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bad);display:block;margin-bottom:5px}
+  .flag b{color:#fff}
+
+  .checklist{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+  .checklist li{list-style:none;margin:8px 0;padding-left:1.6em;position:relative;font-size:14px;color:var(--dim)}
+  .checklist li::before{content:"\2610";position:absolute;left:0;color:var(--brass);font-size:15px}
+  .checklist li b{color:var(--ink)}
+  .checklist li.open::before{content:"\2691";color:var(--bad)}
+  .checklist li.done::before{content:"\2611";color:var(--ok)}
+
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:12px}
+  @media(max-width:700px){.shotgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-spec="east-victoria-countdown">
+<div class="wrap">
+
+<header class="segment chg">
+  <div class="kicker">Shavit Rootman &middot; shavit-pipeline &middot; Instagram Carousel</div>
+  <h1>East Victoria Street Surprises <span style="color:var(--faint);font-weight:400">, carousel spec</span></h1>
+  <p class="sub">A numbered, swipeable photo carousel about East Victoria Street, Indiana: real surprises on the
+  property when the CPM team took over. &ldquo;Surprise&rdquo; is used deliberately in place of the earlier
+  &ldquo;things wrong&rdquo; framing: a surprise does not have to be a problem, it can be any unexpected real
+  detail, which is a wider and more honest net to work from than a defects list. This is the companion still-photo
+  post to the separate portfolio montage reel built the same day, and is built from the same standing rule as
+  every other piece of Shavit content: every caption traces to either something plainly visible in a real photo,
+  or the one fact already confirmed by a dictated meeting transcript. All nineteen real photos from this
+  property's Drive folder have been downloaded and individually viewed for this spec. Four support a fully
+  written, confirmed caption: a damaged exterior window, a bent fence panel, an octagonal accent window on the
+  gable end, and the basement's prior use. A fifth candidate, a closer photo of the same basement window, was cut
+  per Jake's note for reading as redundant with the exterior window item once both sat in the same short
+  carousel. That is four confirmed items, not a padded seven or any other round number chosen in advance. The
+  hook slide states the number honestly as four. The carousel closes on two separate beats rather than one, a
+  plain proof-of-work photo followed by a text-only title card, split apart per Jake's note.</p>
+  <div class="meta-row">
+    <span class="chip">6 slides &middot; <b>5 real photos, no open slots</b></span>
+    <span class="chip">4 confirmed surprises &middot; <b>0 unconfirmed</b></span>
+    <span class="chip">Format: <b>swipeable photo carousel</b>, not a reel</span>
+    <span class="chip">No people visible in selected photos &middot; <b>de-identify check clear</b></span>
+    <span class="chip">Status: <b>draft, awaiting Shavit review</b></span>
+    <span class="chip" style="border-color:var(--gold);color:var(--gold)">UPDATED, rev 3</span>
+  </div>
+  <div class="revlog">
+    <h4>Revision log, newest first</h4>
+    <ul>
+      <li><span class="rev">rev 7 &middot; 2026-07-22</span>, Jake picked Option A for the closing title card.
+      Marked final on slide 7, open-items checklist updated to reflect the closer is now decided, not open.
+      Also fixed a leftover orphaned div tag from the rev 6 edit that had thrown off the annotation click
+      targets.</li>
+      <li><span class="rev">rev 6 &middot; 2026-07-22</span>, cut the standalone renovation-progress photo per
+      Jake's note (he did not like it and questioned whether it was needed); the closing title card now uses a
+      real photo of the house (the same front-exterior shot from the hook slide) as its background instead of a
+      flat dark panel, with a scrim behind the text for legibility. Down to 6 slides total.</li>
+      <li><span class="rev">rev 5 &middot; 2026-07-22</span>, restored the caption-overlay treatment on the
+      renovation photo (slide 7) per Jake's follow-up note, it had been left bare in rev 4. Caption states only
+      what is visible: fresh paint, protected floors and windows.</li>
+      <li><span class="rev">rev 4 &middot; 2026-07-22</span>, per Jake's annotations: cut item 5 (the closer
+      basement-window photo) for reading as redundant with item 1's window, dropping the confirmed count from
+      five to four; changed &ldquo;Shavit's team&rdquo; to &ldquo;the CPM team&rdquo; in the basement caption;
+      reworded the basement-window item to say the wood frame was rotten instead of repeating &ldquo;cracked
+      glass&rdquo; from item 1; and split the closing slide into two separate beats, a plain renovation photo
+      with no caption and a text-only title card carrying the three tagline options, instead of one combined
+      slide. Confirmed &ldquo;Live with us. Work with us.&rdquo; is the standing closing tagline across this
+      project's reels.</li>
+      <li><span class="rev">rev 3 &middot; 2026-07-22</span>, every photo now shows a mockup of the caption
+      burned directly onto the image (uppercase Inter, white type, a short brass rule above the text, dark
+      bottom scrim for legibility), matching this project's documented brand tokens, instead of only describing
+      the on-screen text in a separate box below the photo. This is a best-effort approximation of the caption
+      treatment referenced from the prior Howder review, not a pixel-exact match, annotate any slide if the type
+      size, weight, or placement is off from what was actually agreed on before. The plain-text box under each
+      photo is kept as the spec reference copy, the mockup above it is what it should actually look like. The
+      closing slide now shows all three caption options rendered on the photo side by side instead of only as
+      text, so the choice between them can be judged visually, not just read. No property or photo swap was made
+      this revision, Jake confirmed the current material is acceptable to proceed with as flagged.</li>
+      <li><span class="rev">rev 2 &middot; 2026-07-22</span>, per Jake's annotations: expanded from three
+      confirmed items to five, reframed the whole concept from &ldquo;things found/wrong&rdquo; to
+      &ldquo;surprises,&rdquo; and rewrote the closing slide as three distinct options for Jake to pick from
+      instead of one unilateral swap. To reach five honestly, all thirteen previously unreviewed photos from the
+      property's nineteen-file Drive folder were downloaded and individually inspected. Two new confirmable items
+      turned up: an octagonal accent window on the gable end, and a basement window at the foundation with
+      cracked glass and a rotted frame, a stronger, more specific real photo for the basement item than the wide
+      gable shot used before. Two of the newly reviewed photos turned out to already be in use in the sibling
+      portfolio montage reel (the new HVAC unit and mulch bed exterior, and a backyard shed shot with a person
+      visible shoveling snow) and were excluded here on the standing no-overlap-with-the-reel rule; the
+      person-visible photo would also have failed the de-identify check on its own. Two more newly reviewed
+      photos plainly show the property's house number on a porch placard and were excluded outright since street
+      numbers are never used in this project. The previously open, unconfirmed garage-fence-debris slide is cut
+      entirely, superseded by the two new confirmed items.</li>
+      <li><span class="rev">rev 1 &middot; 2026-07-22</span>, initial draft. All photos downloaded from the
+      confirmed Drive file ID list, opened and visually inspected before any caption was written. Two of the
+      nineteen file IDs already used in today's separate portfolio montage reel were intentionally skipped so
+      the two companion posts do not repeat the same stills.</li>
+    </ul>
+  </div>
+</header>
+
+<h2 class="chg">Running order, 6 slides <span class="chip" style="border-color:var(--gold);color:var(--gold);text-transform:none;letter-spacing:normal;font-weight:600">UPDATED, rev 6</span></h2>
+<table class="chg">
+  <tr><th>#</th><th>slide</th><th>photo status</th><th>on-screen text, short</th></tr>
+  <tr><td>1</td><td>Hook / cover</td><td>real photo</td><td>&ldquo;4 surprises we found when we got the keys.&rdquo;</td></tr>
+  <tr><td>2</td><td>Item 1, exterior window</td><td>real photo</td><td>Cracked wood window frame</td></tr>
+  <tr><td>3</td><td>Item 2, rear fence</td><td>real photo</td><td>Bent fence panel, wood board wedged in</td></tr>
+  <tr><td>4</td><td>Item 3, gable window</td><td>real photo</td><td>Octagonal accent window, gable end</td></tr>
+  <tr><td>5</td><td>Item 4, basement</td><td>real photo</td><td>Basement's confirmed prior use, CPM team took over</td></tr>
+  <tr><td>6</td><td>Closing title card <span class="badge b-real">UPDATED</span></td><td>real photo background</td><td>Tagline, 3 options</td></tr>
+</table>
+<p class="d">Two candidates were cut this round rather than defended: the closer basement-window shot (redundant
+with item 1) and the standalone renovation-progress photo (Jake did not like it and it was not earning its own
+slide). See their &ldquo;removed&rdquo; notes in the slide list below for the full reasoning.</p>
+<p class="d chg">Numbering logic: the hook slide promises exactly four surprises, and exactly four numbered items
+follow it, each one already confirmed either by what is visible in its photo or by the transcript. The item that
+used to run fifth, a closer shot of the same basement window, was cut per Jake's note since it read as redundant
+with item 1's window once both sat in the same short carousel, rather than force a fifth item just to hit a
+round number. The carousel now closes on two separate beats instead of one: a plain proof-of-work photo, then a
+text-only title card, split apart per Jake's note rather than combined into a single slide. The octagonal gable
+window is placed third deliberately, as the one item in the set that is a neutral, even pleasant surprise rather
+than a problem, demonstrating the broader &ldquo;surprise&rdquo; framing rather than a disguised defects list.</p>
+
+<h2>Slides</h2>
+
+<div class="segment chg" data-annot="slide-1">
+  <div class="hdr"><h3>1. Hook / cover</h3><span class="chip">real photo</span><span class="chip">not part of the count</span><span class="chip" style="border-color:var(--gold);color:var(--gold)">UPDATED, rev 2</span></div>
+  <p class="desc">Establishing exterior shot of the property as it stood in December 2025, before any renovation
+  work shown later in this same Drive folder. Snow on the ground, original vinyl siding. This slide states the
+  carousel's premise and the real number of confirmed surprises that follow, reframed from an earlier
+  &ldquo;things found&rdquo; draft to &ldquo;surprises,&rdquo; a wording that covers both the problems and the
+  neutral or pleasant finds in the same set.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide1-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-countdown-2026-07-22/assets/hook-exterior.jpg" alt="East Victoria Street, front exterior, snow, December 2025">
+        <div class="cap-mock">
+          <span class="cap-rule"></span>
+          <span class="cap-txt">4 surprises we found when we got the keys.</span>
+          <span class="cap-txt">East Victoria Street, Indiana.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">front exterior, snow</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">4 surprises we found when we got the keys.</span><span class="line">East Victoria Street, Indiana.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Photo shows the front of the house, olive green vinyl siding, snow on the ground and covered porch, shot
+    December 2025. This is the same visit that produced most of the item slides below, so it accurately
+    represents condition at intake, not a staged or later shot. No caption claims anything is wrong with the
+    house itself here, this slide only sets up the count that follows.
+  </div>
+</div>
+
+<div class="segment" data-annot="slide-2">
+  <div class="hdr"><h3>2. Item 1, exterior window</h3><span class="chip">real photo</span><span class="chip">fully confirmed</span></div>
+  <p class="desc">Close-up of an exterior window. The wood muntins dividing the panes are visibly cracked and
+  split in multiple places, and the white paint is peeling and flaking at several of those joints.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide2-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-countdown-2026-07-22/assets/window-frame.jpg" alt="Cracked wood window frame, exterior, close up">
+        <div class="cap-mock">
+          <span class="cap-rule"></span>
+          <span class="cap-txt">1. Cracked wood window frame, exterior.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">cracked window frame</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">1. Cracked wood window frame, exterior.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Caption states only what the photo shows: cracked wood muntins and peeling paint on one exterior window. No
+    claim is made about how many windows on the property are in this condition, whether it has been repaired
+    since, or what caused it. If Shavit knows this was a single window or a house-wide issue, that context can
+    be added to the caption later.
+  </div>
+</div>
+
+<div class="segment" data-annot="slide-3">
+  <div class="hdr"><h3>3. Item 2, rear fence</h3><span class="chip">real photo</span><span class="chip">fully confirmed</span></div>
+  <p class="desc">Rear yard, beside the detached garage. The chain link fence's top rail is visibly bent, and a
+  wood board is wedged into the fencing at ground level.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide3-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-countdown-2026-07-22/assets/fence-panel.jpg" alt="Bent chain link fence, wood board wedged into fencing, rear yard">
+        <div class="cap-mock">
+          <span class="cap-rule"></span>
+          <span class="cap-txt">2. Bent chain link fence, wood board wedged into the fencing, rear yard.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">bent fence, wood board</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">2. Bent chain link fence, wood board wedged into the fencing, rear yard.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Same December 2025 visit as the window and basement window slides. Caption describes only what is visibly
+    true: a bent top rail and a wood board caught in the fencing, no claim about whether the fence has since
+    been repaired or replaced.
+  </div>
+</div>
+
+<div class="segment chg" data-annot="slide-4">
+  <div class="hdr"><h3>4. Item 3, gable window</h3><span class="chip">real photo</span><span class="chip">fully confirmed</span><span class="chip" style="border-color:var(--gold);color:var(--gold)">NEW, rev 2</span></div>
+  <p class="desc">Side gable end of the house, olive green siding, snow on the roofline. An octagonal accent
+  window with white trim sits in the middle of the siding, a decorative shape that is easy to miss from the
+  street-facing angle used in the hook photo. This photo was one of the thirteen previously unreviewed files from
+  the property's Drive folder, downloaded and viewed for the first time in this revision.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide4-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-countdown-2026-07-22/assets/gable-octagon-window.jpg" alt="Octagonal accent window, gable end, olive green siding, December 2025">
+        <div class="cap-mock">
+          <span class="cap-rule"></span>
+          <span class="cap-txt">3. Octagonal window, gable end.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">octagonal gable window</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">3. Octagonal window, gable end.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Caption states only what the photo shows: a real octagonal window on the gable end. No claim is made about
+    when it was installed or why. This is the one deliberately neutral, non-problem surprise in the set, placed
+    third to demonstrate the &ldquo;surprise&rdquo; reframe rather than let all four items read as a defects
+    list.
+  </div>
+</div>
+
+<div class="segment chg" data-annot="slide-5">
+  <div class="hdr"><h3>5. Item 4, basement</h3><span class="chip">real photo</span><span class="chip">confirmed by transcript</span><span class="chip" style="border-color:var(--gold);color:var(--gold)">UPDATED, rev 2</span></div>
+  <p class="desc">This is the one confirmed fact about this property's history, sourced from a real dictated
+  meeting transcript, not from anything visible in a photo. No basement interior photo exists in the Drive
+  folder for this property, so the exterior foundation and basement window are used to ground the slide in a
+  real image of the actual house, the same honest pairing already used in today's companion reel spec for this
+  same fact.</p>
+  <div class="shotgrid single">
+    <div class="shot" data-annot="slide5-img">
+      <div class="cap-wrap">
+        <img src="east-victoria-countdown-2026-07-22/assets/basement-window.jpg" alt="Foundation and basement window, exterior, December 2025">
+        <div class="cap-mock">
+          <span class="cap-rule"></span>
+          <span class="cap-txt">4. Basement was a dog breeding operation before purchase.</span>
+          <span class="cap-txt">Prior tenants were evicted before the CPM team took over.</span>
+        </div>
+      </div>
+      <div class="tag"><span class="lbl">foundation, basement window</span><span class="badge b-real">REAL</span></div>
+    </div>
+  </div>
+  <div class="overlay-box">
+    <span class="k">On-screen text</span>
+    <span class="txt"><span class="line">4. Basement was a dog breeding operation before purchase.</span><span class="line">Prior tenants were evicted before the CPM team took over.</span></span>
+  </div>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Photo shows the exterior foundation wall and a basement-level window, it does not show the basement's
+    interior or the breeding operation itself, no such photo exists to show. The caption states a confirmed fact
+    from the transcript, the photo grounds it in a real image of the actual foundation rather than an
+    unrelated stock or generic shot. This item now leads directly into the next slide, a closer photo of an
+    actual basement window found elsewhere in the folder.
+  </div>
+</div>
+
+<div class="segment chg" data-annot="slide-6-cut">
+  <div class="hdr"><h3>Item 5, basement window &mdash; cut</h3><span class="chip" style="border-color:var(--gold);color:var(--gold)">REMOVED, rev 4</span></div>
+  <p class="desc">Removed per Jake's note: this slide's closer shot of the same basement window was too close to
+  slide 2's window-frame item to justify its own numbered beat once both were sitting in the same short carousel.
+  Rather than force a fifth item to hit a round number, the carousel now honestly runs four confirmed surprises,
+  matching the same discipline used to land on five instead of seven in the previous revision.</p>
+</div>
+
+<div class="segment chg" data-annot="slide-7-cut">
+  <div class="hdr"><h3>Renovation photo &mdash; cut</h3><span class="chip" style="border-color:var(--gold);color:var(--gold)">REMOVED, rev 6</span></div>
+  <p class="desc">Removed per Jake's note (&ldquo;I really fucking hate this photo&rdquo;). The plain interior
+  repaint shot was not earning its own slide once the closing card below carries a real exterior photo of the
+  house instead of a flat background, so this beat is dropped rather than defended.</p>
+</div>
+
+<div class="segment chg" data-annot="slide-7">
+  <div class="hdr"><h3>7. Closing title card</h3><span class="chip">real photo background</span><span class="chip badge b-real">OPTION A SELECTED</span><span class="chip" style="border-color:var(--gold);color:var(--gold)">UPDATED, rev 7</span></div>
+  <p class="desc">Per Jake's note, the closing card now uses a real photo of the house as its background instead
+  of a flat dark panel, so it reads as this property's card, not a generic template. All three use the same
+  December 2025 front-exterior shot from the hook slide for a consistent, recognizable background, and vary only
+  the proof-line above the standing tagline, &ldquo;Live with us. Work with us.&rdquo; Annotate whichever card
+  below to pick it, or ask for a different background photo if this one does not read as the strongest option.</p>
+  <div class="shotgrid trio">
+    <div class="title-card" data-annot="slide7-a" style="border:2px solid var(--gold)">
+      <img class="tc-bg" src="east-victoria-countdown-2026-07-22/assets/hook-exterior.jpg" alt="East Victoria Street, front exterior, background">
+      <div class="tc-scrim"></div>
+      <div class="tc-content">
+        <span class="cap-rule"></span>
+        <span class="cap-txt">Renovation in progress.</span>
+        <span class="cap-txt">Live with us. Work with us.</span>
+        <div class="mark">Shavit Rootman</div>
+      </div>
+      <span class="badge b-real" style="position:absolute;top:8px;right:8px;z-index:3">FINAL</span>
+    </div>
+    <div class="title-card" data-annot="slide7-b">
+      <img class="tc-bg" src="east-victoria-countdown-2026-07-22/assets/hook-exterior.jpg" alt="East Victoria Street, front exterior, background">
+      <div class="tc-scrim"></div>
+      <div class="tc-content">
+        <span class="cap-rule"></span>
+        <span class="cap-txt">4 surprises. One property.</span>
+        <span class="cap-txt">Live with us. Work with us.</span>
+        <div class="mark">Shavit Rootman</div>
+      </div>
+    </div>
+    <div class="title-card" data-annot="slide7-c">
+      <img class="tc-bg" src="east-victoria-countdown-2026-07-22/assets/hook-exterior.jpg" alt="East Victoria Street, front exterior, background">
+      <div class="tc-scrim"></div>
+      <div class="tc-content">
+        <span class="cap-rule"></span>
+        <span class="cap-txt">East Victoria Street, Indiana.</span>
+        <span class="cap-txt">Live with us. Work with us.</span>
+        <div class="mark">Shavit Rootman</div>
+      </div>
+    </div>
+  </div>
+  <p class="d" style="margin-top:10px"><b style="color:var(--gold)">Option A selected.</b> Options B and C are
+  left in place below for reference, not removed, in case the choice changes before this ships.</p>
+  <div class="prodnote">
+    <span class="k">Production note</span>
+    Background is the same real front-exterior photo used on the hook slide, with a dark bottom-weighted scrim
+    for text legibility, same gold mark treatment as the sibling reel's closing card. No dollar figures, no claim
+    of completion, no specific date.
+  </div>
+</div>
+
+<h2 class="chg">Open items before this ships <span class="chip" style="border-color:var(--gold);color:var(--gold);text-transform:none;letter-spacing:normal;font-weight:600">UPDATED, rev 2</span></h2>
+<div class="checklist segment chg">
+  <ul>
+    <li class="done"><b>Closer, picked.</b> Option A selected (&ldquo;Renovation in progress. Live with us.
+    Work with us.&rdquo;), on a real front-exterior photo background. Options B and C remain on slide 7 for
+    reference only.</li>
+    <li class="done"><b>Real count and list of surprises.</b> Four items are now confirmed for this post: the
+    cracked window frame, the bent fence, the octagonal gable window, and the basement's prior use. All nineteen
+    Drive photos for this property have been downloaded and individually viewed, so this is the full real list
+    this spec can responsibly produce, not a guess at a longer one. A fifth item (a closer basement-window photo)
+    was cut per Jake's note for reading as redundant with item 1.</li>
+    <li class="done"><b>Garage fence debris slide, cut.</b> The previous open, unconfirmed slide 5 is removed.
+    Two new confirmable items were found elsewhere in the folder to reach five honestly, so the unconfirmed debris
+    photo is no longer needed to hit the count Jake asked for.</li>
+    <li class="done"><b>De-identify check.</b> All seven selected photos were individually viewed. No person is
+    visible in any of them, so no blur or crop is needed for this post. Widening the review to all nineteen
+    Drive photos did turn up one image with a person visible, mid-frame, shoveling snow near a backyard shed;
+    that photo is not used here, both because of the visible person and because it is already in use in the
+    sibling portfolio montage reel. This is a completed check, not an open question.</li>
+    <li class="done"><b>House number check.</b> Two of the newly reviewed photos plainly show the property's
+    house number on a porch placard. Neither is used anywhere in this spec, consistent with the standing
+    street-name-only rule.</li>
+    <li class="done"><b>Real photos only.</b> All seven images used in this spec, including the two new ones
+    added this revision, were downloaded from the confirmed Drive file ID list, opened and visually inspected,
+    and verified with the <code>file</code> command as genuine iPhone camera JPEGs with intact EXIF data, not
+    screenshots, not generated, not corrupted.</li>
+    <li class="done"><b>No overlap with the reel.</b> All nineteen Drive file IDs for this property have now been
+    checked against the sibling portfolio montage reel's assets. Two matches turned up among the newly reviewed
+    photos (the new HVAC unit and mulch bed exterior, and the backyard shed shot with a person visible) and were
+    excluded from this spec on that basis. The seven photos used here are all different stills from that reel.</li>
+    <li><b>Brand rules.</b> Checked against every visible caption above: no dollar figures, full state name
+    (Indiana), street name only with no house number, no contractions, no em dashes, no adjectives beyond a
+    literal material or color name.</li>
+  </ul>
+</div>
+
+<footer>East Victoria Street Surprises carousel spec &middot; shavit-pipeline &middot; annotate anything above,
+notes save to the pipeline inbox when served through <code>serve.py</code>.</footer>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

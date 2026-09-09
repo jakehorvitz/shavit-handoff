@@ -1,0 +1,163 @@
+{
+  "verification": "Matched each missing entries[].source.external.absolutePath media ID against each serialized timeline. Existence only; editor playback/render not tested.",
+  "packages": [
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Montage of Current Project Reels.palmier",
+      "activeTimelineId": "2E4A7370-D1E2-422D-A983-519E9557CC8D",
+      "activeTimelineName": "rev6 BLOCKS",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier",
+      "activeTimelineId": "05D72676-6EAF-4CF1-B351-F5776A6B7FC3",
+      "activeTimelineName": "AUGUST 2026 RECAP · v4 (tight, full-bleed)",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": [
+        {
+          "path": "/Users/jakehorvitz/Downloads/Bumbled - Deep Active Sound Remix.mp3",
+          "mediaId": "B89FDD37-35CA-47C0-A030-7DCFA4AEBA16",
+          "usedInTimelines": [
+            "A4 · The BRRRR — BLOCKED"
+          ],
+          "usedInActiveTimeline": false
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/Other Culture.mp3",
+          "mediaId": "4CA78EA5-A4CD-4B97-B1F5-153CA373A978",
+          "usedInTimelines": [
+            "A4 · The BRRRR — BLOCKED",
+            "B1 · Behind The Door — HELD",
+            "B1 + E3 · FLAT (audio editable)"
+          ],
+          "usedInActiveTimeline": false
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/Pia (1).mp3",
+          "mediaId": "95563507-E082-45D0-8441-5F2708993840",
+          "usedInTimelines": [
+            "B1 · Behind The Door — HELD",
+            "B1 + E3 · FLAT (audio editable)"
+          ],
+          "usedInActiveTimeline": false
+        },
+        {
+          "path": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_tLZ9C9/Screenshot 2026-08-12 at 3.31.07 PM.png",
+          "mediaId": "23B23F92-0329-4EAB-A4F9-D349A3B25854",
+          "usedInTimelines": [
+            "MERGE · B1 + E3 Auction Win (preview)",
+            "B1 + E3 · FLAT (audio editable)"
+          ],
+          "usedInActiveTimeline": false
+        },
+        {
+          "path": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_8eEKsh/Screenshot 2026-08-12 at 3.36.44 PM.png",
+          "mediaId": "A82B9A5A-8503-4A48-9497-2C3BA6BB6233",
+          "usedInTimelines": [
+            "MERGE · B1 + E3 Auction Win (preview)",
+            "B1 + E3 · FLAT (audio editable)"
+          ],
+          "usedInActiveTimeline": false
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Mead Teaser.palmier",
+      "activeTimelineId": "8E563A02-6A5C-47B3-9873-8A4E0C828C93",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier",
+      "activeTimelineId": "ED115DDC-58B3-47A7-BD3B-B15254E7EE9F",
+      "activeTimelineName": "RAW - Oak Lane Landscaping (captioned, uncut)",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/New Shavit Stuff.palmier",
+      "activeTimelineId": "1FEA6B53-BFDC-44AA-8468-E28F0A5E0262",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Website Edit - The Turn (previs).palmier",
+      "activeTimelineId": "7A98B3A0-134C-40D1-B4BD-81EAA791D7D5",
+      "activeTimelineName": "REEL 2 · Kendall Street (35s)",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit B1 - Whats Behind The Door (HELD).palmier",
+      "activeTimelineId": "7A39E906-29C1-41A1-841D-495F216B8829",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A1 - Ewing Tenant Story.palmier",
+      "activeTimelineId": "A6A787FF-CEE8-4278-BEBF-83B7F258989A",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A3 - Brand New Windows.palmier",
+      "activeTimelineId": "F93C274F-1809-42FE-968C-B3B4DF8AFF4F",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A2 - Walk It Before It Exists.palmier",
+      "activeTimelineId": "841B2AC2-7B2A-4B81-AED4-05788F976ECB",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit C2 - Come On Upstairs.palmier",
+      "activeTimelineId": "1253C47B-D926-458A-B7EE-7868507D4511",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit B2 - Never An Impossible Situation (HELD).palmier",
+      "activeTimelineId": "23CA04BC-55B4-4699-9445-C59DB3841235",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit C3 - The Admin Week.palmier",
+      "activeTimelineId": "BD1BF352-AA60-41B8-BCCF-66ED7B0D42EB",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A4 - The BRRRR (BLOCKED - money rule).palmier",
+      "activeTimelineId": "4D99ECA3-9197-4D22-B18E-C1AFA8AAB96A",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit C1 - How We Meet Budgets.palmier",
+      "activeTimelineId": "0BDDF5C2-3338-4480-8DBF-78A04BF168AA",
+      "activeTimelineName": "Timeline 1",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    },
+    {
+      "package": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-reel-2026-08-04/East-Victoria-Process-DRAFT.palmier",
+      "activeTimelineId": "CB11A63B-5C33-4AD7-AF15-14851D360E00",
+      "activeTimelineName": "East Victoria process draft",
+      "missingUsedByActiveTimeline": [],
+      "missingHistoricalUse": []
+    }
+  ]
+}

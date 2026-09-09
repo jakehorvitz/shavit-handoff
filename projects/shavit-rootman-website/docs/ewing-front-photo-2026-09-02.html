@@ -1,0 +1,274 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1902 E Ewing — front photo options</title>
+<style>
+  :root{
+    --bg:#0d0d0d; --panel:#151515; --line:#262626;
+    --ink:#f2efe9; --mute:#9a938a; --brass:#c9a227; --bad:#d9584a; --ok:#5aa06a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:400 15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 28px 120px}
+  header.top{border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:34px}
+  .kicker{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;color:var(--brass);font-weight:700}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 8px;letter-spacing:-0.5px}
+  .sub{color:var(--mute);max-width:70ch}
+  h2{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);
+     margin:52px 0 6px;padding-top:22px;border-top:1px solid var(--line)}
+  .lede{color:var(--mute);max-width:74ch;margin:0 0 22px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  .shot{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .shot .frame{position:relative;aspect-ratio:1/1;background:#000;overflow:hidden}
+  .shot .frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .shot .stamp{position:absolute;top:50%;left:-8%;right:-8%;transform:translateY(-50%) rotate(-12deg);
+    text-align:center;font:700 24px/1 -apple-system,sans-serif;letter-spacing:3px;
+    color:var(--bad);border:3px solid var(--bad);padding:10px 0;opacity:.92}
+  .shot .meta{padding:14px 16px 18px}
+  .shot h3{margin:0 0 4px;font-size:15px;letter-spacing:.2px}
+  .shot .file{font:400 11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mute);
+              word-break:break-all;margin-bottom:8px}
+  .verdict{font-size:13px;color:var(--mute)}
+  .tag{display:inline-block;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;
+       font-weight:700;padding:3px 8px;border-radius:3px;margin-bottom:8px}
+  .t-live{background:rgba(201,162,39,.16);color:var(--brass);border:1px solid rgba(201,162,39,.4)}
+  .t-no{background:rgba(217,88,74,.14);color:var(--bad);border:1px solid rgba(217,88,74,.35)}
+  .t-ref{background:rgba(90,160,106,.14);color:var(--ok);border:1px solid rgba(90,160,106,.35)}
+  .full{margin-top:10px}
+  .full img{width:100%;display:block;border-radius:6px;border:1px solid var(--line)}
+  details{margin-top:10px}
+  summary{cursor:pointer;font-size:12px;color:var(--brass);letter-spacing:.4px}
+  .math{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brass);
+        border-radius:6px;padding:18px 20px;margin:22px 0;
+        font:400 13px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mute)}
+  .math b{color:var(--ink);font-weight:600}
+  .revlog{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+          padding:16px 20px;margin:26px 0 0;font-size:13px;color:var(--mute)}
+  .revlog b{color:var(--ink)}
+  .opts{display:grid;gap:14px;margin-top:8px}
+  .opt{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+  .opt h3{margin:0 0 6px;font-size:16px}
+  .opt .why{color:var(--mute);font-size:13.5px}
+  .opt.rec{border-color:rgba(201,162,39,.5)}
+  .chg{position:relative;border-color:rgba(201,162,39,.55)!important;
+       box-shadow:0 0 0 1px rgba(201,162,39,.25),0 0 26px -6px rgba(201,162,39,.45)}
+  .chg::before{content:"UPDATED";position:absolute;top:-9px;left:16px;z-index:2;
+       background:var(--brass);color:#141414;font:700 9px/1 -apple-system,sans-serif;
+       letter-spacing:1.6px;padding:4px 7px;border-radius:3px}
+  table.prov{width:100%;border-collapse:collapse;margin-top:6px;font-size:13.5px}
+  table.prov th,table.prov td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);
+       vertical-align:top}
+  table.prov th{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--brass)}
+  table.prov td.f{font:400 11.5px/1.5 ui-monospace,Menlo,monospace;color:var(--mute)}
+  .opt.rec h3::after{content:"RECOMMENDED";font-size:10px;letter-spacing:1.6px;color:var(--brass);
+                     margin-left:10px;vertical-align:middle}
+</style>
+<body data-spec="ewing-front-photo-2026-09-02">
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">Charger Property Management · shavitrootman.com</div>
+  <h1>1902 E Ewing Ave, front photo</h1>
+  <p class="sub">Shavit asked twice on 9/2 for the exterior instead of the interior. This page shows
+  every real photo of the house that exists, rendered in the actual 1:1 card frame the site uses,
+  so the choice is made on what the card will look like rather than on what the file looks like.</p>
+  <div class="revlog chg"><b>Rev 2 · 9/2/26.</b> Scanned Google Drive and the full iMessage
+  history end to end. Result is in the new Provenance section below: Shavit has sent exactly
+  <b>two</b> photographs of this house, ever, and Drive holds no others. The pool is closed.</div>
+  <div class="revlog"><b>Rev 1 · 9/2/26.</b> First pass. Every candidate below is a real photograph
+  of 1902 E Ewing from Shavit's own Drive folder, except the three reference cards in the first
+  section, which are what the neighbouring listings already use.</div>
+</header>
+
+<h2>The standard he is comparing against</h2>
+<p class="lede">The card Shavit screenshotted sits next to 1919 Kendall. Kendall and Barry both have
+real photo shoots behind them, 18 and 12 frames each. Ewing has no shoot at all, which is the
+actual root of this. There is no assets/properties/ewing-street folder.</p>
+<div class="grid">
+  <div class="shot" data-annot="ref-kendall">
+    <div class="frame"><img src="ewing-options/img/ref-kendall-card.jpg" alt="1919 Kendall card"></div>
+    <div class="meta"><span class="tag t-ref">Neighbour card</span>
+      <h3>1919 Kendall St</h3>
+      <div class="file">assets/properties/kendall-street/01.jpg</div>
+      <div class="verdict">Real shoot, 18 frames. Street level, whole house, no people.
+      This is what he wants Ewing to look like.</div></div>
+  </div>
+  <div class="shot" data-annot="ref-barry">
+    <div class="frame"><img src="ewing-options/img/ref-barry-card.jpg" alt="33 Barry card"></div>
+    <div class="meta"><span class="tag t-ref">Neighbour card</span>
+      <h3>33 Barry St</h3>
+      <div class="file">assets/properties/barry-street/01.jpg</div>
+      <div class="verdict">His own six photos, texted 8/18. Front exterior, survives the square
+      crop without an outpaint.</div></div>
+  </div>
+  <div class="shot" data-annot="ref-kitchen">
+    <div class="frame"><img src="ewing-options/img/ref-cpm-kitchen-card.jpg" alt="CPM kitchen placeholder"></div>
+    <div class="meta"><span class="tag t-no">What he objected to</span>
+      <h3>The CPM kitchen placeholder</h3>
+      <div class="file">assets/listings/cpm-kitchen.jpg</div>
+      <div class="verdict">Still carried by 11 E St Joe, 19 E St Joe, 115 Oak B, 60 S Norwood and
+      both Ludlam units. Ewing carried it from 7/16 until today.</div></div>
+  </div>
+</div>
+
+<h2>Every real photo of 1902 E Ewing we hold</h2>
+<p class="lede">Four distinct shots. Everything else in the folder is a duplicate: ewing-02.heic and
+view-02.jpg are the same frame as the first one, view-01.jpg is the same as the second,
+view-auction.jpg is the same as the fourth. The pipeline Drive pull holds the same two files again,
+byte for byte.</p>
+<div class="grid">
+
+  <div class="shot" data-annot="exterior-people">
+    <div class="frame"><img src="ewing-options/img/exterior-people-card.jpg" alt="Exterior with two people">
+      <div class="stamp">LEASE SIGNED</div></div>
+    <div class="meta"><span class="tag t-live">Live right now</span>
+      <h3>Front exterior, two people</h3>
+      <div class="file">ewing-exterior-1902.jpg · 2003 x 2402</div>
+      <div class="verdict">The only clean, post-renovation shot of the whole house. Correct season,
+      correct condition, his own photo. The problem is the two men, and one of them may be Shavit,
+      which makes it a brand call rather than a photo call.</div>
+      <details><summary>Show the full frame</summary>
+        <div class="full"><img src="ewing-options/img/exterior-people-full.jpg" alt="full frame"></div></details>
+    </div>
+  </div>
+
+  <div class="shot" data-annot="pressure-wash">
+    <div class="frame"><img src="ewing-options/img/pressure-wash-card.jpg" alt="Pressure washing the siding">
+      <div class="stamp">LEASE SIGNED</div></div>
+    <div class="meta"><span class="tag t-no">Weak</span>
+      <h3>Pressure washing the siding</h3>
+      <div class="file">ewing-01.png · 1014 x 1634</div>
+      <div class="verdict">Genuinely exterior and genuinely this house, and it does say something
+      about work quality. Cropped square it is a siding close up that tells a renter nothing about
+      the home, and it reads as mid job under a Lease Signed stamp.</div>
+      <details><summary>Show the full frame</summary>
+        <div class="full"><img src="ewing-options/img/pressure-wash-full.jpg" alt="full frame"></div></details>
+    </div>
+  </div>
+
+  <div class="shot" data-annot="interior-reno">
+    <div class="frame"><img src="ewing-options/img/interior-reno-card.jpg" alt="Interior mid renovation">
+      <div class="stamp">LEASE SIGNED</div></div>
+    <div class="meta"><span class="tag t-no">Out</span>
+      <h3>Interior, mid renovation</h3>
+      <div class="file">ewing-interior-still.jpg · 2160 x 3840</div>
+      <div class="verdict">Paint buckets and drop cloths. It is an interior, which is the exact
+      thing he asked to move away from, and it shows the house unfinished.</div>
+      <details><summary>Show the full frame</summary>
+        <div class="full"><img src="ewing-options/img/interior-reno-full.jpg" alt="full frame"></div></details>
+    </div>
+  </div>
+
+  <div class="shot" data-annot="auction-winter">
+    <div class="frame"><img src="ewing-options/img/auction-winter-card.jpg" alt="Winter auction photo">
+      <div class="stamp">LEASE SIGNED</div></div>
+    <div class="meta"><span class="tag t-no">Out</span>
+      <h3>Winter, pre renovation, auction listing</h3>
+      <div class="file">auction-1902-ewing.jpg · 1600 x 1108</div>
+      <div class="verdict">This is the one shot that frames the house from the street the way he
+      wants. It fails on two counts. It shows the house before the renovation, under snow, beneath a
+      Lease Signed stamp, and it is auction house photography, which breaks the 33 Barry rule that
+      other people's listing photos are not ours to copy.</div>
+      <details><summary>Show the full frame</summary>
+        <div class="full"><img src="ewing-options/img/auction-winter-full.jpg" alt="full frame"></div></details>
+    </div>
+  </div>
+
+</div>
+
+
+<h2>Provenance: where every Ewing photo actually came from</h2>
+<p class="lede">Scanned Drive and every message in chat.db, not just the recent window. Shavit sent
+Ewing photos on exactly one occasion.</p>
+<div class="shot chg" data-annot="provenance" style="padding:20px 22px">
+<table class="prov">
+  <tr><th style="width:26%">File</th><th style="width:20%">Source</th><th>What it is</th></tr>
+  <tr><td class="f">IMG_9292.heic<br>1,231,690 b</td>
+      <td>Shavit, iMessage<br>7/27/26 3:33pm<br>captioned "1902 E Ewing"</td>
+      <td>The front exterior with two men. Saved locally as ewing-02.heic and converted to
+          ewing-exterior-1902.jpg. <b>Currently live on the card.</b></td></tr>
+  <tr><td class="f">IMG_5125.png<br>2,481,204 b</td>
+      <td>Shavit, iMessage<br>7/27/26 3:33pm<br>same message</td>
+      <td>Pressure washing the siding. Saved locally as ewing-01.png.</td></tr>
+  <tr><td class="f">ewing-interior-still.jpg<br>2160 x 3840</td>
+      <td>Not from Shavit</td>
+      <td>Interior mid renovation. Dimensions are 4K vertical, so almost certainly a frame pulled
+          from the Ewing tenant-story footage, not a photograph he sent.</td></tr>
+  <tr><td class="f">auction-1902-ewing.jpg<br>1600 x 1108</td>
+      <td>Not from Shavit</td>
+      <td>The winter pre-renovation shot, taken off the auction listing. Third party photography.</td></tr>
+  <tr><td class="f">view-01 / view-02 / view-auction</td>
+      <td>Derivatives</td>
+      <td>Smaller re-exports of the three above. No new content.</td></tr>
+</table>
+<p class="verdict" style="margin-top:16px">Drive folder <span class="f">Indiana / On going-New projects /
+1902 E Ewing</span> contains those same two Shavit files and nothing else, uploaded by Jake on 7/28,
+the day after the text. There is no other Ewing folder anywhere in the Drive. Ewing sits under
+"On going/New projects" while Kendall, Parkview and East Victoria sit under "Past Projects" with
+real shoots behind them.</p>
+<p class="verdict" style="margin-top:12px">Worth noting: on 7/13 Jake asked him directly for
+"any videos or photos of houses in Michigan or Indiana, even candid photos of the houses unstaged".
+What came back two weeks later was these two frames. Ewing has never been properly shot.</p>
+</div>
+
+<h2>Why the two men cannot simply be cropped out</h2>
+<p class="lede">This is geometry, not taste. The card frame is square with object-fit cover, so
+whatever is supplied gets centre cropped to 1:1.</p>
+<div class="math">
+  Source frame: <b>2003 wide x 2402 tall</b><br>
+  House spans roughly <b>x 374 to 1869</b>, about <b>1575px</b> of width<br>
+  The two figures begin at about <b>y 975</b> and run to the bottom edge<br>
+  <br>
+  A square that clears them must be at most <b>975 tall</b>, so at most <b>975 wide</b><br>
+  A square that holds the house must be at least <b>1575 wide</b><br>
+  <b>975 &lt; 1575</b>, so no square crop of this photograph holds the house and clears the people.
+</div>
+<div class="grid">
+  <div class="shot" data-annot="crop-live">
+    <div class="frame"><img src="ewing-options/img/crop-live-card.jpg" alt="1502 square crop"></div>
+    <div class="meta"><span class="tag t-live">Live right now</span><h3>1502px square</h3>
+      <div class="verdict">Whole house, both men at chest height.</div></div>
+  </div>
+  <div class="shot" data-annot="crop-1100">
+    <div class="frame"><img src="ewing-options/img/crop-1100-card.jpg" alt="1100 square crop"></div>
+    <div class="meta"><span class="tag t-no">Fails</span><h3>1100px square</h3>
+      <div class="verdict">Two heads still enter the bottom edge.</div></div>
+  </div>
+  <div class="shot" data-annot="crop-940">
+    <div class="frame"><img src="ewing-options/img/crop-940-card.jpg" alt="940 square crop"></div>
+    <div class="meta"><span class="tag t-no">Fails</span><h3>940px square</h3>
+      <div class="verdict">People are gone, but the frame is now sky and roofline with the porch
+      cut off. It reads as a roof detail, not a house.</div></div>
+  </div>
+</div>
+
+<h2>The call</h2>
+<div class="opts">
+  <div class="opt rec chg">
+    <h3>Text Shavit for one street photo</h3>
+    <div class="why">He is in the thread, he is responsive, and it is his own building. One phone
+    photo from the sidewalk ends this permanently and gives Ewing the same footing as Kendall and
+    Barry. Everything below is only what sits on the card until that arrives.</div>
+  </div>
+  <div class="opt" data-annot="opt-placeholder">
+    <h3>Interim: gold house mark, "Photos coming"</h3>
+    <div class="why">Set photo to null. Removes the two men, ships nothing misleading, and is honest
+    that the house was never shot. The risk is that a Lease Signed card reading "Photos coming" can
+    look unfinished, which is close to what he flagged on Kendall on 7/27.</div>
+  </div>
+  <div class="opt" data-annot="opt-keep">
+    <h3>Interim: leave the two men up</h3>
+    <div class="why">What is live now. Real house, real condition, whole facade, his own photograph.
+    The risk is that it is a people photo on a rental listing card.</div>
+  </div>
+  <div class="opt" data-annot="opt-revert">
+    <h3>Interim: back to the CPM kitchen</h3>
+    <div class="why">Matches five other cards and restores the illustration disclaimer. The risk is
+    that this is the exact image he screenshotted twice today.</div>
+  </div>
+</div>
+
+</div>
+<script src="../spec-annotate.js"></script>
+</body>

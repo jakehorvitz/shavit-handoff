@@ -1,0 +1,982 @@
+{
+ "timelines": [
+  {
+   "id": "CB11A63B-5C33-4AD7-AF15-14851D360E00",
+   "name": "East Victoria process draft",
+   "width": 1080,
+   "height": 1920,
+   "fps": 30,
+   "settingsConfigured": true,
+   "tracks": [
+    {
+     "id": "49B69561-16F0-4D8B-8BE9-BF1A83C471AC",
+     "type": "video",
+     "clips": [
+      {
+       "fadeInInterpolation": "linear",
+       "fadeInFrames": 0,
+       "edgeSoftness": 0,
+       "textContent": "514 East Victoria Street, Indiana",
+       "fadeOutInterpolation": "linear",
+       "durationFrames": 90,
+       "volume": 1,
+       "startFrame": 0,
+       "textStyle": {
+        "lineSpacing": 0,
+        "color": {
+         "a": 1,
+         "r": 0.6901960784313725,
+         "g": 0.5529411764705883,
+         "b": 0.3411764705882353
+        },
+        "shadow": {
+         "offsetX": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.95,
+          "g": 0
+         },
+         "offsetY": 2,
+         "enabled": true,
+         "blur": 14
+        },
+        "isOverlined": false,
+        "fontName": "Inter",
+        "widthScale": 1,
+        "fontCase": "uppercase",
+        "background": {
+         "paddingY": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.6,
+          "g": 0
+         },
+         "enabled": false,
+         "paddingX": 0,
+         "outlineColor": {
+          "a": 1,
+          "r": 0,
+          "g": 0,
+          "b": 0
+         },
+         "offsetY": 0,
+         "offsetX": 0,
+         "cornerRadius": 0,
+         "outlineWidth": 0
+        },
+        "tracking": 7,
+        "isItalic": false,
+        "fontScale": 1,
+        "fontSize": 24,
+        "heightScale": 1,
+        "alignment": "center",
+        "border": {
+         "width": 4,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 1,
+          "g": 0
+         },
+         "enabled": false
+        },
+        "isBold": true,
+        "isUnderlined": false,
+        "isStruckThrough": false
+       },
+       "textAnimation": {
+        "preset": "fadeIn",
+        "perWordFrames": 6
+       },
+       "sourceClipType": "text",
+       "opacity": 1,
+       "trimEndFrame": 96,
+       "speed": 1,
+       "fadeOutFrames": 0,
+       "id": "62564D30-1F18-450D-99E6-0875D3C4621A",
+       "mediaRef": "",
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "left": 0,
+        "bottom": 0
+       },
+       "mediaType": "text",
+       "trimStartFrame": 0,
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "flipVertical": false,
+        "flipHorizontal": false,
+        "centerY": 0.715,
+        "height": 0.035,
+        "width": 0.96
+       },
+       "edgeRounding": 0
+      },
+      {
+       "fadeInInterpolation": "linear",
+       "fadeInFrames": 0,
+       "edgeSoftness": 0,
+       "textContent": "As found",
+       "fadeOutInterpolation": "linear",
+       "durationFrames": 84,
+       "volume": 1,
+       "startFrame": 96,
+       "textStyle": {
+        "lineSpacing": 0,
+        "color": {
+         "a": 1,
+         "r": 0.6901960784313725,
+         "g": 0.5529411764705883,
+         "b": 0.3411764705882353
+        },
+        "shadow": {
+         "offsetX": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.95,
+          "g": 0
+         },
+         "offsetY": 2,
+         "enabled": true,
+         "blur": 14
+        },
+        "isOverlined": false,
+        "fontName": "Inter",
+        "widthScale": 1,
+        "fontCase": "uppercase",
+        "background": {
+         "paddingY": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.6,
+          "g": 0
+         },
+         "enabled": false,
+         "paddingX": 0,
+         "outlineColor": {
+          "a": 1,
+          "r": 0,
+          "g": 0,
+          "b": 0
+         },
+         "offsetY": 0,
+         "offsetX": 0,
+         "cornerRadius": 0,
+         "outlineWidth": 0
+        },
+        "tracking": 7,
+        "isItalic": false,
+        "fontScale": 1,
+        "fontSize": 24,
+        "heightScale": 1,
+        "alignment": "center",
+        "border": {
+         "width": 4,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 1,
+          "g": 0
+         },
+         "enabled": false
+        },
+        "isBold": true,
+        "isUnderlined": false,
+        "isStruckThrough": false
+       },
+       "textAnimation": {
+        "preset": "fadeIn",
+        "perWordFrames": 6
+       },
+       "sourceClipType": "text",
+       "opacity": 1,
+       "trimEndFrame": 90,
+       "speed": 1,
+       "fadeOutFrames": 0,
+       "id": "7E39306F-BDC2-4A2E-AE7A-11FEFC92A492",
+       "mediaRef": "",
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "left": 0,
+        "bottom": 0
+       },
+       "mediaType": "text",
+       "trimStartFrame": 0,
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "flipVertical": false,
+        "flipHorizontal": false,
+        "centerY": 0.715,
+        "height": 0.035,
+        "width": 0.96
+       },
+       "edgeRounding": 0
+      },
+      {
+       "fadeInInterpolation": "linear",
+       "fadeInFrames": 0,
+       "edgeSoftness": 0,
+       "textContent": "The work",
+       "fadeOutInterpolation": "linear",
+       "durationFrames": 129,
+       "volume": 1,
+       "startFrame": 186,
+       "textStyle": {
+        "lineSpacing": 0,
+        "color": {
+         "a": 1,
+         "r": 0.6901960784313725,
+         "g": 0.5529411764705883,
+         "b": 0.3411764705882353
+        },
+        "shadow": {
+         "offsetX": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.95,
+          "g": 0
+         },
+         "offsetY": 2,
+         "enabled": true,
+         "blur": 14
+        },
+        "isOverlined": false,
+        "fontName": "Inter",
+        "widthScale": 1,
+        "fontCase": "uppercase",
+        "background": {
+         "paddingY": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.6,
+          "g": 0
+         },
+         "enabled": false,
+         "paddingX": 0,
+         "outlineColor": {
+          "a": 1,
+          "r": 0,
+          "g": 0,
+          "b": 0
+         },
+         "offsetY": 0,
+         "offsetX": 0,
+         "cornerRadius": 0,
+         "outlineWidth": 0
+        },
+        "tracking": 7,
+        "isItalic": false,
+        "fontScale": 1,
+        "fontSize": 24,
+        "heightScale": 1,
+        "alignment": "center",
+        "border": {
+         "width": 4,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 1,
+          "g": 0
+         },
+         "enabled": false
+        },
+        "isBold": true,
+        "isUnderlined": false,
+        "isStruckThrough": false
+       },
+       "textAnimation": {
+        "preset": "fadeIn",
+        "perWordFrames": 6
+       },
+       "sourceClipType": "text",
+       "opacity": 1,
+       "trimEndFrame": 135,
+       "speed": 1,
+       "fadeOutFrames": 0,
+       "id": "F4918840-AA0D-42CD-8F9B-A92D5C730E64",
+       "mediaRef": "",
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "left": 0,
+        "bottom": 0
+       },
+       "mediaType": "text",
+       "trimStartFrame": 0,
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "flipVertical": false,
+        "flipHorizontal": false,
+        "centerY": 0.715,
+        "height": 0.035,
+        "width": 0.96
+       },
+       "edgeRounding": 0
+      },
+      {
+       "fadeInInterpolation": "linear",
+       "fadeInFrames": 0,
+       "edgeSoftness": 0,
+       "textContent": "Now",
+       "fadeOutInterpolation": "linear",
+       "durationFrames": 105,
+       "volume": 1,
+       "startFrame": 321,
+       "textStyle": {
+        "lineSpacing": 0,
+        "color": {
+         "a": 1,
+         "r": 0.6901960784313725,
+         "g": 0.5529411764705883,
+         "b": 0.3411764705882353
+        },
+        "shadow": {
+         "offsetX": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.95,
+          "g": 0
+         },
+         "offsetY": 2,
+         "enabled": true,
+         "blur": 14
+        },
+        "isOverlined": false,
+        "fontName": "Inter",
+        "widthScale": 1,
+        "fontCase": "uppercase",
+        "background": {
+         "paddingY": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.6,
+          "g": 0
+         },
+         "enabled": false,
+         "paddingX": 0,
+         "outlineColor": {
+          "a": 1,
+          "r": 0,
+          "g": 0,
+          "b": 0
+         },
+         "offsetY": 0,
+         "offsetX": 0,
+         "cornerRadius": 0,
+         "outlineWidth": 0
+        },
+        "tracking": 7,
+        "isItalic": false,
+        "fontScale": 1,
+        "fontSize": 24,
+        "heightScale": 1,
+        "alignment": "center",
+        "border": {
+         "width": 4,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 1,
+          "g": 0
+         },
+         "enabled": false
+        },
+        "isBold": true,
+        "isUnderlined": false,
+        "isStruckThrough": false
+       },
+       "textAnimation": {
+        "preset": "fadeIn",
+        "perWordFrames": 6
+       },
+       "sourceClipType": "text",
+       "opacity": 1,
+       "trimEndFrame": 111,
+       "speed": 1,
+       "fadeOutFrames": 0,
+       "id": "7E1AA123-09AE-49C0-A5B4-E06B1F15A7A7",
+       "mediaRef": "",
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "left": 0,
+        "bottom": 0
+       },
+       "mediaType": "text",
+       "trimStartFrame": 0,
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "flipVertical": false,
+        "flipHorizontal": false,
+        "centerY": 0.715,
+        "height": 0.035,
+        "width": 0.96
+       },
+       "edgeRounding": 0
+      },
+      {
+       "fadeInInterpolation": "linear",
+       "fadeInFrames": 0,
+       "edgeSoftness": 0,
+       "textContent": "Live with us. Work with us.",
+       "fadeOutInterpolation": "linear",
+       "durationFrames": 96,
+       "volume": 1,
+       "startFrame": 618,
+       "textStyle": {
+        "lineSpacing": 0,
+        "color": {
+         "a": 1,
+         "r": 0.6901960784313725,
+         "g": 0.5529411764705883,
+         "b": 0.3411764705882353
+        },
+        "shadow": {
+         "offsetX": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.95,
+          "g": 0
+         },
+         "offsetY": 2,
+         "enabled": true,
+         "blur": 14
+        },
+        "isOverlined": false,
+        "fontName": "Inter",
+        "widthScale": 1,
+        "fontCase": "uppercase",
+        "background": {
+         "paddingY": 0,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 0.6,
+          "g": 0
+         },
+         "enabled": false,
+         "paddingX": 0,
+         "outlineColor": {
+          "a": 1,
+          "r": 0,
+          "g": 0,
+          "b": 0
+         },
+         "offsetY": 0,
+         "offsetX": 0,
+         "cornerRadius": 0,
+         "outlineWidth": 0
+        },
+        "tracking": 7,
+        "isItalic": false,
+        "fontScale": 1,
+        "fontSize": 24,
+        "heightScale": 1,
+        "alignment": "center",
+        "border": {
+         "width": 4,
+         "color": {
+          "r": 0,
+          "b": 0,
+          "a": 1,
+          "g": 0
+         },
+         "enabled": false
+        },
+        "isBold": true,
+        "isUnderlined": false,
+        "isStruckThrough": false
+       },
+       "textAnimation": {
+        "preset": "fadeIn",
+        "perWordFrames": 6
+       },
+       "sourceClipType": "text",
+       "opacity": 1,
+       "trimEndFrame": 102,
+       "speed": 1,
+       "fadeOutFrames": 0,
+       "id": "C9DF87D3-6D55-44F2-B632-490062D4E0B4",
+       "mediaRef": "",
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "left": 0,
+        "bottom": 0
+       },
+       "mediaType": "text",
+       "trimStartFrame": 0,
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "flipVertical": false,
+        "flipHorizontal": false,
+        "centerY": 0.5,
+        "height": 0.035,
+        "width": 0.96
+       },
+       "edgeRounding": 0
+      }
+     ],
+     "syncLocked": false,
+     "muted": false,
+     "displayHeight": 50,
+     "hidden": false
+    },
+    {
+     "id": "1B166581-BE34-44CE-823F-D9BCF71E4F44",
+     "type": "video",
+     "clips": [
+      {
+       "id": "CFF2452D-F61F-4F1B-B0D9-707966A7661D",
+       "mediaRef": "F4F280A1-DC82-4A5D-B9FD-3FDFC08A7DB3",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 0,
+       "durationFrames": 45,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "6FF7D420-2E86-449B-B203-8DF356018878",
+       "mediaRef": "C8956DD5-DADC-4D1F-8961-4851FFA95947",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 45,
+       "durationFrames": 45,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "A5AFFAEA-BBDD-4D9F-A1D9-D4E6F76604AB",
+       "mediaRef": "03CC726E-6B5C-46BD-B612-73D8745D4C59",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 90,
+       "durationFrames": 45,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "3A2EB6E8-9550-4537-A066-22453205971B",
+       "mediaRef": "8E34B4E3-FE2A-416A-AD8E-D08C5028CF94",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 135,
+       "durationFrames": 45,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "D07F22AB-0025-4692-A64F-DD8DD147AAB6",
+       "mediaRef": "3A619EF3-BA72-40C6-87CC-CB35693540AE",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 180,
+       "durationFrames": 45,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "F0EC8BD6-011B-4D01-A3F1-87A23CA116D5",
+       "mediaRef": "F118B0E4-6C19-464D-834E-9D1B0CCF60FB",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 225,
+       "durationFrames": 45,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "7658D40C-DB8C-42F3-B189-8ECFF52B7DA2",
+       "mediaRef": "7A95A445-CCBF-47EF-AD7A-5D924D4F1D04",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 270,
+       "durationFrames": 45,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "EAA1C108-293F-4111-9542-B284B8D0D30A",
+       "mediaRef": "22631326-823C-435F-BFBA-4F389B52F64C",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 315,
+       "durationFrames": 60,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "489E795F-A1DE-4216-80DA-B6A70813FECF",
+       "mediaRef": "75B66E75-25C8-4B4E-9D6E-417128DF1627",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 375,
+       "durationFrames": 60,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "B5E5CB8A-1EF9-46F5-B51F-4786F188155B",
+       "mediaRef": "7FB7C8A1-4515-47C1-8256-E0AD5267E0D6",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 435,
+       "durationFrames": 60,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "F27D5285-515A-438F-933B-64D6986F08A1",
+       "mediaRef": "CF57DC67-53C1-4554-82CC-67DB7A7F645A",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 495,
+       "durationFrames": 60,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      },
+      {
+       "id": "081DF9C6-13DA-444B-A328-465A362F03FA",
+       "mediaRef": "F7E7D7D7-A0B9-42FA-919F-3B9B9AC117C3",
+       "mediaType": "image",
+       "sourceClipType": "image",
+       "startFrame": 555,
+       "durationFrames": 60,
+       "trimStartFrame": 0,
+       "trimEndFrame": 660,
+       "speed": 1,
+       "volume": 1,
+       "opacity": 1,
+       "fadeInFrames": 0,
+       "fadeOutFrames": 0,
+       "fadeInInterpolation": "linear",
+       "fadeOutInterpolation": "linear",
+       "edgeSoftness": 0,
+       "edgeRounding": 0,
+       "crop": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+       },
+       "transform": {
+        "rotation": 0,
+        "centerX": 0.5,
+        "centerY": 0.5,
+        "width": 1,
+        "height": 1,
+        "flipHorizontal": false,
+        "flipVertical": false
+       }
+      }
+     ],
+     "syncLocked": false,
+     "muted": false,
+     "displayHeight": 50,
+     "hidden": false
+    },
+    {
+     "id": "46453806-C2C2-41BE-8B48-F451553AFE93",
+     "type": "audio",
+     "clips": [],
+     "syncLocked": false,
+     "muted": false,
+     "displayHeight": 50,
+     "hidden": false
+    }
+   ]
+  }
+ ],
+ "openTimelineIds": [
+  "CB11A63B-5C33-4AD7-AF15-14851D360E00"
+ ],
+ "activeTimelineId": "CB11A63B-5C33-4AD7-AF15-14851D360E00",
+ "viewStates": {
+  "CB11A63B-5C33-4AD7-AF15-14851D360E00": {
+   "playheadFrame": 0,
+   "zoomScale": 1,
+   "scrollOffsetX": 0
+  }
+ }
+}

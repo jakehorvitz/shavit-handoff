@@ -1,0 +1,21 @@
+{
+  "id" : "5DEC89AE-E570-45C7-871E-3C2022A1B66E",
+  "isOpen" : false,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit Reels - Aug 2026"
+        }
+      ],
+      "id" : "85BE34AA-1B0F-4F95-8058-003DC7485755",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-09-04T20:19:15Z"
+}

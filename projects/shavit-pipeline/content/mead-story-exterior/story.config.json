@@ -1,0 +1,10 @@
+{
+  "caption": ["BEAUTIFYING NEIGHBORHOODS", "WHILE SAVING LIVES."],
+  "caption_size": 54,
+  "location": "MEAD STREET | HILLSDALE, MICHIGAN",
+  "top_photo": "photos/mead-2026-08-27/CleanShot 2025-12-05 at 11.16.07@2x.png",
+  "bottom_photo": "photos/mead-2026-08-27/2.jpeg",
+  "top_label": "BEFORE",
+  "bottom_label": "AFTER",
+  "out": "content/mead-story-exterior/story.png"
+}

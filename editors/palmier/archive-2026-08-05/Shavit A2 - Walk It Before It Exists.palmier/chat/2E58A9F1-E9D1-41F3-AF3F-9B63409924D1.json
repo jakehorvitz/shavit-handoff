@@ -1,0 +1,21 @@
+{
+  "id" : "2E58A9F1-E9D1-41F3-AF3F-9B63409924D1",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit A2 - Walk It Before It Exists"
+        }
+      ],
+      "id" : "29CB0432-3F44-4BBF-AA4D-CAB95F66E96F",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:04:51Z"
+}

@@ -1,0 +1,34 @@
+{
+  "id" : "001E5575-2CAF-4EA7-9DC9-74AD7DCACA39",
+  "isOpen" : false,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit Reels - Aug 2026"
+        }
+      ],
+      "id" : "9E1F3D5A-9767-46DD-8F2E-F4D2A4797C11",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    },
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit Reels - Aug 2026"
+        }
+      ],
+      "id" : "863DC46B-DD9F-43A8-986B-EC16807FFA06",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-16T08:03:36Z"
+}

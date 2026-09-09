@@ -1,0 +1,21 @@
+{
+  "id" : "B45F79CE-C945-490E-A2D2-EC9CE113ADD1",
+  "isOpen" : false,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit Mead Teaser"
+        }
+      ],
+      "id" : "551283C9-F1C5-4BD1-BB36-69932E027CF7",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-29T01:16:19Z"
+}

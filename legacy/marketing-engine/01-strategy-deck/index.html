@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shavit Rootman — Marketing Strategy (All-Platform, Automated)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" />
+<style>
+:root{
+  --canvas:#000; --surface:#0d0d0d; --surface-2:#161616; --surface-3:#1f1f1f;
+  --hairline:#2c2c2c; --brass:#B08D57; --brass-2:#cdb185; --brass-3:#7d6440; --brass-deep:#5a4a30;
+  --ink:#fff; --body:#bcbcbc; --body-strong:#e6e6e6; --muted:#7e7e7e;
+  --ease:cubic-bezier(.65,0,.35,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--canvas);color:var(--body);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-weight:300;-webkit-font-smoothing:antialiased;overflow:hidden}
+h1,h2,h3,h4{color:var(--ink);font-weight:800;letter-spacing:-.5px;text-transform:uppercase;line-height:1.04}
+a{color:var(--brass);text-decoration:none}
+strong{color:var(--body-strong);font-weight:600}
+.brass{color:var(--brass)}
+code{color:var(--brass);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+.stripe{display:block;height:4px;width:56px;background:var(--brass);border:0;margin:16px 0}
+
+/* Deck shell */
+.deck{position:fixed;inset:0;overflow:hidden}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+  padding:8vh 9vw;opacity:0;transition:opacity .4s var(--ease)}
+.slide.active{display:flex;opacity:1}
+.slide.active .rise{animation:rise .5s var(--ease) both}
+.slide.active .rise:nth-child(2){animation-delay:.05s}
+.slide.active .rise:nth-child(3){animation-delay:.1s}
+.slide.active .rise:nth-child(4){animation-delay:.16s}
+.slide.active .rise:nth-child(5){animation-delay:.22s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.slide.active .grow{animation:grow .8s var(--ease) both;animation-delay:.2s}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Type */
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--brass)}
+.slide h1{font-size:clamp(34px,6vw,76px)}
+.slide h2{font-size:clamp(24px,3.6vw,44px);margin-bottom:4px}
+.slide h3{font-size:clamp(15px,1.4vw,19px)}
+.lead{font-size:clamp(15px,1.5vw,21px);color:var(--body);max-width:60ch;line-height:1.5}
+.note{font-size:12.5px;color:var(--muted);letter-spacing:.2px}
+
+/* Bullets */
+ul{list-style:none}
+.bul li{position:relative;padding-left:22px;margin:11px 0;font-size:clamp(14px,1.35vw,17px);line-height:1.4;max-width:60ch}
+.bul li::before{content:"";position:absolute;left:0;top:.6em;width:9px;height:2px;background:var(--brass)}
+.bul.tight li{margin:7px 0}
+
+/* Grid helpers */
+.cols{display:grid;gap:30px;align-items:center}
+.c2{grid-template-columns:1fr 1fr}
+.c2u{grid-template-columns:1.1fr .9fr}
+.c3{grid-template-columns:repeat(3,1fr)}
+.chips .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;
+  color:var(--body-strong);background:var(--surface);border:1px solid var(--hairline);padding:8px 12px;margin:6px 8px 0 0}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--hairline);padding:20px}
+.card .k{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--brass);margin-bottom:9px}
+.card h3{font-size:15px;letter-spacing:.4px;margin-bottom:8px}
+.card p{font-size:13.5px;line-height:1.45;color:var(--body)}
+
+/* ===== CHART: ranked horizontal bars (goals, channel effort) ===== */
+.barchart{display:flex;flex-direction:column;gap:16px;width:100%}
+.barrow{display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:center}
+.barrow .rank{font-size:26px;font-weight:800;color:var(--brass-3);line-height:1}
+.barrow .b-main{display:flex;flex-direction:column;gap:7px}
+.barrow .b-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.barrow .b-label{font-size:17px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.3px}
+.barrow .b-sub{font-size:12.5px;color:var(--muted)}
+.barrow .b-track{height:18px;background:var(--surface-2);border:1px solid var(--hairline);overflow:hidden}
+.barrow .b-fill{height:100%;background:var(--brass);transform-origin:left center}
+.barrow .b-fill.f2{background:var(--brass-3)}
+.barrow .b-fill.f3{background:var(--brass-deep)}
+
+/* ===== CHART: donut (channel mix) ===== */
+.donut-wrap{display:grid;grid-template-columns:230px 1fr;gap:36px;align-items:center}
+.donut{position:relative;width:220px;height:220px}
+.donut svg{transform:rotate(-90deg)}
+.donut .seg{fill:none;stroke-width:30}
+.donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.donut .center b{font-size:30px;color:var(--ink);font-weight:800;line-height:1}
+.donut .center span{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-direction:column;gap:14px}
+.legend .row{display:grid;grid-template-columns:16px 1fr auto;gap:14px;align-items:center}
+.legend .sw{width:16px;height:16px}
+.legend .l-name{font-size:15px;color:var(--ink);font-weight:600}
+.legend .l-name small{display:block;font-weight:300;color:var(--muted);font-size:12px;letter-spacing:0;text-transform:none}
+.legend .l-pct{font-size:20px;font-weight:800;color:var(--ink)}
+
+/* ===== CHART: cadence blocks ===== */
+.cadence{display:flex;gap:10px;align-items:flex-end;height:130px}
+.cadence .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;text-align:center}
+.cadence .blk{background:var(--brass);border:0;transform-origin:bottom}
+.cadence .blk.alt{background:var(--brass-3)}
+.cadence .cap{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--body)}
+.cadence .sub{font-size:10px;color:var(--muted)}
+
+/* ===== CHART: funnel ===== */
+.funnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.funnel-stages{display:flex;flex-direction:column;gap:14px}
+.fstage{display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center}
+.fstage .fp{font-size:20px;font-weight:800;color:var(--brass)}
+.fstage h4{font-size:15px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink);margin-bottom:2px}
+.fstage p{font-size:12.5px;color:var(--body);line-height:1.35}
+
+/* ===== CHART: pipeline (analytics) ===== */
+.pipe{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.pipe .node{flex:1;min-width:150px;background:var(--surface);border:1px solid var(--hairline);padding:16px;position:relative}
+.pipe .node + .node{border-left:0}
+.pipe .node .pn{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--brass)}
+.pipe .node h4{font-size:14px;text-transform:none;letter-spacing:0;margin:6px 0 4px;font-weight:600;color:var(--ink)}
+.pipe .node p{font-size:12px;color:var(--body);line-height:1.35}
+.pipe .arr{display:flex;align-items:center;color:var(--brass);font-size:20px;padding:0 4px}
+
+/* ===== CHART: target range bars (90-day) ===== */
+.targets{display:flex;flex-direction:column;gap:13px;width:100%}
+.trow{display:grid;grid-template-columns:250px 1fr 96px;gap:20px;align-items:center}
+.trow .t-lab{font-size:14.5px;color:var(--body-strong);font-weight:600;line-height:1.25}
+.trow .t-lab small{display:block;font-weight:300;color:var(--muted);font-size:11px}
+.t-track{position:relative;height:16px;background:var(--surface-2);border:1px solid var(--hairline)}
+.t-band{position:absolute;top:0;bottom:0;background:var(--brass);opacity:.92;transform-origin:left center}
+.t-scale{position:absolute;left:0;right:0;top:20px;display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted)}
+.trow .t-goal{font-size:17px;font-weight:800;color:var(--brass);text-align:right;letter-spacing:.3px}
+
+/* Title slide */
+.title-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:48px;align-items:center;height:100%}
+.title-grid .portrait{width:100%;height:60vh;object-fit:cover;border:1px solid var(--hairline);filter:grayscale(100%) contrast(1.05);background:var(--surface)}
+.wordmark span{color:var(--brass)}
+
+/* watermark + chrome */
+.wm{position:absolute;right:7vw;bottom:8vh;font-size:12vw;font-weight:800;color:#0b0b0b;letter-spacing:-2px;z-index:0;pointer-events:none}
+.slide > *{position:relative;z-index:1}
+.bar{position:fixed;top:0;left:0;height:3px;background:var(--brass);width:0;z-index:30;transition:width .3s var(--ease)}
+.counter{position:fixed;bottom:22px;left:9vw;font-size:12px;letter-spacing:2px;color:var(--muted);z-index:30}
+.counter b{color:var(--ink)}
+.brandmark{position:fixed;top:18px;right:9vw;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);z-index:30}
+.brandmark span{color:var(--brass)}
+.ctrls{position:fixed;bottom:18px;right:9vw;display:flex;gap:8px;z-index:30}
+.ctrls button{width:40px;height:40px;background:var(--surface);border:1px solid var(--hairline);color:var(--ink);font-size:16px;cursor:pointer;transition:.2s var(--ease)}
+.ctrls button:hover{border-color:var(--brass);background:var(--surface-2)}
+.hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:1.5px;color:var(--muted);z-index:30;text-transform:uppercase}
+
+@media (max-width:880px){
+  .title-grid,.c2,.c2u,.c3,.donut-wrap,.funnel-grid{grid-template-columns:1fr;gap:18px}
+  .title-grid .portrait{height:26vh}
+  .trow{grid-template-columns:1fr;gap:6px}.t-scale{position:static;margin-top:14px}
+  .slide{padding:9vh 7vw;overflow-y:auto;justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  @page{size:13.333in 7.5in;margin:0}
+  html,body{overflow:visible;height:auto;background:#000}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .deck{position:static;overflow:visible;height:auto}
+  .slide{display:flex!important;opacity:1!important;position:relative;page-break-after:always;break-after:page;width:100%;min-height:100vh;height:100vh}
+  .slide:last-child{page-break-after:auto}
+  .slide .rise,.slide .grow{animation:none!important;opacity:1!important;transform:none!important}
+  .bar,.ctrls,.hint,.counter,.brandmark{display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="brandmark">SHAVIT<span>ROOTMAN</span> · MARKETING</div>
+<div class="deck" id="deck">
+
+  <!-- 1 · TITLE -->
+  <section class="slide active">
+    <div class="title-grid">
+      <div>
+        <div class="eyebrow rise">Marketing Strategy · 90-Day Plan · 2026</div>
+        <h1 class="rise" style="margin-top:14px">Reach on<br>Autopilot.</h1>
+        <hr class="stripe rise" />
+        <ul class="bul tight rise">
+          <li>An <strong>operator-brand</strong> engine across every short-form platform</li>
+          <li><strong>Three markets</strong>, tracked separately: Hillsdale · Cleveland · South Bend</li>
+          <li><strong>Autonomous</strong> — generate, approve, auto-post · measured end-to-end</li>
+        </ul>
+        <p class="note rise" style="margin-top:18px">Prepared by Jake Horvitz · Building communities, profitably.</p>
+      </div>
+      <img class="portrait rise" src="portrait.jpg" alt="Shavit Rootman" onerror="this.style.display='none'" />
+    </div>
+  </section>
+
+  <!-- 2 · THE BRIEF -->
+  <section class="slide">
+    <div class="eyebrow rise">The brief</div>
+    <h2 class="rise">Market the operator — quietly,<br>and on our terms.</h2>
+    <hr class="stripe rise" />
+    <div class="cols c2 rise" style="margin-top:10px">
+      <ul class="bul">
+        <li><strong>Every platform</strong> — short-form video, one clip posted everywhere.</li>
+        <li><strong>Minimal site</strong> — no forms, email-only, "not currently accepting inquiries."</li>
+        <li><strong>Never a capital raise</strong> — no return claims, no "invest with us."</li>
+      </ul>
+      <ul class="bul">
+        <li><strong>Voice:</strong> disciplined operator — third person on site, first person on Substack.</li>
+        <li><strong>Solo execution</strong> — cadence must survive a full course load.</li>
+        <li><strong>Per-market</strong> — Hillsdale, Cleveland and South Bend are different audiences.</li>
+      </ul>
+    </div>
+    <div class="chips rise" style="margin-top:24px">
+      <span class="tag">7 platforms</span><span class="tag">No forms</span><span class="tag">Email only</span>
+      <span class="tag">No raise language</span><span class="tag">Operator voice</span><span class="tag">Autonomous</span>
+    </div>
+    <div class="wm">01</div>
+  </section>
+
+  <!-- 3 · GOALS (ranked bar chart) -->
+  <section class="slide">
+    <div class="eyebrow rise">What we optimize for</div>
+    <h2 class="rise">Three goals, in priority order.</h2>
+    <hr class="stripe rise" />
+    <div class="barchart rise" style="margin-top:18px;max-width:1000px">
+      <div class="barrow">
+        <div class="rank">1</div>
+        <div class="b-main">
+          <div class="b-top"><span class="b-label">Operator brand awareness</span><span class="b-sub">The long game · partnerships arrive warm</span></div>
+          <div class="b-track"><div class="b-fill grow" style="width:100%"></div></div>
+        </div>
+      </div>
+      <div class="barrow">
+        <div class="rank">2</div>
+        <div class="b-main">
+          <div class="b-top"><span class="b-label">Fill rental openings</span><span class="b-sub">MI · OH · IN · most measurable near-term win</span></div>
+          <div class="b-track"><div class="b-fill f2 grow" style="width:72%"></div></div>
+        </div>
+      </div>
+      <div class="barrow">
+        <div class="rank">3</div>
+        <div class="b-main">
+          <div class="b-top"><span class="b-label">Attract direct sellers</span><span class="b-sub">Owner-direct, incl. pre-foreclosure · no agents</span></div>
+          <div class="b-track"><div class="b-fill f3 grow" style="width:48%"></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="note rise" style="margin-top:22px">Bar length = relative emphasis of effort, not a fixed budget.</p>
+    <div class="wm">02</div>
+  </section>
+
+  <!-- 4 · CHANNEL MIX (donut) -->
+  <section class="slide">
+    <div class="eyebrow rise">The channel mix · every platform</div>
+    <h2 class="rise">One clip, every platform.</h2>
+    <hr class="stripe rise" />
+    <div class="donut-wrap rise" style="margin-top:14px">
+      <div class="donut">
+        <svg viewBox="0 0 200 200" width="220" height="220" aria-label="Distribution across seven platforms">
+          <circle class="seg" cx="100" cy="100" r="70" stroke="#B08D57" stroke-dasharray="62.83 376.99" stroke-dashoffset="0"></circle>
+          <circle class="seg" cx="100" cy="100" r="70" stroke="#cdb185" stroke-dasharray="62.83 376.99" stroke-dashoffset="-62.83"></circle>
+          <circle class="seg" cx="100" cy="100" r="70" stroke="#d8c8a8" stroke-dasharray="62.83 376.99" stroke-dashoffset="-125.66"></circle>
+          <circle class="seg" cx="100" cy="100" r="70" stroke="#9c7c4c" stroke-dasharray="62.83 376.99" stroke-dashoffset="-188.49"></circle>
+          <circle class="seg" cx="100" cy="100" r="70" stroke="#7d6440" stroke-dasharray="62.83 376.99" stroke-dashoffset="-251.32"></circle>
+          <circle class="seg" cx="100" cy="100" r="70" stroke="#8a6e44" stroke-dasharray="62.83 376.99" stroke-dashoffset="-314.15"></circle>
+          <circle class="seg" cx="100" cy="100" r="70" stroke="#3c3c3c" stroke-dasharray="62.83 376.99" stroke-dashoffset="-376.98"></circle>
+        </svg>
+        <div class="center"><b>7</b><span>platforms</span></div>
+      </div>
+      <div class="legend">
+        <div class="row"><span class="sw" style="background:#B08D57"></span><span class="l-name">TikTok <small>reach</small></span></div>
+        <div class="row"><span class="sw" style="background:#cdb185"></span><span class="l-name">Instagram Reels <small>reach</small></span></div>
+        <div class="row"><span class="sw" style="background:#d8c8a8"></span><span class="l-name">YouTube Shorts <small>proof + reach</small></span></div>
+        <div class="row"><span class="sw" style="background:#9c7c4c"></span><span class="l-name">Facebook Reels <small>reach</small></span></div>
+        <div class="row"><span class="sw" style="background:#7d6440"></span><span class="l-name">LinkedIn <small>professional credibility</small></span></div>
+        <div class="row"><span class="sw" style="background:#8a6e44"></span><span class="l-name">X / Twitter <small>conversation</small></span></div>
+        <div class="row"><span class="sw" style="background:#3c3c3c"></span><span class="l-name">Threads <small>operator notes</small></span></div>
+      </div>
+    </div>
+    <p class="note rise" style="margin-top:18px">Hub-and-spoke: one short-form video — generated, brand-checked, and auto-posted everywhere.</p>
+    <div class="wm">03</div>
+  </section>
+
+  <!-- 5 · INSTAGRAM (cadence chart) -->
+  <section class="slide">
+    <div class="eyebrow rise">Primary channel</div>
+    <h2 class="rise">Instagram: the floor cadence.</h2>
+    <hr class="stripe rise" />
+    <div class="cols c2u rise" style="margin-top:14px">
+      <div>
+        <div class="cadence">
+          <div class="col"><div class="blk grow" style="height:70%"></div><div class="cap">Reel</div><div class="sub">reach</div></div>
+          <div class="col"><div class="blk grow" style="height:70%"></div><div class="cap">Reel</div><div class="sub">reach</div></div>
+          <div class="col"><div class="blk alt grow" style="height:100%"></div><div class="cap">Carousel</div><div class="sub">depth</div></div>
+        </div>
+        <p class="note" style="margin-top:14px"><strong style="color:var(--brass)">3 posts / week</strong> · floor, not ceiling · hit it ≥80% of weeks</p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px">The five formats</h3>
+        <ul class="bul tight">
+          <li><strong>Before / During / After</strong> — the rehab arc</li>
+          <li><strong>Operator Notes</strong> — one lesson, plainly told</li>
+          <li><strong>Numbers Without Hype</strong> — real figures, no flex</li>
+          <li><strong>Market Walks</strong> — a street, a thesis</li>
+          <li><strong>Openings Spotlight</strong> — a unit + the bio link</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wm">04</div>
+  </section>
+
+  <!-- 6 · YOUTUBE -->
+  <section class="slide">
+    <div class="eyebrow rise">Proof library</div>
+    <h2 class="rise">YouTube: where skeptics<br>go to believe you.</h2>
+    <hr class="stripe rise" />
+    <div class="cols c2 rise" style="margin-top:14px">
+      <ul class="bul">
+        <li><strong>1 long-form / month</strong> — 6–12 min, phone footage + voiceover</li>
+        <li><strong>Shorts</strong> cut from the week's reels — free incremental reach</li>
+        <li><strong>Evergreen</strong> — keeps working months after posting, unlike a reel</li>
+        <li><strong>The hub</strong> the IG bio, Substack & email signatures point to</li>
+      </ul>
+      <div>
+        <h3 style="margin-bottom:12px">Four formats</h3>
+        <div class="chips">
+          <span class="tag">Deal Debrief</span><span class="tag">Rehab Breakdown</span>
+          <span class="tag">BRRRR Field Notes</span><span class="tag">Market Dispatch</span>
+        </div>
+      </div>
+    </div>
+    <div class="wm">05</div>
+  </section>
+
+  <!-- 7 · MARKETS -->
+  <section class="slide">
+    <div class="eyebrow rise">Don't treat the markets the same</div>
+    <h2 class="rise">Three markets, three plays.</h2>
+    <hr class="stripe rise" />
+    <div class="cols c3 rise" style="margin-top:14px;align-items:stretch">
+      <div class="card">
+        <div class="k">Hillsdale, MI</div>
+        <h3>Reputation density</h3>
+        <ul class="bul tight" style="margin-top:8px">
+          <li>Smallest market, tightest network</li>
+          <li>Show up usefully — the College</li>
+          <li>Student & faculty housing trust</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="k">Cleveland, OH</div>
+        <h3>Relationship pipeline</h3>
+        <ul class="bul tight" style="margin-top:8px">
+          <li>Neighborhood-specific content</li>
+          <li>Wholesaler · estate-attorney · CDC ties</li>
+          <li>Where direct-seller flow lives</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="k">South Bend, IN</div>
+        <h3>Institutional trust</h3>
+        <ul class="bul tight" style="margin-top:8px">
+          <li>Notre Dame & healthcare-adjacent</li>
+          <li>Transient, high-trust tenant base</li>
+          <li>Be the reliable professional operator</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wm">06</div>
+  </section>
+
+  <!-- 8 · FUNNEL (funnel chart) -->
+  <section class="slide">
+    <div class="eyebrow rise">From a reel to a conversation — no forms</div>
+    <h2 class="rise">The funnel is a link and an inbox.</h2>
+    <hr class="stripe rise" />
+    <div class="funnel-grid rise" style="margin-top:10px">
+      <svg viewBox="0 0 460 360" width="100%" aria-label="Marketing funnel">
+        <polygon points="40,12 420,12 350,90 110,90" fill="#5a4a30"></polygon>
+        <polygon points="110,98 350,98 300,176 160,176" fill="#7d6440"></polygon>
+        <polygon points="160,184 300,184 268,262 192,262" fill="#9c7c4c"></polygon>
+        <polygon points="192,270 268,270 244,348 216,348" fill="#B08D57"></polygon>
+        <text x="230" y="56" text-anchor="middle" fill="#fff" font-size="17" font-weight="800" font-family="Inter">SEE</text>
+        <text x="230" y="142" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" font-family="Inter">TAP</text>
+        <text x="230" y="228" text-anchor="middle" fill="#fff" font-size="14" font-weight="800" font-family="Inter">CHOOSE</text>
+        <text x="230" y="314" text-anchor="middle" fill="#000" font-size="12" font-weight="800" font-family="Inter">CONVERT</text>
+      </svg>
+      <div class="funnel-stages">
+        <div class="fstage"><div class="fp">01</div><div><h4>See</h4><p>Reel / short — operator content, tagged by market with a clear CTA.</p></div></div>
+        <div class="fstage"><div class="fp">02</div><div><h4>Tap</h4><p><code>/links</code> hub — the IG bio page, four UTM-tagged buttons, on brand.</p></div></div>
+        <div class="fstage"><div class="fp">03</div><div><h4>Choose</h4><p>Openings · Tenants · Owners · Substack — routed to the right page.</p></div></div>
+        <div class="fstage"><div class="fp">04</div><div><h4>Convert</h4><p>Market-aliased email — <code>rentals+hillsdale@</code>, <code>owners@</code> — the key event.</p></div></div>
+      </div>
+    </div>
+    <div class="wm">07</div>
+  </section>
+
+  <!-- 9 · ANALYTICS (pipeline) -->
+  <section class="slide">
+    <div class="eyebrow rise">If we can't measure it, we're guessing</div>
+    <h2 class="rise">A free analytics stack, end to end.</h2>
+    <hr class="stripe rise" />
+    <div class="pipe rise" style="margin-top:14px">
+      <div class="node"><div class="pn">01 · IN</div><h4>UTM links</h4><p>Every inbound link tagged by source, campaign & market.</p></div>
+      <div class="arr">→</div>
+      <div class="node"><div class="pn">02 · ON-SITE</div><h4>GA4 + GTM</h4><p>5 events fire automatically on the site.</p></div>
+      <div class="arr">→</div>
+      <div class="node"><div class="pn">03 · OFF-SITE</div><h4>Lead Log</h4><p>Emails, calls & offers logged by hand, by market.</p></div>
+      <div class="arr">→</div>
+      <div class="node"><div class="pn">04 · VIEW</div><h4>Looker Studio</h4><p>One page, shared with Shavit, reviewed monthly.</p></div>
+    </div>
+    <div class="cols c2 rise" style="margin-top:26px">
+      <div>
+        <h3 style="margin-bottom:10px;font-size:14px">The five tracked events</h3>
+        <div class="chips">
+          <span class="tag" style="border-color:var(--brass);color:var(--brass)">email_click ★</span>
+          <span class="tag">openings_click</span><span class="tag">owners_page_view</span>
+          <span class="tag">substack_click</span><span class="tag">youtube_click</span>
+        </div>
+      </div>
+      <ul class="bul tight">
+        <li><strong>★ email_click</strong> is the conversion — rental & seller emails</li>
+        <li>Security held: CSP loosens by <strong>exactly two</strong> entries for Google</li>
+      </ul>
+    </div>
+    <div class="wm">08</div>
+  </section>
+
+  <!-- 10 · 90-DAY TARGETS (range bars) -->
+  <section class="slide">
+    <div class="eyebrow rise">What "good" looks like in 90 days</div>
+    <h2 class="rise">The targets we review against.</h2>
+    <hr class="stripe rise" />
+    <div class="targets rise" style="margin-top:16px;max-width:1080px">
+      <div class="trow">
+        <div class="t-lab">Posting floor <small>weeks hitting the cadence</small></div>
+        <div class="t-track"><div class="t-band grow" style="left:80%;width:20%"></div><div class="t-scale"><span>0%</span><span>100%</span></div></div>
+        <div class="t-goal">≥ 80%</div>
+      </div>
+      <div class="trow">
+        <div class="t-lab">IG follower growth <small>month over month</small></div>
+        <div class="t-track"><div class="t-band grow" style="left:33.3%;width:33.3%"></div><div class="t-scale"><span>0%</span><span>15%</span></div></div>
+        <div class="t-goal">5–10%</div>
+      </div>
+      <div class="trow">
+        <div class="t-lab">Qualified tenant inquiries <small>per available unit</small></div>
+        <div class="t-track"><div class="t-band grow" style="left:50%;width:33.3%"></div><div class="t-scale"><span>0</span><span>6</span></div></div>
+        <div class="t-goal">3–5</div>
+      </div>
+      <div class="trow">
+        <div class="t-lab">Source attribution <small>inquiries we can trace</small></div>
+        <div class="t-track"><div class="t-band grow" style="left:70%;width:30%"></div><div class="t-scale"><span>0%</span><span>100%</span></div></div>
+        <div class="t-goal">≥ 70%</div>
+      </div>
+      <div class="trow">
+        <div class="t-lab">Direct-seller conversations <small>credible, per month</small></div>
+        <div class="t-track"><div class="t-band grow" style="left:20%;width:40%"></div><div class="t-scale"><span>0</span><span>5</span></div></div>
+        <div class="t-goal">1–3</div>
+      </div>
+      <div class="trow">
+        <div class="t-lab">Openings with trackable traffic <small>no unit goes dark</small></div>
+        <div class="t-track"><div class="t-band grow" style="left:0%;width:100%"></div><div class="t-scale"><span>0%</span><span>100%</span></div></div>
+        <div class="t-goal">100%</div>
+      </div>
+    </div>
+    <p class="note rise" style="margin-top:18px">Brass band = the target zone on each scale.</p>
+    <div class="wm">09</div>
+  </section>
+
+  <!-- 11 · MISTAKES -->
+  <section class="slide">
+    <div class="eyebrow rise">The ways this goes wrong</div>
+    <h2 class="rise">Three mistakes we won't make.</h2>
+    <hr class="stripe rise" />
+    <div class="cols c3 rise" style="margin-top:14px;align-items:stretch">
+      <div class="card">
+        <div class="k">Avoid 01</div>
+        <h3>Sounding like a raise</h3>
+        <ul class="bul tight" style="margin-top:8px"><li>No return claims</li><li>No "invest with us"</li><li>Awareness ≠ solicitation</li></ul>
+      </div>
+      <div class="card">
+        <div class="k">Avoid 02</div>
+        <h3>Guru gloss</h3>
+        <ul class="bul tight" style="margin-top:8px"><li>Over-polish kills trust</li><li>Operator proof is the moat</li><li>Phone footage wins</li></ul>
+      </div>
+      <div class="card">
+        <div class="k">Avoid 03</div>
+        <h3>One-size markets</h3>
+        <ul class="bul tight" style="margin-top:8px"><li>Three distinct audiences</li><li>Post per market</li><li>Track per market</li></ul>
+      </div>
+    </div>
+    <div class="wm">10</div>
+  </section>
+
+  <!-- 12 · CLOSE -->
+  <section class="slide">
+    <div class="eyebrow rise">What happens next</div>
+    <h2 class="rise">Sustainable, measured,<br>already built.</h2>
+    <hr class="stripe rise" />
+    <div class="cols c2 rise" style="margin-top:14px">
+      <div>
+        <h3 style="margin-bottom:10px;font-size:14px">Live now</h3>
+        <ul class="bul tight">
+          <li><strong>/links</strong> hub page — on-site, on-brand</li>
+          <li><strong>GA4 + GTM</strong> events wired & verified</li>
+          <li><strong>Lead Log</strong> + <strong>Looker</strong> templates ready</li>
+          <li><strong>90-day targets</strong> baked into the review</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-bottom:10px;font-size:14px">The cadence</h3>
+        <ul class="bul tight">
+          <li><strong>Weekly</strong> — 2 reels + 1 carousel, by market</li>
+          <li><strong>Monthly</strong> — 1 YouTube long-form + dashboard review</li>
+          <li><strong>~30 min</strong> of Shavit's time per reel</li>
+        </ul>
+        <hr class="stripe" />
+        <p class="lead">Warm partnerships. Filled units. Real seller conversations. On autopilot, across every platform.</p>
+      </div>
+    </div>
+    <div class="wm">11</div>
+  </section>
+
+</div>
+
+<div class="counter"><b id="cur">01</b> / <span id="tot">12</span></div>
+<div class="ctrls"><button id="prev" aria-label="Previous slide">‹</button><button id="next" aria-label="Next slide">›</button></div>
+<div class="hint">← → or space to navigate · F for fullscreen</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0, n = slides.length;
+  document.getElementById('tot').textContent = String(n).padStart(2,'0');
+  function show(k){
+    i = Math.max(0, Math.min(n-1, k));
+    slides.forEach(function(s,idx){ s.classList.toggle('active', idx===i); });
+    document.getElementById('bar').style.width = (i/(n-1)*100)+'%';
+    document.getElementById('cur').textContent = String(i+1).padStart(2,'0');
+  }
+  function nextS(){ show(i+1); } function prevS(){ show(i-1); }
+  document.getElementById('next').onclick = nextS;
+  document.getElementById('prev').onclick = prevS;
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); nextS(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prevS(); }
+    else if(e.key==='Home'){ show(0); } else if(e.key==='End'){ show(n-1); }
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+  });
+  document.getElementById('deck').addEventListener('click', function(e){
+    if(e.target.closest('a,button')) return;
+    (e.clientX > window.innerWidth*0.5) ? nextS() : prevS();
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

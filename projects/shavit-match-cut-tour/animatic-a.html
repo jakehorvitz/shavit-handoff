@@ -1,0 +1,146 @@
+<style>
+  :root{--brass:#B08D57;--gold:#FFC000;--ink:#f4f1ea;--before:#d08a6a;--after:#7fb08a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#000;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px}
+  .badge{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8c857a}
+  .badge b{color:var(--brass)}
+  .player{position:relative;width:min(92vw,calc(88vh*9/16));aspect-ratio:9/16;background:#000;border-radius:16px;
+    overflow:hidden;box-shadow:0 20px 70px #000a;border:1px solid #222}
+  .layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
+  .layer.on{opacity:1}
+  .kb{animation:kb 6s ease-out forwards}@keyframes kb{from{transform:scale(1.001)}to{transform:scale(1.07)}}
+  .kbout{animation:kbout 6s ease-out forwards}@keyframes kbout{from{transform:scale(1.08)}to{transform:scale(1.0)}}
+  .rise{animation:rise 3s ease-in forwards}
+  @keyframes rise{0%{transform:scale(1.05) translateY(0) rotate(0)}
+    100%{transform:scale(.34) translateY(-42%) rotate(320deg);filter:brightness(.8)}}
+  .fx{position:absolute;inset:-25%;pointer-events:none;opacity:0}
+  .dust{background:radial-gradient(circle at 50% 60%,rgba(150,128,100,.96),rgba(70,58,44,.75) 42%,transparent 72%)}
+  .dust.blow{animation:blow 2.2s ease-in-out forwards}
+  @keyframes blow{0%{opacity:0;transform:scale(.6)}35%{opacity:.98;transform:scale(1)}70%{opacity:.7;transform:scale(1.15)}100%{opacity:0;transform:scale(1.4)}}
+  .sweep{inset:0;background:linear-gradient(115deg,transparent 42%,rgba(255,240,200,.6) 50%,transparent 58%);background-size:280% 100%;background-position:180% 0}
+  .sweep.go{animation:sweep 1.1s ease-in-out forwards}
+  @keyframes sweep{0%{opacity:0;background-position:180% 0}30%{opacity:1}100%{opacity:0;background-position:-80% 0}}
+  .flash{inset:0;background:#0a0a0a}.flash.go{animation:flash .5s ease-out}
+  @keyframes flash{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
+  .sky{inset:0;background:linear-gradient(180deg,#8fb8e0 0%,#c9dcef 45%,#eef4fb 100%)}
+  .sky.go{animation:skyin 3s ease-in forwards}
+  @keyframes skyin{0%{opacity:0}55%{opacity:.2}100%{opacity:1}}
+  .word{position:absolute;left:8%;right:8%;bottom:19%;text-align:center;opacity:0;z-index:9}
+  .word.on{opacity:1;transition:opacity .5s ease}
+  .word .t{display:inline-block;background:#000c;border:1px solid var(--brass);color:#fff;padding:9px 15px;border-radius:7px;
+    font-size:clamp(13px,3.4vw,20px);letter-spacing:.16em;text-transform:uppercase;font-weight:800;line-height:1.35;white-space:pre-line;backdrop-filter:blur(2px)}
+  .word .a{display:block;margin-top:9px;font-size:11px;letter-spacing:.08em;color:#e8dfce;text-shadow:0 1px 3px #000}
+  .addr{position:absolute;left:8%;right:8%;top:16%;text-align:center;opacity:0;z-index:9;transition:opacity .5s ease}
+  .addr.on{opacity:1}
+  .addr .s{display:inline-block;background:#000a;border:1px solid var(--brass);color:var(--brass);padding:6px 13px;border-radius:6px;
+    font-size:clamp(11px,2.8vw,15px);letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .batag{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:11;font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;padding:5px 14px;border-radius:6px;opacity:0;transition:opacity .35s ease}
+  .batag.on{opacity:1}
+  .batag.b{background:#1c110b;color:var(--before);border:1px solid #45291a}
+  .batag.a{background:#0f1a12;color:var(--after);border:1px solid #1f3a2a}
+  .end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#000;opacity:0;z-index:12;transition:opacity .7s ease}
+  .end.on{opacity:1}
+  .closer{font-size:clamp(15px,4vw,24px);letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--gold);text-align:center;line-height:1.5;opacity:0}
+  .closer.on{opacity:1;transition:opacity .8s ease}
+  .sig{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0}.sig.on{opacity:1;transition:opacity 1s ease}
+  .mark{width:44px;height:44px;border:2px solid var(--brass);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--brass);font-size:20px}
+  .wordmark{font-size:15px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink);font-weight:700}
+  .tagline{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#8c857a}
+  .beatlbl{position:absolute;top:12px;left:12px;z-index:10;background:#000a;color:#fff;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:5px;border:1px solid #ffffff22}
+  .music{position:absolute;top:12px;right:12px;z-index:10;background:#000a;color:var(--gold);font-size:10px;letter-spacing:.08em;padding:4px 9px;border-radius:5px;border:1px solid #ffffff22}
+  .vig{position:absolute;inset:0;z-index:8;pointer-events:none;box-shadow:inset 0 0 120px #000a}
+  .bar{position:absolute;left:0;right:0;bottom:0;height:4px;background:#ffffff1a;z-index:11}.bar i{display:block;height:100%;width:0;background:var(--brass)}
+  .ctrl{display:flex;gap:10px;align-items:center}
+  button{background:#161616;color:var(--ink);border:1px solid #333;border-radius:8px;padding:9px 16px;font-size:13px;letter-spacing:.06em;cursor:pointer;font-family:inherit}
+  button:hover{border-color:var(--brass)}
+  .tc{font-variant-numeric:tabular-nums;color:#8c857a;font-size:12px}
+  .legend{font-size:11px;color:#8c857a;letter-spacing:.04em;text-align:center;max-width:540px}
+  .legend b{color:var(--before)} .legend i{color:var(--after);font-style:normal}
+</style>
+
+<div class="badge"><b>Version A</b> — AI Showcase · animatic · ⛔ needs Shavit sign-off</div>
+
+<div class="player" id="player">
+  <img class="layer" id="imgA"><img class="layer" id="imgB">
+  <div class="fx dust" id="dust"></div>
+  <div class="fx sweep" id="sweep"></div>
+  <div class="fx flash" id="flash"></div>
+  <div class="fx sky" id="sky"></div>
+  <div class="vig"></div>
+  <div class="batag" id="batag"></div>
+  <div class="addr" id="addr"><span class="s">River Street · Hillsdale, Michigan</span></div>
+  <div class="word" id="word"><span class="t" id="wordT"></span><span class="a" id="wordA"></span></div>
+  <div class="beatlbl" id="beatlbl">01 · —</div>
+  <div class="music">♪ Mellencamp — Small Town</div>
+  <div class="end" id="end">
+    <div class="closer" id="closer">Built in Michigan,<br>Ohio &amp; Indiana.</div>
+    <div class="sig" id="sig"><div class="mark">S</div><div class="wordmark">Shavit Rootman</div><div class="tagline">Made in America · Local to the Midwest</div></div>
+  </div>
+  <div class="bar"><i id="barI"></i></div>
+</div>
+
+<div class="ctrl"><button id="replay">▶ Replay</button><span class="tc" id="tc">0.0s / 40.0s</span></div>
+<div class="legend">Reno beats show real <b>BEFORE</b> → <i>AFTER</i> (exterior · kitchen). Bath &amp; the other rooms are a clean tour of the renovated spaces. Ends on the address → 360 rise into the sky → Shavit outro. <br>Note: address shows street + city + state, <b>no house number</b> (register rule).</div>
+
+<script>
+const A="spec-assets/", TOTAL=40;
+const beats=[
+  {t:0,   lbl:"01 · Rebuild",      type:"teardown", before:"before_ext.jpg",     after:"after_ext.jpg"},
+  {t:5.5, lbl:"02 · Kitchen",      type:"reno",     before:"before_kitchen.jpg", after:"after_kitchen.jpg", word:"PROFESSIONAL\nACROSS THE BOARD.", attr:"— Jeffrey S. Riling · US Veteran"},
+  {t:11,  lbl:"03 · Bath",         type:"tour",     after:"after_shower.jpg",   word:"TRUSTWORTHY FRIEND.",             attr:"— Nicky · Cleveland Investor"},
+  {t:15.5,lbl:"04 · Living room",  type:"tour",     after:"reward_fireplace.jpg",word:"…MAKES YOU FEEL\nLIKE FAMILY.", attr:"— Jeffrey S. Riling · US Veteran"},
+  {t:20,  lbl:"05 · Sunroom",      type:"tour",     after:"reward_sunroom.jpg", word:"A MAN OF HIS WORD.",              attr:"— Nicky · Cleveland Investor"},
+  {t:24.5,lbl:"06 · Final house",  type:"finale",   after:"after_ext.jpg",      word:"THE HOUSE THAT\nCAME BACK.",     attr:""},
+  {t:33,  lbl:"07 · Signature",    type:"end"}
+];
+const $=id=>document.getElementById(id);
+let imgs=[$("imgA"),$("imgB")], cur=0, timers=[], start=0, raf=0;
+function preload(){beats.forEach(b=>["before","after"].forEach(k=>{if(b[k]){const i=new Image();i.src=A+b[k];}}));}
+function T(ms,fn){timers.push(setTimeout(fn,ms));}
+function clearAll(){timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf);
+  imgs.forEach(im=>{im.className="layer";im.style.transform="";});
+  ["dust","sweep","flash","sky"].forEach(f=>$(f).className="fx "+f);
+  $("word").className="word";$("addr").className="addr";$("end").className="end";$("closer").className="closer";$("sig").className="sig";
+  $("batag").className="batag";$("barI").style.width="0";}
+function showImg(src,kb){const nx=imgs[1-cur];nx.src=A+src;nx.classList.add(kb);void nx.offsetWidth;nx.classList.add("on");imgs[cur].classList.remove("on");cur=1-cur;}
+function tag(kind,txt){const el=$("batag");el.className="batag "+kind+" on";el.textContent=txt;}
+function tagOff(){$("batag").className="batag";}
+function word(b){if(b.word){$("wordT").textContent=b.word;$("wordA").textContent=b.attr||"";$("word").classList.add("on");}}
+
+function runBeat(b){
+  $("beatlbl").textContent=b.lbl;$("word").classList.remove("on");
+  if(b.type==="end"){
+    imgs[cur].classList.remove("on");tagOff();$("sky").className="fx sky";$("end").classList.add("on");
+    T(400,()=>$("closer").classList.add("on"));T(4600,()=>$("closer").classList.remove("on"));T(5000,()=>$("sig").classList.add("on"));return;
+  }
+  if(b.type==="teardown"){
+    tagOff();showImg(b.before,"kb");
+    T(1500,()=>{$("dust").classList.add("blow");$("flash").classList.add("go");});
+    T(2200,()=>showImg(b.after,"kb"));
+    T(3900,()=>{$("dust").className="fx dust";$("flash").className="fx flash";});return;
+  }
+  if(b.type==="reno"){
+    showImg(b.before,"kb");tag("b","● Before");
+    T(1900,()=>$("sweep").classList.add("go"));
+    T(2300,()=>{showImg(b.after,"kb");tag("a","✓ After");});
+    T(3300,()=>$("sweep").className="fx sweep");
+    T(2900,()=>word(b));return;
+  }
+  if(b.type==="tour"){tagOff();showImg(b.after,"kb");T(800,()=>word(b));return;}
+  if(b.type==="finale"){
+    tagOff();showImg(b.after,"kb");
+    T(700,()=>word(b));
+    T(2600,()=>{$("word").classList.remove("on");$("addr").classList.add("on");});   // address
+    T(5000,()=>{$("addr").classList.remove("on");                                    // 360 rise into sky
+      imgs[cur].classList.remove("kb");imgs[cur].classList.add("rise");$("sky").classList.add("go");});
+    return;
+  }
+}
+function tick(){const el=(performance.now()-start)/1000;
+  $("barI").style.width=Math.min(100,el/TOTAL*100)+"%";
+  $("tc").textContent=Math.min(TOTAL,el).toFixed(1)+"s / "+TOTAL.toFixed(1)+"s";
+  if(el<TOTAL) raf=requestAnimationFrame(tick);}
+function play(){clearAll();start=performance.now();beats.forEach(b=>T(b.t*1000,()=>runBeat(b)));raf=requestAnimationFrame(tick);}
+$("replay").onclick=play;preload();setTimeout(play,300);
+</script>

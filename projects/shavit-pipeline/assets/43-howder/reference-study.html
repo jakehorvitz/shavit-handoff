@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder, Reference Study · Joel Van Beek edit</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#2a2a2e;
+    --ink:#f4f2ec; --dim:#a5a29a; --faint:#6f6c64;
+    --brass:#B08D57; --gold:#FFC000; --ok:#7FB88A; --bad:#e0794a; --blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:32px;line-height:1.1;margin:.35em 0 .15em}
+  h1 .num{color:var(--faint);font-weight:400}
+  .sub{color:var(--dim);max-width:74ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  a{color:var(--brass)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-ai{background:rgba(110,163,214,.14);color:var(--blue);border:1px solid rgba(110,163,214,.42)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0}
+  .card h4{margin:0 0 8px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  .card .src{font-family:var(--mono);font-size:11px;color:var(--faint);margin-left:8px}
+  .decision{background:linear-gradient(180deg,rgba(110,163,214,.1),transparent);border:1px solid rgba(110,163,214,.35);border-left:3px solid var(--blue);border-radius:10px;padding:14px 16px;margin:14px 0}
+  .decision h4{margin:0 0 6px;color:var(--blue);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog b{color:var(--ink)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .filmstrip{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin:14px 0}
+  .filmstrip figure{margin:0}
+  .filmstrip img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:7px;border:1px solid var(--line);display:block}
+  .figc{font-size:10px;color:var(--faint);font-family:var(--mono);margin-top:4px;text-align:center}
+  .thesis{background:linear-gradient(180deg,rgba(255,192,0,.07),transparent);border:1px solid rgba(255,192,0,.3);border-left:3px solid var(--gold);border-radius:10px;padding:14px 16px;margin:14px 0}
+  .thesis h4{margin:0 0 6px;color:var(--gold);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .prompt{font-family:var(--mono);font-size:12px;color:#bcd8f2;background:#0d1218;border:1px solid rgba(110,163,214,.35);border-radius:8px;padding:10px 12px;margin:8px 0;white-space:pre-wrap}
+  @media(max-width:760px){.filmstrip{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body data-spec="43-howder-ref">
+<div class="wrap">
+
+<header>
+  <div class="kicker">Shavit Rootman · shavit-pipeline · 43 Howder reel · reference teardown</div>
+  <h1>Reference Study <span class="num">,  "How I Edit Modern Real Estate Videos"</span></h1>
+  <p class="sub">Source: <a href="https://www.youtube.com/watch?v=LnbDaoKNBcs" target="_blank">Joel Van Beek, How I Edit Modern Real Estate Videos (Cinematic Effects &amp; Transitions)</a>, 41:07, DaVinci Resolve tutorial building one vertical 9:16 reel for a two-storey house. I pulled the full video, extracted 239 frames, and read the entire narration. Every setting below comes from the video itself, cited by timestamp. This is the recreate-level teardown you asked for, annotate anything.</p>
+  <div class="meta-row">
+    <span class="chip">Editor: <b>DaVinci Resolve</b> (edit + Fusion pages)</span>
+    <span class="chip">AI tool: <b>Higgsfield</b>, same one we use</span>
+    <span class="chip">Format: <b>9:16 vertical</b></span>
+    <span class="chip">Base: <b>real gimbal footage</b> + AI inserts</span>
+    <span class="chip">Cost so far on our side: <b>0 credits</b></span>
+  </div>
+  <div class="revlog">
+    <h4>Revision log, newest first</h4>
+    <ul>
+      <li><span class="rev">study rev 1 · Jul 11</span>, full teardown from scratch: shot map, 12 technique cards with exact settings, both Higgsfield recipes verbatim, and the 43 Howder mapping decision.</li>
+    </ul>
+  </div>
+</header>
+
+<div class="thesis" data-annot="thesis">
+  <h4>The one-line thesis, why his edit looks professional and ours did not</h4>
+  <p style="margin:6px 0 0">His base layer is <b>real gimbal walkthrough footage</b>, and the craft is <b>speed ramps locked to music beats + motion blur over every ramp + a named transition at every seam</b>. AI appears constantly (night exterior, furnished rooms, dolly videos) but is <b>never shown slow</b>, it flashes past at 300-1600% speed under blur, so your eye reads energy, not seams. Our failed tours did the opposite: long, slow AI glides with nothing to hide them. His recipe = exactly the fix for every note you left on preview_tour v1-v3.</p>
+</div>
+
+<h2 data-annot="shot-map">The finished reel, shot map</h2>
+<p class="d">Reconstructed from the intro preview (0:00-0:28) and Final Result playback (40:12+). Green = real footage, blue = AI-generated.</p>
+<div class="filmstrip">
+  <figure><img src="ref/r1.jpg"><figcaption class="figc">night ext (AI)</figcaption></figure>
+  <figure><img src="ref/r2.jpg"><figcaption class="figc">living wide</figcaption></figure>
+  <figure><img src="ref/r3.jpg"><figcaption class="figc">kitchen wide</figcaption></figure>
+  <figure><img src="ref/r4.jpg"><figcaption class="figc">dining+island</figcaption></figure>
+  <figure><img src="ref/r5.jpg"><figcaption class="figc">fridge pop</figcaption></figure>
+  <figure><img src="ref/r6.jpg"><figcaption class="figc">basement suite</figcaption></figure>
+  <figure><img src="ref/r7.jpg"><figcaption class="figc">galley kitchen</figcaption></figure>
+  <figure><img src="ref/r8.jpg"><figcaption class="figc">island whip</figcaption></figure>
+  <figure><img src="ref/r9.jpg"><figcaption class="figc">finale ramps</figcaption></figure>
+</div>
+<table>
+  <tr><th>#</th><th>Shot</th><th>Source</th><th>In-transition</th><th>What happens</th></tr>
+  <tr><td>1</td><td>Day exterior, gimbal push toward house</td><td><span class="badge b-real">REAL</span></td><td>, </td><td>Speed ramp: slow 50%, then fast right into the beat drop.</td></tr>
+  <tr><td>2</td><td>Night exterior, dolly-in</td><td><span class="badge b-ai">AI</span></td><td><b>Luma fade</b> on the beat drop</td><td>Same house turned to night by Higgsfield; windows glowing. Extra fake zoom ramp on an adjustment clip.</td></tr>
+  <tr><td>3</td><td>Living room wide (whole main floor)</td><td><span class="badge b-real">REAL</span></td><td>cut on beat</td><td>Clip reversed, ramped, then nearly frozen at 4-5% speed.</td></tr>
+  <tr><td>4</td><td>Same frame, furnished</td><td><span class="badge b-ai">AI</span></td><td><b>Disappear effect</b></td><td>Nano Banana Pro furnishing of the exact freeze frame. Furniture pops in, then luma-fades away.</td></tr>
+  <tr><td>5</td><td>Reverse ramp through kitchen</td><td><span class="badge b-real">REAL</span></td><td>luma fade out</td><td>Zoom out → whip to stove (fast, on beat) → <b>shine sweep across the stovetop</b> → wide kitchen + dining.</td></tr>
+  <tr><td>6</td><td>Dining room furnishing cycle</td><td><span class="badge b-ai">AI</span></td><td>beat cuts</td><td>3-4 furnishing variants flash by; a keyframed <b>camera-shake wobble</b> spikes at each cut.</td></tr>
+  <tr><td>7</td><td>Fridge closed → open</td><td><span class="badge b-real">REAL</span></td><td><b>Warp transition</b> (strong warp 2)</td><td>Two separate real takes, both reversed, stabilized and center-aligned so the fridge "pops" open.</td></tr>
+  <tr><td>8</td><td>Basement suite: empty → furnished ×3</td><td><span class="badge b-ai">AI</span></td><td><b>Warp</b> L→R→L, value .15</td><td>Real empty clip, then 3-4 Higgsfield dolly-in videos from one furnished still, synced at ~300% speed.</td></tr>
+  <tr><td>9</td><td>Galley kitchen push</td><td><span class="badge b-real">REAL</span></td><td>fake zoom ramp</td><td>Speed ramp to the counter + stove frame.</td></tr>
+  <tr><td>10</td><td>Island orbit</td><td><span class="badge b-real">REAL</span></td><td><b>Cine whip</b> (right + up, overshoot)</td><td>The signature move, whip over the island, motion matched.</td></tr>
+  <tr><td>11</td><td>Finale montage</td><td><span class="badge b-real">REAL</span></td><td>beat cuts</td><td>Pendants, corridor, empty room, pure fast/slow/fast speed ramps, every ramp blurred.</td></tr>
+</table>
+
+<h2 data-annot="music">Music structure</h2>
+<p class="d" data-annot="music-note">Every single speed point, cut, and transition midpoint is dragged onto a beat, he says it out loud a dozen times ("right between the last beat and the beat drop", "right over top of the beat"). The edit is built <b>music-first</b>: beat grid down, then footage bent to it. For us: lock the Hurts So Good full-band section first, mark every backbeat, then place ramps. This is the single highest-leverage habit in the whole video.</p>
+
+<h2>Technique cards, exact settings, cited</h2>
+
+<div class="card" data-annot="T1">
+  <h4>T1 · Speed ramp (the core unit) <span class="src">0:28-1:55, used everywhere</span></h4>
+  <ul>
+    <li>Ctrl+R on the clip → add a <b>speed point</b> → slow segment to <b>50%</b> (or 4-5% for a near-freeze before an AI insert; up to 1600% for whips).</li>
+    <li>Speed marker placed <b>between the last beat and the beat drop</b>; fast segment ends exactly on the drop.</li>
+    <li>Keyframe tray → switch lanes to <b>curves</b> → select keyframe → <b>ease in and out</b> → drag handle out; when it hits the clip edge, <b>hold Shift and extend the other side further</b>. That asymmetric easing is what makes his ramps feel liquid.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T2">
+  <h4>T2 · Day → night exterior (AI) <span class="src">1:55-3:49</span></h4>
+  <ul>
+    <li>Grab a still of the real day shot (color page → grab still → export).</li>
+    <li>Higgsfield image tab, upload still, prompt verbatim:</li>
+  </ul>
+  <div class="prompt">Keep the photo exactly the same. Turn the photo to nighttime. Turn on the interior lights so the windows are glowing. Turn on the exterior lights.</div>
+  <ul>
+    <li>Then <b>Cinema Studio</b>: start frame = that generation, camera movement = <b>dolly in</b>, <b>no text prompt</b>, aspect 9:16, <b>duration 10s</b> (extra runway for ramping), audio off, slow motion off.</li>
+    <li>This is exactly our approved V_entry2 pattern, one clean camera primitive from a real still, no prompt.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T3">
+  <h4>T3 · Stabilize an AI clip <span class="src">3:49-4:38</span></h4>
+  <ul>
+    <li>Fusion: <b>Tracker</b> node over a high-contrast center feature → track forward + reverse.</li>
+    <li>Operation = <b>match move</b>, merge = <b>background only</b>. Add a Transform, keyframe center at frame 1, then scale up until the transparent edges vanish.</li>
+    <li>Fixes the AI camera-shake complaint without rejecting the clip.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T4">
+  <h4>T4 · Luma fade transition <span class="src">4:38-7:09 · his default seam</span></h4>
+  <ul>
+    <li>Settings he uses "99% of the time": <b>luma source = video 2, fade mode = bright first</b>. The bright windows eat the frame first, that is why day→night feels organic.</li>
+    <li>Midpoint tuning: hold Ctrl on the left edge of the transition and drag left, extends it AND shifts the midpoint early.</li>
+    <li>He also uses a luma fade to exit the furnished still (15:10), reads as a wipe, not a dissolve. This answers your "needs to be more creative than a dissolve" note.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T5">
+  <h4>T5 · Fake speed ramp on an adjustment clip <span class="src">6:19-7:07, 32:08</span></h4>
+  <ul>
+    <li>Adjustment clip over the seam → Fusion Transform → keyframe <b>size 1 → 2</b>, spline S-handles bent so the growth all lands at the end.</li>
+    <li>Adds camera energy to clips that have none, directly usable on our static photo crops.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T6">
+  <h4>T6 · AI furnishing still <span class="src">9:09-10:33</span></h4>
+  <ul>
+    <li>Still of the exact freeze frame → Higgsfield <b>Nano Banana Pro</b> → prompt verbatim:</li>
+  </ul>
+  <div class="prompt">Furnish the living room with modern furniture. Add a couch on the left, two accent chairs by the large windows, a modern light stand, a coffee table, an area rug. Make the furniture elegant and modern. Do not change anything about the perspective or proportions of the room, and add a TV on the TV wall and a TV console.</div>
+  <ul>
+    <li>Note the shape: named objects with placements + a hard "do not change perspective or proportions", our realism-prompt standard already matches this.</li>
+    <li>2K resolution, aspect matched. Because it is the same frame, the cut lands pixel-true.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T7">
+  <h4>T7 · Disappear effect + freeze cut <span class="src">13:48-15:10</span></h4>
+  <ul>
+    <li>Slow the real clip to ~4%, cut, place the furnished still after the cut, keep the tail of the real clip to cut back to the same frame.</li>
+    <li>The Disappear generator sits over the cut (offset zeroed with , and . keys), pivot moved over the furniture, aspect widened. Furniture materializes with an aberration flicker instead of a crossfade.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T8">
+  <h4>T8 · Shine sweep on a feature <span class="src">16:07-19:41</span></h4>
+  <ul>
+    <li>Fusion: Tracker in <b>corner positioning</b> mode pinned to the stovetop, tracked only between two timeline markers.</li>
+    <li>White Background node piped into the tracker foreground input, masked by a thin vertical <b>rectangle, huge soft edge, slight rotation</b>, keyframed to sweep left → right across the stove. Easing ~80, <b>blend 0.07</b> so it is a glint, not a flashlight.</li>
+    <li>This is a "feature callout" without a caption, could be our stainless / island / shower-glass beat and it answers "describe the rooms" without words.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T9">
+  <h4>T9 · Furnishing cycle + wobble <span class="src">19:48-22:29</span></h4>
+  <ul>
+    <li>3-4 furnishing variants of one frame, straight cuts on beats.</li>
+    <li>Adjustment clip over all of it → Fusion <b>Camera Shake</b>: deviations near zero, <b>overall strength keyframed 0→1→0 spiking exactly at each cut</b>, edges = mirror, shake speed ~0.04, eased with sharpened peaks.</li>
+    <li>The cut itself is what shakes, reads like an impact, not a slideshow advance. Directly reusable over our photo cuts.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T10">
+  <h4>T10 · Fridge / door pop <span class="src">22:29-27:09</span></h4>
+  <ul>
+    <li>Two real takes (closed walk-in, open walk-in), both reversed, both speed ramped to ~50% with the stop landing between beats.</li>
+    <li>Alignment trick: overlay clip 2 at <b>opacity 0</b> to eyeball the match; both clips tracker-stabilized (match move, background only) and centered against the <b>center guide</b>; a throwaway rectangle at the fridge top is copy-pasted between Fusion comps as a scale reference.</li>
+    <li>Seam covered by a <b>Warp transition, mode strong warp 2, strength ≈1.38</b>, a tiny twist-flick, not a full warp.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T11">
+  <h4>T11 · Dolly stack (empty → furnished ×N) <span class="src">27:09-31:17</span></h4>
+  <ul>
+    <li>One furnished still → <b>Cinema Studio dolly-in, repeated 3-4 times</b> from the SAME start frame → near-identical camera paths.</li>
+    <li>Sync in the edit: overlay at opacity 0, raise speed until features line up (~300%), trim, cut between them mid-move.</li>
+    <li>Seams: warp transitions alternating <b>left, right, left</b>, value ≈0.15, easing changed <b>expo → sine</b> (softer). Alternation = rhythm; never repeat one gimmick twice in a row, your standing rule, confirmed by the reference.</li>
+  </ul>
+</div>
+
+<div class="card" data-annot="T12">
+  <h4>T12 · Cine whip + motion blur pass <span class="src">32:40-40:10</span></h4>
+  <ul>
+    <li><b>Cine whip</b> into the island orbit: transition as long as possible, direction right + slightly up (matches the orbit), curve mode <b>overshoot</b> (eases in, snaps back out), additional crop raised to hide edge mirroring. Built-in blur, never double-blur a whip.</li>
+    <li>Then a blur pass over <b>every</b> speed ramp with <b>Motion Blur Simple</b>: zoom mode scale ≈1.7 for push-ins, ≈−1.5 for pull-outs, direction mode (scale 1, angle 0, low strength) for lateral moves, pivot point ON the subject. Spans shortened and centered on each ramp. Pro (pixel-tracking) only for curvy moves.</li>
+    <li>His words: motion blur is "the one major critical piece missing" from most edits. It was also missing from every cut of ours.</li>
+  </ul>
+</div>
+
+<h2 data-annot="failures">Why our parked cuts failed his test</h2>
+<table>
+  <tr><th>Your note (on tour v1-v3)</th><th>What the reference does instead</th></tr>
+  <tr><td>"too slow… the door needs to open into the house"</td><td>Nothing slow ever survives; slow segments exist only as launch pads for a ramp landing on a beat.</td></tr>
+  <tr><td>"that cut scene SCREAMS AI… less staged, less shiny"</td><td>AI shown at 300%+ under motion blur, or as a 1-frame-matched still. Never asked to carry a scene.</td></tr>
+  <tr><td>"cut too sudden… look at real estate tours"</td><td>Every seam has a named device: luma fade, warp .15, cine whip, disappear, shine. Zero naked cuts.</td></tr>
+  <tr><td>"weird jump cut… should be smooth one shot"</td><td>The "one shot" feel comes from motion continuity across cuts (reverse ramps + whips that match direction), not from actual long takes.</td></tr>
+  <tr><td>"WHAT THE FUCK IS THIS THIS IS NOT THE HOUSE"</td><td>Furnishing prompts pin perspective and proportions; dolly videos are generated FROM the real still, so the geometry never drifts.</td></tr>
+</table>
+
+<h2 data-annot="mapping">Mapping this to 43 Howder, the one structural gap</h2>
+<p class="d">His raw material is real gimbal video walking the house. We have <b>photos only</b> (16 finished Unit 1, 7 before, 25 mid-rehab Unit 2). Three paths:</p>
+<div class="decision" data-annot="path-decision">
+  <h4>Decision, which base layer do we build on?</h4>
+  <ul style="margin:6px 0 0">
+    <li><b>Path A, real footage (recommended, matches the recipe 1:1):</b> Shavit shoots the 5-minute vertical phone walkthrough (draft ask already written). We then apply this recipe natively: his phone clips become the real base, AI only for day→night exterior and optional furnishing cycles. Strongest result, zero geometry risk, ~1 week dependency on Shavit.</li>
+    <li><b>Path B, photos + Cinema Studio dollies now:</b> every "real clip" is replaced by a 10s dolly-in generated from a hand-picked real photo (exactly how he made his night shot and basement dollies), then hidden the way he hides them: beat-locked ramps, blur pass, luma/warp seams. Costs credits (I will quote the exact number per clip and get your go before ANY spend; ~205 remain). Riskier but starts today.</li>
+    <li><b>Path C, hybrid (my recommendation if you want motion this week):</b> build the spine from photos with T1/T5/T9 (ramps, fake zooms, wobble cuts, all free, no AI), add ONE Cinema Studio test clip as the hook, and swap in Shavit's real footage when it lands.</li>
+  </ul>
+</div>
+<div class="decision" data-annot="tooling">
+  <h4>Decision, tooling</h4>
+  <ul style="margin:6px 0 0">
+    <li>The reference is built in <b>DaVinci Resolve</b> (free version covers nearly all of it) with his paid presets, but he has free from-scratch tutorials for every preset (luma fade, warp, cine whip, disappear, motion blur), and I can rebuild each in our ffmpeg pipeline: luma fade = luma-map xfade, warp flick = displacement ramp, whip = directional-blur pan, zoom blur = radial blur ramp, wobble = keyframed shake. Slower per-iteration but fully scriptable and reviewable shot-by-shot, which fits our gate process.</li>
+    <li>If you have Resolve installed and want to drive it yourself from my shot plan, say so, otherwise I default to the ffmpeg build.</li>
+  </ul>
+</div>
+<div class="decision" data-annot="credits">
+  <h4>Standing constraint, credits</h4>
+  <ul style="margin:6px 0 0">
+    <li>~205 Higgsfield credits remain. Nothing in this study spent any. No generation happens without your explicit go per batch, with cost quoted first.</li>
+  </ul>
+</div>
+
+<h2 data-annot="next">Proposed next step (one step, then I stop and wait)</h2>
+<p class="d">On your go: I fold this study into <b>storyboard rev 8</b>, a new beat-locked shot map for 43 Howder built on this grammar (music grid first, ramp/seam plan per shot, AI beats marked and justified), with changes highlighted. You grill it before anything is built or generated. Annotate this page or the storyboard; I read both prefixes.</p>
+
+<footer>reference-study · rev 1 · Jul 11 2026 · source frames in <code>ref/</code>, full transcript in scratchpad · annotations land under <code>43-howder-ref/</code></footer>
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

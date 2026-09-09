@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shavit Rootman Rebuild Cut | AI Showcase</title>
+<link rel="canonical" href="https://shavitrootman.com/spec-a-ai-fancy.html">
+<meta name="description" content="Version A storyboard for Shavit Rootman's AI-assisted rebuild cut: teardown reveal, walkthrough, furniture morph staging, disclosure, and ship gate.">
+<meta property="og:type" content="video.other">
+<meta property="og:title" content="Shavit Rootman Rebuild Cut | AI Showcase">
+<meta property="og:description" content="A 40-second AI-assisted rebuild cut storyboard with teardown reveal, walkthrough, staging morphs, and disclosure gate.">
+<meta property="og:image" content="https://shavitrootman.com/spec-assets/after_ext.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shavit Rootman Rebuild Cut | AI Showcase">
+<meta name="twitter:description" content="Version A storyboard for an AI-assisted rebuild reveal and property walkthrough.">
+<meta name="twitter:image" content="https://shavitrootman.com/spec-assets/after_ext.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "The House That Came Back - Rebuild Cut",
+  "description": "Version A storyboard for Shavit Rootman's AI-assisted rebuild cut, including teardown reveal, walkthrough tour, furniture morph staging, AI disclosure, and ship gate.",
+  "creator": {
+    "@type": "Person",
+    "name": "Shavit Rootman"
+  },
+  "dateCreated": "2026-07-05",
+  "inLanguage": "en-US",
+  "about": [
+    "AI-assisted real estate video",
+    "teardown reveal",
+    "property walkthrough",
+    "virtual staging"
+  ],
+  "image": "https://shavitrootman.com/spec-assets/after_ext.jpg"
+}
+</script>
+<style>
+  :root{--bg:#0a0a0a;--panel:#141414;--panel2:#1a1a1a;--ink:#f4f1ea;--dim:#9a948a;--brass:#B08D57;
+    --gold:#FFC000;--line:#2a2722;--red:#d0553f;--before:#7a5b5b;--after:#5b7a63;--pop:#6a86c0}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 90px}
+  .num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  h1{font-size:29px;letter-spacing:.1em;text-transform:uppercase;margin:6px 0 6px;font-weight:800}
+  .sub{color:var(--dim);font-size:13px}
+  .rule{height:2px;width:60px;background:var(--red);margin:14px 0 22px}
+  h2{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:46px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .banner{display:flex;gap:14px;align-items:flex-start;background:#1a0f0b;border:1px solid #40201a;border-left:4px solid var(--red);border-radius:12px;padding:15px 18px;margin:18px 0 0}
+  .banner b{color:var(--red)} .banner p{margin:5px 0 0;font-size:13px;color:#e6d8d2}
+  code{background:#000;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px;color:var(--gold)}
+  .hero{display:grid;grid-template-columns:320px 1fr;gap:22px;align-items:start}
+  .stage{position:relative;width:100%;aspect-ratio:9/16;max-height:440px;border-radius:12px;overflow:hidden;background:#000;border:1px solid var(--line)}
+  .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .before{z-index:2;animation:tearOut 8s ease-in-out infinite}
+  .after{z-index:1;animation:riseIn 8s ease-in-out infinite}
+  .workers{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;
+    background:repeating-linear-gradient(100deg, transparent 0 22px, rgba(255,200,0,.05) 22px 24px);animation:workers 8s ease-in-out infinite}
+  .dust{position:absolute;inset:-25%;z-index:4;pointer-events:none;opacity:0;
+    background:radial-gradient(circle at 50% 62%, rgba(150,128,100,.95), rgba(70,58,44,.7) 42%, transparent 72%);animation:dust 8s ease-in-out infinite}
+  .furn{position:absolute;left:14%;right:14%;bottom:15%;height:26%;z-index:2;border-radius:8px;
+    background:linear-gradient(180deg,rgba(120,110,95,0),rgba(90,80,66,.4));opacity:0;animation:furn 8s ease-in-out infinite}
+  .lbl{position:absolute;top:8px;left:8px;z-index:6;background:#000b;color:#fff;font-size:10px;letter-spacing:.13em;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid #ffffff22}
+  @keyframes tearOut{0%,20%{opacity:1;transform:scale(1) translateY(0) rotate(0);filter:brightness(1) blur(0)}
+    27%{transform:scale(1.03) rotate(.5deg);filter:brightness(.55) blur(2px)}
+    34%{opacity:.2;transform:scale(.85) translateY(5%) rotate(-.6deg);filter:brightness(.2) blur(10px)}
+    40%,100%{opacity:0;transform:scale(.78) translateY(8%)}}
+  @keyframes riseIn{0%,36%{opacity:0;transform:translateY(16%) scale(1.08);filter:brightness(.3) blur(9px)}
+    50%{opacity:1;transform:translateY(3%) scale(1.02);filter:brightness(.85) blur(2px)}
+    62%,100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1) blur(0)}}
+  @keyframes workers{0%,22%{opacity:0}26%,32%{opacity:1}38%,100%{opacity:0}}
+  @keyframes dust{0%,25%{opacity:0}36%{opacity:.97}46%{opacity:.85}58%{opacity:0}100%{opacity:0}}
+  @keyframes furn{0%,66%{opacity:0}78%,92%{opacity:1}100%{opacity:0}}
+  .story{display:flex;flex-direction:column;gap:9px}
+  .beat{display:grid;grid-template-columns:56px 1fr;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .beat .t{font-variant-numeric:tabular-nums;color:var(--gold);font-size:12px;font-weight:700}
+  .beat h3{margin:0 0 2px;font-size:13px} .beat p{margin:0;font-size:12px;color:#cfc9bd}
+  .board{display:flex;flex-direction:column;gap:12px}
+  .row{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .rbody{padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+  .frames{display:flex;gap:6px;align-items:center}
+  .fr{width:70px} .fr img{width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid var(--line);display:block}
+  .fr.b img{border-color:var(--before)} .fr.a img{border-color:var(--after)} .fr.s img{border-color:var(--pop)}
+  .fr span{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:block;text-align:center;margin-top:3px}
+  .arrow{color:var(--pop);font-size:15px}
+  .tc{font-variant-numeric:tabular-nums;color:var(--gold);font-size:12px;font-weight:700}
+  .kv{font-size:12.5px;margin:2px 0;color:#cfc9bd}
+  .kv b{color:var(--brass);font-weight:600;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;min-width:78px;display:inline-block}
+  .word{display:inline-block;margin-top:6px;background:#000;border:1px solid var(--brass);color:#fff;padding:5px 10px;border-radius:5px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;white-space:pre-line}
+  .trans{background:#160b08;border-top:1px dashed #3a1f16;padding:6px 14px;font-size:11px;color:#e0b3a5;letter-spacing:.06em;text-transform:uppercase}
+  .trans b{color:var(--red)} .trans.g{background:#0e120f;border-color:#1e2b22;color:#b6cdbe} .trans.g b{color:var(--after)}
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  ul{margin:6px 0 0;padding-left:16px}li{font-size:13px;color:#cfc9bd;margin:5px 0}
+  table{width:100%;border-collapse:collapse;margin-top:6px}
+  td,th{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);font-size:13px}
+  th{color:var(--brass);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  a{color:var(--gold)}
+  @media(max-width:760px){.hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="num">bones-pipeline · stage 3 · <span style="color:var(--red)">VERSION A — AI SHOWCASE</span> · needs Shavit override · 2026-07-05</div>
+  <h1>The House That Came Back — <span style="color:var(--red)">Rebuild Cut</span></h1>
+  <div class="sub">Shavit Rootman · teardown-rebuild → walkthrough tour → furniture morph-staging · River Street &nbsp;·&nbsp; compare → <a href="spec.html"><b>spec.html</b></a> (Version B, safe)</div>
+  <div class="rule"></div>
+
+  <div class="banner">
+    <div style="font-size:20px">⛔</div>
+    <div><b>Ship-gate: requires Shavit's explicit written yes.</b> The teardown, the fake construction crews, and the
+      furniture that materializes into empty rooms are all fabricated ([[no-generated-architecture]] + virtual-staging generation).
+      This is the "AI look" Shavit rejected on v3/v6 — so it's the maximalist showcase, not the default.
+      <p>Mitigations baked in: the dust <b>fully occludes screen</b> at each swap so fake frames are brief and always
+      resolve to a <b>real photo</b>; furniture <b>morphs/light-sweeps</b> in (never bounces — the corny tell), dressed to the real palette.</p>
+    </div>
+  </div>
+
+  <h2>1 · The hero moment — your vision, playing</h2>
+  <div class="hero">
+    <div class="stage">
+      <span class="lbl">crews tear apart → dust takeover → reveal</span>
+      <div class="dust"></div><div class="workers"></div><div class="furn"></div>
+      <img class="before" src="spec-assets/before_ext.jpg" alt="Before exterior photo of the River Street house">
+      <img class="after" src="spec-assets/after_ext.jpg" alt="After exterior photo of the rebuilt River Street house">
+    </div>
+    <div class="story">
+      <div class="beat"><div class="t">0.0s</div><div><h3>The tired house</h3><p>Real before-exterior, slow push. Mellencamp bar drops.</p></div></div>
+      <div class="beat"><div class="t">1.6s</div><div><h3>CREWS DESCEND &amp; REBUILD</h3><p>AI construction crews swarm — the house tears apart and reassembles. <b>Fabricated.</b></p></div></div>
+      <div class="beat"><div class="t">2.6s</div><div><h3>DUST TAKES THE SCREEN</h3><p>Debris cloud blooms until it <b>fills frame</b> — the occlusion hiding the swap.</p></div></div>
+      <div class="beat"><div class="t">3.4s</div><div><h3>THE REVEAL</h3><p>Dust blows away → finished house resolves. <b>Real after-photo.</b></p></div></div>
+      <div class="beat"><div class="t">then</div><div><h3>WALK INSIDE</h3><p>One continuous glide carries us through the door; furniture <b>morphs in</b> room by room.</p></div></div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:8px">↑ CSS approximation, loops. Real Higgsfield/Kling build is far more detailed (crews, debris physics, volumetric dust, staging morph).</p>
+
+  <h2>2 · Frame-by-frame (≈40s · rebuild → walkthrough → staging)</h2>
+  <div class="board">
+
+    <div class="row">
+      <div class="rbody"><div class="frames"><div class="fr b"><img src="spec-assets/before_ext.jpg" alt="Before exterior anchor frame"><span>before</span></div><span class="arrow">→</span><div class="fr a"><img src="spec-assets/after_ext.jpg" alt="After exterior reveal anchor frame"><span>after</span></div></div>
+        <div><span class="tc">0.0–5.0s · HERO TEARDOWN-REBUILD</span><div class="kv"><b>Transition</b> crews tear apart → dust takeover → reveal (the moment above)</div><div class="kv"><b>Word</b> — silent through the reveal</div></div></div>
+      <div class="trans">then → <b>glide through the front door</b> (continuous walkthrough, no cut)</div>
+    </div>
+
+    <div class="row">
+      <div class="rbody"><div class="frames"><div class="fr a"><img src="spec-assets/after_kitchen.jpg" alt="Finished kitchen anchor frame"><span>kitchen</span></div><span class="arrow">↝</span><div class="fr s"><img src="spec-assets/after_kitchen.jpg" alt="Kitchen staging morph target frame" style="filter:saturate(1.15) brightness(1.05)"><span>staged</span></div></div>
+        <div><span class="tc">5.0–10.5s · KITCHEN</span><div class="kv"><b>Motion</b> glide in; light-sweep, styling morphs (stools, counter life)</div><span class="word">PROFESSIONAL
+ACROSS THE BOARD.</span><div class="kv" style="margin-top:5px">— Jeffrey S. Riling · US Veteran</div></div></div>
+      <div class="trans g">→ <b>continuous glide</b> to the living room</div>
+    </div>
+
+    <div class="row">
+      <div class="rbody"><div class="frames"><div class="fr a"><img src="spec-assets/reward_fireplace.jpg" alt="Living room fireplace anchor frame"><span>empty</span></div><span class="arrow">↝</span><div class="fr s"><img src="spec-assets/reward_fireplace.jpg" alt="Living room furniture morph target frame" style="filter:contrast(1.08) brightness(1.03)"><span>furnished</span></div></div>
+        <div><span class="tc">10.5–16.0s · LIVING ROOM</span><div class="kv"><b>Staging</b> sofa, rug, art <b>morph in</b> around the lit fireplace (real palette)</div><span class="word">A MAN OF HIS WORD.</span><div class="kv" style="margin-top:5px">— Nicky · Cleveland Investor · <span style="color:var(--pop)">generated furniture</span></div></div></div>
+      <div class="trans g">→ glide down the hall to the bath</div>
+    </div>
+
+    <div class="row">
+      <div class="rbody"><div class="frames"><div class="fr a"><img src="spec-assets/after_shower.jpg" alt="Finished bathroom anchor frame"><span>bath</span></div><span class="arrow">↝</span><div class="fr s"><img src="spec-assets/after_shower.jpg" alt="Bathroom styling sweep target frame" style="filter:brightness(1.05)"><span>styled</span></div></div>
+        <div><span class="tc">16.0–21.0s · BATH</span><div class="kv"><b>Staging</b> towels, plant, styling sweep in</div><span class="word">TRUSTWORTHY FRIEND.</span><div class="kv" style="margin-top:5px">— Nicky · Cleveland Investor</div></div></div>
+      <div class="trans g">→ glide into the sunroom</div>
+    </div>
+
+    <div class="row">
+      <div class="rbody"><div class="frames"><div class="fr a"><img src="spec-assets/reward_sunroom.jpg" alt="Sunroom anchor frame"><span>empty</span></div><span class="arrow">↝</span><div class="fr s"><img src="spec-assets/reward_sunroom.jpg" alt="Sunroom furniture morph target frame" style="filter:brightness(1.08) saturate(1.1)"><span>furnished</span></div></div>
+        <div><span class="tc">21.0–27.0s · SUNROOM</span><div class="kv"><b>Staging</b> seating + plants morph in as light blooms</div><span class="word">…MAKES YOU FEEL
+LIKE FAMILY.</span><div class="kv" style="margin-top:5px">— Jeffrey S. Riling · US Veteran · <span style="color:var(--pop)">generated furniture</span></div></div></div>
+      <div class="trans g">→ pull back out to the full finished home</div>
+    </div>
+
+    <div class="row">
+      <div class="rbody"><div class="frames"><div class="fr a"><img src="spec-assets/after_ext.jpg" alt="Finished exterior closing frame"><span>full</span></div></div>
+        <div><span class="tc">27.0–40.0s · STAKE + CLOSER + SIGNATURE</span>
+        <div class="kv" style="margin-top:4px"><b>Stake</b> "THE HOUSE THAT CAME BACK"</div>
+        <span class="word" style="border-color:var(--gold);color:var(--gold)">BUILT IN MICHIGAN,
+OHIO &amp; INDIANA.</span>
+        <div class="kv" style="margin-top:6px"><b>Signature</b> static brass logo (no pulse)</div>
+        <div class="kv"><b>Music</b> John Mellencamp — "Small Town" (both cuts)</div>
+        <div class="kv"><b>Disclosure</b> "AI-assisted" tag ([[meta-ai-disclosure-mandate]])</div></div></div>
+    </div>
+
+  </div>
+
+  <h2>3 · Generation plan (Higgsfield) &amp; credits</h2>
+  <div class="box">
+    <table>
+      <tr><th>Job</th><th>Approach</th><th>~Credits</th></tr>
+      <tr><td>Upscale anchors → 2K</td><td><code>upscale_image</code></td><td>~16</td></tr>
+      <tr><td>Hero teardown-rebuild + dust reveal</td><td><code>generate_video</code> i2v / dust preset · Kling; re-roll heavy</td><td>~60–120</td></tr>
+      <tr><td>4 room staging morphs (furniture in)</td><td>Kling i2v, empty→furnished, smooth</td><td>~50–80</td></tr>
+      <tr><td>Continuous walkthrough glides</td><td>Kling i2v, one move each</td><td>~40–60</td></tr>
+      <tr><td>Assemble / grade / caption / audio</td><td>local ffmpeg</td><td>0</td></tr>
+    </table>
+    <p class="kv" style="margin-top:10px"><b>Version A full render ≈ 190–290 credits.</b> Balance: <b>704</b>. Proof (hero teardown + 1 staged room) ≈ 60–90 cr.</p>
+  </div>
+
+  <h2>4 · Reference (teardown + furniture-morph)</h2>
+  <div class="box">
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=_mtsoapv1po">Empty Room to Fully Designed Space Using AI</a> — empty→furnished morph</li>
+      <li><a href="https://www.youtube.com/watch?v=eU0mDLGw3WA">Nano Banana Pro + Kling for Interior Animations</a> — staging morph technique</li>
+      <li><a href="https://www.youtube.com/watch?v=aMLKJQYr1Pk">This AI Video Animation Transforms Any Room</a></li>
+      <li><a href="https://www.youtube.com/watch?v=ReASV_e1mwc">Higgsfield + Kling 3.0 walkthrough</a> — the one you sent</li>
+    </ul>
+    <p class="kv" style="margin-top:8px">Locked: <b>smooth morph / light-sweep</b> staging, never bounce-in (the corny tell).</p>
+  </div>
+
+  <div class="sub" style="margin-top:26px">A = maximalist AI (needs Shavit's yes). B = <a href="spec.html"><b>spec.html</b></a>, the safe cut that ships clean. Proof-render both heroes (~120–170 cr) to pick from footage. Gate open.</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+file,kind,property,state,confidence,hygiene
+before_001.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons); black-bars; adjacent-photo sliver top; NOTE: house number 61 but pebbledash/Tudor facade CONFLICTS with 61 Salem hero+film — confirm with Shavit; pairs with after_050
+before_002.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); black-bars (navy frame); adjacent-photo sliver top
+before_003.jpg,before,UNKNOWN,UNKNOWN,LOW,black-bars (black right edge + dark frame); adjacent-photo sliver top
+before_004.jpg,before,River Street,MI,HIGH,ig-chrome (chevrons + dots + red sliver left); black-bars; next-photo sliver bottom
+before_005.jpg,before,River Street,MI,HIGH,ig-chrome (chevrons + dots + red sliver left); black-bars; next-photo sliver bottom
+before_006.jpg,before,River Street,MI,HIGH,"ig-chrome (chevron + dots + red sliver); baked-caption (MLS watermark ""MichRIC"" bottom-left — licensing risk); black-bars; thumbnail sliver bottom"
+before_007.jpg,before,UNKNOWN,UNKNOWN,LOW,desktop-text (grey window-chrome bar top); black-bars (navy bands); adjacent-photo sliver top-right
+before_008.jpg,before,UNKNOWN,UNKNOWN,LOW,desktop-text (grey window-chrome bar top); black-bars (navy bands); adjacent-photo sliver top-right
+before_009.jpg,before,61 Salem,MI,LOW,ig-chrome (chevrons); black-bars (black frame top/right)
+before_010.jpg,before,61 Salem,MI,LOW,ig-chrome (chevrons + dots); desktop-text (grey bar top); black-bars (navy bands); adjacent-photo sliver top-right
+before_011.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevron + dots); black-bars; thumbnail strip sliver bottom
+before_012.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots + red sliver left); black-bars (navy top band); adjacent-photo sliver top-right; NOTE: grey cinderblock 2-story rear — construction matches 2217 Parkview painted-block; IN-before CANDIDATE pending Shavit confirm
+before_013.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + red sliver left); black-bars (navy top band); adjacent-photo sliver top-right; NOTE: same cinderblock house as before_012 — Parkview IN-before CANDIDATE
+before_014.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevron + dots + red sliver left); black-bars (navy top band); adjacent-photo sliver top-right
+before_015.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons); desktop-text (grey window-chrome bar top); black-bars (navy bands); adjacent-photo sliver top-right
+before_016.jpg,before,UNKNOWN,UNKNOWN,LOW,"ig-chrome (dots); desktop-text (macOS window title ""Personal Jarvis"" bottom-right — PRIVACY LEAK); thumbnail strip sliver bottom"
+before_017.jpg,before,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevron + dots); black-bars (navy/black frame); adjacent-photo slivers top+bottom
+after_018.jpg,after,61 Salem,MI,HIGH,ig-chrome (chevron + red badge sliver); adjacent grid-photo strip top
+after_019.jpg,after,61 Salem,MI,MED,ig-chrome (chevrons + dots + red badge sliver); adjacent-photo slivers top/bottom
+after_020.jpg,after,61 Salem,MI,HIGH,ig-chrome (chevrons + dots + red badge sliver); photo-grid sliver bottom
+after_021.jpg,after,61 Salem,MI,MED,ig-chrome (chevrons + dots); photo-grid sliver bottom
+after_022.jpg,after,61 Salem,MI,MED,ig-chrome (chevrons + dots + red badge sliver); photo-grid sliver bottom
+after_023.jpg,before,61 Salem,MI,MED,MISFILED before-state photo; ig-chrome (chevrons + red badge sliver); adjacent photo strip top
+after_024.jpg,before,61 Salem,MI,MED,MISFILED before-state photo; ig-chrome (chevrons + dots + red badge sliver); photo-grid sliver bottom
+after_025.jpg,before,61 Salem,MI,MED,MISFILED before-state photo; ig-chrome (chevron + red badge sliver); adjacent photo strip top
+after_026.jpg,after,East Saint Joe,MI,HIGH,ig-chrome (username tag pills calebdienerphotography/wrightbradley14/camdendice + tag icon + dots + chevron + red badge); black-bars heavy letterbox; photo-grid slivers — WORST OFFENDER
+after_027.jpg,after,East Saint Joe,MI,HIGH,ig-chrome (chevrons + red badge sliver); black-bars top strip
+after_028.jpg,after,East Saint Joe,MI,HIGH,ig-chrome (chevrons + dots + red badge sliver); black-bars thin top/bottom
+after_029.jpg,after,East Saint Joe,MI,HIGH,ig-chrome (chevrons + dots + red badge sliver); black-bars thin top/bottom
+after_030.jpg,after,East Saint Joe,MI,HIGH,ig-chrome (chevrons + dots + red badge sliver); black-bars thin top/bottom
+after_031.jpg,after,East Saint Joe,MI,HIGH,ig-chrome (chevrons + dots + red badge sliver); black-bars thin top/bottom
+after_032.jpg,after,East Saint Joe,MI,HIGH,ig-chrome (chevron + red badge sliver); black-bars left+top
+after_033.jpg,after,East Saint Joe,MI,MED,ig-chrome (chevrons + dots + red badge sliver); black-bars top+right
+after_034.jpg,after,East Saint Joe,MI,MED,ig-chrome (chevrons + dots + red badge sliver); black-bars top+left
+after_035.jpg,before,East Saint Joe,MI,HIGH,MISFILED before-state photo; ig-chrome (chevrons + dots + red badge sliver); black-bars heavy letterbox; photo-grid slivers
+after_036.jpg,before,East Saint Joe,MI,HIGH,MISFILED before-state photo; ig-chrome (chevrons + red badge sliver); black-bars top strip
+after_037.jpg,before,East Saint Joe,MI,MED,MISFILED before-state photo; ig-chrome (chevron + dots + red badge sliver); black-bars top strip
+after_038.jpg,after,Budlong,MI,HIGH,ig-chrome (dots + chevron); black-bars bottom strip + top-left corner
+after_039.jpg,after,Budlong,MI,HIGH,ig-chrome (chevrons + red badge sliver); black-bars top strip
+after_040.jpg,after,Budlong,MI,MED,ig-chrome (chevrons + dots + red badge sliver); black-bars top+bottom
+after_041.jpg,after,Budlong,MI,MED,ig-chrome (chevron + dots + red badge sliver); black-bars left+top+bottom
+after_042.jpg,before,Budlong,MI,LOW,MISFILED before-state photo; clean — ONLY clean crop in the set
+after_043.jpg,before,Budlong,MI,MED,MISFILED before-state photo; other UI: Google Street View remnants (circled X close button + map pin); black-bars top strip
+after_044.jpg,after,Second Chance Ranch,MI,HIGH,ig-chrome (chevron + red badge sliver); adjacent grid-photo strip top
+after_045.jpg,after,Second Chance Ranch,MI,HIGH,ig-chrome (chevrons + dots + red badge sliver); photo-grid slivers top/bottom
+after_046.jpg,after,Second Chance Ranch,MI,MED,ig-chrome (chevrons + red badge sliver); black-bars left/right/top
+after_047.jpg,after,Second Chance Ranch,MI,MED,ig-chrome (chevrons + dots + red badge sliver); photo-grid sliver top
+after_048.jpg,after,Second Chance Ranch,MI,MED,ig-chrome (chevrons + dots + red badge sliver); photo-grid slivers top/bottom
+after_049.jpg,after,River Street,MI,LOW,ig-chrome (left chevron + partial red icon left edge); adjacent-photo sliver top
+after_050.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevron + dots); black-bars left/right; adjacent-photo sliver top; NOTE: house number 61 charcoal-gable/cream-stucco — CONFLICTS with 61 Salem hero+film; pairs with before_001; do NOT composite as Salem
+after_051.jpg,after,West Side,OH,HIGH,ig-chrome (chevrons + dots); black-bars frame; adjacent-photo slivers top+bottom
+after_052.jpg,after,West Side,OH,MED,ig-chrome (chevrons + dots); black-bars; adjacent-photo sliver top
+after_053.jpg,after,61 Salem,MI,MED,ig-chrome (chevrons); black-bars; adjacent-photo sliver top
+after_054.jpg,after,61 Salem,MI,MED,ig-chrome (chevrons); black-bars; adjacent-photo sliver top
+after_055.jpg,after,River Street,MI,HIGH,ig-chrome (chevron + dots); adjacent-photo strip bottom
+after_056.jpg,after,River Street,MI,HIGH,ig-chrome (chevrons + dots + red icon slivers); black-bars; adjacent-photo strip bottom
+after_057.jpg,after,River Street,MI,MED,ig-chrome (chevrons + red icon sliver); black-bars top; adjacent-photo sliver
+after_058.jpg,after,River Street,MI,HIGH,ig-chrome (chevrons + dots + red icon sliver); black-bars; adjacent-photo strip bottom
+after_059.jpg,after,River Street,MI,MED,ig-chrome (chevrons + dots + red icon sliver); black-bars; adjacent-photo strip bottom
+after_060.jpg,after,River Street,MI,HIGH,ig-chrome (chevrons + dots + red icon sliver); black-bars; adjacent-photo strip bottom
+after_061.jpg,after,River Street,MI,HIGH,ig-chrome (chevrons + dots + red bar left edge); black-bars; adjacent-photo strip bottom
+after_062.jpg,after,34 Mead,MI,MED,BANNED; desktop-text (navy window/browser bar top); black-bars; adjacent-photo sliver top-right
+after_063.jpg,after,34 Mead,MI,HIGH,"BANNED; ig-chrome FULL desktop post UI (shavitness username; caption ""34 Mead Street... bought for $57 500"" — DOLLAR FIGURE; likes; comment box; arrow + dots); desktop-text"
+after_064.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); black-bars; adjacent-photo strip bottom
+after_065.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); black-bars; adjacent-photo strip bottom
+after_066.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); desktop-text (navy browser bar top); black-bars; adjacent-photo slivers top corners
+after_067.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); black-bars; adjacent-photo strip bottom
+after_068.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons); desktop-text (navy bar + grey browser strip top); black-bars; adjacent-photo sliver top-right
+after_069.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); desktop-text (navy bar + grey browser strip top); black-bars; adjacent-photo slivers
+after_070.jpg,after,2217 Parkview,IN,HIGH,ig-chrome (chevrons + red icon sliver); desktop-text (navy bar top); black-bars; adjacent-photo sliver top-right
+after_071.jpg,after,2217 Parkview,IN,HIGH,ig-chrome (chevrons); desktop-text (navy bar + grey browser strip top); black-bars; adjacent-photo slivers top
+after_072.jpg,after,2217 Parkview,IN,MED,ig-chrome (chevrons + dots + red icon sliver); desktop-text (navy bar top); black-bars; adjacent-photo slivers
+after_073.jpg,after,2217 Parkview,IN,MED,ig-chrome (chevrons + dots + red icon sliver); desktop-text (navy bar top); black-bars; adjacent-photo slivers
+after_074.jpg,after,2217 Parkview,IN,MED,ig-chrome (chevrons + dots + red icon sliver); desktop-text (navy bar top); black-bars; adjacent-photo slivers
+after_075.jpg,after,2217 Parkview,IN,MED,ig-chrome (chevrons + dots + red icon sliver); desktop-text (navy bar top); black-bars; adjacent-photo slivers
+after_076.jpg,after,2217 Parkview,IN,MED,ig-chrome (chevrons + dots + red icon sliver); desktop-text (navy bar top); black-bars; adjacent-photo slivers
+after_077.jpg,after,Cleveland Heights,OH,HIGH,BANNED; ig-chrome (right chevron); desktop-text (navy bar + grey browser strip top); black-bars; adjacent-photo sliver top-right
+after_078.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); desktop-text (navy bar + grey browser strip top); black-bars; adjacent-photo slivers; pale-blue interiors + detached garage — Cleveland-area candidate
+after_079.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons + dots); desktop-text (navy bar + grey browser strip top); black-bars; adjacent-photo slivers; same property as after_078
+after_080.jpg,after,UNKNOWN,UNKNOWN,LOW,ig-chrome (chevrons); desktop-text (navy bar + grey browser strip top); black-bars; adjacent-photo sliver top-right (incl. sliver of adjacent post showing people's shoes); same property as after_078
+salem_video_before.jpg,before,61 Salem,MI,HIGH,"baked-caption (""BEFORE"" chip top-left); angle-mismatched vs salem_video_after (opposite corners) — NOT a frames-mode anchor pair"
+salem_video_after.jpg,after,61 Salem,MI,HIGH,"baked-caption (""AFTER"" chip top-left); matches hero 06; reserved for hook/reward per spec"
+salem_clean_before.jpg,before,61 Salem,MI,HIGH,clean crop from client-owned 61 Salem split-screen source; baked BEFORE chip removed
+salem_clean_after.jpg,after,61 Salem,MI,HIGH,clean crop from client-owned 61 Salem split-screen source; baked AFTER chip removed
+01_river_street_hillsdale__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 01_river_street_hillsdale.jpg
+02_34_mead_street_hillsdale__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 02_34_mead_street_hillsdale.jpg
+03_2217_parkview_south_bend__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 03_2217_parkview_south_bend.jpg
+04_cleveland_heights__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 04_cleveland_heights.jpg
+05_west_side_cleveland__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 05_west_side_cleveland.jpg
+06_61_salem_street_hillsdale__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 06_61_salem_street_hillsdale.jpg
+07_larchmere_duplex_cleveland__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 07_larchmere_duplex_cleveland.jpg
+08_east_saint_joe_hillsdale__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 08_east_saint_joe_hillsdale.jpg
+09_budlong_street_hillsdale__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 09_budlong_street_hillsdale.jpg
+10_second_chance_ranch_hillsdale__chrome_clean.jpg,after,UNKNOWN,UNKNOWN,LOW,clean chrome-shape scrub of 10_second_chance_ranch_hillsdale.jpg
+after_018__chrome_clean.jpg,after,61 Salem,MI,HIGH,clean chrome-shape scrub of after_018.jpg
+after_019__chrome_clean.jpg,after,61 Salem,MI,MED,clean chrome-shape scrub of after_019.jpg
+after_038__chrome_clean.jpg,after,Budlong,MI,HIGH,clean chrome-shape scrub of after_038.jpg
+after_039__chrome_clean.jpg,after,Budlong,MI,HIGH,clean chrome-shape scrub of after_039.jpg
+after_044__chrome_clean.jpg,after,Second Chance Ranch,MI,HIGH,clean chrome-shape scrub of after_044.jpg
+after_045__chrome_clean.jpg,after,Second Chance Ranch,MI,HIGH,clean chrome-shape scrub of after_045.jpg
+after_055__chrome_clean.jpg,after,River Street,MI,HIGH,clean chrome-shape scrub of after_055.jpg
+before_009__chrome_clean.jpg,before,61 Salem,MI,LOW,clean chrome-shape scrub of before_009.jpg
+salem_clean_after__chrome_clean.jpg,after,61 Salem,MI,HIGH,clean chrome-shape scrub of salem_clean_after.jpg
+after_051__chrome_clean.jpg,after,West Side,OH,HIGH,clean chrome-shape scrub of after_051.jpg

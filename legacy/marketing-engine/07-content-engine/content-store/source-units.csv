@@ -1,0 +1,7 @@
+id,market,pillar,headline,numbers_json,asset_folder_url,status,created,notes
+SU-001,Hillsdale,numbers,What 17 Lo Presto actually penciled to,"{""purchase"":"""",""rehab"":"""",""rent"":""""}",,unused,2026-06-15,Jake fills numbers from Shavit — never invent
+SU-002,Hillsdale,operator_note,Buying out-of-state without losing control,"{}",,unused,2026-06-15,Conceptual — no real asset required
+SU-003,Cleveland,before_after,Gut job to rented in one cycle,"{}",,unused,2026-06-15,Needs before+after stills in asset folder
+SU-004,Cleveland,market_walk,Why this block and not the next,"{}",,unused,2026-06-15,Google Street View — no asset folder needed
+SU-005,South Bend,openings,2BR near Notre Dame — managed in-house,"{""rent"":""""}",,unused,2026-06-15,Needs unit photos
+SU-006,South Bend,numbers,What a healthcare-adjacent rental returns,"{""purchase"":"""",""rehab"":"""",""rent"":""""}",,unused,2026-06-15,Fill rent at minimum

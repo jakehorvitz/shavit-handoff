@@ -1,0 +1,34 @@
+{
+  "id" : "F63FA400-0685-4C44-9E7D-2DBDC72D986C",
+  "isOpen" : false,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit Montage of Current Project Reels"
+        }
+      ],
+      "id" : "D7E7D129-83E5-4C55-BCCC-C5B5A6033272",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    },
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "make the meet the people card bigger and animate it"
+        }
+      ],
+      "id" : "56573FC7-8A80-40EB-B202-4C20F82F1B26",
+      "mentions" : [
+
+      ],
+      "role" : "user"
+    }
+  ],
+  "title" : "make the meet the people card bigger and",
+  "updatedAt" : "2026-07-30T06:02:12Z"
+}

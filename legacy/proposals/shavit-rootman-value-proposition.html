@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketing Value Proposition, Shavit Rootman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --ink:#0E1A2B;          /* deep navy */
+    --ink-2:#152740;        /* navy 2 */
+    --brass:#C8A35B;        /* warm brass/gold */
+    --brass-d:#B0894A;      /* darker brass */
+    --brass-l:#E0C690;      /* light brass */
+    --bone:#F6F1E7;         /* cream/bone */
+    --bone-2:#FBF8F2;       /* lighter cream */
+    --paper:#FFFFFF;
+    --text:#1C2430;         /* near-ink body */
+    --muted:#6E6354;        /* warm muted */
+    --line:#E4DBCB;         /* hairline */
+    --shadow:0 24px 60px -28px rgba(14,26,43,.32);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{
+    font-family:'Josefin Sans',system-ui,sans-serif;
+    color:var(--text);
+    background:var(--bone);
+    line-height:1.65;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;background:var(--paper);box-shadow:var(--shadow)}
+  .pad{padding:64px 72px}
+  h1,h2,h3,.serif{font-family:'Cinzel',serif}
+  .eyebrow{
+    font-family:'Josefin Sans';font-weight:600;font-size:12px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--brass-d)
+  }
+  .eyebrow.on-dark{color:var(--brass-l)}
+  .rule{height:1px;background:var(--line);border:0;margin:0}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:radial-gradient(120% 140% at 80% -10%, #1d3454 0%, var(--ink) 55%);
+    color:#EFE7D8;padding:72px 72px 64px;position:relative;overflow:hidden
+  }
+  .hero::after{
+    content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    border:1px solid rgba(200,163,91,.25);border-radius:50%
+  }
+  .hero::before{
+    content:"";position:absolute;right:-40px;top:40px;width:300px;height:300px;
+    border:1px solid rgba(200,163,91,.18);border-radius:50%
+  }
+  .hero .mono{font-family:'Josefin Sans';letter-spacing:.3em;font-size:11px;text-transform:uppercase;color:var(--brass-l);font-weight:600}
+  .hero h1{
+    font-size:clamp(2.4rem,5.4vw,4.1rem);font-weight:700;line-height:1.04;
+    letter-spacing:-.01em;margin:22px 0 0;color:#FBF6EC;max-width:14ch
+  }
+  .hero h1 .em{color:var(--brass-l);font-style:normal}
+  .hero .lead{
+    font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;
+    color:#D8CDB8;margin-top:20px;max-width:46ch;line-height:1.5
+  }
+  .meta-row{display:flex;flex-wrap:wrap;gap:28px;margin-top:40px;position:relative;z-index:2}
+  .meta-row .item{border-left:2px solid var(--brass);padding-left:14px}
+  .meta-row .k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-l);font-weight:600}
+  .meta-row .v{font-size:15px;color:#EFE7D8;margin-top:3px;font-weight:400}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:60px 72px}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:8px}
+  .sec-num{font-family:'Cinzel';font-size:14px;color:var(--brass-d);font-weight:600;letter-spacing:.1em}
+  .sec-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.1}
+  .sec-kicker{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--muted);font-style:italic;margin:6px 0 30px;max-width:60ch}
+
+  /* three questions */
+  .ask{background:var(--ink);color:#EFE7D8;border-radius:14px;padding:38px 44px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .ask .q .n{font-family:'Cinzel';color:var(--brass-l);font-size:13px;letter-spacing:.1em}
+  .ask .q h4{font-family:'Cinzel';font-weight:500;font-size:1.18rem;margin:10px 0 8px;color:#FBF6EC;line-height:1.2}
+  .ask .q p{font-size:14px;color:#C5BBA8;line-height:1.55}
+  .ask .q{border-top:2px solid var(--brass)}
+  .ask .q .top{padding-top:14px}
+
+  /* deliverables */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:6px}
+  .card{background:var(--bone-2);border:1px solid var(--line);border-radius:12px;padding:26px 28px;transition:box-shadow .2s,transform .2s}
+  .card:hover{box-shadow:0 18px 40px -26px rgba(14,26,43,.4);transform:translateY(-2px)}
+  .card .ic{width:38px;height:38px;border-radius:9px;background:var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .card .ic svg{width:20px;height:20px;stroke:var(--brass-l)}
+  .card h4{font-family:'Cinzel';font-size:1.12rem;font-weight:600;color:var(--ink);margin-bottom:8px}
+  .card p{font-size:14.5px;color:var(--muted);line-height:1.55}
+
+  /* objective list */
+  .obj{display:grid;grid-template-columns:1fr 1fr;gap:18px 44px;margin-top:8px}
+  .obj .row{display:flex;gap:14px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .obj .row svg{width:20px;height:20px;stroke:var(--brass-d);flex:none;margin-top:3px}
+  .obj .row b{font-family:'Cinzel';font-weight:600;color:var(--ink);font-size:15px}
+  .obj .row span{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+  .pull{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.55rem;color:var(--ink);text-align:center;padding:34px 8% 0;line-height:1.4}
+  .pull .b{color:var(--brass-d);font-style:normal;font-weight:600}
+
+  /* phases */
+  .phases{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:6px}
+  .phase{position:relative;padding:24px 22px;background:var(--bone-2);border:1px solid var(--line);border-radius:12px}
+  .phase .tag{font-family:'Cinzel';font-size:11px;letter-spacing:.12em;color:var(--brass-d);text-transform:uppercase}
+  .phase h4{font-family:'Cinzel';font-size:1.05rem;color:var(--ink);margin:8px 0 6px}
+  .phase p{font-size:13.5px;color:var(--muted);line-height:1.5}
+  .phase .dot{position:absolute;top:24px;right:22px;font-family:'Cinzel';font-size:1.4rem;color:var(--brass-l);font-weight:700}
+
+  /* charts */
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:10px}
+  .chart-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px 26px;box-shadow:0 10px 30px -24px rgba(14,26,43,.5)}
+  .chart-card.full{grid-column:1/-1}
+  .chart-card h4{font-family:'Cinzel';font-size:1.05rem;color:var(--ink);margin-bottom:2px}
+  .chart-card .sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .chart-box{position:relative;height:230px}
+  .chart-box.tall{height:260px}
+
+  /* KPI cards */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:6px}
+  .kpi{background:var(--ink);color:#EFE7D8;border-radius:12px;padding:24px 22px;border-top:3px solid var(--brass)}
+  .kpi .k{font-family:'Cinzel';font-size:1.18rem;color:var(--brass-l);font-weight:600}
+  .kpi .l{font-size:13px;color:#C5BBA8;margin-top:8px;line-height:1.45}
+  .roi{margin-top:26px;background:var(--bone-2);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:10px;padding:22px 26px;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--ink)}
+
+  /* why me */
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;margin-top:6px}
+  .why .r{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+  .why .r .num{font-family:'Cinzel';font-size:1.1rem;color:var(--brass-d);font-weight:700;flex:none;width:28px}
+  .why .r b{font-family:'Cinzel';color:var(--ink);font-size:15.5px;display:block;margin-bottom:2px}
+  .why .r span{font-size:14px;color:var(--muted);line-height:1.5}
+
+  /* investment */
+  .invest{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:stretch;margin-top:6px}
+  .price-card{background:var(--bone-2);border:1px solid var(--line);border-radius:12px;padding:28px 30px}
+  .price-card .label{font-family:'Cinzel';font-size:.95rem;letter-spacing:.06em;color:var(--brass-d);text-transform:uppercase}
+  .price-card .big{font-family:'Cinzel';font-size:2.6rem;color:var(--ink);font-weight:700;line-height:1;margin:10px 0 4px}
+  .price-card .strike{font-size:14px;color:var(--muted)}
+  .price-card .strike s{color:#A89A85}
+  .price-card ul{list-style:none;margin-top:16px}
+  .price-card li{font-size:14px;color:var(--muted);padding:6px 0 6px 22px;position:relative}
+  .price-card li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;background:var(--brass)}
+  .note{font-size:13px;color:var(--muted);font-style:italic;margin-top:14px;font-family:'Cormorant Garamond',serif;font-size:1.05rem}
+
+  /* next steps + footer */
+  .next{background:var(--ink);color:#EFE7D8;padding:54px 72px}
+  .next .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:24px}
+  .next .step{border-top:2px solid var(--brass);padding-top:16px}
+  .next .step .n{font-family:'Cinzel';color:var(--brass-l);font-size:13px}
+  .next .step h4{font-family:'Cinzel';font-weight:500;font-size:1.1rem;margin:8px 0 6px;color:#FBF6EC}
+  .next .step p{font-size:13.5px;color:#C5BBA8;line-height:1.5}
+  .signoff{display:flex;justify-content:space-between;align-items:flex-end;margin-top:46px;padding-top:24px;border-top:1px solid rgba(200,163,91,.25);flex-wrap:wrap;gap:16px}
+  .signoff .name{font-family:'Cinzel';font-size:1.3rem;color:#FBF6EC}
+  .signoff .sub{font-size:13px;color:#B7AC97;margin-top:4px}
+  .signoff .tn{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--brass-l)}
+
+  @media (max-width:880px){
+    .pad,.hero,section,.next{padding-left:32px;padding-right:32px}
+    .grid-2,.charts,.obj,.why,.invest,.ask,.phases,.kpis,.next .steps{grid-template-columns:1fr}
+    .hero h1{font-size:2.3rem}
+  }
+  @media print{
+    body{background:#fff}
+    .wrap{box-shadow:none;max-width:100%}
+    .card:hover{box-shadow:none;transform:none}
+    section,.hero,.next,.pad{page-break-inside:avoid}
+    .chart-card,.kpi,.phase,.card{page-break-inside:avoid}
+    @page{margin:14mm}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="mono">Marketing Value Proposition · June 2026</div>
+    <h1>Showcasing the Work.<br/><span class="em">Building the Reputation.</span></h1>
+    <p class="lead">A marketing engine for Shavit Rootman, built to make the brand match the growth, and to make the work speak before a single word is said.</p>
+    <div class="meta-row">
+      <div class="item"><div class="k">Prepared For</div><div class="v">Shavit · Charger Property Management</div></div>
+      <div class="item"><div class="k">Prepared By</div><div class="v">Jake Horvitz</div></div>
+      <div class="item"><div class="k">Re</div><div class="v">Social Brand Strategy &amp; Website</div></div>
+      <div class="item"><div class="k">Status</div><div class="v">For Your Review</div></div>
+    </div>
+  </header>
+
+  <!-- THE THREE QUESTIONS -->
+  <section>
+    <div class="sec-head"><span class="sec-num">, </span><h2 class="sec-title">You asked me three questions.</h2></div>
+    <p class="sec-kicker">This document answers all three, not with more reels, but with the strategy behind them.</p>
+    <div class="ask">
+      <div class="q"><div class="top"><div class="n">01</div><h4>What service?</h4><p>What, exactly, am I providing, and at what pace and cadence.</p></div></div>
+      <div class="q"><div class="top"><div class="n">02</div><h4>For the company?</h4><p>What it does for Shavit Rootman, measured in reach, engagement, and reputation.</p></div></div>
+      <div class="q"><div class="top"><div class="n">03</div><h4>Why me?</h4><p>Why I'm the one to build it, creative, strategic, and reliable.</p></div></div>
+    </div>
+  </section>
+  <hr class="rule"/>
+
+  <!-- 01 THE SERVICE -->
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">The Service</h2></div>
+    <p class="sec-kicker">A done-for-you brand content engine, every project turned into proof of your standard.</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 0 1 0 1.971l-11.54 6.347a1.125 1.125 0 0 1-1.667-.985V5.653Z"/></svg></div>
+        <h4>Signature Brand Film</h4>
+        <p>One cinematic, pinned introduction, the first thing anyone sees on your profile. Clients understand who you are in sixty seconds, before they read a word.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25A2.25 2.25 0 0 1 13.5 8.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"/></svg></div>
+        <h4>Before / After Reel System</h4>
+        <p>Templated, duplicable formats that turn every "written-off, rebuilt" project into content. Scalable by design, as the projects come, the content comes.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/></svg></div>
+        <h4>Short-Form Hooks</h4>
+        <p>Scroll-stopping cuts engineered for Instagram, TikTok &amp; YouTube, built to hold attention to the end, which is exactly where impressions become engagement.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg></div>
+        <h4>Monthly Newsletter</h4>
+        <p>A polished touchpoint for your network and investors, keeping the brand present between projects, and ready for the rooms you're walking into.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:22px;background:var(--ink);color:#EFE7D8;border:none">
+      <div class="ic" style="background:var(--brass)"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" style="stroke:var(--ink)"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/></svg></div>
+      <h4 style="color:#FBF6EC">A Locked Brand System</h4>
+      <p style="color:#C5BBA8">Uniform colors mirroring the website. Consistent watermark, clean typography, no pulsing, no gimmicks. Every piece reads the same way: luxury, and the standard you hold yourself to.</p>
+    </div>
+  </section>
+  <hr class="rule"/>
+
+  <!-- 02 THE OBJECTIVE -->
+  <section style="background:var(--bone-2)">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">What It's For</h2></div>
+    <p class="sec-kicker">This is not lead generation. It's reputation, showcasing the work to the world.</p>
+    <div class="obj">
+      <div class="row"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg><div><b>Position the luxury standard</b><span>Make Shavit Rootman read as the premium name in property transformation.</span></div></div>
+      <div class="row"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/></svg><div><b>Impressions into engagement</b><span>Hold viewers to the end, every time, that's the metric that compounds.</span></div></div>
+      <div class="row"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg><div><b>Match the brand to the growth</b><span>200 doors today, seven projects shipping by September, fifteen-plus on the horizon.</span></div></div>
+      <div class="row"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/></svg><div><b>Ready for the room</b><span>A brand that holds up in investor meetings, capital raises, and partnerships.</span></div></div>
+    </div>
+    <p class="pull">Every piece answers one question, <span class="b">what is it for?</span><br/>Showcasing your work to the world, and the standard behind it.</p>
+  </section>
+  <hr class="rule"/>
+
+  <!-- 03 THE STRATEGY -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">The Strategy</h2></div>
+    <p class="sec-kicker">Slow, soft introduction, then we scale. Nothing that feels inorganic; a rhythm the audience can follow.</p>
+    <div class="phases">
+      <div class="phase"><span class="dot">I</span><div class="tag">Weeks 1–2</div><h4>Soft Launch</h4><p>Lead with the signature brand film across IG, YouTube &amp; TikTok. Gauge the temperature.</p></div>
+      <div class="phase"><span class="dot">II</span><div class="tag">Weeks 3–6</div><h4>Establish Rhythm</h4><p>Layer in one short reel per week. Consistent look, consistent cadence.</p></div>
+      <div class="phase"><span class="dot">III</span><div class="tag">Month 2+</div><h4>Scale Cadence</h4><p>Two to three posts a week. The before/after system makes this duplicable.</p></div>
+      <div class="phase"><span class="dot">IV</span><div class="tag">Months 3–6</div><h4>Full Engine</h4><p>Steady output, locked brand, measured against the KPIs below.</p></div>
+    </div>
+
+    <div class="charts" style="margin-top:30px">
+      <div class="chart-card">
+        <h4>Content Cadence Ramp</h4>
+        <div class="sub">Posts per week, soft start, deliberate scale</div>
+        <div class="chart-box"><canvas id="cadenceChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h4>Reach &amp; Engagement Trajectory</h4>
+        <div class="sub">Illustrative target curve, not a guarantee</div>
+        <div class="chart-box"><canvas id="growthChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h4>Content Format Mix</h4>
+        <div class="sub">How the output is balanced each month</div>
+        <div class="chart-box"><canvas id="mixChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h4>Six-Month Roadmap</h4>
+        <div class="sub">Phase timeline, week by week</div>
+        <div class="chart-box"><canvas id="roadmapChart"></canvas></div>
+      </div>
+    </div>
+  </section>
+  <hr class="rule"/>
+
+  <!-- 04 MEASURABLES -->
+  <section style="background:var(--ink)">
+    <div class="sec-head"><span class="sec-num" style="color:var(--brass-l)">04</span><h2 class="sec-title" style="color:#FBF6EC">The Measurables</h2></div>
+    <p class="sec-kicker" style="color:#B7AC97">You measure me against numbers, so here's exactly what we track, reported monthly, over a six-month to one-year window.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="k">Reach &amp; Impressions</div><div class="l">Total eyes on the brand, the top of every funnel.</div></div>
+      <div class="kpi"><div class="k">Engagement Rate</div><div class="l">Watch-through, saves, shares, proof the work holds attention.</div></div>
+      <div class="kpi"><div class="k">Audience Growth</div><div class="l">Followers compounding across IG, TikTok &amp; YouTube.</div></div>
+      <div class="kpi"><div class="k">Consistency</div><div class="l">Posts shipped vs. planned, reliability you can count on.</div></div>
+    </div>
+    <div class="roi" style="background:rgba(200,163,91,.08);border-left-color:var(--brass);color:#EFE7D8">
+      Every dollar maps to reach, engagement, and reputation, reviewed against ROI at six months, with the runway to grow the role from there.
+    </div>
+  </section>
+  <hr class="rule"/>
+
+  <!-- 05 WHY ME -->
+  <section style="background:var(--bone-2)">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Why Me</h2></div>
+    <p class="sec-kicker">The reels are proof of taste. This document is proof of mind. You get both.</p>
+    <div class="why">
+      <div class="r"><span class="num">01</span><div><b>Creative &amp; strategic</b><span>I don't just make it look good, I know what each piece is for and how it ladders to reputation.</span></div></div>
+      <div class="r"><span class="num">02</span><div><b>Reliable</b><span>You should never wonder whether it's getting done. I chase the content, you don't chase me.</span></div></div>
+      <div class="r"><span class="num">03</span><div><b>Ethical</b><span>Your work, your brand, never used without your say. That's simply how I operate.</span></div></div>
+      <div class="r"><span class="num">04</span><div><b>Invested</b><span>I'm not a vendor passing through. I'm building this with you, for the long term.</span></div></div>
+      <div class="r"><span class="num">05</span><div><b>Fast &amp; resourceful</b><span>Student energy, senior output, turnaround that keeps pace with seven teams on the ground.</span></div></div>
+      <div class="r"><span class="num">06</span><div><b>Aligned on the vision</b><span>One brand, one standard, growing with the company as it scales toward its next chapter.</span></div></div>
+    </div>
+  </section>
+  <hr class="rule"/>
+
+  <!-- 06 INVESTMENT -->
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">The Investment</h2></div>
+    <p class="sec-kicker">Marketing and website handled separately, each mapped to clear, ROI-measurable value.</p>
+    <div class="invest">
+      <div class="price-card">
+        <div class="label">Website, Design, Build &amp; Maintenance</div>
+        <div class="big">$1,700</div>
+        <div class="strike">Internship rate · typical market <s>$3,000</s></div>
+        <ul>
+          <li>Full design &amp; build, colors mirroring the brand system</li>
+          <li>Ongoing maintenance &amp; updates included</li>
+          <li>ADA-compliant, one less thing for you to think about</li>
+          <li>Billed separately from the marketing engagement</li>
+        </ul>
+        <p class="note">A fair number for the caliber, and worth it on both sides.</p>
+      </div>
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:center">
+        <h4>Website, Value vs. Market</h4>
+        <div class="sub">What this caliber normally costs, and your rate</div>
+        <div class="chart-box" style="height:210px"><canvas id="pricingChart"></canvas></div>
+      </div>
+    </div>
+    <div class="roi" style="margin-top:26px">
+      <b style="font-family:'Cinzel';font-style:normal;color:var(--brass-d);font-size:1rem;letter-spacing:.04em">MARKETING ENGAGEMENT , </b> structured around the cadence, deliverables, and measurables above. Not a line item, a partnership we shape directly, so whatever you invest maps to something you can measure.
+    </div>
+  </section>
+
+  <!-- NEXT STEPS / FOOTER -->
+  <footer class="next">
+    <div class="eyebrow on-dark">Next Steps</div>
+    <h2 class="sec-title" style="color:#FBF6EC;margin-top:10px">Let's put it on paper.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h4>You review</h4><p>Read it once, twice, three times, in whatever context you like. No rush.</p></div>
+      <div class="step"><div class="n">02</div><h4>When you're ready</h4><p>We lock the cadence and align on how we measure success, at your pace.</p></div>
+      <div class="step"><div class="n">03</div><h4>We test the temperature</h4><p>Soft launch, real metrics, and a six-month runway to grow it together.</p></div>
+    </div>
+    <div class="signoff">
+      <div>
+        <div class="name">Jake Horvitz</div>
+        <div class="sub">Marketing &amp; Brand · Shavit Rootman &nbsp;|&nbsp; Prepared June 2026</div>
+      </div>
+      <div class="tn">Tennis and business.</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const ink='#0E1A2B', brass='#C8A35B', brassL='#E0C690', brassD='#B0894A', muted='#6E6354', line='#E4DBCB';
+  Chart.defaults.font.family="'Josefin Sans', sans-serif";
+  Chart.defaults.font.size=12;
+  Chart.defaults.color=muted;
+  const noAnim={duration:0};
+  const gridCfg={color:'rgba(110,99,84,.12)'};
+
+  // 1. Cadence ramp
+  new Chart(document.getElementById('cadenceChart'),{
+    type:'line',
+    data:{labels:['Wk 1','Wk 2','Wk 4','Wk 6','Mo 2','Mo 3','Mo 4','Mo 6'],
+      datasets:[{label:'Posts / week',data:[1,1,2,2,2.5,3,3,3.5],
+        borderColor:brassD,borderWidth:2.5,tension:.4,
+        fill:true,backgroundColor:'rgba(200,163,91,.16)',
+        pointBackgroundColor:ink,pointBorderColor:brass,pointRadius:4,pointHoverRadius:6}]},
+    options:{animation:noAnim,responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{y:{beginAtZero:true,grid:gridCfg,ticks:{stepSize:1}},x:{grid:{display:false}}}}
+  });
+
+  // 2. Growth trajectory (illustrative)
+  new Chart(document.getElementById('growthChart'),{
+    type:'line',
+    data:{labels:['Mo 1','Mo 2','Mo 3','Mo 4','Mo 5','Mo 6'],
+      datasets:[
+        {label:'Reach',data:[8,18,34,55,82,118],borderColor:ink,borderWidth:2.5,tension:.4,pointRadius:3,pointBackgroundColor:ink,fill:false},
+        {label:'Engagement',data:[4,10,19,31,47,68],borderColor:brass,borderWidth:2.5,tension:.4,pointRadius:3,pointBackgroundColor:brass,borderDash:[5,4],fill:false}
+      ]},
+    options:{animation:noAnim,responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,padding:16}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'k (index)'}}},
+      scales:{y:{beginAtZero:true,grid:gridCfg,ticks:{callback:v=>v+'k'}},x:{grid:{display:false}}}}
+  });
+
+  // 3. Format mix
+  new Chart(document.getElementById('mixChart'),{
+    type:'doughnut',
+    data:{labels:['Before / After Reels','Short-Form Hooks','Signature Brand Film','Newsletter'],
+      datasets:[{data:[40,30,15,15],
+        backgroundColor:[ink,brass,brassD,'#C9BCA3'],borderColor:'#fff',borderWidth:2}]},
+    options:{animation:noAnim,responsive:true,maintainAspectRatio:false,cutout:'58%',
+      plugins:{legend:{position:'right',labels:{usePointStyle:true,boxWidth:8,padding:14,font:{size:11.5}}}}}
+  });
+
+  // 4. Roadmap (horizontal stacked: offset + duration)
+  new Chart(document.getElementById('roadmapChart'),{
+    type:'bar',
+    data:{labels:['Soft Launch','Establish Rhythm','Scale Cadence','Full Engine'],
+      datasets:[
+        {label:'start',data:[0,2,6,12],backgroundColor:'rgba(0,0,0,0)',stack:'s'},
+        {label:'Duration (weeks)',data:[2,4,6,12],
+          backgroundColor:[brassD,brass,'#A9C0D6',ink],stack:'s',borderRadius:5,barThickness:22}
+      ]},
+    options:{animation:noAnim,indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{filter:i=>i.datasetIndex===1,callbacks:{label:c=>c.parsed.x+' weeks'}}},
+      scales:{x:{stacked:true,grid:gridCfg,title:{display:true,text:'Weeks',color:muted},ticks:{stepSize:4}},
+        y:{stacked:true,grid:{display:false}}}}
+  });
+
+  // 5. Pricing comparison
+  new Chart(document.getElementById('pricingChart'),{
+    type:'bar',
+    data:{labels:['Typical Market','Your Rate'],
+      datasets:[{data:[3000,1700],backgroundColor:['#C9BCA3',brassD],borderRadius:7,barThickness:64}]},
+    options:{animation:noAnim,responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y.toLocaleString()}}},
+      scales:{y:{beginAtZero:true,grid:gridCfg,ticks:{callback:v=>'$'+v.toLocaleString()}},x:{grid:{display:false}}}}
+  });
+</script>
+</body>
+</html>

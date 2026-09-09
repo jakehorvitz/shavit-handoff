@@ -1,0 +1,374 @@
+[
+  {
+    "source": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-62s.m4a",
+    "destination": "editors/source-media/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-62s.m4a",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Montage of Current Project Reels.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Desktop/Shavit - Concept Renders/concept-ewing-kitchen.png",
+    "destination": "editors/source-media/desktop/Shavit - Concept Renders/concept-ewing-kitchen.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Desktop/Shavit - Concept Renders/concept-ewing-sunroom.png",
+    "destination": "editors/source-media/desktop/Shavit - Concept Renders/concept-ewing-sunroom.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Desktop/Shavit - Concept Renders/concept-norwood-bath.png",
+    "destination": "editors/source-media/desktop/Shavit - Concept Renders/concept-norwood-bath.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Downloads/Bumbled - Deep Active Sound Remix.mp3",
+    "destination": "editors/source-media/downloads/Bumbled - Deep Active Sound Remix.mp3",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": [
+      "/Users/jakehorvitz/Desktop/DJ TRACKS/Bumbled - Deep Active Sound Remix.mp3"
+    ]
+  },
+  {
+    "source": "/Users/jakehorvitz/Downloads/Other Culture.mp3",
+    "destination": "editors/source-media/downloads/Other Culture.mp3",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": [
+      "/Users/jakehorvitz/Desktop/DJ TRACKS/Other Culture.mp3"
+    ]
+  },
+  {
+    "source": "/Users/jakehorvitz/Downloads/Pia (1).mp3",
+    "destination": "editors/source-media/downloads/Pia (1).mp3",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/65/05/04DFE36E-78CD-41A1-8034-1997FFF26F06/IMG_0227.png",
+    "destination": "editors/source-media/message-attachments/65/05/04DFE36E-78CD-41A1-8034-1997FFF26F06/IMG_0227.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/ba/10/939702B8-9E07-418F-99F5-9AC6DF4F441E/IMG_4764.png",
+    "destination": "editors/source-media/message-attachments/ba/10/939702B8-9E07-418F-99F5-9AC6DF4F441E/IMG_4764.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/10/00/5EC4AB1B-0431-4778-97EB-DA14704D4CD4/IMG_2053.heic",
+    "destination": "editors/source-media/message-attachments/10/00/5EC4AB1B-0431-4778-97EB-DA14704D4CD4/IMG_2053.heic",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/7d/13/69419246-2922-49E9-863E-013148CD8354/IMG_4710.heic",
+    "destination": "editors/source-media/message-attachments/7d/13/69419246-2922-49E9-863E-013148CD8354/IMG_4710.heic",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4710.heic"
+    ]
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/89/09/51BC7255-CE3C-4525-971E-0223C2B2CE5B/IMG_4709.heic",
+    "destination": "editors/source-media/message-attachments/89/09/51BC7255-CE3C-4525-971E-0223C2B2CE5B/IMG_4709.heic",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4709.heic"
+    ]
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/b6/06/ADA15755-C7CB-47BA-9D8E-36FEDE33B30B/IMG_4708.heic",
+    "destination": "editors/source-media/message-attachments/b6/06/ADA15755-C7CB-47BA-9D8E-36FEDE33B30B/IMG_4708.heic",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4708.heic"
+    ]
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/ba/10/E5F25FB3-80E9-414E-A489-B6BD7395B518/IMG_7933.heic",
+    "destination": "editors/source-media/message-attachments/ba/10/E5F25FB3-80E9-414E-A489-B6BD7395B518/IMG_7933.heic",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/bd/13/EA7DEE3C-960C-4290-8839-C341431165E3/IMG_7933.heic",
+    "destination": "editors/source-media/message-attachments/bd/13/EA7DEE3C-960C-4290-8839-C341431165E3/IMG_7933.heic",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/Users/jakehorvitz/Library/Messages/Attachments/dd/13/D248B8F4-2463-4D99-8E43-6C6CE35C37B4/IMG_4708.heic",
+    "destination": "editors/source-media/message-attachments/dd/13/D248B8F4-2463-4D99-8E43-6C6CE35C37B4/IMG_4708.heic",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4708.heic"
+    ]
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_8eEKsh/Screenshot 2026-08-12 at 3.36.44 PM.png",
+    "destination": "editors/source-media/temporary/850670901343-Screenshot 2026-08-12 at 3.36.44 PM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_tLZ9C9/Screenshot 2026-08-12 at 3.31.07 PM.png",
+    "destination": "editors/source-media/temporary/07ddefaaf0a4-Screenshot 2026-08-12 at 3.31.07 PM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_7ATZPD/Screenshot 2026-08-19 at 8.52.43 AM.png",
+    "destination": "editors/source-media/temporary/a214b2b5da8e-Screenshot 2026-08-19 at 8.52.43 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_IPTCKI/Screenshot 2026-08-18 at 4.35.06 PM.png",
+    "destination": "editors/source-media/temporary/3234932e8c79-Screenshot 2026-08-18 at 4.35.06 PM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_Ndf4S4/Screenshot 2026-08-19 at 8.49.15 AM.png",
+    "destination": "editors/source-media/temporary/3eb79095f876-Screenshot 2026-08-19 at 8.49.15 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_SbgIVY/Screenshot 2026-08-19 at 8.55.31 AM.png",
+    "destination": "editors/source-media/temporary/c2676e14b75c-Screenshot 2026-08-19 at 8.55.31 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_UPEij7/Screenshot 2026-08-19 at 9.05.54 AM.png",
+    "destination": "editors/source-media/temporary/de522dcbaa34-Screenshot 2026-08-19 at 9.05.54 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_UPky8h/Screenshot 2026-08-18 at 4.32.42 PM.png",
+    "destination": "editors/source-media/temporary/8cf8ef4bdd93-Screenshot 2026-08-18 at 4.32.42 PM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_VvJoqs/Screenshot 2026-08-19 at 9.09.56 AM.png",
+    "destination": "editors/source-media/temporary/7f8085737129-Screenshot 2026-08-19 at 9.09.56 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_dgTsrb/Screenshot 2026-08-17 at 11.44.21 PM.png",
+    "destination": "editors/source-media/temporary/5f93c4ee34f6-Screenshot 2026-08-17 at 11.44.21 PM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_hYilhU/Screenshot 2026-08-18 at 4.33.33 PM.png",
+    "destination": "editors/source-media/temporary/259fbf721501-Screenshot 2026-08-18 at 4.33.33 PM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_kU2AGh/Screenshot 2026-08-19 at 8.51.25 AM.png",
+    "destination": "editors/source-media/temporary/573b884ecef7-Screenshot 2026-08-19 at 8.51.25 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_qpb2wh/Screenshot 2026-08-19 at 8.54.41 AM.png",
+    "destination": "editors/source-media/temporary/adac58839885-Screenshot 2026-08-19 at 8.54.41 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  },
+  {
+    "source": "/var/folders/sw/x3jczrcj6zn00qdng2fsmbgr0000gn/T/TemporaryItems/NSIRD_screencaptureui_yiIsv4/Screenshot 2026-08-19 at 9.08.30 AM.png",
+    "destination": "editors/source-media/temporary/5d00e8a7f9c9-Screenshot 2026-08-19 at 9.08.30 AM.png",
+    "kind": "referenced-media",
+    "exists": false,
+    "bytes": null,
+    "referencedBy": [
+      "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier"
+    ],
+    "status": "missing-original-reference",
+    "filenameMatchesUnverified": []
+  }
+]

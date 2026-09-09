@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The work you never see, carousel spec</title>
+<style>
+  :root{--bg:#0b0b0c;--panel:#141416;--panel2:#1b1b1e;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a5a29a;--faint:#6f6c64;
+    --brass:#B08D57;--gold:#FFC000;--ok:#7FB88A;--bad:#e0794a;--blue:#6ea3d6;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;--sans:"Inter",system-ui,-apple-system,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;line-height:1.15;margin:.35em 0 .15em}
+  .sub{color:var(--dim);max-width:76ch;font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim);background:var(--panel)}
+  .chip b{color:var(--ink)}
+  h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:52px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{font-size:19px;margin:0 0 4px}
+  p{font-size:15px} p.d{color:var(--dim)}
+  ul{margin:.4em 0;padding-left:1.1em} li{margin:.3em 0;font-size:14px}
+  code{font-family:var(--mono);font-size:12.5px;background:#000;border:1px solid var(--line);padding:1px 6px;border-radius:5px;color:var(--gold)}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;vertical-align:middle}
+  .b-real{background:rgba(127,184,138,.14);color:var(--ok);border:1px solid rgba(127,184,138,.4)}
+  .b-watch{background:rgba(224,121,74,.14);color:var(--bad);border:1px solid rgba(224,121,74,.4)}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog li{color:var(--dim)} .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .slide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0 30px;position:relative;display:grid;grid-template-columns:360px 1fr;gap:22px}
+  @media(max-width:820px){.slide{grid-template-columns:1fr}}
+  .slide .num{position:absolute;top:-11px;left:20px;background:var(--bg);border:1px solid var(--brass);color:var(--brass);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:2px 10px;border-radius:6px;text-transform:uppercase}
+  .chg{box-shadow:0 0 0 1px var(--gold),0 0 22px rgba(255,192,0,.14)}
+  .chg::after{content:"UPDATED";position:absolute;top:-11px;right:20px;background:var(--bg);border:1px solid var(--gold);color:var(--gold);font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:2px 8px;border-radius:6px}
+  .held{opacity:.62;border-style:dashed}
+  .held::after{content:"HELD";border-color:var(--bad);color:var(--bad)}
+  .shot{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#000}
+  .shot img{display:block;width:100%;height:auto}
+  .shot .cap{font-family:var(--mono);font-size:11px;color:var(--faint);padding:6px 8px;border-top:1px solid var(--line)}
+  .ost{background:#000;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:15px}
+  .ost span{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  .note{border-left:2px solid var(--gold);padding-left:12px;margin:0 0 12px;color:var(--dim);font-size:14px}
+  .note b{color:var(--ink)}
+  .alt{color:var(--dim);font-size:13px;margin:.5em 0 0}
+  .caption{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:18px 20px;white-space:pre-wrap;font-size:14.5px;line-height:1.7}
+  .warn{background:rgba(224,121,74,.07);border:1px solid rgba(224,121,74,.35);border-radius:12px;padding:16px 20px;margin:16px 0;position:relative}
+  .warn h4{margin:0 0 6px;color:var(--bad);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .good{background:rgba(127,184,138,.07);border:1px solid rgba(127,184,138,.35);border-radius:12px;padding:16px 20px;margin:16px 0;position:relative}
+  .good h4{margin:0 0 6px;color:var(--ok);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .pair{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0 4px}
+  @media(max-width:760px){.pair{grid-template-columns:1fr}}
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;position:relative}
+  footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px}
+</style>
+</head>
+<body data-spec="work-you-never-see">
+<div class="wrap">
+
+<div class="kicker">Shavit Rootman &middot; carousel spec</div>
+<h1>The work you never see</h1>
+<p class="sub">Rev 12. Shavit rejected rev 10 as too identical to East Victoria; rev 11 answered
+with a black band and Jake rejected the band. Two replacements were built and rendered in full. Bone works
+on all six and is the recommendation. Sky is the more beautiful idea and fails legibility on two of six, so
+it is recorded here with its failure rather than quietly dropped. Copy, photos, order and caption remain
+byte for byte what Shavit approved.</p>
+
+<div class="meta-row">
+  <span class="chip">Rev <b>12</b></span>
+  <span class="chip">Slides <b>6</b></span>
+  <span class="chip">All six <b>rendered</b></span>
+  <span class="chip">Blocked on Jake <b>Bone or sky</b></span>
+  <span class="chip">Target <b>Sunday 26 July</b></span>
+</div>
+
+<div class="revlog">
+  <h4>Revision log</h4>
+  <ul>
+    <li><span class="rev">rev 12 &middot; 2026-07-26</span>, <b>the black band is out.</b> Jake on the rev
+    11 spec: &ldquo;im not a fan of the black band is there something else we can do&rdquo;. The step index
+    and the gold progress rule survive; the surface under them does not. Two builds:
+    <b>bone</b> (<code>BONE=1 python3 render_cards_v11.py</code>, output <code>final-v11-bone/</code>) keeps
+    the band geometry and flips it to bone with brass, which reads legibly on all six and flips the grid
+    thumbnail from dark to light. <b>Sky</b> (<code>render_cards_v12.py</code>, output
+    <code>final-v12/</code>) removes the band entirely and sets the type in ink on the ceiling, choosing
+    ink or white per card from measured pixel luminance. Sky is recommended against: see the failure
+    below.</li>
+    <li><span class="rev">rev 11 &middot; 2026-07-26</span>, <b>re-skinned off the East Victoria
+    lockup</b> after Shavit's 10:56 note, &ldquo;It is too identical to E Victoria. I vote to change.&rdquo;
+    The scrim is removed and the type moves into a solid band below a full bleed photo; the word kickers
+    become a numbered step index sitting on a gold progress rule. Gold, the wordmark, the end card and the
+    tagline are all unchanged. Copy, photo selection, slide order and caption are byte for byte rev 10.
+    New renderer at <code>_scripts/render_cards_v11.py</code>, output in
+    <code>work-you-never-see-2026-07-24/final-v11/</code>; rev 10's <code>final/</code> is left intact so
+    the two can be compared and so nothing is lost if this is rejected.</li>
+    <li><span class="rev">rev 10 &middot; 2026-07-25</span>, <b>type rebuilt on the East Victoria
+    renderer</b> so the two posts match in the grid. Gold kicker, brass rule, heavy white uppercase headline
+    ending in a period, DM Sans sentence case support line under every card, gold Bricolage call to action
+    with an underline on the closer, gold mark. Support lines written for all six. Left aligned on the
+    middle four, centred on the cover and the closer, exactly as East Victoria does it.</li>
+    <li><span class="rev">rev 9 &middot; 2026-07-25</span>, cover set to THIS IS WHAT THE PROCESS LOOKS
+    LIKE, card re-rendered. Nobody posts this part retained as the caption opener.</li>
+    <li><span class="rev">rev 8 &middot; 2026-07-25</span>, slide 2 set to WE LEARN THE HOUSE FROM THE
+    INSIDE AND OUT. Card re-rendered. The middle three slides now run learn, know, never have to.</li>
+    <li><span class="rev">rev 6 &middot; 2026-07-25</span>, slide 3 and 4 locked to your pair, slide 5
+    subline dropped for repetition, <b>all six cards rendered</b> after two failed passes on exposure and
+    crop. Caption rewritten to carry the chosen line.</li>
+    <li><span class="rev">rev 5 &middot; 2026-07-24</span>, your four notes. <b>Exterior provenance resolved
+    off the website</b>, it is Kendall, so nothing is blocked on Shavit any more. Same room pair confirmed by
+    you. Closing card confirmed. Twenty options added for slide 3, along with the reason it was not working,
+    which turned out to be structural rather than verbal. Never ship mantel check run and passed.</li>
+    <li><span class="rev">rev 4 &middot; 2026-07-24</span>, your three notes. Slide 3 line rewritten, the
+    every room at once card is gone. Slide 5 line rewritten to name what is actually in the frame.
+    <b>Closing card rebuilt on the Kendall exterior and rendered</b>, so it is a real card now rather than a
+    description. That also resolves the held slide: the exterior is in the post, as the closing background
+    rather than as its own slide, which means the provenance question is now a ship blocker rather than an
+    optional extra.</li>
+    <li><span class="rev">rev 3 &middot; 2026-07-24</span>, your four notes. <b>Cover swapped</b> so the same
+    room claim is actually checkable, see the verification block below. <b>Opened wall slide replaced</b>,
+    photograph and caption both. <b>Exterior slide held</b> pending provenance, since you are right that it
+    cannot be confirmed as this house from the folder alone. Closing card kept as is.</li>
+    <li><span class="rev">rev 2 &middot; 2026-07-24</span>, your first ten notes. Three slides cut, hook
+    moved to the cover, after moved forward, all photographs swapped.</li>
+    <li><span class="rev">rev 1 &middot; 2026-07-24</span>, first build, nine slides.</li>
+  </ul>
+</div>
+
+<div class="good" data-annot="verify-sameroom">
+  <h4>Your note: I like it but it is not the same room. You were right, and here is the fix</h4>
+  <p style="margin:.3em 0">The frame I had on the cover was <b>089</b>, and it shows a fireplace at the far
+  left edge, cut off and at an oblique angle. I claimed it matched the finished room. It is not provable
+  from that frame, and an unprovable pair is the exact failure this project has already been burned by.
+  <b>The cover is now 055 instead</b>, and the pair becomes obvious rather than argued:</p>
+  <div class="pair">
+    <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s1-cover-sameroom.jpg" alt="The room during renovation, fireplace visible behind equipment">
+      <div class="cap">055 &middot; new cover</div></div>
+    <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s4-after-sameroom.jpg" alt="The finished room with the fireplace between two windows">
+      <div class="cap">098 &middot; the after</div></div>
+    <div class="shot"><img src="work-you-never-see-2026-07-24/assets/proof-wide-fireplace.jpg" alt="Wide view of the finished room showing the same fireplace with the laundry area beyond">
+      <div class="cap">080 &middot; corroborates</div></div>
+  </div>
+  <p class="d" style="margin:.6em 0 0"><b>The evidence, so you can check it rather than take it:</b> a dark
+  stacked stone chimney breast sitting on a white and grey brick firebox, one window to the left and one to
+  the right, recessed lights already in the ceiling in both frames. 080 is a wider view of the same room and
+  shows that fireplace with the laundry area beyond it, which is the third point that fixes the geometry.
+  <b>If you look at these three and still say it is not the same room, the SAME ROOM card comes out
+  entirely</b> and slide 4 goes back to being an ordinary after. Say the word.</p>
+</div>
+
+<h2 data-annot="s-rev12">Rev 12 &middot; two answers to the band note</h2>
+
+<div class="box chg" data-annot="rev12-note">
+  <h4>The note</h4>
+  <p style="margin:.3em 0">14:08 on the rev 11 spec: <b>&ldquo;im not a fan of the black band is there
+  something else we can do&rdquo;.</b> Change C, the numbered step index on the gold progress rule, drew no
+  objection and is carried into both builds below. Only the surface the type sits on is in question.</p>
+</div>
+
+<h2 data-annot="s-bone">Bone &middot; recommended, all six rendered</h2>
+<div class="good chg" data-annot="bone-why">
+  <h4>Why this one ships</h4>
+  <p style="margin:.3em 0">Same geometry as rev 11, inverted: a bone band with near black type and a brass
+  progress rule instead of bright gold, which has no contrast on a light ground. If the objection was the
+  black rather than the band, this is the direct fix.</p>
+  <p class="d" style="margin:.6em 0 0"><b>It is also the hardest separation from East Victoria available.</b>
+  East Victoria's thumbnails are dark. These are light. In the profile grid the two posts no longer share a
+  silhouette, a value range or a type treatment, which is the entire substance of Shavit's complaint. The
+  photographs stay undimmed, so the ladders, extraction gear and opened floor still read. Legibility is
+  uniform across all six with nothing left to per-card luck.</p>
+</div>
+<div class="pair chg" data-annot="bone-cards" style="grid-template-columns:repeat(3,1fr)"><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11-bone/01_055.jpg" alt="Bone carousel card 1"><div class="cap">card 1</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11-bone/02_091.jpg" alt="Bone carousel card 2"><div class="cap">card 2</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11-bone/03_089.jpg" alt="Bone carousel card 3"><div class="cap">card 3</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11-bone/04_098.jpg" alt="Bone carousel card 4"><div class="cap">card 4</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11-bone/05_073.jpg" alt="Bone carousel card 5"><div class="cap">card 5</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11-bone/06_019.jpg" alt="Bone carousel card 6"><div class="cap">card 6</div></div></div>
+
+<h2 data-annot="s-sky">Sky &middot; built, and recommended against</h2>
+<div class="warn chg" data-annot="sky-fail">
+  <h4>The better idea that does not survive contact with the photos</h4>
+  <p style="margin:.3em 0">Sky removes the band completely. Every frame already has a large quiet surface at
+  the top, the ceiling indoors and the sky outdoors, so the type goes there in ink with the progress rule
+  pinned to the top edge of the frame. Nothing is covered and the whole photograph is visible. It is the
+  exact inverse of East Victoria, whose signature is white type on a dark bottom scrim. On cards 1, 2 and 5
+  it is the best-looking thing built for this post.</p>
+  <p class="d" style="margin:.6em 0 0"><b>It fails on two of six, and the reason is structural.</b> The
+  renderer picks ink or white from the mean luminance of the region under the text block. A mean is only
+  meaningful when the backdrop is uniform, and on two cards it is not. <b>Card 4</b>: the subline crosses
+  the dark stacked stone chimney breast and disappears. <b>Card 6</b>: &ldquo;Kendall Street, South Bend,
+  Indiana. Finished.&rdquo; runs onto the white siding and disappears. Per-line ink selection would not
+  save either one, because the failing lines themselves straddle light and dark. It needs frames with
+  genuinely uniform tops, which these two are not.</p>
+  <p class="d"><b>Shipping four good cards and two broken ones is worse than shipping six consistent ones</b>,
+  so bone is the recommendation. Sky is kept on the record because it is worth revisiting on a property
+  whose photography suits it.</p>
+</div>
+<div class="pair chg" data-annot="sky-cards" style="grid-template-columns:repeat(3,1fr)">
+  <div class="shot"><img src="work-you-never-see-2026-07-24/final-v12/05_073.jpg" alt="Sky card 5, working"><div class="cap">card 5 &middot; sky at its best</div></div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/final-v12/04_098.jpg" alt="Sky card 4, subline lost on the chimney breast"><div class="cap">card 4 &middot; subline lost on the chimney</div></div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/final-v12/06_019.jpg" alt="Sky card 6, address line lost on the siding"><div class="cap">card 6 &middot; address lost on the siding</div></div>
+</div>
+
+<div class="warn chg" data-annot="rev12-open">
+  <h4>Still open, unchanged from rev 11</h4>
+  <p style="margin:.3em 0"><b>Slides 1 and 3 are the same room from a similar angle.</b> Both are the living
+  room with the fireplace, the ladders and the debris. That reads as repetition inside a six card set and it
+  blunts slide 4, whose payoff line is that you are standing in the same room as the first one. 106 Kendall
+  frames are in the pool. Not changed yet, because it swaps a photo Shavit already approved.</p>
+  <p class="d" style="margin:.6em 0 0"><b>And the clock.</b> The engagement window Shavit named for tonight
+  is 6 to 7pm. Sending bone to him for a yes costs that window if he is slow to answer.</p>
+</div>
+
+<h2 data-annot="s-reskin">Rev 11 &middot; the re-skin</h2>
+
+<div class="warn" data-annot="reskin-why">
+  <h4>What he said, and why it happened</h4>
+  <p style="margin:.3em 0">Sunday 10:56am: <b>&ldquo;It is too identical to E Victoria. I vote to
+  change.&rdquo;</b> He is right, and the cause is on the record. Rev 10 deliberately rebuilt the type on
+  the East Victoria renderer so the two posts would sit together in the grid. Matching was the goal. He
+  read matching as repetition.</p>
+  <p class="d" style="margin:.6em 0 0">Both posts used one lockup: a bottom anchored dark scrim, a gold
+  underlined kicker, a heavy white uppercase headline, a sentence case support line, a gold wordmark. At
+  thumbnail size in the profile grid there was nothing left to tell them apart. The fix therefore has to
+  land at thumbnail scale, not in the detail.</p>
+</div>
+
+<div class="pair" data-annot="reskin-compare" style="grid-template-columns:repeat(3,1fr)">
+  <div class="shot"><img src="east-victoria-story-2026-07-23/final/02_foreclosure.jpg" alt="East Victoria card for comparison"><div class="cap">East Victoria &middot; the post he is comparing against</div></div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/final/03_089.jpg" alt="Rev 10 Kendall card"><div class="cap">rev 10 &middot; rejected</div></div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/final-v11/03_089.jpg" alt="Rev 11 Kendall card"><div class="cap">rev 11 &middot; proposed</div></div>
+</div>
+
+<div class="box" data-annot="reskin-a">
+  <h4>Change A &middot; the scrim comes off and the type gets a band</h4>
+  <p style="margin:.3em 0">The photo now runs full bleed and undarkened in the upper region, and the words
+  sit in a solid near black band beneath it. East Victoria reads as text dissolving into a photograph. This
+  reads as a photograph above a hard edge. That difference survives being shrunk to a grid thumbnail, which
+  is the only place the complaint actually lives.</p>
+  <p class="d" style="margin:.6em 0 0"><b>It also fixes something real.</b> The rev 10 scrim darkened the
+  bottom 52 to 62 percent of every frame, which on these slides is precisely where the ladders, the
+  extraction gear and the opened floor are. The post argues that the hidden work is the work worth paying
+  for, and the treatment was dimming the evidence. Nothing is darkened now, so the per card
+  <code>darken</code> values are gone. The per card brightness lift stays, because the interiors are
+  genuinely dim.</p>
+  <p class="d"><b>Band geometry.</b> Measured across all six cards and then applied uniformly at 532px,
+  39 percent of the frame, so the baseline never jumps between slides. Each block is centred optically
+  inside that band, so the short cards do not sit on a slab of dead black.</p>
+</div>
+
+<div class="box" data-annot="reskin-c">
+  <h4>Change C &middot; step index and progress rule replace the word kickers</h4>
+  <p style="margin:.3em 0"><span class="rev">OPENING UP</span> and <span class="rev">THE MIDDLE</span> and
+  <span class="rev">THE SAME ROOM</span> become <span class="rev">01 / 06</span> through
+  <span class="rev">06 / 06</span>, sitting under a gold rule that fills left to right as the carousel
+  advances. By card six the rule is solid gold across the full width.</p>
+  <p class="d" style="margin:.6em 0 0">This is the change that makes the re-skin look deliberate instead of
+  looking like a different template got grabbed. The post's own claim is that a renovation is a sequence
+  most people never watch. A progress bar states that in the furniture, and it gives a reason to keep
+  swiping that the word kickers never gave. It also removes the last piece of East Victoria's signature,
+  which was the gold underlined kicker word.</p>
+</div>
+
+<div class="good" data-annot="reskin-kept">
+  <h4>What deliberately did not change</h4>
+  <p style="margin:.3em 0">Every word on every card, the six photographs, the slide order, the caption, the
+  gold, the SHAVIT ROOTMAN wordmark, the closing card and <b>Live with us. Work with us.</b> are all
+  identical to what he approved. His note was about this post resembling the last one, not about the brand,
+  and the standing rule is that the end card and tagline carry forward unchanged rather than being
+  reinvented per post. Rev 10 output is preserved in <code>final/</code>, so rejecting rev 11 costs
+  nothing.</p>
+</div>
+
+<h2 data-annot="s-rev11-cards">Rev 11 &middot; all six rendered</h2>
+<div class="pair" data-annot="rev11-cards" style="grid-template-columns:repeat(3,1fr)"><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11/01_055.jpg" alt="Rev 11 carousel card 1"><div class="cap">card 1</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11/02_091.jpg" alt="Rev 11 carousel card 2"><div class="cap">card 2</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11/03_089.jpg" alt="Rev 11 carousel card 3"><div class="cap">card 3</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11/04_098.jpg" alt="Rev 11 carousel card 4"><div class="cap">card 4</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11/05_073.jpg" alt="Rev 11 carousel card 5"><div class="cap">card 5</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final-v11/06_019.jpg" alt="Rev 11 carousel card 6"><div class="cap">card 6</div></div></div>
+
+<div class="warn" data-annot="reskin-open">
+  <h4>Two decisions before this ships</h4>
+  <p style="margin:.3em 0"><b>1. Slides 1 and 3 are the same room from a similar angle.</b> Both are the
+  living room with the fireplace, the ladders and the debris. Inside a six card set that reads as
+  repetition, and it blunts slide 4, whose whole payoff line is that you are standing in the same room as
+  the first one. There are 106 Kendall frames in the pool. Swapping slide 3 for a different room mid work
+  would sharpen the 1 into 4 reveal. <b>Not done yet, because it changes a photo Shavit already approved.
+  Say go and it is a five minute change.</b></p>
+  <p class="d" style="margin:.6em 0 0"><b>2. Does this go to Shavit before it posts, or does it post?</b>
+  He asked to review, then said at 10:56 that he votes to change. The next engagement window he named is
+  6 to 7pm tonight. Sending rev 11 for a yes costs that window if he is slow.</p>
+</div>
+
+<h2 data-annot="s-final">Rendered, all six</h2>
+<div class="good" data-annot="final-cards">
+  <h4>Built at 1080 by 1350, ready to post</h4>
+  <p style="margin:.3em 0">Your pair is set: <b>WE KNOW WHAT IS BEHIND EVERY WALL</b> into <b>SO THE FAMILY
+  WILL NEVER HAVE TO</b>. It is the only pair on the list where slide 4 finishes the sentence slide 3
+  starts, which is why it carries the story the earlier lines could not.</p>
+  <div class="pair" style="grid-template-columns:repeat(3,1fr)"><div class="shot"><img src="work-you-never-see-2026-07-24/final/01_055.jpg" alt="Rendered carousel card 1"><div class="cap">card 1</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final/02_091.jpg" alt="Rendered carousel card 2"><div class="cap">card 2</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final/03_089.jpg" alt="Rendered carousel card 3"><div class="cap">card 3</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final/04_098.jpg" alt="Rendered carousel card 4"><div class="cap">card 4</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final/05_073.jpg" alt="Rendered carousel card 5"><div class="cap">card 5</div></div><div class="shot"><img src="work-you-never-see-2026-07-24/final/06_019.jpg" alt="Rendered carousel card 6"><div class="cap">card 6</div></div></div>
+  <p class="d" style="margin:.8em 0 0"><b>Three things changed to make these work.</b> The first render was
+  unusable, so it is worth recording why. Exposure: the interiors were already dim and a flat forty percent
+  darken buried them, so each card now carries its own brightness lift and its own darken. Crop: slide 5 had
+  lost the view through to the kitchen, which was the entire reason for that frame, so it is recut off
+  centre. Contrast: slide 4 put white type across pale limestone, so that card is cropped lower to seat the
+  words on the dark floor and its scrim starts higher.</p>
+  <p class="d"><b>One knock on effect.</b> Slide 5 used to carry a second line reading and everything behind
+  the walls. Your pair now owns that idea across two cards, so the repetition is gone and slide 5 is the
+  clean three part line.</p>
+  <p class="d"><b>Note on SAME ROOM.</b> That card is gone, replaced by your line. The room continuity is
+  still doing its work visually and the caption still points at it, so nothing is lost, but it is no longer
+  stated on the card. Say the word if you want it back as a small second line on slide 4.</p>
+</div>
+
+<h2 data-annot="s-slides">The six slides</h2>
+
+<div class="slide" data-annot="slide-1">
+  <div class="num">Slide 1 &middot; cover</div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s1-cover-sameroom.jpg" alt="A room during renovation with fans, propane tanks, buckets, ladders and tool cases in front of a fireplace">
+    <div class="cap">055 &middot; replaces 089</div></div>
+  <div>
+    <p class="note"><b>Changed for your same room note.</b> Same idea as before, a room mid destruction, but
+    this one contains the fireplace fully in frame, which is what makes slide 4 land. It is also the busier
+    photograph: fans, propane tanks, buckets, ladders, tool cases, drop cloths, plastic over the windows.</p>
+    <h3>The room, at its worst</h3>
+    <div class="ost"><span>On screen, final</span>THIS IS WHAT THE PROCESS LOOKS LIKE</div>
+    <p class="d" style="border-left:2px solid var(--gold);padding-left:12px"><b>Revised 7/25.</b> Nobody
+    posts this part moves off the card and stays as the first line of the caption, where it still does its
+    job inside the 125 character preview. The cover now states the thing rather than commenting on it, which
+    is his rule, and it answers his 7/22 instruction in his own words: what I am trying to feature is the
+    process so far. It also stops the cover from rhyming with any other card.</p>
+    <p class="d">Your hook, unchanged. Compose the card so the fireplace stays visible, because it is the
+    hinge of the whole post.</p>
+    <p class="alt"><b>Alt text.</b> A room during renovation with fans, propane tanks, buckets and ladders
+    in front of a fireplace.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-3">
+  <div class="num">Slide 2 of 6</div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s2-ceiling-open.jpg" alt="A hallway during renovation with the ceiling opened along its length and a cord running across the floor">
+    <div class="cap">091 &middot; ceiling opened down the hall</div></div>
+  <div>
+    <h3>The ceiling, opened end to end</h3>
+    <div class="ost"><span>On screen, final</span>WE LEARN THE HOUSE FROM THE INSIDE AND OUT</div>
+    <p class="d" style="border-left:2px solid var(--gold);padding-left:12px"><b>Revised 7/25.</b> It gets
+    worse before it gets better is out. It broke his own rule, it told the viewer how to feel about the
+    sequence rather than stating the work, and it was the one card that did not set up your pair. The chosen line makes slides 2, 3 and 4 a single motion: we learn the house, we know what is behind every wall, so the family never has to. Learn into know into never have to. It makes no property claim, so nothing on this card needs sourcing from Shavit.</p>
+    <p class="d">Unchanged from rev 2, since this was the slide you asked me to recaption and the new line
+    stands. Alternate photograph exported at 063.</p>
+    <p class="alt"><b>Alt text.</b> A hallway during renovation with the ceiling opened along its length.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-4">
+  <div class="num">Slide 3 of 6</div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s3-jobsite-full.jpg" alt="A second room during renovation with a ladder, shop vacuum, tool cases and materials across the floor">
+    <div class="cap">089 &middot; replaces the opened wall frame</div></div>
+  <div>
+    <p class="note"><b>Your note:</b> change photo and caption. Both changed. The opened wall frame is out.
+    Looking at it again next to everything else, it reads as a brown patch rather than as structure, and it
+    needed a caption to explain itself, which is a bad sign for a single slide. <b>089 takes the slot</b>,
+    which also keeps the strongest job site photograph in the post now that it is no longer carrying a claim
+    it could not support.</p>
+    <h3>The room with no listing photo</h3>
+    <div class="ost"><span>On screen, final</span>WE KNOW WHAT IS BEHIND EVERY WALL</div>
+    <p class="d" style="border-left:2px solid var(--gold);padding-left:12px">Every room at once is gone. You
+    were right that it did not make sense: it was describing a work sequence the photograph does not show,
+    so it read as filler. The new line describes the photograph and lands the thesis at the same time. This
+    room, in this state, will never be photographed again. Nobody will ever tour it. It exists in exactly
+    one picture, and that picture is this one.</p>
+    <p class="d">Two alternates if you want it drier: NO ONE TOURS A HOUSE LIKE THIS, or THE PART WITH NO
+    BEFORE AND NO AFTER. Photograph alternates if this frame sits too close to the cover: 063, the hall with
+    the ceiling open, or 057, a room stripped for paint.</p>
+    <p class="alt"><b>Alt text.</b> A second room during renovation with a ladder, shop vacuum and tool
+    cases across the floor.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="sec-7">
+  <div class="num">Slide 4 of 6 &middot; the after starts</div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s4-after-sameroom.jpg" alt="The finished room with a stone fireplace between two windows, new flooring and fresh white walls">
+    <div class="cap">098 &middot; the same fireplace as the cover</div></div>
+  <div>
+    <h3>The same room, finished</h3>
+    <div class="ost"><span>On screen, final</span>SO THE FAMILY WILL NEVER HAVE TO</div>
+    <p class="d">Now provable against the cover rather than asserted. Two words on the card, no explanation,
+    and anyone who swipes back gets the whole argument for free. Alternate exported at 080, the wider view,
+    if the tight fireplace frame reads too much like a listing photograph.</p>
+    <p class="alt"><b>Alt text.</b> The finished room with a stone fireplace between two windows, new
+    flooring and freshly painted walls.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-8">
+  <div class="num">Slide 5 of 6</div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s5-after-through.jpg" alt="Finished open living space looking through to the new kitchen with stainless appliances">
+    <div class="cap">073 &middot; through to the kitchen</div></div>
+  <div>
+    <h3>Through the house</h3>
+    <div class="ost"><span>On screen, final</span>NEW FLOOR. NEW LIGHT. NEW KITCHEN.</div>
+    <p class="d" style="border-left:2px solid var(--gold);padding-left:12px">This is what it buys is gone.
+    You were right, it was vague and it made the reader do the work. The new card names the three things
+    actually visible in this frame, floor, lighting, kitchen, then the small second line ties them back to
+    the five slides of hidden work that came before. Specific on top, argument underneath.</p>
+    <p class="d">Every claim on this card is checkable in the photograph, which matters because the caption
+    no longer carries a trade list. Alternate photograph exported at 066, the kitchen straight on, if this
+    post is going to be the only Kendall content for a while.</p>
+    <p class="alt"><b>Alt text.</b> The finished open living space looking through to the new kitchen.</p>
+  </div>
+</div>
+
+<div class="slide" data-annot="slide-9">
+  <div class="num">Slide 6 of 6 &middot; closing card &middot; rendered</div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s6-closing-card.jpg" alt="Closing card, the finished house behind a dark scrim with the closing lines and the Shavit Rootman mark">
+    <div class="cap">rendered &middot; 1080 x 1350 &middot; 019 background</div></div>
+  <div>
+    <p class="note"><b>Your note:</b> have the exterior of Kendall be the background. Done, and rendered
+    rather than described, so you are looking at the actual card.</p>
+    <h3>Closing card, on the house</h3>
+    <p class="d">Built at 1080 by 1350 through the same renderer settings East Victoria used, so it sits
+    consistently in the grid: SF for the two heading lines, DM Sans for the gold call to action, brass rule
+    between them, mark at the foot. The photograph is cover cropped with the frame biased upward so the
+    whole house clears the type, then carries a forty two percent darken plus a gradient scrim into the
+    lower half. That keeps the siding, the black windows and the new planting readable while the type stays
+    at full contrast.</p>
+    <p class="d">This is a better ending than the flat black card was. The post spends five slides
+    underground and then pays it off on the finished house, which is the argument in one image. It also
+    means the carousel now opens and closes on the same property rather than trailing off on a logo.</p>
+    <p class="d"><b>Two adjustments available:</b> the scrim can lift if you want more house and less
+    contrast, and the crop can shift down to include more of the stone wall and the steps.</p>
+  </div>
+</div>
+
+<h2 data-annot="s-held">The exterior, and the one question that now blocks shipping</h2>
+
+<div class="good" data-annot="blocker">
+  <h4>Resolved. The exterior is Kendall, confirmed off the website</h4>
+  <p style="margin:.3em 0"><b>Your note: check the exterior on the website for confirmation. Done, and it
+  confirms.</b> shavitrootman.com carries a live listing for <b>Kendall Street, South Bend, Indiana, zip
+  46613</b>, with its own nine photograph set curated from this same Drive folder on the twenty third. Its
+  published exterior hero and the frame on our closing card are the same house photographed a few feet
+  apart: same siding, same black roof and windows, same black railings, same stone retaining wall, same
+  hydrangeas, same pine at the right, same chimney.</p>
+  <p style="margin:.6em 0 0">Three more frames tie as well. The site's fourth photograph is the fireplace
+  room on our slide 4, front door at the left and the stacked stone breast in the middle. Its eighth is the
+  utility corner with the water heater and the panel. Its third is the through view on our slide 5.
+  <b>Single property, confirmed by Shavit's own published listing rather than by folder names. The ship
+  blocker is cleared and nothing is waiting on him.</b></p>
+  <p style="margin:.6em 0 0"><b>One thing the site notes turned up, worth honouring.</b> The listing entry
+  records that six raw photographs in this folder were flagged never ship, for people visible, a personal
+  photograph on a mantel, and screenshots. Our cover and slide 3 both show that mantel, so both were
+  enlarged and checked. <b>Clean:</b> the mantel carries a takeaway cup, a dark work jacket and plastic
+  tubs, and no personal photograph and no person appears in either frame.</p>
+</div>
+
+<div class="slide" data-annot="sec-9">
+  <div class="num">The exterior &middot; provenance</div>
+  <div class="shot"><img src="work-you-never-see-2026-07-24/assets/s6-exterior-after.jpg" alt="A finished house from the street, white siding, black roof, black railings and new planting along a stone retaining wall">
+    <div class="cap">019 &middot; provenance not established</div></div>
+  <div>
+    <p class="note"><b>Your note:</b> but is this actually Kendall or is this a compilation of other houses.
+    <b>Straight answer: every frame in this post came out of one Drive folder, the folder Shavit named
+    Kendall under Indiana, Past Projects. Nothing here is pulled from another property.</b> That is where
+    my confidence ends, and your instinct is better than the filing.</p>
+    <h3>Why this still needs one answer</h3>
+    <p class="d">The folder holds <b>at least three visibly different exteriors</b>. There is a grey house
+    in snow with a large enclosed glass porch on the right side. There is a blue grey house in summer with
+    mature hedges. There is this white house with a black roof in summer. They share a stone retaining wall
+    and a similar ranch footprint, which is what made me treat them as one house at different stages, and
+    that may well be right, because siding, roof, railings and planting all change in a full renovation.</p>
+    <p class="d"><b>But it is not proven, and a folder is not evidence.</b> The interiors in slides 1 to 5
+    are all internally consistent and tie to each other. The exterior does not tie to them by anything I can
+    see. So it needs Shavit to confirm it before this card ships, which is a single question and costs nothing to ask.</p>
+    <p class="d">This also puts a caution on the Kendall story spec, where the same exterior is the cover.
+    <b>Ask before that one ships too.</b> Related: frame 004 was labelled an alternate finished front in rev
+    1 of that spec and is actually a pre renovation exterior, which is already corrected there.</p>
+    <div class="ost"><span>The question for Shavit</span>Is the white house with the black roof the same
+    building as the grey house with the enclosed porch, and are both of them Kendall</div>
+  </div>
+</div>
+
+<h2 data-annot="s-ideas">Slide 3 &middot; twenty options</h2>
+
+<div class="warn" data-annot="slide3-problem">
+  <h4>Read this before picking a line, because the line may not be the problem</h4>
+  <p style="margin:.3em 0">You said slide 3 needs to tell a story and is not doing it. While enlarging that
+  frame for the mantel check I found out why. <b>089 is the same room as the cover.</b> The stacked stone
+  breast and the brick firebox are both there, shot from the other side. In rev 3 I moved the cover off 089
+  because the pair was not provable at contact sheet size, and at full size it turns out it was the same
+  room the whole time.</p>
+  <p style="margin:.6em 0 0">So the post currently runs: that room wrecked, a hallway, <b>that same room
+  wrecked again</b>, that room finished. Slide 3 is not failing because of its words. It is failing because
+  it repeats the cover and the viewer feels the story stop moving. Options 1 to 12 below keep 089 and give
+  it a job. <b>Options 13 to 20 change the photograph</b>, and I think that is the stronger fix.</p>
+</div>
+
+<div class="good" data-annot="shavit-voice">
+  <h4>Shavit's own language, pulled from his texts, specs and critiques</h4>
+  <p style="margin:.3em 0">You asked for lines in his voice, so here is what the record actually shows. All
+  of these are his, from the branding calls, the website build notes and his texts.</p>
+  <ul style="margin:.5em 0 0">
+    <li><b>&ldquo;You do not tell people a Porsche is beautiful. Let them see.&rdquo;</b> His analogy, and
+    the single most useful thing he has said about copy.</li>
+    <li><b>&ldquo;No adjective fluff. State the work done, let them judge.&rdquo;</b> A standing rule from
+    the branding call.</li>
+    <li><b>&ldquo;Wonder how we do it?&rdquo;</b> His own hook, texted 7/17, still unspent.</li>
+    <li><b>&ldquo;What I am trying to feature is the process so far.&rdquo;</b> 7/22, which is the entire
+    mandate for this post.</li>
+    <li><b>&ldquo;Nobody saw it coming.&rdquo;</b> His line about River Street.</li>
+    <li>Listing register: <b>&ldquo;Fresh paint, updated light fixtures, shower tile throughout.&rdquo;</b>
+    and <b>&ldquo;Three season room made an all season room for the comfort of your family.&rdquo;</b>
+    Flat, declarative, itemised, warm only at the very end.</li>
+    <li>Standing lines: <b>Live with us. Work with us.</b> &middot; <b>Real estate, operated.</b> &middot;
+    <b>Made in the Midwest, local to the Midwest.</b></li>
+  </ul>
+  <p class="d" style="margin:.7em 0 0"><b>What that means for slide 3.</b> Option 12 worked because it does
+  what he asks for and nothing else: it states a fact about the work and lets the reader draw the
+  conclusion. Every line below is built the same way. None of them contains an adjective, none of them tells
+  anyone how to feel, and none of them asks for credit.</p>
+</div>
+
+<div class="box" data-annot="ideas">
+  <p class="d" style="margin-top:0"><b>Group A, the absence frame.</b> Option 12's own structure: name the
+  thing by what it lacks. The story is carried by the gap.</p>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono);width:34px">1</td><td style="padding:6px 10px">THE PART WITH NO BEFORE AND NO AFTER<br><span style="color:var(--faint);font-size:13px">Your pick, kept as the anchor. Everything below is measured against it.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">2</td><td style="padding:6px 10px">THE PART THAT NEVER MAKES A LISTING<br><span style="color:var(--faint);font-size:13px">Ties to his own world. He writes listings every week, so this is his frame of reference.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">3</td><td style="padding:6px 10px">THE PART A WALKTHROUGH NEVER SHOWS<br><span style="color:var(--faint);font-size:13px">Aimed at buyers and lenders, who only ever see a house in two states.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">4</td><td style="padding:6px 10px">THE PART BETWEEN THE TWO PHOTOS EVERYONE SHARES<br><span style="color:var(--faint);font-size:13px">Names before and after without saying either word. Longest on the list.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">5</td><td style="padding:6px 10px">THE PART THAT MAKES THE AFTER POSSIBLE<br><span style="color:var(--faint);font-size:13px">Points forward at slide 4 instead of sideways. Strongest story link of group A.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">6</td><td style="padding:6px 10px">THE PART THAT COSTS THE MOST AND SHOWS THE LEAST<br><span style="color:var(--faint);font-size:13px">Money without a figure, which stays inside the no dollars rule.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">7</td><td style="padding:6px 10px">THE PART NOBODY ASKS ABOUT<br><span style="color:var(--faint);font-size:13px">Quietest one here. Works if the caption is doing the heavy lifting.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">8</td><td style="padding:6px 10px">THE PART THAT DECIDES THE NEXT TWENTY YEARS<br><span style="color:var(--faint);font-size:13px">Time horizon a lender thinks in. Confirm we are comfortable stating twenty.</span></td></tr>
+  </table>
+
+  <p class="d" style="margin-top:18px"><b>Group B, his listing register.</b> Flat and itemised, the way he
+  writes a unit description. States the work done and stops.</p>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono);width:34px">9</td><td style="padding:6px 10px">THE ROOM WAS TAKEN BACK TO THE BRICK<br><span style="color:var(--faint);font-size:13px">True of this frame, and it explains why the fireplace survives into slide 4.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">10</td><td style="padding:6px 10px">WHAT STAYED: THE BRICK. WHAT WENT: EVERYTHING ELSE.<br><span style="color:var(--faint);font-size:13px">His two column listing habit, turned into a card.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">11</td><td style="padding:6px 10px">FLOOR OUT. CEILING OPEN. NOTHING FINISHED.<br><span style="color:var(--faint);font-size:13px">Closest to Fresh paint, updated light fixtures, shower tile throughout. Same rhythm, inverted.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">12</td><td style="padding:6px 10px">NO FLOOR. NO CEILING. NO HEAT. NOT YET.<br><span style="color:var(--faint);font-size:13px">The not yet is what turns a list into a story. Check the heat claim against the frame first.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">13</td><td style="padding:6px 10px">EVERY SURFACE IN THIS ROOM CAME OUT<br><span style="color:var(--faint);font-size:13px">One fact, no adjective, easy to stand behind.</span></td></tr>
+  </table>
+
+  <p class="d" style="margin-top:18px"><b>Group C, time.</b> The story beat the post is currently missing.
+  Duration is what makes hidden work feel expensive without naming a figure.</p>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono);width:34px">14</td><td style="padding:6px 10px">THIS STATE LASTED LONGER THAN THE FINISH<br><span style="color:var(--faint);font-size:13px">My favourite of the twenty. States a fact, implies months, asks for nothing.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">15</td><td style="padding:6px 10px">THE HOUSE LOOKED LIKE THIS FOR MONTHS<br><span style="color:var(--faint);font-size:13px">Plainer version of fourteen. Confirm months with Shavit before it ships.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">16</td><td style="padding:6px 10px">THIS IS THE MIDDLE. IT IS MOST OF IT.<br><span style="color:var(--faint);font-size:13px">Two short sentences, which is his cadence when he is being direct.</span></td></tr>
+  </table>
+
+  <p class="d" style="margin-top:18px"><b>Group D, his own hooks.</b> Lines that borrow phrasing he has
+  already used, so the account starts sounding like one voice across posts.</p>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono);width:34px">17</td><td style="padding:6px 10px">WONDER HOW WE DO IT<br><span style="color:var(--faint);font-size:13px">His line, texted 7/17, still unspent. Putting it here answers it with work rather than with a team reel, and it makes this post part of his stated arc.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">18</td><td style="padding:6px 10px">THIS IS THE PROCESS. NOT THE RESULT.<br><span style="color:var(--faint);font-size:13px">Straight out of what I am trying to feature is the process so far.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">19</td><td style="padding:6px 10px">NOBODY SAW THIS ONE COMING<br><span style="color:var(--faint);font-size:13px">His River Street line, reused. Only if he is happy repeating himself across properties.</span></td></tr>
+    <tr><td style="padding:6px 10px;color:var(--gold);font-family:var(--mono)">20</td><td style="padding:6px 10px">WE DO NOT ASK YOU TO TAKE OUR WORD FOR IT<br><span style="color:var(--faint);font-size:13px">The Porsche principle stated outright. Strong, but it is the one line here that talks about itself.</span></td></tr>
+  </table>
+
+  <p class="d" style="margin-top:18px"><b>If you want the story to actually move, pick 14 or 5.</b> Fourteen
+  adds time, which is the dimension this post does not have anywhere else, and it is unarguable. Five points
+  the reader straight at slide 4 so the SAME ROOM card lands harder. Seventeen is the wildcard: it is his
+  own hook, it costs nothing, and it quietly folds this post into the arc he asked for back on the
+  seventeenth.</p>
+  <p class="d"><b>Still worth deciding separately:</b> whether slide 3 keeps 089 at all. It is the same room
+  as the cover, so any line here is working against a repeated image. Lines 9, 10 and 5 are the three that
+  turn that repetition into a deliberate setup rather than a stall.</p>
+</div>
+
+<h2 data-annot="s-caption">Caption draft</h2>
+<div class="caption" data-annot="caption" style="position:relative">Nobody posts this part.
+
+This is what a renovation looks like for most of the time it is actually happening. Fans running, propane on the floor, a ceiling opened end to end. None of it is visible once the walls close, and all of it decides whether a family is warm in February and whether the house is still sound in ten years.
+
+We know what is behind every wall in this house. The people who live here never have to.
+
+Swipe to the fourth slide. You are standing in the same room as the first one.
+
+Indiana. Finished now.
+
+Save this for your next walk through.
+
+Live with us. Work with us.
+
+.
+.
+#rehab #renovation #realestateinvesting #indianarealestate #midwestrealestate #propertymanagement</div>
+<p class="d" style="margin-top:10px"><b>Changed in rev 3.</b> The opening paragraph now describes what is
+actually in the six slides, fans, propane, opened ceiling, every room at once, rather than the stripped wall
+that is no longer in the post. No claim about the exterior, since that slide is held.</p>
+
+<h2 data-annot="s-checks">Pre-ship checks</h2>
+<div class="box" data-annot="checks">
+  <ul>
+    <li><span class="badge b-real">Done</span> <b>Same room pair now checkable</b> on three frames, 055,
+    098 and 080, against the fireplace, the two flanking windows and the ceiling lights.</li>
+    <li><span class="badge b-real">Done</span> <b>Single property.</b> Every shipping frame came from the
+    one Drive folder named Kendall.</li>
+    <li><span class="badge b-real">Done</span> <b>No person visible</b> in any of the six frames.</li>
+    <li><span class="badge b-real">Done</span> <b>No house number, no street sign, no portal imagery, no
+    generated architecture.</b></li>
+    <li><span class="badge b-real">Done</span> <b>No unsourced claims in the caption.</b> Everything it
+    describes is visible in a slide.</li>
+    <li><span class="badge b-real">Done</span> <b>Exterior provenance confirmed</b> against the live Kendall Street listing on shavitrootman.com, four frames tie.</li>
+    <li><span class="badge b-real">Done</span> <b>Never ship check.</b> The mantel in the cover and slide 3 was enlarged, no personal photograph and no person in either.</li>
+    <li><span class="badge b-watch">Open</span> <b>Slide 3.</b> Pick from the twenty options, or take the recommendation.</li>
+    <li><span class="badge b-real">Done</span> <b>Closing card rendered</b> at 1080 by 1350.</li>
+    <li><span class="badge b-watch">Open</span> <b>Render the remaining five cards</b> plus the review PDF.</li>
+    <li><span class="badge b-real">Done</span> <b>No house number on the closing card.</b> There is a wall mounted mailbox beside the door and it carries no digits, checked at full resolution.</li>
+  </ul>
+  <p class="d" style="margin-top:10px"><b>Note on annotating this page.</b> The keys that come through as
+  <code>sec-N</code> are positional, they count the photo boxes down the page, so they shift whenever slides
+  are added or removed. The ones that read <code>slide-N</code> are stable. Nothing to do about it, just
+  worth knowing that a <code>sec-4</code> note on rev 2 does not point at the same block in rev 3.</p>
+</div>
+
+<footer>The work you never see &middot; rev 3 &middot; 2026-07-24 &middot; shavit-pipeline &middot; frames
+sourced from the Kendall Drive folder, pulled and reviewed 2026-07-24. Annotate any slide above, notes save
+to the pipeline inbox when served through <code>serve.py</code>.</footer>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

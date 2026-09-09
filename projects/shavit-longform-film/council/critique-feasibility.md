@@ -1,0 +1,8 @@
+# Council critique — build feasibility lens · verdict: NOT READY (short path to ready)
+P1: zero verified local imagery for Lo Presto / 46 W South / Trio — the film's spine is unsourced. Website heroes are 10 OTHER properties. Fix: re-anchor to documented properties (34 Mead: $57.5K woman-in-crisis full-BRRRR; 61 Salem: tree collapse +$140K; West Side Cleveland) or hard-gate on Shavit's Drive drop. Do not build named-address chapters from Zillow scrapes.
+P2: the "66+17 images" are 2880x1800 FULL-DESKTOP screenshots (menu bar, tabs, Jake's files/email subjects visible); usable photo ≈1000x1300 IG-recompressed; counts inflated by carousel duplicates. Fix: batch-crop to photo rect (privacy!), re-pull IG natives via logged-in session, treat screenshots as fallback.
+P3: acceptance checks unverifiable as written: hex check impossible on H.264 (do it on pre-composite layer PNGs); no-pulse frame-diff contradicts the 4% push-in (use FFT periodicity test); ±80ms beat check is self-referential (verify against independently recomputed beat map). Keep ffprobe/LUFS/runtime/first-type checks.
+P4: pure PIL won't deliver promised kinetics (no motion blur/subpixel type); prior scripts gone; v1/v2 were landscape anyway. Fix: Remotion type/graphics layer (video_toolkit skill) + Python/librosa beat map + ffmpeg composite.
+P5: Higgsfield parallax on soft screenshot crops will invent geometry ("move the house"). Restrict to ≤5 hero frames, manual diff vs source; Ken-Burns elsewhere.
+P6: hook A/B via pinned-reel Insights impossible (one pin, Insights not unlocked, 3 public posts violates cadence). Pick internally via the 05B weekly review.
+Toolchain verified: ffmpeg/ffprobe/librosa 0.11/PIL all installed; Long Form 1 = 1920x1080@30 landscape.

@@ -1,0 +1,10 @@
+# shavit-pipeline machine rules — allowlist edited ONLY via `shavit.sh allow` (TTY).
+# Regex rules live in shavit.py lint; this file holds Jake-editable data.
+allowlist:
+bait:
+  - "follow for more"
+  - "you won't believe"
+  - "smash that"
+  - "link in bio NOW"
+  - "giveaway"
+  - "tag 3 friends"

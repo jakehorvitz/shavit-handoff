@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rev13 — Oak takes the screen, one at a time</title>
+<style>
+  :root{
+    --bg:oklch(0.15 0.008 60); --surface:oklch(0.20 0.010 60); --raised:oklch(0.26 0.012 60);
+    --line:oklch(0.33 0.014 60); --ink:oklch(0.97 0.004 60); --muted:oklch(0.76 0.010 60);
+    --brass:oklch(0.82 0.155 85); --ok:oklch(0.80 0.110 150); --warn:oklch(0.76 0.130 55);
+    --ease-q:cubic-bezier(0.22,1,0.36,1);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); padding:28px 32px 80px;
+    font:400 15px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{margin:0 0 6px; font-size:clamp(1.4rem,2.4vw,1.85rem); font-weight:600; letter-spacing:-0.02em}
+  .sub{margin:0; color:var(--muted); max-width:80ch}
+  .specs{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 30px; font:500 12px/1 ui-monospace, monospace}
+  .specs span{background:var(--raised); border:1px solid var(--line); border-radius:6px; padding:7px 9px}
+  h2{
+    font-size:13px; color:var(--muted); letter-spacing:0.05em; font-weight:600;
+    margin:42px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .row{display:flex; gap:22px; flex-wrap:wrap; align-items:flex-start}
+  figure{
+    margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:11px; overflow:hidden; width:268px; flex:0 0 auto;
+  }
+  figure.hero{width:330px; border-color:oklch(0.82 0.155 85/0.5)}
+  figure video, figure img.card{display:block; width:100%; background:#000}
+  figcaption{padding:11px 13px; font-size:13px; color:var(--muted)}
+  figcaption b{color:var(--ink); display:block; font-size:13.5px; margin-bottom:3px}
+  .badge{
+    display:inline-block; background:var(--ok); color:oklch(0.16 0.01 60);
+    font:600 10px/1 ui-monospace,monospace; letter-spacing:0.06em;
+    padding:4px 6px; border-radius:4px; margin-bottom:7px;
+  }
+  .badge.alt{background:var(--raised); color:var(--muted)}
+
+  .controls{display:flex; gap:9px; flex-wrap:wrap; margin:0 0 12px}
+  button{
+    font:inherit; color:var(--ink); background:var(--raised); border:1px solid var(--line);
+    border-radius:8px; padding:9px 14px; cursor:pointer;
+    transition:background .15s var(--ease-q), transform .15s var(--ease-q);
+  }
+  button:hover{background:oklch(0.31 0.014 60)}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--brass); border-color:var(--brass); color:oklch(0.17 0.01 60); font-weight:600}
+  button:focus-visible{outline:2px solid var(--brass); outline-offset:2px}
+
+  ol.beats{max-width:70ch; margin:0; padding-left:1.3em; color:var(--muted)}
+  ol.beats li{margin-bottom:7px}
+  ol.beats b{color:var(--ink)}
+
+  .note{
+    max-width:80ch; margin-top:22px; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; padding:16px 18px;
+  }
+  .note.flag{border-color:oklch(0.76 0.130 55/0.5)}
+  .note b{color:var(--ink)}
+  .note + .note{margin-top:13px}
+  img.sheet{max-width:100%; border:1px solid var(--line); border-radius:10px; display:block}
+  .scroll{overflow-x:auto; padding-bottom:4px}
+  table{border-collapse:collapse; font-size:13.5px; min-width:600px}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--muted); font-weight:600; font-size:11.5px; letter-spacing:0.04em; text-transform:uppercase}
+  td.n{font:600 12.5px/1.5 ui-monospace,monospace; white-space:nowrap}
+  @media (prefers-reduced-motion: reduce){ button{transition:none} }
+</style>
+</head>
+<body>
+  <h1>rev13 — Oak takes the screen, one at a time</h1>
+  <p class="sub">
+    The grid is gone. Each Oak photo now owns the whole frame and then settles into its corner,
+    exposing the next one already full-screen behind it, until all four are holding.
+  </p>
+  <div class="specs">
+    <span>1080&times;1920</span><span>30 fps</span><span>1776 frames</span>
+    <span>59.20s</span><span>&minus;14.1 LUFS</span><span>&minus;1.3 dBTP</span>
+    <span>0 credits spent</span>
+  </div>
+
+  <div class="controls">
+    <button class="primary" id="playAll" type="button">Play all</button>
+    <button id="slow" type="button">Half speed</button>
+    <button id="normal" type="button">Normal speed</button>
+  </div>
+
+  <h2>The film</h2>
+  <div class="row">
+    <figure class="hero">
+      <video class="v" src="rev13.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge">rev13 &mdash; NEW</span>
+        <b>59.20s</b>
+        Unmute it. Oak sits at 0:24. Everything after Oak shifted half a second later than rev11.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <video class="v" src="OAK-sequence.mp4" muted loop controls playsinline autoplay></video>
+      <figcaption>
+        <span class="badge">REBUILT</span>
+        <b>115 Oak &mdash; 3.50s</b>
+        Four photos, four full-screen beats, four corners. Watch it at half speed to see that nothing
+        ever enters the frame.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img class="card" src="CARD-brand.png" alt="Branded black title card with the SHAVIT ROOTMAN lockup">
+      <figcaption>
+        <span class="badge alt">UNCHANGED</span>
+        <b>Title card art</b>
+        Black, white type, gold stake line, SHAVIT ROOTMAN lockup. Both card slots.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <video class="v" src="rev11-previous.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge alt">rev11 &mdash; PREVIOUS</span>
+        <b>58.70s</b>
+        For A/B. This is the version with the grid you did not like.
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2>How Oak runs now</h2>
+  <ol class="beats">
+    <li><b>Ladder room</b> owns the whole screen, then settles into the <b>top-left</b> &mdash; and as it
+        shrinks, the green room is already there full-screen behind it.</li>
+    <li><b>Green room</b> owns the screen, then settles into the <b>top-right</b>, exposing the arch.</li>
+    <li><b>Arch to the front door</b> owns the screen, then settles into the <b>bottom-left</b>,
+        exposing the kitchen.</li>
+    <li><b>Kitchen</b> owns the screen last &mdash; it is the strongest photo, so it gets the final
+        full-screen beat &mdash; then settles into the <b>bottom-right</b>, where the eye finishes.</li>
+    <li>All four hold, each still running its own slow pan, until the white flash into Indiana.</li>
+  </ol>
+
+  <div class="note">
+    <b>Why this reads as natural instead of as an effect.</b> Two things, and both fall out of the
+    geometry rather than being animated in.
+    <br><br>
+    <b>1. It is a pure uniform scale.</b> The frame is 9:16 and every corner cell is 9:16, so a photo
+    travelling from full screen to a corner is just the same image getting smaller. Nothing warps,
+    nothing re-crops, no aspect snaps at the end. That is what makes it read as a physical object
+    receding rather than a transition playing.
+    <br><br>
+    <b>2. Nothing ever enters.</b> The four photos start stacked full-screen, front to back. Each one
+    shrinks <em>away</em> and exposes the next already sitting there. No slide-in, no fade-up, and not
+    one frame of empty background anywhere in the clip &mdash; the space a shrinking photo vacates is
+    always either a corner that is already filled or the next photo underneath.
+    <br><br>
+    Easing is ease-in-out cubic: starts at rest, ends at rest, no overshoot. A bounce would have read
+    as a cartoon, which is the opposite of what you asked for.
+  </div>
+
+  <h2>The Oak block, frame by frame</h2>
+  <img class="sheet" src="oak-frames.jpg" alt="Ten frames through the Oak sequence, from full screen to the completed quad">
+
+  <h2>Everything else, unchanged from rev11</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Time</th><th>Shot</th><th>Out on</th></tr>
+    <tr><td class="n">0:02</td><td>Ludlam &mdash; your opener, descends onto a finished house</td><td class="n">12f cross-dissolve</td></tr>
+    <tr><td class="n">0:06</td><td>S Norwood &times;3 &mdash; the rough one</td><td class="n">hard cuts, 8f bloom</td></tr>
+    <tr><td class="n">0:12</td><td>Howder &times;3</td><td class="n">hard cuts, 5f flash</td></tr>
+    <tr><td class="n">0:19</td><td>Barry &times;2 &mdash; studs into finished room</td><td class="n">10f cross-dissolve</td></tr>
+    <tr><td class="n">0:24</td><td>Oak &times;4 &mdash; one at a time into the corners</td><td class="n">5f flash</td></tr>
+    <tr><td class="n">0:27</td><td>E Ewing &mdash; the only live-action shot</td><td class="n">8f bloom</td></tr>
+    <tr><td class="n">0:30</td><td>Cedar &mdash; descends</td><td class="n">5f flash</td></tr>
+    <tr><td class="n">0:35</td><td>Saint Joe &mdash; climbs to the widest frame</td><td class="n">16f dip to black</td></tr>
+    <tr><td class="n">0:41</td><td>Team card &rarr; seven names &rarr; outro</td><td class="n">hard cuts</td></tr>
+  </table>
+  </div>
+  <img class="sheet" src="verify.jpg" alt="Frame strips through the title card, both dissolves, the flash and the dip to black" style="margin-top:16px">
+
+  <h2>Read before you sign off</h2>
+
+  <div class="note flag">
+    <b>A bug this pass nearly shipped.</b> The first export of this version went black for the last
+    half-second of Oak. Palmier caches an imported asset's frame count, and I had overwritten the clip
+    file in place while making it longer &mdash; so the timeline asked for frames the editor still
+    believed did not exist. Caught it in the rendered pixels, not in the timeline. The fix is that the
+    clip filename is now versioned, and the renderer carries a comment saying why.
+  </div>
+
+  <div class="note">
+    <b>The one real cost.</b> Four equal cells in a 9:16 frame forces each cell to 9:16 too, so each
+    3:4 photo gives up 25% of its width when it is in a corner. Nothing important is lost &mdash; the
+    ladder room keeps both windows, the kitchen keeps the base cabinets, sink and faucet, the arch shot
+    keeps the arch and drops a folding chair &mdash; and the full-screen beat before each settle shows
+    the same crop, so you always see the photo at full size before it shrinks.
+  </div>
+
+  <div class="note">
+    <b>Still open, unchanged.</b> Howder's clipped carpenter is the oldest defect in the film, 7.5
+    credits against roughly 20 available. Ludlam now opens the film on its single usable photo, and
+    that frame shows gas meters on the side elevation &mdash; worth asking Shavit for a front
+    elevation. And the Saint Joe interiors are still completely unused.
+  </div>
+
+<script>
+  const vs = [...document.querySelectorAll('video.v')];
+  document.getElementById('playAll').onclick = () => vs.forEach(v => { v.currentTime = 0; v.play(); });
+  document.getElementById('slow').onclick    = () => vs.forEach(v => v.playbackRate = 0.5);
+  document.getElementById('normal').onclick  = () => vs.forEach(v => v.playbackRate = 1);
+</script>
+</body>
+</html>

@@ -1,0 +1,1416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mead Street case study · Instagram post spec</title>
+<style>
+  :root{--bg:#0b0b0c;--card:#131315;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a8a49c;
+    --brass:#B08D57;--gold:#FFC000;--red:#e0674f;--green:#7fb069;
+    --mono:ui-monospace,Menlo,monospace}
+  *{box-sizing:border-box}
+  body{margin:0 auto;max-width:1040px;padding:40px 20px 90px;background:var(--bg);
+    color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+    margin:44px 0 14px;padding-top:18px;border-top:1px solid var(--line)}
+  h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:20px 0 8px}
+  .sub{color:var(--dim);margin:0 0 22px}
+  .sub code{font-family:var(--mono);font-size:12px;color:var(--ink)}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:14px 16px;margin:18px 0 8px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 14px}
+  .quote{border-left:3px solid var(--gold);padding:10px 14px;background:#000a;border-radius:6px;
+    font-size:15px;margin:0 0 12px}
+  .quote .who{display:block;font:600 11px/1 var(--mono);letter-spacing:.1em;color:var(--dim);
+    text-transform:uppercase;margin-top:8px}
+  .phone{max-width:470px;background:#000;border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;font-size:14.5px;line-height:1.6}
+  .phone .handle{font:700 13px/1 Inter;margin:0 0 12px;color:var(--ink)}
+  .phone .handle span{color:var(--dim);font-weight:400}
+  .phone p{margin:0 0 12px}
+  .phone .span{border-bottom:1px dotted var(--brass);cursor:help}
+  .phone .tags{color:#7aa7d9;font-size:13.5px}
+  .fold{border-top:1px dashed var(--gold);margin:12px 0;position:relative;height:0}
+  .fold span{position:absolute;top:-8px;right:0;background:#000;padding:0 6px;
+    font:600 9.5px/1 var(--mono);letter-spacing:.1em;color:var(--gold);text-transform:uppercase}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{font:600 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+    text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  td.id{font-family:var(--mono);font-size:12px;color:var(--gold);white-space:nowrap}
+  td.src{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+  .flag{border-left:3px solid var(--gold)}
+  .flag b{color:var(--gold)}
+  .stop{border-left:3px solid var(--red)}
+  .stop b{color:var(--red)}
+  .ok{color:var(--green)}
+  pre{background:#000;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+    font:12.5px/1.7 var(--mono);color:var(--ink);overflow-x:auto}
+  .note{color:var(--dim);font-size:13px}
+  ol li,ul li{margin:5px 0}
+  .slides{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 18px}
+  @media(max-width:820px){.slides{grid-template-columns:1fr}}
+  .slide{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:10px;position:relative}
+  .slide>img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;display:block}
+  .slide .n{position:absolute;top:16px;left:16px;z-index:2;background:#000c;color:var(--gold);
+    font:700 10.5px/1 var(--mono);letter-spacing:.1em;padding:5px 7px;border-radius:4px}
+  .slide figcaption{font-size:12.5px;margin-top:9px;color:var(--ink)}
+  .slide figcaption b{display:block;margin-bottom:5px}
+  .slide .line{display:block;color:var(--gold);font-style:italic;margin:0 0 6px;line-height:1.45}
+  .slide .src{display:block;font-family:var(--mono);font-size:10.5px;color:var(--dim);line-height:1.5}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+  .split>div{position:relative}
+  .split img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block}
+  .split>div:first-child img{border-radius:6px 0 0 6px}
+  .split>div:last-child img{border-radius:0 6px 6px 0}
+  .split .chip{position:absolute;bottom:6px;left:6px;background:#000c;color:var(--brass);
+    font:700 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:4px 6px;border-radius:3px}
+  .collage{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+  .collage img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+
+  /* ---- Instagram post mock (rev 8) ---- */
+  .ig-wrap{display:flex;justify-content:center;margin:0 0 18px}
+  .ig{width:470px;max-width:100%;background:#fff;color:#000;border:1px solid #dbdbdb;
+    border-radius:10px;overflow:hidden;font:14px/1.45 -apple-system,"Segoe UI",Roboto,sans-serif}
+  .ig-head{display:flex;align-items:center;gap:11px;padding:11px 14px}
+  .ig-av{width:34px;height:34px;border-radius:50%;flex:0 0 34px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#B08D57,#7a5f34);color:#fff;font:700 12px/1 Inter,sans-serif;
+    letter-spacing:.04em}
+  .ig-who{flex:1;display:flex;flex-direction:column;line-height:1.25}
+  .ig-who b{font-size:13.5px}
+  .ig-who span{font-size:12px;color:#3c3c3c}
+  .ig-dots{color:#262626;font-size:19px;letter-spacing:1px}
+  .ig-media{position:relative;background:#000;aspect-ratio:4/5;overflow:hidden}
+  .ig-track{display:flex;height:100%;transition:transform .28s ease}
+  .ig-track img{width:100%;height:100%;object-fit:cover;flex:0 0 100%;display:block}
+  .ig-nav{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;
+    border:none;border-radius:50%;background:rgba(255,255,255,.85);color:#333;cursor:pointer;
+    font:700 17px/1 sans-serif;display:grid;place-items:center;padding:0}
+  .ig-nav:hover{background:#fff}
+  .ig-prev{left:9px}.ig-next{right:9px}
+  .ig-nav[disabled]{opacity:0;pointer-events:none}
+  .ig-count{position:absolute;top:11px;right:11px;background:rgba(0,0,0,.62);color:#fff;
+    font:600 11.5px/1 sans-serif;padding:5px 9px;border-radius:11px}
+  .ig-dotsrow{display:flex;justify-content:center;gap:5px;padding:11px 0 3px;background:#fff}
+  .ig-dotsrow i{width:6px;height:6px;border-radius:50%;background:#c7c7c7;display:block}
+  .ig-dotsrow i.on{background:#0095f6}
+  .ig-actions{display:flex;gap:15px;padding:6px 14px 4px;background:#fff}
+  .ig-actions svg{width:23px;height:23px;fill:none;stroke:#262626;stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round}
+  .ig-actions .ig-save{margin-left:auto}
+  .ig-body{padding:2px 14px 15px;background:#fff}
+  .ig-likes{font-size:13.5px;margin:2px 0 6px}
+  .ig-cap{font-size:13.6px;line-height:1.5;color:#000}
+  .ig-user{font-weight:600;margin-right:5px}
+  .ig-more{color:#8e8e8e;cursor:pointer;margin-left:4px}
+  .ig-rest{display:none;margin-top:2px}
+  .ig-rest.open{display:block}
+  .ig-cap p{margin:9px 0 0}
+  .ig-tags{color:#00376b}
+  .ig-tags .tag{margin-right:4px}
+  .ig-time{font-size:11px;color:#8e8e8e;letter-spacing:.02em;margin-top:11px;text-transform:uppercase}
+  .chg{box-shadow:0 0 0 2px var(--gold);border-radius:8px}
+  .lib-b{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;
+    text-transform:uppercase;padding:2px 6px;border-radius:4px;margin-bottom:3px}
+  .lib-on .lib-b{background:rgba(176,141,87,.22);color:var(--gold)}
+  .lib-col .lib-b{background:rgba(120,170,120,.20);color:#8fbf8f}
+  .lib-off .lib-b{background:rgba(255,255,255,.07);color:var(--dim)}
+  .lib-off>img{opacity:.55}
+</style>
+</head>
+<body data-spec="mead-case-study-post" data-annot-targets=".card, .phone, h2, h3, .quote, pre">
+
+<h1>Mead Street &middot; deal case study &middot; Instagram post</h1>
+<p class="sub">Post id <code>mead-deal-story</code> &middot; rev 22 &middot; 2026-08-31 &middot;
+state <code>draft</code> &middot; caption renders at <b>2,085</b> characters (limit 2,200)</p>
+
+<div class="revlog">
+  <h4>Revision log</h4>
+  <ul>
+    <li><span class="rev">rev 22 &middot; 8/31</span> <b>Jake's own exterior is the only after-exterior on the deck, at both ends.</b> "thats the only shot of the exterior house that I want put that in the collage and that as the ending photo." It is slide 8 and the collage's top-left tile. He also <b>re-uploaded it to the Drive folder at 1510&times;1042</b> against the 522&times;359 the deck had, which flips slide 8 from a <b>2.46&times; upscale to a 0.85&times; downscale</b> and is worth <b>+177% / +184% gradient energy</b> &mdash; the softness is gone because the renderer stopped inventing pixels, not because anything was sharpened. <code>lift</code> back to 1.00 for the same reason. <b style="color:var(--red)">Section 16 is unchanged:</b> a bigger copy of the same picture is the same picture, so the rendering disclosure still applies. The rev-21 native recut of the real May-shoot exterior stays built and is one line away.</li>
+    <li><span class="rev">rev 21 &middot; 8/31</span> <b>Slide 8 is now the same file as the collage's top-left tile, and that file was recut from the camera original.</b> Jake: "make sure 8 is the same image as the top left in the collage and see if you can make it higher quality." The deck had been rendering a frame <b>two generations off the camera</b> (3600&times;2400 &rarr; 1400&times;933 JPEG &rarr; 1327&times;884). It now takes crop <code>(0,192,2666,1776)</code> straight out of <code>_drop/2.jpeg</code> &mdash; located by cross-correlation, not guessed &mdash; and stays PNG through the lawn fill: <b>1.90&times; the pixels, one resample, no intermediate JPEG</b>. Export raised to q95 4:4:4 from q90 4:2:0. <code>fix_lawn_patches.py</code> gained scale-aware polygon reuse rather than a second hand-drawn polygon; re-verified zero pixels changed above the lawn. Measured gain 3.8&ndash;4.1% gradient energy, shown at 1:1 in section 18. Side effect: <b>the section 16 frame is off the deck entirely</b>, so every photo on it is now from the May shoot.</li>
+    <li><span class="rev">rev 20 &middot; 8/31</span> <b>The collage moves to the front, and the cover frame moves to the back.</b> Jake: "start with collage for one then end with our current image of one." A straight swap of the two end frames, so the deck stays at <b>eight</b> and the nine-slide build is retired. Slide 1 is the 3&times;3 of nine rooms; slide 8 is <code>exterior-cover-jake.jpg</code> under his 1:48 PM headline and the CTA. <b>No copy changed on either slide</b>, so the copy rule is untouched. Two things follow: the first tile is now the hardest scroll-stop on the deck, and <b>section 16's provenance record now attaches to the last slide instead of the first</b>. Section 18 rewritten; section 7's slide 1 was also still showing <code>exterior-after-clean</code> from before rev 16 and is corrected.</li>
+    <li><span class="rev">rev 19 &middot; 8/31</span> <b>Sections 17 and 18: the complete photo library, and a closing collage.</b> Jake: "put all the photos in a spec and maybe have a collage at the end." Section 17 is all <b>nineteen</b> source files with every derived crop mapped back to its raw frame <i>by pixel correlation rather than by memory</i>, so the table cannot drift from the renderer. That mapping surfaced two things: three good frames were sitting unused (the second kitchen angle, the half bath, the upstairs room with the en-suite), and the cover scores 0.36 against <code>2.jpeg</code> where every real crop of it scores 1.00, which is the measurement behind section 16. Section 18 is the collage, a <b>3&times;3 of the nine distinct rooms</b> as slide 9, repeating slide 1's three lines verbatim so the deck bookends, and carrying no second CTA. It spends all three of the unused frames. <b>The approved eight-slide deck is untouched</b>; the nine-slide build is a separate output from the same copy list.</li>
+    <li><span class="rev">rev 18 &middot; 8/31</span> <b>Slide 8 photo replaced</b> on Jake's 4:20 PM note, "something more professional". The closer was <code>after-11.jpg</code>, the side entry: chain-link fence, bare soil, leaf litter on the treads, a service-door angle that ended the deck on the least finished thing in the set. It is now <code>exterior-after-clean.jpg</code>, the front three-quarter &mdash; whole house, porch and garage, <b>1400&times;933 against after-11's 1024&times;683</b>, so it upscales less into the 1080&times;884 photo area. It carries the front-lawn fill from Shavit's own 8/31 landscaping note, which is non-generative: every grass pixel is cloned from real grass in the same photograph. Closing on the exterior is the standing carousel rule; this is the pulled-back angle, the cover is the tight one. Four rejected candidates and the old slide are kept in <code>Slide 8 options/</code> beside the deck. Copy, caption and band are untouched.</li>
+    <li><span class="rev">rev 17 &middot; 8/31</span> <b>Slide 8 headline changed on Shavit's instruction</b>, 1:48 PM: "building communities - one project at a time", his wording and his hyphen verbatim. It sets on two lines, so the uniform band grows 466 &rarr; 528px (39% of frame) across the deck. The caption never carried the retired line, so it is unchanged at 2,086 characters.</li>
+    <li><span class="rev">rev 16 &middot; 8/31</span> <b>Jake's supplied frame is the cover</b>, his call after seeing the provenance comparison. Soft: 522&times;359 upscaled 2.46&times;. The wide real frame stays built and one line away in <code>render_mead.py</code> if it is wanted back. Section 16 keeps the record so the provenance travels with the deck.</li>
+    <li><span class="rev">rev 15 &middot; 8/31</span> <b>Cover is now the wide real frame</b> (<code>_drop/2.jpeg</code>, 3600&times;2400): whole house, garage, driveway, street tree, lawn evened by the same non-generative pass. The file Jake supplied for the cover is <b>not a photograph of this property</b> and is held off the deck &mdash; section 16 has the evidence. The lawn tool now carries a per-frame polygon config, and its feather is inward-only, since a plain blur pushed the fill up over the porch.</li>
+    <li><span class="rev">rev 14 &middot; 8/31</span> <b>Lawn resurfaced, not spot-filled.</b> Jake: "its still like patchy it should just be even." Patching only the bare spots left the old thatch and blotchy shading in place, which was most of the patchiness. Now the whole lawn is resurfaced with <b>randomised quilting from four donor patches</b>, which also kills the tiling repeat that a single donor produced. Re-verified: <b>still zero pixels changed above the porch line</b>, every strong change between y=638 and y=917, all ground.</li>
+    <li><span class="rev">rev 13 &middot; 8/31</span> <b>Grass evened.</b> Coverage raised to catch soil still showing through the fill, polygon widened to the brown strips under the veneer and above the walk, donor sharpened to match the real grass it sits next to. Re-verified: still <b>zero pixels changed above the porch line</b>, and every strong change in the frame falls between y=642 and y=917, all of it ground.</li>
+    <li><span class="rev">rev 12 &middot; 8/31</span> <b>The patchy grass is fixed properly.</b> The first pass only shifted hue, which could not help: that strip is bare soil, not dying grass. Real grass is now cloned in from the purest patch in the same photograph, depth-scaled and relit per channel to the lawn's own grass. Confined to a hand-drawn lawn polygon; measured against a strength-0 control, <b>zero pixels change above the porch line</b>. Rebuild with <code>_scripts/build_exterior_clean.sh</code>.</li>
+    <li><span class="rev">rev 11 &middot; 8/31</span> <b>All eight slides rebuilt on his 11:08 AM copy.</b> His headers, his order, his sentences trimmed to the band; deck re-rendered and the band actually got <i>smaller</i> (466px, 35%), so every header now sets on one line. Four things are held out and marked red in section 7: the hardship clause (contradiction), the two finish inventories (his own note 2, plus the Budlong rule) and the relocating-tenants claim (no source). Section 7 had also drifted from the renderer since rev 7 &mdash; it was showing <code>after-05</code> for slide 7 and the uncleaned exterior for the cover &mdash; both corrected. The slide 7 alternates were stale one-offs carrying a retired line; they are re-rendered from the same card every run now.</li>
+    <li><span class="rev">rev 10 &middot; 8/31</span> <b>Scanned the texts again and found Shavit's 11:08 AM private rewrite of the whole carousel.</b> Sections 14 and 15. His note "lightly clean up the landscaping" is actioned on slide 1 with a non-generative retouch, before and after shown. His other five notes were already satisfied. But his new slide 2 <b>contradicts the live website</b> on why the seller sold, and three of his claims have no source yet, so the middle slides are held.</li>
+    <li><span class="rev">rev 9 &middot; 8/31</span> Section 13: the draft message for the CPM marketing GC, three asks that are each a decision only Shavit can make, plus the attachment order and a shorter version. <b>Draft only, Jake sends.</b></li>
+    <li><span class="rev">rev 8 &middot; 8/31</span> <b>The post itself is now section 4</b>, not the parts. Real feed chrome, the eight rendered slides swipeable with arrows, dots or the left and right keys, and the caption truncated at Instagram's fold with a working "more". Handle is <code>@shavitness</code>, the account the live site links to.</li>
+    <li><span class="rev">rev 7 &middot; 8/31</span> <b>Deck rendered.</b> Eight slides at 1080x1350 via <code>_scripts/render_mead.py</code>, send-ready set on the Desktop. Rendering exposed three things the paper spec could not: the cover crop was loose and orphaned a word, slide 3's two halves did not read as the same room, and slide 7's frame was fridge-dominated and duplicated the kitchen. All three fixed. Slide 7 has two alternates for you to pick from.</li>
+    <li><span class="rev">rev 6 &middot; 8/31</span> Jake: "you need like Mead Street, look at the first slides for the other studies." Checked both. <b>The property name is the headline</b> on Kendall and Clarendon, and their one-liners run 61 and 74 characters against rev 5's 100. Slide 1 rebuilt to the series form: Mead Street, Hillsdale Michigan, then the short BRRRR formula that both siblings already ship verbatim.</li>
+    <li><span class="rev">rev 5 &middot; 8/31</span> Slide 1 goes back to his BRRRR one-liner as the header (trimmed only to drop "distressed"). Slide 2 reheaded. <b>Old slides 3 and 8 removed</b>, deck is now eight. Slide 5 keeps the header you liked and swaps to the french doors seen from inside. The outcome slide gets the bright kitchen view and the entry shot moves to the closer, which keeps the exterior close. <b>Cutting the exterior split leaves only one before-and-after pair, flagged above.</b></li>
+    <li><span class="rev">rev 4 &middot; 8/31</span> Jake kept the headers on slides 7 to 10 and cut all six before them. The six are rebuilt to the rule that comparison exposes: <b>present tense, standing principle, no comparison, no cleverness</b>. Three of the cut lines were also carrying a competitor comparison, which breaks the Porsche rule outright. Slides 7 to 10 are untouched.</li>
+    <li><span class="rev">rev 3 &middot; 8/31</span> Jake's four spec annotations actioned. Scanned the texts and found <b>Shavit's own Kendall slide set (8/3)</b>, which is the case-study register; every slide line rebuilt in that form. "Distressed" removed from the caption and the deck, opener swapped to his L35 differentiator. His Lessons Learned 3 added as a new fact. The <code>/casestudies</code> redirect is <b>fixed</b> in the repo and <code>/case-studies</code> was pointing at a <code>#standard</code> anchor that does not exist, so that is fixed too.</li>
+    <li><span class="rev">rev 2 &middot; 8/31</span> Jake: "I need to see a draft post in the spec with the photos." Added section 5, the ten slides with the real frames. Checking the set turned up three things: <b>no December before exists for the kitchen or the bathroom</b>, <code>after-01</code> duplicates the cover exterior, and the deck-after boards read weathered against the site's "fresh deck" caption. Caption unchanged.</li>
+    <li><span class="rev">rev 1 &middot; 8/31</span> First draft. Shavit's 8/27 3:48 PM case-study
+      text, sequenced in the Clarendon deal-story shape, opened and closed in the register of the
+      8/30 teaser caption he approved. Fifteen facts queued for the TTY pass.</li>
+  </ul>
+</div>
+
+<h2>1 &middot; Why this post, right now</h2>
+
+<div class="card">
+  <p>This is not a new format. It is the <b>delivery of a post Shavit already announced.</b>
+  His teaser caption, approved 8/30 at 9:52 AM with "You're good to go", ends on this sentence:</p>
+  <blockquote class="quote">We are excited to introduce our next case study, featuring our Mead
+  Street project in Hillsdale, Michigan.
+  <span class="who">Shavit &middot; CPM marketing GC &middot; 8/30 9:52 AM</span></blockquote>
+  <p class="note">It is also item 3 on the list Jake sent the team this morning: "Draft of case study."</p>
+</div>
+
+<h2>2 &middot; The two previous posts, and what each one gives this draft</h2>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Previous post on the account</h3>
+    <p>The case-studies teaser reel, 8/30. It sets the <b>register</b>: no contractions, no em
+    dashes, no exclamation marks, no emoji, first person plural, one idea per paragraph, a reason
+    to care stated before any detail.</p>
+    <p>It also hands over two blocks used verbatim here: his sentence about what a case study
+    contains, and his ten-tag hashtag block.</p>
+  </div>
+  <div class="card">
+    <h3>Previous case-study post</h3>
+    <p>The Clarendon Road carousel. It sets the <b>skeleton</b>, and this caption matches it slot
+    for slot:</p>
+    <p class="note">one-liner &rarr; street, city, state &rarr; how it was acquired and why &rarr;
+    renovation scope &rarr; what it is now &rarr; the hold or repeat beat &rarr;
+    "Live with us. Work with us." &rarr; tags.</p>
+    <p class="note">Templated formats win (brand rule 10). A reader who saw Clarendon should
+    recognize this as the same series on sight.</p>
+  </div>
+</div>
+
+<h2>3 &middot; Brand specialist, not designer</h2>
+
+<div class="card">
+  <p>The standard is Shavit's own 8/28 9:00 PM correction, and his reasoning was operational
+  rather than aesthetic:</p>
+  <blockquote class="quote">I don't think it was possible to not see how distressed 34 Mead was.
+  We just have better funding, operations, on site management, and Renters pipeline to be able to
+  execute projects that other people will pass on. In other words, it is not about we fix what
+  other people don't see, it is about we do what others cannot.
+  <span class="who">Shavit &middot; 8/28 9:00 PM</span></blockquote>
+
+  <p>So the caption <b>never describes the photographs.</b> The photos carry the transformation;
+  the copy carries the advantage. The advantage beat is his own sentence from the BUY step, pulled
+  forward into paragraph three:</p>
+  <pre>Because we specialize in value-add investments, we were able to move quickly
+and purchase the home directly.</pre>
+  <p>That is the same claim as "we do what others cannot", stated with a fact instead of a slogan.
+  Which matters, because <b>he rejected the slogan</b> at 9:18 PM the same night: Jake proposed
+  WE INVEST WHERE OTHERS WALK AWAY and WE DO WHAT OTHERS CANNOT, and the reply was
+  "Nope! Negative for both." Neither line belongs on a slide or in this caption.</p>
+</div>
+
+<div class="card">
+  <h3>The hook is the acquisition, not the renovation</h3>
+  <p>Every operator in Hillsdale posts a finished kitchen. Almost none can say a homeowner called
+  <i>them</i> because of a mailer. His L35 line is the most differentiated sentence in the whole
+  case study, and it does double duty: character to a tenant or seller, deal flow to a lender or
+  partner. It leads the body.</p>
+</div>
+
+<div class="card">
+  <h3>The numbers stay on the website</h3>
+  <p>Acquisition price, renovation spend, ARV, equity, monthly rent, cap rate and ROI are all
+  barred by <code>no-dollar</code> and <code>uncited-numeral</code>. The caption does not gesture
+  at them vaguely either. It <b>names</b> them as the reason to click, in his own inventory
+  sentence ("the economics behind the investment"). The promise of the number moves traffic to
+  the case study he just spent a reel announcing; the number itself would only satisfy curiosity
+  in the feed.</p>
+</div>
+
+<h2 id="s4">4 &middot; The post</h2>
+
+<p class="note">The actual thing, as it lands in the feed. Swipe with the arrows, the dots, or the
+left and right keys. Caption is truncated at Instagram's fold exactly as it will be; tap
+<b>more</b> to open it.</p>
+
+<div class="ig-wrap">
+<div class="ig">
+  <div class="ig-head">
+    <div class="ig-av"><span>SR</span></div>
+    <div class="ig-who"><b>shavitness</b><span>Hillsdale, Michigan</span></div>
+    <div class="ig-dots">&#8943;</div>
+  </div>
+
+  <div class="ig-media">
+    <div class="ig-track" id="igTrack">
+      <img src="mead-case-study-post-spec/slides/01_cover.jpg" alt="Slide 1"><img src="mead-case-study-post-spec/slides/02_before-collage.jpg" alt="Slide 2"><img src="mead-case-study-post-spec/slides/03_split-upstairs.jpg" alt="Slide 3"><img src="mead-case-study-post-spec/slides/04_durable.jpg" alt="Slide 4"><img src="mead-case-study-post-spec/slides/05_kitchen.jpg" alt="Slide 5"><img src="mead-case-study-post-spec/slides/06_bathroom.jpg" alt="Slide 6"><img src="mead-case-study-post-spec/slides/07_outcome.jpg" alt="Slide 7"><img src="mead-case-study-post-spec/slides/08_close.jpg" alt="Slide 8">
+    </div>
+    <button class="ig-nav ig-prev" id="igPrev" aria-label="Previous slide">&#8249;</button>
+    <button class="ig-nav ig-next" id="igNext" aria-label="Next slide">&#8250;</button>
+    <div class="ig-count" id="igCount">1/8</div>
+  </div>
+
+  <div class="ig-dotsrow" id="igDots"></div>
+
+  <div class="ig-actions">
+    <svg viewBox="0 0 24 24"><path d="M12 21s-8-4.9-8-10.3A4.7 4.7 0 0 1 12 7a4.7 4.7 0 0 1 8 3.7C20 16.1 12 21 12 21z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.3-.6L3 21l1.8-5A8.3 8.3 0 0 1 3.9 11 8.4 8.4 0 0 1 12.4 3 8.4 8.4 0 0 1 21 11.5z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M22 3 11 14M22 3l-7 19-4-8-8-4 19-7z"/></svg>
+    <svg class="ig-save" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+  </div>
+
+  <div class="ig-body">
+    <div class="ig-likes">Liked by <b>chargerpropertymanagement</b> and <b>others</b></div>
+    <div class="ig-cap" id="igCap">
+      <span class="ig-user">shavitness</span>
+      <span class="ig-first">Some of our best opportunities begin with simply letting people know we are willing to help.</span><span class="ig-more" id="igMore">&#8230; more</span>
+      <div class="ig-rest" id="igRest"><p>Mead Street. Hillsdale, Michigan.</p><p>After receiving one of our &quot;We Buy Houses&quot; mailers distributed throughout Hillsdale, the homeowner contacted us. She was experiencing significant financial hardship, the home had deteriorated over many years, and its condition prevented her from obtaining homeowners insurance.</p><p>Rather than seeing a property beyond repair, we saw an opportunity to solve a difficult situation while preserving another home for the Hillsdale community. Because we specialize in value-add investments, we were able to move quickly and purchase the home directly.</p><p>The renovation included structural and deferred maintenance repairs, new drywall throughout, new flooring, a completely renovated kitchen, an updated bathroom, new lighting and fixtures, interior and exterior paint, updated mechanical systems, and landscaping and exterior improvements. Rather than applying cosmetic upgrades, the goal was to create a durable, low-maintenance home that would perform well for years to come.</p><p>Standardizing materials and finishes improves efficiency while reducing future maintenance costs.</p><p>Today, the property is professionally managed, fully occupied, and provides quality housing for a local family. Our goal is not simply to renovate homes. It is to provide housing that tenants are proud to call home.</p><p>Capital returned through refinancing was reinvested into additional acquisitions, allowing us to continue expanding our portfolio while preserving quality housing throughout Hillsdale.</p><p>Beyond the finished renovation, the case study walks through how we found the opportunity, why we pursued it, the economics behind the investment, the renovation process, the timeline, and the lessons we learned along the way. Read it at ShavitRootman.com/case-studies.</p><p>Live with us. Work with us.</p><p class="ig-tags"><span class="tag">#RealEstateInvesting</span> <span class="tag">#BRRRR</span> <span class="tag">#PropertyManagement</span> <span class="tag">#CaseStudy</span> <span class="tag">#HillsdaleMI</span> <span class="tag">#CommunityDevelopment</span> <span class="tag">#RealEstateDevelopment</span> <span class="tag">#BeforeAndAfter</span> <span class="tag">#LongTermInvesting</span> <span class="tag">#ChargerPropertyManagement</span></p></div>
+    </div>
+    <div class="ig-time">Draft &middot; not posted</div>
+  </div>
+</div>
+</div>
+
+<h2>5 &middot; The caption, span by span</h2>
+
+<div class="phone">
+  <p class="handle">shavitrootman <span>&middot; Mead Street carousel</span></p>
+
+  <p><span class="span" title="mead.origin · his L35, verbatim · rev 3 opener">Some of our best
+  opportunities begin with simply letting people know we are willing to help.</span></p>
+
+  <div class="fold"><span>125-char fold</span></div>
+
+  <p><span class="span" title="prop.mead.street">Mead Street</span>.
+  <span class="span" title="prop.mead.city">Hillsdale</span>,
+  <span class="span" title="prop.mead.state">Michigan</span>.</p>
+
+  <p><span class="span" title="mead.mailer · L37 sentence 1, verbatim">After receiving one of our
+  "We Buy Houses" mailers distributed throughout Hillsdale, the homeowner contacted us.</span>
+  <span class="span" title="mead.hardship · L37 sentence 2, verbatim · SEE DECISION 1">She was
+  experiencing significant financial hardship, the home had deteriorated over many years, and its
+  condition prevented her from obtaining homeowners insurance.</span></p>
+
+  <p><span class="span" title="mead.opportunity · L39, verbatim">Rather than seeing a property
+  beyond repair, we saw an opportunity to solve a difficult situation while preserving another
+  home for the Hillsdale community.</span>
+  <span class="span" title="mead.valueadd · L60 sentence 3, verbatim">Because we specialize in
+  value-add investments, we were able to move quickly and purchase the home directly.</span></p>
+
+  <p><span class="span" title="mead.scope · L62 bullets joined, same join the website shipped">The
+  renovation included structural and deferred maintenance repairs, new drywall throughout, new
+  flooring, a completely renovated kitchen, an updated bathroom, new lighting and fixtures,
+  interior and exterior paint, updated mechanical systems, and landscaping and exterior
+  improvements.</span>
+  <span class="span" title="mead.standard · L62 final sentence, verbatim">Rather than applying
+  cosmetic upgrades, the goal was to create a durable, low-maintenance home that would perform
+  well for years to come.</span></p>
+
+  <p><span class="span" title="mead.lesson.finishes · his Lessons Learned 3, verbatim · new in rev 3">Standardizing
+  materials and finishes improves efficiency while reducing future maintenance costs.</span></p>
+
+  <p><span class="span" title="mead.today · L41 sentence 2, verbatim">Today, the property is
+  professionally managed, fully occupied, and provides quality housing for a local family.</span>
+  <span class="span" title="mead.goal · L64, rent figure removed, em dash split">Our goal is not
+  simply to renovate homes. It is to provide housing that tenants are proud to call
+  home.</span></p>
+
+  <p><span class="span" title="mead.repeat · L68, verbatim">Capital returned through refinancing
+  was reinvested into additional acquisitions, allowing us to continue expanding our portfolio
+  while preserving quality housing throughout Hillsdale.</span></p>
+
+  <p><span class="span" title="brand.casestudy.contents · his approved 8/30 caption">Beyond the
+  finished renovation, the case study walks through how we found the opportunity, why we pursued
+  it, the economics behind the investment, the renovation process, the timeline, and the lessons
+  we learned along the way.</span> Read it at
+  <span class="span" title="url claim · only composed sentence in the caption">ShavitRootman.com/case-studies</span>.</p>
+
+  <p>Live with us. Work with us.</p>
+  <p>.<br>.</p>
+  <p class="tags">#RealEstateInvesting #BRRRR #PropertyManagement #CaseStudy #HillsdaleMI
+  #CommunityDevelopment #RealEstateDevelopment #BeforeAndAfter #LongTermInvesting
+  #ChargerPropertyManagement</p>
+</div>
+
+<p class="note" style="margin-top:12px">Every dotted span is a registry claim.
+His one-liner is 111 characters, so the entire positioning statement sits above the fold and
+nothing truncates mid-thought. Hashtag block is his, verbatim, from the 8/30 caption.</p>
+
+<h2>6 &middot; The register, recovered from the texts</h2>
+
+<div class="card flag">
+  <p><b>Superseded in part by rev 11.</b> The Kendall register below is how the slide lines were
+  built through rev 10, and it is still why the deck reads the way it does. As of rev 11 the lines
+  themselves come from <b>Shavit's own 8/31 11:08 AM rewrite</b> instead. Kept here because his new
+  slides obey the same shape, which is the strongest evidence that the shape was right.</p>
+</div>
+
+<div class="card">
+  <p>Jake's note on rev 2: <i>"scan texts and see how the language was in the last case study
+  post."</i> Found it. Shavit wrote the whole slide set himself for Kendall on <b>8/3</b>, and
+  that is the house format for a case-study carousel:</p>
+  <pre>Slide 1   EVERY HOME HAS A SECOND CHANCE.
+          1919 Kendall Street. South Bend, Indiana.
+
+Slide 2   WE DO NOT START WITH PAINT.
+          We begin by understanding the structure, the systems, and everything behind the walls.
+
+Slide 4   QUALITY IS BUILT LONG BEFORE THE FINISHES.
+          The best renovations are not measured by what you can see.
+          They are measured by what will never become a problem later.
+
+Slide 7   THE GOAL IS SIMPLE.
+          Build a home we would proudly hand to our own family. Nothing less.
+
+Slide 10  ONE HOME. ONE FAMILY. ONE NEIGHBORHOOD AT A TIME.
+          Proudly revitalizing South Bend's 46613 and 46614.
+          LIVE WITH US. WORK WITH US.</pre>
+
+  <p><b>The rule the format encodes:</b> an uppercase line that states a <i>principle</i>, then
+  one or two plain sentences that explain it. Specifics appear as bare fragments underneath
+  ("Electrical. Plumbing. HVAC.") but they are never the point of the slide. Not one of his ten
+  slides describes its own photograph.</p>
+
+  <p>That is the same instruction from a different direction as his 8/28 correction and as Jake's
+  rev 2 notes. Rev 3 rebuilds every slide line in this form. The Kendall <i>lines</i> are not
+  reusable, only the shape: he rejected reused slide lines outright on 8/28
+  ("Nope! Negative for both"). Slide 10 is the exception, because the closing triple, the
+  "Proudly revitalizing" line and "Live with us. Work with us." are standing brand elements, not
+  hooks.</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Jake's rev 2 notes, and what each one changed</b></h3>
+  <table>
+    <tr><th>note</th><th>change</th></tr>
+    <tr><td>"Don't say distressed say something else"</td>
+        <td>Gone from the caption and every slide. The caption now opens on his L35 line, which is
+        the differentiator rather than the category. <b>His one-liner stays on the website
+        untouched.</b></td></tr>
+    <tr><td>"2 should be like Using x y z and we were able to create blah blah"</td>
+        <td>Slide 2 is now his own 8/28 sentence: funding, operations, on-site management and a
+        renters pipeline are what let them take it on when others passed.</td></tr>
+    <tr><td>"3 is too obvious leverage more"</td>
+        <td>Was a paint-and-landscaping list. Now the uninsurable line, which is the specific fact
+        that explains why other buyers walked.</td></tr>
+    <tr><td>"what does structural and deferred maintenance tell you about the homes"</td>
+        <td>Slide 4 answers it instead of listing it: deferred maintenance is a bill someone
+        postponed, and it was paid in full.</td></tr>
+    <tr><td>"fix that please" (the URL)</td>
+        <td><b class="ok">Done</b> in <code>site/public/_redirects</code>. See section 7.</td></tr>
+  </table>
+</div>
+
+<h2 class="chg" id="s7">7 &middot; The draft post &middot; eight slides, real frames</h2>
+
+<p class="note">Every frame is a real photograph from Shavit's 8/27 7:06 PM dump. Slide lines are
+<b>proposed</b>, written in his Kendall form from his own Mead sentences, and need his sign-off.
+Structure follows the standing carousel rules: cover on the finished exterior, befores collected
+on slide 2, rooms split before-and-after in one frame because Instagram cannot animate, and the
+deck closes on the brand triple.</p>
+
+<div class="card stop">
+  <h3><b>Photo gap</b> &middot; the kitchen and the bathroom have no BEFORE</h3>
+  <p>Only <b>five</b> before frames exist, all December 5 CleanShots: the attic room, a close-up of
+  its failed ceiling, the paneled stairwell, the front exterior, and the rear deck. That is the
+  whole set.</p>
+  <p>So the two strongest afters in the house <b>can only run after-only</b>, which the standing
+  rule calls a miss, and his copy names both explicitly so they cannot be cut either.
+  <b>Ask Shavit for a December kitchen and a December bathroom frame.</b></p>
+</div>
+
+<div class="card flag">
+  <h3><b>Two frame problems</b></h3>
+  <p><b>a. <code>after-01.jpg</code> is the same frame as <code>exterior-after.jpg</code>.</b>
+  Do not let both in as if they were two photographs.</p>
+  <p><b>b. The deck boards in <code>deck-after.jpg</code> read weathered and grey</b>, against the
+  website slider's "a fresh deck". Crop up onto the french doors and railings, or cut the deck
+  pair if ten slides is tight.</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Rev 6</b> &middot; slide 1 now matches the series</h3>
+  <p>Checked the other two covers. The property name is the headline and the one-liner is a
+  <b>short, formulaic subline</b> that barely changes between studies:</p>
+  <table>
+    <tr><th></th><th>headline</th><th>one-liner</th></tr>
+    <tr><td class="id">Kendall</td><td><b>Kendall Street</b><br>South Bend, Indiana</td>
+        <td>A complete transformation using the BRRRR investment strategy. <span class="src">61</span></td></tr>
+    <tr><td class="id">Clarendon</td><td><b>Clarendon Road</b><br>Cleveland Heights, Ohio</td>
+        <td>A complete multifamily transformation using the BRRRR investment strategy. <span class="src">74</span></td></tr>
+    <tr><td class="id">Mead, rev 5</td><td><span style="color:var(--red)">buried on line two</span></td>
+        <td>A home transformed into a professionally managed family rental through the BRRRR investment strategy. <span class="src">100</span></td></tr>
+    <tr><td class="id">Mead, rev 6</td><td class="ok"><b>Mead Street</b><br>Hillsdale, Michigan</td>
+        <td class="ok">A complete transformation using the BRRRR investment strategy. <span class="src">62</span></td></tr>
+  </table>
+  <p style="margin-top:12px">Two things were wrong in rev 5. The one-liner ran <b>100 characters</b>
+  against their 61 and 74, so it swamped the card, and it pushed the street name down to a second
+  line where nobody reads it. Shavit's long Mead sentence works on a web hero with room to breathe;
+  it does not work as carousel type.</p>
+  <p><b>"A complete transformation using the BRRRR investment strategy"</b> is not a rewrite of his
+  words either. It is the <b>series formula</b>, already shipped verbatim on both Kendall and
+  Clarendon, which makes it a standing brand element like "Live with us. Work with us." His longer
+  Mead sentence stays on the website hero untouched, so nothing contradicts.</p>
+  <p class="note">This also settles the ordering question. The shipped Clarendon carousel put the
+  one-liner first and the street second, but that only reads because the one-liner is short. With
+  the property name promoted, the cover matches both the site heroes and the carousel.</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Rev 5</b> &middot; the three notes at 10:10</h3>
+  <table>
+    <tr><th>note</th><th>done</th></tr>
+    <tr><td>"Take out first header I liked the BRRR strategy maybe even put that back as the header"</td>
+        <td>Slide 1 now carries his one-liner, trimmed only to drop "distressed". Same call
+        Clarendon shipped with, where the cover was his docx one-liner.</td></tr>
+    <tr><td>"don't like 2"</td><td>New header. Still carries the four capabilities, still no
+        comparison.</td></tr>
+    <tr><td>"don't like 3 maybe even remove it entirely"</td><td><b>Removed.</b> See the flag
+        below, it has a cost.</td></tr>
+    <tr><td>"I like 5 but pick a different image"</td><td>Header kept. Image swapped to the
+        french doors from <b>inside</b>, which is the same architectural feature without the
+        weathered decking that was flagged in rev 2.</td></tr>
+    <tr><td>"take out 8"</td><td><b>Removed.</b> Its image is not recycled elsewhere.</td></tr>
+    <tr><td>"replace image 9"</td><td>Swapped to the bright kitchen and living view. The entry
+        shot it used moves to the closer, where it doubles as the exterior close.</td></tr>
+    <tr><td>"end with 10"</td><td>Confirmed, the brand triple is the last slide.</td></tr>
+  </table>
+  <p class="note">Deck is now <b>eight slides</b>. Kendall and East Victoria were ten, but padding
+  to ten with another empty grey room would weaken it.</p>
+</div>
+
+<div class="card stop">
+  <h3><b>What removing slide 3 costs</b></h3>
+  <p>The old slide 3 was the front exterior split. With it gone, the deck has <b>one</b> true
+  before-and-after pair left, the upstairs room on slide 3. Before-and-after proof is the whole
+  reason this format works for Shavit's audience, and it is the thing the standing carousel rule
+  protects.</p>
+  <p>It is not fatal: slide 1 is the finished exterior and the collage on slide 2 contains the
+  front before, so a reader still gets the exterior transformation across two slides. But if that
+  reads thin to you, <b>the one-line fix is to put the exterior split back with a new header</b>
+  rather than to accept a single pair. Say the word.</p>
+</div>
+
+<h3 class="chg">Slides 1 to 3</h3>
+<div class="slides chg">
+  <figure class="slide">
+    <span class="n">01</span>
+    <img class="chg" src="mead-case-study-post-spec/slides/01_cover.jpg" alt="Opening collage, nine finished rooms">
+    <figcaption><b>Cover &middot; the collage</b>
+      <span class="line" style="font-size:15px;letter-spacing:.02em">MEAD STREET</span>
+      <span class="line" style="font-style:normal;color:var(--ink)">Hillsdale, Michigan</span>
+      <span class="line">A complete BRRRR renovation.</span>
+      <span class="line" style="font-style:normal;color:var(--dim);font-size:10.5px;letter-spacing:.14em">SHAVIT ROOTMAN</span>
+      <span class="src"><b style="color:var(--gold)">rev 20: the collage opens the deck</b>,
+      Jake's instruction &mdash; "start with collage for one". 3&times;3, nine distinct rooms.
+      Copy is untouched from the photo cover it replaces, so his 8/31 11:08 slide 1 still reads
+      verbatim &middot; <b style="color:var(--red)">his shorter one-liner replaces the series
+      formula</b> that Kendall and Clarendon both ship verbatim, so this cover no longer matches
+      its siblings. His call, but worth confirming.</span></figcaption>
+  </figure>
+
+  <figure class="slide">
+    <span class="n">02</span>
+    <div class="collage">
+      <img src="mead-case-study-post-spec/img/before-front.jpg" alt="Front exterior before renovation">
+      <img src="mead-case-study-post-spec/img/before-rear-deck.jpg" alt="Rear deck before renovation">
+      <img src="mead-case-study-post-spec/img/before-attic-room.jpg" alt="Attic room before renovation">
+      <img src="mead-case-study-post-spec/img/before-ceiling-failed.jpg" alt="Failed ceiling before renovation">
+    </div>
+    <figcaption><b>The before collage &middot; the origin slide</b>
+      <span class="line">EVERY HOME HAS A STORY.<br>This project began with a phone call,
+      after one of our local mailers.<br>Our role was not simply to purchase a house. It was to
+      give the property a second life.</span>
+      <span class="src"><b style="color:var(--gold)">his 8/31 11:08 slide 2</b>, trimmed for the
+      band &middot; <b style="color:var(--red)">his hardship sentence sits between these two and is
+      HELD</b>, because his new "health challenges" contradicts the site's "financial hardship"
+      &middot; his four capabilities move off this slide</span></figcaption>
+  </figure>
+
+  <figure class="slide">
+    <span class="n">03</span>
+    <div class="split">
+      <div><img src="mead-case-study-post-spec/img/bedroom-before.jpg" alt="Attic room before, stained failing ceiling"><span class="chip">Before</span></div>
+      <div><img src="mead-case-study-post-spec/img/bedroom-after.jpg" alt="Attic room after, grey walls and new flooring"><span class="chip">After</span></div>
+    </div>
+    <figcaption><b>The upstairs room &middot; the only split pair</b>
+      <span class="line">OUR STANDARD BEGAN HERE.<br>Every company has a project that changes
+      how it operates. Mead Street became ours.<br>The systems developed here still improve
+      efficiency and simplify maintenance.</span>
+      <span class="src"><b style="color:var(--gold)">his 8/31 11:08 slide 3</b>, trimmed &middot;
+      <b style="color:var(--red)">the origin claim is new</b> and appears in no other source, so it
+      needs a fact add from him &middot; the named finish inventory is dropped per his own note
+      2</span></figcaption>
+  </figure>
+</div>
+
+<h3 class="chg">Slides 4 to 6</h3>
+<div class="slides chg">
+  <figure class="slide">
+    <span class="n">04</span>
+    <img src="mead-case-study-post-spec/img/after-06.jpg" alt="French doors opening onto the rear deck, seen from inside">
+    <figcaption><b>Durability</b>
+      <span class="line">BUILD FOR THE TENTH YEAR.<br>The most important work is usually
+      hidden behind the walls.<br>Structural integrity and updated mechanicals, not temporary
+      cosmetic improvements.</span>
+      <span class="src"><b style="color:var(--gold)">his 8/31 11:08 slide 4</b> &middot; his header
+      is the imperative form of the one you already approved &middot; image unchanged: the french
+      doors from inside, so the weathered decking stays out of frame</span></figcaption>
+  </figure>
+
+  <figure class="slide">
+    <span class="n">05</span>
+    <img src="mead-case-study-post-spec/img/after-04.jpg" alt="Renovated kitchen with white cabinets and stainless appliances">
+    <figcaption><b>Kitchen</b>
+      <span class="line">A CONSISTENT STANDARD.<br>A family should know what to expect when
+      they move into one of our homes.<br>Consistency is not about repetition. It is about
+      dependable quality.</span>
+      <span class="src"><b style="color:var(--gold)">his 8/31 11:08 slide 5</b> &middot; his finish
+      inventory (stainless, dishwashers, white cabinetry) is dropped: it is all visible in the
+      frame, which his note 2 excludes, and specs are the Budlong rule &middot;
+      <b style="color:var(--red)">still no December before</b></span></figcaption>
+  </figure>
+
+  <figure class="slide">
+    <span class="n">06</span>
+    <img src="mead-case-study-post-spec/img/after-07.jpg" alt="Renovated bathroom with glass shower and black fixtures">
+    <figcaption><b>Bathroom</b>
+      <span class="line">DETAILS MATTER.<br>Rental housing should never require lowering
+      expectations.<br>The goal is simple: homes that residents in Hillsdale are genuinely proud to
+      live in.</span>
+      <span class="src"><b style="color:var(--gold)">his 8/31 11:08 slide 6</b> &middot; walk-in
+      shower and black fixtures dropped, both are in the frame &middot; his Lessons Learned 3, the
+      old subline here, is <b>still the fact behind slide 3</b> &middot;
+      <b style="color:var(--red)">still no December before</b></span></figcaption>
+  </figure>
+</div>
+
+<h3 class="chg">Slides 7 and 8</h3>
+<div class="slides chg">
+  <figure class="slide">
+    <span class="n">07</span>
+    <img src="mead-case-study-post-spec/img/after-10.jpg" alt="Living space, warm and lived in">
+    <figcaption><b>The outcome</b>
+      <span class="line">QUALITY ATTRACTS PEOPLE.<br>Quality housing strengthens communities
+      and supports local employers.<br>Creating demand for great housing benefits everyone.</span>
+      <span class="src"><b style="color:var(--gold)">his 8/31 11:08 slide 7</b> &middot;
+      <b style="color:var(--red)">his "families relocating from outside Hillsdale" sentence is
+      HELD</b>, it is a new tenant claim with no source &middot; frame corrected here to
+      <code>after-10</code>, which is what the renderer has always used</span></figcaption>
+  </figure>
+
+  <figure class="slide">
+    <span class="n">08</span>
+    <img class="chg" src="mead-case-study-post-spec/img/exterior-cover-jake-hq-web.jpg" alt="Jake's exterior frame at 1510x1042">
+    <figcaption><b>Close</b>
+      <span class="line">BUILDING COMMUNITIES - ONE PROJECT AT A TIME<br>One more home preserved,
+      one more family welcomed, one more investment made with a long-term perspective.<br>LIVE WITH
+      US. WORK WITH US.</span>
+      <span class="src"><b style="color:var(--gold)">headline replaced on his instruction, 8/31
+      1:48 PM</b> ("Change the one home at a time to / building communities - one project at a
+      time"), his wording and his hyphen verbatim &middot; subline and sign-off still his 11:08
+      slide 8 &middot; replaces the Kendall slide 10 triple &middot; <b style="color:var(--gold)">rev 22: Jake's own frame, re-uploaded at 1510&times;1042</b> &mdash; "thats the only shot of the exterior house that I want". Same file as the collage's top-left tile. <b>The softness is genuinely gone rather than argued with:</b> at the old 522&times;359 this frame was upscaled 2.46&times; into the 1080&times;884 photo area, at 1510&times;1042 it downscales 0.85&times;, worth <b>+177% / +184% gradient energy</b>. Frame history today: <code>after-11</code> to rev 18, <code>exterior-after-clean</code> rev 18&ndash;19, <code>exterior-cover-jake</code> rev 20, <code>exterior-after-clean-hq</code> rev 21, and now his re-upload &middot; <b style="color:var(--red)">section 16 applies to this file and travels with it</b></span></figcaption>
+  </figure>
+</div>
+
+<div class="card">
+  <h3>Frames now unused</h3>
+  <p><code>exterior-before</code> and <code>deck-before</code> survive inside the slide 2 collage.
+  <code>deck-after</code> is out entirely (weathered boards). <code>after-01</code> is the same
+  frame slide 8 now uses, only smaller (1024&times;683), so the larger <code>exterior-after-clean</code>
+  wins. <code>after-11</code>, the side entry, is <b>out as of rev 18</b> &mdash; it was the closer
+  and it read as the least finished thing in the set. <code>after-02</code>, <code>after-03</code>,
+  <code>after-08</code>, <code>after-09</code>, <code>after-10</code> are empty grey rooms that
+  repeat each other.
+  <code>before-stairwell</code> is held for a stairwell after that does not exist yet.
+  <code>50.jpeg</code>, the floor plan, stays out permanently.</p>
+</div>
+
+<h2 id="s8">8 &middot; The rendered deck</h2>
+
+<div class="card">
+  <p>Built with <code>_scripts/render_mead.py</code>, adapted from the Clarendon renderer, which
+  came from the shipped Kendall deck. Bone band, SF headline, DM Sans subline, brass progress rule,
+  index chip, gold mark: nothing in the treatment changed. <b>1080 &times; 1350, eight slides.</b></p>
+  <p class="note">Files: <code>docs/reel-specs/mead-ig-2026-08-31/final/</code> and a send-ready
+  copy at <code>~/Desktop/Shavit - Mead Carousel/</code> (eight slides, two alternates,
+  <code>CAPTION.txt</code>, <code>Mead-Carousel-MASTER.pdf</code>, review sheet).</p>
+  <img src="mead-case-study-post-spec/slides/REVIEW-sheet.jpg" alt="All eight rendered slides"
+       style="width:100%;border-radius:10px;border:1px solid var(--line);margin-top:8px;background:#000">
+</div>
+
+<div class="card flag">
+  <h3><b>Three things the render exposed, and what changed</b></h3>
+  <p><b>The cover was too loose.</b> First pass put the house in the top third with a foreground of
+  driveway and sidewalk, and the series one-liner wrapped so that "strategy." orphaned onto its own
+  line. Tightened to <code>zoom 1.16</code> biased up and right, and the one-liner is set as two
+  balanced centred lines.</p>
+  <p><b>Slide 3 did not read as one room.</b> Centred crops on both halves showed the cluttered
+  before and a clean empty after with no shared landmark, so the eye could not match them. Both
+  halves are now biased onto the feature they share, the sloped ceiling meeting the knee wall with
+  the window in frame. It reads as a pair now.</p>
+  <p><b>Slide 7 was a second kitchen.</b> The frame chosen on paper turned out to be dominated by a
+  stainless fridge at the right edge, which duplicated slide 5 and read cold under "today a local
+  family lives here". Swapped for the bright upstairs room.</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Your call</b> &middot; slide 7, three frames</h3>
+  <p>The one that shipped in the deck is on the left. It is a clean, bright room, but it does sit
+  close to slide 3's after in feel, since most of the finished frames are grey empty rooms. Two
+  alternates are rendered and on the Desktop. Say a letter and it swaps.</p>
+  <div class="slides" style="margin-top:12px">
+    <figure class="slide">
+      <img src="mead-case-study-post-spec/slides/07_outcome.jpg" alt="Slide 7, upstairs room">
+      <figcaption><b>07 &middot; in the deck</b>
+        <span class="src">after-10 &middot; brightest frame in the set. Closest in feel to slide 3.</span></figcaption>
+    </figure>
+    <figure class="slide">
+      <img src="mead-case-study-post-spec/slides/07a_outcome-alt-living.jpg" alt="Slide 7 alternate, living space">
+      <figcaption><b>07a &middot; the living space</b>
+        <span class="src">after-03 &middot; most "home" of the three, real depth through to the
+        next room. This was the image on the slide you cut, reused rather than the slide.</span></figcaption>
+    </figure>
+    <figure class="slide">
+      <img src="mead-case-study-post-spec/slides/07b_outcome-alt-room.jpg" alt="Slide 7 alternate, flat-walled room">
+      <figcaption><b>07b &middot; flat-walled room</b>
+        <span class="src">after-02 &middot; the most visually distinct from the rest of the deck,
+        but the plainest of the three.</span></figcaption>
+    </figure>
+  </div>
+</div>
+
+<h3>The eight slides, full size</h3>
+<div class="slides">
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/01_cover.jpg" alt="Slide 1 cover"><figcaption><b>01 &middot; cover</b></figcaption></figure>
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/02_before-collage.jpg" alt="Slide 2 before collage"><figcaption><b>02 &middot; before collage</b></figcaption></figure>
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/03_split-upstairs.jpg" alt="Slide 3 split"><figcaption><b>03 &middot; the split pair</b></figcaption></figure>
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/04_durable.jpg" alt="Slide 4 durability"><figcaption><b>04 &middot; durability</b></figcaption></figure>
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/05_kitchen.jpg" alt="Slide 5 kitchen"><figcaption><b>05 &middot; kitchen</b></figcaption></figure>
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/06_bathroom.jpg" alt="Slide 6 bathroom"><figcaption><b>06 &middot; bathroom</b></figcaption></figure>
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/07_outcome.jpg" alt="Slide 7 outcome"><figcaption><b>07 &middot; the outcome</b></figcaption></figure>
+  <figure class="slide"><img src="mead-case-study-post-spec/slides/08_close.jpg" alt="Slide 8 close"><figcaption><b>08 &middot; close</b></figcaption></figure>
+</div>
+
+<h2>9 &middot; Decisions for Jake</h2>
+
+<div class="card stop">
+  <h3><b>Blocker</b> &middot; the URL in the approved teaser 404s</h3>
+  <p>Shavit says <code>ShavitRootman.com/casestudies</code> out loud in the reel he approved.
+  Checked live this morning:</p>
+  <pre>https://shavitrootman.com/casestudies        404
+https://shavitrootman.com/case-studies       200
+https://shavitrootman.com/case-studies/34-mead/   200</pre>
+  <p>One line in <code>site/public/_redirects</code> fixes it, and it should ship before either
+  post goes out:</p>
+  <pre>/casestudies /#case-studies 301</pre>
+  <p class="note">While in that file: <code>/case-studies /#standard 301</code> also looks wrong.
+  It sends the plural landing route to the Standard section rather than to
+  <code>#case-studies</code>.</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Decision 1</b> &middot; the seller's hardship paragraph</h3>
+  <p><code>mead.hardship</code> is his verbatim sentence and it is already published on the
+  website. It stays in the draft because it is his authored copy, it is anonymous, and it is the
+  load-bearing setup for "solve a difficult situation."</p>
+  <p>But a case study page read by a few hundred people is not a local Instagram feed in the town
+  where she lives, and Hillsdale is small. Brand rule 3 says de-identify. Ask him rather than
+  softening his words unilaterally. Two ready swaps, both still his words:</p>
+  <p class="note"><b>a.</b> His own alternate phrasing of the same beat, from the BUY step (L60):
+  "...the homeowner contacted us seeking a solution for a property that had become difficult to
+  maintain."</p>
+  <p class="note"><b>b.</b> A pure trim of the first clause only: "She was experiencing significant
+  financial hardship, and the home had deteriorated over many years."</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Decision 2</b> &middot; "provides quality housing for a local family"</h3>
+  <p>His words, describing the actual tenancy rather than an ideal tenant, which is what keeps it
+  on the right side of fair housing, and it is on the website for the same reason. If anyone
+  raises it, the fallback is "provides quality housing in Hillsdale", but that changes his
+  sentence and needs his OK.</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Decision 3</b> &middot; #HillsdaleMI versus brand rule 4</h3>
+  <p>The tag block is his, verbatim, from a caption he approved, and it contains
+  <code>#HillsdaleMI</code>. Brand rule 4 says spell out Michigan. The tag passes lint (no word
+  boundary before the MI) and the Howder post shipped the same tag, so rev 1 keeps his block
+  intact. Swap to <code>#HillsdaleMichigan</code> if the rule is to be enforced everywhere.</p>
+</div>
+
+<div class="card flag">
+  <h3><b>Decision 4</b> &middot; the link line</h3>
+  <p>"Read it at ShavitRootman.com/case-studies." Nine words, and the only composed sentence in
+  the caption. Everything before it is his. Flagged so it is a conscious choice, not drift.</p>
+</div>
+
+<h2>10 &middot; Facts queued for the TTY pass</h2>
+
+<p class="note">Fifteen ids. <code>mead.strategy</code> was retired in rev 3 when the "distressed" opener came out; <code>mead.lesson.finishes</code> replaced it. Registry writes are TTY-only, so Jake types these. Full blocks with sources in
+<code>content/mead-deal-story/FACTS-TO-ADD.md</code>. The three <code>prop.mead.*</code> ids are
+shared with the Mead story posts and are added once.</p>
+
+<table>
+<tr><th>id</th><th>value</th><th>source</th></tr>
+<tr><td class="id">prop.mead.street</td><td>Mead Street</td><td class="src">L30, house number removed</td></tr>
+<tr><td class="id">prop.mead.city</td><td>Hillsdale</td><td class="src">L31</td></tr>
+<tr><td class="id">prop.mead.state</td><td>Michigan</td><td class="src">L31</td></tr>
+<tr><td class="id">mead.origin</td><td>Some of our best opportunities begin with simply letting people know we are willing to help.</td><td class="src">L35, verbatim</td></tr>
+<tr><td class="id">mead.mailer</td><td>After receiving one of our "We Buy Houses" mailers distributed throughout Hillsdale, the homeowner contacted us.</td><td class="src">L37 s1, verbatim</td></tr>
+<tr><td class="id">mead.hardship</td><td>She was experiencing significant financial hardship, the home had deteriorated over many years, and its condition prevented her from obtaining homeowners insurance.</td><td class="src">L37 s2, verbatim &middot; decision 1</td></tr>
+<tr><td class="id">mead.opportunity</td><td>Rather than seeing a property beyond repair, we saw an opportunity to solve a difficult situation while preserving another home for the Hillsdale community.</td><td class="src">L39, verbatim</td></tr>
+<tr><td class="id">mead.valueadd</td><td>Because we specialize in value-add investments, we were able to move quickly and purchase the home directly.</td><td class="src">L60 s3, verbatim</td></tr>
+<tr><td class="id">mead.scope</td><td>The renovation included structural and deferred maintenance repairs, new drywall throughout, new flooring, a completely renovated kitchen, an updated bathroom, new lighting and fixtures, interior and exterior paint, updated mechanical systems, and landscaping and exterior improvements.</td><td class="src">L62 bullets joined, same join the site shipped</td></tr>
+<tr><td class="id">mead.standard</td><td>Rather than applying cosmetic upgrades, the goal was to create a durable, low-maintenance home that would perform well for years to come.</td><td class="src">L62 final sentence, verbatim</td></tr>
+<tr><td class="id">mead.lesson.finishes</td><td>Standardizing materials and finishes improves efficiency while reducing future maintenance costs.</td><td class="src">his Lessons Learned 3, verbatim &middot; new in rev 3</td></tr>
+<tr><td class="id">mead.today</td><td>Today, the property is professionally managed, fully occupied, and provides quality housing for a local family.</td><td class="src">L41 s2, verbatim</td></tr>
+<tr><td class="id">mead.goal</td><td>Our goal is not simply to renovate homes. It is to provide housing that tenants are proud to call home.</td><td class="src">L64, rent removed, em dash split</td></tr>
+<tr><td class="id">mead.repeat</td><td>Capital returned through refinancing was reinvested into additional acquisitions, allowing us to continue expanding our portfolio while preserving quality housing throughout Hillsdale.</td><td class="src">L68, verbatim</td></tr>
+<tr><td class="id">brand.casestudy.contents</td><td>Beyond the finished renovation, the case study walks through how we found the opportunity, why we pursued it, the economics behind the investment, the renovation process, the timeline, and the lessons we learned along the way.</td><td class="src">his approved 8/30 caption, "each" &rarr; "the"</td></tr>
+</table>
+
+<p class="note" style="margin-top:10px">Line numbers refer to the verbatim block fenced in
+<code>shavit-rootman-website/docs/case-studies/mead-34/NOTES.md</code>, which is the same text the
+live case study is built from. Verbatim keeps the post and the site from contradicting each
+other.</p>
+
+<h2>11 &middot; Lint</h2>
+
+<div class="card">
+  <p>Against the real root, lint stops at <code>unknown-fact: mead.strategy</code>. That is the
+  designed gate, not a defect: the registry does not exist yet and writes are TTY-only.</p>
+  <p>The same body was linted under a throwaway <code>SHAVIT_ROOT</code> in the session scratchpad,
+  seeded with sandbox facts. The real registry was never created or written.</p>
+  <pre>seeded 15 sandbox facts (throwaway)
+lint ok</pre>
+  <table>
+    <tr><th>rule</th><th>result</th></tr>
+    <tr><td class="id">no-dollar</td><td class="ok">pass &middot; every figure stays on the website</td></tr>
+    <tr><td class="id">full-states</td><td class="ok">pass &middot; Michigan spelled out; see decision 3 on the tag</td></tr>
+    <tr><td class="id">no-house-numbers</td><td class="ok">pass &middot; "Mead Street", no leading digits</td></tr>
+    <tr><td class="id">uncited-numeral</td><td class="ok">pass &middot; the body carries no digits at all</td></tr>
+    <tr><td class="id">phone-registry</td><td class="ok">pass &middot; no phone-shaped strings</td></tr>
+    <tr><td class="id">no-bait</td><td class="ok">clean &middot; no allowlisted bait phrase fires</td></tr>
+    <tr><td class="id">url-quote</td><td class="ok">pass &middot; supporting line pre-seeded in claims.json</td></tr>
+  </table>
+</div>
+
+<h2>12 &middot; Ship gate</h2>
+
+<div class="card">
+  <ol>
+    <li>Fix the <code>/casestudies</code> redirect and deploy.</li>
+    <li><code>./shavit.sh fact add</code> &times; 15, TTY, Jake types.</li>
+    <li><code>./shavit.sh lint mead-deal-story</code></li>
+    <li><code>./shavit.sh verify mead-deal-story</code>, TTY.</li>
+    <li><code>./shavit.sh review mead-deal-story</code></li>
+    <li><b>Shavit approves</b>, his 8/27 5:01 PM standing rule. Send him the rendered caption and
+      the slide set together.</li>
+    <li><code>./shavit.sh ship mead-deal-story --date &lt;date&gt;</code></li>
+  </ol>
+  <p class="note">Cadence: this is the week's rock. He flagged on 8/28 that daily stories had gone
+  "too trivial. The same as always", and agreed the account does not have the volume for daily.
+  One substantial post, no filler stories around it.</p>
+</div>
+
+
+<h2>13 &middot; The message to the GC</h2>
+
+<p class="note"><b>Draft only. You send it.</b> Chat: CPM Onboarding Marketing Team. Also saved at
+<code>content/mead-deal-story/GC-DRAFT.md</code>.</p>
+
+<div class="ig-wrap">
+<div class="ig" style="width:430px">
+  <div class="ig-head" style="border-bottom:1px solid #efefef">
+    <div class="ig-av" style="background:linear-gradient(135deg,#3a7bd5,#2b5fa8)"><span>CPM</span></div>
+    <div class="ig-who"><b>CPM Onboarding Marketing Team</b><span>Shavit, Jake</span></div>
+  </div>
+  <div style="background:#fff;padding:16px 14px 18px">
+    <div style="background:#1c8cff;color:#fff;border-radius:19px;padding:11px 15px;
+                font:14.5px/1.5 -apple-system,'Segoe UI',Roboto,sans-serif;margin-left:38px">
+      <p style="margin:0 0 11px">Mead Street case study post is ready. Eight slides plus the
+      caption, all of it your language from the 8/27 case study.</p>
+      <p style="margin:0 0 11px">Three things before it goes out:</p>
+      <p style="margin:0 0 11px">1. No before photos exist for the kitchen or the bathroom, so
+      those two slides are after only. If you have December shots of either, send them and they
+      become before and afters.</p>
+      <p style="margin:0 0 11px">2. The caption keeps your line about the previous owner's
+      hardship and the insurance. It is already live on the site, but the post reaches Hillsdale
+      directly. Tell me if you want it in, trimmed, or out.</p>
+      <p style="margin:0 0 11px">3. Slide 7 has three photo options. Sending all three so you can
+      pick.</p>
+      <p style="margin:0">Good to post this week?</p>
+    </div>
+    <div style="text-align:right;font:11px/1 -apple-system,sans-serif;color:#8e8e8e;
+                margin:7px 4px 0;text-transform:uppercase;letter-spacing:.03em">Draft &middot; not sent</div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+  <h3>What to attach, in order</h3>
+  <p><code>REVIEW-sheet.jpg</code> first, all eight slides on one sheet, then
+  <code>07_outcome.jpg</code>, <code>07a_outcome-alt-living.jpg</code> and
+  <code>07b_outcome-alt-room.jpg</code> for the slide 7 pick. Everything is in
+  <code>~/Desktop/Shavit - Mead Carousel/</code>.</p>
+  <p><b>Then send the caption as its own message</b>, straight from
+  <code>CAPTION.txt</code>, so he can react to the copy on its own. That is how he sent you the
+  teaser caption on 8/30.</p>
+</div>
+
+<div class="card">
+  <h3>Why it is shaped this way</h3>
+  <p><b>It follows his own teaser.</b> His 8/30 caption ended "We are excited to introduce our next
+  case study, featuring our Mead Street project in Hillsdale, Michigan." This is that post, so it
+  does not need reintroducing.</p>
+  <p><b>Three asks, each a decision only he can make.</b> The photo gap, the hardship line, the
+  slide 7 pick. Everything else is settled, so nothing else is put in front of him.</p>
+  <p><b>No process talk.</b> He does not need the register, the header rule or the lint gates. He
+  asked on 7/24 for "less like viral storytelling, more confidence and craftsmanship", and that
+  applies to how he gets briefed too.</p>
+  <p><b>One question at the end, with a timeframe in it.</b> That is the shape that got a same-day
+  answer on 8/28 and again on 8/30.</p>
+  <p class="note">A shorter two-ask version is in <code>GC-DRAFT.md</code> if you would rather just
+  fire it off.</p>
+</div>
+
+<h2 class="chg" id="s14">14 &middot; Shavit's 11:08 AM rewrite, and what it costs</h2>
+
+<div class="card flag chg">
+  <h3><b>He did not send this to the GC. He sent it to you privately, 8/31 11:08 AM.</b></h3>
+  <p>It opens <i>"Absolutely. Below is exactly what I would send Jake"</i>, so he is relaying
+  something he had drafted with an assistant rather than typing it himself. That still makes it
+  <b>his direction</b>, but it is <b>not his own writing</b>, which is the distinction the standing
+  copy rule turns on. Two of his eight slides carry claims that are not in the case study, and one
+  <b>contradicts</b> a fact already live on the website.</p>
+  <p><b>rev 11: his copy is now on all eight slides.</b> His headers, his order, his sentences
+  trimmed to the band. What is <b>held out</b> is only what cannot be sourced or cannot both be
+  true: the hardship clause on slide 2, the finish inventories on slides 5 and 6, and the
+  relocating-tenants claim on slide 7. Each is marked in red in section 7.</p>
+</div>
+
+<div class="card chg">
+  <h3>His six notes, verbatim</h3>
+  <ul>
+    <li>Lightly clean up the landscaping in the exterior photos. Keep it natural and realistic.
+      <span class="src" style="color:var(--gold)">&nbsp;&larr; DONE, slide 1, see below</span></li>
+    <li>Remove copy that simply describes what the viewer can already see.</li>
+    <li>Focus each slide on why we made a decision rather than what was installed.</li>
+    <li>The tone should feel understated, premium, and operational&mdash;closer to Porsche than HGTV.</li>
+    <li>Avoid marketing buzzwords such as "luxury," "stunning," "beautiful," "game-changing," or
+      "state-of-the-art."</li>
+    <li>Every slide should teach the reader something about how Charger thinks, operates, and
+      invests. That is what makes these case studies different.</li>
+  </ul>
+  <p class="note">Note 2 and note 3 are the same rule the deck was already rebuilt to in rev 4 and
+  rev 3. Note 4 is the Porsche rule by name. <b>The deck does not violate any of the six.</b> What
+  changes is not the standard, it is the content of the slides.</p>
+</div>
+
+<div class="card flag chg">
+  <h3><b>Blocker</b> &middot; his new slide 2 contradicts the website</h3>
+  <table>
+    <tr><th>Live on the site and in the queued fact</th><th>His 11:08 slide 2</th></tr>
+    <tr>
+      <td>She was experiencing significant <b>financial hardship</b>, the home had deteriorated
+        over many years, and its condition prevented her from obtaining homeowners insurance.
+        <span class="src">his 8/27 3:48 PM text, L37, verbatim &middot; fact <code>mead.hardship</code></span></td>
+      <td>She was dealing with significant <b>health challenges</b>, and the property had
+        deteriorated to the point where it could no longer be insured.
+        <span class="src">his 8/31 11:08 AM text, slide 2</span></td>
+    </tr>
+  </table>
+  <p>These are different claims about a real person, and they cannot both ship. The website
+  currently says financial. <b>This is a question for him, not a choice for us</b> &mdash; and it is
+  the same span <code>coach.md</code> decision 1 already flagged as the one to clear before ship.</p>
+</div>
+
+<div class="card chg">
+  <h3>Three claims in his rewrite that no source supports yet</h3>
+  <table>
+    <tr><th>Slide</th><th>Claim</th><th>Status</th></tr>
+    <tr><td>03</td><td>Mead was the <b>first</b> renovation where finishes were standardized
+      portfolio-wide, and the systems built here still run</td>
+      <td>Not in the 8/27 case study, not on the website. A strong origin story if true, and it
+      would become the best slide in the deck. Needs him to confirm it.</td></tr>
+    <tr><td>05, 06</td><td>Named finish inventory: stainless appliances, dishwashers, white
+      cabinetry, walk-in showers, black fixtures</td>
+      <td>Specs. His own case-study copy never states specs, and the Budlong rule kept the floor
+      plan out of this deck for exactly that reason. Also collides with his own note 2.</td></tr>
+    <tr><td>07</td><td>Rented to families <b>relocating from outside</b> Hillsdale</td>
+      <td>New tenant claim, no source. The queued fact says only "a local family".</td></tr>
+  </table>
+  <p class="note">Every one of these needs a <code>fact add</code> from him before it can appear in
+  a caption or on a slide. That is four more TTY facts on top of the fifteen already queued.</p>
+</div>
+
+<div class="card chg">
+  <h3>What he kept, and what it costs to adopt the rest</h3>
+  <p>His slide 1 is <b>the deck's slide 1</b>, down to the 01 / 08 and the city line. His slide 4
+  header is "BUILD FOR THE TENTH YEAR", against the deck's "We build for the tenth year, not the
+  first." His slide 8 closes on one-home-at-a-time and "LIVE WITH US. WORK WITH US.", which is the
+  deck's closer. <b>The spine matches.</b></p>
+  <p>What differs is the middle. He replaces the renovation-scope slides with a standardization
+  story that the case study does not tell. Taking it means the caption changes too, because the
+  caption is built from the same 8/27 text the middle slides are.</p>
+  <p class="note"><b>Where this leaves it:</b> the deck now reads in his words end to end, and
+  the four things it cannot say without him are the four asks to put in one message. His notes are
+  satisfied; his new facts are not yet facts. <b>Nothing ships until he answers and approves.</b></p>
+</div>
+
+<h2 class="chg" id="s15">15 &middot; Slide 1 &middot; the landscaping, before and after</h2>
+
+<div class="card chg">
+  <p>Shavit's note 1, actioned, then Jake: "fix the patchy grass". Two passes, neither of them
+  generative. <b>Every green pixel added here is real grass cloned from elsewhere in this same
+  photograph</b>, so the species, the sun angle, the time of day and the camera all match by
+  construction.</p>
+  <ol>
+    <li><b>Fill.</b> The strip in front of the porch was mostly bare soil, not dying grass, so
+    recolouring could not fix it: there was nothing there to green up. Grass is cloned in from the
+    purest grass patch in the frame (found by search, 98.6% pure, the foreground strip beside the
+    driveway), shrunk to 0.60 for the depth difference so the blades are the right size, and then
+    <b>relit per channel to the brightness and hue the lawn's own grass already has at that spot</b>,
+    which is what carries the sun and shade across the lawn. Matching it to the raw image instead
+    blew the fill out neon, because bare soil is far brighter than grass.</li>
+    <li><b>Even out.</b> A light pass over the dry grass that was already there.</li>
+    <li><b>Evenness.</b> Patching only the bare spots still read as patchy, because the surviving
+    thatch and the lawn's own blotchy shading were most of what made it look patchy in the first
+    place. So the fill now <b>resurfaces the whole lawn</b> rather than spot-filling it, over a
+    light field blurred wide enough to keep the real sun gradient and drop the blotches.</li>
+    <li><b>No repeat.</b> One donor tiled across the lawn repeats visibly, and mirroring it to hide
+    that just trades the repeat for chevrons. The fill is now <b>randomised quilting</b>: four
+    separate donor patches, each &ge;99% pure, cross-faded through a Hann window at random offsets
+    and random flips. The donor is also sharpened after its depth rescale, since shrinking softened
+    the blades and the fill read as a smudge against the sharp real grass beside it.</li>
+  </ol>
+  <p>The fill is confined to <b>a hand-drawn polygon over the front lawn</b>, kept deliberately
+  inside the real lawn on every side. Pavement, the porch block, the stone veneer, the plant bed and
+  the house are not reachable by the script at all, whatever the colour test does.</p>
+  <p class="note"><b>Measured, not asserted.</b> Against a strength-0 control that isolates the
+  JPEG re-encode: the retouch changes <b>zero pixels above the porch line</b> (largest difference
+  0/255 &mdash; not one pixel). 45,630 pixels move by more than 25/255; 91% are inside the lawn
+  polygon and the rest is the hue pass on real grass elsewhere on the ground plane. <b>Nothing above
+  y=700 changes at all</b>, and the house, porch and veneer all sit above that line. The
+  frame is encoded once, not twice, so the house carries a single re-save and nothing else.</p>
+  <div class="grid2">
+    <figure class="slide"><span class="n">BEFORE</span>
+      <img src="mead-case-study-post-spec/img/exterior-wide.jpg" alt="Wide exterior, as shot">
+      <figcaption><b>As shot</b><span class="src">exterior-wide.jpg &middot; <code>_drop/2.jpeg</code> at 3600&times;2400, his 8/27 7:06 PM dump</span></figcaption>
+    </figure>
+    <figure class="slide"><span class="n">AFTER</span>
+      <img src="mead-case-study-post-spec/img/exterior-wide-clean.jpg" alt="Wide exterior, landscaping cleaned">
+      <figcaption><b>Landscaping cleaned</b><span class="src">exterior-wide-clean.jpg &middot; fill 0.92, even 0.50</span></figcaption>
+    </figure>
+  </div>
+  <p class="note"><b>Both exteriors on the deck now carry this pass.</b> Since rev 18 slide 8 is
+  <code>exterior-after-clean.jpg</code>, the tight front frame run through the same polygon fill,
+  so his "photos" plural is satisfied. <code>exterior-wide-clean.jpg</code> above stays built and
+  is one line away in <code>render_mead.py</code> if the wider closer is wanted instead.</p>
+</div>
+
+<h2 class="chg" id="s16">16 &middot; The cover photo, and what it is</h2>
+
+<div class="card flag chg"><h3><b>Decision: Jake's frame IS the cover, rev 16.</b></h3><p>He was shown the comparison below and chose it. Recorded here so the provenance travels with the deck rather than getting lost: <b>if this goes to Shavit or to the feed, it should be described as a rendering, not as a photograph of the house.</b></p></div>
+
+<div class="card flag chg">
+  <h3><b>It is not a photograph of this property.</b></h3>
+  <p>Supplied 8/31 via Drive as <code>5A8A1E24&hellip;_4_5005_c.jpeg</code>, saved here as
+  <code>exterior-cover-jake.jpg</code>. Set against the real listing frame, the building and the lot
+  are different:</p>
+  <ul>
+    <li>The real foundation carries a <b>light stone veneer</b> band and a <b>concrete block</b>
+      porch pier. In the supplied file the foundation is uniform flat dark, no stone anywhere.</li>
+    <li>The real photo has <b>plantings, irises and a hose spigot</b> along the wall. The supplied
+      file has turf running to the siding.</li>
+    <li>The <b>garage</b> changes colour, door width and roof pitch, and the chain-link fence beside
+      it is gone.</li>
+    <li>The <b>neighbouring house</b> visible past the porch is gone.</li>
+    <li>The lawn meets driveway and walk on a razor edge with no soil seam.</li>
+  </ul>
+  <p>Those are changes to the building and the lot, not retouching. Separately it is
+  <b>522&times;359</b> against a 1080&times;884 photo area, a 2.5&times; upscale, so it would ship
+  soft even if the provenance were fine.</p>
+  <p><b>Held off the deck.</b> Every caption claim in this post is cited to Shavit's own words, the
+  post documents real work on a real house, and he rejected AI-altered images himself on 8/28. A
+  generated exterior as the cover undercuts all of it. His own instruction was "keep it natural and
+  realistic", which a retouch satisfies and a generation does not.</p>
+  <p class="note">Kept in the repo, unused, in case he wants to see it.</p>
+</div>
+
+<div class="card chg">
+  <h3>What the cover is instead</h3>
+  <p>The <b>wide real frame</b>, <code>_drop/2.jpeg</code> at 3600&times;2400, which is the same
+  composition Jake was reaching for: whole house, garage, driveway and the street tree. Real
+  photograph, full resolution, lawn evened by the same non-generative pass. Section 15 shows it
+  before and after.</p>
+  <div class="grid2">
+    <figure class="slide"><span class="n">SUPPLIED</span>
+      <img src="mead-case-study-post-spec/img/exterior-cover-jake.jpg" alt="Supplied file">
+      <figcaption><b>ON THE DECK</b><span class="src">522&times;359, upscaled 2.46&times;</span></figcaption>
+    </figure>
+    <figure class="slide"><span class="n">ON THE DECK</span>
+      <img src="mead-case-study-post-spec/img/exterior-wide-clean.jpg" alt="Wide real frame">
+      <figcaption><b>Held, real alternative</b><span class="src">real photograph, 3600&times;2400 source</span></figcaption>
+    </figure>
+  </div>
+</div>
+
+<h2 class="chg" id="s17">17 &middot; The complete photo library</h2>
+
+<div class="card chg">
+  <h3>Every frame that exists for this property, and where each one ended up</h3>
+  <p>Nineteen source files, and nothing else. They live in
+  <code>shavit-rootman-website/docs/case-studies/mead-34/_drop</code>; everything the deck
+  renders is a resize or a crop of one of them. Each derived name is mapped back to its
+  source below by pixel correlation, not by memory, so this table cannot drift from the
+  renderer the way section 7 did before rev 11.</p>
+  <p class="note"><b>Two populations, and they are not equal.</b> The afters are a
+  professional May shoot at 3600&times;2400, which is why they survive any crop the deck
+  asks for. The befores are five screenshots taken 5 December 2025 at roughly 670&times;530.
+  Every "before" in the deck is those screenshots upscaled about 2&times;, which is the
+  real ceiling on the before-and-after work and the reason there is only one true
+  before-and-after pair.</p>
+</div>
+
+<h3>The May shoot &middot; 13 photographs and a floor plan</h3>
+<div class="slides">
+  <figure class="slide lib-on">
+    <span class="n">2.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-2.jpg" alt="Front three-quarter from the sidewalk: whole house, porch, detached garage, street tree and driveway." loading="lazy">
+    <figcaption><b>Front three-quarter from the sidewalk: whole house, porch, detached garage, street tree and driveway.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; OFF the deck since rev 22 &mdash; was slide 8 + collage tile 1 at rev 21; the native recut <code>exterior-after-clean-hq</code> stays built and is one line away<br>
+      native 3600&times;2400 &middot; derived: exterior-wide 1800&times;1200 (full frame) &middot; exterior-after 1400&times;933 (crop) &middot; after-01 1024&times;683 (crop) &middot; -clean variants of both</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-col">
+    <span class="n">23.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-23.jpg" alt="Long sightline through the open living space to the kitchen, refrigerator at the far end." loading="lazy">
+    <figcaption><b>Long sightline through the open living space to the kitchen, refrigerator at the far end.</b>
+      <span class="src"><b class="lib-b">collage only</b> &middot; SLIDE 7 alternate (07a) &middot; collage tile 2<br>
+      native 3600&times;2400 &middot; derived: after-03 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">26.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-26.jpg" alt="Kitchen: range, microwave, window over the sink, white cabinets." loading="lazy">
+    <figcaption><b>Kitchen: range, microwave, window over the sink, white cabinets.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 5 &middot; collage tile 3<br>
+      native 3600&times;2400 &middot; derived: after-04 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-col">
+    <span class="n">30.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-30.jpg" alt="Kitchen peninsula looking toward the french doors, refrigerator at right." loading="lazy">
+    <figcaption><b>Kitchen peninsula looking toward the french doors, refrigerator at right.</b>
+      <span class="src"><b class="lib-b">collage only</b> &middot; collage tile 4 &mdash; not on the eight-slide deck<br>
+      native 3600&times;2400 &middot; derived: after-05 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">31.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-31.jpg" alt="French doors seen from inside an empty room, deck beyond." loading="lazy">
+    <figcaption><b>French doors seen from inside an empty room, deck beyond.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 4 &middot; collage tile 5<br>
+      native 3600&times;2400 &middot; derived: after-06 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">24.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-24.jpg" alt="Full bath: vanity, toilet, walk-in shower with a black frame." loading="lazy">
+    <figcaption><b>Full bath: vanity, toilet, walk-in shower with a black frame.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 6 &middot; collage tile 6<br>
+      native 3600&times;2400 &middot; derived: after-07 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-col">
+    <span class="n">37.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-37.jpg" alt="Half bath: round mirror, wall-hung vanity, toilet." loading="lazy">
+    <figcaption><b>Half bath: round mirror, wall-hung vanity, toilet.</b>
+      <span class="src"><b class="lib-b">collage only</b> &middot; collage tile 7 &mdash; not on the eight-slide deck<br>
+      native 3600&times;2400 &middot; derived: after-08 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-col">
+    <span class="n">38.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-38.jpg" alt="Upstairs room, vaulted ceiling, tall window plus a small square window, open doorway to an en-suite." loading="lazy">
+    <figcaption><b>Upstairs room, vaulted ceiling, tall window plus a small square window, open doorway to an en-suite.</b>
+      <span class="src"><b class="lib-b">collage only</b> &middot; collage tile 8 &mdash; not on the eight-slide deck<br>
+      native 3600&times;2400 &middot; derived: after-09 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">39.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-39.jpg" alt="Upstairs bedroom, vaulted ceiling, white six-panel door open to the landing." loading="lazy">
+    <figcaption><b>Upstairs bedroom, vaulted ceiling, white six-panel door open to the landing.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 3, the after half of the split &middot; collage tile 9<br>
+      native 3600&times;2400 &middot; derived: bedroom-after 1400&times;933</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">40.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-40.jpg" alt="Upstairs room, vaulted ceiling, window in the end wall and a large corner window." loading="lazy">
+    <figcaption><b>Upstairs room, vaulted ceiling, window in the end wall and a large corner window.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 7<br>
+      native 3600&times;2400 &middot; derived: after-10 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-off">
+    <span class="n">22.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-22.jpg" alt="Ground-floor room, flat ceiling, two windows and a white six-panel door." loading="lazy">
+    <figcaption><b>Ground-floor room, flat ceiling, two windows and a white six-panel door.</b>
+      <span class="src"><b class="lib-b">unused</b> &middot; SLIDE 7 alternate (07b) only<br>
+      native 3600&times;2400 &middot; derived: after-02 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-off">
+    <span class="n">5.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-5.jpg" alt="Side entry: door, painted steps, handrail, chain-link fence and the wooded side lot." loading="lazy">
+    <figcaption><b>Side entry: door, painted steps, handrail, chain-link fence and the wooded side lot.</b>
+      <span class="src"><b class="lib-b">unused</b> &middot; OUT since rev 18 &mdash; this was slide 8 until Jake cut it<br>
+      native 3600&times;2400 &middot; derived: after-11 1024&times;683</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-off">
+    <span class="n">14.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-14.jpg" alt="Rear deck looking back at the house: new french doors, deck boards and rail." loading="lazy">
+    <figcaption><b>Rear deck looking back at the house: new french doors, deck boards and rail.</b>
+      <span class="src"><b class="lib-b">unused</b> &middot; OUT &mdash; weathered boards, and kept out of the collage for the same reason<br>
+      native 3600&times;2400 &middot; derived: deck-after 1400&times;933</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-off">
+    <span class="n">50.jpeg</span>
+    <img src="mead-case-study-post-spec/library/raw-50.jpg" alt="Floor plan, 1,334 sq ft total." loading="lazy">
+    <figcaption><b>Floor plan, 1,334 sq ft total.</b>
+      <span class="src"><b class="lib-b">unused</b> &middot; OUT permanently &mdash; a plan is not a photograph and breaks the grid<br>
+      native 3600&times;2700 &middot; derived: none</span>
+    </figcaption>
+  </figure>
+</div>
+
+<h3>The before screenshots &middot; 5 December 2025</h3>
+<div class="slides">
+  <figure class="slide lib-on">
+    <span class="n">CleanShot 2025-12-05 at 11.16.07</span>
+    <img src="mead-case-study-post-spec/library/before-11-16-07.jpg" alt="Front exterior before: green siding, bare trees, winter light." loading="lazy">
+    <figcaption><b>Front exterior before: green siding, bare trees, winter light.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 2 collage, top left<br>
+      native 792&times;634 &middot; derived: before-front 1400&times;1120 &middot; exterior-before 1400&times;933 (crop)</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">CleanShot 2025-12-05 at 11.16.11</span>
+    <img src="mead-case-study-post-spec/library/before-11-16-11.jpg" alt="Rear deck before: failed deck structure, lattice skirting, debris underneath." loading="lazy">
+    <figcaption><b>Rear deck before: failed deck structure, lattice skirting, debris underneath.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 2 collage, top right<br>
+      native 774&times;592 &middot; derived: before-rear-deck 1400&times;1071 &middot; deck-before 1400&times;933 (crop)</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">CleanShot 2025-12-05 at 11.15.49</span>
+    <img src="mead-case-study-post-spec/library/before-11-15-49.jpg" alt="Upstairs bedroom before: furniture and belongings still in place, ceiling fan, stained sloped ceiling." loading="lazy">
+    <figcaption><b>Upstairs bedroom before: furniture and belongings still in place, ceiling fan, stained sloped ceiling.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 2 collage, bottom left &middot; SLIDE 3, the before half<br>
+      native 668&times;534 &middot; derived: before-attic-room 1400&times;1119 &middot; bedroom-before 1400&times;933 (crop)</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-on">
+    <span class="n">CleanShot 2025-12-05 at 11.15.53</span>
+    <img src="mead-case-study-post-spec/library/before-11-15-53.jpg" alt="Failed ceiling: plaster gone, lath and framing exposed." loading="lazy">
+    <figcaption><b>Failed ceiling: plaster gone, lath and framing exposed.</b>
+      <span class="src"><b class="lib-b">on the deck</b> &middot; SLIDE 2 collage, bottom right<br>
+      native 668&times;526 &middot; derived: before-ceiling-failed 1400&times;1102</span>
+    </figcaption>
+  </figure>
+  <figure class="slide lib-off">
+    <span class="n">CleanShot 2025-12-05 at 11.15.58</span>
+    <img src="mead-case-study-post-spec/library/before-11-15-58.jpg" alt="Stairwell before: wood paneling, worn carpet treads, wall-mounted handrail." loading="lazy">
+    <figcaption><b>Stairwell before: wood paneling, worn carpet treads, wall-mounted handrail.</b>
+      <span class="src"><b class="lib-b">unused</b> &middot; HELD &mdash; there is no stairwell after in the set, so it cannot be paired<br>
+      native 666&times;526 &middot; derived: before-stairwell 1400&times;1105</span>
+    </figcaption>
+  </figure>
+</div>
+
+<div class="card flag chg">
+  <h3><b>The one frame with no source in this library: the cover.</b></h3>
+  <p><code>exterior-cover-jake.jpg</code>, 522&times;359, is the file Jake supplied and chose
+  as slide 1 at rev 16 and moved to <b>slide 8</b> at rev 20. It correlates to <code>2.jpeg</code> at 0.36, where every real crop of
+  that frame scores 1.0, which is the measurement behind section 16's finding that
+  <b>it is not a photograph of this property</b>. At <b>rev 22 it is back, and it is the only after-exterior on the deck</b> &mdash; slide 8 and
+  the collage's top-left tile &mdash; on Jake's "thats the only shot of the exterior house that
+  I want". He also re-uploaded it to the same Drive folder at <b>1510&times;1042</b>, which
+  retires the softness objection: it now downscales into the photo area instead of being
+  upscaled 2.46&times;. <b style="color:var(--red)">What it does not retire is the provenance
+  finding.</b> The bigger file is the same picture, so if this deck reaches Shavit or the feed,
+  that frame should still be described as a rendering rather than a photograph of the house. It is listed here
+  rather than quietly left out so the library stays a complete account.</p>
+</div>
+
+<div class="card chg">
+  <h3>What the library says about the deck</h3>
+  <p><b>Three good frames were sitting unused</b> before rev 19: the second kitchen angle
+  (<code>30</code>), the half bath (<code>37</code>) and the upstairs room with the en-suite
+  doorway (<code>38</code>). None of them could earn a slide of their own without new copy,
+  which the copy rule forbids. The collage is what finally spends them.</p>
+  <p><b>Two frames are out on quality, not on fit:</b> the side entry (<code>5</code>) and the
+  rear deck (<code>14</code>). <b>One is out on structure:</b> the stairwell before
+  (<code>CleanShot 11.15.58</code>) has no after to pair with. <b>One is out on kind:</b> the
+  floor plan.</p>
+</div>
+
+<h2 class="chg" id="s18">18 &middot; The collage, and where it goes</h2>
+
+<div class="card chg">
+  <h3>It opens the deck. It does not close it.</h3>
+  <p>Jake asked for a collage "at the end", saw it built at the end, and moved it:
+  <b>"start with collage for one then end with our current image of one."</b> That is a
+  straight swap of the two frames at the ends of the deck, so the deck stays at eight.
+  Slide 1 is the collage. Slide 8 is the frame that was the cover.</p>
+  <p><b>It is the better order, and for a reason worth keeping.</b> On Instagram the first
+  tile is the only one that has to earn a swipe, and nine finished rooms at once is a harder
+  scroll-stop than one facade. Ending on a single wide exterior gives the deck somewhere to
+  land, next to the call to action, instead of the busiest tile in the set.</p>
+  <p><b>No copy changed in the swap.</b> Slide 1 keeps the property name, the town and his
+  BRRRR one-liner; slide 8 keeps his 1:48 PM headline and the call to action. The copy rule is
+  untouched because nothing was composed for either.</p>
+</div>
+
+<div class="grid2 chg">
+  <figure class="slide">
+    <span class="n">01</span>
+    <img src="mead-case-study-post-spec/slides/01_cover.jpg" alt="Opening collage slide">
+    <figcaption><b>01 &middot; opens on the collage</b>
+      <span class="line">MEAD STREET<br>Hillsdale, Michigan<br>A complete BRRRR renovation.</span>
+      <span class="src">3&times;3 &middot; tiles 356&times;270 &middot; nine distinct rooms, one
+      tile each &middot; band is the deck's uniform 528px, unchanged</span>
+    </figcaption>
+  </figure>
+  <figure class="slide">
+    <span class="n">08</span>
+    <img src="mead-case-study-post-spec/slides/08_close.jpg" alt="Closing slide, same frame as collage tile 1">
+    <figcaption><b>08 &middot; closes on the collage's top-left tile</b>
+      <span class="line">BUILDING COMMUNITIES - ONE PROJECT AT A TIME<br>LIVE WITH US. WORK WITH US.</span>
+      <span class="src">his 1:48 PM headline and the CTA, both unchanged &middot; the photo is
+      <code>exterior-after-clean-hq.png</code> &mdash; <b>the same file as tile 1 of slide 1</b>,
+      at native resolution</span>
+    </figcaption>
+  </figure>
+</div>
+
+<div class="card chg">
+  <h3>What is in the nine, and what is deliberately not</h3>
+  <p><b>In:</b> front, living, both kitchen angles, the french doors, both baths, and the two
+  upstairs rooms. One tile per room, so nothing in the grid repeats. It is also the only thing
+  on the deck that spends the three good frames nobody had used &mdash; the second kitchen
+  angle, the half bath and the upstairs room with the en-suite doorway.</p>
+  <p><b>Out:</b> <code>deck-after</code> (weathered boards, already out), <code>after-11</code>
+  (the side entry cut from slide 8 earlier today) and the near-duplicate rooms
+  <code>after-02</code> and <code>after-10</code>.</p>
+  <p class="note"><b>Why 3&times;3 and not 3&times;4.</b> Twelve tiles measure 356&times;201
+  against a 3:2 source, which throws away a third of every frame, and filling twelve required
+  putting both rejected frames back in. Nine tiles measure 356&times;270, crop far less, and
+  every one is a frame the deck is happy to show.</p>
+</div>
+
+<h3 class="chg">Rev 22 &middot; his frame, at both ends, at 1510&times;1042</h3>
+
+<div class="card chg">
+  <h3>One exterior on the deck, and it is his</h3>
+  <p>Jake: <b>"thats the only shot of the exterior house that I want put that in the collage and
+  that as the ending photo."</b> Done. <code>exterior-cover-jake-hq.png</code> is slide 8
+  <i>and</i> the collage's top-left tile, and it is the <b>only after-exterior anywhere on the
+  deck</b>. The two exteriors in the slide 2 collage stay, because those are befores and are the
+  before half of a before-and-after, not a competing hero shot.</p>
+  <p><b>The quality objection is retired, not argued with.</b> He re-uploaded the frame to the same
+  Drive folder at <b>1510&times;1042</b>, against the 522&times;359 the deck had. That flips the
+  slide from an upscale to a downscale:</p>
+  <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0">
+    <tr style="color:var(--gold)"><td style="padding:4px 8px 4px 0">&nbsp;</td>
+      <td>source</td><td>into 1080&times;884</td><td>gradient energy</td></tr>
+    <tr><td style="padding:4px 8px 4px 0"><b>rev 20</b></td><td>522&times;359</td>
+      <td><b style="color:var(--red)">upscale 2.46&times;</b></td><td>x 9.00 &middot; y 9.77</td></tr>
+    <tr><td style="padding:4px 8px 4px 0"><b>rev 22</b></td><td>1510&times;1042</td>
+      <td><b style="color:var(--gold)">downscale 0.85&times;</b></td><td>x 24.88 &middot; y 27.73</td></tr>
+  </table>
+  <p class="note"><b>+177% horizontal, +184% vertical.</b> That is not a retouch, it is simply
+  stopping the renderer from inventing pixels. <code>lift</code> also drops from 1.02 back to 1.00
+  on this slide: the contrast bump was compensating for upscale mush that no longer exists.</p>
+</div>
+
+<div class="grid2 chg">
+  <figure class="slide">
+    <span class="n">01</span>
+    <img src="mead-case-study-post-spec/slides/01_cover.jpg" alt="Opening collage, his exterior top left">
+    <figcaption><b>01 &middot; opens on the collage</b>
+      <span class="src">3&times;3, nine rooms &middot; <b>top-left tile is his exterior</b>, the same
+      file as slide 8</span>
+    </figcaption>
+  </figure>
+  <figure class="slide">
+    <span class="n">08</span>
+    <img src="mead-case-study-post-spec/slides/08_close.jpg" alt="Closing slide on his exterior frame">
+    <figcaption><b>08 &middot; closes on the same frame</b>
+      <span class="src">his 1:48 PM headline and the CTA, unchanged &middot; sharp now, because the
+      source finally exceeds the photo area</span>
+    </figcaption>
+  </figure>
+</div>
+
+<div class="card flag chg">
+  <h3><b>The one thing the bigger file does not fix.</b></h3>
+  <p>A higher-resolution copy of the same picture is still the same picture. <b>Section 16's
+  finding stands</b>: set against the real listing frame, the foundation material, the plantings,
+  the garage and the neighbouring house all differ. So the resolution complaint is closed and the
+  provenance one is not. <b>If this deck goes to Shavit or to the feed, that frame should be
+  described as a rendering, not as a photograph of the house</b> &mdash; and Shavit's own 8/28
+  rejection of AI images is the reason to say it out loud rather than let it ride.</p>
+  <p class="note">The real May-shoot exterior, <code>exterior-after-clean-hq.png</code> at
+  2666&times;1776, stays built from rev 21 and is one line away in <code>render_mead.py</code>.</p>
+</div>
+
+<script>
+(function(){
+  var track=document.getElementById('igTrack'); if(!track) return;
+  var imgs=track.querySelectorAll('img'), n=imgs.length, i=0;
+  var dots=document.getElementById('igDots'), count=document.getElementById('igCount');
+  var prev=document.getElementById('igPrev'), next=document.getElementById('igNext');
+  for(var k=0;k<n;k++) dots.appendChild(document.createElement('i'));
+  function go(x){
+    i=Math.max(0,Math.min(n-1,x));
+    track.style.transform='translateX('+(-i*100)+'%)';
+    count.textContent=(i+1)+'/'+n;
+    var ds=dots.children;
+    for(var k=0;k<ds.length;k++) ds[k].className = (k===i?'on':'');
+    prev.disabled=(i===0); next.disabled=(i===n-1);
+  }
+  prev.addEventListener('click',function(){go(i-1)});
+  next.addEventListener('click',function(){go(i+1)});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft') go(i-1);
+    if(e.key==='ArrowRight') go(i+1);
+  });
+  go(0);
+  var more=document.getElementById('igMore'), rest=document.getElementById('igRest');
+  more.addEventListener('click',function(){
+    var open=rest.classList.toggle('open');
+    more.textContent = open ? '' : '\u2026 more';
+  });
+})();
+</script>
+<script src="../spec-annotate.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "id" : "56DCA774-965D-4A87-A372-DA999E065C56",
+  "isOpen" : false,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit New Videos - Aug 17"
+        }
+      ],
+      "id" : "3B35ED3E-732E-4F18-A140-E9CA403B291B",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-18T23:02:07Z"
+}

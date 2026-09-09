@@ -1,0 +1,14 @@
+site/node_modules/
+site/dist/
+.loop/
+*.log
+
+# secrets — never commit
+.supabase-secrets
+.env.local
+site/.env
+site/.env.local
+.launch-secrets
+.netlify/
+/supabase/
+site/rejected-photos/

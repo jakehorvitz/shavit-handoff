@@ -1,0 +1,1852 @@
+{
+  "scope": "Read-only identified Shavit package metadata and media references; no media copied; chat histories not read. Filename containing not Shavit excluded.",
+  "packages": [
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Montage of Current Project Reels.palmier",
+      "bytes": 234351333,
+      "files": 65,
+      "modified": "2026-09-06T10:53:16.913034",
+      "activeTimelineId": "2E4A7370-D1E2-422D-A983-519E9557CC8D",
+      "timelines": [
+        {
+          "id": "AF329DCC-9AC4-461D-8CD5-342A1E2A3B75",
+          "name": "Timeline 1"
+        },
+        {
+          "id": "2E4A7370-D1E2-422D-A983-519E9557CC8D",
+          "name": "rev6 BLOCKS"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BARRY-finished.jpg",
+          "exists": true,
+          "bytes": 670002
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-51s.m4a",
+          "exists": true,
+          "bytes": 1683951
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-55s.m4a",
+          "exists": true,
+          "bytes": 1821632
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-56s.m4a",
+          "exists": true,
+          "bytes": 1854265
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-59s.m4a",
+          "exists": true,
+          "bytes": 1959497
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-62s.m4a",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-63s.m4a",
+          "exists": true,
+          "bytes": 2034153
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/BED-redlights-64s.m4a",
+          "exists": true,
+          "bytes": 2076019
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/CARD-brand.png",
+          "exists": true,
+          "bytes": 39453
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/CARD-meet-gold.png",
+          "exists": true,
+          "bytes": 32089
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/CEDAR-drone-5s.mp4",
+          "exists": true,
+          "bytes": 10327062
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/CEDAR-exterior.jpg",
+          "exists": true,
+          "bytes": 571255
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/CREW-fullframe.jpg",
+          "exists": true,
+          "bytes": 1128425
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/EWING-southbend-25s.mp4",
+          "exists": true,
+          "bytes": 3518088
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/LUDLAM-drone-5s.mp4",
+          "exists": true,
+          "bytes": 20813793
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/LUDLAM-exterior.jpg",
+          "exists": true,
+          "bytes": 1099365
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/NORWOOD-framing-3s.mp4",
+          "exists": true,
+          "bytes": 7540194
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-1-ladder.mp4",
+          "exists": true,
+          "bytes": 2521075
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-2-green.mp4",
+          "exists": true,
+          "bytes": 1537869
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-3-arch.mp4",
+          "exists": true,
+          "bytes": 2331798
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-4-kitchen.mp4",
+          "exists": true,
+          "bytes": 1440350
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-grid-3s.mp4",
+          "exists": true,
+          "bytes": 2080751
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-grid-full.mp4",
+          "exists": true,
+          "bytes": 3942597
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-inprogress.jpg",
+          "exists": true,
+          "bytes": 244493
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-sequence-v2.mp4",
+          "exists": true,
+          "bytes": 4147940
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-sequence-v3.mp4",
+          "exists": true,
+          "bytes": 4800177
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/OAK-sequence.mp4",
+          "exists": true,
+          "bytes": 3942597
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/SAINTJOE-after.jpg",
+          "exists": true,
+          "bytes": 473388
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/SAINTJOE-before.jpg",
+          "exists": true,
+          "bytes": 454897
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/SAINTJOE-drone-5s.mp4",
+          "exists": true,
+          "bytes": 19719530
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/SAINTJOE-drone-6s-nodish-v2.mp4",
+          "exists": true,
+          "bytes": 31891698
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/conform-0729/SAINTJOE-drone-6s.mp4",
+          "exists": true,
+          "bytes": 23445315
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/BED-redlights-38s.m4a",
+          "exists": true,
+          "bytes": 1296379
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/GEN2-norwood-stripped-dolly.mp4",
+          "exists": true,
+          "bytes": 11896316
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/GEN3-barry-chimney-cranedown.mp4",
+          "exists": true,
+          "bytes": 14839275
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/GEN4-barry-joists-craneup.mp4",
+          "exists": true,
+          "bytes": 5975225
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/GEN5-howder-rafters-crane.mp4",
+          "exists": true,
+          "bytes": 13196715
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/GEN7-howder-joists-worker.mp4",
+          "exists": true,
+          "bytes": 5087049
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/GEN8-howder-crew-worker.mp4",
+          "exists": true,
+          "bytes": 4504610
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/motion6/N1-norwood-establisher-TRIM24.mp4",
+          "exists": true,
+          "bytes": 5635992
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/11_C1-allan-wiggins.jpg",
+          "exists": true,
+          "bytes": 617191
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/12_C2-pamela-montez.jpg",
+          "exists": true,
+          "bytes": 483534
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/13_C3-jon-rutan.jpg",
+          "exists": true,
+          "bytes": 583037
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/14_C4-darrin-hannibal.jpg",
+          "exists": true,
+          "bytes": 545806
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/15_C5-monte-rimer.jpg",
+          "exists": true,
+          "bytes": 388538
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/16_C6-riana-beardsley.jpg",
+          "exists": true,
+          "bytes": 810681
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/17_C7-tito-jonah.jpg",
+          "exists": true,
+          "bytes": 984085
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-centered/18_C8-team-photo.jpg",
+          "exists": true,
+          "bytes": 595770
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-overlays/rule-brass.png",
+          "exists": true,
+          "bytes": 118
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-overlays/rule-track.png",
+          "exists": true,
+          "bytes": 119
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-overlays/scrim.png",
+          "exists": true,
+          "bytes": 10443
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/11_C1-allan-wiggins.jpg",
+          "exists": true,
+          "bytes": 495480
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/12_C2-pamela-montez.jpg",
+          "exists": true,
+          "bytes": 508973
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/13_C3-jon-rutan.jpg",
+          "exists": true,
+          "bytes": 449456
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/14_C4-darrin-hannibal.jpg",
+          "exists": true,
+          "bytes": 267937
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/15_C5-monte-rimer.jpg",
+          "exists": true,
+          "bytes": 290229
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/16_C6-riana-beardsley.jpg",
+          "exists": true,
+          "bytes": 557321
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/17_C7-tito-jonah.jpg",
+          "exists": true,
+          "bytes": 584916
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier-team/18_C8-team-photo.jpg",
+          "exists": true,
+          "bytes": 451042
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/01_A1-norwood-delivery.jpg",
+          "exists": true,
+          "bytes": 1045239
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/02_A2-norwood-materials.jpg",
+          "exists": true,
+          "bytes": 694917
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/03_A3-norwood-stripped.jpg",
+          "exists": true,
+          "bytes": 470441
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/04_A4-norwood-debris.jpg",
+          "exists": true,
+          "bytes": 849255
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/05_A5-norwood-framing.mp4",
+          "exists": true,
+          "bytes": 1284230
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/06_A6-barry-chimney.jpg",
+          "exists": true,
+          "bytes": 655488
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/07_A7-barry-supplies.jpg",
+          "exists": true,
+          "bytes": 231254
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/08_A8-howder-joists.jpg",
+          "exists": true,
+          "bytes": 630080
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/09_A9-howder-rafters.jpg",
+          "exists": true,
+          "bytes": 490342
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/10_A10-howder-crew.jpg",
+          "exists": true,
+          "bytes": 587469
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/11_C1-allan-wiggins.jpg",
+          "exists": true,
+          "bytes": 682621
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/12_C2-pamela-montez.jpg",
+          "exists": true,
+          "bytes": 677261
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/13_C3-jon-rutan.jpg",
+          "exists": true,
+          "bytes": 647641
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/14_C4-darrin-hannibal.jpg",
+          "exists": true,
+          "bytes": 552469
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/15_C5-monte-rimer.jpg",
+          "exists": true,
+          "bytes": 360843
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/16_C6-riana-beardsley.jpg",
+          "exists": true,
+          "bytes": 615111
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/17_C7-tito-jonah.jpg",
+          "exists": true,
+          "bytes": 871271
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/18_C8-team-photo.jpg",
+          "exists": true,
+          "bytes": 562524
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/current-projects-team-2026-07-27/palmier/19_D1-outro.jpg",
+          "exists": true,
+          "bytes": 80639
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Reels - Aug 2026.palmier",
+      "bytes": 360638963,
+      "files": 117,
+      "modified": "2026-09-06T12:52:57.684775",
+      "activeTimelineId": "05D72676-6EAF-4CF1-B351-F5776A6B7FC3",
+      "timelines": [
+        {
+          "id": "15948B72-9579-4A10-BD98-435177B8DE64",
+          "name": "Timeline 1"
+        },
+        {
+          "id": "363F787A-EEED-49D3-B3AF-589DE2BCC5BD",
+          "name": "A1 · Tenant Story (Ewing)"
+        },
+        {
+          "id": "845A0879-A143-4CB1-8C84-CC422EBED9D5",
+          "name": "A2 · The Vision (Ewing)"
+        },
+        {
+          "id": "8826F765-CE94-43F6-8AC3-3896C0ED695B",
+          "name": "A3 · Brand New Windows (Ewing)"
+        },
+        {
+          "id": "48CDB967-6AC7-42EA-983A-30FCCEF5EFCE",
+          "name": "A4 · The BRRRR — BLOCKED"
+        },
+        {
+          "id": "EFB2D126-3263-4142-8388-3B6DD3752A61",
+          "name": "B1 · Behind The Door — HELD"
+        },
+        {
+          "id": "72DAAE02-D457-4BB8-883C-DD1215FC99F8",
+          "name": "B2 · Never Impossible — HELD"
+        },
+        {
+          "id": "818A29C6-A3E1-4B2E-BA4E-0D0E85E0998C",
+          "name": "C1 · How We Meet Budgets (Norwood)"
+        },
+        {
+          "id": "5ABE2132-F348-4CF3-A29F-A7B96535CC69",
+          "name": "C2 · Come On Upstairs (Norwood)"
+        },
+        {
+          "id": "6D8AF81E-9765-4298-9F91-00CAF214C17D",
+          "name": "C3 · The Admin Week"
+        },
+        {
+          "id": "B26135A3-C8DF-490C-AB7D-AA8D814951D2",
+          "name": "D1 · The Roof (Norwood)"
+        },
+        {
+          "id": "2AFE4DA0-9FD8-4B30-9208-F30F01B36822",
+          "name": "D2 · Difficult Deal (Norwood)"
+        },
+        {
+          "id": "044942A9-FA9F-4E6B-BAE1-F09ED46E79F5",
+          "name": "D3 · Norwood Economics — FIGURES"
+        },
+        {
+          "id": "1548C38E-0E1E-448A-83A0-A3DF82D8BFCC",
+          "name": "END CARD (shared)"
+        },
+        {
+          "id": "7428654D-A7E1-4F55-9738-572A9C9C9FB3",
+          "name": "MERGE · D2 + D3 (preview)"
+        },
+        {
+          "id": "EDCF6FBC-6FE5-424A-91E1-3E0F2F7077F0",
+          "name": "MERGE · A3 + A2 (preview)"
+        },
+        {
+          "id": "54694293-F1EC-43F8-B0E8-D3E984E67371",
+          "name": "JONAH SCRATCH (transcribe)"
+        },
+        {
+          "id": "43888133-E04E-4F73-9CFD-5D855225179D",
+          "name": "COVER · BRRRR (black card)"
+        },
+        {
+          "id": "DE9B7596-57B9-44C2-9026-07F42EAC41C8",
+          "name": "E1 · Testimonials (Norwood) — WIP"
+        },
+        {
+          "id": "1DE7B221-B248-4977-8D12-AE89BC134921",
+          "name": "E1 · Crew Credit (8-07) — WIP"
+        },
+        {
+          "id": "BB7D4162-5733-4688-8D3F-9D28A5175C9E",
+          "name": "Timeline 21"
+        },
+        {
+          "id": "ADC45F65-1A48-4968-B6CB-5878AD4D85A1",
+          "name": "MERGE · B1 + E3 Auction Win (preview)"
+        },
+        {
+          "id": "5E446C43-D11D-4978-A5A9-98B853C88263",
+          "name": "E3 · Auction Win (8-12) — WIP"
+        },
+        {
+          "id": "1753C150-A3BC-43E5-A2D9-FEE7EB788A01",
+          "name": "B1 + E3 · FLAT (audio editable)"
+        },
+        {
+          "id": "8FD5573B-8906-4A58-AA23-81DF2B806A69",
+          "name": "AUGUST 2026 RECAP · v1 (spec v1.7)"
+        },
+        {
+          "id": "05D72676-6EAF-4CF1-B351-F5776A6B7FC3",
+          "name": "AUGUST 2026 RECAP · v4 (tight, full-bleed)"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Jonah MOVS/IMG_4727.MOV",
+          "exists": true,
+          "bytes": 97547691
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Jonah MOVS/IMG_4728.MOV",
+          "exists": true,
+          "bytes": 132867282
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Jonah MOVS/IMG_4729.MOV",
+          "exists": true,
+          "bytes": 115803995
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Jonah MOVS/IMG_4730.MOV",
+          "exists": true,
+          "bytes": 128843319
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Jonah MOVS/IMG_4731.MOV",
+          "exists": true,
+          "bytes": 62270594
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4679.MOV",
+          "exists": true,
+          "bytes": 118576499
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4680.MOV",
+          "exists": true,
+          "bytes": 335113004
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4681.MOV",
+          "exists": true,
+          "bytes": 407607894
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4682.JPEG",
+          "exists": true,
+          "bytes": 1892235
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4683.MOV",
+          "exists": true,
+          "bytes": 592857712
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4684.MOV",
+          "exists": true,
+          "bytes": 420916836
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4686.mov",
+          "exists": true,
+          "bytes": 8488527
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4687.mov",
+          "exists": true,
+          "bytes": 20914836
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4688.mov",
+          "exists": true,
+          "bytes": 3873368
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4689.mov",
+          "exists": true,
+          "bytes": 25324584
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/build-A1/seg1_clean.mp4",
+          "exists": true,
+          "bytes": 40579640
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/build-A1/seg2_fixed.mp4",
+          "exists": true,
+          "bytes": 39064883
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4694.mov",
+          "exists": true,
+          "bytes": 14696040
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4697.heic",
+          "exists": true,
+          "bytes": 4173348
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4702.mov",
+          "exists": true,
+          "bytes": 16599233
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4703.mov",
+          "exists": true,
+          "bytes": 2107971
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4704.mov",
+          "exists": true,
+          "bytes": 21983239
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4705.mov",
+          "exists": true,
+          "bytes": 13623266
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4706.mov",
+          "exists": true,
+          "bytes": 24959613
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4707.mov",
+          "exists": true,
+          "bytes": 17767209
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Concept Renders/concept-ewing-kitchen.png",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Concept Renders/concept-ewing-sunroom.png",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Concept Renders/concept-norwood-bath.png",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Ewing Photos/auction-1902-ewing.jpg",
+          "exists": true,
+          "bytes": 191109
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Ewing Photos/ewing-exterior-1902.jpg",
+          "exists": true,
+          "bytes": 1821316
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Field Footage/john-boom-lift-roof.MOV",
+          "exists": true,
+          "bytes": 7432271
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Field Footage/john-tree-removal-chainsaw.MOV",
+          "exists": true,
+          "bytes": 22813568
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Friday 8-07/_superseded/shavit-portrait-4k.png",
+          "exists": true,
+          "bytes": 8325477
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/A1.mp3",
+          "exists": true,
+          "bytes": 7101126
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/A2.mp3",
+          "exists": true,
+          "bytes": 6522671
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/A3-folk-acoustic-sunrise.mp3",
+          "exists": true,
+          "bytes": 4765440
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/A3-indie-folk-upbeat.mp3",
+          "exists": true,
+          "bytes": 3947206
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/A3.mp3",
+          "exists": true,
+          "bytes": 3962253
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/A4.mp3",
+          "exists": true,
+          "bytes": 3561848
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/B1-upbeat-country-music.mp3",
+          "exists": true,
+          "bytes": 4033306
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/B1.mp3",
+          "exists": true,
+          "bytes": 3606151
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/B2.mp3",
+          "exists": true,
+          "bytes": 4100179
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/C1.mp3",
+          "exists": true,
+          "bytes": 4441234
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/C2.mp3",
+          "exists": true,
+          "bytes": 4931918
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/C3-upbeat-acoustic.mp3",
+          "exists": true,
+          "bytes": 5410899
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/C3.mp3",
+          "exists": true,
+          "bytes": 3713149
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/D1.mp3",
+          "exists": true,
+          "bytes": 5379134
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/D2-upbeat-country-blues.mp3",
+          "exists": true,
+          "bytes": 4980401
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/D2.mp3",
+          "exists": true,
+          "bytes": 2817044
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/D3.mp3",
+          "exists": true,
+          "bytes": 2977541
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/american-landscape-cinematic.mp3",
+          "exists": true,
+          "bytes": 6352979
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/americana-instrumental-07.mp3",
+          "exists": true,
+          "bytes": 6884352
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/ref.mp3",
+          "exists": true,
+          "bytes": 6789888
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/slow-edm-options-8-07/edm-1 · Downtempo Chill Electronic (alex-morgan).mp3",
+          "exists": true,
+          "bytes": 6361344
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Music/slow-edm-options-8-07/edm-4 · Vlog Electronic Downtempo (Tunetank).mp3",
+          "exists": true,
+          "bytes": 5704307
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Norwood Photos/full_n03.jpg",
+          "exists": true,
+          "bytes": 1637191
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Norwood Photos/full_n04.jpg",
+          "exists": true,
+          "bytes": 1525453
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Norwood Photos/full_n05.jpg",
+          "exists": true,
+          "bytes": 1224177
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Norwood Photos/full_n06.jpg",
+          "exists": true,
+          "bytes": 1153749
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Testimonials 2026-08-10/IMG_4690-HQ-150734.MOV",
+          "exists": true,
+          "bytes": 28548932
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Testimonials 2026-08-10/IMG_4690.mov",
+          "exists": true,
+          "bytes": 5250798
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Testimonials 2026-08-10/IMG_4695.MOV",
+          "exists": true,
+          "bytes": 444058495
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Testimonials 2026-08-10/IMG_4700.jpg",
+          "exists": true,
+          "bytes": 3518129
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Testimonials 2026-08-10/IMG_4700_portrait.jpg",
+          "exists": true,
+          "bytes": 2852788
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - Testimonials 2026-08-10/IMG_4825.mov",
+          "exists": true,
+          "bytes": 5670070
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/Bumbled - Deep Active Sound Remix.mp3",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/Other Culture.mp3",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/Pia (1).mp3",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/65/05/04DFE36E-78CD-41A1-8034-1997FFF26F06/IMG_0227.png",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/ba/10/939702B8-9E07-418F-99F5-9AC6DF4F441E/IMG_4764.png",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/cards/CARD-brand.png",
+          "exists": true,
+          "bytes": 39453
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-01-barry-rise.mp4",
+          "exists": true,
+          "bytes": 14178896
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-02-barry-walk-a.mp4",
+          "exists": true,
+          "bytes": 7518721
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-03-barry-walk-b.mp4",
+          "exists": true,
+          "bytes": 7376628
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-04-oak-side.mp4",
+          "exists": true,
+          "bytes": 23981130
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-05-howder-pan.mp4",
+          "exists": true,
+          "bytes": 9061597
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-06-norwood-rise.mp4",
+          "exists": true,
+          "bytes": 8040698
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-07-ewing-push.mp4",
+          "exists": true,
+          "bytes": 19213733
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/gen-08-ewing-walk.mp4",
+          "exists": true,
+          "bytes": 24130496
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/rf-01-barry-rise-916.mp4",
+          "exists": true,
+          "bytes": 6900936
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/rf-05-howder-pan-916.mp4",
+          "exists": true,
+          "bytes": 6399629
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/rf-06-norwood-rise-916.mp4",
+          "exists": true,
+          "bytes": 6482226
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/generated/rf-07-ewing-push-916.mp4",
+          "exists": true,
+          "bytes": 12925217
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/barry-01.jpg",
+          "exists": true,
+          "bytes": 3104625
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/barry-02.jpg",
+          "exists": true,
+          "bytes": 382731
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/barry-03.jpg",
+          "exists": true,
+          "bytes": 4313311
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/barry-04.jpg",
+          "exists": true,
+          "bytes": 365693
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/barry-05.jpg",
+          "exists": true,
+          "bytes": 440725
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/barry-06.jpg",
+          "exists": true,
+          "bytes": 395196
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/barry-07.jpg",
+          "exists": true,
+          "bytes": 679519
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/ewing-01.jpg",
+          "exists": true,
+          "bytes": 4099113
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/ewing-02.jpg",
+          "exists": true,
+          "bytes": 745914
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/howder-current-01.jpg",
+          "exists": true,
+          "bytes": 3483226
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/howder-current-02.jpg",
+          "exists": true,
+          "bytes": 357157
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/howder-current-04.jpg",
+          "exists": true,
+          "bytes": 282372
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/ludlam-01.jpg",
+          "exists": true,
+          "bytes": 506217
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/norwood-01.jpg",
+          "exists": true,
+          "bytes": 2191410
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/norwood-02.jpg",
+          "exists": true,
+          "bytes": 1659484
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/norwood-03.jpg",
+          "exists": true,
+          "bytes": 2201461
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/norwood-04.jpg",
+          "exists": true,
+          "bytes": 291553
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/norwood-06.jpg",
+          "exists": true,
+          "bytes": 1246449
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/norwood-08.jpg",
+          "exists": true,
+          "bytes": 2312283
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/oak-01.jpg",
+          "exists": true,
+          "bytes": 268663
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/oak-02.jpg",
+          "exists": true,
+          "bytes": 624735
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/oak-03.jpg",
+          "exists": true,
+          "bytes": 610492
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/oak-04.jpg",
+          "exists": true,
+          "bytes": 159305
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/palmier/stills/oak-05.jpg",
+          "exists": true,
+          "bytes": 160507
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/source/recent/ewing-03.jpg",
+          "exists": true,
+          "bytes": 4134279
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/source/recent/ewing-04.jpg",
+          "exists": true,
+          "bytes": 5181017
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-august-2026-recap/assets/source/recent/ewing-05.jpg",
+          "exists": true,
+          "bytes": 4212497
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/auction-won-701e-4th-2026-08-10/auction-win.png",
+          "exists": true,
+          "bytes": 986729
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-rootman-website/site/public/assets/shavit-portrait.png",
+          "exists": true,
+          "bytes": 994757
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Mead Teaser.palmier",
+      "bytes": 9881828,
+      "files": 7,
+      "modified": "2026-09-06T10:53:16.887894",
+      "activeTimelineId": "8E563A02-6A5C-47B3-9873-8A4E0C828C93",
+      "timelines": [
+        {
+          "id": "8E563A02-6A5C-47B3-9873-8A4E0C828C93",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-country-33.8s.m4a",
+          "exists": true,
+          "bytes": 839668
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-country-34.8s.m4a",
+          "exists": true,
+          "bytes": 864539
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-lofi-29.4s.m4a",
+          "exists": true,
+          "bytes": 718085
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-lofi-31.0s.m4a",
+          "exists": true,
+          "bytes": 754885
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-lofi-33.8s.m4a",
+          "exists": true,
+          "bytes": 826489
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/endcard/END-CARD-shared.mp4",
+          "exists": true,
+          "bytes": 202979
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/14.jpeg",
+          "exists": true,
+          "bytes": 2842386
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/2.jpeg",
+          "exists": true,
+          "bytes": 4433835
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/22.jpeg",
+          "exists": true,
+          "bytes": 1210275
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/23.jpeg",
+          "exists": true,
+          "bytes": 1041860
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/24.jpeg",
+          "exists": true,
+          "bytes": 1093841
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/26.jpeg",
+          "exists": true,
+          "bytes": 1481535
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/30.jpeg",
+          "exists": true,
+          "bytes": 1491414
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/31.jpeg",
+          "exists": true,
+          "bytes": 1496360
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/37.jpeg",
+          "exists": true,
+          "bytes": 902785
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/38.jpeg",
+          "exists": true,
+          "bytes": 1118830
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/39.jpeg",
+          "exists": true,
+          "bytes": 955846
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/40.jpeg",
+          "exists": true,
+          "bytes": 1070729
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/5.jpeg",
+          "exists": true,
+          "bytes": 3495887
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/50.jpeg",
+          "exists": true,
+          "bytes": 562519
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/CleanShot 2025-12-05 at 11.15.49@2x.png",
+          "exists": true,
+          "bytes": 483813
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/CleanShot 2025-12-05 at 11.15.53@2x.png",
+          "exists": true,
+          "bytes": 460436
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/CleanShot 2025-12-05 at 11.15.58@2x.png",
+          "exists": true,
+          "bytes": 547419
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/CleanShot 2025-12-05 at 11.16.07@2x.png",
+          "exists": true,
+          "bytes": 1004225
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/images/CleanShot 2025-12-05 at 11.16.11@2x.png",
+          "exists": true,
+          "bytes": 809519
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/inserts/mead.mp4",
+          "exists": true,
+          "bytes": 23691440
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/inserts/minis.mp4",
+          "exists": true,
+          "bytes": 4494859
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/inserts/web1.mp4",
+          "exists": true,
+          "bytes": 1328838
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/inserts/web2.mp4",
+          "exists": true,
+          "bytes": 913496
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mead-teaser/video/shavit-teaser-2026-08-28.mov",
+          "exists": true,
+          "bytes": 9653897
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit New Videos - Aug 17.palmier",
+      "bytes": 197210251,
+      "files": 63,
+      "modified": "2026-08-20T10:50:12.879158",
+      "activeTimelineId": "ED115DDC-58B3-47A7-BD3B-B15254E7EE9F",
+      "timelines": [
+        {
+          "id": "A3F73148-198F-4D70-AB85-E31AC8B5CCA3",
+          "name": "REEL - Oak Lane Landscaping collab (rough cut)"
+        },
+        {
+          "id": "ED115DDC-58B3-47A7-BD3B-B15254E7EE9F",
+          "name": "RAW - Oak Lane Landscaping (captioned, uncut)"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4695-clean.mp4",
+          "exists": true,
+          "bytes": 27206434
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4708.heic",
+          "exists": true,
+          "bytes": 1666113
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4709.heic",
+          "exists": true,
+          "bytes": 1667567
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4710.heic",
+          "exists": true,
+          "bytes": 1616014
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/ai-plan-recreation-higgsfield.png",
+          "exists": true,
+          "bytes": 1681754
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/final-photo-1-front-hero.png",
+          "exists": true,
+          "bytes": 2802579
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/final-photo-2-mulch-corner.png",
+          "exists": true,
+          "bytes": 2703129
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/final-photo-3-side-mulch.png",
+          "exists": true,
+          "bytes": 2727663
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/lewis-lawn-care-logo-circle.png",
+          "exists": true,
+          "bytes": 201340
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/luis-lawn-care-logo-square.png",
+          "exists": true,
+          "bytes": 62624
+        },
+        {
+          "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/luis-lawn-care-logo.png",
+          "exists": true,
+          "bytes": 83153
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/E22FC5F9-470A-4455-B693-02DAC3321C2B.MOV",
+          "exists": true,
+          "bytes": 444058495
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/Shavit New Videos - Aug 17.mp4",
+          "exists": true,
+          "bytes": 202724164
+        },
+        {
+          "path": "/Users/jakehorvitz/Downloads/lewis-lawn-care-logo-circle.png",
+          "exists": true,
+          "bytes": 201340
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/10/00/5EC4AB1B-0431-4778-97EB-DA14704D4CD4/IMG_2053.heic",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/7d/13/69419246-2922-49E9-863E-013148CD8354/IMG_4710.heic",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/89/09/51BC7255-CE3C-4525-971E-0223C2B2CE5B/IMG_4709.heic",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/b6/06/ADA15755-C7CB-47BA-9D8E-36FEDE33B30B/IMG_4708.heic",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/ba/10/E5F25FB3-80E9-414E-A489-B6BD7395B518/IMG_7933.heic",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/bd/13/EA7DEE3C-960C-4290-8839-C341431165E3/IMG_7933.heic",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/Library/Messages/Attachments/dd/13/D248B8F4-2463-4D99-8E43-6C6CE35C37B4/IMG_4708.heic",
+          "exists": false,
+          "bytes": null
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-edm-35s.m4a",
+          "exists": true,
+          "bytes": 931543
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/endcard/END-CARD-shared.mp4",
+          "exists": true,
+          "bytes": 202979
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/New Shavit Stuff.palmier",
+      "bytes": 444,
+      "files": 3,
+      "modified": "2026-09-06T10:53:16.902086",
+      "activeTimelineId": "1FEA6B53-BFDC-44AA-8468-E28F0A5E0262",
+      "timelines": [
+        {
+          "id": "1FEA6B53-BFDC-44AA-8468-E28F0A5E0262",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": []
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Pro/Shavit Website Edit - The Turn (previs).palmier",
+      "bytes": 34627268,
+      "files": 13,
+      "modified": "2026-08-17T21:29:02",
+      "activeTimelineId": "7A98B3A0-134C-40D1-B4BD-81EAA791D7D5",
+      "timelines": [
+        {
+          "id": "DF82CA28-4DB1-4908-AB0E-F3BF46D1D513",
+          "name": "Timeline 1"
+        },
+        {
+          "id": "AD0F9A5D-A96D-4BBC-80B0-68F478C89825",
+          "name": "SPEC 1 · The Turn — desktop previs (21s)"
+        },
+        {
+          "id": "8C772ECB-08BA-44B8-9BED-D994D661FF4F",
+          "name": "SPEC 2 · key frames storyboard"
+        },
+        {
+          "id": "FC4E3AC1-BA5E-4000-B8F8-4046D9F26E2E",
+          "name": "SPEC 3 · phone fallback (no pin, no animation)"
+        },
+        {
+          "id": "3194F6F8-C5A2-432C-B537-FA3C3221FF52",
+          "name": "REEL 1 · The website (35s)"
+        },
+        {
+          "id": "7A98B3A0-134C-40D1-B4BD-81EAA791D7D5",
+          "name": "REEL 2 · Kendall Street (35s)"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-35s-american-landscape.m4a",
+          "exists": true,
+          "bytes": 861057
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/audio/bed-edm-35s.m4a",
+          "exists": true,
+          "bytes": 931543
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/reel2-base-nonum.mp4",
+          "exists": true,
+          "bytes": 10984463
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/01-open.png",
+          "exists": true,
+          "bytes": 2754066
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/02-wipe-mid.png",
+          "exists": true,
+          "bytes": 2738467
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/03-wipe-late-numbers.png",
+          "exists": true,
+          "bytes": 2570035
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/04-chapter1-settled.png",
+          "exists": true,
+          "bytes": 2569915
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/05-kitchen.png",
+          "exists": true,
+          "bytes": 1465856
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/06-living.png",
+          "exists": true,
+          "bytes": 1876895
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/07-close.png",
+          "exists": true,
+          "bytes": 816676
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/phone-01-top.png",
+          "exists": true,
+          "bytes": 1012022
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/stills/phone-02-kitchen.png",
+          "exists": true,
+          "bytes": 969684
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/mockup/the-turn-previs-desktop.mp4",
+          "exists": true,
+          "bytes": 9289190
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-product-edit/docs/product-edit/reel1/reel1-base.mp4",
+          "exists": true,
+          "bytes": 11986127
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit B1 - Whats Behind The Door (HELD).palmier",
+      "bytes": 54993,
+      "files": 5,
+      "modified": "2026-08-05T13:09:28",
+      "activeTimelineId": "7A39E906-29C1-41A1-841D-495F216B8829",
+      "timelines": [
+        {
+          "id": "7A39E906-29C1-41A1-841D-495F216B8829",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4686.mov",
+          "exists": true,
+          "bytes": 8488527
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4687.mov",
+          "exists": true,
+          "bytes": 20914836
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A1 - Ewing Tenant Story.palmier",
+      "bytes": 78959155,
+      "files": 30,
+      "modified": "2026-08-05T15:09:41",
+      "activeTimelineId": "A6A787FF-CEE8-4278-BEBF-83B7F258989A",
+      "timelines": [
+        {
+          "id": "A6A787FF-CEE8-4278-BEBF-83B7F258989A",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/build-A1/seg1_clean.mp4",
+          "exists": true,
+          "bytes": 40579640
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/build-A1/seg2_clean.mp4",
+          "exists": true,
+          "bytes": 33223587
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/build-A1/seg2_fixed.mp4",
+          "exists": true,
+          "bytes": 39064883
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4694.mov",
+          "exists": true,
+          "bytes": 14696040
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4704.mov",
+          "exists": true,
+          "bytes": 21983239
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4706.mov",
+          "exists": true,
+          "bytes": 24959613
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A3 - Brand New Windows.palmier",
+      "bytes": 96228,
+      "files": 5,
+      "modified": "2026-08-05T13:07:16",
+      "activeTimelineId": "F93C274F-1809-42FE-968C-B3B4DF8AFF4F",
+      "timelines": [
+        {
+          "id": "F93C274F-1809-42FE-968C-B3B4DF8AFF4F",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4683.MOV",
+          "exists": true,
+          "bytes": 592857712
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A2 - Walk It Before It Exists.palmier",
+      "bytes": 186497,
+      "files": 5,
+      "modified": "2026-08-05T13:06:06",
+      "activeTimelineId": "841B2AC2-7B2A-4B81-AED4-05788F976ECB",
+      "timelines": [
+        {
+          "id": "841B2AC2-7B2A-4B81-AED4-05788F976ECB",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4681.MOV",
+          "exists": true,
+          "bytes": 407607894
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4682.JPEG",
+          "exists": true,
+          "bytes": 1892235
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit C2 - Come On Upstairs.palmier",
+      "bytes": 175100,
+      "files": 5,
+      "modified": "2026-08-05T13:03:51",
+      "activeTimelineId": "1253C47B-D926-458A-B7EE-7868507D4511",
+      "timelines": [
+        {
+          "id": "1253C47B-D926-458A-B7EE-7868507D4511",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4704.mov",
+          "exists": true,
+          "bytes": 21983239
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit B2 - Never An Impossible Situation (HELD).palmier",
+      "bytes": 49023,
+      "files": 5,
+      "modified": "2026-08-05T13:10:24",
+      "activeTimelineId": "23CA04BC-55B4-4699-9445-C59DB3841235",
+      "timelines": [
+        {
+          "id": "23CA04BC-55B4-4699-9445-C59DB3841235",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4688.mov",
+          "exists": true,
+          "bytes": 3873368
+        },
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/B-mishawaka-preauction/IMG_4689.mov",
+          "exists": true,
+          "bytes": 25324584
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit C3 - The Admin Week.palmier",
+      "bytes": 129445,
+      "files": 5,
+      "modified": "2026-08-05T13:04:45",
+      "activeTimelineId": "BD1BF352-AA60-41B8-BCCF-66ED7B0D42EB",
+      "timelines": [
+        {
+          "id": "BD1BF352-AA60-41B8-BCCF-66ED7B0D42EB",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4694.mov",
+          "exists": true,
+          "bytes": 14696040
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit A4 - The BRRRR (BLOCKED - money rule).palmier",
+      "bytes": 68329,
+      "files": 5,
+      "modified": "2026-08-05T13:08:24",
+      "activeTimelineId": "4D99ECA3-9197-4D22-B18E-C1AFA8AAB96A",
+      "timelines": [
+        {
+          "id": "4D99ECA3-9197-4D22-B18E-C1AFA8AAB96A",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-04 Field Footage/A-ewing-1902-south-bend/IMG_4684.MOV",
+          "exists": true,
+          "bytes": 420916836
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/Documents/Palmier Archive 2026-08-05/Shavit C1 - How We Meet Budgets.palmier",
+      "bytes": 221401,
+      "files": 5,
+      "modified": "2026-08-05T13:02:40",
+      "activeTimelineId": "0BDDF5C2-3338-4480-8DBF-78A04BF168AA",
+      "timelines": [
+        {
+          "id": "0BDDF5C2-3338-4480-8DBF-78A04BF168AA",
+          "name": "Timeline 1"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/Desktop/Shavit - 2026-08-05 Field Footage/IMG_4706.mov",
+          "exists": true,
+          "bytes": 24959613
+        }
+      ]
+    },
+    {
+      "package": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-reel-2026-08-04/East-Victoria-Process-DRAFT.palmier",
+      "bytes": 31938,
+      "files": 4,
+      "modified": "2026-08-04T10:59:18.121210",
+      "activeTimelineId": "CB11A63B-5C33-4AD7-AF15-14851D360E00",
+      "timelines": [
+        {
+          "id": "CB11A63B-5C33-4AD7-AF15-14851D360E00",
+          "name": "East Victoria process draft"
+        }
+      ],
+      "externalReferences": [
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-countdown-2026-07-22/assets/gable-octagon-window.jpg",
+          "exists": true,
+          "bytes": 167949
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-countdown-2026-07-22/assets/renovation-progress.jpg",
+          "exists": true,
+          "bytes": 53787
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-bath.jpg",
+          "exists": true,
+          "bytes": 155754
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-front-hero.jpg",
+          "exists": true,
+          "bytes": 379063
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-kitchen-hero.jpg",
+          "exists": true,
+          "bytes": 181720
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/after-living-fireplace.jpg",
+          "exists": true,
+          "bytes": 188371
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-basement-2.jpg",
+          "exists": true,
+          "bytes": 197636
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-exterior-snow.jpg",
+          "exists": true,
+          "bytes": 125814
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-foreclosure.jpg",
+          "exists": true,
+          "bytes": 300336
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/before-window.jpg",
+          "exists": true,
+          "bytes": 112425
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/during-gutted.jpg",
+          "exists": true,
+          "bytes": 256068
+        },
+        {
+          "path": "/Users/jakehorvitz/projects/shavit-pipeline/docs/reel-specs/east-victoria-story-2026-07-23/assets/during-interior-work.jpg",
+          "exists": true,
+          "bytes": 139978
+        }
+      ]
+    }
+  ],
+  "oakLaneSourceMedia": [
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4710.heic",
+      "bytes": 1616014
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4695.mov",
+      "bytes": 24823179
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/final-photo-3-side-mulch.png",
+      "bytes": 2727663
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/ai-plan-recreation-higgsfield.png",
+      "bytes": 1681754
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/final-photo-1-front-hero.png",
+      "bytes": 2802579
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/luis-lawn-care-logo.png",
+      "bytes": 83153
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/luis-lawn-care-logo-square.png",
+      "bytes": 62624
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/lewis-lawn-care-logo-circle.png",
+      "bytes": 201340
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4708.heic",
+      "bytes": 1666113
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4695-clean.mp4",
+      "bytes": 27206434
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/final-photo-2-mulch-corner.png",
+      "bytes": 2703129
+    },
+    {
+      "path": "/Users/jakehorvitz/Documents/Palmier Pro/_source-media/oak-lane-landscaping/IMG_4709.heic",
+      "bytes": 1667567
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>701e 4th St — auction WON. B1 unblocked + the Part 2 Shavit greenlit · 2026-08-10</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#26262a; --ink:#f2f0ec; --dim:#9d9a94;
+    --brass:#b08d57; --gold:#ffc000; --bone:#edeae3; --bad:#e0674f; --ok:#6fae7b; --blue:#6ea3d6;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;padding:0 0 140px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);padding:44px 0 28px;margin-bottom:8px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+     margin:48px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:20px;margin:0 0 4px}
+  p{margin:0 0 1em}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+        text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);
+        color:var(--dim);margin-right:6px}
+  .pill.hold{color:var(--bad);border-color:rgba(224,103,79,.4)}
+  .pill.new{color:var(--gold);border-color:rgba(255,192,0,.4)}
+  .pill.go{color:var(--ok);border-color:rgba(111,174,123,.45)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .chg{position:relative;box-shadow:0 0 0 1px rgba(255,192,0,.45),0 0 26px -6px rgba(255,192,0,.35)}
+  .chg::after{content:"UPDATED";position:absolute;top:-10px;right:16px;background:var(--bg);
+    color:var(--gold);border:1px solid rgba(255,192,0,.5);border-radius:6px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:2px 8px}
+
+  .reel{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+        padding:22px 24px;margin:16px 0 28px;position:relative}
+  .reel .rank{position:absolute;top:-11px;left:22px;background:var(--bg);border:1px solid var(--brass);
+        color:var(--brass);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:2px 10px;
+        border-radius:6px;text-transform:uppercase}
+  .reel.blocked{border-color:rgba(224,103,79,.45)}
+  .reel.blocked .rank{border-color:var(--bad);color:var(--bad)}
+  .premise{color:var(--gold);font-size:15.5px;margin:.5em 0 1em;font-style:italic}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .box h5{margin:0 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .box p{font-size:14px;margin:0}
+  .quote{background:var(--bone);color:#121214;border-radius:8px;padding:14px 16px;margin:10px 0 0;
+         font-size:14px;line-height:1.45;font-style:italic;font-weight:600}
+  .quote .attr{display:block;font-style:normal;font-weight:400;font-family:var(--mono);
+         font-size:11px;color:#5c5954;margin-top:8px;letter-spacing:.04em}
+  .strip{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:12px 0}
+  .strip img{width:100%;border-radius:6px;display:block;background:#000}
+  .rule{color:var(--dim);font-size:13px;font-family:var(--mono);margin-top:12px}
+  .why{color:var(--dim);font-size:13.5px;margin-top:12px}
+  .why b{color:var(--ink);font-weight:600}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+  th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+     color:var(--brass);border-bottom:1px solid var(--line);padding:8px 10px 8px 0;font-weight:600}
+  td{border-bottom:1px solid var(--line);padding:9px 10px 9px 0;vertical-align:top;color:var(--dim)}
+  td b{color:var(--ink);font-weight:600}
+  code{font-family:var(--mono);font-size:12.5px;color:var(--blue);
+       background:rgba(110,163,214,.09);padding:1px 5px;border-radius:4px}
+  .callout{border:1px solid rgba(224,103,79,.4);background:rgba(224,103,79,.06);
+    border-radius:10px;padding:14px 16px;margin:14px 0}
+  .callout.good{border-color:rgba(111,174,123,.4);background:rgba(111,174,123,.06)}
+  .callout h5{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bad)}
+  .callout.good h5{color:var(--ok)}
+  ol,ul{margin:0 0 1em;padding-left:20px}
+  li{margin:.35em 0}
+</style>
+
+<body data-spec="auction-won-0810">
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Text intake · 2026-08-10 · 701e 4th St, Mishawaka</div>
+  <h1>He won the auction. B1 is unblocked, and he greenlit a Part 2.</h1>
+  <p class="sub">Everything on this page comes from his iMessage thread between 8/5 and 8/10 12:13 PM, plus the
+  auction.com screenshot he sent at 10:39 AM. No figure here was inferred.</p>
+  <div class="revlog">
+    <h4>Revision log</h4>
+    <ul>
+      <li><span class="rev">rev 1 · 2026-08-10</span> First pass. Created because the 8/10 11:49 HANDOFF
+      predates the auction result by fifty minutes and still lists B1 as <b>HELD on the auction</b>. That hold
+      is now dead. Also folds in six asks from 8/7 through 8/10 that were never written down anywhere.</li>
+    </ul>
+  </div>
+</header>
+
+<h2 data-annot="sec-result">The result</h2>
+
+<div class="reel chg">
+  <div class="rank">Won · in contracting</div>
+  <h3>701e 4th St, Mishawaka, IN 46544 (St Joseph County)</h3>
+  <p class="premise">"WE WON THE AUCTION" &middot; 8/10, 10:39 AM.</p>
+
+  <div class="grid2">
+    <div>
+      <table>
+        <tr><th>Field</th><th>Value</th></tr>
+        <tr><td>Winning bid</td><td><b>$81,901</b></td></tr>
+        <tr><td>Earnest money deposit</td><td><b>$4,095.05</b></td></tr>
+        <tr><td>Opening bid</td><td>$25,000</td></tr>
+        <tr><td>Est. market value</td><td><b>$171,419</b> <span style="font-size:12px">(Cotality, via auction.com)</span></td></tr>
+        <tr><td>Reserve</td><td>Met</td></tr>
+        <tr><td>Status</td><td>Bank Owned, now In Contracting</td></tr>
+        <tr><td>Beds / baths / size</td><td>4 bd &middot; 1 ba &middot; 1,456 sq ft</td></tr>
+        <tr><td>Listing views</td><td>248</td></tr>
+      </table>
+      <p class="rule">Provenance: <code>IMG_9182.png</code>, iMessage 8/10 10:39 AM, auction.com account page.
+      This is a source document, not a claim reconstructed from memory.</p>
+    </div>
+    <div class="box">
+      <h5>Why this matters to the slate</h5>
+      <p>B1 &middot; Behind The Door is the pre-auction walkthrough of <b>this exact house</b>. It was shot
+      before he owned it, and the HANDOFF held it back pending the auction outcome so the reel would not go out
+      describing a property he might lose.</p>
+      <p style="margin-top:.9em">He won it. The reel is no longer a gamble, it is the opening chapter of a
+      story with a confirmed ending. <b>Release the hold.</b></p>
+      <p style="margin-top:.9em">The spread is also the strongest number set on the whole slate:
+      <b>$81,901 paid against a $171,419 estimated value</b>, from a $25,000 opening bid. That is a better
+      real story than A4 and D3, the two reels blocked on the money rule.</p>
+    </div>
+  </div>
+
+  <div class="strip" style="grid-template-columns:1fr;max-width:760px">
+    <img src="auction-won-701e-4th-2026-08-10/auction-win.png" alt="Auction.com confirmation reading Congratulations, you won the auction. Winning bid 81,901 dollars, reserve met, 701e 4th St Mishawaka Indiana.">
+  </div>
+</div>
+
+<h2 data-annot="sec-part2">The Part 2 he greenlit</h2>
+
+<div class="callout good">
+  <h5>Confirmed by text, 8/10 12:02 PM</h5>
+  <div class="quote">
+    Jake, 11:43 AM: "CONGRATS! Should we make another part then to the video of you saying we won the auction
+    or continue editing with current footage"<br><br>
+    Shavit, 12:02 PM: "Yes 👍"<br>
+    Shavit, 12:02 PM: "We should"
+    <span class="attr">iMessage</span>
+  </div>
+  <p style="margin-top:1em">Read literally, he approved <b>another part</b>: a second piece in which he says on
+  camera that they won. He did not approve an edit to B1, and he did not send the footage. B1 stays as it
+  shipped to him at 12:13 PM today.</p>
+</div>
+
+<h3 style="margin-top:26px">Structure: B1 becomes a two-parter, not a re-cut</h3>
+<table>
+  <tr><th>Part</th><th>What it is</th><th>Status</th></tr>
+  <tr><td><b>Part 1</b></td><td>B1 &middot; Behind The Door + Jonah, the pre-auction walkthrough. 101.4s,
+  window passage removed per his 8/9 note.</td><td><b>Ready.</b> Render verified at 1080x1920, 30fps,
+  10.1 Mbps, 130 MB. He has the file.</td></tr>
+  <tr><td><b>Part 2</b></td><td>The result. He says on camera that they won it, at what price, and what
+  happens next. Ends on the shared end card.</td><td><b>Blocked on footage.</b> Nothing usable exists in the
+  thread. This is the one thing only he can supply.</td></tr>
+</table>
+
+<div class="box" style="margin-top:16px">
+  <h5>Why a separate part beats appending to B1</h5>
+  <p>Part 1 is built as a complete arc that ends on the end card, and he has already reviewed and approved it
+  in that shape twice. Appending a win announcement means re-rippling a timeline that took three attempts to
+  get clean, and it retires a reel he is happy with. A Part 2 also earns a second post, a second hook, and a
+  reason for anyone who saw Part 1 to come back. On @jakebuiltit, the account he told Jake to study, the
+  numbered series is the only structure that repeats.</p>
+</div>
+
+<h2 data-annot="sec-ask">What to ask him for (draft, Jake sends)</h2>
+
+<div class="callout">
+  <h5>Nothing here gets sent by this pipeline. This is a draft for Jake.</h5>
+  <p>The pickup shot is the whole gate. Everything else on Part 2 can be built in an hour once it lands.</p>
+</div>
+
+<div class="quote">
+  Congrats again on 701e 4th. For Part 2 I need about forty seconds of you on camera, shot vertical, ideally
+  standing at the house or in the truck. Four beats, in this order:<br><br>
+  1. "We won it." Say the address out loud, 701e 4th Street in Mishawaka.<br>
+  2. What you paid and what you think it is worth. Only if you want those numbers public, your call.<br>
+  3. What is wrong with it and what the plan is.<br>
+  4. What happens in the next thirty days.<br><br>
+  Say the property name at the top of the clip so it does not get mixed up with Norwood or Ewing footage.
+  Landscape or a selfie both work, just keep it vertical. If you would rather not put the price on screen,
+  say so and I will cut a no-numbers version.
+  <span class="attr">Draft only. Jake sends.</span>
+</div>
+
+<h2 data-annot="sec-money">The money rule, partly answered by him</h2>
+
+<div class="callout good">
+  <h5>He put dollar figures in his own mandated caption</h5>
+  <p>The HANDOFF records the rule as <b>"Zero dollar figures on screen, pending a ruling from Shavit,"</b>
+  and that rule is what blocks A4 and D3. On 8/7 at 5:11 PM he sent copy he insisted on keeping:</p>
+  <div class="quote">
+    "You have to keep the title.<br><br>
+    'How We Are Planning to Turn a $120,000 Foreclosure into a $265,000 Rental<br>
+    There is a process behind every project. Here is ours.'"
+    <span class="attr">Shavit, iMessage 8/7 17:11</span>
+  </div>
+  <p style="margin-top:1em"><b>What this settles:</b> dollar figures in <b>caption copy</b> are approved by
+  him, in his own words, unprompted. <b>What it does not settle:</b> figures burned into the <b>picture</b>.
+  Those are still unruled, so A4 and D3 stay blocked. The distinction is worth putting to him as one
+  question rather than guessing, because the answer unblocks two finished reels.</p>
+  <p style="margin-top:.9em">Note the $120,000 and $265,000 in that title belong to <b>1902 E Ewing</b>, the
+  BRRRR reel. They are not 701e 4th St numbers. Do not let the two properties' figures cross.</p>
+</div>
+
+<h2 data-annot="sec-captions">His caption assets, captured verbatim</h2>
+
+<p>He dictated these on 8/7 for the reel that posted. They are reusable and were living only in the message
+thread. Now filed at <code>templates/reel-caption.md</code>.</p>
+
+<div class="grid2">
+  <div class="box">
+    <h5>Hashtag block, 20 tags, his order</h5>
+    <p style="font-family:var(--mono);font-size:12px;line-height:1.7">#RealEstate #RealEstateInvesting #BRRRR
+    #BRRRRMethod #RentalProperty #RentalProperties #CashFlow #InvestmentProperty #RealEstateInvestor
+    #AuctionCom #Foreclosure #FixAndRent #BuyHoldRepeat #SouthBend #IndianaRealEstate #PropertyManagement
+    #Construction #HomeRenovation #FinancialFreedom #BuildingWealth</p>
+  </div>
+  <div class="box">
+    <h5>Accounts to tag</h5>
+    <p style="font-family:var(--mono);font-size:12.5px;line-height:1.9">@auction.com<br>@homedepotpro<br>@dominionfinancial<br>@Jonah Davey</p>
+    <p class="why" style="margin-top:.9em"><b>For 701e 4th St, @auction.com is no longer a courtesy tag.</b>
+    The win happened on their platform and the screenshot is their interface. That is the single most relevant
+    tag on the Part 2 post.</p>
+  </div>
+</div>
+
+<div class="box" style="margin-top:14px">
+  <h5>His two caption notes, same day</h5>
+  <p>8/7 17:09: <b>"Spacing, tho?"</b> then <b>"So maybe even shorter."</b> He wants the caption shorter and
+  spaced out, but the title block above kept in full. Those two pull against each other, so the resolution is:
+  keep his title verbatim, cut everything else, and put blank lines between every block.</p>
+</div>
+
+<h2 data-annot="sec-jakebuiltit">@jakebuiltit, the account he told Jake to study</h2>
+
+<p>He said only <b>"Look at Jakebuiltit Instagram page"</b> on 8/9 at 10:33 AM, with no explanation. Pulled it.
+It is a Los Angeles custom home builder, and it is a close structural analogue to what Shavit is building.</p>
+
+<table>
+  <tr><th>Metric</th><th>@jakebuiltit</th></tr>
+  <tr><td>Followers / following</td><td><b>10,658</b> / 130</td></tr>
+  <tr><td>Posts</td><td>120, and <b>essentially every one is a reel</b></td></tr>
+  <tr><td>Verified</td><td>Yes. Category: Construction Company</td></tr>
+  <tr><td>Bio</td><td>"Jake Built It | LA Home Builder &middot; Pacific Palisades Rebuilder &middot; LA Builder, Developer, Realtor &middot; Custom homes + signature builds"</td></tr>
+</table>
+
+<div class="callout good">
+  <h5>The one takeaway worth copying: named, numbered series</h5>
+  <p>He runs recurring named franchises rather than one-off posts. <b>"The Build Journal"</b> follows a single
+  Palisades house from framing to finishes. <b>"Land to Legacy"</b> follows a parcel. Episodes reference each
+  other and tell viewers to go watch the rest.</p>
+  <p style="margin-top:.9em">Shavit's twelve reels are twelve unrelated one-offs with no series identity.
+  <b>701e 4th St is the natural first franchise:</b> pre-auction walkthrough, the win, the rehab, the lease.
+  Part 1 and Part 2 are already episodes one and two of it. That is the argument for naming the series now
+  rather than after four disconnected posts.</p>
+</div>
+
+<div class="callout">
+  <h5>The uncomfortable finding, and it is the useful one</h5>
+  <p>Engagement on that account is wildly bimodal. His finished-space aesthetic reels do
+  <b>16,979</b>, <b>2,310</b> and <b>432</b> likes. His founder-story, portfolio-pride and
+  brand-voice posts do <b>3</b> likes, repeatedly, on the same account, in the same weeks.</p>
+  <p style="margin-top:.9em">Read plainly: <b>finished beauty travels, process and founder narrative does
+  not.</b> Ten of Shavit's twelve reels are process and founder narrative. This does not mean stop making
+  them, they are what he wants and they build trust with people who already know him. It does mean the slate
+  has no reach vehicle in it at all, and the 60 S Norwood finished rooms are the closest thing to one, sitting
+  unused.</p>
+  <p style="margin-top:.9em">Worth flagging honestly: that account uses <b>five or six</b> hashtags, not
+  twenty. Shavit specified twenty. That is his call and his brand, so his list stands exactly as written above.
+  Noting the divergence, not overriding it.</p>
+</div>
+
+<h2 data-annot="sec-open-asks">Six asks from his texts that were not written down anywhere</h2>
+
+<table>
+  <tr><th>#</th><th>His ask</th><th>When</th><th>State</th></tr>
+  <tr><td>1</td><td>"Can you remove Jonah saying 'we came through here'?"</td><td>8/9 10:14</td>
+      <td><b>Done.</b> Applied to the timeline 8/10, B1 now 101.4s. Note it is Shavit at the window, not
+      Jonah, and the cut covers the whole thought, not only that line.</td></tr>
+  <tr><td>2</td><td>Title card: "Just me sitting on the bench at the reel is fine."</td><td>8/7 21:52</td>
+      <td><b>Ruled.</b> He rejected both the black card and his own headshot and chose the bench frame from
+      the reel itself. Verify the shipped B1 matches this before posting.</td></tr>
+  <tr><td>3</td><td>"Let's go only with this one for now."</td><td>8/7 16:24</td>
+      <td><b>Live constraint.</b> Only reel 1 posts. <b>Reel 2, The BRRRR, is held by him</b>, not by us.
+      Do not queue it without a fresh yes.</td></tr>
+  <tr><td>4</td><td>"Also, let's find slower music, for this one." (The BRRRR)</td><td>8/7 13:57</td>
+      <td><b>Open.</b> New music went out at 15:41 but he held the reel three hours later without commenting
+      on the bed. Unconfirmed.</td></tr>
+  <tr><td>5</td><td>"11 E Saint Joe, lease signed on unit two. Unit 1/2 you can remove."</td><td>8/9 04:17</td>
+      <td><b>Shipped.</b> Website commit <code>30cfa41</code>.</td></tr>
+  <tr><td>6</td><td>Phone view is a left/right toggle in Michigan but scrolls down in Indiana.</td><td>8/9 04:14</td>
+      <td><b>Shipped.</b> Same commit, one phone layout.</td></tr>
+</table>
+
+<p class="why"><b>Also closed:</b> the microphone. He asked for an Amazon recommendation on 8/8, then said
+"I got this one" on 8/10 07:40, and Jake confirmed it was the same model his brother uses. No action.</p>
+
+<h2 data-annot="sec-footage">The actual bottleneck: 3.2 GB of his footage never downloaded</h2>
+
+<div class="callout">
+  <h5>This blocks more content than any creative decision on this page</h5>
+  <p>Fifteen video and photo attachments he sent between 8/5 and 8/7 are still stubs in
+  <code>chat.db</code> with no bytes on disk. macOS defers Messages attachment downloads when the volume is
+  near full, and this Mac was in a disk-full crisis through 8/10. There are 14 GB free now, which is enough,
+  but the download cannot be triggered from code. Messages exposes no public API for it and
+  <code>brctl</code> refuses the path outright.</p>
+  <table>
+    <tr><th>Batch</th><th>What he said it was</th><th>Missing</th></tr>
+    <tr><td>8/5 10:49</td><td>"60 S Norwood project updates"</td><td>IMG_4707 (597 MB), IMG_4703 (548 MB),
+    IMG_4702 (290 MB), IMG_4705 (246 MB), IMG_4701, IMG_4704, IMG_4697, IMG_4698, IMG_4699</td></tr>
+    <tr><td>8/6 15:27</td><td>Sent with no caption, right after the debris note</td><td>IMG_4727 (225 MB),
+    IMG_4728 (363 MB), IMG_4729 (275 MB), IMG_4730 (400 MB), IMG_4731 (141 MB)</td></tr>
+    <tr><td>8/7 14:05</td><td>Sent with no caption</td><td>IMG_4695 (444 MB), IMG_4700</td></tr>
+    <tr><td>8/5 20:04</td><td>Sent with no caption</td><td>IMG_0675</td></tr>
+  </table>
+  <p style="margin-top:1em"><b>Fix, one manual step:</b>
+  <code>python3 docs/reel-specs/_scripts/collect_shavit_media.py --open-thread</code> jumps Messages straight
+  to his conversation. Scroll to 8/5 and 8/6 and tap each stub. Then re-run the same script without the flag
+  to file everything into a dated folder.</p>
+  <p style="margin-top:.9em">The 8/5 batch is the one to prioritise. Norwood is where C1, C2, D1, D2 and D3
+  all live, and per the finding above, finished Norwood rooms are the closest thing to a reach vehicle on the
+  slate.</p>
+</div>
+
+<h2 data-annot="sec-registry">One pipeline gap worth knowing about</h2>
+
+<div class="callout">
+  <h5>The facts registry does not exist</h5>
+  <p><code>shavit-pipeline/facts/</code> is absent, so <code>read_facts()</code> returns empty and any
+  <code>[F:...]</code> claim span in a <code>content/&lt;post-id&gt;/post.md</code> would fail lint. Seeding it
+  is <b>TTY-only by design</b>: <code>./shavit.sh fact add</code>, with Jake typing the values. Nothing in this
+  session wrote to it, and nothing should.</p>
+  <p style="margin-top:.9em">Consequence: caption copy for Part 2 cannot go through the lint, verify, coach,
+  review flow until the registry holds at least the 701e 4th St address and the auction figures. That is a
+  five-minute TTY session, and it is the correct next step before any caption is treated as send-ready.</p>
+</div>
+
+<h2 data-annot="sec-open">Open questions for him</h2>
+<ol>
+  <li><b>The pickup shot.</b> Forty seconds of him saying they won it. Nothing else on Part 2 can start
+  without it.</li>
+  <li><b>Figures on screen, one question, one answer.</b> He approved dollar figures in caption copy himself.
+  Are they allowed burned into the picture? A yes unblocks A4 and D3 immediately. A no retires A4 in favour of
+  C1, which does the same job with no numbers.</li>
+  <li><b>Does 701e 4th St become a named series?</b> Pre-auction, the win, the rehab, the lease. If yes, the
+  series needs a name before Part 2 posts, because the name goes on the card.</li>
+  <li><b>Pam's consent</b>, still outstanding from the previous handoff. C3 names her in full and films her.
+  Being named in a July caption is not consent.</li>
+  <li><b>Reel 2, The BRRRR.</b> He held it on 8/7. Is it held pending the slower music, pending the figures
+  ruling, or dropped?</li>
+</ol>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>

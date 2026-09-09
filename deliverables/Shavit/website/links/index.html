@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shavit Rootman — Links</title>
+  <meta name="description" content="Shavit Rootman — real estate, operated. Openings, tenant info, direct-sale inquiries, and the Substack." />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+
+  <!-- ===== Analytics (same self-hosted loaders as the main site) =====
+       Paths are ../ because this page sits in /links/. The strict CSP
+       (script-src 'self' + googletagmanager.com) is unchanged. -->
+  <script src="../gtm-loader.js"></script>
+  <!-- <script src="../ga4-loader.js"></script> --> <!-- direct-GA4 alternative; never both -->
+  <script src="../analytics.js" defer></script>
+
+  <!-- Inline styles are allowed by the site CSP (style-src 'unsafe-inline').
+       Self-contained so the bio page loads instantly with no app bundle. -->
+  <style>
+    :root{
+      --canvas:#000; --surface:#101010; --surface-2:#181818;
+      --hairline:#2c2c2c; --brass:#B08D57; --ink:#fff; --body:#bbb; --muted:#7e7e7e;
+      --ease:cubic-bezier(.65,0,.35,1);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--canvas);color:var(--body);
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      font-weight:300;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .wrap{max-width:520px;margin:0 auto;padding:48px 24px 64px;min-height:100vh;
+      display:flex;flex-direction:column;}
+
+    /* Header */
+    .hero{text-align:center;margin-bottom:32px}
+    .portrait{width:96px;height:96px;border-radius:9999px;object-fit:cover;
+      margin:0 auto 20px;border:1px solid var(--hairline);
+      filter:grayscale(100%) contrast(1.05);}
+    .wordmark{font-weight:800;letter-spacing:-.5px;text-transform:uppercase;
+      color:var(--ink);font-size:26px;line-height:1.05;margin:0}
+    .wordmark span{color:var(--brass)}
+    .stripe{display:block;height:4px;width:56px;background:var(--brass);
+      margin:14px auto;border:0}
+    .tagline{color:var(--body);font-size:14px;letter-spacing:.3px;margin:0 auto;max-width:34ch}
+
+    /* Market chips */
+    .markets{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0 30px}
+    .chip{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+      color:var(--muted);border:1px solid var(--hairline);padding:6px 12px}
+
+    /* Primary buttons */
+    .links{display:flex;flex-direction:column;gap:12px}
+    .lnk{display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:18px 20px;background:var(--surface);border:1px solid var(--hairline);
+      transition:background .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease);}
+    .lnk:hover{background:var(--surface-2);border-color:var(--brass);transform:translateY(-1px)}
+    .lnk:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+    .lnk__main{display:flex;flex-direction:column;gap:3px}
+    .lnk__title{color:var(--ink);font-weight:700;letter-spacing:.4px;font-size:15px;text-transform:uppercase}
+    .lnk__sub{color:var(--muted);font-size:12.5px;font-weight:300}
+    .lnk__arrow{color:var(--brass);font-size:18px;flex:0 0 auto}
+
+    /* Secondary row */
+    .social{display:flex;gap:10px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+    .social a{flex:1;min-width:88px;text-align:center;padding:13px 8px;border:1px solid var(--hairline);
+      font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--body);
+      transition:border-color .2s var(--ease),color .2s var(--ease)}
+    .social a:hover{border-color:var(--brass);color:var(--ink)}
+
+    /* Footer */
+    .foot{margin-top:auto;padding-top:40px;text-align:center}
+    .foot p{font-size:11px;color:var(--muted);letter-spacing:.3px;margin:6px 0;line-height:1.5}
+    .foot .ast{color:var(--brass)}
+
+    @media (prefers-reduced-motion:reduce){*{transition-duration:0ms!important}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <img class="portrait" src="../assets/shavit-portrait.png" alt="Shavit Rootman" />
+      <h1 class="wordmark">Shavit<span>Rootman</span></h1>
+      <hr class="stripe" />
+      <p class="tagline">Real estate, operated. Buy direct, rehab in-house, manage for the long hold. Building communities, profitably.</p>
+      <div class="markets" aria-label="Markets">
+        <span class="chip">Hillsdale, MI</span>
+        <span class="chip">Cleveland, OH</span>
+        <span class="chip">South Bend, IN</span>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         PRIMARY FUNNELS — every link is UTM-tagged (utm_source=instagram).
+         UTM convention: lowercase source/medium/campaign/content.
+         openings_click & owners_page_view fire on the DESTINATION page load
+         (analytics.js route detection). substack_click fires here on click.
+         JAKE: when you cut a market-specific reel, you can deep-link with a
+         tighter utm_content, e.g. ...&utm_content=reel_cleveland_2026_06
+         ========================================================================= -->
+    <nav class="links" aria-label="Primary links">
+      <a class="lnk"
+         href="https://shavitrootman.com/?utm_source=instagram&utm_medium=social&utm_campaign=openings&utm_content=links_hub#openings">
+        <span class="lnk__main">
+          <span class="lnk__title">View Openings</span>
+          <span class="lnk__sub">Available rentals across MI · OH · IN</span>
+        </span>
+        <span class="lnk__arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="lnk"
+         href="https://shavitrootman.com/?utm_source=instagram&utm_medium=social&utm_campaign=tenants&utm_content=links_hub#tenants">
+        <span class="lnk__main">
+          <span class="lnk__title">Tenant Info</span>
+          <span class="lnk__sub">How we operate &amp; how to reach us about a unit</span>
+        </span>
+        <span class="lnk__arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="lnk"
+         href="https://shavitrootman.com/?utm_source=instagram&utm_medium=social&utm_campaign=owners&utm_content=links_hub#contact">
+        <span class="lnk__main">
+          <span class="lnk__title">For Owners — Direct Sale</span>
+          <span class="lnk__sub">Selling a property? Talk to the operator directly — no agents</span>
+        </span>
+        <span class="lnk__arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="lnk"
+         href="https://shavitrootman.substack.com/?utm_source=instagram&utm_medium=social&utm_campaign=substack&utm_content=links_hub"
+         target="_blank" rel="noopener noreferrer">
+        <span class="lnk__main">
+          <span class="lnk__title">Substack</span>
+          <span class="lnk__sub">Field notes from the operation — in his own words</span>
+        </span>
+        <span class="lnk__arrow" aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <!-- Secondary: IG, LinkedIn, YouTube (youtube_click), Email (email_click).
+         LinkedIn fires linkedin_click via analytics.js. -->
+    <div class="social" aria-label="More">
+      <a href="https://instagram.com/shavitness" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.linkedin.com/in/shavitrootman" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <!-- JAKE: replace with your real channel URL, e.g. https://youtube.com/@shavitrootman -->
+      <a href="https://www.youtube.com/@shavitrootman" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="mailto:info@shavitrootman.com?subject=Hello%20from%20Instagram">Email</a>
+    </div>
+
+    <footer class="foot">
+      <p><span class="ast">*</span> Not currently accepting new partnership inquiries.</p>
+      <p>© Shavit Rootman · Real estate, operated.</p>
+    </footer>
+  </main>
+</body>
+</html>

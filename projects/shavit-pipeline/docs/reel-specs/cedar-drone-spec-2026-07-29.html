@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1114 Cedar — new drone shot, spec</title>
+<style>
+  :root{
+    --bg:oklch(0.15 0.008 60); --surface:oklch(0.20 0.010 60); --raised:oklch(0.26 0.012 60);
+    --line:oklch(0.33 0.014 60); --ink:oklch(0.97 0.004 60); --muted:oklch(0.76 0.010 60);
+    --brass:oklch(0.82 0.155 85); --ok:oklch(0.80 0.110 150); --warn:oklch(0.76 0.130 55);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); padding:30px 34px 90px;
+    font:400 15px/1.62 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{margin:0 0 6px; font-size:clamp(1.4rem,2.4vw,1.9rem); font-weight:600; letter-spacing:-0.02em}
+  .sub{margin:0; color:var(--muted); max-width:78ch}
+  h2{
+    font-size:13px; color:var(--muted); letter-spacing:0.05em; font-weight:600;
+    margin:44px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .quote{
+    margin:20px 0 0; padding:15px 18px; background:var(--surface);
+    border-left:1px solid var(--brass); border-radius:0 10px 10px 0; max-width:78ch;
+  }
+  .quote b{color:var(--brass); display:block; font-size:11.5px; letter-spacing:0.05em;
+    text-transform:uppercase; margin-bottom:6px}
+  .row{display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start}
+  figure{
+    margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:11px; overflow:hidden; width:228px; flex:0 0 auto;
+  }
+  figure.pick{border-color:oklch(0.80 0.110 150/0.6); box-shadow:0 0 0 1px oklch(0.80 0.110 150/0.25)}
+  figure img, figure video{display:block; width:100%; background:#000}
+  figcaption{padding:10px 12px; font-size:12.5px; color:var(--muted)}
+  figcaption b{color:var(--ink); display:block; font-size:13px; margin-bottom:3px}
+  .badge{display:inline-block; background:var(--ok); color:oklch(0.16 0.01 60);
+    font:600 10px/1 ui-monospace,monospace; letter-spacing:0.06em; padding:4px 6px;
+    border-radius:4px; margin-bottom:6px}
+  .badge.alt{background:var(--raised); color:var(--muted)}
+  .note{max-width:80ch; margin-top:20px; background:var(--surface);
+    border:1px solid var(--line); border-radius:10px; padding:16px 18px}
+  .note.flag{border-color:oklch(0.76 0.130 55/0.55)}
+  .note.good{border-color:oklch(0.80 0.110 150/0.45)}
+  .note b{color:var(--ink)}
+  .note + .note{margin-top:13px}
+  .scroll{overflow-x:auto; padding-bottom:4px}
+  table{border-collapse:collapse; font-size:13.5px; min-width:600px}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--muted); font-weight:600; font-size:11.5px; letter-spacing:0.04em; text-transform:uppercase}
+  td.n{font:600 12.5px/1.5 ui-monospace,monospace; white-space:nowrap}
+  ol,ul{max-width:78ch; color:var(--muted)} li{margin-bottom:6px} li b{color:var(--ink)}
+  pre{max-width:78ch; overflow-x:auto; background:var(--raised); border:1px solid var(--line);
+    border-radius:9px; padding:13px 15px; font:500 12.5px/1.6 ui-monospace,monospace}
+  img.sheet{max-width:100%; border:1px solid var(--line); border-radius:10px;
+    display:block; margin-bottom:16px}
+</style>
+</head>
+<body>
+  <h1>1114 Cedar — new drone shot</h1>
+  <p class="sub">
+    Spec for approval. Nothing has been generated for this yet; no credits spent beyond the shot
+    already in the film.
+  </p>
+
+  <div class="quote">
+    <b>Your note, on the Cedar shot</b>
+    "honestly can we get the camera tigther and I wouldn't be oppose to have the camera only show the
+    front of the house but it needs to be a sexy drone shot put it in a spec and I'll see for my self"
+  </div>
+
+  <h2>Why the current shot is weak</h2>
+  <div class="row">
+    <figure>
+      <video src="cedar-spec-0729/current-shot.mp4" muted loop controls playsinline autoplay></video>
+      <figcaption>
+        <span class="badge alt">IN THE FILM NOW</span>
+        <b>Cedar, 5s</b>
+        Descends from a wide. Opens on invented neighbourhood rooftops.
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="cedar-spec-0729/source.jpg" alt="The real Cedar photograph, 1402x1122">
+      <figcaption>
+        <span class="badge">THE ONLY REAL PHOTO</span>
+        <b>1402&times;1122, landscape</b>
+        Straight-on front elevation. This is everything we have of this property.
+      </figcaption>
+    </figure>
+  </div>
+
+  <ol>
+    <li><b>Its plate was never real.</b> The photo is landscape and the film is vertical, so a 9:16
+      plate had to come from somewhere. Outpainting was tried twice and fabricated property both times
+      — a detached garage, a driveway and a hillside on one attempt, an attached wing with its own
+      roof on the other. Both were refused; 35 credits were not spent. The plate in use instead has
+      the house anchored at the bottom with the sky above extrapolated as a gradient.</li>
+    <li><b>That flat gradient sky gave the model nothing to move through.</b> The first 5 seconds of
+      the 10s generation are nearly static — frame-diff 26 at t=5 against 78 at t=10. The clip in the
+      film is the back half, reversed.</li>
+    <li><b>So it opens on the weakest frame in the film:</b> a high wide shot whose neighbourhood
+      context does not exist in any photograph of this property.</li>
+  </ol>
+
+  <h2>What your note unlocks</h2>
+
+  <div class="note good">
+    <b>Going tighter removes the entire problem.</b> A 9:16 crop of the real photograph uses the
+    <em>full height</em> of the source and 45% of its width. Nothing is added above, below or to the
+    sides. <b>Zero invented pixels, zero outpaint credits, and no brand-rule exposure.</b> Every
+    previous Cedar attempt failed at the plate stage; this skips that stage entirely.
+    <br><br>
+    The trade is resolution: a 631&times;1122 crop upscales 1.71&times; to 1080&times;1920 before it
+    goes to the model. Kling re-renders at its own resolution, so this matters less than it sounds,
+    but the plate is softer than Saint Joe's was.
+  </div>
+
+  <h2>Pick a plate</h2>
+  <img class="sheet" src="cedar-spec-0729/plates.jpg"
+       alt="The source photo and three candidate 9:16 plates">
+  <div class="row">
+    <figure class="pick">
+      <img src="cedar-spec-0729/plate-B-door.jpg" alt="Plate B, centred on the front door">
+      <figcaption>
+        <span class="badge">RECOMMENDED — B</span>
+        <b>Centred on the door</b>
+        Gable, upper window, porch, front door, the wooden steps and the walkway. The steps lead the
+        eye straight up the middle, which is what makes it read as a portrait of the house.
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="cedar-spec-0729/plate-A-centre.jpg" alt="Plate A, centred on the frame">
+      <figcaption>
+        <span class="badge alt">A</span>
+        <b>Frame centre</b>
+        Slightly more porch on the left, door sits right of centre. Less symmetrical.
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="cedar-spec-0729/plate-C-porch-left.jpg" alt="Plate C, biased to the porch">
+      <figcaption>
+        <span class="badge alt">C</span>
+        <b>Porch-biased</b>
+        Shows more of the wrap porch and the black railing. Door pushed toward the right.
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2>Pick a move</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Option</th><th>The move</th><th>Why it works / risk</th><th>Credits</th></tr>
+    <tr>
+      <td class="n">1 · RISE<br>recommended</td>
+      <td>Starts low and tight on the steps and front door, rises slowly and pulls back to settle on
+        the full front elevation. Ends on the real photograph's framing.</td>
+      <td>The safest move in the set: it ends where the plate already is, so the model has the least
+        room to invent. It also lands on the house rather than leaving it, which is what the block
+        needs.</td>
+      <td class="n">17.5</td>
+    </tr>
+    <tr>
+      <td class="n">2 · PUSH</td>
+      <td>Starts on the full front elevation and pushes in slowly to the door and steps, drifting up a
+        few degrees so the gable stays in frame.</td>
+      <td>The most "listing" of the three and the most likely to feel calm and expensive. Risk is that
+        a straight push can read as a zoom rather than a camera.</td>
+      <td class="n">17.5</td>
+    </tr>
+    <tr>
+      <td class="n">3 · ARC</td>
+      <td>A shallow lateral arc across the front, maybe 15 degrees, holding the door roughly centred
+        so the porch depth and the railing parallax past each other.</td>
+      <td>The most three-dimensional and the most genuinely "sexy". Highest risk: lateral movement is
+        what makes a model invent the sides of a building, which is exactly how the last two Cedar
+        attempts failed.</td>
+      <td class="n">17.5</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>Generate at 10s and cut to 5, always.</b> This is the one lesson that has held across every
+    generated shot in this film. At 5s the model compresses a big move into a small one — it happened
+    to GEN1 in rev6 and again on the first Saint Joe attempt. The fix was never the wording, it was
+    the duration. So the 17.5 credits buys a 10s clip and we cut the best 5 seconds out of it.
+  </div>
+
+  <h2>The prompt, if you approve</h2>
+  <pre>Plate:    cedar-spec-0729/plate-B-door.jpg  (real photo, 9:16 crop, nothing added)
+Model:    Kling 3.0 pro, image-to-video, 9:16, 10s
+Cost:     17.5 credits   ·   balance 33.75 before, 16.25 after
+
+Move (option 1, RISE):
+  Slow aerial rise. Camera begins low, close on the wooden front steps and
+  the white front door. It lifts steadily and pulls back, keeping the door
+  centred, until the full front elevation sits in frame with the gable and
+  the upper window at the top. Smooth continuous motion, no orbit, no
+  lateral drift, no cut. Late afternoon sun, hard shadows, clear blue sky.
+
+Hard constraints:
+  - do not add buildings, garages, driveways, fences or vehicles
+  - do not extend the roof or alter the porch
+  - no people, no text
+  - keep the house geometry identical to the plate</pre>
+
+  <div class="note flag">
+    <b>What I need from you.</b> A plate (A, B or C), a move (1, 2 or 3), and a yes on the 17.5
+    credits. Annotate this page or just tell me. If the generation comes back with anything invented
+    on the property, I will refuse it and report rather than cut it in — same as the last two attempts.
+  </div>
+
+  <div class="note">
+    <b>Two things this does not fix.</b> Cedar will still be the only property in the film with no
+    second angle, and the shot will still be built from a 631px-wide crop. If Shavit has any other
+    photograph of this house — a three-quarter, a side, anything portrait — it is worth more than the
+    17.5 credits.
+  </div>
+
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

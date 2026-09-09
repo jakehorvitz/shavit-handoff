@@ -1,0 +1,5 @@
+file '/Users/jakehorvitz/projects/shavit-match-cut-tour/build/recut/seg/s0.mp4'
+file '/Users/jakehorvitz/projects/shavit-match-cut-tour/build/recut/seg/s1.mp4'
+file '/Users/jakehorvitz/projects/shavit-match-cut-tour/build/recut/seg/s2.mp4'
+file '/Users/jakehorvitz/projects/shavit-match-cut-tour/build/recut/seg/s3.mp4'
+file '/Users/jakehorvitz/projects/shavit-match-cut-tour/build/recut/seg/s4.mp4'

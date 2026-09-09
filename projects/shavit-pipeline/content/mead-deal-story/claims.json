@@ -1,0 +1,14 @@
+{
+  "body_sha256": null,
+  "claims": [
+    {
+      "fact_id": "url:https://shavitrootman.com/case-studies/34-mead/",
+      "index": 16,
+      "marker": "[F:url:https://shavitrootman.com/case-studies/34-mead/]{ShavitRootman.com/case-studies}",
+      "quote": "Shavit's 8/30 teaser VO and caption send viewers to the case studies; the Mead study is live at /case-studies/34-mead/ (verified HTTP 200 on 8/31).",
+      "source": "",
+      "span": "ShavitRootman.com/case-studies",
+      "status": "pending"
+    }
+  ]
+}

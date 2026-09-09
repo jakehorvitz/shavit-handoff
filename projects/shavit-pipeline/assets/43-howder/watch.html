@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder, watch</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#000;font-family:system-ui,-apple-system,sans-serif}
+  body{display:flex;align-items:center;justify-content:center}
+  video{height:100vh;max-width:100vw;object-fit:contain;background:#000}
+  #bar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);width:min(560px,92vw);
+       display:flex;gap:8px;opacity:.25;transition:opacity .15s}
+  #bar:focus-within,#bar:hover{opacity:1}
+  #note{flex:1;background:rgba(20,20,22,.92);border:1px solid #3a3a3e;border-radius:10px;
+        color:#f4f2ec;font-size:14px;padding:10px 12px;outline:none}
+  #note:focus{border-color:#B08D57}
+  #note::placeholder{color:#8a877f}
+  #send{background:#B08D57;border:0;border-radius:10px;color:#0b0b0c;font-size:13px;
+        font-weight:600;padding:0 16px;cursor:pointer}
+  #toast{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:rgba(20,20,22,.95);
+         border:1px solid #3a3a3e;border-radius:8px;color:#7FB88A;font-size:12px;padding:6px 12px;
+         opacity:0;transition:opacity .2s;pointer-events:none}
+</style>
+</head>
+<body>
+<video id="v" src="clips/howder_v24.mp4" controls loop playsinline></video>
+<div id="bar">
+  <input id="note" placeholder="note, stamps the current second, Enter to save" autocomplete="off">
+  <button id="send">save</button>
+</div>
+<div id="toast"></div>
+<script>
+  var v=document.getElementById("v"),note=document.getElementById("note"),
+      send=document.getElementById("send"),toast=document.getElementById("toast");
+  function ts(){var s=v.currentTime,m=Math.floor(s/60);return m+":"+(s%60).toFixed(1).padStart(4,"0")}
+  function flash(msg){toast.textContent=msg;toast.style.opacity=1;setTimeout(function(){toast.style.opacity=0},1600)}
+  note.addEventListener("focus",function(){v.pause()});
+  async function save(){
+    var t=note.value.trim();if(!t)return;
+    var stamp=ts();
+    try{
+      var r=await fetch("/annotate",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({section:"43-howder-video/v22@"+stamp,comment:t})});
+      if(!r.ok)throw 0;
+      note.value="";flash("saved at "+stamp);v.play();
+    }catch(e){flash("save failed, is serve.py up?")}
+  }
+  send.addEventListener("click",save);
+  note.addEventListener("keydown",function(e){if(e.key==="Enter")save();if(e.key==="Escape"){note.blur();v.play()}});
+</script>
+</body>
+</html>

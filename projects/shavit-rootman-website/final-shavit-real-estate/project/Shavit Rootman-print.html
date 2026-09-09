@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shavit Rootman. Real Estate, Operated.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@300;400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="design-system/colors_and_type.css" />
+  <link rel="stylesheet" href="site.css" />
+  <style id="__print-overrides">
+    /* ============================================================
+       Print-ready overrides for PDF export.
+       Force the full page into a static, fully-revealed layout.
+       ============================================================ */
+
+    /* Force every scroll-reveal element to its settled state */
+    [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .lr-line__text { opacity: 1 !important; transform: none !important; }
+    .lr-line__rule { opacity: 0 !important; }
+    .stat.is-in .stat__rule, .stat__rule { transform: scaleX(1) !important; }
+    .stat__lbl-anim { opacity: 1 !important; }
+
+    /* Kill chrome that should not appear in print/PDF */
+    .intro, .cursor-ring, .scroll-progress, .film-grain,
+    .hex, .hero__progress, .nav, .overlay, .fmod, .bp { display: none !important; }
+
+    /* Stop all animation/transition globally */
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    /* Hero video → static; keep the scrim/photo readable */
+    .hero__video { display: none !important; }
+    .hero { height: auto !important; min-height: 60vh; }
+
+    @media screen {
+      body { background: #000; }
+    }
+
+    @media print {
+      @page { size: portrait; margin: 0.5in; }
+      html, body {
+        background: #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      /* Let tall sections flow; avoid slicing key blocks across pages */
+      .hero, .band, .split, .deep, .cstudy, .process__panel,
+      .progvis, .three-worlds, .pullq, .turning, .act, .substrip,
+      .ccard, .qcard, .endorse, .brrrr__step, .stat, .cstudy__panel,
+      .deep__panel, .market__grid, .whyh__grid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      /* Section starts on fresh page where it reads cleanly */
+      .band--navy, .progvis, .substrip, .whyh, .turning { break-before: auto; }
+      /* Remove sticky/fixed positioning that breaks pagination */
+      .nav, .scroll-progress, .cursor-ring, .film-grain { display: none !important; }
+      /* Ensure full-bleed media doesn't clip */
+      .hero, .split, .deep, .cstudy, .process__panel { overflow: visible !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="src/Motion.jsx"></script>
+  <script type="text/babel" src="src/Shared.jsx"></script>
+  <script type="text/babel" src="src/Intro.jsx"></script>
+  <script type="text/babel" src="src/Forms.jsx"></script>
+  <script type="text/babel" src="src/Polish.jsx"></script>
+  <script type="text/babel" src="src/BlueprintHouse.jsx"></script>
+  <script type="text/babel" src="src/IsraeliFlagBand.jsx"></script>
+  <script type="text/babel" src="src/BrrrrIcon.jsx"></script>
+  <script type="text/babel" src="src/HomesRevitalized.jsx"></script>
+  <script type="text/babel" src="src/AccessibilityPage.jsx"></script>
+  <script type="text/babel" src="src/Nav.jsx"></script>
+  <script type="text/babel" src="src/Footer.jsx"></script>
+  <script type="text/babel" src="src/HomePage.jsx"></script>
+  <script type="text/babel" src="src/CompaniesPage.jsx"></script>
+  <script type="text/babel" src="src/CaseStudiesPage.jsx"></script>
+  <script type="text/babel" src="src/MeetPage.jsx"></script>
+  <script type="text/babel" src="src/ContactPage.jsx"></script>
+  <script type="text/babel" src="src/App.jsx"></script>
+
+  <!-- Auto-print: wait for fonts + Babel-transpiled app render, then print -->
+  <script type="text/babel">
+    (function () {
+      // Drop the session intro so the page isn't covered by the curtain
+      try { sessionStorage.setItem('intro-played', '1'); } catch (e) {}
+
+      function ready() {
+        // Reveal anything still hidden (belt-and-suspenders)
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          el.classList.add('is-in');
+        });
+        document.querySelectorAll('.is-in, .stat').forEach(function (el) {
+          el.classList.add('is-in');
+        });
+        window.scrollTo(0, 0);
+        window.print();
+      }
+
+      function whenRendered() {
+        var tries = 0;
+        (function poll() {
+          var root = document.getElementById('root');
+          var hasContent = root && root.querySelector('main');
+          tries++;
+          if (hasContent || tries > 60) {
+            var fontsReady = (document.fonts && document.fonts.ready)
+              ? document.fonts.ready : Promise.resolve();
+            fontsReady.then(function () { setTimeout(ready, 800); });
+          } else {
+            setTimeout(poll, 150);
+          }
+        })();
+      }
+
+      if (document.readyState === 'complete') whenRendered();
+      else window.addEventListener('load', whenRendered);
+    })();
+  </script>
+</body>
+</html>

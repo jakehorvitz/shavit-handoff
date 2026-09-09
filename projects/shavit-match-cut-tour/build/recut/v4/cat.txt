@@ -1,0 +1,2 @@
+file '/Users/jakehorvitz/projects/shavit-match-cut-tour/build/recut/v4/_house.mp4'
+file '/Users/jakehorvitz/projects/shavit-match-cut-tour/build/recut/v4/_outro.mp4'

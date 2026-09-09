@@ -1,0 +1,174 @@
+{
+  "entries": [
+    {
+      "name": "00_hook",
+      "lines": [
+        "FIFTY DOORS.",
+        "THREE STATES.",
+        "ONE STANDARD."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 0.0,
+      "out": 3.297234,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/00_hook.png"
+    },
+    {
+      "name": "01_proof_doors",
+      "lines": [
+        "MICHIGAN"
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 3.297234,
+      "out": 5.27093,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/01_proof_doors.png"
+    },
+    {
+      "name": "02_proof_states",
+      "lines": [
+        "OHIO."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 5.27093,
+      "out": 7.918005,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/02_proof_states.png"
+    },
+    {
+      "name": "03_proof_local",
+      "lines": [
+        "INDIANA."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 7.918005,
+      "out": 9.891701,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/03_proof_local.png"
+    },
+    {
+      "name": "04_tree_1",
+      "lines": [
+        "A TREE WENT",
+        "THROUGH THE ROOF."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 9.891701,
+      "out": 13.839092999999998,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/04_tree_1.png"
+    },
+    {
+      "name": "05_tree_2",
+      "lines": [
+        "REBUILT.",
+        "RE-RENTED."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 13.839092999999998,
+      "out": 17.809704999999997,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/05_tree_2.png"
+    },
+    {
+      "name": "06_tree_3",
+      "lines": [
+        "A HOME AGAIN."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 17.809704999999997,
+      "out": 21.757096999999998,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/06_tree_3.png"
+    },
+    {
+      "name": "07_banker_1",
+      "lines": [
+        "A BANK MANAGER",
+        "WATCHED IT ALL."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 21.757096999999998,
+      "out": 27.028026999999998,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/07_banker_1.png"
+    },
+    {
+      "name": "08_banker_hold",
+      "lines": [],
+      "watermark": true,
+      "signature": false,
+      "in": 27.028026999999998,
+      "out": 28.351563999999996,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/08_banker_hold.png"
+    },
+    {
+      "name": "09_banker_2",
+      "lines": [
+        "THEN ASKED US",
+        "TO BUY HER HOUSE."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 28.351563999999996,
+      "out": 30.998638999999997,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/09_banker_2.png"
+    },
+    {
+      "name": "10_buyer_1",
+      "lines": [
+        "ONE BUYER.",
+        "THE WHOLE SET."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 30.998638999999997,
+      "out": 34.946031,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/10_buyer_1.png"
+    },
+    {
+      "name": "11_buyer_2",
+      "lines": [
+        "OWN. OPERATE. REPEAT."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 34.946031,
+      "out": 38.243265,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/11_buyer_2.png"
+    },
+    {
+      "name": "12_reward_1",
+      "lines": [
+        "MADE IN AMERICA,",
+        "LOCAL TO THE MIDWEST."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 38.243265,
+      "out": 43.514195,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/12_reward_1.png"
+    },
+    {
+      "name": "13_reward_2",
+      "lines": [
+        "BUILDING COMMUNITIES,",
+        "LOCALLY."
+      ],
+      "watermark": true,
+      "signature": false,
+      "in": 43.514195,
+      "out": 50.758821,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/13_reward_2.png"
+    },
+    {
+      "name": "14_signature",
+      "lines": [],
+      "watermark": false,
+      "signature": true,
+      "in": 50.758821,
+      "out": 53.429116,
+      "layer": "/Users/jakehorvitz/projects/shavit-longform-film/build/layers/14_signature.png"
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rev11 — branded cards, Ludlam first, full-frame Oak grid</title>
+<style>
+  :root{
+    --bg:oklch(0.15 0.008 60); --surface:oklch(0.20 0.010 60); --raised:oklch(0.26 0.012 60);
+    --line:oklch(0.33 0.014 60); --ink:oklch(0.97 0.004 60); --muted:oklch(0.76 0.010 60);
+    --brass:oklch(0.82 0.155 85); --ok:oklch(0.80 0.110 150); --warn:oklch(0.76 0.130 55);
+    --ease-q:cubic-bezier(0.22,1,0.36,1);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); padding:28px 32px 80px;
+    font:400 15px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{margin:0 0 6px; font-size:clamp(1.4rem,2.4vw,1.85rem); font-weight:600; letter-spacing:-0.02em}
+  .sub{margin:0; color:var(--muted); max-width:80ch}
+  .specs{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 30px; font:500 12px/1 ui-monospace, monospace}
+  .specs span{background:var(--raised); border:1px solid var(--line); border-radius:6px; padding:7px 9px}
+  h2{
+    font-size:13px; color:var(--muted); letter-spacing:0.05em; font-weight:600;
+    margin:42px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .row{display:flex; gap:22px; flex-wrap:wrap; align-items:flex-start}
+  figure{
+    margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:11px; overflow:hidden; width:268px; flex:0 0 auto;
+  }
+  figure.hero{width:330px; border-color:oklch(0.82 0.155 85/0.5)}
+  figure video, figure img.card{display:block; width:100%; background:#000}
+  figcaption{padding:11px 13px; font-size:13px; color:var(--muted)}
+  figcaption b{color:var(--ink); display:block; font-size:13.5px; margin-bottom:3px}
+  .badge{
+    display:inline-block; background:var(--ok); color:oklch(0.16 0.01 60);
+    font:600 10px/1 ui-monospace,monospace; letter-spacing:0.06em;
+    padding:4px 6px; border-radius:4px; margin-bottom:7px;
+  }
+  .badge.alt{background:var(--raised); color:var(--muted)}
+
+  .controls{display:flex; gap:9px; flex-wrap:wrap; margin:0 0 12px}
+  button{
+    font:inherit; color:var(--ink); background:var(--raised); border:1px solid var(--line);
+    border-radius:8px; padding:9px 14px; cursor:pointer;
+    transition:background .15s var(--ease-q), transform .15s var(--ease-q);
+  }
+  button:hover{background:oklch(0.31 0.014 60)}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--brass); border-color:var(--brass); color:oklch(0.17 0.01 60); font-weight:600}
+  button:focus-visible{outline:2px solid var(--brass); outline-offset:2px}
+
+  .scroll{overflow-x:auto; padding-bottom:4px}
+  table{border-collapse:collapse; font-size:13.5px; min-width:620px}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--muted); font-weight:600; font-size:11.5px; letter-spacing:0.04em; text-transform:uppercase}
+  td.n{font:600 12.5px/1.5 ui-monospace,monospace; white-space:nowrap}
+  td.was{color:oklch(0.60 0.010 60)}
+  tr.hi td:first-child{color:var(--brass); font-weight:600}
+
+  .note{
+    max-width:80ch; margin-top:22px; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; padding:16px 18px;
+  }
+  .note.flag{border-color:oklch(0.76 0.130 55/0.5)}
+  .note b{color:var(--ink)}
+  .note + .note{margin-top:13px}
+  img.sheet{max-width:100%; border:1px solid var(--line); border-radius:10px; display:block}
+  @media (prefers-reduced-motion: reduce){ button{transition:none} }
+</style>
+</head>
+<body>
+  <h1>rev11 — branded cards, Ludlam opening, full-frame Oak grid</h1>
+  <p class="sub">
+    Five notes applied: no blurred bars anywhere, a live camera on every Oak photo, faster
+    transitions, Shavit black-and-white cards carrying the logo, and Ludlam promoted to the
+    first house.
+  </p>
+  <div class="specs">
+    <span>1080&times;1920</span><span>30 fps</span><span>1761 frames</span>
+    <span>58.70s</span><span>&minus;14.0 LUFS</span><span>&minus;1.3 dBTP</span>
+    <span>0 credits spent</span>
+  </div>
+
+  <div class="controls">
+    <button class="primary" id="playAll" type="button">Play all</button>
+    <button id="slow" type="button">Half speed</button>
+    <button id="normal" type="button">Normal speed</button>
+  </div>
+
+  <h2>The film</h2>
+  <div class="row">
+    <figure class="hero">
+      <video class="v" src="rev11.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge">rev11 &mdash; NEW</span>
+        <b>58.70s</b>
+        Unmute it. The music bed track had gone muted again and was unmuted on this build; the
+        build now fixes that automatically.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <video class="v" src="OAK-grid-full.mp4" muted loop controls playsinline autoplay></video>
+      <figcaption>
+        <span class="badge">REBUILT</span>
+        <b>115 Oak &mdash; four rooms, 3.00s</b>
+        Four 9:16 cells tiling the frame exactly. No backdrop plate, so black is only ever on screen
+        while a tile is airborne. Every photo runs its own pan and push for the full clip &mdash; two
+        in, two out, alternating directions.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img class="card" src="CARD-brand.png" alt="Branded black title card with the SHAVIT ROOTMAN lockup">
+      <figcaption>
+        <span class="badge">NEW</span>
+        <b>Title card art</b>
+        Black canvas, white type, gold stake line, SHAVIT ROOTMAN lockup. Used by both card slots.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <video class="v" src="rev10-previous.mp4" muted loop controls playsinline></video>
+      <figcaption>
+        <span class="badge alt">rev10 &mdash; PREVIOUS</span>
+        <b>58.30s</b>
+        For A/B. Blurred backdrop behind the Oak grid, plain black cards, Cedar&nbsp;&rarr;&nbsp;Ludlam
+        &rarr; Saint Joe.
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2>Your notes</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>You said</th><th>What changed</th></tr>
+    <tr class="hi"><td>"I can't have blurred bars&hellip; no blurred bars at all"</td>
+        <td>The grid's defocused backdrop plate is gone entirely. Four 9:16 cells tile 1080&times;1920
+            exactly, so at rest every pixel is photograph. The cost: each 3:4 photo gives up 25% of
+            its width, so the crop anchors were picked per photo off a three-way comparison rather
+            than defaulted to centre.</td></tr>
+    <tr class="hi"><td>"the grid looks weird, get some movement for each picture"</td>
+        <td>Every tile now runs its own camera the whole clip &mdash; two push in, two pull back, pans
+            alternating so no two are synchronised. The pans are real resolution, not a fake: they
+            spend the same 25% strip the crop discards, so nothing is upscaled past 1:1. A 3px white
+            seam was added so four unrelated rooms read as four, not as one broken photograph.</td></tr>
+    <tr class="hi"><td>"make the transitions fasts"</td>
+        <td>Blooms 12f&nbsp;&rarr;&nbsp;8f, dip to black 24f&nbsp;&rarr;&nbsp;16f, Barry's dissolve
+            14f&nbsp;&rarr;&nbsp;10f. Oak's tiles arrive in 12 frames instead of 20 and leave in 7
+            instead of 12.</td></tr>
+    <tr class="hi"><td>"title cards need&hellip; white and black with the shavit logo"</td>
+        <td>Both cards are black with white type, a gold stake line, and the SHAVIT ROOTMAN lockup
+            lifted pixel-for-pixel out of the shipped outro so the two can never drift. Baked into a
+            still, so the mark draws once and holds static &mdash; the standing no-pulsing-logo rule.</td></tr>
+    <tr class="hi"><td>"I want ludham to be the first house"</td>
+        <td>Done, and it pays off better than expected &mdash; see below.</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>Ludlam first turned out to be the best structural idea in the film.</b> It descends and lands
+    on the real photograph of a finished white house at a three-quarter angle with grass in the lower
+    third. Norwood's establisher is the same siding at nearly the same oblique. So the two now
+    <b>cross-dissolve as a genuine match cut</b>: a finished house becoming one that is still being
+    gutted, trailer and debris in the yard. The rough-to-finished arc closes a loop instead of just
+    running one way. Frames f190&ndash;f212 in the strip below.
+  </div>
+
+  <h2>Order</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>rev11</th><th>Shot</th><th>Out on</th></tr>
+    <tr class="hi"><td class="n">0:02</td><td>Ludlam &mdash; descends, lands finished</td><td class="n">12f cross-dissolve</td></tr>
+    <tr><td class="n">0:06</td><td>S Norwood &times;3 &mdash; the rough one</td><td class="n">hard cuts, then 8f bloom</td></tr>
+    <tr><td class="n">0:12</td><td>Howder &times;3 &mdash; structure and crew</td><td class="n">hard cuts, then 5f flash</td></tr>
+    <tr><td class="n">0:19</td><td>Barry &times;2 &mdash; studs into finished room</td><td class="n">10f cross-dissolve</td></tr>
+    <tr><td class="n">0:23</td><td>Oak &times;4 &mdash; four rooms at once</td><td class="n">5f flash</td></tr>
+    <tr><td class="n">0:26</td><td>E Ewing &mdash; the only live-action shot</td><td class="n">8f bloom</td></tr>
+    <tr><td class="n">0:29</td><td>Cedar &mdash; descends</td><td class="n">5f flash</td></tr>
+    <tr><td class="n">0:34</td><td>Saint Joe &mdash; climbs to the widest frame</td><td class="n">16f dip to black</td></tr>
+    <tr><td class="n">0:40</td><td>Team card &rarr; seven names &rarr; outro</td><td class="n">hard cuts</td></tr>
+  </table>
+  </div>
+
+  <h2>Verified in rendered frames</h2>
+  <img class="sheet" src="verify.jpg" alt="Frame strips through the title card, both dissolves, the Oak grid, the flash and the dip to black">
+
+  <h2>Read before you sign off</h2>
+
+  <div class="note flag">
+    <b>A correction to what I told you on rev10.</b> I said the Cedar&nbsp;&rarr;&nbsp;Ludlam dissolve
+    buried Cedar's generated wide end. Checking the actual frames, that was wrong: Cedar
+    <em>descends</em>, so its invented neighbourhood rooftops are at its <b>head</b>, not its tail.
+    A dissolve at the tail never covered them and could not have. What does cover them is the bloom
+    coming <em>into</em> Cedar. That is also why Cedar now hands to Saint Joe on a flash rather than a
+    dissolve &mdash; Cedar ends on a high oblique, Saint Joe opens on a low straight-on elevation, so
+    dissolving them would mismatch framing and camera height both.
+  </div>
+
+  <div class="note">
+    <b>The Oak crop is a real trade.</b> Filling the frame with four cells means each 3:4 photo loses
+    25% of its width. Nothing important is gone &mdash; the ladder room keeps both windows, the kitchen
+    keeps the base cabinets, sink and faucet, the arch shot keeps the arch and drops a folding chair
+    &mdash; but it is a crop, and the alternative was the blurred plate you rejected.
+  </div>
+
+  <div class="note">
+    <b>Still open, unchanged.</b> Howder's clipped carpenter is the oldest defect in the film; he is
+    cut by the right frame edge for the entire clip and only a regeneration with him centred fixes it,
+    at 7.5 credits against roughly 20 available. 11 Ludlam has exactly one usable source photo, and
+    the frame it now opens the film on shows gas meters on the side elevation &mdash; worth asking
+    Shavit for a front elevation. And the Saint Joe interiors, the best-photographed assets in the
+    library, are still completely unused.
+  </div>
+
+<script>
+  const vs = [...document.querySelectorAll('video.v')];
+  document.getElementById('playAll').onclick = () => vs.forEach(v => { v.currentTime = 0; v.play(); });
+  document.getElementById('slow').onclick    = () => vs.forEach(v => v.playbackRate = 0.5);
+  document.getElementById('normal').onclick  = () => vs.forEach(v => v.playbackRate = 1);
+</script>
+</body>
+</html>

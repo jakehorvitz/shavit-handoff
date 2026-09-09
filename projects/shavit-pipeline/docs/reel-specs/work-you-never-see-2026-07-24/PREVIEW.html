@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The work you never see, post preview</title>
+<style>
+  :root{--page:#0b0b0c;--ink:#f4f2ec;--dim:#a5a29a;--faint:#6f6c64;--line:#2a2a2e;--brass:#B08D57;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);
+    display:flex;flex-direction:column;align-items:center;padding:44px 20px 90px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:26px;margin:.35em 0 .1em;text-align:center}
+  .sub{color:var(--dim);font-size:14px;max-width:62ch;text-align:center;margin:0 0 26px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
+  .chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--dim)}
+  .chip b{color:var(--ink)}
+
+  /* the post itself, styled the way it will actually appear */
+  .post{width:min(470px,100%);background:#fff;color:#000;border-radius:10px;overflow:hidden;
+    box-shadow:0 24px 70px rgba(0,0,0,.55)}
+  .hdr{display:flex;align-items:center;gap:11px;padding:11px 14px}
+  .av{width:34px;height:34px;border-radius:50%;flex:none;
+    background:conic-gradient(from 200deg,#B08D57,#FFC000,#B08D57);
+    display:flex;align-items:center;justify-content:center}
+  .av i{width:30px;height:30px;border-radius:50%;background:#111;color:#FFC000;font-style:normal;
+    font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}
+  .who{font-size:14px;font-weight:600;line-height:1.25}
+  .where{font-size:12px;color:#555;line-height:1.25}
+  .dots-r{margin-left:auto;color:#222;font-size:18px;letter-spacing:2px}
+
+  .rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .rail::-webkit-scrollbar{display:none}
+  .rail img{width:100%;flex:none;scroll-snap-align:center;display:block;aspect-ratio:4/5;object-fit:cover}
+  .railwrap{position:relative}
+  .count{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.65);color:#fff;
+    font-size:12px;font-weight:600;padding:3px 9px;border-radius:12px}
+  .acts{display:flex;align-items:center;gap:15px;padding:9px 14px 3px;font-size:21px}
+  .acts .sp{margin-left:auto}
+  .dots{display:flex;gap:5px;justify-content:center;padding:7px 0 2px}
+  .dots b{width:6px;height:6px;border-radius:50%;background:#c7c7c7;display:block}
+  .dots b.on{background:#0095f6}
+  .likes{padding:2px 14px 0;font-size:14px;font-weight:600}
+  .cap{padding:5px 14px 4px;font-size:14px;line-height:1.45;white-space:pre-wrap}
+  .cap .name{font-weight:600}
+  .more{color:#8e8e8e;cursor:pointer}
+  .tags{color:#00376b}
+  .time{padding:6px 14px 14px;font-size:11px;color:#8e8e8e;text-transform:uppercase;letter-spacing:.02em}
+  .hidden{display:none}
+
+  .note{max-width:min(470px,100%);margin-top:30px;border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;font-size:13.5px;color:var(--dim);line-height:1.6}
+  .note h4{margin:0 0 8px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .note b{color:var(--ink)}
+  .note code{font-family:var(--mono);font-size:12px;background:#000;border:1px solid var(--line);
+    padding:1px 5px;border-radius:4px;color:#FFC000}
+  .strip{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;max-width:min(470px,100%);margin-top:26px}
+  .strip img{width:100%;display:block;border-radius:4px;border:1px solid var(--line)}
+  .strip span{font-family:var(--mono);font-size:10px;color:var(--faint);text-align:center;display:block;margin-top:4px}
+</style>
+</head>
+<body data-spec="wyns-preview">
+
+<div class="kicker">Shavit Rootman &middot; first draft</div>
+<h1>The work you never see</h1>
+<p class="sub">The post as it will actually appear. Swipe the image area to move through the six cards, or
+use the arrow keys. Caption is the shipping draft, truncated the way the feed truncates it.</p>
+
+<div class="chips">
+  <span class="chip">Cards <b>6</b></span>
+  <span class="chip">Ratio <b>4 by 5</b></span>
+  <span class="chip">Property <b>Kendall, South Bend, Indiana</b></span>
+  <span class="chip">Target <b>Sunday 26 July</b></span>
+</div>
+
+<div class="post">
+  <div class="hdr">
+    <div class="av"><i>SR</i></div>
+    <div>
+      <div class="who">shavitness</div>
+      <div class="where">South Bend, Indiana</div>
+    </div>
+    <div class="dots-r">&middot;&middot;&middot;</div>
+  </div>
+
+  <div class="railwrap">
+    <div class="rail" id="rail">
+      <img src="final/01_055.jpg" alt="Card 1, a room during renovation, this is what the process looks like">
+      <img src="final/02_091.jpg" alt="Card 2, a hallway with the ceiling opened, we learn the house from the inside and out">
+      <img src="final/03_089.jpg" alt="Card 3, a second view of the room mid work, we know what is behind every wall">
+      <img src="final/04_098.jpg" alt="Card 4, the finished room with the fireplace, so the family will never have to">
+      <img src="final/05_073.jpg" alt="Card 5, the finished living space looking through to the kitchen">
+      <img src="final/06_019.jpg" alt="Card 6, the closing card on the finished house">
+    </div>
+    <div class="count" id="count">1/6</div>
+  </div>
+
+  <div class="acts">
+    <span>&#9825;</span><span>&#9736;</span><span>&#10148;</span>
+    <span class="sp"></span><span>&#9634;</span>
+  </div>
+  <div class="dots" id="dots"></div>
+
+  <div class="likes">Liked by <b>charger.property.management</b> and others</div>
+
+  <div class="cap"><span class="name">shavitness</span> Nobody posts this part.<span id="rest" class="hidden">
+
+This is what a renovation looks like for most of the time it is actually happening. Fans running, propane on the floor, a ceiling opened end to end. None of it is visible once the walls close, and all of it decides whether a family is warm in February and whether the house is still sound in ten years.
+
+We know what is behind every wall in this house. The people who live here never have to.
+
+Swipe to the fourth slide. You are standing in the same room as the first one.
+
+Indiana. Finished now.
+
+Save this for your next walk through.
+
+Live with us. Work with us.
+
+<span class="tags">#rehab #renovation #realestateinvesting #indianarealestate #midwestrealestate #propertymanagement</span></span><span class="more" id="more"> ... more</span></div>
+
+  <div class="time">1 hour ago</div>
+</div>
+
+<div class="strip">
+  <div><img src="final/01_055.jpg" alt="card 1"><span>1</span></div>
+  <div><img src="final/02_091.jpg" alt="card 2"><span>2</span></div>
+  <div><img src="final/03_089.jpg" alt="card 3"><span>3</span></div>
+  <div><img src="final/04_098.jpg" alt="card 4"><span>4</span></div>
+  <div><img src="final/05_073.jpg" alt="card 5"><span>5</span></div>
+  <div><img src="final/06_019.jpg" alt="card 6"><span>6</span></div>
+</div>
+
+<div class="note">
+  <h4>What you are looking at, and what is still yours to decide</h4>
+  <p style="margin:.2em 0"><b>The arc.</b> Here is the process, here is how we learn it, here is what we
+  know, here is who never has to, here is what they get, here is the house. Cards 1, 3 and 4 are the same
+  room, so the turn at card 4 is a real proof rather than a mood change.</p>
+  <p style="margin:.7em 0 0"><b>Checked and clean.</b> Single property, confirmed against the live Kendall
+  Street listing. No person in any frame. No house number, no street sign. No dollar figures, no
+  contractions, state spelled out. Nothing claimed that a photograph does not show.</p>
+  <p style="margin:.7em 0 0"><b>Open, small.</b> The cover and card 3 are both wide job site views, so if
+  the feed reads repetitive at thumbnail size, card 3 can swap to the opened wall frame. And card 5 can
+  become the kitchen straight on if the Kendall story carousel is not following this week.</p>
+  <p style="margin:.7em 0 0"><b>Files.</b> <code>final/01_055.jpg</code> through <code>final/06_019.jpg</code>,
+  1080 by 1350, post in that order. <b>Drafts only. Nothing is scheduled and nothing is posted.</b></p>
+</div>
+
+<script>
+  var rail = document.getElementById('rail');
+  var dots = document.getElementById('dots');
+  var count = document.getElementById('count');
+  var n = rail.children.length;
+  for (var i = 0; i < n; i++) {
+    var b = document.createElement('b');
+    if (i === 0) b.className = 'on';
+    dots.appendChild(b);
+  }
+  function sync() {
+    var i = Math.round(rail.scrollLeft / rail.clientWidth);
+    i = Math.max(0, Math.min(n - 1, i));
+    count.textContent = (i + 1) + '/' + n;
+    for (var k = 0; k < n; k++) dots.children[k].className = (k === i ? 'on' : '');
+  }
+  rail.addEventListener('scroll', sync, { passive: true });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    var i = Math.round(rail.scrollLeft / rail.clientWidth) + (e.key === 'ArrowRight' ? 1 : -1);
+    i = Math.max(0, Math.min(n - 1, i));
+    rail.scrollTo({ left: i * rail.clientWidth, behavior: 'smooth' });
+  });
+  var more = document.getElementById('more');
+  more.onclick = function () {
+    document.getElementById('rest').classList.remove('hidden');
+    more.style.display = 'none';
+  };
+</script>
+</body>
+</html>

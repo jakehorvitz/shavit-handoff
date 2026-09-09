@@ -1,0 +1,77 @@
+# Mead deal-story fact queue — transcribed 2026-09-01 from FACTS-TO-ADD.md rev 3.
+# Run: ./shavit.sh fact add --from content/mead-deal-story/facts-queue.txt
+#
+# Every value below is Shavit's own wording, verbatim from his 8/27/26 3:48 PM
+# message in the CPM Onboarding Marketing Team GC (fenced in
+# ~/projects/shavit-rootman-website/docs/case-studies/mead-34/NOTES.md), trimmed
+# only for length or to strip a dollar figure, percentage or house number.
+# Per shavit-copy-is-shavits-words, nothing here is composed.
+#
+# This file pre-fills the four prompts. It does NOT pre-answer the confirmation:
+# you still see each value and type y, because the registry stamps verified_by:
+# jake and that stamp has to mean you actually checked it.
+#
+# NOTE on mead.hardship: coach.md decision 1 flags this as the one span to clear
+# with Shavit before ship. His 8/31 rewrite says "health challenges" while the
+# live site says "financial hardship" — his call, not ours. Answer n to skip it
+# if you have not settled that with him yet; the lint will tell you it is missing.
+
+id: prop.mead.street
+label: Mead property street
+value: Mead Street
+source: NOTES.md L30 "34 Mead Street" — house number removed per no-digit-addresses
+
+id: prop.mead.city
+label: Mead property city
+value: Hillsdale
+source: NOTES.md L31 "Hillsdale, Michigan"
+
+id: prop.mead.state
+label: Mead property state
+value: Michigan
+source: NOTES.md L31 "Hillsdale, Michigan"
+
+id: mead.origin
+label: Mead acquisition principle
+value: Some of our best opportunities begin with simply letting people know we are willing to help.
+source: NOTES.md L35, verbatim
+
+id: mead.mailer
+label: Mead acquisition channel
+value: After receiving one of our "We Buy Houses" mailers distributed throughout Hillsdale, the homeowner contacted us.
+source: NOTES.md L37 first sentence, verbatim
+
+id: mead.hardship
+label: Mead seller situation
+value: She was experiencing significant financial hardship, the home had deteriorated over many years, and its condition prevented her from obtaining homeowners insurance.
+source: NOTES.md L37 second sentence, verbatim — coach.md decision 1, clear with Shavit before ship
+
+id: mead.opportunity
+label: Mead why-we-bought
+value: Rather than seeing a property beyond repair, we saw an opportunity to solve a difficult situation while preserving another home for the Hillsdale community.
+source: NOTES.md L39, verbatim
+
+id: mead.valueadd
+label: Mead competitive advantage
+value: Because we specialize in value-add investments, we were able to move quickly and purchase the home directly.
+source: NOTES.md L60 third sentence (his BUY step), verbatim
+
+id: mead.scope
+label: Mead renovation scope
+value: The renovation included structural and deferred maintenance repairs, new drywall throughout, new flooring, a completely renovated kitchen, an updated bathroom, new lighting and fixtures, interior and exterior paint, updated mechanical systems, and landscaping and exterior improvements.
+source: NOTES.md L62 bullet list, joined in his order — the identical join the website shipped
+
+id: mead.standard
+label: Mead build standard
+value: Rather than applying cosmetic upgrades, the goal was to create a durable, low-maintenance home that would perform well for years to come.
+source: NOTES.md L62 final sentence, verbatim
+
+id: mead.lesson.finishes
+label: Mead lessons learned 3
+value: Standardizing materials and finishes improves efficiency while reducing future maintenance costs.
+source: NOTES.md Lessons Learned bullet 3, verbatim — new in rev 3, replaces the retired mead.strategy
+
+id: mead.today
+label: Mead current status
+value: Today, the property is professionally managed, fully occupied, and provides quality housing for a local family.
+source: NOTES.md L41 second sentence, verbatim

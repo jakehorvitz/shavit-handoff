@@ -1,0 +1,91 @@
+<style>
+  :root{--bg:#0a0a0a;--panel:#131313;--ink:#f4f1ea;--dim:#9a948a;--brass:#B08D57;--gold:#FFC000;--line:#2a2722;--green:#7fb08a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 90px}
+  .num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  h1{font-size:28px;letter-spacing:.1em;text-transform:uppercase;margin:6px 0 6px;font-weight:800}
+  .sub{color:var(--dim);font-size:13px}
+  .rule{height:2px;width:60px;background:var(--gold);margin:14px 0 26px}
+  h2{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:46px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+  .card{display:flex;flex-direction:column;gap:9px;align-items:center;max-width:300px}
+  .card img{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+  .card.pick img{border:2px solid var(--gold)}
+  .tag{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;padding:4px 12px;border-radius:5px;background:#191612;color:var(--brass);border:1px solid var(--line)}
+  .tag.gold{background:#241c05;color:var(--gold);border-color:#4a3a08}
+  .cap{font-size:12px;color:var(--dim);text-align:center;line-height:1.55}
+  .cap b{color:var(--ink)}
+  .tl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px 0;margin-top:6px}
+  .tr{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:11px 18px;border-bottom:1px solid #1c1a16;font-size:13px}
+  .tr:last-child{border-bottom:0}
+  .tc{color:var(--gold);font-variant-numeric:tabular-nums;font-weight:700;font-size:12px}
+  .tr b{color:var(--brass);font-weight:600}
+  .kill{background:#1a0f0b;border:1px solid #40201a;border-left:4px solid #d0553f;border-radius:12px;padding:14px 18px;font-size:13px;color:#e8c9c0;margin:16px 0 0}
+  .kill b{color:#d0553f}
+  .note{font-size:12.5px;color:var(--dim);margin-top:14px}
+  .note b{color:var(--green)}
+</style>
+
+<div class="wrap">
+  <div class="num">bones-pipeline · rev 4 spec — awaiting your pick before any render</div>
+  <h1>Rev 4 — Outro Over the House + Bold Words</h1>
+  <div class="sub">Your two notes: kill the sky-fall logo reveal · testimonials in bold. Mocks below are real composited frames (actual plates on the actual photos), not sketches.</div>
+  <div class="rule"></div>
+
+  <div class="kill"><b>CUT:</b> the 360 sky-rise ending. No more camera falling away to reveal the logo — the video now ends where the story ends: on the house.</div>
+
+  <h2>1 · The new ending — logo fades in front of the house (pick a treatment)</h2>
+  <div class="row">
+    <div class="card">
+      <span class="tag">step 1 · the house holds</span>
+      <img src="build/mocks/outro_house_a_house.jpg">
+      <p class="cap">After the payoff title, the renovated exterior <b>holds with a barely-there push</b> — no move away from it.</p>
+    </div>
+    <div class="card">
+      <span class="tag">step 2 · dusk falls</span>
+      <img src="build/mocks/outro_house_b_mid.jpg">
+      <p class="cap">The frame <b>dims like dusk</b> over ~1.2s while the outro begins to fade up.</p>
+    </div>
+    <div class="card pick">
+      <span class="tag gold">E1 · sharp hold (recommended)</span>
+      <img src="build/mocks/outro_house_c_full.jpg">
+      <p class="cap"><b>House stays sharp at 55% dim.</b> The renovation remains visible behind the wordmark to the last frame — the work is the backdrop.</p>
+    </div>
+    <div class="card">
+      <span class="tag gold">E2 · soft focus</span>
+      <img src="build/mocks/outro_house_d_blur.jpg">
+      <p class="cap"><b>Gentle defocus + dim.</b> Cleaner type legibility, more "end card" feel — but you lose the house detail.</p>
+    </div>
+  </div>
+
+  <div class="tl">
+    <div class="tr"><span class="tc">28.8 – 33.2s</span><span><b>Payoff</b> — "THE HOUSE THAT CAME BACK" + address on the full exterior (unchanged)</span></div>
+    <div class="tr"><span class="tc">33.2 – 34.4s</span><span><b>Title fades out</b> · house keeps its slow push · dusk dim fades in</span></div>
+    <div class="tr"><span class="tc">34.0 – 36.0s</span><span><b>Outro fades up over the house</b> — eyebrow → wordmark → WORK WITH ME · music resolves under it</span></div>
+  </div>
+  <p class="note">Applies to <b>both A and B</b> · runtime stays ~36s · zero new credits — it's a re-edit of frames we already have.</p>
+
+  <h2>2 · Testimonials — bold</h2>
+  <div class="row">
+    <div class="card">
+      <span class="tag">current · weight 700</span>
+      <img src="build/mocks/word_current_700.jpg">
+      <p class="cap">What's in rev 3.</p>
+    </div>
+    <div class="card pick">
+      <span class="tag gold">B1 · true bold · weight 800</span>
+      <img src="build/mocks/word_bold_800.jpg">
+      <p class="cap"><b>ExtraBold with a hairline stroke</b> — noticeably heavier pull, same layout, gold rule + attribution untouched. Applied to all four testimonials + the payoff title.</p>
+    </div>
+  </div>
+
+  <h2>3 · The choppy "makes you feel like family" shot — diagnosed</h2>
+  <div class="tl">
+    <div class="tr"><span class="tc">CAUSE</span><span>The room glides were generated at <b>24fps</b> but the masters run at <b>30fps</b> — the conform duplicates every 4th frame, which reads as a subtle stutter. The sunroom's slow drift makes it most visible, but all four glides carry it.</span></div>
+    <div class="tr"><span class="tc">FIX</span><span><b>Motion-compensated interpolation</b> (ffmpeg minterpolate) on the 24fps originals → true 30fps with synthesized in-between frames. Butter-smooth drift, no re-generation, <b>zero credits</b>. Applied to kitchen, fireplace, bath and sunroom.</span></div>
+    <div class="tr"><span class="tc">RISK</span><span>Interpolation can shimmer on fine texture (window blinds). I'll frame-check each clip and fall back to a cinematic 24fps master (IG supports it natively) for any clip that artifacts.</span></div>
+  </div>
+
+  <div class="note" style="margin-top:30px">Say the word (e.g. <b>"E1 go"</b> or <b>"E2 and bold"</b>) and I re-cut both masters with the smoothness fix included — ~10 min, no credits.</div>
+</div>

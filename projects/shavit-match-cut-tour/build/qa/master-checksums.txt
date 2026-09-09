@@ -1,0 +1,2 @@
+MD5 (A_showcase.mp4) = 8d6afa26bd3e433e37d49a610d7d8020
+MD5 (B_safe.mp4) = 56fca3f58edb7aac3db3724efcaf3807

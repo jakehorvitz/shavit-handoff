@@ -1,0 +1,35 @@
+<!--
+  Shavit Rootman — "Final Result" title card template
+  Usage: duplicate this file, replace the two placeholders below, open in a
+  browser at exactly 1080x1350 and take a full-page screenshot.
+    {{PHOTO_PATH}}   — absolute file:// path (or relative path) to the real property photo
+    {{PROJECT_TAG}}  — street name or project nickname ONLY (no house numbers), e.g. "Oak Lane"
+  Brand tokens (rules/brand.md #8): black canvas, white uppercase Inter type,
+  brass/gold rule. Real photos only — no generated architecture, no house numbers.
+-->
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1080px; height:1350px; background:#000; overflow:hidden; font-family:'Inter',sans-serif; }
+  .frame { position:relative; width:1080px; height:1350px; }
+  .photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .scrim { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 76%, rgba(0,0,0,0.18) 88%, rgba(0,0,0,0.4) 100%); }
+  .content { position:absolute; left:0; right:0; bottom:0; padding:0 72px 88px; }
+  .kicker { color:#C9A24B; font-size:22px; font-weight:600; letter-spacing:6px; text-transform:uppercase; margin-bottom:18px; text-shadow:0 2px 10px rgba(0,0,0,0.85); }
+  .rule { width:64px; height:3px; background:#C9A24B; margin-bottom:22px; }
+  .headline { color:#fff; font-size:76px; font-weight:900; letter-spacing:2px; text-transform:uppercase; line-height:1; text-shadow:0 3px 16px rgba(0,0,0,0.9); }
+</style></head>
+<body>
+  <div class="frame">
+    <img class="photo" src="{{PHOTO_PATH}}">
+    <div class="scrim"></div>
+    <div class="content">
+      <div class="kicker">{{PROJECT_TAG}}</div>
+      <div class="rule"></div>
+      <div class="headline">Final Result</div>
+    </div>
+  </div>
+</body></html>

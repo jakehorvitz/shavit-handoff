@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shavit Rootman &middot; Next Two Reels &middot; Storyboard</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--gold:#FFC000;--ivory:#F5EFE1;--brass:#B08D57;--bg:#0b0b0c;--panel:#141416;--line:#2a2a2e;--dim:#a5a29a;--good:#3ecf8e;--warn:#e5a83b;--block:#e06c6c}
+  html,body{min-height:100%;background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(176,141,87,.16), transparent 60%), var(--bg);
+    color:var(--ivory);font-family:"Inter",system-ui,-apple-system,sans-serif;line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:44px 22px 90px}
+  .kicker{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass);font-weight:700}
+  h1{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:32px;margin:10px 0 4px;letter-spacing:.01em}
+  h1 .g{color:var(--gold)}
+  .sub{color:var(--dim);font-size:14px;margin-bottom:6px}
+  h2{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:22px;margin:2px 0 6px;color:var(--ivory);scroll-margin-top:20px}
+  h2 .num{color:var(--brass);font-size:15px;letter-spacing:.1em;margin-right:8px}
+  h3{color:var(--gold);margin:16px 0 6px;text-transform:uppercase;font-weight:700;font-size:12.5px;letter-spacing:.14em}
+  p{margin:6px 0}
+  .shot{position:relative;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brass);
+    border-radius:12px;padding:16px 18px;margin:14px 0}
+  .shot.head{border-left-color:var(--gold);background:#101013}
+  .rule{width:44px;height:2px;background:var(--gold);margin:34px 0 10px;opacity:.8}
+  .dim{color:var(--dim)}
+  ul{margin:6px 0 6px 20px}
+  li{margin:3px 0}
+  b{color:var(--ivory)}
+  code{background:#000;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font:12.5px ui-monospace,Menlo,monospace;color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
+  th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--brass);text-transform:uppercase;letter-spacing:.08em;font-size:11px}
+  td.t{color:var(--gold);font-family:ui-monospace,Menlo,monospace;white-space:nowrap}
+  .pill{display:inline-block;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.04em;
+    padding:4px 8px;border-radius:999px;border:1px solid var(--line);text-transform:uppercase}
+  .pill.ready{color:var(--good);border-color:#1f5c43}
+  .pill.needs{color:var(--warn);border-color:#5c471f}
+  .pill.block{color:var(--block);border-color:#5c1f1f}
+  .quote{border-left:3px solid var(--gold);background:#0f0f10;padding:10px 14px;border-radius:8px;margin:8px 0;color:var(--ivory)}
+  .vo{background:#000;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:8px 0;font:15px/1.6 Georgia,serif;color:var(--ivory)}
+  .flag{color:var(--block);font-weight:700}
+  .ask{background:#101013;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  footer{margin-top:40px;color:#6f6c64;font-size:11px;letter-spacing:.02em;border-top:1px solid var(--line);padding-top:14px}
+  .toc{font-size:13px;color:var(--dim);margin:10px 0 4px}
+  .toc a{color:var(--brass);text-decoration:none;margin-right:14px}
+  .toc a:hover{color:var(--gold)}
+  /* storyboard photo boards */
+  .board{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0 4px}
+  .board.staff{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  .cell{background:#0d0d0f;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .cell img{display:block;width:100%;height:118px;object-fit:cover;background:#000}
+  .board.staff .cell img{height:150px}
+  .cell .cap{padding:6px 8px;font-size:11px;line-height:1.35;color:var(--dim)}
+  .cell .cap b{color:var(--ivory)}
+  .cell.gap{display:flex;align-items:center;justify-content:center;min-height:118px;border-style:dashed;
+    color:var(--warn);font-size:11.5px;text-align:center;padding:10px}
+  .framenote{font-size:11px;color:var(--brass);text-transform:uppercase;letter-spacing:.1em;margin:2px 0 0}
+  /* revision markers */
+  .chg{outline:1px solid rgba(255,192,0,.55);box-shadow:0 0 0 3px rgba(255,192,0,.10);position:relative}
+  .chg::after{content:"UPDATED";position:absolute;top:-9px;right:12px;background:var(--gold);color:#0b0b0c;
+    font:700 9px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;padding:3px 7px;border-radius:999px}
+  .revlog{background:#0f0f10;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0}
+  .revlog h3{margin-top:4px}
+  .revlog .r{border-left:2px solid var(--brass);padding:4px 0 4px 12px;margin:8px 0;font-size:13px}
+  .revlog .r b{color:var(--gold)}
+</style>
+</head>
+<body data-spec="2x-reels-plan" data-annot-targets=".shot, h2">
+<div class="wrap">
+
+  <div class="kicker">Shavit Rootman &middot; Content Operations</div>
+  <h1>Next Two <span class="g">Reels</span> &middot; Photo Storyboard</h1>
+  <div class="sub">Prepared for the Carpinteria call (Dart Coffee, Tue 12:30) &middot; Spec v2 &middot; 2026-07-20</div>
+  <div class="toc">
+    <a href="#overview">Overview</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#reel1">Reel 1 &middot; Open Projects</a>
+    <a href="#reel2">Reel 2 &middot; Staff</a>
+    <a href="#later">Later beats</a>
+    <a href="#asks">Asks for Shavit</a>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ============ REVLOG ============ -->
+  <div class="revlog">
+    <h3>What changed in v2</h3>
+    <div class="r"><b>v2 &middot; 2026-07-20.</b> Re-scoped the two reels to match Shavit&rsquo;s own arc (texted 7/17, reaffirmed 7/19 &ldquo;Are we following what I proposed?&rdquo; &rarr; &ldquo;Yes&rdquo;). The next two reels are now <b>Open Projects &rarr; &ldquo;Wonder how we do it?&rdquo;</b> (Reel 1) and the <b>Staff Feature payoff</b> (Reel 2). Added real photo frames to every shot. Website-intro reel and the Indiana feature moved to Later beats, in his stated order. Blocks marked <span style="color:var(--gold)">UPDATED</span> are new or moved since v1.</div>
+    <div class="r"><b>v1 &middot; 2026-07-19.</b> Baseline (Reel 1 units montage, Reel 2 website intro).</div>
+  </div>
+
+  <!-- ============ OVERVIEW ============ -->
+  <h2 id="overview"><span class="num">00</span>Overview</h2>
+  <div class="shot head chg">
+    <p>Shavit&rsquo;s content arc, in his exact words (7/17, 10:40 AM):</p>
+    <div class="quote">&ldquo;We should feature all open projects we have, and then, break and text saying, wonder how we do it? And then we feature our entire staff &hellip; positions and roles &hellip; including you and Eli. Then, we feature Indiana. Then we go back to projects before and after.&rdquo;</div>
+    <p>So the <b>hook and its payoff are the next two reels</b>: Reel 1 walks every open project and ends on the &ldquo;Wonder how we do it?&rdquo; card; Reel 2 answers it by featuring the whole team. He already sent the six staff photos (7/17, 10:40&ndash;10:42 AM), which makes Reel 2 buildable now. Indiana and the website-intro reel come after, in his order.</p>
+    <h3>Hard rules Shavit set</h3>
+    <ul>
+      <li>Montages show <b>city only</b>, never the exact street address (&ldquo;Hillsdale, MI&rdquo;). Exact addresses live on the website only (7/17).</li>
+      <li>Leased units get a <b>&ldquo;Leased&rdquo;</b> badge on the photo, placed under available units (7/16).</li>
+      <li>Applications route to the existing <b>Zillow</b> listing &mdash; he confirmed no in-site apply (7/19).</li>
+      <li>Brand voice: <b>no contractions, no em dashes</b> in on-screen copy or captions.</li>
+      <li>Before/after projects keep the <b>&ldquo;BEFORE&rdquo;</b> label on every before photo (7/14, Howder).</li>
+    </ul>
+  </div>
+
+  <!-- ============ CALENDAR ============ -->
+  <h2 id="calendar"><span class="num">01</span>Three-Week Calendar</h2>
+  <div class="shot chg">
+    <p class="dim">Cadence: 2 posts per week (confirm days on the call &mdash; suggested Tuesday and Friday). Jake and Eli are up with Shavit this week, so anything blocked on his inputs can be closed in person.</p>
+    <table>
+      <tr><th>Week</th><th>Post 1</th><th>Post 2</th><th>Arc beat</th></tr>
+      <tr><td class="t">Jul 21</td><td><b>Reel 1</b> Open Projects montage &rarr; the tease</td><td><b>Reel 2</b> Staff feature (&ldquo;how we do it&rdquo;)</td><td>Hook, then payoff</td></tr>
+      <tr><td class="t">Jul 28</td><td><b>Reel 3</b> Website intro + voiceover</td><td><b>Reel 4</b> Indiana feature</td><td>Utility, then region</td></tr>
+      <tr><td class="t">Aug 4</td><td><b>Reel 5</b> Before / after #1</td><td><b>Reel 6</b> Before / after #2 (or Ohio)</td><td>Back to before and after</td></tr>
+    </table>
+    <p class="dim">Howder (43 Howder St) is approved and captioned; it is the before/after template. <span class="flag">Confirm it actually posted before calling that beat closed.</span></p>
+  </div>
+
+  <!-- ============ REEL 1 ============ -->
+  <h2 id="reel1"><span class="num">02</span>Reel 1 &middot; Open Projects Montage <span class="pill ready">Build now</span></h2>
+  <div class="shot head">
+    <p><b>Goal.</b> Show every open project at a premium clip, city only, and land on the &ldquo;Wonder how we do it?&rdquo; card so it hands directly to the staff reel.</p>
+    <p><b>Format.</b> 9:16 vertical &middot; target 29 seconds &middot; Shavit brand overlays (gold bar, bold city, ivory subtext) matching the Howder look.</p>
+  </div>
+
+  <div class="shot">
+    <h3>Shot board</h3>
+    <p class="dim">Frames below are the real source stills on hand. Dashed cells are photos to collect from Shavit on the call.</p>
+    <div class="board">
+      <div class="cell"><img src="thumbs/p_budlong.jpg" alt="Budlong"><div class="cap"><b>34 Budlong</b><br>Hillsdale, MI &middot; Available Now</div></div>
+      <div class="cell"><img src="thumbs/p_oak.jpg" alt="115 Oak hall"><div class="cap"><b>115 Oak</b><br>Hillsdale, MI &middot; Coming Aug<br><span class="framenote">hall + kitchen on hand</span></div></div>
+      <div class="cell"><img src="thumbs/p_cedar.jpg" alt="1114 Cedar Niles"><div class="cap"><b>1114 Cedar</b><br>Niles, MI &middot; Coming Soon</div></div>
+      <div class="cell gap">33 Barry A/B<br>photo needed</div>
+      <div class="cell gap">11 Ludlam A/B<br>photo needed</div>
+      <div class="cell gap">1902 Ewing<br>South Bend, IN<br>photo needed</div>
+    </div>
+    <h3>Shot list &amp; timing</h3>
+    <table>
+      <tr><th>Time</th><th>Shot</th><th>On-screen text</th></tr>
+      <tr><td class="t">0.0&ndash;2.5</td><td>Cold open, black to gold</td><td>SHAVIT ROOTMAN / &ldquo;Now leasing across the Midwest&rdquo;</td></tr>
+      <tr><td class="t">2.5&ndash;6.0</td><td>34 Budlong (photo on hand)</td><td>Hillsdale, MI / 3 Bed &middot; 1 Bath &middot; Available Now</td></tr>
+      <tr><td class="t">6.0&ndash;9.5</td><td>115 Oak (hall + kitchen on hand)</td><td>Hillsdale, MI / Available August</td></tr>
+      <tr><td class="t">9.5&ndash;13.0</td><td>1114 Cedar (photo on hand)</td><td>Niles, MI / Coming Soon</td></tr>
+      <tr><td class="t">13.0&ndash;16.0</td><td>33 Barry <span class="flag">(need photo)</span></td><td>Hillsdale, MI / Coming Soon</td></tr>
+      <tr><td class="t">16.0&ndash;19.0</td><td>11 Ludlam <span class="flag">(need photo)</span></td><td>Hillsdale, MI / Coming Soon</td></tr>
+      <tr><td class="t">19.0&ndash;22.5</td><td>1902 Ewing, region-change beat <span class="flag">(need photo)</span></td><td>South Bend, IN / Coming Soon</td></tr>
+      <tr><td class="t">22.5&ndash;26.0</td><td>Text card, gold on black</td><td>&ldquo;Wonder how we do it?&rdquo;</td></tr>
+      <tr><td class="t">26.0&ndash;29.0</td><td>End card</td><td>shavitrootman.com / New homes every month &middot; link in bio</td></tr>
+    </table>
+    <p class="dim"><span class="flag">Open question:</span> the 7/17 list groups Barry, Ludlam under &ldquo;Michigan&rdquo; without a city; assumed Hillsdale. Confirm each city on the call. Bed/bath counts unconfirmed for most units &mdash; Shavit still owes these (7/15).</p>
+  </div>
+
+  <div class="shot">
+    <h3>Overlay spec</h3>
+    <ul>
+      <li><b>City line:</b> bold ivory, centered, over a gold bar (the Howder title treatment).</li>
+      <li><b>Detail line:</b> smaller, brass &mdash; bed / bath / availability month.</li>
+      <li><b>Leased badge:</b> gold pill, top-right, reads &ldquo;LEASED&rdquo; for any unit Shavit flags as rented (they still appear, to show momentum).</li>
+      <li><b>No street numbers anywhere on screen.</b></li>
+    </ul>
+    <h3>Audio</h3>
+    <p>Premium, upbeat instrumental; one clean beat drop at the region change (Indiana) and a soft stop on the &ldquo;Wonder how we do it?&rdquo; card.</p>
+    <h3>Caption draft</h3>
+    <div class="quote">New homes, ready across the Midwest.<br><br>From Hillsdale to South Bend, here is what is available right now. Every unit is fully renovated and built to the standard every family deserves.<br><br>Find yours at shavitrootman.com, link in bio.<br><br>Wonder how we do it? Stay tuned.</div>
+    <p class="dim"><span class="pill ready">Have</span> Budlong, Oak, Cedar frames + brand template.
+       <span class="pill needs">Need from Shavit</span> Barry / Ludlam / Ewing photos, leased flags, bed/bath counts, city per unit.</p>
+  </div>
+
+  <!-- ============ REEL 2 ============ -->
+  <h2 id="reel2"><span class="num">03</span>Reel 2 &middot; Staff Feature <span class="pill needs">Photos in, names out</span></h2>
+  <div class="shot head chg">
+    <p><b>Goal.</b> The payoff to &ldquo;Wonder how we do it?&rdquo; Feature the whole team with positions and roles, including Jake and Eli. Each person gets a photo, name, and title card.</p>
+    <p><b>Format.</b> 9:16 vertical &middot; target 22&ndash;26 seconds &middot; warm, human, same brand overlays but softer. Opens by echoing the &ldquo;Wonder how we do it?&rdquo; line so the two reels feel like one story.</p>
+  </div>
+
+  <div class="shot chg">
+    <h3>Shot board &mdash; the six photos Shavit sent (7/17)</h3>
+    <p class="dim">Order and names are placeholders. Shavit said &ldquo;we will talk about it on the phone&rdquo; &mdash; confirm each person&rsquo;s name, role, and sequence on the call. He wants <b>positions and roles</b>, not just a thank-you flash (7/17, 10:54 AM).</p>
+    <div class="board staff">
+      <div class="cell"><img src="thumbs/s1.jpg" alt="crew"><div class="cap"><b>Name?</b><br>Role? &middot; orange shirt, porch</div></div>
+      <div class="cell"><img src="thumbs/s2.jpg" alt="crew"><div class="cap"><b>Name?</b><br>Role? &middot; RUTA polo, golden hour</div></div>
+      <div class="cell"><img src="thumbs/s3.jpg" alt="crew"><div class="cap"><b>Name?</b><br>Role? &middot; gray tee, cap</div></div>
+      <div class="cell"><img src="thumbs/s4.jpg" alt="crew"><div class="cap"><b>Name?</b><br>Role? &middot; paint bucket, porch</div></div>
+      <div class="cell"><img src="thumbs/s5.jpg" alt="crew"><div class="cap"><b>Name?</b><br>Role? &middot; pink top, front yard</div></div>
+      <div class="cell"><img src="thumbs/s6.jpg" alt="crew"><div class="cap"><b>Name?</b><br>Two men (one likely Shavit)</div></div>
+    </div>
+    <div class="board staff">
+      <div class="cell gap">Jake<br>photo needed</div>
+      <div class="cell gap">Eli<br>photo needed</div>
+    </div>
+  </div>
+
+  <div class="shot chg">
+    <h3>Shot list &amp; timing</h3>
+    <table>
+      <tr><th>Time</th><th>Shot</th><th>On-screen text</th></tr>
+      <tr><td class="t">0.0&ndash;2.5</td><td>Callback card, gold on black</td><td>&ldquo;You asked how we do it.&rdquo;</td></tr>
+      <tr><td class="t">2.5&ndash;4.0</td><td>Beat / logo pulse</td><td>&ldquo;Meet the team.&rdquo;</td></tr>
+      <tr><td class="t">4.0&ndash;20.0</td><td>Each staff photo, ~2s, gentle push-in</td><td>Name (bold ivory) / Role (brass) per person</td></tr>
+      <tr><td class="t">20.0&ndash;23.0</td><td>Group / Shavit + closing line</td><td>&ldquo;This is Shavit Rootman.&rdquo;</td></tr>
+      <tr><td class="t">23.0&ndash;25.0</td><td>End card</td><td>shavitrootman.com &middot; Building communities in the Midwest</td></tr>
+    </table>
+    <h3>Caption draft</h3>
+    <div class="quote">You asked how we do it. Here is the answer: our team.<br><br>From the crews on site to the people behind every renovation, this is who turns a house into a home. Grateful for all of them.<br><br>Building communities across the Midwest. shavitrootman.com, link in bio.</div>
+    <p class="dim"><span class="pill ready">Have</span> six staff photos.
+       <span class="pill needs">Need from Shavit</span> each name + role + order, Jake and Eli photos, and a yes on the callback opener.</p>
+  </div>
+
+  <!-- ============ LATER BEATS ============ -->
+  <h2 id="later"><span class="num">04</span>Later Beats (weeks of Jul 28 and Aug 4)</h2>
+  <div class="shot">
+    <h3>Reel 3 &middot; Website intro + voiceover <span class="pill ready">Low block</span></h3>
+    <p>Shavit&rsquo;s 7/19 request: a reel introducing shavitrootman.com with a voiceover showing how people search and apply, and fixing the swipe-arrow discoverability he flagged after testing with three people. 9:16 iPhone screen recording of the live site, ~27s, VO + captions. Jake built the site, so he controls the recording &mdash; only needs a yes on the script.</p>
+    <div class="vo">Looking for a rental in the Midwest? Here is how to find your next home in under a minute. Head to shavitrootman dot com. Swipe through every available unit, right here on the home page. Tap any home to see the photos, the layout, and when it is available. Found one you like? Tap apply, and it takes you straight to the listing. New homes are added every month. Shavit Rootman. Building communities in the Midwest.</div>
+    <h3>Reel 4 &middot; Indiana feature <span class="pill needs">Needs photos</span></h3>
+    <p>Shavit wants more Indiana and Ohio featured and said he will send photos (7/17). Same montage template as Reel 1, city only, leading with South Bend. <b>Blocker:</b> Indiana and Ohio photos.</p>
+    <h3>Reel 5 and 6 &middot; Before / after rotation <span class="pill needs">Needs story line</span></h3>
+    <p>Howder is the template: renovated project, before and after, &ldquo;BEFORE&rdquo; on every before photo, with a short story caption Shavit writes himself. Pick the next two projects on the call. The edit tracker lists nine AVAILABLE properties (River Street is the only USED one), so pull the next before/after from those. <b>Blocker:</b> which projects, one story line each.</p>
+  </div>
+
+  <!-- ============ ASKS ============ -->
+  <h2 id="asks"><span class="num">05</span>What to Get From Shavit at Dart Coffee</h2>
+  <div class="shot head chg">
+    <p class="dim">These answers unlock both reels this week. Drive the call with this list.</p>
+    <div class="ask">1. <b>Cadence.</b> Confirm two posts per week and lock the two days.</div>
+    <div class="ask">2. <b>Staff names + roles + order.</b> For each of the six photos, plus where Jake and Eli slot in. This is the only thing blocking Reel 2.</div>
+    <div class="ask">3. <b>Jake and Eli photos.</b> Take these on site this week if he does not have them.</div>
+    <div class="ask">4. <b>Reel 1 photos.</b> 33 Barry, 11 Ludlam, and 1902 Ewing (Indiana) current photos.</div>
+    <div class="ask">5. <b>Leased vs available + bed/bath.</b> Which open units are already rented (for the badge) and the bed/bath count per unit.</div>
+    <div class="ask">6. <b>Tagline (open loop).</b> He floated &ldquo;Improving / Building Midwest Communities,&rdquo; Jake pushed &ldquo;Investing in Midwest Communities.&rdquo; Pick one &mdash; it sets the cold-open line on every montage.</div>
+  </div>
+
+  <footer>Confidential &middot; internal review copy &middot; not for distribution &middot; annotate any block with the &ldquo;+ note&rdquo; control</footer>
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+metric,target,dashboard_section,data_source,how_measured,month_1,month_2,month_3,on_track
+Posting floor (weeks hit ≥80%),>=80% of weeks,Awareness,Manual / posting log,Weeks with 2 reels + 1 carousel posted / total weeks,,,,
+IG follower growth,5-10% per month,Awareness,Lead Log Monthly tab (ig_followers),(this month - last month) / last month,,,,
+Qualified tenant inquiries per available unit,3-5 per unit,Tenant demand,Lead Log (type=tenant),Count tenant rows per opening / number of open units,,,,
+Source attribution rate,>=70% of inquiries,Tenant + Seller,Lead Log (source non-blank),Rows with a source / all inquiry rows,,,,
+Trackable traffic per opening,Every opening,Tenant demand,GA4 (openings_click) + Lead Log,Each open unit has >=1 attributed session or logged inquiry,,,,
+Direct-seller conversations per month,1-3 per month,Seller demand,Lead Log (type=seller),Count credible seller conversations across markets,,,,

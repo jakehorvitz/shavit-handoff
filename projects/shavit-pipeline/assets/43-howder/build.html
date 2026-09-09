@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 Howder — Build Monitor (shot by shot)</title>
+<style>
+  :root{--bg:#0b0b0c;--panel:#141416;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a5a29a;--faint:#6f6c64;
+    --brass:#B08D57;--gold:#FFC000;--build:#6ea3d6;--after:#7FB88A;--warn:#e0794a;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;--sans:"Inter",system-ui,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 24px 120px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600}
+  h1{font-size:30px;margin:.35em 0 .1em}
+  .sub{color:var(--dim);max-width:66ch;font-size:15px}
+  .legendbar{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
+  .pill{font:600 11px/1 var(--mono);border-radius:999px;padding:5px 10px;border:1px solid var(--line);color:var(--dim)}
+  .pill.pending{color:var(--faint)} .pill.gen{color:var(--gold);border-color:rgba(255,192,0,.4)}
+  .pill.ready{color:var(--after);border-color:rgba(127,184,138,.4)} .pill.review{color:var(--build);border-color:rgba(110,163,214,.4)}
+  h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin:40px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+  .shot{display:grid;grid-template-columns:60px 220px 1fr;gap:16px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .shot .id{font:600 13px/1 var(--mono);color:var(--gold)} .shot .id .t{display:block;color:var(--faint);font-size:11px;margin-top:5px}
+  .media{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#000;aspect-ratio:9/16;max-height:220px}
+  .media img,.media video{width:100%;height:100%;object-fit:cover;display:block}
+  .media .stamp{position:absolute;top:8px;left:8px;font:700 10px/1 var(--mono);letter-spacing:.08em;padding:4px 8px;border-radius:5px}
+  .stamp.pending{background:rgba(0,0,0,.6);color:var(--faint);border:1px solid var(--line)}
+  .stamp.ready{background:var(--after);color:#0b0b0c}
+  .room{font-weight:600;font-size:14px} .desc{color:var(--dim);font-size:13px;margin:4px 0 8px}
+  .attrs{display:flex;flex-wrap:wrap;gap:6px} .attr{font:11px/1 var(--mono);color:var(--dim);background:#1b1b1e;border:1px solid var(--line);border-radius:5px;padding:3px 8px}
+  .attr.fx{border-color:rgba(110,163,214,.45);color:var(--build)}
+  .note{background:linear-gradient(180deg,rgba(110,163,214,.1),transparent);border:1px solid rgba(110,163,214,.35);border-left:3px solid var(--build);border-radius:10px;padding:14px 16px;margin:16px 0}
+  .note h4{margin:0 0 6px;color:var(--build);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  code{font-family:var(--mono);font-size:12px;background:#000;border:1px solid var(--line);padding:1px 5px;border-radius:5px;color:var(--gold)}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px}
+  @media(max-width:720px){.shot{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-spec="43-howder-build" data-annot-targets=".shot">
+<div class="wrap">
+  <div class="kicker">Shavit Rootman · 43 Howder · build monitor</div>
+  <h1>Build — shot by shot</h1>
+  <p class="sub">One shot at a time. Each cell fills as it is generated: real still → upscaled frame →
+  motion clip. I stop after each and wait for your ＋note (approve or edit) before the next. Re-rolls
+  are cheap on stills, expensive on video — so we lock the frame first. Nothing here is generated yet.</p>
+  <div class="legendbar">
+    <span class="pill pending">● pending</span>
+    <span class="pill gen">● generating</span>
+    <span class="pill review">● ready for your review</span>
+    <span class="pill ready">● approved</span>
+  </div>
+  <div class="note">
+    <h4>Before shot 1 — three green lights</h4>
+    <p style="margin:0;font-size:13.5px">1) Keep the S1 "before" opener or drop it · 2) Michigan town for the plate (or leave MICHIGAN) ·
+    3) Credit go-ahead (~210–235 of 530.5). Then I generate <b>S1 only</b>, show it here, and stop.</p>
+  </div>
+
+  <h2>▶ Latest — S1 → S2 transition + preview</h2>
+  <div id="trans"></div>
+
+  <h2>Phase A/B — shots (still → upscale → motion), each gated</h2>
+  <div id="shots"></div>
+
+  <footer>43 Howder · build monitor · clips land in <code>clips/&lt;id&gt;.mp4</code> as generated ·
+  CONFIDENTIAL (Shavit Rootman NDA) — local only.</footer>
+</div>
+
+<script>
+const SHOTS = [
+  ["S1","0.0–2.5","Exterior, as found","u1-17","slow push-in","morph into build"],
+  ["S2","2.5–4.5","Down to the studs","u2-10","slow push","material sweep"],
+  ["S3","4.5–6.5","Framing — the 360","u2-08","360 orbit","orbit hand-off"],
+  ["S4","6.5–9.5","The build-up (gutted→finished)","u2-10","Kling first/last","Higgsfield Morph"],
+  ["S5","9.5–12.0","Finished house resolves","u1-16","push-in porch","match-cut door"],
+  ["S6","12.0–14.0","Living room — enter","u1-02","push forward","doorway hand-off"],
+  ["S7","14.0–15.8","Staircase — rise","u1-06","tilt up","object-continuity"],
+  ["S8","15.8–17.6","Upstairs hall","u1-01","push down hall","match-cut light"],
+  ["S9","17.6–19.8","Kitchen","u1-08","slow push-in","doorway hand-off"],
+  ["S10","19.8–21.8","Bathroom","u1-13","drift","material sweep"],
+  ["S11","21.8–23.4","Laundry off the kitchen","u1-12","push-through","doorway hand-off"],
+  ["S12","23.4–25.8","Rear exterior — address + CTA","u1-11","pull-back","CTA into card"],
+  ["S13","25.8–30.0","River-Street brand card","u1-11","hold","—"],
+];
+function card(o){
+  const [id,t,room,thumb,motion,fx]=o;
+  const d=document.createElement("div"); d.className="shot";
+  d.innerHTML=`<div class="id">${id}<span class="t">${t}s</span></div>
+   <div class="media"><span class="stamp pending" data-stamp>PENDING</span><img src="thumbs/${thumb}.jpg" alt="" data-still></div>
+   <div class="body"><div class="room">${room}</div>
+   <div class="desc">Frame = <code>${thumb}</code>. When generated, the clip replaces the still here.</div>
+   <div class="attrs"><span class="attr">motion · ${motion}</span><span class="attr fx">out · ${fx}</span></div></div>`;
+  fetch(`clips/${id}.mp4`,{method:"HEAD"}).then(r=>{ if(r.ok){
+    const m=d.querySelector(".media"); const st=d.querySelector("[data-stamp]");
+    st.textContent="READY"; st.className="stamp ready";
+    d.querySelector("[data-still]").remove();
+    const v=document.createElement("video"); v.src=`clips/${id}.mp4`; v.controls=true; v.loop=true; v.muted=true; v.playsInline=true;
+    m.appendChild(v);
+  }}).catch(()=>{});
+  return d;
+}
+const shotsEl=document.getElementById("shots");
+SHOTS.forEach(o=>shotsEl.appendChild(card(o)));
+document.getElementById("trans").innerHTML=`
+  <div class="shot"><div class="id">T1→2<span class="t">morph</span></div>
+   <div class="media"><span class="stamp ready">READY</span><video src="clips/T12.mp4" controls loop muted playsinline></video></div>
+   <div class="body"><div class="room">S1 → S2 transition — through the door, into the studs</div>
+   <div class="desc">Kling first/last-frame morph: S1's last frame (house, pushed in) → S2's first frame (gutted interior). A continuous push through the front-door opening — no dissolve.</div>
+   <div class="attrs"><span class="attr fx">effect · morph (Higgsfield/Kling)</span></div></div></div>
+  <div class="shot"><div class="id">PRE<span class="t">S1·T·S2</span></div>
+   <div class="media"><span class="stamp ready">READY</span><video src="clips/preview_S1_S2.mp4" controls loop muted playsinline></video></div>
+   <div class="body"><div class="room">Stitched preview — S1 → transition → S2 in context</div>
+   <div class="desc">The three clips concatenated (15s) so you see the transition in the flow. Untrimmed; final will tighten S1 to ~2.5s and S2 to ~2s.</div>
+   <div class="attrs"><span class="attr">preview · full-res 720×1280</span></div></div></div>`;
+</script>
+<script src="../../spec-annotate.js"></script>
+</body>
+</html>

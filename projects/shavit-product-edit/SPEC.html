@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spec — shavitrootman.com Migration &amp; Production Launch</title>
+<style>
+  :root{--navy:#15192a;--orange:#e8722a;--ink:#1a1a1a;--mut:#5b6472;--line:#e3e6ec;--bg:#f7f8fa;--ok:#0a8a4a;--warn:#b8860b;--stop:#c0392b;}
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  header{background:var(--navy);color:#fff;padding:40px 32px}
+  header .k{color:var(--orange);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+  header h1{margin:8px 0 6px;font-size:30px}
+  header p{margin:0;color:#c7cede}
+  main{max-width:920px;margin:0 auto;padding:32px}
+  section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 28px;margin:0 0 20px}
+  h2{margin:0 0 4px;font-size:21px;color:var(--navy)}
+  h2 .n{color:var(--orange);font-weight:800;margin-right:8px}
+  h3{margin:20px 0 6px;font-size:16px;color:var(--navy)}
+  .sub{color:var(--mut);margin:0 0 16px;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--bg);color:var(--navy)}
+  code{background:#eef1f6;border-radius:4px;padding:1px 6px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  ul,ol{margin:8px 0;padding-left:22px} li{margin:4px 0}
+  .pill{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:99px;color:#fff}
+  .pill.ok{background:var(--ok)} .pill.warn{background:var(--warn)} .pill.stop{background:var(--stop)} .pill.info{background:var(--navy)}
+  .kill{border-left:4px solid var(--orange);padding-left:16px;background:#fff8f2}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:8px;padding:14px}
+  .card h4{margin:0 0 6px;font-size:14px;color:var(--navy)}
+  .muted{color:var(--mut);font-size:13px}
+  .accept li{margin:6px 0}
+  .gate{background:var(--navy);color:#fff;border-radius:10px;padding:20px 24px}
+  .gate h2{color:#fff}.gate a{color:var(--orange)}
+  footer{max-width:920px;margin:0 auto;padding:0 32px 60px;color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="k">Build Spec · Bones Pipeline Stage 3</div>
+  <h1>shavitrootman.com — Migration &amp; Production Launch</h1>
+  <p>Charger Realty Management, by Shavit Rootman · v1.0 · 2026-06-30</p>
+</header>
+<main>
+
+<section>
+  <h2><span class="n">0</span>What this is</h2>
+  <p class="sub">One sentence: take the already-built React site live on <code>shavitrootman.com</code> with a real build, a working contact form, real SEO, verified accessibility, and full security — replacing the current WordPress site — without ever taking email down.</p>
+  <table>
+    <tr><th>Item</th><th>Today (live)</th><th>After launch</th></tr>
+    <tr><td>Site</td><td>WordPress 7.0 on Hostinger</td><td>Prerendered static React on Netlify</td></tr>
+    <tr><td>Registrar / DNS</td><td>Squarespace Domains</td><td><span class="pill ok">Unchanged</span></td></tr>
+    <tr><td>Email (<code>info@shavitrootman.com</code>)</td><td>GoDaddy MX</td><td><span class="pill ok">Untouched — never modified</span></td></tr>
+    <tr><td>Lead capture</td><td>Broken Google Form (placeholder IDs)</td><td>Contact form → Supabase → email to Shavit</td></tr>
+    <tr><td>Investor solicitation</td><td>"Invest With Me" accredited-investor form</td><td><span class="pill stop">Removed entirely</span></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">1</span>Locked decisions</h2>
+  <p class="sub">Signed off in the brainstorm. Not re-opened during the build.</p>
+  <ol>
+    <li><b>Remove "Invest With Me" entirely.</b> No accredited-investor questions, no investment amounts, no debt/equity fields anywhere. Kills the Reg&nbsp;D securities-solicitation risk.</li>
+    <li><b>Contact is the only intake.</b> Fields: name, email, phone, message. That's it.</li>
+    <li><b>Brand name = "Charger Realty Management"</b> everywhere (nav, footer, intro, titles, schema), subline "by Shavit Rootman." Subsidiary names (Charger Realty, Charger Property Management, Barootman, DSR) kept only where they name a specific company on the Companies page.</li>
+    <li><b>Hosting = Netlify only.</b> No Vercel, no Cloudflare DNS proxying.</li>
+    <li><b>Real build.</b> Vite, path-based routes prerendered to per-page HTML. Drops in-browser Babel + unpkg React.</li>
+    <li><b>Lead backend = Supabase</b> (Postgres + one Edge Function; RLS default-deny).</li>
+    <li><b>Bot protection = Cloudflare Turnstile</b> (standalone widget) + honeypot.</li>
+    <li><b>Email on submit = Resend</b> → notifies Shavit.</li>
+    <li><b>Direct cutover</b> (validated on <code>*.netlify.app</code> first, then flip DNS).</li>
+    <li><b>Remove Google Forms completely.</b> Delete <code>Forms.jsx</code>, the <code>URLS.work</code>/<code>URLS.invest</code> Google-Form links in <code>Shared.jsx</code>, every "Open in Google Forms" fallback link, and the Google-Forms mention in the AccessibilityPage copy. No <code>docs.google.com/forms</code> reference anywhere. The Supabase-backed contact form is the sole intake path.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Page-by-page changes</h2>
+  <table>
+    <tr><th>Page / route</th><th>Change</th></tr>
+    <tr><td><code>/</code> Home</td><td>Remove "Invest With Me" CTA button; keep "Work With Me" (→ contact). Rename brand in hero/nav. Per-page title + meta + OG.</td></tr>
+    <tr><td><code>/companies</code></td><td>Keep subsidiary company names as-is. Investor "Deploy capital / Invest With Me" CTA band → generic "Get in touch" (→ contact). Remove any accredited-investor FAQ copy that implies open solicitation.</td></tr>
+    <tr><td><code>/case-studies</code></td><td>Both bottom CTAs ("Work With Me" + "Invest With Me") → single "Get in touch." Keep testimonials/stats.</td></tr>
+    <tr><td><code>/meet</code></td><td>Rename brand refs; investor CTAs → contact.</td></tr>
+    <tr><td><code>/contact</code></td><td><b>The rebuild.</b> Real form: name, email, phone, message + Turnstile + honeypot. Posts to Edge Function. Success/error states. Keep direct email/phone rows.</td></tr>
+    <tr><td><code>/accessibility</code></td><td>Keep — but its WCAG-AA claim must be earned (see §5) before launch.</td></tr>
+    <tr><td>Nav / Footer / Intro</td><td>"Charger Realty Management" wordmark + "by Shavit Rootman" subline. Delete dead <code>Forms.jsx</code> (Google-Form modal) once contact form replaces it.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Contact form → lead flow</h2>
+  <div class="grid2">
+    <div class="card"><h4>Browser</h4><p class="muted">React form (name/email/phone/message) + Turnstile widget + hidden honeypot. On submit: get Turnstile token, POST JSON to the Edge Function URL. Only the Supabase <b>anon</b> key + Turnstile <b>site</b> key ship in the bundle.</p></div>
+    <div class="card"><h4>Supabase Edge Function</h4><p class="muted">(1) verify Turnstile token server-side; (2) reject if honeypot filled; (3) validate/sanitize fields; (4) rate-limit by IP; (5) insert into <code>leads</code> using <b>service_role</b> (server env only); (6) call Resend to email Shavit. Returns clean success/error JSON.</p></div>
+    <div class="card"><h4>Postgres <code>leads</code></h4><p class="muted">Columns: id, created_at, name, email, phone, message, ip, user_agent. <b>RLS enabled, zero public policies</b> → anon key can't read/insert/update/delete directly. Only the Edge Function (service_role) writes.</p></div>
+    <div class="card"><h4>Secrets</h4><p class="muted"><span class="pill stop">Never in bundle:</span> service_role key, Resend API key, Turnstile secret key. These live only in Supabase Edge Function env vars.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span>SEO deliverables</h2>
+  <ul>
+    <li>Per-page <code>&lt;title&gt;</code> + meta description + canonical.</li>
+    <li>Open Graph + Twitter card tags (title, description, image) per page.</li>
+    <li><code>sitemap.xml</code> (all 6 real routes) + <code>robots.txt</code>.</li>
+    <li>JSON-LD: <code>Organization</code> + <code>LocalBusiness</code> (operator/investor-facing — <b>not</b> residential-listing schema).</li>
+    <li>OG share image + favicon set.</li>
+    <li>Post-cutover: submit sitemap to Google Search Console.</li>
+  </ul>
+  <p class="muted">This only pays off because §1.5 makes each route a real prerendered HTML file — hash routing would have left only the homepage indexable.</p>
+</section>
+
+<section>
+  <h2><span class="n">5</span>ADA / WCAG 2.1 AA — verified, not asserted</h2>
+  <p class="sub">The AccessibilityPage claims conformance. We prove it or the claim comes off.</p>
+  <ul>
+    <li>Run <b>axe</b> + <b>Lighthouse</b> accessibility audits against the real build.</li>
+    <li>Fix every violation: color contrast, focus order + visible focus, image alt text, form labels + error association, <code>prefers-reduced-motion</code> honored, skip-link, semantic landmarks, keyboard-only nav.</li>
+    <li><b>Acceptance:</b> Lighthouse a11y ≥ 95 and zero axe critical/serious violations on every route before launch.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">6</span>Security</h2>
+  <ul>
+    <li><code>_headers</code> (Netlify): CSP scoped to real origins, <code>X-Content-Type-Options: nosniff</code>, <code>Referrer-Policy</code>, <code>X-Frame-Options</code>/frame-ancestors.</li>
+    <li>Production React build (no dev bundles, no in-browser Babel).</li>
+    <li>Server-side validation + rate-limiting in the Edge Function; Turnstile + honeypot on the form.</li>
+    <li><b>Delete <code>uploads/</code></b> (internal screenshots + brief PDF) so it never deploys. Also drop the other stray standalone HTML files from the deploy dir.</li>
+    <li>Check Squarespace DNS for DNSSEC; enable if available.</li>
+    <li>Re-run <code>/security-review</code> (Stage 6 gate) against the built output.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">7</span>Cutover runbook — email-safe, direct <span class="pill info">hardened by Stage-4 review</span></h2>
+  <ol>
+    <li><b>Capture the zone first.</b> Before any edit, export/screenshot the full Squarespace DNS zone and run <code>dig shavitrootman.com MX +short</code>, <code>dig TXT +short</code>, <code>dig _dmarc.shavitrootman.com TXT +short</code>, and the GoDaddy DKIM selector. Record the current Hostinger A value <code>195.35.39.73</code> (rollback target).</li>
+    <li><b>Lower TTL 24–48h ahead.</b> Set the apex + www record TTLs to <code>300s</code> in Squarespace (default is often 4h) so a bad flip — or rollback — propagates in minutes.</li>
+    <li>Build + Supabase + Turnstile + Resend wired; validated on temporary <code>*.netlify.app</code> URL (a real test lead lands in Shavit's inbox; Lighthouse/axe green).</li>
+    <li>In Netlify, add <code>shavitrootman.com</code> + <code>www</code> as a custom domain using <span class="pill stop">EXTERNAL DNS ONLY</span> — <b>never "Netlify DNS" / nameserver delegation.</b> Delegating nameservers would drop the GoDaddy MX + SPF/DKIM/DMARC and bounce all email. Keep nameservers on Squarespace/Google.</li>
+    <li>Also confirm the Squarespace domain is <b>not</b> toggled to "connect to a Squarespace site" — that can override apex records.</li>
+    <li>In Squarespace DNS, change ONLY two records: delete the apex A → <code>195.35.39.73</code> and set apex <b>ALIAS</b> <code>@ → apex-loadbalancer.netlify.com</code> (Squarespace supports ALIAS; use the fallback A → <code>75.2.60.5</code> only if ALIAS is rejected). Set <b>www CNAME → <code>&lt;site&gt;.netlify.app</code></b>. Canonical = apex; 301 www→apex in Netlify. <span class="pill stop">Touch zero MX / TXT records.</span></li>
+    <li>Wait for propagation + Netlify TLS provision. Verify (all of): HTTPS live + valid cert, every route loads, contact form delivers a lead, and <b>three email tests</b> — (a) external → info@ arrives, (b) info@ → external lands in inbox not spam, (c) <code>dig MX/TXT</code> byte-identical to the pre-flip capture.</li>
+    <li><b>Kill Hostinger LAST.</b> Leave the WordPress site running 48h after a fully-verified flip (it's the rollback target and serves stragglers still caching the old record). Rollback = delete ALIAS, re-add A → <code>195.35.39.73</code>.</li>
+    <li>Post-cutover: submit sitemap to Google Search Console; check Squarespace DNS for DNSSEC and enable if available.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">8</span>What I need from you (accounts &amp; keys)</h2>
+  <p class="sub">The build (§2–6) proceeds without these. Deploy + cutover (§7) can't complete until you provide them. <b>Jake creates the accounts / does the DNS action; I never send anything as you.</b></p>
+  <table>
+    <tr><th>Needed for</th><th>What</th><th>Who</th></tr>
+    <tr><td>Lead DB + function</td><td>Supabase project (URL + anon key for me; service_role stays in Supabase)</td><td>Jake creates</td></tr>
+    <tr><td>Email on submit</td><td>Resend account + API key + verified sender domain</td><td>Jake creates</td></tr>
+    <tr><td>Bot protection</td><td>Cloudflare Turnstile site key + secret key</td><td>Jake creates</td></tr>
+    <tr><td>Hosting</td><td>Netlify account (connect repo/dir)</td><td>Jake creates</td></tr>
+    <tr><td>DNS flip</td><td>Squarespace DNS: A + www CNAME edit</td><td>Jake does (I give exact values)</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">9</span>Acceptance criteria <span class="pill info">Stage 5 build gate</span></h2>
+  <p class="sub">The build loop only passes when an executable check confirms all of these. This is the machine-verified gate — "looks done" won't pass it.</p>
+  <ol class="accept">
+    <li><code>npm run build</code> exits 0 and emits <code>dist/</code> with a separate HTML file per route (<code>index.html</code>, <code>companies.html</code> or <code>companies/index.html</code>, etc.).</li>
+    <li>Zero occurrences of <code>Invest With Me</code>, accredited-investor copy, or investment-amount fields anywhere in <code>dist/</code>.</li>
+    <li>Zero occurrences of stray brand strings that should be "Charger Realty Management" in nav/footer/intro/titles (subsidiary names on Companies page exempt).</li>
+    <li>No <code>unpkg</code>, no <code>@babel/standalone</code>, no <code>react.development.js</code> referenced in built HTML.</li>
+    <li>No <code>uploads/</code> dir in <code>dist/</code>, and <b>zero Google Forms footprint</b>: no <code>docs.google.com/forms</code>, no <code>PLACEHOLDER_</code> IDs, no <code>Forms.jsx</code>, no "Open in Google Forms" text anywhere in <code>dist/</code> or the source tree.</li>
+    <li>Each route's HTML contains a unique <code>&lt;title&gt;</code> + meta description + canonical; <code>sitemap.xml</code> + <code>robots.txt</code> present; Organization/LocalBusiness JSON-LD present.</li>
+    <li><code>_headers</code> present with CSP + nosniff + referrer + frame protections.</li>
+    <li>No <code>service_role</code>, Resend, or Turnstile <i>secret</i> key string anywhere in <code>dist/</code>.</li>
+    <li>Lighthouse accessibility ≥ 95 and zero axe serious/critical on <code>/</code> and <code>/contact</code>.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">10</span>Explicitly OUT of scope (v1)</h2>
+  <ul>
+    <li>Tenant portal / Avail integration, rental-availability page, careers page (roadmap — not this launch).</li>
+    <li>HubSpot forwarding (nice-to-have; can add to the Edge Function later).</li>
+    <li>Rootman Holdings restructure (architecture supports it; not built now).</li>
+    <li>The Reg&nbsp;D attorney review — <b>no longer blocking</b> since the investor form is removed, but still recommended before any future investor-facing feature.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">11</span>Build toolchain <span class="pill info">Stage-4 council addendum</span></h2>
+  <p class="sub">Two adversarial reviewers pressure-tested the plan. DNS findings folded into §7. Build findings below.</p>
+  <h3>Toolchain (locked)</h3>
+  <p><b>Vite + React 18 + react-router-dom v6 + <code>vite-react-ssg</code></b> for prerendering. vite-react-ssg runs <code>renderToString</code> in Node (effects never fire → clean, animation-free markup). Rejected: <code>react-snap</code> (unmaintained, Puppeteer-crawls the live 4.6s intro into the HTML), Astro (would force rewriting components into islands).</p>
+  <h3>The conversion (mechanical, ~all 17 files)</h3>
+  <ul>
+    <li>Strip each file's <code>window.X = X</code> / <code>Object.assign(window,…)</code> footer and <code>/* global … */</code> banner → real <code>export</code> + <code>import</code>. Replace <code>const { useState: useAppState } = React</code> aliasing with <code>import { useState } from 'react'</code>.</li>
+    <li>Extract the data globals (<code>SHAVIT_PHOTOS</code>, <code>STOCK</code>, <code>URLS</code>, <code>HERO_VIDEO</code>, <code>CONTACT</code>) — currently defined in <code>Shared.jsx</code> — into a <code>data.js</code> module and import where used. <span class="muted">(Note: reviewer flagged these as "missing" — false alarm, they're in Shared.jsx; just need extracting.)</span></li>
+    <li>Good news: every browser-API call (IntersectionObserver, matchMedia, scrollY, rAF, video) is already inside <code>useEffect</code>/handlers → <b>SSR-safe</b>, nothing crashes at prerender once the window-footers are gone.</li>
+  </ul>
+  <h3>Two prerender traps to fix</h3>
+  <ul>
+    <li><b>LogoIntro</b> (4.6s black curtain) must be <b>client-only</b> (mounted-guard returning <code>null</code> on server) — otherwise every prerendered page ships a black overlay as the first thing Google/users see. Add a reduced-motion guard too.</li>
+    <li><b>Hero <code>&lt;video autoPlay&gt;</code></b>: add a <code>poster=</code> image so first paint is an image (LCP), lazy-init the video, and don't autoplay under <code>prefers-reduced-motion</code>.</li>
+  </ul>
+  <h3>Router change</h3>
+  <p>Replace <code>App.jsx</code>'s hash-<code>switch</code> with a real route list (<code>/</code>, <code>/companies</code>, <code>/case-studies</code>, <code>/meet</code>, <code>/contact</code>, <code>/accessibility</code>) driven by vite-react-ssg → emits <code>companies/index.html</code> etc. with real crawlable text (today the site ships an empty <code>&lt;div id="root"&gt;</code> to crawlers).</p>
+</section>
+
+<div class="gate">
+  <h2>Sign-off</h2>
+  <p>This is the Stage 3 gate. Grill it — anything wrong, missing, or mis-scoped? Approve it and I move to Stage 4 (council/critique), then the acceptance-gated build loop.</p>
+</div>
+
+</main>
+<footer>
+  Charger Realty Management, by Shavit Rootman · migration spec · generated in the bones pipeline · not sent to anyone.
+</footer>
+</body>
+</html>

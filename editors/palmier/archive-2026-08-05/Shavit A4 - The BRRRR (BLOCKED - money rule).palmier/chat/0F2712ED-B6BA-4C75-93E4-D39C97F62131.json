@@ -1,0 +1,21 @@
+{
+  "id" : "0F2712ED-B6BA-4C75-93E4-D39C97F62131",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit A4 - The BRRRR (BLOCKED - money rule)"
+        }
+      ],
+      "id" : "E6B85BD8-F7BB-4046-8B42-8F1CD3490838",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:07:28Z"
+}

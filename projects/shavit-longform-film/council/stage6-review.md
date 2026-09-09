@@ -1,0 +1,6 @@
+# Stage 6 adversarial review (independent agent) — round 1 verdict: DO NOT SHIP
+F1 BLOCKER tag/headline collision ~8/10 beats · F2 hard scrim seam · F3 16:9 pillarboxed · F4 poster=black card · F5 signature black-card cut (spec forbade) · F6 Ch.3 collage missing, dated kitchen under demand line · F7 tree line over intact roof · F8 possible porch-post digits (blur precaution) · F9 captions below house standard · F10 H3 line-swap only.
+Privacy/claims: CLEAN (no addresses, no banker identifiers, no IG chrome, no desktop pixels, claims on approved list). H3/H7 head-swaps verified byte-identical from 3s. Audio drop-out verified (-87dB true silence ~30s). Design 5.5/10.
+
+# Round 2 (after iter-3 re-render) — orchestrator verification, frame-by-frame:
+F1 fixed (tags above headlines, brass underscores, no collision at any sampled two-line beat) · F2 fixed (smooth gradient) · F3 fixed (blurred-plate side fill, professional convention) · F4 fixed (poster = warm reward frame + wordmark) · F5 fixed (signature overlays dimming warm frame) · F6 fixed (hero tile collage at 38s) · F7 fixed (bare-branch roofline plate under the tree line) · F9 fixed (7-platform pack, UTMs, hashtags, audio note). Machine gates added to check.sh so F3/F4/F5 cannot regress. All gates green on re-run.

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The House That Came Back — 60s Brand Film Spec · Shavit Rootman</title>
+<style>
+  :root{
+    --black:#000000; --ink:#0A0A0A; --panel:#111111; --line:#222222;
+    --white:#FFFFFF; --grey:#9A9A9A; --dim:#666666;
+    --brass:#B08D57; --gold:#FFC000;
+    --font:'Inter',-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--black);color:var(--white);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px 120px;}
+  ::selection{background:var(--gold);color:var(--black);}
+
+  /* masthead */
+  header{padding:88px 0 56px;border-bottom:1px solid var(--line);}
+  .kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);margin-bottom:20px;}
+  h1{font-size:clamp(38px,6vw,64px);font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:1.02;}
+  h1 .gold{color:var(--gold);}
+  .sub{margin-top:22px;font-size:17px;color:var(--grey);max-width:640px;}
+  .meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+  .meta b{color:var(--white);font-weight:600;}
+  .rule{height:1px;background:var(--brass);width:64px;margin:26px 0 0;}
+
+  /* sections */
+  section{padding:72px 0 8px;border-bottom:1px solid var(--line);}
+  .num{font-size:12px;letter-spacing:.3em;color:var(--brass);text-transform:uppercase;margin-bottom:14px;}
+  h2{font-size:30px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:10px;}
+  .lede{color:var(--grey);font-size:16px;max-width:680px;margin-bottom:40px;}
+  h3{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin:34px 0 12px;}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 40px;}
+  th{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);}
+  td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#D8D8D8;}
+  td.t{color:var(--gold);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  td.k{color:var(--white);font-weight:600;white-space:nowrap;}
+  .tablebox{overflow-x:auto;}
+
+  /* intent card */
+  .intent{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);padding:28px 32px;margin:0 0 46px;font-size:18px;max-width:760px;}
+  .intent em{color:var(--gold);font-style:normal;font-weight:700;}
+  .intent .src{display:block;margin-top:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+
+  /* timeline */
+  .timeline{display:flex;height:64px;border:1px solid var(--line);margin:6px 0 12px;overflow:hidden;}
+  .tseg{position:relative;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;border-right:1px solid var(--black);}
+  .tlabels{display:flex;font-size:10px;color:var(--dim);margin-bottom:44px;font-variant-numeric:tabular-nums;}
+  .tlabels span{border-left:1px solid var(--line);padding:2px 0 0 6px;}
+
+  /* storyboard */
+  .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin:10px 0 30px;}
+  .frame{background:var(--panel);border:1px solid var(--line);}
+  .screen{aspect-ratio:9/16;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;border-bottom:1px solid var(--line);}
+  .screen .tc{position:absolute;top:10px;left:12px;font-size:9px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums;}
+  .screen .wm{position:absolute;top:10px;right:12px;font-size:8px;letter-spacing:.18em;color:rgba(255,255,255,.35);}
+  .screen .type{font-weight:800;text-transform:uppercase;line-height:1.06;letter-spacing:-.01em;}
+  .screen .type .u{box-shadow:inset 0 -3px 0 var(--brass);}
+  .screen .tag{font-size:8.5px;letter-spacing:.22em;color:var(--brass);text-transform:uppercase;margin-bottom:8px;}
+  .fmeta{padding:14px 16px 18px;}
+  .fmeta .fk{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:700;}
+  .fmeta p{font-size:12.5px;color:var(--grey);line-height:1.5;}
+  .g-before{background:linear-gradient(160deg,#1c2126 0%,#0e1114 55%,#07090b 100%);}
+  .g-after{background:linear-gradient(160deg,#3a2f1e 0%,#241c10 55%,#120e07 100%);}
+  .g-split{background:linear-gradient(90deg,#141a1f 0 50%,#2e2517 50% 100%);}
+  .g-black{background:#000;}
+  .counters{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+  .counters .c{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;}
+  .counters .cl{font-size:8px;letter-spacing:.24em;color:var(--brass);}
+  .sig{display:flex;flex-direction:column;align-items:center;justify-content:center !important;text-align:center;gap:8px;}
+  .housemark{width:34px;height:34px;border:2px solid var(--gold);border-bottom:none;position:relative;transform:rotate(45deg);margin-bottom:10px;}
+  .sig .wordmark{font-size:15px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;}
+  .sig .rules{width:56px;border-top:1px solid var(--brass);border-bottom:1px solid var(--brass);height:5px;}
+  .sig .cap{font-size:8px;letter-spacing:.3em;color:var(--grey);text-transform:uppercase;}
+
+  /* tokens */
+  .tokens{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:8px 0 36px;}
+  .tok{border:1px solid var(--line);}
+  .tok .swatch{height:74px;}
+  .tok .ti{padding:12px 14px;font-size:12px;}
+  .tok .ti b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;}
+  .tok .ti span{color:var(--dim);font-size:11px;}
+
+  .do{color:#7FBF7F;font-weight:700;} .dont{color:#C96A6A;font-weight:700;}
+  .callout{background:var(--panel);border:1px solid var(--line);padding:22px 26px;margin:14px 0 36px;font-size:14px;color:#D8D8D8;max-width:820px;}
+  .callout b{color:var(--gold);}
+  ul.plain{list-style:none;margin:0 0 36px;}
+  ul.plain li{padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line);font-size:14px;color:#D8D8D8;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:19px;width:12px;height:1px;background:var(--brass);}
+  .grill{counter-reset:q;}
+  .grill li{counter-increment:q;padding-left:44px;}
+  .grill li::before{content:counter(q,decimal-leading-zero);width:auto;height:auto;background:none;top:10px;color:var(--gold);font-weight:800;font-size:13px;}
+  footer{padding:56px 0 0;color:var(--dim);font-size:12px;letter-spacing:.14em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Shavit Rootman · Brand Film · Spec for Sign-off · Stage 3 of 10</div>
+  <h1>The House<br>That Came <span class="gold">Back</span></h1>
+  <p class="sub">The definitive ~60-second pinned brand film for @shavitness. Vertical-first. No voiceover.
+  Every constraint Shavit has stated is locked into the system below. <b style="color:var(--gold);">v4.3 = the re-cut after Shavit
+  rejected the promoted v3 cut (7/3: "Hi, I vote against it") + Jake's spec-review notes</b> — camera moves are the motion language
+  (Ken Burns demoted to ≤20% seasoning), ≈30-word cap with the story told in pictures and people, 1–2 rationed AI walkthroughs,
+  dollar figures gone everywhere, Midwest-Americana music without losing luxury, closer verbatim: "Building communities, locally."</p>
+  <div class="meta">
+    <span>Master <b>9:16 · 1080×1920 · 30fps</b></span>
+    <span>Runtime <b>~60s</b></span>
+    <span>Voice <b>None — type + music</b></span>
+    <span>Logo motion <b>Static (no pulse)</b></span>
+    <span>Motion <b>Camera moves · Ken Burns ≤20%</b></span>
+    <span>Status <b>v4.3 — signed + council-hardened · BUILDING</b></span>
+  </div>
+  <div class="rule"></div>
+</header>
+
+<section>
+  <div class="num">00-A · Postmortem</div>
+  <h2>Why v3 died — Shavit's words → v4 deltas</h2>
+  <p class="lede">Full feedback on record (iMessage, 7/3, "Hi, I vote against it" + numbered follow-ups + Jake's redirect). Every line maps to a spec delta below — nothing is loose.</p>
+  <div class="tablebox"><table>
+    <tr><th style="width:330px;">Verbatim feedback</th><th>v4 delta</th></tr>
+    <tr><td class="k">"It looks a little AI. I'll just send you lighter photos" / "This photo below is AI, I have another of 34 Mead"</td>
+      <td>AI-looking stills purged. Shavit's incoming real/lighter photos become the primary plates; outpainted 9:16 property plates <span class="dont">banned</span> (§04). 34 Mead swapped the day his photo lands.</td></tr>
+    <tr><td class="k">Jake: "I don't like the bullshit Ken Burns stuff… it should look extremely professional" · revised 7/3: "ken burns doesn't need to be banned but it can't be the main theme"</td>
+      <td>Primary motion = slow, architecture-stable AI camera moves on every hero still (§04); Ken Burns demoted to transitional seasoning, ≤20% of still-derived runtime, never on hook/chapter-opens/reward. Machine-checked (§06).</td></tr>
+    <tr><td class="k">Jake 7/3: "less words and more animations or photos but tell a story… human touch… cater to the Midwest" · "marketers are doing AI walkthroughs — incorporate" · hooks: H1 + H3, not H7 · ending: site intro or current draft's</td>
+      <td>≈30-word hard cap, story must read type-off (§03 Word budget) · ≥3 human/Midwest beats (§03 Human touch) · 1–2 rationed AI walkthroughs (§04) · cut list = H1/H3 (§02B) · two approved endings (§01 Signature).</td></tr>
+    <tr><td class="k">"Song - off! … more midwest living, nonetheless do not compromise luxury, and in relations to enterprise and 4th of July. Happy birthday America/Midwest living video"</td>
+      <td>New bed: Midwest-Americana × luxury-enterprise (§03 Music). 4th-of-July framing option — <b>note: July 4 is tomorrow; ship-window decision at the gate</b>.</td></tr>
+    <tr><td class="k">"Change MI, OH, IN to → Michigan, Ohio, Indiana"</td><td>Full state names everywhere on screen. OCR acceptance check updated.</td></tr>
+    <tr><td class="k">"Remove all portfolio value moving forward, including website. Instead: Made in America, local to the Midwest"</td>
+      <td>$12M+ and every dollar figure struck from the film (proof beat rebuilt, §01). Website already done + committed 7/3. New proof line: <b>MADE IN AMERICA · LOCAL TO THE MIDWEST</b>. Acceptance now fails on ANY $ character on screen — including the Ch.1 "+$140K" stake, struck by default (Jake can overrule at the gate).</td></tr>
+    <tr><td class="k">"Change all messaging from Building communities, profitably → Building communities, locally."</td><td>Closer line is his verbatim: <b>"BUILDING COMMUNITIES, LOCALLY."</b></td></tr>
+    <tr><td class="k">"Cleveland Heights — window on top isn't centered. Remove and use another photo" / "This picture was used twice, change to another property - perhaps 17 Lo Presto"</td>
+      <td>Off-center Cleveland Heights plate pulled (awaiting his replacement). Duplicate-frame check added to acceptance; dupe slot re-assigned to 17 Lo Presto.</td></tr>
+    <tr><td class="k">Audiences (his list): tenants · investors/lenders · aspiring investors · community members — "Can I trust this company?"</td>
+      <td>Intent line re-aimed at trust + local stewardship, not portfolio flex (§00).</td></tr>
+  </table></div>
+  <div class="callout"><b>Silver lining, on record:</b> killing the $12M+ claim also kills the Reg D solicitation flag from the website review — dollar-value portfolio claims next to investor-facing messaging was the single biggest legal exposure. "Made in America, local to the Midwest" is safer and stronger.</div>
+</section>
+
+<section>
+  <div class="num">00 · Intent</div>
+  <h2>One sentence, or it doesn't ship</h2>
+  <div class="intent">
+    After 60 seconds, a tenant, lender, or partner who has never heard of Shavit believes:
+    <em>"I can trust this company — they rebuild real houses in real Midwest towns, and they stay."</em>
+    <span class="src">Hormozi filter: content exists to make the viewer better off · reputation, not virality · measured in profile taps &amp; DMs, not views</span>
+  </div>
+  <p class="lede">This is the film Shavit asked for on 5/22 ("preferred pinned brand video… strong brand message") built from
+  the three true stories he told on 7/2. It is proof-driven — every claim on screen is something he actually did.</p>
+
+  <h3>The audience, in Shavit's own words (via Jake, 7/3)</h3>
+  <div class="tablebox"><table>
+    <tr><th style="width:280px;">Audience (verbatim)</th><th>What the film gives them</th></tr>
+    <tr><td class="k" style="white-space:normal;">Prospective &amp; current tenants — "professional, responsive, quality-focused"</td><td>Ch.1's "REBUILT. RE-RENTED. A HOME AGAIN." + the reward-house warmth + the human-touch beats: this is what living in one of his homes looks like.</td></tr>
+    <tr><td class="k" style="white-space:normal;">Investors, lenders, partners — "disciplined stewards of capital"</td><td>Proof beat (50+ doors, three states) + Ch.2 (a bank manager who watched the work chose them) + Ch.3 (a buyer wanted the whole set). Third-party validation, no self-praise.</td></tr>
+    <tr><td class="k" style="white-space:normal;">People learning RE investing / entrepreneurship — "real projects, real lessons"</td><td>The chapters ARE case studies in 12s form; the content engine (§05B) releases them as standalone teaching reels after the pin.</td></tr>
+    <tr><td class="k" style="white-space:normal;">Members of the communities — "revitalization creates value for everyone"</td><td>The closer "BUILDING COMMUNITIES, LOCALLY." + "MADE IN AMERICA, LOCAL TO THE MIDWEST" + Midwest-texture beats. The town is the hero's home, never the punchline.</td></tr>
+  </table></div>
+
+  <h3>His five visitor questions — each must be answerable after one watch</h3>
+  <div class="tablebox"><table>
+    <tr><th style="width:340px;">Question (verbatim)</th><th style="width:100px;">Answered by</th><th>How</th></tr>
+    <tr><td class="k" style="white-space:normal;">"Can I trust this company?"</td><td class="t">Whole film</td><td>Every frame is a real property he actually rebuilt — provenance-checked. Trust is the film's one job (§00 intent).</td></tr>
+    <tr><td class="k" style="white-space:normal;">"Would I want to invest or partner with this company?"</td><td class="t">3–12s · 24–43s</td><td>Proof beat + the banker + the portfolio buyer — other people's money already said yes.</td></tr>
+    <tr><td class="k" style="white-space:normal;">"Would I want to rent from this company?"</td><td class="t">12–24s · 43–54s</td><td>"A HOME AGAIN." + the finished, warm reward interior (the AI-walkthrough hero slot).</td></tr>
+    <tr><td class="k" style="white-space:normal;">"Will I learn something valuable by following this page?"</td><td class="t">§05B</td><td>Honestly: the 60s film teases it; the chapter-reels + carousels that follow deliver it. The pin is the door, not the classroom.</td></tr>
+    <tr><td class="k" style="white-space:normal;">"Does this company make a positive impact on the communities where it operates?"</td><td class="t">43–57s</td><td>The loop closes on the same house made whole + "BUILDING COMMUNITIES, LOCALLY." — impact stated in his own words.</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="num">01 · Structure</div>
+  <h2>The 60-second beat map</h2>
+  <p class="lede">Hormozi skeleton: hook in 3 seconds, proof up front, one open loop held for 50 seconds, specific stories with real stakes, reward that closes the loop, signature last.</p>
+
+  <div class="timeline">
+    <div class="tseg" style="flex:3;background:#1A1D21;color:#fff;">Hook</div>
+    <div class="tseg" style="flex:6;background:#15130D;color:var(--gold);">Proof</div>
+    <div class="tseg" style="flex:12;background:#111;color:#fff;">Ch.1 The Tree</div>
+    <div class="tseg" style="flex:10;background:#15130D;color:#fff;">Ch.2 The Banker</div>
+    <div class="tseg" style="flex:7;background:#111;color:#fff;">Ch.3 Demand</div>
+    <div class="tseg" style="flex:12;background:#1c160a;color:var(--gold);">Reward</div>
+    <div class="tseg" style="flex:3;background:#000;color:var(--brass);border-right:none;">Sig</div>
+  </div>
+  <div class="tlabels">
+    <span style="flex:3;">0s</span><span style="flex:6;">3s</span><span style="flex:12;">9s</span>
+    <span style="flex:10;">21s</span><span style="flex:7;">31s</span><span style="flex:12;">38s</span><span style="flex:3;">50–53s</span>
+  </div>
+
+  <div class="tablebox"><table>
+    <tr><th style="width:90px;">Time</th><th style="width:130px;">Beat</th><th>On screen</th><th>Why (council-hardened)</th></tr>
+    <tr><td class="t">0–3s</td><td class="k">HOOK</td>
+      <td>Hard cut into the strongest camera-move exterior. Line rises on three beats: <b>"FIFTY DOORS. THREE STATES. ONE STANDARD."</b> Music enters on the cut, cold. (Jake's pick, 7/3 — locked.)</td>
+      <td>80% decide in 3s; no logo intro. Numbers-forward proof for the lender audience, zero $ signs, house never disparaged — fits the warm July-4 frame.</td></tr>
+    <tr><td class="t">3–9s</td><td class="k">PROOF</td>
+      <td>The hook's promise paid visually: three before→after ghost-dissolves with <b>accelerating tempo — MICHIGAN 2.5s · OHIO 2.0s · INDIANA 1.5s</b> — and <b>MADE IN AMERICA, LOCAL TO THE MIDWEST</b> overlaid ON the Indiana dissolve (a reveal caption, never its own static beat). Hard cut out of the Indiana after directly into Ch.1's wrecked before — the collision is a retention event. <span class="dont">No dollar figures, no two-letter abbreviations.</span> Council rule: a dissolve runs ONLY where a verified same-property before exists — else that state degrades to a single after plate with its name (a mismatched-property "dissolve" is a fake before/after on a trust film).</td>
+      <td>Council r2: 9s of identical-mechanic dissolves sagged exactly on IG's 3–10s cliff — compressed to 6s, accelerating, no standstill tagline card.</td></tr>
+    <tr><td class="t">12–24s</td><td class="k">CH.1 — THE TREE</td>
+      <td>61 Salem, 9–21s (on screen: <b>"SALEM STREET"</b>, no number). Before: <b>"A TREE WENT THROUGH THE ROOF."</b> → rebuild sequence → warm after: <b>"REBUILT. RE-RENTED."</b> stake: <b>"A HOME AGAIN."</b> Rebuild sequence default = <b>re-cut of the real 61 Salem split-screen film</b>; the §04 frames-mode construction effect is a CANDIDATE upgrade, used only if (a) an angle-matched real anchor pair is found (scrub the split-screen + River Street films; or Shavit's photos) and (b) Shavit approves the isolated clip in Saturday's preview.</td>
+      <td>Verified assets exist (photos + the split-screen film). <b>"+$140K" struck by default</b> — it's a dollar-value claim and Shavit said remove ALL value figures; Jake can overrule at the gate if he reads Shavit's rule as portfolio-total only. All lines ≤7 words.</td></tr>
+    <tr><td class="t">24–36s</td><td class="k">CH.2 — THE BANKER</td>
+      <td>Rehab footage, 21–31s (any documented property, no address anywhere). Brass tag: <b>ONE OF OUR REHABS</b>. Type: <b>"A BANK MANAGER WATCHED IT ALL."</b> → <b>silence drop, hold 0.8–1.2s</b> — the bed LIFTS for ~1s before the cut (fall from a local peak, not from quiet), the frame <b>freezes and snaps near-B&W on the drop</b>, then snaps warm on <b>"THEN ASKED US TO BUY HER HOUSE."</b> and the bed re-enters on a low swell.</td>
+      <td>Council r2: the spike must exist for MUTED viewers (the desat-freeze→warm-snap is the visual event) and the hold is capped — dead air past ~1.2s reads as a broken video. Trimmed 12s→10s. De-identification rules unchanged.</td></tr>
+    <tr><td class="t">36–43s</td><td class="k">CH.3 — DEMAND</td>
+      <td>31–38s: rapid collage tiles pop on consecutive beats — capped at the <b>6–8 most visually distinct</b> heroes (mix exterior/interior, day/dusk; 10 near-identical exteriors smear into wallpaper), last tile holds a full beat. Type (canonical): <b>"ONE BUYER."</b> → <b>"THE WHOLE SET."</b> → gold payoff: <b>"OWN. OPERATE. REPEAT."</b> (Jake-picked slot A final, 7/4 — the business model as three verbs; operator-dry, zero fact-check, sets up the signature's "REAL ESTATE, OPERATED.").</td>
+      <td>Council r2: the beat map and storyboard had two different scripts — canonized to the 4-word staccato version. "Whole set" still avoids the unconfirmed 3-vs-4 count (Saturday confirm).</td></tr>
+    <tr><td class="t">43–54s</td><td class="k">REWARD</td>
+      <td>38–50s: return to the hook property — today, warm, finished — <b>mandatory interior spectacle at ~43–48s</b> (the film's second visual weapon: Shavit-approved frames-mode interior build-up, else a slow real-interior walkthrough move), then the closer: <b>"BUILDING COMMUNITIES, LOCALLY."</b> with the brass sub-line <b>"MIDWEST GROWN. MIDWEST KEPT."</b> beneath it (Jake-picked slot B, 7/4) "SAME HOUSE. NEW STANDARD." is cut — the same-house visual already says it; that is the point of the loop check.</td>
+      <td>Council r2: the back half had zero spectacle after 24s — the interior build-up is now mandatory, and the word budget needed the redundant line back. Closer is Shavit's verbatim (7/3).</td></tr>
+    <tr><td class="t">50–53s</td><td class="k">SIGNATURE</td>
+      <td><b>Two approved endings (Jake 7/3), picked at build review:</b> (a) the shavitrootman.com intro animation adapted as the outro — the site's LogoIntro/blueprint house-draw, brand-exact, ties the film to the website; or (b) the current draft's proven signature (gold house-mark draws on once then static, SHAVIT / ROOTMAN, twin brass rules, "REAL ESTATE, OPERATED."). ~1.5s draw + 1.5s hold either way.</td>
+      <td>Both are one-time draw-ons over the dimming final frame — no black-card cut, <span class="dont">not a pulse</span>. (a) is the upgrade if the web animation ports cleanly to 30fps video; (b) is the zero-risk fallback.</td></tr>
+  </table></div>
+  <div class="callout"><b>Runtime ~53s (gate: 52–62s — floor lowered by council r2).</b> Chapter durations are deliberately unequal (12/12/7) so tempo escalates — three identical 11s blocks is where type-only films lose the mid-roll. Lo Presto, 46 W South and the Trio become <b>future chapters</b> the day their footage lands in Shavit's Drive folders — the template takes them as drop-ins.</div>
+</section>
+
+<section>
+  <div class="num">02 · Storyboard</div>
+  <h2>Key frames, 9:16</h2>
+  <p class="lede">Type comps at true proportions. Placeholder gradients stand in for footage; cool = before, warm = after. The Shavit watermark sits top-right on every frame at 35% white.</p>
+  <div class="board">
+    <div class="frame">
+      <div class="screen g-before">
+        <div class="tc">00:00–00:03</div><div class="wm">SHAVIT·ROOTMAN</div>
+        <div class="tag">Hook · cold open</div>
+        <div class="type" style="font-size:19px;">Fifty doors.<br>Three states.<br><span class="u">One standard.</span></div>
+      </div>
+      <div class="fmeta"><div class="fk">F1 · Hook</div><p>Strongest real exterior with a slow AI camera move (no Ken Burns on the hook — §03). One line-group per beat. Cut lands with the first downbeat.</p></div>
+    </div>
+    <div class="frame">
+      <div class="screen g-split">
+        <div class="tc">00:03–00:12</div><div class="wm">SHAVIT·ROOTMAN</div>
+        <div class="tag">Proof · counters</div>
+        <div class="counters">
+          <div><div class="c" style="font-size:14px;">MICHIGAN</div><div class="cl">Dissolve 1</div></div>
+          <div><div class="c" style="font-size:14px;">OHIO · INDIANA</div><div class="cl">Dissolves 2–3</div></div>
+          <div><div class="c" style="font-size:12px;">MADE IN AMERICA</div><div class="cl">Local to the Midwest</div></div>
+        </div>
+      </div>
+      <div class="fmeta"><div class="fk">F2 · Proof</div><p>Ghost-dissolve before→afters behind; counters tick to value on the beat, brass underscore draws under each.</p></div>
+    </div>
+    <div class="frame">
+      <div class="screen g-after">
+        <div class="tc">00:12–00:24</div><div class="wm">SHAVIT·ROOTMAN</div>
+        <div class="tag">Ch.1 · Salem Street</div>
+        <div class="type" style="font-size:17px;">A tree went through the roof.<br>Rebuilt. Re-rented.<br><span style="color:var(--gold);">A home again.</span></div>
+      </div>
+      <div class="fmeta"><div class="fk">F3 · The Tree</div><p>Street name only — no house number. Cool→warm shift inside the chapter; gold reserved for the stake line. Verified assets: photos + the existing split-screen film.</p></div>
+    </div>
+    <div class="frame">
+      <div class="screen g-after">
+        <div class="tc">00:24–00:36</div><div class="wm">SHAVIT·ROOTMAN</div>
+        <div class="tag">Ch.2 · One of our rehabs</div>
+        <div class="type" style="font-size:17px;">A bank manager watched it all.<br><span style="color:var(--gold);">Then asked us to buy her house.</span></div>
+      </div>
+      <div class="fmeta"><div class="fk">F4 · The Twist</div><p>Fully de-identified: no address, no town, no "two doors down." Music drops to silence on the held beat between lines — the spike is the silence.</p></div>
+    </div>
+    <div class="frame">
+      <div class="screen g-split">
+        <div class="tc">00:36–00:43</div><div class="wm">SHAVIT·ROOTMAN</div>
+        <div class="tag">Ch.3 · Demand</div>
+        <div class="type" style="font-size:17px;">One buyer.<br><span style="color:var(--gold);">The whole set.</span></div>
+      </div>
+      <div class="fmeta"><div class="fk">F5 · The Portfolio</div><p>Rapid tile pops from the 10 verified portfolio heroes; 7s chapter — tempo escalation, not a third identical block.</p></div>
+    </div>
+    <div class="frame">
+      <div class="screen g-black sig" style="justify-content:center;">
+        <div class="tc">00:50–00:53</div>
+        <div class="housemark"></div>
+        <div class="wordmark">Shavit<br>Rootman</div>
+        <div class="rules"></div>
+        <div class="cap">Real Estate, Operated.</div>
+      </div>
+      <div class="fmeta"><div class="fk">F6 · Signature</div><p>Mark draws on once, then holds static. Slow 4% push-in. No pulse, no loop, no shimmer.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="num">02B · Hooks</div>
+  <h2>The v4.2 hook bank — ten new angles, audience-tagged</h2>
+  <p class="lede">Rebuilt per Jake 7/3: the old bank leaned on one mechanic (disparage the before, promise the after) — H1 and "every town has a house like this" both died for it. These ten are different machines: each opens the film for a specific one of Shavit's four audiences (§00), and none insults the house, the street, or the town. Hormozi still applies: 80% decide in 3 seconds. Jake picks 1–2; H3 stays available as the staccato fallback.</p>
+  <div class="tablebox"><table>
+    <tr><th style="width:44px;">#</th><th style="width:330px;">Line (over first frame)</th><th style="width:150px;">Opens for</th><th>Mechanic + first frame</th></tr>
+    <tr><td class="t" style="color:#7FBF7F;">W7 ✓</td><td class="k">"FIFTY DOORS. THREE STATES. ONE STANDARD."</td><td>Lenders · everyone</td><td><b>THE HOOK — Jake locked it 7/3 ("Defenetly like 7," workshop round).</b> Numbers-forward promise; proof beat pays it with full state names; reward echoes it ("SAME HOUSE. NEW STANDARD."). Zero $ signs, zero abbreviations, nothing disparaged. Frame: strongest finished exterior, slow camera move.</td></tr>
+    <tr><td class="t" style="color:#C96A6A;">N1 ✕</td><td class="k" style="text-decoration:line-through;color:var(--dim);">"AMERICA TURNS 250. THIS HOUSE TURNS ONE."</td><td>—</td><td><span class="dont">Killed by Jake 7/3 evening:</span> "it DOES NOT need to be 4th of July theme — it just needs to have midwestern american values." Time-pegged hooks are out; W7 leads, N2 is the swap.</td></tr>
+    <tr><td class="t">N2 ★</td><td class="k">"SOME INVESTORS FLIP. WE STAY."</td><td>Investors · community</td><td>Thesis-first differentiator; answers "disciplined stewards of capital" in five words. Frame: Shavit or crew on site, working — not posing.</td></tr>
+    <tr><td class="t">N3</td><td class="k">"WE RENT HOMES WE'D LIVE IN."</td><td>Tenants</td><td>The tenant-trust open — no other RE page leads with the renter. Frame: warm finished interior (the walkthrough hero).</td></tr>
+    <tr><td class="t">N4</td><td class="k">"THIS IS WHAT DISCIPLINED CAPITAL LOOKS LIKE."</td><td>Investors / lenders</td><td>Shavit's own phrase turned into a dare; the film then proves it. Frame: mid-rehab studs, clean site.</td></tr>
+    <tr><td class="t">N5</td><td class="k">"THE NEIGHBORS NOTICED FIRST."</td><td>Community</td><td>Third-party vouch as curiosity — who noticed what? Pays off with the banker chapter. Frame: street-level exterior, quiet.</td></tr>
+    <tr><td class="t">N6</td><td class="k">"WATCH A HOUSE GET ITS LIFE BACK."</td><td>Community · learners</td><td>Warm transformation promise — the house is a patient, not a punchline. Frame: before exterior, but graded gentle, not grim.</td></tr>
+    <tr><td class="t">N7</td><td class="k">"FIRST DAY. FINAL WALKTHROUGH. TEN SECONDS."</td><td>Learners · investors</td><td>Format promise — tells you exactly what you'll get and when. Frame: hard split, day-1 left / finished right.</td></tr>
+    <tr><td class="t">N8</td><td class="k">"HOUSES ONLY DIE IF YOU LET THEM."</td><td>Learners</td><td>Philosophy open — the lesson-shaped hook for the education audience. Frame: worst before, held static one beat.</td></tr>
+    <tr><td class="t">N9</td><td class="k">"BRICK BY BRICK. BLOCK BY BLOCK."</td><td>Community</td><td>Anthem cadence — scales the story from one house to the neighborhood; sets up "BUILDING COMMUNITIES, LOCALLY." Frame: hands laying brick / crew detail.</td></tr>
+    <tr><td class="t">N10</td><td class="k">"MIDWEST BUILT. MIDWEST KEPT."</td><td>Community · tenants</td><td>Four words, pairs with the "MADE IN AMERICA, LOCAL TO THE MIDWEST" proof line — kept is the promise flippers can't make. Frame: porch + lawn Americana.</td></tr>
+  </table></div>
+  <div class="callout"><b>★ = my two to cut as head-swaps:</b> N1 for the July-4 (250th) moment, N2 as the evergreen that outlives the holiday. Jake picks the final pair. Every hook above maps to a named audience — the audience tables in §00 define what each group needs; the hook is that group's doorway into the same 60 seconds.</div>
+
+  <h3>Prior bank (v3) — retained for the record</h3>
+  <div class="tablebox"><table>
+    <tr><th style="width:50px;">#</th><th style="width:390px;">Line (over first frame)</th><th>Angle</th></tr>
+    <tr><td class="t" style="color:#C96A6A;">H1 ✕</td><td class="k" style="text-decoration:line-through;color:var(--dim);">"EVERYBODY DROVE PAST THIS HOUSE."</td><td><span class="dont">Killed by Jake 7/3</span> ("I def don't like…") — blame-the-crowd energy fights the warm July-4 reframe.</td></tr>
+    <tr><td class="t">H3 ◦</td><td class="k">"BOARDED UP. GUTTED. WRITTEN OFF."</td><td>Fallback. Staccato, one word-group per beat over three rapid before frames. Jake liked it 7/3; kept available if no N-hook beats it.</td></tr>
+    <tr><td class="t">H7</td><td class="k">"THE WORST HOUSE ON THE STREET. WATCH."</td><td>Demoted per Jake 7/3 ("don't like H7") — stays in the bank, not in the cut.</td></tr>
+    <tr><td class="t">H4</td><td class="k">"50 DOORS STARTED WITH ONE NOBODY WANTED."</td><td>Proof + origin fused; counters become the payoff instead of the setup.</td></tr>
+    <tr><td class="t">H5</td><td class="k">"WE BUY THE HOUSES EVERYBODY GAVE UP ON."</td><td>Thesis-first manifesto open — closest to prior film v2's cold open.</td></tr>
+    <tr><td class="t">H6</td><td class="k">"THIS IS WHAT A WRITE-OFF LOOKS LIKE. WAIT."</td><td>Explicit curiosity command.</td></tr>
+    <tr><td class="t">H8</td><td class="k">"ONE BUYER WANTED THE WHOLE SET."</td><td>Demand-side open; de-counted until Shavit confirms the number.</td></tr>
+    <tr><td class="t">H10</td><td class="k">"SAME HOUSE. SIXTY SECONDS APART."</td><td>Meta-hook on the format; promises the ghost-dissolve payoff immediately.</td></tr>
+    <tr><td class="t" style="color:#C96A6A;">H2 ✕</td><td class="k" style="text-decoration:line-through;color:var(--dim);">"The bank manager watched us rehab the house two doors down…"</td><td><span class="dont">Killed by council:</span> 17 words (unreadable in 3s), forces a chapter restructure (not a head-swap), and re-identifies the banker.</td></tr>
+    <tr><td class="t" style="color:#C96A6A;">H9 ✕</td><td class="k" style="text-decoration:line-through;color:var(--dim);">"Nobody invests here. That's the point."</td><td><span class="dont">Killed by council:</span> disinvestment subtext — insults the communities the closing line claims he builds.</td></tr>
+  </table></div>
+  <div class="callout">All hooks are true head-swaps: identical film from second 3 onward. Winner picked internally at the weekly review (Jake + Shavit thumbs-up), not by public A/B — one pinned slot, Insights not yet unlocked.</div>
+</section>
+
+<section>
+  <div class="num">03 · Design system</div>
+  <h2>Brand tokens — locked to the live site</h2>
+  <p class="lede">Identical to shavitrootman.com's design system. Uniform colors were Shavit's explicit ask (5/22, 36:34). One accent does one job each.</p>
+  <div class="tokens">
+    <div class="tok"><div class="swatch" style="background:#000;border-bottom:1px solid var(--line);"></div><div class="ti"><b>Canvas</b><span>#000000 — every frame mounts on black</span></div></div>
+    <div class="tok"><div class="swatch" style="background:#FFF;"></div><div class="ti"><b>Type</b><span>#FFFFFF — all narrative type</span></div></div>
+    <div class="tok"><div class="swatch" style="background:#B08D57;"></div><div class="ti"><b>Brass</b><span>#B08D57 — rules &amp; underscores only</span></div></div>
+    <div class="tok"><div class="swatch" style="background:#FFC000;"></div><div class="ti"><b>Gold</b><span>#FFC000 — the mark + one stake line per chapter</span></div></div>
+  </div>
+
+  <div class="tablebox"><table>
+    <tr><th style="width:180px;">Element</th><th>Rule</th></tr>
+    <tr><td class="k">Typeface</td><td>Inter (Helvetica fallback), 800 uppercase for narrative type, tight tracking (-1%); tabular numerals for counters. Two weights max on any frame.</td></tr>
+    <tr><td class="k">Type scale</td><td>Hook/stake lines ≈ 92px @1080w · chapter lines ≈ 64px · tags/labels 28px letterspaced. Max 7 words on screen at once.</td></tr>
+    <tr><td class="k">Safe zones</td><td>All type inside 9:16 center-safe: 220px clear top (IG UI), 320px clear bottom (caption/CTA), 60px sides. 16:9/4:5 exports come from Higgsfield reframe + re-set type, <i>not</i> a blind center-crop (a 16:9 crop band is only y≈656–1263 — most type would fall outside it).</td></tr>
+    <tr><td class="k">Vertical treatment</td><td>All source photography is landscape. Three sanctioned treatments: (1) <b>AI camera-move clip</b> (§04) mounted on black with type in the dead zones — the default; (2) <b>stacked split</b> — before top / after bottom for dissolve beats; (3) <b>real video footage</b> reframed. <span class="dont">No outpainting of property imagery</span> — v3 wrote this rule and the shipped cut broke it (outpainted 9:16 plates are part of what read "a little AI" to Shavit). v4 enforces it: zero generated architecture, period. The plates916/ outpaints are retired from the film.</td></tr>
+    <tr><td class="k">Motion</td><td><b>Primary language = AI camera moves on real photos</b> (§04) — 4–8s per shot, one move per shot, dolly/push/lateral only, no whip or orbit on interiors. <b>Ken Burns is seasoning, not the theme</b> (Jake 7/3 revision): allowed on brief transitional/montage beats only, capped at ≤20% of still-derived runtime, and <span class="dont">never</span> on the hook, chapter opens, or the reward. Type layer keeps word-by-word rise-ins and ghost-dissolves for before→after. Type/graphics rendered in Remotion; Python/librosa builds the beat map; ffmpeg composites and encodes.</td></tr>
+    <tr><td class="k">Word budget</td><td><b>Less type, more picture (Jake 7/3).</b> Hard cap ≈30 words across the whole film: hook line · one setup + one payoff line per chapter · the closer. The story must read with the sound off AND the type off — before→after motion carries the narrative; type punctuates it. No frame holds more than one line at a time.</td></tr>
+    <tr><td class="k">Human touch</td><td>At least 3 human/Midwest-texture beats from verified footage: Shavit or crew mid-rehab (the existing reel footage), porch/lawn/street warmth, flag or small-town detail for the July-4 angle. People make it a story about a community, not a slideshow about siding — his stated audience (tenants, neighbors, local lenders) sees themselves in it. <b>Values register (Jake 7/3): Midwestern-American values, evergreen — work ethic, craft, stewardship, community, permanence.</b> Every texture beat must express one of these; patriotic set-dressing (flags, holiday cues) is optional garnish, never the theme.</td></tr>
+    <tr><td class="k">Grade</td><td>Before = cool, desaturated (-20 sat, cold shift). After = warm, lifted. Full warm saturation is <i>earned</i> — only from the Reward beat on.</td></tr>
+    <tr><td class="k">Addresses</td><td><span class="dont">No full street addresses on screen, ever.</span> Street names or project nicknames only ("SALEM STREET", "THE TRIO"). Protects tenants (occupied), the properties (vacant mid-rehab = theft vector), and third parties. Machine-checked via OCR at acceptance.</td></tr>
+    <tr><td class="k">Watermark</td><td>"SHAVIT·ROOTMAN" 35% white, top-right, every frame except the signature. <span class="do">Watermark OK</span> — his ask.</td></tr>
+    <tr><td class="k">Logo motion</td><td><span class="dont">NO pulsing logo</span> — draw-on once at 54s, then fully static. Machine-checked (see §06).</td></tr>
+    <tr><td class="k">Music</td><td><b>New bed (Shavit 7/3: "Song - off!"):</b> Midwest-Americana × luxury-enterprise — think restrained acoustic/orchestral Americana (warm guitar or piano motif, low strings, room to breathe), <span class="dont">not</span> country-radio, <span class="dont">not</span> stock-corporate. Framing revised (Jake 7/3 evening): <b>evergreen Midwestern-American values — NOT holiday-pegged.</b> Work, craft, community, permanence; "do not compromise luxury" stands. Track locked: Heartland (candidate #5) — it is values-Americana, not fireworks-Americana, so it survives the redirect. librosa beat map re-derived from the chosen track; <b>full drop-out to silence on the Ch.2 held beat</b> stays — that mechanism was never the complaint.</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="num">04 · The Higgsfield answer</div>
+  <h2>v4: Higgsfield is the motion engine, not the polish layer</h2>
+  <p class="lede">v3 rationed AI motion to ≤5 hero frames and filled the rest with Ken Burns — that ratio is exactly what Jake rejected ("bullshit Ken Burns… looks like a student made it"). v4 inverts it. The credibility rule is unchanged: <b style="color:var(--gold);">AI may move the camera, never the house.</b>
+  Every pixel of property imagery originates from a real photo of the real property.</p>
+  <div class="tablebox"><table>
+    <tr><th style="width:70px;"></th><th style="width:260px;">Use</th><th>How</th></tr>
+    <tr><td class="do">YES</td><td class="k">Camera moves on EVERY still that appears</td><td>Image-to-video (Kling 3 class — best architecture stability; <i>models_explore recommend</i> confirms per-shot) with camera-motion-only prompts: slow dolly-in through the frame, lateral track, gentle push. <b>One move per shot, 4–8s, slow = luxury.</b> Every clip frame-diffed/eyeballed vs its source still — warped siding, bent window lines, or invented geometry = reject and re-roll. Stills that fail repeatedly run as stacked-split or inside real footage — <span class="dont">never Ken Burns</span>.</td></tr>
+    <tr><td class="do">YES</td><td class="k">AI interior walkthroughs — <b>1–2 hero moments, rationed</b></td><td>The current RE-marketing trend (Kling-class walkthroughs) — Jake's ask 7/3, incorporated with the credibility rule intact: slow push <i>along the photo's own axis</i> into a living space (reward-house interior is the prime slot). The camera never turns a corner — passing beyond the photo's edge forces the model to invent rooms, which is exactly the "looks a little AI" Shavit flagged. Frame-diffed like every motion clip; invented geometry = reject.</td></tr>
+    <tr><td class="do" style="color:#E0B050;">CAND.</td><td class="k">Construction build-up effect — <b>candidate upgrade, twice-gated</b> (Jake's ask 7/3, demoted by council r2)</td><td>Kling <b>frames mode</b>: start frame = a REAL before/mid-rehab photo (Salem Street has studs shots + the split-screen film), end frame = the REAL finished photo, same angle. Prompt (from the Market U tutorial, adapted): <i>"A timelapse video capturing the entire construction process, featuring motion blur"</i> — + dolly-in for interiors. The house visibly rebuilds itself INTO the true footage — generated pixels exist only in motion between two real anchors, so the credibility rule holds. ≤2 uses: Ch.1 studs→after, optionally the reward interior.</td></tr>
+    <tr><td class="dont">NO</td><td class="k">Tutorial-exact fake construction states</td><td>The source tutorial has Nano Banana invent a partially-built version of the house (or a night-scene variant). That renders a state that never existed on a real property — exactly the "looks a little AI" Shavit rejected. Only usable with Jake + Shavit's explicit ok; default dead.</td></tr>
+    <tr><td class="do">YES</td><td class="k">Upscale to 2K/4K</td><td>Shavit's phone photos/older stills → <i>upscale_image / upscale_video</i> before motion-gen. Cleaner source = fewer i2v artifacts = fewer re-rolls.</td></tr>
+    <tr><td class="do">YES</td><td class="k">Signature animation</td><td>The house-mark draw-on rendered as a clean motion asset (once, then static).</td></tr>
+    <tr><td class="do">YES</td><td class="k">Reframe assists</td><td><i>reframe</i> to help derive 16:9/4:5 exports from the 9:16 master where the safe-zone crop needs help.</td></tr>
+    <tr><td class="dont">NO</td><td class="k">Generated property imagery</td><td>No invented interiors, exteriors, or "enhanced" rooms that didn't exist. Misrepresentation risk on a reputation asset.</td></tr>
+    <tr><td class="dont">NO</td><td class="k">AI people / testimonials</td><td>The bank-manager story is told in type, anonymous. No synthetic faces, ever.</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="num">05 · Assets</div>
+  <h2>We build with what we have — verified inventory</h2>
+  <p class="lede">Per Jake at spec review: the film builds NOW from existing material + research. Shavit's Drive folders are a <b>future</b> pipeline, not a blocker. Inventory verified 7/2:</p>
+  <div class="tablebox"><table>
+    <tr><th style="width:300px;">Source</th><th style="width:90px;">Count</th><th>What it gives the film</th></tr>
+    <tr><td class="k" style="color:var(--gold);">Shavit's incoming photos (7/3 — he offered)</td><td class="t">TBD</td><td><b>Primary v4 plates:</b> "lighter" real photos to replace anything reading AI · a new Cleveland Heights exterior (current one has the off-center top window — pulled) · a real 34 Mead (he flagged the used one as AI) · 17 Lo Presto (his suggested swap for the duplicated frame). Build starts on verified existing assets; these drop in as they land.</td></tr>
+    <tr><td class="k" style="color:#C96A6A;">Confirmed-dead frames (Jake attached them 7/3)</td><td class="t">2+</td><td>(1) The Cleveland Heights white-circle frame — off-center gable window, Shavit's explicit pull; (2) the stacked M/OH/IN collage frame — two-letter tags AND its exterior/interior plates read AI (over-smooth lawn/staging). Neither frame, nor its plates, may appear in v4 in any form.</td></tr>
+    <tr><td class="k">Website property heroes (site repo)</td><td class="t">8</td><td>Finished-home money shots: River Street, 2217 Parkview, West Side, 61 Salem, Larchmere, East Saint Joe, Budlong, Second Chance Ranch — the proof beat + chapter afters. <b><span style="color:#C96A6A;">34 Mead and Cleveland Heights are struck by name</span></b> (Shavit 7/3) — a builder may not pull them from any source. Re-verification = provenance row tracing to an original real photograph (site repo origin or Shavit-sent); AI-origin = banned.</td></tr>
+    <tr><td class="k">~/Desktop/Shavit Images + Before (⚠ see pre-step)</td><td class="t">66 + 17</td><td>Screenshots of Shavit's own IG posts — the befores and interiors. <b>Council finding: these are full-desktop captures</b> (2880×1800 with browser chrome and Jake's private desktop visible) and counts include carousel near-duplicates. Usable only after the pre-step below.</td></tr>
+    <tr><td class="k">Prior films + 6 reels (local FINAL folder)</td><td class="t">8 videos</td><td>Motion segments to re-cut — incl. the 61 Salem split-screen (Ch.1's property); poster frames; the proven outro signature.</td></tr>
+    <tr><td class="k">Research lane — IG native re-pull</td><td class="t">—</td><td>Re-pull the same posts' images at native resolution via the logged-in Instagram session (his own account's posts — his content). Replaces screenshot quality; screenshots become the fallback.</td></tr>
+    <tr><td class="k" style="text-decoration:line-through;color:var(--dim);">Zillow/Redfin listing photos</td><td class="t" style="color:#C96A6A;">✕</td><td><span class="dont">Struck by council:</span> listing photos belong to the listing photographer, not the property owner — DMCA/demand-letter exposure on a pinned commercial film, and upscaling makes derivatives. Only usable with a written license, which the Drive pipeline makes unnecessary.</td></tr>
+  </table></div>
+  <div class="callout"><b>Mandatory asset pre-step (privacy + rights + quality):</b> (1) batch-crop every screenshot to the photo rectangle only — <span class="dont">no un-cropped frame may enter the pipeline</span> (Jake's desktop, tabs and email subjects are visible in the raw files); (2) re-pull IG natives where possible; (3) every asset gets a <b>provenance row</b> (source + rights basis) in <code style="color:var(--gold);">assets/manifest.csv</code> — no provenance, no composite; (4) Higgsfield upscale, then grade. All assets live in this repo's <code style="color:var(--gold);">assets/</code> (already copied — Desktop is iCloud-synced and evicts files).</div>
+
+  <h3>Future ask — Shavit's Drive folders (no rush, zero time pressure on him)</h3>
+  <p class="lede" style="margin-bottom:20px;">When his teams get around to filling the MI/OH/IN folders, chapters are drop-in slots — fresh footage replaces research imagery with zero re-edit. Priority whenever it happens:</p>
+  <div class="tablebox"><table>
+    <tr><th style="width:70px;">Priority</th><th style="width:230px;">Folder</th><th>Needed for the film</th></tr>
+    <tr><td class="t">P0</td><td class="k">17 Lo Presto (MI · Past)</td><td>Before + after: street-facing exterior, 2–3 finished interiors, any mid-demo shot — becomes its own future chapter (the street-revival story, told house-first).</td></tr>
+    <tr><td class="t">P0</td><td class="k">46 W South — Airbnb (MI · Past)</td><td>Before + after exteriors and finished interiors of <b>this property only</b> — no neighboring homes (the banker chapter stays de-identified by design).</td></tr>
+    <tr><td class="t">P0</td><td class="k">The TRIO — 33 Barry · 11 Ludlam · 115 Oak (MI · Ongoing)</td><td>One strong exterior of each, any state — the collage beat works even mid-rehab. (On screen they'd be "THE TRIO," no numbers.)</td></tr>
+    <tr><td class="t">P1</td><td class="k">60 S Norwood — "local luxury" · 43 Howder · 15 E Saint Joe</td><td>Best afters → proof-beat dissolves 2 &amp; 3.</td></tr>
+    <tr><td class="t">P2</td><td class="k">Everything else (OH / IN)</td><td>Feeds the proof montage + the template's future chapters (every finished property becomes a 15s chapter later — the scalable system he asked for).</td></tr>
+  </table></div>
+  <div class="callout"><b>How the ask lands lightly:</b> not "Shavit, upload photos" — instead a one-page checklist his site crews follow at every project finish (10 shots: street-facing, 3 interiors, kitchen, bath, one detail, plus the ugliest 3 befores at project start). Shavit delegates once; the pipeline feeds itself.</div>
+</section>
+
+<section>
+  <div class="num">05B · Operating cadence</div>
+  <h2>The low-touch content engine — Shavit's time ≈ 15 min/week</h2>
+  <p class="lede">Jake's constraint from spec review: Shavit doesn't have time to upload lots of content. So the system never depends on him producing anything. One asset pool, everything templated, his only job is a weekly thumbs-up.</p>
+  <div class="tablebox"><table>
+    <tr><th style="width:200px;">Who</th><th>Does what</th><th style="width:170px;">Time cost</th></tr>
+    <tr><td class="k">The asset pool</td><td>93+ existing photos + 8 videos already cover months of content. Every finished film chapter is also a standalone 10–15s reel; every before/after pair is a carousel; captions come off the existing caption-pack voice.</td><td class="t">Already paid</td></tr>
+    <tr><td class="k">Jake + this pipeline</td><td>Batch-produces a week of posts (2–3, per the agreed ceiling) in one session from the templates. Schedules everything. Monitors Insights once Creator mode unlocks.</td><td class="t">1 batch session/wk</td></tr>
+    <tr><td class="k">Shavit</td><td>One weekly review: an iMessage/email with next week's 2–3 posts as previews — reply 👍 or "swap #2." No uploading, no writing, no calls.</td><td class="t">≤15 min/wk</td></tr>
+    <tr><td class="k">Shavit's crews (delegated once)</td><td>The 10-shot finish-day checklist per completed project — replaces any need for Shavit to gather media ever again.</td><td class="t">10 min/project, not his</td></tr>
+  </table></div>
+  <div class="callout"><b>Next-week plan derives from the film itself:</b> the master film is the pinned anchor; its three chapters release as standalone reels in the following weeks; before/after stills become feed carousels between reels. One production effort → a month of calendar. (Full 90-day calendar already exists in the IG remodel spec — this slots into it.)</div>
+</section>
+
+<section>
+  <div class="num">06 · Deliverables &amp; acceptance</div>
+  <h2>What ships, and what "done" means</h2>
+  <h3>Exports (all from the one master)</h3>
+  <ul class="plain">
+    <li><b>9:16 · 1080×1920</b> — IG pinned reel (primary) + TikTok + YT Shorts (Shorts cut trimmed ≤60s exactly)</li>
+    <li><b>16:9 · 1920×1080</b> — website hero, YouTube, LinkedIn</li>
+    <li><b>4:5 · 1080×1350</b> — IG feed</li>
+    <li>Caption pack per platform (same voice as the existing reel caption files) + poster-frame still for the pin</li>
+  </ul>
+  <h3>Acceptance checklist (the Stage-5 build gate — rewritten by council to be actually machine-checkable)</h3>
+  <ul class="plain">
+    <li><b>ffprobe:</b> runtime 52–62s · 1080×1920 · 30fps · H.264 yuv420p · +faststart moov before mdat · <b>loudnorm:</b> −14 LUFS integrated ±1 (check bounds exactly [−15,−13])</li>
+    <li><b>OCR pass over sampled frames:</b> first narrative type ≤1.0s · no digit-leading street address anywhere · no wordmark before 50s · watermark present on sampled non-signature frames · every on-screen claim matches the approved claims list (FIFTY DOORS. THREE STATES. ONE STANDARD. / MICHIGAN / OHIO / INDIANA / MADE IN AMERICA, LOCAL TO THE MIDWEST / OWN. OPERATE. REPEAT. / MIDWEST GROWN. MIDWEST KEPT. / BUILDING COMMUNITIES, LOCALLY. / story lines verbatim) · <b>ZERO "$" characters anywhere in the film</b> (Shavit 7/3) · no two-letter state abbreviations (MI/OH/IN forbidden strings)</li>
+    <li><b>Ken-Burns budget test (revised per Jake 7/3 — capped, not banned):</b> for every still-derived clip, estimate global motion as an affine warp of the source frame — near-zero residual = Ken Burns, parallax residual = true camera move. PASS iff Ken-Burns clips total ≤20% of still-derived runtime AND none lands on the hook, a chapter open, or the reward. Threshold calibrated on one known-good Kling clip + one deliberate Ken Burns clip before the loop starts.</li>
+    <li><b>Word-budget check:</b> canonical line set v5 (Jake's slot A+B lines locked 7/4) — OCR unique narrative word count ≤ 50 (excl. watermark/signature) · no frame carries more than one narrative line · ≤7 words per frame</li>
+    <li><b>Silence-spike check:</b> the Ch.2 drop-out hold is 0.8–1.2s in the beat map · desat-freeze frame present on the drop (visual event for muted viewers)</li>
+    <li><b>Plate hygiene (pre-composite):</b> OCR every plate BEFORE compositing — FAIL on any IG chrome, browser/desktop text, or baked caption text (incl. "CLEVELAND, OH"-style lower thirds in reused reel segments — crop above the caption band) · captions.md and all deliverable text files pass the same zero-$/no-abbrev grep</li>
+    <li><b>Human review integrity:</b> checks/visual_review.md must carry a human-signed reviewer line and postdate the master — a builder-generated attestation file is an automatic FAIL · every AI-motion clip has a diff image vs its source still in checks/motion_diffs/</li>
+    <li><b>Duplicate-plate check:</b> perceptual-hash every composited plate — no photo appears in two different beats (Shavit's dupe catch, 7/3)</li>
+    <li><b>No-pulse (periodicity) test:</b> FFT of the frame-diff signal over the signature segment — monotonic push-in passes, any oscillating component fails. (Raw frame-diff would false-fail the sanctioned 4% push-in.)</li>
+    <li><b>Brand-hex check on pre-composite layers:</b> the Remotion type/graphics layer PNGs contain only the four brand hexes (±antialias tolerance) — checked before ffmpeg compositing, where dissolves/chroma make it unverifiable</li>
+    <li><b>Beat alignment:</b> the edit's cut-list timestamps (incl. dissolve midpoints) verified against an independently recomputed librosa beat map, ±80ms</li>
+    <li><b>Same-house loop check:</b> hook frame and reward frame are the same property — <b>different photographs</b> (different shot/crop/time-of-day); the hook/reward pair is exempt from the duplicate-plate phash collision at the stated threshold, everything else is not</li>
+    <li><b>Provenance:</b> every composited asset has a manifest.csv row (source + rights basis); every AI-motion clip has a reviewed diff vs its source still; zero un-cropped screenshot frames in the pipeline</li>
+  </ul>
+  <h3>Resolved at spec review v2 (Jake, 7/2)</h3>
+  <ul class="plain">
+    <li><span class="do">✓</span> Beats approved · hook variants added · asset-first build · low-touch cadence (§05B)</li>
+    <li><span class="do">✓</span> Claims cleared as already-public; banker story runs anonymous</li>
+  </ul>
+  <h3>Changed by council round 2 (v4.3) — folded after Jake's v4.2 sign-off</h3>
+  <ul class="plain">
+    <li><b>Retention:</b> word budget canonized (48/42 vs a busted ~56); proof beat 9s→6s accelerating with the tagline overlaid; Ch.2 silence fully specced (0.8–1.2s hold, muted-viewer visual event, bed lift-then-drop); Ch.3 canonical "ONE BUYER. / THE WHOLE SET."; reward interior spectacle mandatory; "SAME HOUSE. NEW STANDARD." cut; runtime ~53s (gate 52–62).</li>
+    <li><b>Client risk:</b> Saturday written-approval gate on the cut itself (no go = the date slips); construction effect twice-gated (real angle-matched anchors + Shavit's isolated-clip approval), default = real split-screen re-cut; 34 Mead + Cleveland Heights struck by name from inventory; the "+$140K overrule" hatch deleted — zero dollar figures, no exceptions; Meta "AI info" label decision added to the Saturday package; N1 only if posting ON the 4th.</li>
+    <li><b>Feasibility:</b> check.sh rewritten from scratch (OCR suite, KB-budget affine test, phash dupes, plate hygiene, human-signed review — the old gate would have PASSED the rejected film and the builder self-attested its own "human review"); build_video.py declared a rewrite (it still built the v3 cut verbatim); proof dissolves require verified property/state mapping with single-plate fallback; kling3_0 frames-mode verified live at 10–20 credits/gen (budget was 10× overstated); 10-credit smoke gen doubles as KB-threshold calibration.</li>
+  </ul>
+  <h3>Changed by council (v3) — what Jake re-signed</h3>
+  <ul class="plain">
+    <li><b>Chapters re-anchored to properties with verified footage:</b> Ch.1 = Salem Street tree-collapse (+$140K), Ch.2 = banker story fully de-addressed, Ch.3 = portfolio demand over the 10 verified heroes. Lo Presto / 46 W South / Trio footage become future drop-in chapters when Shavit's Drive folders fill.</li>
+    <li><b>Banker de-identified for real:</b> no address, no "two doors down," no town, no financing detail — protects his warmest banking relationship. Suggested cheap insurance: Shavit sends her a one-line heads-up.</li>
+    <li><b>No house numbers on screen</b> (tenants, vacant-property security); hooks aim at the house, never the street/community (his referral pipeline lives there); H2 + H9 killed.</li>
+    <li><b>Zillow/Redfin lane struck</b> (photographer copyright); screenshot assets must be cropped (privacy) and re-pulled at native res; provenance manifest required.</li>
+    <li><b>Stack: Remotion type layer</b> + librosa beat map + ffmpeg; acceptance checks rewritten to be genuinely machine-verifiable; runtime ~57s.</li>
+    <li><b>The Saturday approval package (council r2 — the hard gate before Stage 8):</b> the full cut goes to Shavit Saturday with four asks in one message: (1) <b>written approval of the video itself</b> — no written go, no Sunday post, the date slips; (2) FIFTY DOORS confirmed as-of 7/5; (3) buyer count ("whole set" vs "all four"); (4) his call on Instagram's "AI info" label + the isolated construction-effect clip if it made the cut. The $12M+ confirmation is moot (figure removed at his request, which also clears the Reg D flag).</li>
+  </ul>
+</section>
+
+<footer>
+  Spec v4.3 · 2026-07-03 · bones-pipeline stage 3 (Shavit's rejection + Jake's spec-review notes folded in — full feedback in §00-A) · changes cheap now, expensive after render
+</footer>
+
+</div>
+</body>
+</html>

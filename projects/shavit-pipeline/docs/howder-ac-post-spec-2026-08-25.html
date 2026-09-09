@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Howder AC · standalone post spec</title>
+<style>
+  :root{--bg:#0b0b0c;--card:#131315;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a8a49c;
+    --brass:#B08D57;--gold:#FFC000;--mono:ui-monospace,Menlo,monospace}
+  *{box-sizing:border-box}
+  body{margin:0 auto;max-width:1040px;padding:40px 20px 90px;background:var(--bg);
+    color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+    margin:44px 0 14px;padding-top:18px;border-top:1px solid var(--line)}
+  .sub{color:var(--dim);margin:0 0 22px}
+  .sub code{font-family:var(--mono);font-size:12px;color:var(--ink)}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:14px 16px;margin:18px 0 8px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 14px}
+  .quote{border-left:3px solid var(--gold);padding:10px 14px;background:#000a;border-radius:6px;
+    font-size:15px;margin:0}
+  .quote .who{display:block;font:600 11px/1 var(--mono);letter-spacing:.1em;color:var(--dim);
+    text-transform:uppercase;margin-top:8px}
+  .phone{max-width:470px;background:#000;border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;font-size:14.5px;line-height:1.6}
+  .phone .handle{font:700 13px/1 Inter;margin:0 0 12px;color:var(--ink)}
+  .phone .handle span{color:var(--dim);font-weight:400}
+  .phone p{margin:0 0 12px}
+  .phone .span{border-bottom:1px dotted var(--brass);cursor:help}
+  .phone .sig{color:var(--dim)}
+  .fc{max-width:470px;background:#000;border:1px dashed var(--line);border-radius:14px;
+    padding:14px 22px;font:13px/1.7 var(--mono);color:#7aa7d9;margin-top:10px}
+  .fc .lbl{font:600 10.5px/1 var(--mono);letter-spacing:.1em;color:var(--dim);
+    text-transform:uppercase;display:block;margin-bottom:8px}
+  .hero{max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px}
+  .hero img{width:100%;border-radius:6px;display:block}
+  .hero .cap{font:600 12px/1.3 Inter;margin:8px 0 2px}
+  .hero .src{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{font:600 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+    text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  td.id{font-family:var(--mono);font-size:12px;color:var(--gold);white-space:nowrap}
+  td.src{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+  .flag{border-left:3px solid var(--gold)}
+  .flag b{color:var(--gold)}
+  pre{background:#000;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+    font:12.5px/1.7 var(--mono);color:var(--ink);overflow-x:auto}
+  .note{color:var(--dim);font-size:13px}
+.chg{box-shadow:0 0 0 2px var(--gold)}
+</style>
+</head>
+<body data-spec="howder-ac-post" data-annot-targets=".card, .hero, h2, .phone, .fc">
+
+<h1>Howder AC · standalone post</h1>
+<p class="sub">Instagram · single image · pipeline id <code>howder-ac-story</code> ·
+split out of <code>howder-unit-b-story</code> per Jake, 8/25 · ships AFTER the Unit B carousel</p>
+
+<div class="revlog">
+  <h4>Revision log</h4>
+  <ul>
+    <li><span class="rev">r6 · 8/25 1:05 PM</span> · per Jake: split screen killed. Single full-bleed frame of his 11:57 condenser photo, no chips, same copy. The AC is the whole card.</li>
+    <li><span class="rev">r5 · 8/25 1:00 PM</span> · per Jake: the blank-wall bedroom shot on the INSIDE half is out, replaced with the bedroom-window angle (06_bedroom-window.jpg) — wall head prominent, window light, floor context. Split and copy unchanged.</li>
+    <li><span class="rev">r4 · 8/25 12:50 PM</span> · per Jake: split screen stays, the WORDS change. Hillsdale line deleted everywhere. Headline is his "EVERY ROOM, AIR CONDITIONED." and the subs just describe the hardware: "New mini splits: heating and cooling, room by room." / "Two condensers outside, wall units inside." Caption matches the card. Facts swapped to howder.everyroom + howder.ac-desc (ac-rare and minisplits superseded).</li>
+    <li><span class="rev">r3 · 8/25 12:40 PM</span> · two changes. (1) Jake: the card must EXPLAIN the AC — it is now a SPLIT SCREEN, OUTSIDE condensers | INSIDE the bedroom-window wall head, with feature lines: "Mini splits throughout: heating and cooling, room by room." / "Each room sets its own temperature." / "Something that is not common in Hillsdale." The feature lines are composed spec register, on the confirm list. (2) PHOTO SWAP from the 11:56 scan: his 11:44 condenser photo was AI-cleaned and gained fake recessed lights ("Not that photo, sorry!"); the card and the photo file now use his REAL 11:57 IMG_4830. No AI-altered photo anywhere in the post.</li>
+    <li><span class="rev">r2 · 8/25 12:25 PM</span> · per Jake: this is a RENDERED post, not a caption-only spec. The card is built in the deck language — gold NEW FEATURE chip over his condenser photo, "AIR CONDITIONING." headline, his rarity line + mini splits as the subs, house mark. Rendered at docs/howder-ac-post-spec/final/01_ac-new-feature.jpg and shown below.</li>
+    <li><span class="rev">r1 · 8/25 12:15 PM</span> · initial spec. AC left the Unit B carousel (its r16) and becomes this post: Shavit's 11:44 condenser photo as the single hero, a three-line caption in his words (address · his 11:34 AC-rarity sentence · mini splits), 7 hashtags, 2 new facts, 3 verify flags.</li>
+  </ul>
+</div>
+
+<h2 id="brief">The brief</h2>
+<div class="card">
+  <blockquote class="quote">I would also like the air-conditioning to be features, which is something that is not common in Hillsdale.
+    <span class="who">Shavit · iMessage 8/25 11:34 AM</span>
+  </blockquote>
+</div>
+<div class="card">
+  <blockquote class="quote">[the condenser photo] · Jake replied "Perfect!"
+    <span class="who">Shavit · iMessage 8/25 11:44 AM · Jake 8/25: "take out the airconditioning and make it its own post"</span>
+  </blockquote>
+</div>
+
+<h2 id="post">The post, rendered</h2>
+<div class="hero chg">
+  <img src="howder-ac-post-spec/final/01_ac-new-feature.jpg" alt="Rendered post: NEW FEATURE chip over the condenser photo, AIR CONDITIONING headline" />
+  <p class="cap">The card as it posts · single full-bleed condenser frame, NEW FEATURE eyebrow, feature lines</p>
+  <span class="src">howder-ac-post-spec/final/01_ac-new-feature.jpg · 1080x1350</span>
+</div>
+<p class="note" style="margin-top:10px">Source photo, untouched: <a href="../photos/43-howder-ac/condensers-0825.png" style="color:var(--gold)">condensers-0825.png</a> (his REAL 11:57 IMG_4830 — the 11:44 send was AI-altered and is discarded).</p>
+
+<h2 id="caption">Caption, as it posts</h2>
+<p class="note">Dotted underline = a claim span tied to a registry fact (hover for the id).</p>
+<div class="phone">
+  <p class="handle">shavitness <span>· Hillsdale, Michigan</span></p>
+  <p><span class="span" title="prop.howder.street / city / state · r134032, reused from the Unit B post">Howder Street | Hillsdale, Michigan</span></p>
+  <p><span class="span" title="howder.everyroom · Jake's wording 8/25, Shavit confirms every room has a head — NEW fact, pending TTY add">Every room, air conditioned.</span></p>
+  <p><span class="span" title="howder.ac-desc · composed description per Jake, grounded in the two photos — NEW fact, pending TTY add">New mini splits: heating and cooling, room by room. Two condensers outside, wall units inside.</span></p>
+  <p class="sig">– Charger Property Management</p>
+</div>
+<div class="fc">
+  <span class="lbl">First comment (subset of his 7/15 list + one craft tag)</span>
+  #ChargerPropertyManagement #HillsdaleMI #RentalProperty #PropertyManagement
+  #Renovation #MichiganRealEstate #AirConditioning
+</div>
+
+<h2 id="flags">Flags to settle at verify</h2>
+<div class="card flag"><b>1 · Is the building 43 Howder?</b> He sent the photo in the Howder AC
+  conversation and two condensers fit the duplex, but the frame shows no address. He confirms.</div>
+<div class="card flag"><b>2 · "Mini splits throughout" was written about Unit 1</b> (his 7/13 reel
+  notes), and the caption adds a composed tail "in both units of the duplex." He confirms both, or
+  the caption falls back to the pure trim "Mini splits throughout." (coach.md rewrite).</div>
+<div class="card flag"><b>3 · The three feature lines are composed</b> (spec register per Jake): heating and cooling room by room, per-room temperature. Standard mini-split behavior and consistent with the equipment in both photos, but HE confirms they hold for these units.</div>
+<div class="card flag"><b>4 · Sequencing.</b> Ships after the Unit B carousel so the two Howder posts
+  do not stack in one day. Suggested slot: the next posting day in the Thu/Fri + Sun cadence.</div>
+
+<h2 id="facts">Registry map · 2 new facts + 3 reused</h2>
+<table>
+  <tr><th>id</th><th>span</th><th>source</th></tr>
+  <tr><td class="id">howder.ac-rare</td><td>Air conditioning, something that is not common in Hillsdale.</td><td class="src">his 11:34 text, trimmed · NEW</td></tr>
+  <tr><td class="id">howder.minisplits</td><td>Mini splits throughout,</td><td class="src">his 7/13 reel notes · NEW</td></tr>
+  <tr><td class="id">prop.howder.street/city/state</td><td>Howder Street | Hillsdale, Michigan</td><td class="src">r134032 · reused</td></tr>
+</table>
+
+<h2 id="ship">Ship checklist</h2>
+<pre>
+./shavit.sh fact add                      # howder.ac-rare + howder.minisplits (TTY)
+./shavit.sh lint   howder-ac-story
+./shavit.sh verify howder-ac-story        # TTY, confirm flags 1-2
+./shavit.sh review howder-ac-story
+./shavit.sh ship   howder-ac-story --date &lt;after the carousel&gt;   # only on explicit go
+</pre>
+
+<script src="../spec-annotate.js"></script>
+</body>
+</html>

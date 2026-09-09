@@ -1,0 +1,21 @@
+{
+  "id" : "4F32F788-00BB-4BD7-9CD7-41C20DED3018",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit B2 - Never An Impossible Situation (HELD)"
+        }
+      ],
+      "id" : "AA095235-374A-4FDE-99E0-B44CF7786264",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:09:22Z"
+}

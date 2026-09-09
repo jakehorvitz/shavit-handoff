@@ -1,0 +1,4 @@
+# Deploy config — guards against publishing the repo root (which holds secrets files).
+# The site is ALWAYS published from site/dist. See RUNBOOK.md for the deploy command.
+[build]
+  publish = "site/dist"

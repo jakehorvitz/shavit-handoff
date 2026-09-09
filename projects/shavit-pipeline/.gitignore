@@ -1,0 +1,36 @@
+# Reel media stays on disk, never in git history.
+# As of 2026-07-28 the working tree carries ~6.9GB across ~4,400 source photos,
+# Drive pulls, frame sequences and renders. Documents and build scripts are tracked,
+# the pixels are not.
+
+# Stills, renders, audio, exports
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.mp4
+*.mov
+*.mp3
+*.wav
+*.pdf
+*.xlsx
+
+# Audio stems and fonts. Added 2026-07-28 after a `git add -A` swept in an 8MB
+# music_draft.m4a plus three duplicated copies of the same .ttf files.
+*.m4a
+*.aac
+*.flac
+*.ttf
+*.otf
+*.woff
+*.woff2
+
+# Frame sequences and render scratch
+**/frames/
+**/*_frames/
+
+# Python / OS
+__pycache__/
+*.pyc
+.DS_Store

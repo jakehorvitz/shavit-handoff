@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>43 Howder Unit B — website gallery update (8/24)</title>
+<style>
+  :root{--bg:#0b0b0c;--card:#131315;--line:#2a2a2e;--ink:#f4f2ec;--dim:#a8a49c;
+    --brass:#B08D57;--gold:#FFC000;--mono:ui-monospace,Menlo,monospace}
+  *{box-sizing:border-box}
+  body{margin:0 auto;max-width:1040px;padding:40px 20px 90px;background:var(--bg);
+    color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+    margin:44px 0 14px;padding-top:18px;border-top:1px solid var(--line)}
+  .sub{color:var(--dim);margin:0 0 22px}
+  .sub code{font-family:var(--mono);font-size:12px;color:var(--ink)}
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:14px 16px;margin:18px 0 8px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+  .shot{position:relative;background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:10px;overflow:hidden}
+  .shot img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;display:block;background:#000}
+  .shot img.portrait{aspect-ratio:3/4;object-fit:cover}
+  .shot .cap{font:600 12px/1.3 Inter,system-ui,sans-serif;margin:8px 0 2px}
+  .shot .src{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+  .shot .ord{position:absolute;top:14px;left:14px;background:#000c;color:var(--gold);
+    font:700 11px/1 var(--mono);border-radius:999px;padding:4px 8px}
+  .chg{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 0 18px rgba(255,192,0,.25)}
+  .chg::after{content:"UPDATED";position:absolute;top:14px;right:14px;background:var(--gold);
+    color:#000;font:800 9.5px/1 var(--mono);letter-spacing:.08em;border-radius:4px;padding:4px 6px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .pair .lbl{font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--dim);margin-bottom:6px}
+  .pair .after .lbl{color:var(--gold)}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 15px;
+    color:var(--dim);margin:10px 0}
+  .note b{color:var(--ink)}
+  pre{background:#000;border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    overflow-x:auto;font:12.5px/1.6 var(--mono);color:var(--ink)}
+  footer{margin-top:48px;color:var(--dim);font-size:12.5px}
+</style>
+</head>
+<body data-spec="howder-b-gallery" data-annot-targets=".shot, h2, .pair">
+
+<h1>43 Howder Unit B — gallery update</h1>
+<p class="sub">shavitrootman.com listing card, id <code>howder-b</code> (status stays
+<code>lease-signed</code>, hero stays the building exterior). Working tree only, nothing
+pushed. Annotate anything; notes land in the spec inbox.</p>
+
+<div class="revlog">
+  <h4>Revision log</h4>
+  <ul>
+    <li><span class="rev">rev 3 — 8/24, after Jake's "prison" note</span> — all touch-ups regraded
+      to match the measured tone of Shavit's finals: median luminance raised 121 &rarr; 167-186,
+      warm R/B ratio 1.02 &rarr; ~1.08-1.16, shadows lifted, walls near-white. Re-deployed live;
+      the before/after pairs below show the new grade.</li>
+    <li><span class="rev">rev 2 — 8/24 late night</span> — four touched-up rooms join the gallery
+      (dining + all three bedroom angles, gold-glow tiles below). Gallery goes 6 &rarr; 10 photos,
+      re-sequenced into tour order. Build green, 1024 siblings audited.</li>
+    <li><span class="rev">rev 1 — 8/24 9:22pm</span> — Shavit's five retouched finals wired in
+      (living, kitchen &times;2, bath, laundry), replacing the shared Unit A placeholder set.</li>
+  </ul>
+</div>
+
+<h2 data-annot="gallery-order">Final gallery, in order</h2>
+<div class="grid">
+  <div class="shot" data-annot="tile-ext"><span class="ord">1</span><img src="howder-b-gallery-2026-08-24/ext.jpg" alt="Building exterior" /><div class="cap">Building exterior</div><div class="src">howder-street/01 · unchanged lead</div></div>
+  <div class="shot" data-annot="tile-b01"><span class="ord">2</span><img src="howder-b-gallery-2026-08-24/b01.jpg" alt="Living room" /><div class="cap">Living room</div><div class="src">b/01 · Shavit final</div></div>
+  <div class="shot" data-annot="tile-b02"><span class="ord">3</span><img src="howder-b-gallery-2026-08-24/b02.jpg" alt="Kitchen" /><div class="cap">Kitchen</div><div class="src">b/02 · Shavit final</div></div>
+  <div class="shot" data-annot="tile-b03"><span class="ord">4</span><img src="howder-b-gallery-2026-08-24/b03.jpg" alt="Kitchen, second angle" /><div class="cap">Kitchen, angle 2</div><div class="src">b/03 · Shavit final</div></div>
+  <div class="shot chg" data-annot="tile-b06"><span class="ord">5</span><img class="portrait" src="howder-b-gallery-2026-08-24/b06.jpg" alt="Dining area" /><div class="cap">Dining area</div><div class="src">b/06 · touch-up (new)</div></div>
+  <div class="shot chg" data-annot="tile-b07"><span class="ord">6</span><img class="portrait" src="howder-b-gallery-2026-08-24/b07.jpg" alt="Bedroom" /><div class="cap">Bedroom</div><div class="src">b/07 · touch-up (new)</div></div>
+  <div class="shot chg" data-annot="tile-b08"><span class="ord">7</span><img class="portrait" src="howder-b-gallery-2026-08-24/b08.jpg" alt="Bedroom, window wall" /><div class="cap">Bedroom, window wall</div><div class="src">b/08 · touch-up (new)</div></div>
+  <div class="shot chg" data-annot="tile-b09"><span class="ord">8</span><img class="portrait" src="howder-b-gallery-2026-08-24/b09.jpg" alt="Second bedroom" /><div class="cap">Second bedroom</div><div class="src">b/09 · touch-up (new)</div></div>
+  <div class="shot" data-annot="tile-b04"><span class="ord">9</span><img src="howder-b-gallery-2026-08-24/b04.jpg" alt="Bathroom" /><div class="cap">Bathroom</div><div class="src">b/04 · Shavit final</div></div>
+  <div class="shot" data-annot="tile-b05"><span class="ord">10</span><img src="howder-b-gallery-2026-08-24/b05.jpg" alt="Laundry" /><div class="cap">Laundry</div><div class="src">b/05 · Shavit final</div></div>
+</div>
+
+<h2 data-annot="touchups">The touch-ups, before &rarr; after</h2>
+<p class="sub">Corrections only (white balance, shadow lift, levels, sharpen). No AI-generated
+pixels, no staging, no geometry changes.</p>
+
+<div class="pair" data-annot="pair-06">
+  <div><div class="lbl">Before — dining area</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/before-06.jpg" alt="Dining before" /></div>
+  <div class="after"><div class="lbl">After — ships as b/06</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/b06.jpg" alt="Dining after" /></div>
+</div>
+<div class="pair" data-annot="pair-07">
+  <div><div class="lbl">Before — bedroom</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/before-07.jpg" alt="Bedroom before" /></div>
+  <div class="after"><div class="lbl">After — ships as b/07</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/b07.jpg" alt="Bedroom after" /></div>
+</div>
+<div class="pair" data-annot="pair-08">
+  <div><div class="lbl">Before — bedroom, window wall</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/before-08.jpg" alt="Bedroom window before" /></div>
+  <div class="after"><div class="lbl">After — ships as b/08</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/b08.jpg" alt="Bedroom window after" /></div>
+</div>
+<div class="pair" data-annot="pair-09">
+  <div><div class="lbl">Before — second bedroom</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/before-09.jpg" alt="Second bedroom before" /></div>
+  <div class="after"><div class="lbl">After — ships as b/09</div><img style="width:100%;border-radius:8px" src="howder-b-gallery-2026-08-24/b09.jpg" alt="Second bedroom after" /></div>
+</div>
+
+<h2 data-annot="held-back">Held back on purpose</h2>
+<div class="note"><b>Closet nook and laundry-closet touch-ups</b> stay out of the gallery: Shavit's
+own laundry final already covers that room, and an empty closet corner adds nothing to a
+lease-signed showcase. The full 10-photo MLS set (square + full-frame) lives at
+<b>~/projects/shavit-pipeline/photos/43-howder-unit2/</b> whenever it is needed.</div>
+<div class="note"><b>Duplicates skipped:</b> the touch-up versions of living, kitchen, bath and
+laundry were not added, since Shavit's retouched finals of the same rooms are stronger
+(straightened verticals, balanced windows).</div>
+
+<h2 data-annot="ship">To ship (Jake pushes)</h2>
+<div class="note">Working tree has: 8 new files under
+<b>site/public/assets/properties/howder-b/</b> (06-09 + 1024 siblings) and the
+<b>photos</b> line + comment in <b>site/src/properties.js</b>. Build is green, CSP hashes
+pinned, 1024 audit clean. Paste block:</div>
+<pre>cd ~/projects/shavit-rootman-website
+git add site/public/assets/properties/howder-b site/src/properties.js
+git commit -m "feat(site): Howder Unit B gallery adds dining + bedroom touch-ups, tour order"
+git push
+export NETLIFY_AUTH_TOKEN=$(grep '^NETLIFY_AUTH_TOKEN=' .launch-secrets | cut -d= -f2-)
+netlify deploy --prod --dir=site/dist --site=b40ffade-386e-426f-a7f3-407eaac51e78</pre>
+
+<footer>Spec howder-b-gallery · rev 2 · 8/24/2026 · annotations persist to the pipeline
+spec inbox while served from serve.py.</footer>
+
+<script src="../spec-annotate.js"></script>
+</body>
+</html>

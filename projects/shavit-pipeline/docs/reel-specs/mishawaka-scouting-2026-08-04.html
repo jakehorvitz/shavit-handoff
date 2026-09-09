@@ -1,0 +1,194 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Let me show you — Mishawaka scouting reel · source log</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --line:#26262a; --ink:#f2f0ec; --dim:#9d9a94;
+    --brass:#b08d57; --gold:#ffc000; --bone:#edeae3; --bad:#e0674f; --ok:#6fae7b;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+       padding:0 0 140px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);padding:44px 0 28px;margin-bottom:8px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+     margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+        text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);
+        color:var(--dim);margin-right:6px}
+  .pill.hold{color:var(--bad);border-color:rgba(224,103,79,.4)}
+  .pill.new{color:var(--gold);border-color:rgba(255,192,0,.4)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .shot{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:start;
+        background:var(--panel);border:1px solid var(--line);border-radius:14px;
+        padding:18px;margin:16px 0;position:relative}
+  .shot img{width:100%;border-radius:8px;display:block;background:#000}
+  .num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--brass);text-transform:uppercase}
+  .copy{background:var(--bone);color:#121214;border-radius:8px;padding:16px 18px;margin:10px 0 0}
+  .copy .hl{font-weight:700;font-size:15px;line-height:1.45;font-style:italic}
+  .copy .sl{color:#5c5954;font-size:12.5px;margin-top:6px;font-family:var(--mono)}
+  .why{color:var(--dim);font-size:13.5px;margin-top:12px}
+  .why b{color:var(--ink);font-weight:600}
+  .frame{font-family:var(--mono);font-size:11.5px;color:var(--brass)}
+
+  .chg{box-shadow:0 0 0 1px rgba(255,192,0,.5),0 0 26px rgba(255,192,0,.13)}
+  .chg::after{content:"NEW";position:absolute;top:-9px;right:14px;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;background:var(--gold);
+    color:#191500;padding:2px 8px;border-radius:999px;font-weight:700}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  td.k{font-family:var(--mono);color:var(--dim);white-space:nowrap}
+  .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .grid5 figure{margin:0}
+  .grid5 img{width:100%;border-radius:6px;display:block;background:#000}
+  .grid5 figcaption{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:4px}
+  .q{border-left:3px solid var(--bad);background:rgba(224,103,79,.06);border-radius:0 10px 10px 0;
+     padding:14px 18px;margin:12px 0}
+  .q b{color:var(--bad)}
+  .q.crit{border-left-color:#ff3b30;background:rgba(255,59,48,.09)}
+  .q.crit b{color:#ff6b60}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;
+      overflow-x:auto;font-family:var(--mono);font-size:12.5px;color:var(--dim);white-space:pre-wrap}
+  a{color:var(--gold)}
+  @media (max-width:760px){ .shot{grid-template-columns:1fr} .grid5{grid-template-columns:repeat(2,1fr)} }
+</style>
+
+<body data-spec="mishawaka-scouting">
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Shavit Rootman · vertical talking-head reel · source log, 4 raw clips · Mishawaka, Indiana</div>
+  <h1>Let me show you.</h1>
+  <div class="sub">Foreclosure scouting run, shot and sent by Shavit on 2026-08-04 · <span class="pill hold">Awaiting Jake and Shavit</span><span class="pill">Drafts only — Jake posts</span><span class="pill new">New market: Mishawaka</span></div>
+
+  <div class="revlog">
+    <h4>Revision log</h4>
+    <ul>
+      <li><span class="rev">rev 1 · 2026-08-04</span> — First pass off the new footage. Shavit sent a 6-item iCloud shared album at 12:13 PM (5 videos, 1 photo) that is still stuck mid-upload on his end — "Please check back soon" as of this write-up, 50+ minutes later. At 12:43 PM he sent 4 of those clips directly as iMessage attachments instead. This spec is built entirely from the 4 direct clips, transcribed verbatim via Whisper. The 5th video and the photo from the stuck share are unaccounted for — see open item 3.</li>
+    </ul>
+  </div>
+</header>
+
+<h2 data-annot="sec-source">Where this came from</h2>
+<p>Unprompted. No brief, no ask this time — Shavit was on a job-adjacent visit today and narrated it himself, which is exactly the "more of me" content he asked for on 7/24 and again on 7/31 ("I think more of me is necessary"). Nothing below is paraphrased; every line in quotes is Whisper's transcript of his own audio.</p>
+<table>
+  <tr><th>Source</th><th>What it is</th></tr>
+  <tr><td class="k">iCloud share<br>12:13 PM</td><td>"Today · 6 items," 5 videos + 1 photo per the album's own metadata (CloudKit <code>videosCount:5</code>, <code>photosCount:1</code>). Still shows "Shavit Rootman is uploading 6 shared items… Please check back soon" as of 1:07 PM. Cannot be the source for anything until it clears.</td></tr>
+  <tr><td class="k">Direct attachments<br>12:43 PM</td><td>4 clips, sent as one message, all downloaded clean and playable: IMG_4686.mov (23s), IMG_4687.mov (56s), IMG_4688.mov (11s), IMG_4689.mov (68s). 1280×720 HEVC + AAC, portrait orientation on playback. 158 seconds of raw footage total. This is the source for everything below.</td></tr>
+</table>
+
+<h2 data-annot="sec-critical">Before anything else</h2>
+<div class="q crit" data-annot="q-occupied"><b>This is someone's occupied home, filmed before an auction, with a phone number read off the door.</b> Shavit is narrating a pre-auction foreclosure with a tenant apparently still living there — "this place is literally occupied right now," a sign that reads "be right back, storage unit," and his own plan to "call this number" or "knock on the door nicely." That is legitimate acquisition work. It is not obviously postable content as-is. Confirm with Shavit, explicitly, before treating this as anything other than internal documentation: is this meant to become a public reel at all, and if so, not until the auction and any tenant transition are resolved. The standing brand rule already requires de-identifying tenants and neighbours — this is the first time that rule collides with footage where a tenant may still be inside.</div>
+
+<h2 data-annot="sec-clips">The four clips, in capture order</h2>
+<p class="sub" style="margin-bottom:16px">IMG_4686 → IMG_4689 is also the narrative order — hook, setup, confirmation beat, payoff — so capture order is the edit order.</p>
+
+<div class="shot chg" data-annot="clip-4686">
+  <img src="mishawaka-scouting-2026-08-04/frames/01-clip4686-hook.jpg" alt="IMG_4686 still">
+  <div>
+    <div class="num">IMG_4686.mov · <span class="frame">0:00–0:23 · the hook</span></div>
+    <div class="copy">
+      <div class="hl">"Walking here in Mishawaka, Indiana, one of the most complicated things to be able to assess. And I'm being asked that all the time, Shavit, how do you know that a foreclosed house or a house that belongs to the bank, how do you know that the inside is manageable? How do you know that the project you're getting yourself into, you're putting the budgets together? Well, let me show you."</div>
+      <div class="sl">selfie framing, walking down a residential street, speed limit sign visible</div>
+    </div>
+    <div class="why"><b>Cold open.</b> States the question the whole run answers — this is Concept G from the carousel slate ("the one that makes sellers call," his acquisition story) except he shot it himself instead of Jake building it from stills. "Let me show you" is the hinge line into clip 2.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="clip-4687">
+  <img src="mishawaka-scouting-2026-08-04/frames/02-clip4687-property.jpg" alt="IMG_4687 still, the property">
+  <div>
+    <div class="num">IMG_4687.mov · <span class="frame">0:00–0:56 · the setup</span></div>
+    <div class="copy">
+      <div class="hl">"Here's a property we have here in Mishawaka. As you can tell, me and my team have already done the heavy lifting... putting the numbers together... the auction is taking place in a few days from today. That's the property. That's what it looks like before. As you can tell, there's a sign here... this is serious, because this place is literally occupied right now... I think it says, be right back, storage unit... I am definitely going to call this number that's on the door. And if I don't hear anything, I'm going to go and knock on the door nicely and try to get as much intelligence recon as possible. Stay tuned."</div>
+      <div class="sl">two-story house, brick porch columns, house number legible on the porch post — see excluded section</div>
+    </div>
+    <div class="why"><b>The longest clip, and the one with the most editing to do.</b> The middle third (roughly 0:31–0:44, "I'm not sure, I don't know") is dead air and should be cut. Everything else — the auction timeline, the occupied sign, the plan — is real stakes, the same ingredient the carousel slate's section 00 named as what made East Victoria work: "a story with stakes, not a tour." Ends on a genuine cliffhanger.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="clip-4688">
+  <img src="mishawaka-scouting-2026-08-04/frames/04-clip4688-atwindow.jpg" alt="IMG_4688 still">
+  <div>
+    <div class="num">IMG_4688.mov · <span class="frame">0:00–0:11 · confirmation beat</span></div>
+    <div class="copy">
+      <div class="hl">"Here we go. I don't think you can see anything but it seems as if this property is already being vacated. Yep."</div>
+      <div class="sl">shooting through a window/screen, reflection of the street behind him, an electrical panel visible on an interior sill</div>
+    </div>
+    <div class="why"><b>Short connective tissue.</b> Confirms the "stay tuned" paid off without dragging it out — the property is turning over. Useful as a quick cutaway between clip 3 and clip 5, not strong enough to anchor a beat on its own.</div>
+  </div>
+</div>
+
+<div class="shot" data-annot="clip-4689">
+  <img src="mishawaka-scouting-2026-08-04/frames/05-clip4689-walking.jpg" alt="IMG_4689 still">
+  <div>
+    <div class="num">IMG_4689.mov · <span class="frame">0:00–1:08 · the payoff</span></div>
+    <div class="copy">
+      <div class="hl">"So again, I'm just walking around the house here, trying to say hi to whoever lives there right now... And you know what? I have gotten what I wanted because it looks pretty good inside. So I've been asked, Shavit, how do you go and buy these foreclosures? First, I have a team that I know can deal with anything and everything. Secondly, we never set each other to a situation that is impossible. So I just walked all around the property... the first story looks absolutely doable. Except for this gigantic tree that we have to treat, but that's another story."</div>
+      <div class="sl">walking shot, looking up/around, tree canopy overhead — the house itself is mostly off-frame in this clip</div>
+    </div>
+    <div class="why"><b>The payoff and the actual answer to clip 1's question.</b> "A team that can deal with anything" and "we never set each other to an impossible situation" is Shavit's real acquisition philosophy in his own words — this is the verbatim story material section 06 of the carousel slate said did not exist anywhere except the East Victoria call. Now it does, for a second property, on tape, unprompted.</div>
+  </div>
+</div>
+
+<h2 data-annot="sec-cut">Recommended cut — two-part, not one</h2>
+<p>158 seconds raw is roughly triple a normal reel. Cutting it to one ~50s reel would throw away either the stakes (the auction, the occupied sign) or the payoff (his actual philosophy) — one of the two is always what gets cut for time, and both are the point. Splitting it in two, posted a few days apart per the standing Thursday/Sunday cadence, keeps both and turns the cliffhanger in clip 3 into an actual cliffhanger instead of an edited-out beat.</p>
+<table>
+  <tr><th>Part</th><th>Build from</th><th>Est. runtime</th><th>Ends on</th></tr>
+  <tr><td class="k">Part 1<br>"The Question"</td><td>4686 in full (0:00–0:23) + 4687 trimmed — keep 0:00–0:31 and 0:42–0:56, cut the dead air in between</td><td class="n">~52s</td><td>"Stay tuned."</td></tr>
+  <tr><td class="k">Part 2<br>"The Answer"</td><td>4688 in full (0:00–0:11) + 4689 trimmed — keep 0:26–1:08, cut the first 26 seconds of walking with no new information</td><td class="n">~53s</td><td>"...that's another story."</td></tr>
+</table>
+<p class="rule" style="color:var(--dim);font-size:13px">Both parts need a level pass — this is single-take phone audio with wind noise, no lav mic — and a light instrumental bed under his voice, per the "hub and spoke" production notes in the Marketing & Content Engine doc. No captions were burned in yet; auto-captions plus his own words verbatim, no paraphrase, per the standing house rule.</p>
+
+<h2 data-annot="sec-excluded">Excluded on purpose</h2>
+<p>The house number is legible on the porch post in the frames used for clips 03 and 04 above (kept here for internal reference only). Per the standing no-address rule — street name and city only, never a number leading an address — it gets cropped or blurred out of any public cut. The phone number on the storage-unit sign and any close-up of the door itself do not make it into the public cut either, for the same reason the standing rule de-identifies tenants and neighbours: it is not this account's information to publish, even though Shavit says it on camera.</p>
+
+<h2 data-annot="sec-open">Open — needs Jake and Shavit before this ships</h2>
+
+<div class="q" data-annot="q-market"><b>1. New market.</b> Mishawaka, Indiana has never appeared in any property list, Drive folder, or market chip across the whole pipeline — every prior asset is Hillsdale, South Bend, Cleveland, or the open Trio. Confirm whether this is a new active deal (add to the market list) or is close enough to South Bend to fold in under the existing Indiana bucket.</div>
+
+<div class="q" data-annot="q-structure"><b>2. One reel or two.</b> Recommendation above is a two-part cliffhanger. That only works if Part 2 actually posts within a few days — an unresolved "stay tuned" that never pays off reads worse than never asking the question. Needs a yes before Part 1 goes anywhere.</div>
+
+<div class="q" data-annot="q-missing"><b>3. Two items unaccounted for.</b> The stuck iCloud share claims 5 videos and 1 photo; only 4 videos came through directly. There may be a 5th clip and a still photo — possibly the storage-unit sign or an interior shot — sitting in that share once it finishes uploading. Worth a recheck before this is called final source material.</div>
+
+<div class="q" data-annot="q-timing"><b>4. Auction timing.</b> Shavit says the auction is "a few days from today," 2026-08-04. If either part posts, the caption and any on-screen date reference needs to either stay vague or be confirmed against the actual auction date so nothing goes stale or, worse, tips off other bidders before the auction closes.</div>
+
+<h2 data-annot="sec-build">Source files</h2>
+<table>
+  <tr><th>Clip</th><th>Path</th><th>Duration</th></tr>
+  <tr><td class="k">IMG_4686.mov</td><td>~/Library/Messages/Attachments/01/01/EF3CEDCE-4421-46D1-9A63-615721F19202/</td><td class="n">0:23</td></tr>
+  <tr><td class="k">IMG_4687.mov</td><td>~/Library/Messages/Attachments/e8/08/96FA2A1B-ADE7-4974-BE36-BC77CFC0EC2B/</td><td class="n">0:56</td></tr>
+  <tr><td class="k">IMG_4688.mov</td><td>~/Library/Messages/Attachments/25/05/6F1C61A3-2B82-4B87-9617-33E821DC4160/</td><td class="n">0:11</td></tr>
+  <tr><td class="k">IMG_4689.mov</td><td>~/Library/Messages/Attachments/d9/09/D492DAFA-2E81-4E1E-B9E4-24E12D9D4C5D/</td><td class="n">1:08</td></tr>
+  <tr><td class="k">iCloud share</td><td><a href="https://share.icloud.com/photos/075RXBJOHAsxy5nhNivKaFUjA">share.icloud.com/photos/075RXBJOHAsxy5nhNivKaFUjA</a> — stuck, recheck before relying on it</td><td class="n">—</td></tr>
+  <tr><td class="k">Transcription</td><td>Whisper (OpenAI) via the <code>watch</code> skill, run on each clip's extracted audio, verbatim</td><td class="n">—</td></tr>
+</table>
+
+<h2 data-annot="sec-sheet">Frame log</h2>
+<div class="grid5">
+  <figure><img src="mishawaka-scouting-2026-08-04/frames/01-clip4686-hook.jpg" alt=""><figcaption>4686 · hook</figcaption></figure>
+  <figure><img src="mishawaka-scouting-2026-08-04/frames/02-clip4687-property.jpg" alt=""><figcaption>4687 · 0:17 property</figcaption></figure>
+  <figure><img src="mishawaka-scouting-2026-08-04/frames/03-clip4687-porch.jpg" alt=""><figcaption>4687 · 0:20 porch</figcaption></figure>
+  <figure><img src="mishawaka-scouting-2026-08-04/frames/04-clip4688-atwindow.jpg" alt=""><figcaption>4688 · window</figcaption></figure>
+  <figure><img src="mishawaka-scouting-2026-08-04/frames/05-clip4689-walking.jpg" alt=""><figcaption>4689 · walking</figcaption></figure>
+</div>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>

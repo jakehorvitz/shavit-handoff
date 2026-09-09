@@ -1,0 +1,18 @@
+[
+  {
+    "path": "deliverables/Shavit/Netlify Ready (before invest-page rewrite, Jun 2).zip",
+    "change": "zip expanded into sanitized .zip.contents directory"
+  },
+  {
+    "path": "deliverables/Shavit - Clarendon Carousel.zip",
+    "change": "zip expanded into sanitized .zip.contents directory"
+  },
+  {
+    "path": "projects/shavit-pipeline/docs/reel-specs/RESUME-rev6-motion-build.md",
+    "change": "private operator/contact identifiers generalized"
+  },
+  {
+    "path": "projects/shavit-pipeline/docs/reel-specs/_scripts/drive_auth.py",
+    "change": "private operator/contact identifiers generalized"
+  }
+]

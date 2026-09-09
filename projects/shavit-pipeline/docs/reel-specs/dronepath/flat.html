@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drone path — 15 E Saint Joe</title>
+<style>
+  /* Dark surround on purpose: this tool is used while judging a photograph,
+     and a light chrome would throw its own light onto the plate and bias the
+     read. Accent is the brass from the Shavit end card, not a decoration. */
+  :root{
+    --bg:      oklch(0.16 0.008 60);
+    --surface: oklch(0.21 0.010 60);
+    --raised:  oklch(0.26 0.012 60);
+    --line:    oklch(0.34 0.014 60);
+    --ink:     oklch(0.97 0.004 60);
+    --muted:   oklch(0.74 0.010 60);
+    --brass:   oklch(0.78 0.115 78);
+    --brass-d: oklch(0.62 0.105 78);
+    --warn:    oklch(0.72 0.150 45);
+    --ok:      oklch(0.80 0.110 150);
+
+    --z-handle: 20;
+    --z-hud:    30;
+
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:400 15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    display:grid; grid-template-columns:minmax(0,1fr) 372px;
+    gap:28px; padding:28px; min-height:100%; align-items:start;
+  }
+  @media (max-width:1080px){ .wrap{grid-template-columns:minmax(0,1fr)} }
+
+  header{grid-column:1/-1; display:flex; align-items:baseline; gap:16px; flex-wrap:wrap}
+  h1{
+    margin:0; font-size:clamp(1.3rem,2.4vw,1.8rem); font-weight:600;
+    letter-spacing:-0.02em; text-wrap:balance;
+  }
+  .sub{color:var(--muted); font-size:14px}
+
+  /* ---------- stage ---------- */
+  .stage{
+    position:relative; background:var(--surface);
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    touch-action:none;
+  }
+  .stage img{display:block; width:100%; height:auto; user-select:none; -webkit-user-drag:none}
+  .stage.dim img{filter:brightness(0.42) saturate(0.75)}
+
+  svg.paint{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:10}
+
+  .box{
+    position:absolute; border:2px solid var(--brass);
+    box-shadow:0 0 0 1px oklch(0 0 0/0.55), 0 6px 22px oklch(0 0 0/0.4);
+    cursor:grab; z-index:var(--z-handle);
+  }
+  .box.end{border-color:var(--ok); border-style:dashed}
+  .box:active{cursor:grabbing}
+  .box .tag{
+    position:absolute; top:-1px; left:-1px; transform:translateY(-100%);
+    background:var(--brass); color:oklch(0.18 0.01 60);
+    font:600 11px/1 ui-monospace, monospace; letter-spacing:0.06em;
+    padding:5px 7px; border-radius:4px 4px 0 0; white-space:nowrap;
+  }
+  .box.end .tag{background:var(--ok)}
+  .box .grip{
+    position:absolute; width:15px; height:15px; right:-8px; bottom:-8px;
+    background:var(--ink); border:2px solid oklch(0.18 0.01 60);
+    border-radius:3px; cursor:nwse-resize;
+  }
+  /* thirds, so framing decisions are made against a real guide */
+  .box::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(to right, transparent 33.2%, oklch(1 0 0/0.22) 33.2% 33.5%, transparent 33.5%,
+                      transparent 66.4%, oklch(1 0 0/0.22) 66.4% 66.7%, transparent 66.7%),
+      linear-gradient(to bottom, transparent 33.2%, oklch(1 0 0/0.22) 33.2% 33.5%, transparent 33.5%,
+                      transparent 66.4%, oklch(1 0 0/0.22) 66.4% 66.7%, transparent 66.7%);
+  }
+
+  .bowHandle{
+    position:absolute; width:17px; height:17px; margin:-9px 0 0 -9px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--brass);
+    cursor:move; z-index:var(--z-handle);
+  }
+
+  .playhead{
+    position:absolute; border:2px solid var(--ink); pointer-events:none;
+    z-index:var(--z-hud); box-shadow:0 0 0 9999px oklch(0 0 0/0.55);
+    display:none;
+  }
+  .playhead.on{display:block}
+
+  /* ---------- panel ---------- */
+  .panel{display:flex; flex-direction:column; gap:18px; min-width:0}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px}
+  .card h2{
+    margin:0 0 12px; font-size:13px; font-weight:600; color:var(--muted);
+    letter-spacing:0.04em;
+  }
+  .row{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:11px 0}
+  .row label{font-size:14px; color:var(--muted)}
+  .row output{font:600 14px/1 ui-monospace, monospace; color:var(--ink); min-width:62px; text-align:right}
+  input[type=range]{width:100%; accent-color:var(--brass)}
+  .rangeRow{margin:14px 0}
+  .rangeRow .lab{display:flex; justify-content:space-between; margin-bottom:6px; font-size:14px}
+  .rangeRow .lab span:last-child{font:600 14px/1 ui-monospace, monospace}
+  .hint{font-size:12.5px; color:var(--muted); margin:6px 0 0}
+
+  select, button, textarea{font:inherit; color:var(--ink)}
+  select{
+    background:var(--raised); border:1px solid var(--line); border-radius:7px;
+    padding:7px 9px;
+  }
+  .btns{display:flex; gap:9px; flex-wrap:wrap}
+  button{
+    background:var(--raised); border:1px solid var(--line); border-radius:8px;
+    padding:9px 14px; cursor:pointer;
+    transition:background .16s var(--ease-out-quint), border-color .16s var(--ease-out-quint),
+               transform .16s var(--ease-out-quint);
+  }
+  button:hover{background:oklch(0.31 0.014 60); border-color:oklch(0.44 0.018 60)}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--brass); border-color:var(--brass); color:oklch(0.18 0.01 60); font-weight:600}
+  button.primary:hover{background:var(--brass-d); border-color:var(--brass-d)}
+  button:focus-visible, .box:focus-visible, .bowHandle:focus-visible{
+    outline:2px solid var(--brass); outline-offset:2px;
+  }
+
+  .verdict{border:1px solid var(--line); border-radius:8px; padding:12px; margin-top:4px}
+  .verdict.free{background:oklch(0.80 0.110 150 / 0.13); border-color:oklch(0.80 0.110 150 / 0.5)}
+  .verdict.paid{background:oklch(0.72 0.150 45 / 0.13); border-color:oklch(0.72 0.150 45 / 0.5)}
+  .verdict b{display:block; margin-bottom:3px; font-size:14px}
+  .verdict span{font-size:13px; color:var(--muted)}
+
+  textarea{
+    width:100%; min-height:132px; resize:vertical;
+    background:oklch(0.13 0.006 60); border:1px solid var(--line); border-radius:8px;
+    padding:11px; font:12.5px/1.5 ui-monospace, monospace; color:var(--ink);
+  }
+  .copied{color:var(--ok); font-size:13px; margin-left:2px}
+  kbd{
+    background:var(--raised); border:1px solid var(--line); border-bottom-width:2px;
+    border-radius:4px; padding:1px 5px; font:11px/1.4 ui-monospace, monospace;
+  }
+  @media (prefers-reduced-motion: reduce){
+    button{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Trace the drone move</h1>
+    <span class="sub">15 E Saint Joe &middot; drag the two frames, bow the path, then copy the spec</span>
+  </header>
+
+  <div>
+    <div class="stage" id="stage">
+      <img id="plate" src="saintjoe.jpg" alt="15 E Saint Joe finished exterior">
+      <svg class="paint" id="paint" preserveAspectRatio="none"></svg>
+
+      <div class="box start" id="boxStart" tabindex="0" role="group" aria-label="Start frame">
+        <span class="tag">START</span><span class="grip" data-grip="start"></span>
+      </div>
+      <div class="box end" id="boxEnd" tabindex="0" role="group" aria-label="End frame">
+        <span class="tag">END</span><span class="grip" data-grip="end"></span>
+      </div>
+      <div class="bowHandle" id="bowHandle" tabindex="0" role="slider" aria-label="Path curvature"></div>
+      <div class="playhead" id="playhead"></div>
+    </div>
+    <p class="hint">
+      Both frames are locked to 9:16, the reel's shape. Drag a frame to move it, its corner to resize.
+      Drag the round handle to bow the flight path. <kbd>Space</kbd> previews the move.
+    </p>
+  </div>
+
+  <div class="panel">
+    <div class="card">
+      <h2>Move</h2>
+      <div class="rangeRow">
+        <div class="lab"><span>Duration</span><span id="durOut">2.5s</span></div>
+        <input type="range" id="dur" min="1" max="6" step="0.1" value="2.5">
+      </div>
+      <div class="row">
+        <label for="ease">Easing</label>
+        <select id="ease">
+          <option value="linear" selected>Linear — reads as a camera</option>
+          <option value="easeOut">Ease out — settles</option>
+          <option value="easeInOut">Ease in and out — floaty</option>
+        </select>
+      </div>
+      <div class="rangeRow">
+        <div class="lab"><span>Altitude / true parallax</span><span id="altOut">0%</span></div>
+        <input type="range" id="alt" min="0" max="100" step="5" value="0">
+        <p class="hint">
+          Above zero the camera physically climbs and the roof and rooflines shift against the
+          background. A crop cannot fake that, so it has to be generated.
+        </p>
+      </div>
+      <div class="btns">
+        <button id="play" class="primary" type="button">Preview</button>
+        <button id="reset" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What this costs</h2>
+      <div class="verdict free" id="verdict">
+        <b id="verdictTitle">Free — keyframed in Palmier</b>
+        <span id="verdictBody">A 2D move inside the plate. Exact, repeatable, no credits.</span>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <label>Read</label><output id="readout" style="min-width:0;text-align:right">—</output>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Spec — paste this back to Claude</h2>
+      <textarea id="spec" readonly spellcheck="false"></textarea>
+      <div class="btns" style="margin-top:10px">
+        <button id="copy" class="primary" type="button">Copy spec</button>
+        <span class="copied" id="copied" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const AR = 1080 / 1920;                      // the reel's frame shape
+  const stage = document.getElementById('stage');
+  const plate = document.getElementById('plate');
+  const paint = document.getElementById('paint');
+  const els = {
+    start: document.getElementById('boxStart'),
+    end:   document.getElementById('boxEnd'),
+    bow:   document.getElementById('bowHandle'),
+    head:  document.getElementById('playhead'),
+    dur:   document.getElementById('dur'),
+    durOut:document.getElementById('durOut'),
+    ease:  document.getElementById('ease'),
+    alt:   document.getElementById('alt'),
+    altOut:document.getElementById('altOut'),
+    spec:  document.getElementById('spec'),
+    readout:document.getElementById('readout'),
+    verdict:document.getElementById('verdict'),
+    vTitle:document.getElementById('verdictTitle'),
+    vBody: document.getElementById('verdictBody'),
+  };
+
+  // Frames are stored in plate-fraction space so the spec is resolution-free.
+  const DEFAULTS = () => ({
+    start: {x:0.30, y:0.06, h:0.88},
+    end:   {x:0.34, y:0.00, h:0.62},
+    bow: 0,
+  });
+  let S = DEFAULTS();
+
+  const sizeOf = () => ({w: stage.clientWidth, h: stage.clientHeight});
+  // width is derived: a 9:16 frame of height h on a plate of aspect (pw/ph)
+  const widthFrac = (hFrac) => {
+    const {w, h} = sizeOf();
+    return (hFrac * h * AR) / w;
+  };
+  const clampFrame = (f) => {
+    f.h = Math.min(1, Math.max(0.16, f.h));
+    const wF = widthFrac(f.h);
+    f.x = Math.min(1 - wF, Math.max(0, f.x));
+    f.y = Math.min(1 - f.h, Math.max(0, f.y));
+    return f;
+  };
+  const centre = (f) => ({x: f.x + widthFrac(f.h) / 2, y: f.y + f.h / 2});
+
+  function layout(){
+    const {w, h} = sizeOf();
+    for (const k of ['start','end']){
+      clampFrame(S[k]);
+      const f = S[k], el = els[k];
+      el.style.left   = (f.x * w) + 'px';
+      el.style.top    = (f.y * h) + 'px';
+      el.style.width  = (widthFrac(f.h) * w) + 'px';
+      el.style.height = (f.h * h) + 'px';
+    }
+    const a = centre(S.start), b = centre(S.end);
+    const mid = {x:(a.x+b.x)/2, y:(a.y+b.y)/2};
+    const nx = -(b.y - a.y), ny = (b.x - a.x);          // normal to the chord
+    const ctl = {x: mid.x + nx * S.bow * 0.5, y: mid.y + ny * S.bow * 0.5};
+    els.bow.style.left = (ctl.x * w) + 'px';
+    els.bow.style.top  = (ctl.y * h) + 'px';
+
+    paint.innerHTML =
+      `<path d="M ${a.x*w} ${a.y*h} Q ${ctl.x*w} ${ctl.y*h} ${b.x*w} ${b.y*h}"
+             fill="none" stroke="oklch(0.78 0.115 78)" stroke-width="2.5"
+             stroke-dasharray="7 6" stroke-linecap="round"/>
+       <circle cx="${a.x*w}" cy="${a.y*h}" r="4.5" fill="oklch(0.78 0.115 78)"/>
+       <circle cx="${b.x*w}" cy="${b.y*h}" r="4.5" fill="oklch(0.80 0.110 150)"/>`;
+    describe();
+  }
+
+  // ---- drag: frames, grips, bow handle
+  let drag = null;
+  const pt = (e) => {
+    const r = stage.getBoundingClientRect();
+    return {x:(e.clientX - r.left) / r.width, y:(e.clientY - r.top) / r.height};
+  };
+  stage.addEventListener('pointerdown', (e) => {
+    const grip = e.target.closest('.grip');
+    const box  = e.target.closest('.box');
+    const bow  = e.target.closest('.bowHandle');
+    const p = pt(e);
+    if (grip)      drag = {kind:'resize', key:grip.dataset.grip, p};
+    else if (bow)  drag = {kind:'bow', p};
+    else if (box)  drag = {kind:'move', key:box.id === 'boxStart' ? 'start' : 'end', p,
+                          o:{...S[box.id === 'boxStart' ? 'start' : 'end']}};
+    else return;
+    stage.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  stage.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const p = pt(e);
+    if (drag.kind === 'move'){
+      S[drag.key].x = drag.o.x + (p.x - drag.p.x);
+      S[drag.key].y = drag.o.y + (p.y - drag.p.y);
+    } else if (drag.kind === 'resize'){
+      const f = S[drag.key];
+      f.h = Math.max(0.16, p.y - f.y);
+    } else if (drag.kind === 'bow'){
+      const a = centre(S.start), b = centre(S.end);
+      const mid = {x:(a.x+b.x)/2, y:(a.y+b.y)/2};
+      let nx = -(b.y - a.y), ny = (b.x - a.x);
+      const len = Math.hypot(nx, ny) || 1;
+      nx /= len; ny /= len;
+      const d = (p.x - mid.x) * nx + (p.y - mid.y) * ny;   // project onto normal
+      S.bow = Math.max(-1, Math.min(1, d / (len * 0.5 || 1)));
+    }
+    layout();
+  });
+  const endDrag = () => { drag = null; };
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointercancel', endDrag);
+
+  // ---- keyboard nudge, so the tool is usable without a mouse
+  for (const k of ['start','end']){
+    els[k].addEventListener('keydown', (e) => {
+      const step = e.shiftKey ? 0.05 : 0.01;
+      const map = {ArrowLeft:['x',-1], ArrowRight:['x',1], ArrowUp:['y',-1], ArrowDown:['y',1]};
+      if (map[e.key]){ const [ax, dir] = map[e.key]; S[k][ax] += dir * step; layout(); e.preventDefault(); }
+      if (e.key === '+' || e.key === '='){ S[k].h += step; layout(); e.preventDefault(); }
+      if (e.key === '-'){ S[k].h -= step; layout(); e.preventDefault(); }
+    });
+  }
+
+  // ---- read the move back in plain language
+  function readMove(){
+    const a = centre(S.start), b = centre(S.end);
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const zoom = S.start.h / S.end.h;            // >1 means the frame tightened
+    const words = [];
+    if (zoom > 1.06) words.push('push in');
+    else if (zoom < 0.94) words.push('pull out');
+    if (dy < -0.04) words.push('rise');
+    else if (dy > 0.04) words.push('descend');
+    if (dx > 0.04) words.push('track right');
+    else if (dx < -0.04) words.push('track left');
+    if (Math.abs(S.bow) > 0.12) words.push(S.bow > 0 ? 'arcing' : 'arcing the other way');
+    if (!words.length) words.push('hold');
+    return {words, zoom, dx, dy};
+  }
+
+  function describe(){
+    const {words, zoom} = readMove();
+    const alt = +els.alt.value;
+    const dur = +els.dur.value;
+    els.readout.textContent = words.join(', ');
+
+    const paid = alt > 0;
+    els.verdict.className = 'verdict ' + (paid ? 'paid' : 'free');
+    if (paid){
+      els.vTitle.textContent = 'Needs generating — 8.75 credits per attempt';
+      els.vBody.textContent =
+        'Real altitude means the roof and rooflines have to move against the background. '
+        + 'Kling holds about two seconds on a real still before it invents architecture, '
+        + 'so this generates at 5s and keeps the first 2s.';
+    } else {
+      els.vTitle.textContent = 'Free — keyframed in Palmier';
+      els.vBody.textContent = 'A 2D move inside the plate. Exact, repeatable, no credits.';
+    }
+
+    els.spec.value = JSON.stringify({
+      shot: 'saintjoe-drone',
+      plate: 'drive/saintjoe/000 (1634x998)',
+      start: {x:+S.start.x.toFixed(4), y:+S.start.y.toFixed(4),
+              w:+widthFrac(S.start.h).toFixed(4), h:+S.start.h.toFixed(4)},
+      end:   {x:+S.end.x.toFixed(4), y:+S.end.y.toFixed(4),
+              w:+widthFrac(S.end.h).toFixed(4), h:+S.end.h.toFixed(4)},
+      bow: +S.bow.toFixed(3),
+      durationSec: dur,
+      ease: els.ease.value,
+      altitude: alt / 100,
+      mode: paid ? 'generate' : 'keyframes',
+      reads: words.join(', '),
+      zoomRatio: +zoom.toFixed(3),
+    }, null, 2);
+  }
+
+  // ---- preview: animate the crop so the move is judged, not imagined
+  let raf = null;
+  function preview(){
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    const {w, h} = sizeOf();
+    const dur = +els.dur.value * 1000;
+    const easeFn = {
+      linear: t => t,
+      easeOut: t => 1 - Math.pow(1 - t, 4),
+      easeInOut: t => t < 0.5 ? 8*t*t*t*t : 1 - Math.pow(-2*t + 2, 4) / 2,
+    }[els.ease.value];
+    const a = centre(S.start), b = centre(S.end);
+    const mid = {x:(a.x+b.x)/2, y:(a.y+b.y)/2};
+    const nx = -(b.y - a.y), ny = (b.x - a.x);
+    const ctl = {x: mid.x + nx * S.bow * 0.5, y: mid.y + ny * S.bow * 0.5};
+
+    stage.classList.add('dim');
+    els.head.classList.add('on');
+    const t0 = performance.now();
+    const tick = (now) => {
+      const raw = Math.min(1, (now - t0) / dur);
+      const t = easeFn(raw);
+      const hh = S.start.h + (S.end.h - S.start.h) * t;
+      const q = (p0, p1, p2) => (1-t)*(1-t)*p0 + 2*(1-t)*t*p1 + t*t*p2;   // quadratic bezier
+      const cx = q(a.x, ctl.x, b.x), cy = q(a.y, ctl.y, b.y);
+      const wF = widthFrac(hh);
+      els.head.style.left   = ((cx - wF/2) * w) + 'px';
+      els.head.style.top    = ((cy - hh/2) * h) + 'px';
+      els.head.style.width  = (wF * w) + 'px';
+      els.head.style.height = (hh * h) + 'px';
+      if (raw < 1) raf = requestAnimationFrame(tick);
+      else {
+        raf = null;
+        setTimeout(() => { stage.classList.remove('dim'); els.head.classList.remove('on'); }, 380);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+  }
+
+  document.getElementById('play').addEventListener('click', preview);
+  document.getElementById('reset').addEventListener('click', () => {
+    S = DEFAULTS(); els.alt.value = 0; els.dur.value = 2.5; els.ease.value = 'linear';
+    els.altOut.textContent = '0%'; els.durOut.textContent = '2.5s'; layout();
+  });
+  els.dur.addEventListener('input', () => {
+    els.durOut.textContent = (+els.dur.value).toFixed(1) + 's'; describe();
+  });
+  els.alt.addEventListener('input', () => {
+    els.altOut.textContent = els.alt.value + '%'; describe();
+  });
+  els.ease.addEventListener('change', describe);
+  document.getElementById('copy').addEventListener('click', async () => {
+    els.spec.select();
+    try { await navigator.clipboard.writeText(els.spec.value); }
+    catch { document.execCommand('copy'); }
+    const c = document.getElementById('copied');
+    c.textContent = 'copied'; setTimeout(() => c.textContent = '', 1600);
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && e.target.tagName !== 'TEXTAREA'){ e.preventDefault(); preview(); }
+  });
+  window.addEventListener('resize', layout);
+  if (plate.complete) layout(); else plate.addEventListener('load', layout);
+})();
+</script>
+</body>
+</html>

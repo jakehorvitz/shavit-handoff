@@ -1,0 +1,35 @@
+KENDALL STREET — "EVERY HOME HAS A SECOND CHANCE"
+10-slide Instagram carousel · 1080 x 1350 · built 2026-08-03
+
+POST ORDER
+  Upload 01 through 10 in filename order.
+  01 cover, finished exterior, address only.
+  02 the before state, all nine rooms on one page.
+  No photo is used twice anywhere in the deck.
+
+COPY SOURCE
+  Every headline and subline is Shavit's, verbatim from his 8/2 22:08 text.
+  Do not paraphrase. Caption is in CAPTION.txt.
+
+OPEN BEFORE POSTING
+  1. Shavit's own before / during / after photos were never downloaded from
+     iCloud. Slide 02 uses six verified befores from the Drive dump instead.
+     Open the thread on your phone if you want his swapped in.
+  2. Fair housing: three mentions of family or families, on slides 3, 7 and 9.
+     All describe the standard of work, not who may live there. Give it a look.
+  3. Cover is currently the before exterior. The finished exterior is the
+     stronger thumbnail if you would rather lead with it.
+
+SETTLED 8/3
+  No addresses. The house number is off slide 01 and the caption; street name
+  and city stay, per the standing no-house-numbers rule. Slide 10 now reads
+  "Proudly revitalizing South Bend, Indiana." The ZIP codes are gone.
+
+REVIEW
+  REVIEW-sheet.jpg  — all ten at a glance
+  MASTER pdf        — full size, one page per slide
+  Annotatable spec  — http://localhost:8765/docs/reel-specs/kendall-second-chance-2026-08-03.html
+
+REBUILD
+  ~/projects/shavit-pipeline/docs/reel-specs/_scripts/render_kendall_secondchance.py
+  Run with python3.13, not python3. System python3 has no Pillow.

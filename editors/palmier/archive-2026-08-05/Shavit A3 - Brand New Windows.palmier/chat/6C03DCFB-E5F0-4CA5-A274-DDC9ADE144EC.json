@@ -1,0 +1,21 @@
+{
+  "id" : "6C03DCFB-E5F0-4CA5-A274-DDC9ADE144EC",
+  "isOpen" : true,
+  "messages" : [
+    {
+      "blocks" : [
+        {
+          "kind" : "text",
+          "text" : "Now editing: Shavit A3 - Brand New Windows"
+        }
+      ],
+      "id" : "AAE41512-34F1-4616-A67A-A715B85C92BC",
+      "mentions" : [
+
+      ],
+      "role" : "system"
+    }
+  ],
+  "title" : "New chat",
+  "updatedAt" : "2026-08-05T20:06:06Z"
+}

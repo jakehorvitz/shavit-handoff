@@ -1,0 +1,159 @@
+CLARENDON ROAD — Instagram carousel + Facebook post — build notes
+rev 3, 2026-08-21 (rev 2 built 01:10, copy pass 01:11, rendered 08:48+,
+committed 2d5b561; rev 3 from Jake's six voice notes 09:06 to 09:09)
+agent clarendon-ig-fb / clarendon-ig-rev3
+=====================================================================
+
+WHAT REV 3 CHANGED (one line per voice note; full text in ANNOTATIONS-2026-08-21.md)
+-----------------------------------------------------------------------------------
+- slide-01 "definitely, this one is good"            → cover A stays; 01b rendered for
+                                                        the record only, NOT in the MASTER,
+                                                        NOT in the Desktop set.
+- slide-02 "put the before photo here" + alt-02
+  "this is exactly what I'm talking about … I love that" → slide 02 IS the before
+                                                        collage (4 x 2, watermark cropped),
+                                                        inside the deck and the MASTER.
+- slide-03 "before to an after" + slide-04 "a better
+  before and after representation"                    → slides 03 to 07 are SPLIT frames:
+                                                        before LEFT, after RIGHT, 6 px bone
+                                                        gutter, brass BEFORE / AFTER chips,
+                                                        one per docx BEFORE & AFTER category.
+- slide-10 "we ended with an exterior … but I know we
+  used it twice"                                      → slide 10 closes on the exterior at a
+                                                        clearly different crop (zoom 1.35,
+                                                        held to the roofline, onto the porch
+                                                        and entry, lift 1.04). The exterior
+                                                        appears twice by Jake's call; a second
+                                                        exterior from Shavit is a drop-in at
+                                                        after-exterior/exterior-after.jpeg.
+Copy did not change: Shavit docx 2 wording only (01:11 rule). Slide 06's copy is new
+because the slide is new (bedrooms): his L54 second sentence trimmed at both ends
+("Comfortable and functional homes.") over the tail of his L34.
+
+COPY RULE (Jake, voice note on the spec, 8/21 01:11)
+----------------------------------------------------
+"Should we only use the wording from the specs you are getting, please do not
+make up any bullshit, just use what he gave us." Every slide line, both headline
+options, the IG caption and the Facebook post are Shavit sentences or phrases
+taken VERBATIM from docx 2 (8/20 21:08), trimmed for length or with a dollar
+figure, percentage or the house number removed, never rewritten, reordered
+within a sentence, or composed. Only non-docx words: the standing end card
+(Live with us. Work with us.), "Proudly revitalizing Cleveland Heights, Ohio.",
+the chips, the mark, the hashtags. Every slide's docx source line is quoted in
+FRAMES.md. Removed under the rule in rev 2 and still out: the composed cover
+lines, the composed pointer to the website, the composed slide-10 line, and the
+Facebook playbook CTA (posting-time option only, see fb/CAPTION.txt notes).
+
+STATUS
+------
+Rendered and reviewed by eye (REVIEW-sheet.jpg and full-size reads of 02, 03,
+07, 10). Band is the Kendall metric (484 px, 36%) across all eleven cards.
+FINISH.sh: render, lint proof (final/LINT-OUTPUT.txt: `lint ok` on both
+marker-stripped posts; `unknown-fact` on the real posts until the registry
+exists), Desktop set replaced in full, commit by name.
+
+Spec: http://localhost:8766/docs/reel-specs/clarendon-ig-2026-08-20.html
+Desktop: ~/Desktop/Shavit - Clarendon Carousel/ (+ facebook/) — ten slides,
+MASTER, REVIEW-sheet, captions, FRAMES, NOTES. No 01b, no ALT.
+
+THE DECK
+--------
+01 cover A (exterior) · 02 before collage · 03 KITCHENS split · 04 BATHROOMS split
+· 05 LIVING AREAS split · 06 bedrooms split ("Comfortable and functional homes.")
+· 07 BASEMENT & MECHANICAL SYSTEMS split · 08 "Following renovation, the three
+units were leased." · 09 "Refinancing rather than selling." · 10 "Fully leased,
+refinanced, and professionally managed." over the exterior close + the Kendall
+end card. Pairings and docx quotes per slide: FRAMES.md.
+
+THE THREE THINGS TO CONFIRM WITH SHAVIT
+---------------------------------------
+1. The MLS befores — MORE IMPORTANT NOW. They carry an "MLS Now" watermark (the
+   prior sale listing's photography, not his). By Jake's decision they are now
+   IN the deck (slide 02 collage, the left halves of 03 to 07) and in the
+   MASTER, watermark cropped out. Confirm with Shavit that they are his to
+   publish BEFORE this posts. If the answer is no: slide 02 reverts to the rev 2
+   type-led frame and 03 to 07 revert to after-only (the renderer keeps both
+   paths: plate() and split()). Also note every before shows the prior
+   occupants' belongings; the person at the edge of unit1-bedroom-before is
+   excluded by crop wherever that file appears.
+2. Naming: "Clarendon Road" (docx 2 says Road; memo 1 and rev 1 said Avenue)
+   and "Cleveland Heights" (not "Cleveland"). The website case study uses the
+   same. His own L69 says "relocating to Cleveland from outside the region" and
+   is used verbatim on the Facebook post.
+3. That the posts may describe the tenants with his L37 sentence ("The property
+   attracted tenants including medical residents relocating from outside the
+   area.") and his L69. Both phrased as who DID lease. Still his tenants.
+
+JUDGMENT CALLS MADE (so Jake can reverse any of them)
+-----------------------------------------------------
+- 06 is a BEDROOM split, not the after-only stair frame. There is no hallway or
+  stair before in the drop; an after-only slide in the middle of five splits
+  would be the odd one (the brief preferred the split). The stair frame
+  (after-unit3/dsc06958.jpeg) is DROPPED, not moved to Facebook: the FB
+  playbook caps a post at five photos and the FB set is already five. It is
+  available as a swap.
+- 04 after is now the portrait glass-shower frame (after-unit3/dsc06937.jpeg),
+  which fits a 537 x 866 half almost uncropped; rev 2's tub wall (img_3037) is
+  dropped.
+- The collage reuses befores that also appear as split left halves (a grid
+  thumbnail and a half-frame of the same photo). The brief asked for both;
+  noted here in case Jake wants the collage limited to the three befores not
+  used in splits (unit1-bedroom, unit2-a, unit3-a), which would make it 3 x 1.
+- 07 after slice (xbias 1.0) holds the sink, the panel, the PEX manifold and
+  the dryers; one washer sits at the slice's left edge. The appliances span the
+  whole source, so no 537-wide slice avoids cutting one; the alternative
+  (basement-after-a.png, white wall + epoxy floor) crops clean but shows no
+  mechanical work.
+- Collage basement tile is biased left (xbias 0.0): an ambiguous dark shape at
+  the right edge of the source could read as a figure at thumbnail size.
+- Before halves are trimmed 6% off the bottom before fitting (the collage tiles
+  9%) so the "MLS Now" watermark never lands in the frame; checked by eye on
+  03 and 07 at full size.
+- Slide 08 and 09 unchanged from rev 2; slide 10 copy unchanged, frame changed.
+- The IG caption is digit-free so the marker-stripped lint proof passes
+  uncited-numeral: "late 2025" and "June 2026" live only on slides 02 and 08.
+- #beforeandafter added to the IG hashtags on Jake's word (8/21), now that the
+  befores ship on 02 and 03 to 07. Fourteen tags.
+- platform in content/clarendon-triplex-fb/post.md is "facebook" exactly as the
+  brief's `shavit.sh new -p facebook` writes it.
+
+CROPS
+-----
+- 01: ybias 0.12 (a sliver of sky above the gable peak; the cut is lawn).
+- 02: 4 x 2 tiles, wm_crop 0.09; unit1-bedroom tile xbias 1.0 (person out);
+  basement tile xbias 0.0 (see above).
+- 03: before centre; after img_3052 xbias 0.65 (sink, range, microwave whole).
+- 04: before xbias 0.55 lift 1.10 (tub, curtain, toilet); after dsc06937 centre.
+- 05: before centre; after img_3045 xbias 1.0 (all three front windows).
+- 06: before centre; after img_3040 xbias 0.45 (door, windows, light).
+- 07: before centre lift 1.30; after basement-b xbias 1.0 (sink, panel, PEX).
+- 10: exterior zoom 1.35, ybias 0.04, xbias 0.65, lift 1.04 (peak in, porch
+  and entry in, first-floor windows cut at the band).
+
+PHOTO CAVEATS
+-------------
+- The exterior is 886 x 886 (iMessage copy of IMG_7691), upscaled 1.22x on 01
+  and 1.65x on 10. Ask Shavit for the full-resolution original (and, better, a
+  second exterior for slide 10); both drop in.
+- The house number on the porch post is in the exterior photo; at this size it
+  is a sub-legible smudge on 01 and a slightly larger smudge on 10. If Jake
+  wants it gone it needs a local blur on a copy (real photo, no generation).
+
+WHAT IS NOT BUILT, ON PURPOSE
+----------------------------
+- The "Cleveland team" post (content/clarendon-cleveland-team) stays gated.
+- Nothing posted anywhere. Nothing written into the website repo.
+- The facts registry (facts/) does not exist and is TTY-only. See
+  content/clarendon-deal-story/FACTS-TO-ADD.md (13 ids, every value his
+  verbatim sentence).
+
+POST DAYS
+---------
+Instagram: Sunday 8/23. Facebook: Monday 8/24, different lead beat (his L67).
+
+REV 3b — 2026-08-21 09:47 (operator, on Jake voice note ~09:45)
+- Copy audit: every slide string and both captions checked by script against docx 2; all are his
+  sentences or phrases, trimmed only (period added, dollar clause or trailing clause removed). No composed copy.
+- Slide 10 reframed: the tight porch/gable crop is gone; the close now uses the cover framing
+  (whole house, centred, zoom 1.0, ybias 0.12, xbias 0.50, lift 1.04). Jake: "the house at the
+  end is repositioned like in front and center." He has accepted the exterior appearing twice.

@@ -1,0 +1,195 @@
+<!DOCTYPE html>\n<html><head><meta charset="UTF-8"><title>Shavit Film — Change-Spec v5</title>
+<style>
+  :root{
+    --black:#000000; --ink:#0A0A0A; --panel:#111111; --line:#222222;
+    --white:#FFFFFF; --grey:#9A9A9A; --dim:#666666;
+    --brass:#B08D57; --gold:#FFC000;
+    --font:'Inter',-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--black);color:var(--white);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px 120px;}
+  ::selection{background:var(--gold);color:var(--black);}
+
+  /* masthead */
+  header{padding:88px 0 56px;border-bottom:1px solid var(--line);}
+  .kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);margin-bottom:20px;}
+  h1{font-size:clamp(38px,6vw,64px);font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:1.02;}
+  h1 .gold{color:var(--gold);}
+  .sub{margin-top:22px;font-size:17px;color:var(--grey);max-width:640px;}
+  .meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+  .meta b{color:var(--white);font-weight:600;}
+  .rule{height:1px;background:var(--brass);width:64px;margin:26px 0 0;}
+
+  /* sections */
+  section{padding:72px 0 8px;border-bottom:1px solid var(--line);}
+  .num{font-size:12px;letter-spacing:.3em;color:var(--brass);text-transform:uppercase;margin-bottom:14px;}
+  h2{font-size:30px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:10px;}
+  .lede{color:var(--grey);font-size:16px;max-width:680px;margin-bottom:40px;}
+  h3{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--white);margin:34px 0 12px;}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 40px;}
+  th{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);}
+  td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:#D8D8D8;}
+  td.t{color:var(--gold);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  td.k{color:var(--white);font-weight:600;white-space:nowrap;}
+  .tablebox{overflow-x:auto;}
+
+  /* intent card */
+  .intent{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);padding:28px 32px;margin:0 0 46px;font-size:18px;max-width:760px;}
+  .intent em{color:var(--gold);font-style:normal;font-weight:700;}
+  .intent .src{display:block;margin-top:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+
+  /* timeline */
+  .timeline{display:flex;height:64px;border:1px solid var(--line);margin:6px 0 12px;overflow:hidden;}
+  .tseg{position:relative;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;border-right:1px solid var(--black);}
+  .tlabels{display:flex;font-size:10px;color:var(--dim);margin-bottom:44px;font-variant-numeric:tabular-nums;}
+  .tlabels span{border-left:1px solid var(--line);padding:2px 0 0 6px;}
+
+  /* storyboard */
+  .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin:10px 0 30px;}
+  .frame{background:var(--panel);border:1px solid var(--line);}
+  .screen{aspect-ratio:9/16;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;border-bottom:1px solid var(--line);}
+  .screen .tc{position:absolute;top:10px;left:12px;font-size:9px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums;}
+  .screen .wm{position:absolute;top:10px;right:12px;font-size:8px;letter-spacing:.18em;color:rgba(255,255,255,.35);}
+  .screen .type{font-weight:800;text-transform:uppercase;line-height:1.06;letter-spacing:-.01em;}
+  .screen .type .u{box-shadow:inset 0 -3px 0 var(--brass);}
+  .screen .tag{font-size:8.5px;letter-spacing:.22em;color:var(--brass);text-transform:uppercase;margin-bottom:8px;}
+  .fmeta{padding:14px 16px 18px;}
+  .fmeta .fk{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:700;}
+  .fmeta p{font-size:12.5px;color:var(--grey);line-height:1.5;}
+  .g-before{background:linear-gradient(160deg,#1c2126 0%,#0e1114 55%,#07090b 100%);}
+  .g-after{background:linear-gradient(160deg,#3a2f1e 0%,#241c10 55%,#120e07 100%);}
+  .g-split{background:linear-gradient(90deg,#141a1f 0 50%,#2e2517 50% 100%);}
+  .g-black{background:#000;}
+  .counters{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+  .counters .c{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;}
+  .counters .cl{font-size:8px;letter-spacing:.24em;color:var(--brass);}
+  .sig{display:flex;flex-direction:column;align-items:center;justify-content:center !important;text-align:center;gap:8px;}
+  .housemark{width:34px;height:34px;border:2px solid var(--gold);border-bottom:none;position:relative;transform:rotate(45deg);margin-bottom:10px;}
+  .sig .wordmark{font-size:15px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;}
+  .sig .rules{width:56px;border-top:1px solid var(--brass);border-bottom:1px solid var(--brass);height:5px;}
+  .sig .cap{font-size:8px;letter-spacing:.3em;color:var(--grey);text-transform:uppercase;}
+
+  /* tokens */
+  .tokens{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:8px 0 36px;}
+  .tok{border:1px solid var(--line);}
+  .tok .swatch{height:74px;}
+  .tok .ti{padding:12px 14px;font-size:12px;}
+  .tok .ti b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;}
+  .tok .ti span{color:var(--dim);font-size:11px;}
+
+  .do{color:#7FBF7F;font-weight:700;} .dont{color:#C96A6A;font-weight:700;}
+  .callout{background:var(--panel);border:1px solid var(--line);padding:22px 26px;margin:14px 0 36px;font-size:14px;color:#D8D8D8;max-width:820px;}
+  .callout b{color:var(--gold);}
+  ul.plain{list-style:none;margin:0 0 36px;}
+  ul.plain li{padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line);font-size:14px;color:#D8D8D8;}
+  ul.plain li::before{content:"";position:absolute;left:0;top:19px;width:12px;height:1px;background:var(--brass);}
+  .grill{counter-reset:q;}
+  .grill li{counter-increment:q;padding-left:44px;}
+  .grill li::before{content:counter(q,decimal-leading-zero);width:auto;height:auto;background:none;top:10px;color:var(--gold);font-weight:800;font-size:13px;}
+  footer{padding:56px 0 0;color:var(--dim);font-size:12px;letter-spacing:.14em;text-transform:uppercase;}
+</style>
+<div class="wrap">
+<header>
+  <div class="kicker">Shavit Rootman · Brand Film · Change-Spec for the v5 Cut · 2026-07-04</div>
+  <h1>What Changes,<br>How, and <span class="gold">Why</span></h1>
+  <p class="sub">Jake's directive: brain-check the credit-free draft, spec every change, argue why it pleases Shavit, score it against
+  hard bars (virality ≥85 · reputation ≥95), judged against the WHOLE video-brain — all 9 arms — plus Hormozi doctrine and the
+  27-criterion Shavit-standards file. Four evidence streams feed this: video-brain-analyze (REJECT, 4 critical/9 major),
+  hormozi-criteria (15), shavit-standards (27 + 8 rejection predictors), and two rounds of machine-gated builds.</p>
+  <div class="meta">
+    <span>Verdict on draft <b style="color:#C96A6A;">REJECT — do not show Shavit</b></span>
+    <span>Restart? <b>No — foundation holds, motion layer rebuilds</b></span>
+    <span>Deadline <b>Saturday afternoon</b></span>
+    <span>Credits <b>22 spent · ~704 left</b></span>
+  </div>
+  <div class="rule"></div>
+</header>
+
+<section>
+  <div class="num">01 · The restart question</div>
+  <h2>Keep the foundation, rebuild the motion layer</h2>
+  <p class="lede">Jake authorized a full restart. Assessment: not warranted — and here is the honest reasoning.</p>
+  <div class="tablebox"><table>
+    <tr><th style="width:240px;">Layer</th><th style="width:110px;">Verdict</th><th>Why</th></tr>
+    <tr><td class="k">Story architecture (hook → proof → 3 chapters → reward → signature)</td><td class="do">KEEP</td><td>Survived two councils, Hormozi audit calls it "deeply aligned," and the brain analysis confirms the hook legibility, silence mechanism, and word purge are working. Nothing in any evidence stream indicts the skeleton.</td></tr>
+    <tr><td class="k">Wording register (claims, zero-$, full state names, closer)</td><td class="do">KEEP</td><td>Passes pixel-exact in the draft. This is Shavit's #3 rejection predictor fully neutralized.</td></tr>
+    <tr><td class="k">Machine gate (41 checks) + bones audit trail</td><td class="do">KEEP + EXTEND</td><td>The gate caught 16 failures on the rejected film and forced two honest rebuilds. It gets 6 new checks (§03) from this round's findings.</td></tr>
+    <tr><td class="k">Renderer motion layer (how clips move)</td><td class="dont">REBUILD</td><td>Two rounds produced static-slideshow output — measured motion near zero on every "camera-move" clip. The renderer treats motion as an afterthought; v5 inverts the contract: real Kling clips and real footage are the primitives, stills are the exception.</td></tr>
+    <tr><td class="k">Type-timing layer</td><td class="dont">REBUILD</td><td>Right plates, wrong sync: "OHIO. INDIANA." captions an Ohio house while the real Indiana plate goes unnamed; the banker payoff shows ~1.0s (unreadable). Type timing becomes cutlist-driven with per-line minimum dwell.</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="num">02 · The changes</div>
+  <h2>Every change: what · how · why · source</h2>
+  <div class="tablebox"><table>
+    <tr><th style="width:56px;">#</th><th style="width:260px;">What</th><th>How</th><th style="width:230px;">Why (source)</th></tr>
+    <tr><td class="t">C1</td><td class="k">Hook rides the real Kling dolly</td><td>G1 (Salem exterior push-in, generated + eyeballed) becomes the 0–3s plate, cut into mid-move; "FIFTY DOORS. THREE STATES. ONE STANDARD." rises on three beats, third lands on the cut.</td><td>Draft hook is static → scroll. Motion at frame 0 is the retention floor. (brain-analyze MAJOR; retention council)</td></tr>
+    <tr><td class="t">C2</td><td class="k">Fix the state-caption sync</td><td>Type windows bound to clip windows in the cutlist: MICHIGAN on the River St dissolve, OHIO alone on West Side, INDIANA alone on Parkview. New machine check enforces OCR-window ↔ clip-state overlap.</td><td>The draft makes an Indiana claim over an Ohio house — Shavit's exact 7/3 offense class, aimed at diligence-trained lenders. (brain-analyze CRITICAL #1)</td></tr>
+    <tr><td class="t">C3</td><td class="k">Reward = G2 interior dolly + warm grade</td><td>The accepted G2 clip (Salem entry/staircase, real parallax) fills 43–48s; warmth applied in grade (the empty room reads "ready for a family," type carries the rest). Kills the 12s static empty room.</td><td>Spec mandates the interior spectacle; the draft ignored it. (brain-analyze CRITICAL; retention council #6)</td></tr>
+    <tr><td class="t">C4</td><td class="k">Banker payoff gets its beat back</td><td>"THEN ASKED US TO BUY HER HOUSE." holds ≥2.5s after the silence; freeze-desat → warm snap stays. New check: per-line minimum dwell ≥1.8s.</td><td>The engineered silence currently pays into an unreadable line. (brain-analyze CRITICAL)</td></tr>
+    <tr><td class="t">C5</td><td class="k">Purge chevrons/arrows, not just dots</td><td>Ch.3 tile + the 38–53s background re-cropped from source; dot-scanner extended to detect chevron arrows and dim UI shapes.</td><td>Baked IG chrome = "looks like a screenshot" = rejection predictor #1. (brain-analyze CRITICAL; audit)</td></tr>
+    <tr><td class="t">C6</td><td class="k">Ch.3 reframed: demand as proof, refusal as character</td><td>"ONE BUYER." → "THE WHOLE SET." → gold: <b>"IT&#39;S NOT FOR SALE."</b> (+4 words to the register, gate moves 44→46 unique).</td><td>An exit story inside a "WE STAY" film collides with the thesis; the refusal converts the collision into the strongest trust beat. (hormozi gap #5)</td></tr>
+    <tr><td class="t">C7</td><td class="k">Longevity marker on screen</td><td>Reward beat carries a small brass sub-line under the closer: <b>"HELD SINCE DAY ONE."</b> (pending Shavit&#39;s Saturday confirm of hold-history accuracy; falls away silently if unconfirmed).</td><td>"We stay" needs a visible proof marker; currently zero. (hormozi gap #1)</td></tr>
+    <tr><td class="t">C8</td><td class="k">Salem angle diversity</td><td>Salem appears in 3 beats at near-identical angles — swap Ch.1 after to the split-screen film&#39;s finish frames, reward exterior to a different crop; hook keeps G1.</td><td>Same-angle repetition reads low-effort. (brain-analyze MAJOR)</td></tr>
+    <tr><td class="t">C9</td><td class="k">Delivery floors: bitrate + audio dynamics</td><td>Render at ≥10 Mbps; master the Heartland bed with real dynamics (LRA &gt; 0 — the draft&#39;s 0.0 LU means a brickwalled bed); provenance rows for music + Ch.2 footage (register HARD FAIL fixed).</td><td>1.2 Mbps + flat audio reads cheap on a luxury film. (brain-analyze MAJOR; video-brain-check)</td></tr>
+    <tr><td class="t">C10</td><td class="k">Caption pack + CTA architecture</td><td>Captions rewritten (already register-clean post-round-2) with the off-video CTA Hormozi requires: profile-line CTA, pinned-comment architecture, per-platform variants.</td><td>The film ends with zero ask by design — the ask lives off-video. (hormozi gap #3)</td></tr>
+    <tr><td class="t">C11</td><td class="k">Chapter tags restored</td><td>"SALEM STREET" and "ONE OF OUR REHABS" brass tags render at the register-versioned size (the remaster scale Jake approved, not the pre-remaster size).</td><td>Both tags missing in draft; tag scale is a known Jake-rejection. (brain-analyze MAJOR; video-brain register)</td></tr>
+    <tr><td class="t">C12</td><td class="k">Values texture beat</td><td>One real-footage texture beat (fireplace flame or porch/wreath, timestamps from audit) placed in Ch.2 or reward — the Midwestern-values register made visible, evergreen, no holiday cues.</td><td>Jake 7/3: "midwestern american values," audience = community + tenants. (values register; audience arm)</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="num">03 · New machine checks (findings → gates)</div>
+  <h2>Six additions — nothing found twice</h2>
+  <ul class="plain">
+    <li><b>type_plate_sync</b> — every state-name OCR window must overlap a clip whose manifest state matches (kills C2&#39;s failure class)</li>
+    <li><b>line_min_dwell</b> — every narrative line ≥1.8s on screen (C4)</li>
+    <li><b>chrome_shape_scan</b> — chevron/arrow/dim-UI detection added to the dot scanner (C5)</li>
+    <li><b>motion_floor</b> — every camera-move clip must show measurable median optical flow; static-posing-as-motion fails (C1/C3)</li>
+    <li><b>delivery_floor</b> — bitrate ≥8 Mbps · audio LRA &gt; 0.5 LU (C9)</li>
+    <li><b>provenance_music_footage</b> — music bed + every footage segment needs a manifest row, same as plates (C9)</li>
+  </ul>
+</section>
+
+<section>
+  <div class="num">04 · Why this pleases Shavit</div>
+  <h2>Argued against his own record, not vibes</h2>
+  <div class="tablebox"><table>
+    <tr><th style="width:300px;">His rejection predictor (ranked, from the mining)</th><th>How v5 answers it</th></tr>
+    <tr><td class="k">#1 — Anything that reads AI (sank v3 on one still)</td><td>Every plate provenance-traced to a real photo; both Kling clips human-eyeballed with diff artifacts; outpaints retired; chrome purge extended to arrows; zero synthetic people; IG "AI info" stance decided WITH him before post.</td></tr>
+    <tr><td class="k">#2 — Music misses "Midwest living × luxury-enterprise"</td><td>Heartland (evergreen values-Americana) + real dynamics mastering; one alternate track staged for a 4-minute re-mux if he says "off" again — his least machine-checkable risk gets a pre-built escape hatch.</td></tr>
+    <tr><td class="k">#3 — Any $/portfolio trace</td><td>Zero-$ machine check on every frame AND every text deliverable; website already purged + committed.</td></tr>
+    <tr><td class="k">#4 — Abbreviations / sloppy naming</td><td>MI/OH/IN forbidden-token check + the new type_plate_sync so full names sit on the RIGHT houses.</td></tr>
+    <tr><td class="k">#5 — Screenshot-grade sloppiness (dupes, chrome, off-center)</td><td>phash dupe check, chrome shape scan, per-plate hygiene OCR, his two banned properties struck by name.</td></tr>
+    <tr><td class="k">His 5 visitor questions</td><td>Each mapped to a timestamp in spec §00; the Ch.3 refusal beat (C6) directly answers "can I trust this company?" — the #1 question — with behavior, not adjectives.</td></tr>
+    <tr><td class="k">His time budget (≤15 min/week, thumbs-up communicator)</td><td>Saturday package per the presentation protocol: ONE cut, a "your notes → fixed" ledger, six binary asks, written-go request. No essays.</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="num">05 · Scoring plan — the bars</div>
+  <h2>Virality ≥85 · Reputation ≥95, scored on the finished v5 cut</h2>
+  <ul class="plain">
+    <li><b>Virality (bar 85):</b> Higgsfield virality_predictor on the actual master (hook strength, retention risk, attention) weighted 50% + brain rubric 50% (IG-language arm: hook-3s, loop-close, rewatch seam; audience arm: avatar resonance; Hormozi: value-per-second, stakes, shareability). Trust constraint applies: no virality point may be bought with a reputation point.</li>
+    <li><b>Reputation (bar 95):</b> Shavit register (40%) + gen-quality arm (30-artifact taxonomy pass, zero AI-tells at human-review standard) (30%) + edit-craft arm (grade/rhythm/typography discipline) (20%) + legal/claims gates (10%). Any CRITICAL finding = automatic fail regardless of weighted score.</li>
+    <li><b>Below either bar → iterate, nothing advances.</b> Scores + full working shown in the Saturday memo.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="num">06 · Timeline to Saturday afternoon</div>
+  <h2>The night and the morning</h2>
+  <ul class="plain">
+    <li><b>Tonight:</b> loop round 3 lands (caption band + watermark) → v5 renderer contract written (C1–C12 + 6 new checks) → loop round 4 runs overnight.</li>
+    <li><b>Sat ~9am:</b> human review of the v5 cut (me, frame by frame, signed only if true) → G3/G4 only if a slot still needs them (≤20cr) → scoring run.</li>
+    <li><b>Sat ~11am:</b> scores vs bars. Above both → package assembles. Below → targeted iterate, re-score.</li>
+    <li><b>Sat early PM:</b> the full package to Jake: cut + scores + ledger + the six Shavit asks, ready to forward.</li>
+  </ul>
+  <div class="callout"><b>Standing risks, named:</b> Shavit&#39;s photos still absent (v5 ships on verified existing assets; his photos upgrade v5.1); the music remains his least predictable veto (mitigated, not eliminated); virality for a pinned trust film is structurally capped vs entertainment content — if the predictor scores the format rather than the execution, the memo will show both numbers and say so plainly.</div>
+</section>
+
+<footer>Change-Spec v5 · 2026-07-04 · sources: brain-analysis-round2.md · hormozi-criteria.md · shavit-standards.md · council/ · .bones journal</footer>
+</div></html>

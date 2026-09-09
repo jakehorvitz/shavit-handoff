@@ -1,0 +1,56 @@
+<style>
+  :root{--brass:#B08D57;--gold:#FFC000;--ink:#f4f1ea;--dim:#9a948a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0a0a0a;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:18px;padding:36px 20px 60px}
+  h1{font-size:21px;letter-spacing:.13em;text-transform:uppercase;font-weight:800;text-align:center}
+  .sub{color:var(--dim);font-size:13px;text-align:center;max-width:680px;line-height:1.6}
+  .rule{height:2px;width:60px;background:var(--brass)}
+  .row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+  .card{display:flex;flex-direction:column;gap:9px;align-items:center}
+  .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;padding:4px 12px;border-radius:5px;
+    background:#161207;color:var(--gold);border:1px solid #33290f}
+  img.still{width:min(44vw,380px);border-radius:14px;border:1px solid #2a2722;box-shadow:0 16px 50px #000a;display:block}
+  .cap{font-size:12px;color:var(--dim);max-width:380px;text-align:center;line-height:1.5}
+  .cap b{color:var(--ink)}
+  .plan{margin-top:14px;background:#111;border:1px solid #2a2722;border-radius:14px;padding:18px 20px;max-width:720px}
+  .plan h2{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:10px}
+  .plan ol{padding-left:20px;display:flex;flex-direction:column;gap:7px}
+  .plan li{font-size:13px;color:#cfc9bd;line-height:1.5}
+  .plan b{color:var(--ink)}
+  .plan .cr{color:var(--gold)}
+  .flag{margin-top:10px;font-size:12px;color:#c9773f;background:#1c130b;border:1px solid #3a2a1c;border-radius:8px;padding:8px 12px;line-height:1.5}
+</style>
+
+<h1>Mid-Demolition Stills — pick one</h1>
+<div class="sub">Your realism doctrine applied: nano-banana with the <b>real before-photo as identity reference</b>.
+Same corner, same trees, same porch bench, same sidewalk — now a working jobsite. These become the middle
+anchor the video morphs through, so the motion only ever travels between locked photoreal frames.</div>
+<div class="rule"></div>
+
+<div class="row">
+  <div class="card">
+    <span class="tag">V1 · Rafters + dust haze</span>
+    <img class="still" src="build/qa/demo_still_v1.png">
+    <p class="cap"><b>Gable stripped to raw framing, dark sheathing exposed, dust drifting through the trees.</b><br>
+    4 workers · orange mini-excavator · debris field</p>
+  </div>
+  <div class="card">
+    <span class="tag">V2 · Roof to plywood + CAT</span>
+    <img class="still" src="build/qa/demo_still_v2.png">
+    <p class="cap"><b>Roof peeled to plywood, whole upper gable re-framed in fresh lumber, CAT excavator at the porch.</b><br>
+    3 workers · reads most like a straight documentary photo</p>
+  </div>
+</div>
+
+<div class="plan">
+  <h2>The re-rolled hero (once you pick)</h2>
+  <ol>
+    <li><b>0–4s</b> — real before push-in (already rendered, reused — <span class="cr">0 cr</span>)</li>
+    <li><b>4–9s</b> — Kling frames: <b>real before → your demolition still</b> — crews strip the house, debris builds (<span class="cr">~14 cr</span>)</li>
+    <li><b>9–14s</b> — Kling frames: <b>demolition still → real after</b> — dust cloud erupts, fills the frame, clears on the finished renovation (<span class="cr">~14 cr</span>)</li>
+    <li>Then the tour continues as specced (rooms → payoff → address → sky-rise → outro)</li>
+  </ol>
+  <div class="flag">Frame-diff flags: garbled excavator branding in both (v1 "Kubete", v2 rear panel) — motion blur will
+  mostly hide it; can also patch locally. House number on the door trim still pending its blur. Both fixable, neither blocks the pick.</div>
+</div>

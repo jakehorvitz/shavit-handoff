@@ -1,0 +1,278 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Field footage 8/5 — the budgets answer, a second voice, and the admin week · slate</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1b1b1e; --line:#26262a; --ink:#f2f0ec; --dim:#9d9a94;
+    --brass:#b08d57; --gold:#ffc000; --bone:#edeae3; --bad:#e0674f; --ok:#6fae7b; --blue:#6ea3d6;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;padding:0 0 140px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);padding:44px 0 28px;margin-bottom:8px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);
+     margin:48px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:20px;margin:0 0 4px}
+  p{margin:0 0 1em}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+        text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);
+        color:var(--dim);margin-right:6px}
+  .pill.hold{color:var(--bad);border-color:rgba(224,103,79,.4)}
+  .pill.new{color:var(--gold);border-color:rgba(255,192,0,.4)}
+  .pill.go{color:var(--ok);border-color:rgba(111,174,123,.45)}
+
+  .revlog{background:linear-gradient(180deg,rgba(176,141,87,.1),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;
+    padding:12px 16px;margin:20px 0 0;font-size:13px}
+  .revlog h4{margin:0 0 6px;color:var(--brass);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .revlog ul{margin:0;padding-left:18px}
+  .revlog li{color:var(--dim);margin:3px 0}
+  .revlog .rev{font-family:var(--mono);color:var(--gold)}
+
+  .chg{position:relative;box-shadow:0 0 0 1px rgba(255,192,0,.45),0 0 26px -6px rgba(255,192,0,.35)}
+  .chg::after{content:"UPDATED";position:absolute;top:-10px;right:16px;background:var(--bg);
+    color:var(--gold);border:1px solid rgba(255,192,0,.5);border-radius:6px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:2px 8px}
+
+  .reel{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+        padding:22px 24px;margin:16px 0 28px;position:relative}
+  .reel .rank{position:absolute;top:-11px;left:22px;background:var(--bg);border:1px solid var(--brass);
+        color:var(--brass);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:2px 10px;
+        border-radius:6px;text-transform:uppercase}
+  .reel.blocked{border-color:rgba(224,103,79,.45)}
+  .reel.blocked .rank{border-color:var(--bad);color:var(--bad)}
+  .premise{color:var(--gold);font-size:15.5px;margin:.5em 0 1em;font-style:italic}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .box h5{margin:0 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .box p{font-size:14px;margin:0}
+  .quote{background:var(--bone);color:#121214;border-radius:8px;padding:14px 16px;margin:10px 0 0;
+         font-size:14px;line-height:1.45;font-style:italic;font-weight:600}
+  .quote .attr{display:block;font-style:normal;font-weight:400;font-family:var(--mono);
+         font-size:11px;color:#5c5954;margin-top:8px;letter-spacing:.04em}
+  .strip{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:12px 0}
+  .strip img{width:100%;border-radius:6px;display:block;background:#000}
+  .rule{color:var(--dim);font-size:13px;font-family:var(--mono);margin-top:12px}
+  .why{color:var(--dim);font-size:13.5px;margin-top:12px}
+  .why b{color:var(--ink);font-weight:600}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+  th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+     color:var(--brass);border-bottom:1px solid var(--line);padding:8px 10px 8px 0;font-weight:600}
+  td{border-bottom:1px solid var(--line);padding:9px 10px 9px 0;vertical-align:top;color:var(--dim)}
+  td b{color:var(--ink);font-weight:600}
+  code{font-family:var(--mono);font-size:12.5px;color:var(--blue);
+       background:rgba(110,163,214,.09);padding:1px 5px;border-radius:4px}
+  .callout{border:1px solid rgba(224,103,79,.4);background:rgba(224,103,79,.06);
+    border-radius:10px;padding:14px 16px;margin:14px 0}
+  .callout.good{border-color:rgba(111,174,123,.4);background:rgba(111,174,123,.06)}
+  .callout h5{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bad)}
+  .callout.good h5{color:var(--ok)}
+  ol,ul{margin:0 0 1em;padding-left:20px}
+  li{margin:.35em 0}
+</style>
+
+<body data-spec="field-footage-0805">
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Shavit Rootman · vertical talking-head reels · 5 new items · 8/4 evening through 8/5 midday</div>
+  <h1>He answered the money question without saying a single number.</h1>
+  <div class="sub">Everything Shavit sent after the 8/4 slate closed · <span class="pill go">3 reels ready to cut</span><span class="pill hold">2 items blocked on transfer</span><span class="pill">Drafts only — Jake posts</span></div>
+
+  <div class="revlog">
+    <h4>Revision log</h4>
+    <ul>
+      <li><span class="rev">rev 1 · 2026-08-05</span> — First pass. Companion to <code>field-footage-2026-08-04.html</code>, which covers the Ewing and Mishawaka batches and is unchanged by this document. Five new items arrived between 6:53 PM on 8/4 and 10:49 AM on 8/5 across four separate messages. Three transcribed, two blocked on incomplete transfers.</li>
+    </ul>
+  </div>
+</header>
+
+<h2 data-annot="sec-0">The one thing that matters in this batch</h2>
+
+<div class="callout good">
+  <h5>The A4 blocker just dissolved</h5>
+  <p>The 8/4 slate had exactly one reel worth fighting for and exactly one reason it could not ship: <b>A4, the BRRRR walkthrough, breaks the no-dollar-figures rule five times in fifty seconds and names a lender on camera.</b> The recommendation was to either bend the rule with Shavit's sign-off or recut it into a weaker no-numbers version.</p>
+  <p style="margin-top:.8em">Neither is necessary any more. On 8/5 he shot <b>IMG_4706</b>, in which he answers <i>"how does your company meet budgets?"</i> — the actual question the investor audience is asking — and does it with <b>zero dollar figures, no lender, and no deal specifics.</b> It is the same audience, the same credibility, and it clears the brand rule as written. A4 can stay in the drawer indefinitely instead of waiting on a decision.</p>
+</div>
+
+<p>The second thing worth naming: on 7/31 Shavit told Jake <i>"it's a pretty reel, but I would not say it's doing well"</i> and then <i>"I think more of me is necessary."</i> Everything in this batch and the one before it is him acting on his own note without being asked again. The bottleneck on this account has been story input from him, and for two days running it has not been the bottleneck.</p>
+
+<h2 data-annot="sec-arrived">What arrived</h2>
+
+<table>
+  <tr><th>Sent</th><th>Item</th><th>Property</th><th>Length</th><th>State</th></tr>
+  <tr><td>8/4 6:53 PM</td><td><b>IMG_4690.mov</b></td><td>11 E Saint Joe, unit 2 · Hillsdale</td><td>—</td><td><span class="pill hold">Transfer incomplete</span></td></tr>
+  <tr><td>8/5 7:13 AM</td><td><b>IMG_4694.mov</b></td><td>Admin / office</td><td>0:39</td><td><span class="pill go">Transcribed</span></td></tr>
+  <tr><td>8/5 7:46 AM</td><td>iCloud share link</td><td>Lane Lewis · lawn care vendor</td><td>—</td><td><span class="pill hold">Not opened</span></td></tr>
+  <tr><td>8/5 10:49 AM</td><td><b>IMG_4704.mov</b></td><td>60 S Norwood · Hillsdale</td><td>0:59</td><td><span class="pill go">Transcribed</span></td></tr>
+  <tr><td>8/5 10:49 AM</td><td><b>IMG_4706.mov</b></td><td>60 S Norwood · Hillsdale</td><td>1:07</td><td><span class="pill go">Transcribed</span></td></tr>
+  <tr><td>8/5 10:49 AM</td><td>IMG_4697.heic + 7 more</td><td>60 S Norwood · Hillsdale</td><td>—</td><td><span class="pill hold">Still transferring</span></td></tr>
+</table>
+
+<p class="rule">Saved to <code>~/Desktop/Shavit - 2026-08-05 Field Footage/</code>. All three usable clips are 1280×720 Messages-compressed, a full tier below the 4K Ewing batch — so 8/5 material should not be intercut with Ewing material inside one reel.</p>
+
+<img src="field-footage-2026-08-05/frames/contact-0805.jpg" alt="Six frames across the three usable 8/5 clips" style="width:100%;border-radius:12px;border:1px solid var(--line);margin-top:8px">
+
+<h2 data-annot="sec-slate">The slate</h2>
+
+<div class="reel" data-annot="reel-c1">
+  <div class="rank">Reel C1 · ship first</div>
+  <h3>How does your company meet budgets?</h3>
+  <div><span class="pill go">Nothing blocking the rule</span><span class="pill">~58s after the fix</span></div>
+  <p class="premise">He is asked this constantly. He answers it in two parts, and never says a number.</p>
+
+  <div class="quote">
+    "There's two reasons I'm being asked quite often — Shavit, how do you meet budgets? How does your company meet budgets?… The first one is thanks to Home Depot's program. It provides you anywhere from twenty to, I would say, eighty percent off on some of their products. Now you do have to spend a tremendous amount of money to be able to qualify… Second reason would be in-home construction. Nothing better than having your own construction team. It's not cheap to start with, and when you do have the downtime, there's not a lot of work to do. It gets expensive to keep them — but at the same time, if you have your own construction at home, your own full-time employees, this is what happens."
+    <span class="attr">IMG_4706 · 0:00–1:07 · outside, direct to camera</span>
+  </div>
+
+  <div class="strip">
+    <img src="field-footage-2026-08-05/frames/IMG_4706-4.jpg" alt="Shavit talking to camera outdoors">
+    <img src="field-footage-2026-08-05/frames/IMG_4706-45.jpg" alt="Close direct address, hand gesture">
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h5>Why this is the one</h5>
+      <p>It gives the investor audience the thing they actually want — proof he knows why his numbers work — and it does it structurally rather than numerically. <b>"It gets expensive to keep them"</b> is the line that sells it: he volunteers the cost of his own advantage, which is what makes the rest of it credible. Nothing else shot this year reads as operator-to-operator the way this does.</p>
+    </div>
+    <div class="box">
+      <h5>Build</h5>
+      <p>IMG_4706 <code>0:00 → 45.60</code> hard-spliced to <code>54.46 → 1:06.7</code>. That removes an 8.9-second self-correction ("it's not expensive… I'm sorry, it's not cheap… apologies") and lands on <b>"…your own construction team. It's not cheap to start with, and when you do have the downtime…"</b> Ends on "this is what happens," which needs the framing footage from IMG_4704 or IMG_4697 cut in over it as the payoff.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h5>Three names to clear before this ships</h5>
+    <p>He thanks <b>Ron and Yaacov</b> for the referral and <b>Bruce, his account manager at Home Depot</b>, by name. He also states a specific discount band for a named national retailer's trade program. None of that breaks the money rule, but all of it is someone else's name attached to a commercial claim. Recommend: keep the substance, cut the three names, and soften the discount to "a real discount" unless Shavit wants to keep the shout-out and is happy to have it on a public account. <b>His call, and it is a two-second edit either way.</b></p>
+  </div>
+
+  <p class="rule">Location label per his 7/29 rule: <b>Hillsdale</b> under any 60 S Norwood frame.</p>
+</div>
+
+<div class="reel" data-annot="reel-c2">
+  <div class="rank">Reel C2</div>
+  <h3>Come on upstairs.</h3>
+  <div><span class="pill go">Nothing blocking</span><span class="pill new">Second face on the account</span><span class="pill">~55s</span></div>
+  <p class="premise">Shavit opens it, then hands the camera to the man who actually built it.</p>
+
+  <div class="quote">
+    "To summarize quickly — I'm not even sure what the layout of the property was before we acquired it, but I'm telling you that as of now we're getting a full three-bedroom, two-bath, completely full. And Jon will take us upstairs."<br><br>
+    "Come on upstairs. We've put a new stairway in — it's solid and level… Upstairs now, it's completely open. We've got two bedrooms. Each bedroom has its own closet. At the end of the hall we have a full bath that will have a tub-shower unit, a vanity and a stool. These windows, when they get new, they won't be that low to the ground — and we kept the window in the bathroom just because of the aesthetics on the outside of the house."
+    <span class="attr">IMG_4704 · 0:00–0:59 · Shavit hands off to Jon Rutan mid-clip</span>
+  </div>
+
+  <div class="strip">
+    <img src="field-footage-2026-08-05/frames/IMG_4704-5.jpg" alt="Shavit in the gutted interior, studs exposed">
+    <img src="field-footage-2026-08-05/frames/IMG_4704-30.jpg" alt="New framing, stud walls upstairs">
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h5>Why this one</h5>
+      <p>Two things the account has never had. First, <b>a second voice</b> — every reel to date is Shavit alone, and the July post already introduced Jon Rutan as "keeping operations moving forward every day," so the audience has met him in text but never heard him. Second, <b>a craft detail that is not a brag</b>: keeping the bathroom window because of how the outside of the house reads is a decision nobody makes for a spreadsheet. That single line is the reel.</p>
+    </div>
+    <div class="box">
+      <h5>Build</h5>
+      <p>IMG_4704 <code>0:00 → 0:59</code>, cutting the dead air at <code>19.5 → 26.5</code> where the camera is climbing the stairs with nothing being said. Consider ending on the window line at <code>0:56</code> rather than "Beautiful, Jon" — the compliment is warm in the room and reads as filler on a reel.</p>
+    </div>
+  </div>
+
+  <p class="rule">Config language matches the site convention exactly: "three-bedroom, two-bath." Keep verbatim. Confirm Jon Rutan is happy to be on camera before this posts — he is named in the July team post, which is not the same as agreeing to be filmed.</p>
+</div>
+
+<div class="reel" data-annot="reel-c3">
+  <div class="rank">Reel C3</div>
+  <h3>The work you never see, part two.</h3>
+  <div><span class="pill go">Nothing blocking the cut</span><span class="pill hold">Consent needed</span><span class="pill">~35s</span></div>
+  <p class="premise">The other half of the company. No hard hat, no drywall, just the list that has to get done this week.</p>
+
+  <div class="quote">
+    "…and administration — the items that I have to complete this week. We have two items that need to have legal closure done, through our attorney and through the courts. We are going to procure another storage unit so that we can store all of our materials and items that we need. Receipt reconciliation — that has been taken care of, that's been completed. There are two units that need to have leases signed this week if possible, and also to make sure that all rent is taken care of and utilities are taken care of this week."
+    <span class="attr">IMG_4694 · 0:00–0:39 · at a laptop, reading the week's list</span>
+  </div>
+
+  <div class="strip">
+    <img src="field-footage-2026-08-05/frames/IMG_4694-3.jpg" alt="VP of administration at a laptop">
+    <img src="field-footage-2026-08-05/frames/IMG_4694-20.jpg" alt="Reading the week's items">
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h5>Why this one</h5>
+      <p>The "work you never see" concept has been running on construction footage since 7/24, which quietly makes the point that the invisible work is still physical work. It is not. <b>This is the actual invisible work</b> — attorneys, storage units, receipt reconciliation, leases, utilities — narrated by the person who does it, off a real list, on a normal Tuesday. It is also the only piece of content the account has ever had that shows the company is more than one man with a camera.</p>
+    </div>
+    <div class="box">
+      <h5>Build</h5>
+      <p>Straight cut, IMG_4694 <code>0:00 → 0:35</code>. Drop the trailing repetition of "this week." Captions carry this one entirely — she is reading, not performing, and the audio is roomy. Consider a simple title card over the first beat: <b>"What a week looks like from the office."</b> No music bed over the first three seconds.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h5>Do not cut this until she has said yes</h5>
+    <p>Shavit captioned the clip <b>"VP of administration! 08/02 workweek"</b> and did not name her. She is filmed candidly, at a laptop, not addressing camera, and she may not know it is going on Instagram. Per the July roster the VP of administration function is Pamela Montez, and per Shavit's 7/30 message none of the Michigan team is on Instagram except Riana. <b>Get an explicit yes, and confirm whether she wants to be named or credited by title only.</b> Everything else here is a five-minute edit.</p>
+  </div>
+</div>
+
+<div class="reel blocked" data-annot="reel-d1">
+  <div class="rank">Reel D1 · blocked</div>
+  <h3>Another Hillsdale unit available.</h3>
+  <div><span class="pill hold">File never finished transferring</span></div>
+  <p class="premise">"Another Hillsdale available unit. 11 E Saint Joe, unit 2 — 2 bedroom."</p>
+  <p class="why">Sent 8/4 at 6:53 PM with a video attached. The video is on disk at 7.8 MB but has <b>no moov atom</b> — the transfer failed partway and the file will not decode. Nothing can be cut from it. <b>Ask Shavit to re-send IMG_4690</b>, or re-download it from Messages on a better connection.</p>
+  <p class="rule">Worth chasing: an available-unit reel is the only listing-side content in the pipeline, and 11 E Saint Joe already appears in the portfolio as a Hillsdale property. Fair-housing rules apply the moment this becomes a listing post — describe the unit and the location, never who it suits.</p>
+</div>
+
+<h2 data-annot="sec-pending">Still outstanding from him</h2>
+<ol>
+  <li><b>Seven attachments from the 10:49 AM message have not downloaded</b> — including three video files over 250 MB. IMG_4697.heic and two clips came through; the rest are mid-transfer. Re-check Messages before assuming this batch is only three items.</li>
+  <li><b>The 7:46 AM iCloud share has not been opened.</b> Captioned "Lane Lewis from the local Lewis lawn care maintenance." A named local vendor — potentially a good "who we work with" beat, potentially just a receipt. Open it before deciding.</li>
+  <li><b>IMG_4690 needs re-sending</b> (see D1).</li>
+</ol>
+
+<h2 data-annot="sec-sequence">Recommended sequence, both batches merged</h2>
+
+<table>
+  <tr><th>Slot</th><th>Reel</th><th>Why here</th><th>Blocked on</th></tr>
+  <tr><td>Thu 6 Aug</td><td><b>A1 · the tenants</b> (Ewing)</td><td>Warmest thing on the account. Draft 2 is cut and the ending defect is fixed</td><td>Nothing</td></tr>
+  <tr><td>Sun 9 Aug</td><td><b>C1 · the budgets answer</b></td><td>Hard pivot from warm to operator. Answers the question he is actually asked, and retires the A4 problem</td><td>Three names, his call</td></tr>
+  <tr><td>Thu 13 Aug</td><td><b>C2 · come on upstairs</b></td><td>Introduces a second voice while the budgets reel is still being replied to</td><td>Jon's yes</td></tr>
+  <tr><td>Sun 16 Aug</td><td><b>A2 · the vision</b> (Ewing)</td><td>Returns to Indiana before the account reads as Michigan-only</td><td>Nothing</td></tr>
+  <tr><td>Thu 20 Aug</td><td><b>C3 · the admin week</b></td><td>Third distinct voice, and the strongest argument that this is a company</td><td>Her yes</td></tr>
+  <tr><td>Reserve</td><td>A3 · the work · D1 · the available unit</td><td>Drop-ins for any week that slips</td><td>A3 nothing · D1 re-send</td></tr>
+  <tr><td>Retired</td><td><s>A4 · the numbers</s></td><td>Superseded by C1, which does the same job without the rule fight</td><td>—</td></tr>
+</table>
+
+<p>That is five weeks of posting, three separate people on camera, and not one thing needed from Shavit except two consents and one yes-or-no on three names.</p>
+
+<h2 data-annot="sec-a1">Status of A1, carried over from the 8/4 slate</h2>
+
+<div class="callout good">
+  <h5>Draft 1 was not shippable. Draft 2 is.</h5>
+  <p>Draft 1 ended on captions reading <b>"NEXT WHAT WAS / IT NEXT HOTEL"</b> — in a reel whose entire premise is how the company treated the tenants it inherited. The cause was a truncation, not a transcription error: <code>seg2</code> was cut at source 41.5s, which stopped the sentence exactly one word into a self-correction. He actually says <i>"…their next, what was it? Next hotel, or next place where they lived."</i></p>
+  <p style="margin-top:.8em"><b>Draft 2</b> extends the cut to the true end of the sentence and splices out the 2.8-second stumble, so the line now reads and hears as <i>"…we ended up helping them to be able to afford their next place where they lived."</i> Verified by re-transcribing the render, not by eye. Two caption regressions were also fixed: a per-word fade that left short captions permanently semi-transparent, and a caption baseline that had drifted 90px off the position in draft 1.</p>
+  <div class="strip" style="grid-template-columns:repeat(2,1fr);max-width:640px">
+    <img src="field-footage-2026-08-05/frames/v2-5.jpg" alt="Draft 2 caption band, solid white with gold highlight">
+    <img src="field-footage-2026-08-05/frames/v2-34.4.jpg" alt="Draft 2 clean ending hold, no caption">
+  </div>
+  <p class="rule">Render: <code>~/Desktop/Shavit - 2026-08-04 Field Footage/A1-DRAFT2-Ewing-Tenant-Story.mp4</code> · 35.1s · 1080×1920 · 30fps. The Palmier project still points at the old <code>seg2_clean.mp4</code> and needs its second clip replaced with <code>seg2_fixed.mp4</code> before it is re-rendered from there.</p>
+</div>
+
+<h2 data-annot="sec-open">Open questions</h2>
+<ol>
+  <li><b>The three names in C1.</b> Keep the Home Depot shout-out and the two referral names, or cut to the substance? Recommend cutting — the reel is stronger tight, and it removes a claim about a third party's pricing from a public account.</li>
+  <li><b>Consent for C2 and C3.</b> Jon Rutan and the VP of administration are both filmed, not merely mentioned. Being named in a July caption is not consent to appear on camera.</li>
+  <li><b>Does A4 get formally retired?</b> If C1 performs, the case for ever running dollar figures gets weaker, not stronger. Worth deciding once rather than re-litigating every time he shoots a numbers clip.</li>
+  <li><b>The standing ask.</b> He has now shot thirteen usable items in two days with a phone and no plan. The content problem is solved for as long as that continues. Ask him to keep doing exactly this on every site visit — and to say the property name at the top of every clip, which would remove most of the identification work from this pipeline.</li>
+</ol>
+
+</div>
+<script src="../../spec-annotate.js"></script>
+</body>

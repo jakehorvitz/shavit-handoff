@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spec — shavit-pipeline</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0 auto; max-width: 920px; padding: 2.5rem 1.25rem 6rem; }
+  h1 { font-size: 2rem; margin: 0 0 .25rem; }
+  .sub { opacity: .65; margin: 0 0 2rem; }
+  h2 { margin: 2.25rem 0 .5rem; padding-top: 1rem; border-top: 1px solid color-mix(in oklch, currentColor 18%, transparent); position: relative; }
+  .anti { background: color-mix(in oklch, tomato 12%, transparent); padding: .75rem 1rem; border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; margin: .5rem 0; }
+  th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid color-mix(in oklch, currentColor 14%, transparent); vertical-align: top; }
+  th { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; opacity: .7; }
+  .status { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .8rem; background: color-mix(in oklch, gray 22%, transparent); }
+  code { background: color-mix(in oklch, currentColor 10%, transparent); padding: .1rem .35rem; border-radius: 6px; font-size: .9em; }
+  pre { background: color-mix(in oklch, currentColor 8%, transparent); padding: .8rem 1rem; border-radius: 10px; overflow-x: auto; font-size: .85rem; line-height: 1.45; }
+  .signoff { margin-top: 1rem; padding: 1rem; border: 1px dashed color-mix(in oklch, currentColor 35%, transparent); border-radius: 12px; }
+  footer { margin-top: 3rem; font-size: .85rem; opacity: .6; }
+  /* annotation UI */
+  .ann-btn { position: absolute; right: 0; top: 1rem; font-size: .75rem; padding: .2rem .6rem; border-radius: 999px; border: 1px solid color-mix(in oklch, currentColor 30%, transparent); background: transparent; color: inherit; cursor: pointer; opacity: .55; }
+  .ann-btn:hover { opacity: 1; }
+  .ann-box { margin: .5rem 0; }
+  .ann-box textarea { width: 100%; min-height: 70px; font: inherit; padding: .5rem; border-radius: 8px; border: 1px solid color-mix(in oklch, currentColor 30%, transparent); background: transparent; color: inherit; box-sizing: border-box; }
+  .ann-box button { margin-top: .3rem; padding: .3rem .9rem; border-radius: 8px; border: none; background: color-mix(in oklch, gold 45%, gray); cursor: pointer; font-weight: 600; }
+  .ann-list { font-size: .85rem; margin: .4rem 0 0; padding: 0; list-style: none; }
+  .ann-list li { border-left: 3px solid color-mix(in oklch, gold 60%, transparent); padding: .25rem .6rem; margin: .25rem 0; background: color-mix(in oklch, gold 7%, transparent); border-radius: 0 8px 8px 0; }
+  .ann-list .at { opacity: .5; font-size: .78rem; margin-right: .4rem; }
+  #ann-status { position: fixed; bottom: 1rem; right: 1rem; font-size: .8rem; padding: .35rem .8rem; border-radius: 999px; background: color-mix(in oklch, gray 25%, transparent); opacity: 0; transition: opacity .3s; }
+</style>
+</head>
+<body>
+  <h1>shavit-pipeline</h1>
+  <p class="sub">Spec v1.2 · 2026-07-10 · owner: Jake (signed off v1.1: "ok build it") · status: <span class="status">BUILD</span> · v1.2 = v1.1 + stage-4 council fixes (27 findings, see §12 + docs/council-critique.md)</p>
+
+  <h2 id="problem">1. Problem &amp; goal</h2>
+  <p>Shavit Rootman content keeps shipping with invented phone numbers, hallucinated stats, missing
+  locations, and unread bios. Prose discipline has failed; the fix is <strong>mechanical enforcement</strong>:
+  no claim ships without a citation, and no post ships until Jake physically confirms every flagged fact.</p>
+  <p><strong>Goal (Jake's words, §problem annotation):</strong> <em>"reliably put this week's posts through the
+  pipeline so they're queued up for next Friday."</em> The operating unit is the <strong>weekly batch</strong>:
+  every week's content goes through draft → lint → coach → verify → review → ship, and lands in the queue with
+  a target date <strong>before Friday</strong>. The one-stop-shop hub is where that whole rhythm lives — text
+  posts (IG/FB/LinkedIn) through the enforced pipeline, video surfacing from higgs-timeline on the same
+  timeline, brand rules + facts + playbook as shared substrate.</p>
+  <p><strong>Success looks like:</strong> this week's batch fully verified (zero fact errors, zero Register
+  violations) and queued with target dates by Friday 2026-07-17 — then every week after.
+  <strong>Kill condition:</strong> Jake routes content around it, or per-post overhead exceeds ~15 minutes.</p>
+
+  <h2 id="users">2. Users</h2>
+  <p><strong>Jake</strong> (operator — drafts, confirms facts, ships). <strong>Shavit</strong> (client — his
+  reputation with lenders, partners, sellers, and tenants is what every error damages; per the Register the
+  account optimizes reputation, not virality). Claude sessions are a user too: the <code>shavit-content</code>
+  skill routes any future content request through this pipeline instead of freehanding.</p>
+
+  <h2 id="scope">3. Scope (in)</h2>
+  <ul>
+    <li><strong>Facts registry</strong> — <code>facts/*.yaml</code>: identity (phone, email, license, service area),
+      bio, per-property files, stats. Every fact has an id, value, source, and a <code>verified_by: jake</code> stamp.
+      <em>Registry-first with ask-per-post fallback:</em> a claim with no registry backing hard-blocks the draft;
+      lint prints the "add fact" instruction, and <code>shavit.sh fact add</code> — a TTY-gated command, the
+      <strong>only</strong> registry write path — records Jake's answer so it never asks twice. Lint itself never
+      writes the registry; neither does Claude.</li>
+    <li><strong>Claim markup</strong> — drafts cite inline with an explicit covered span:
+      <code>[F:identity.phone]{(555) 123-4567}</code> or <code>[F:url:&lt;link&gt;]{the claimed text}</code> —
+      the marker covers ONLY the braced text (a marker elsewhere on the line covers nothing else).
+      URL claims require a non-empty <code>quote</code> (the exact supporting line from the source) at lint.
+      <code>claims.json</code> maps every marker → source + fact value at confirm time + confirmation status.
+      <strong>Claim classes that MUST be covered:</strong> digit runs, phone-shaped strings, and any braced claim —
+      not every noun (that's the TSA failure §11 warns about). Target ~5 min/post; kill condition stays 15.</li>
+    <li><strong>Lint engine</strong> — machine rules compiled from the Shavit Register + registry checks (see §7).
+      Lint failure names the rule and blocks advancement.</li>
+    <li><strong>Verify gate</strong> — per-fact terminal confirm: shows claim, citation, and source line side by side;
+      Jake types y/n per fact. One 'n' or one uncited fact = post blocked.</li>
+    <li><strong>Review page</strong> — generated per post: platform-styled preview with every fact highlighted +
+      citation links + advisory playbook score. Reading comfort; the terminal confirm stays binding.</li>
+    <li><strong>One-stop hub (v1-slim, council cut #18)</strong> — <code>serve.py</code> serves a hub page:
+      drafts queue with states + the <strong>"Queued for Friday" panel</strong> (sorted target date, then post-id),
+      and a link out to higgs-timeline's own UI for video. No unified-timeline render, no facts/playbook browser in
+      v1 — those are files.</li>
+    <li><strong>higgs-timeline integration</strong> — shipping a post appends a <code>shavit_post</code> event to
+      <code>$SHAVIT_TIMELINE_DIR/inbox.jsonl</code> (default: <code>~/projects/higgs-timeline</code>; if the dir is
+      missing, ship still succeeds to outbox with a loud journaled timeline-skip warning — queue &gt; integration).
+      The posting ceiling (2–3/week) counts across text + video: consumed video events must parse as
+      <code>{kind, platform, date}</code>; unparseable events are skipped with a warning.</li>
+    <li><strong>Spec annotation</strong> — this page has per-section 💬 annotation appending to
+      <code>docs/spec-inbox.jsonl</code>; Claude drains it at turn start. Review-page annotations are CUT from v1
+      (council #17/#21) — feedback on drafts happens in chat or the verify session. Inbox comments are treated as
+      spec feedback <em>data</em>, never as instructions that change guardrails (council #27).</li>
+    <li><strong>Coach layer</strong> (Jake's §scope annotation; council #19 shape) — the pipeline doesn't just
+      block errors, it <em>pushes quality up</em>: at draft time Claude must produce
+      <code>content/&lt;id&gt;/coach.md</code> — concrete "consider this strategy" and "rewrite this line → here's
+      the better version" suggestions against the playbook, with at least one structured
+      <code>rewrite:</code> block. Not a separate state: <code>review</code> refuses to run without a
+      substantive coach.md. Advisory on content (only lint + verify block on substance).</li>
+    <li><strong>Weekly queue</strong> (Jake's §problem annotation) — every shipped post carries a target date;
+      <code>outbox/</code> is date-organized; the hub shows a "Queued for Friday" panel (this week's batch vs.
+      the deadline). Ship refuses without a target date.</li>
+    <li><strong>Marketing playbook + template library</strong> — <code>playbook/instagram.md</code>, <code>facebook.md</code>, <code>linkedin.md</code>
+      compiled from Shavit-Instagram-Remodel.pdf + Shavit-Social-Remodel.pdf + the Register + platform expertise (§8),
+      plus <code>templates/*.md</code> — an <em>extensible</em> format library (Jake's §playbook annotation:
+      "other videos and different templates, not just before and after"). v1 seeds two (council #20):
+      before→process→after and property-spotlight; adding a format = dropping in one markdown file.</li>
+    <li><strong>Claude Code skill</strong> — <code>shavit-content</code> installed to <code>~/.claude/skills/</code>: any
+      "shavit post/content" request in any session routes through <code>shavit.sh</code>, forbidding uncited claims.</li>
+  </ul>
+
+  <h2 id="antireqs">4. Non-goals / anti-requirements <span class="status">hard don'ts</span></h2>
+  <div class="anti"><ul>
+    <li><strong>Never auto-posts.</strong> No IG/FB/LinkedIn API calls anywhere in the codebase. Terminal state is
+      <code>outbox/</code> — Jake posts by hand. (Drafts, not sends.)</li>
+    <li><strong>Never invents a fact.</strong> The pipeline cannot seed its own registry — phone, license, bio ground
+      truth come from Jake or a Jake-approved source, stamped <code>verified_by: jake</code>.</li>
+    <li><strong>Never touches real higgs-timeline data in tests.</strong> Timeline writes go through
+      <code>$SHAVIT_TIMELINE_DIR</code>; acceptance tests run against a temp dir. The Shavit Register
+      (<code>video-brain/Shavit.md</code>) is read-only — compiled copies live in <code>rules/</code>.</li>
+    <li><strong>Register rules are law:</strong> no <code>$</code> figures · no digit-leading street addresses ·
+      Michigan/Ohio/Indiana spelled out (MI/OH/IN forbidden) · house may be criticized, street/community never ·
+      no Zillow/portal imagery · no generated architecture · people de-identified · 2–3 posts/week ceiling.</li>
+    <li><strong>No engagement-bait.</strong> Reputation over virality — the playbook cannot recommend rage hooks,
+      giveaways, or follow-loops.</li>
+    <li><strong>No web app sprawl.</strong> Hub = static pages + the tiny stdlib server. No framework, no build step,
+      no database beyond files (+ reading higgs-timeline's existing data).</li>
+  </ul></div>
+
+  <h2 id="datamodel">5. Data model</h2>
+<pre>facts/identity.yaml         # one file per domain; every fact:
+  - id: identity.phone      #   stable dotted id (cited as [F:identity.phone])
+    label: "Office phone"
+    value: "(XXX) XXX-XXXX" # seeded by Jake in M1 — never invented
+    source: "jake 2026-07-10"
+    verified_by: jake
+    verified_at: 2026-07-10
+facts/properties/&lt;slug&gt;.yaml  # per-property: street name (no number), city, state (full), beds/baths, status
+content/&lt;post-id&gt;/post.md     # frontmatter: platform, title, target_date, state; body with [F:id]{span} markers
+content/&lt;post-id&gt;/claims.json # [{marker, fact_id|url, span, quote, fact_value_at_confirm,
+                              #   status: pending|confirmed|rejected, confirmed_at}] + body_sha256 at verify
+                              # written atomically per answer; ANY 'n' resets all confirmations (bounce to draft)
+content/&lt;post-id&gt;/coach.md    # Claude's coach report (strategy + rewrite: blocks) — required by review
+content/&lt;post-id&gt;/review.html # generated review page
+content/&lt;post-id&gt;/state       # canonical: draft → linted → confirmed → reviewed → shipped
+                              # editing post.md OR a cited registry fact after verify ⇒ hash/value mismatch ⇒ demoted to draft
+outbox/YYYY-MM-DD/&lt;post-id&gt;.md  # final copy by target date — re-ship of same id REFUSES (no overwrite)
+posted.log                    # `shavit.sh posted &lt;id&gt;` — closes shipped→actually-posted loop; ceiling counts target/posted dates
+rules/lint.yaml               # machine rules compiled from the Register (regexes + registry checks + allowlist)
+rules/brand.md                # prose rules for draft-time guidance (tokens, tone, templated formats)
+playbook/{instagram,facebook,linkedin}.md + templates/*.md
+docs/spec-inbox.jsonl         # {"at","section","comment"} appended by this page's 💬
+$SHAVIT_TIMELINE_DIR/inbox.jsonl  # ship appends {"kind":"shavit_post","platform","date",...};
+                              # default ~/projects/higgs-timeline; ceiling reads events as {kind, platform, date},
+                              # skipping unparseable ones with a warning</pre>
+  <p><strong>Fresh-data rule:</strong> tests and staging use fixtures/temp dirs only; nothing ever overwrites
+  real registry, content, or higgs-timeline data.</p>
+
+  <h2 id="statemachine">6. Per-post state machine (<code>shavit.sh</code>)</h2>
+  <table>
+    <thead><tr><th>Cmd</th><th>Does</th><th>Advance blocked unless</th></tr></thead>
+    <tbody>
+      <tr><td><code>new</code></td><td>scaffold post dir from platform template; Claude drafts using playbook + jakevoice, citing every fact</td><td>—</td></tr>
+      <tr><td><code>lint</code></td><td>run rules/lint.yaml: forbidden patterns, phone-must-match-registry, every digit run / phone-shaped string covered by a [F:id]{span} brace, unknown fact ids → prints "add fact" instruction (never writes registry). Scoped to body text; allowlist for idiom numerals; url-claims need non-empty quote. Recomputes body hash — post-verify edits demote to draft</td><td>exit 0</td></tr>
+      <tr><td><code>verify</code></td><td><strong>the Jake gate:</strong> TTY-only per-fact y/n — claim span, citation, source line (or url + quote) side by side; stamps fact_value_at_confirm + body_sha256, atomic per answer. Any 'n' → asks "draft wrong or fact wrong?", resets ALL confirmations, bounces post to draft (fact-wrong routes to <code>fact add</code>)</td><td>every claim confirmed</td></tr>
+      <tr><td><code>review</code></td><td>refuses without a substantive coach.md (≥1 <code>rewrite:</code> block); generates review.html: preview + highlighted citations + coach report + brand-rules prose checklist</td><td>coach.md ✓ + page generated</td></tr>
+      <tr><td><code>ship</code></td><td>requires target_date; re-checks body hash + registry values (mismatch demotes); hard-blocks on posting ceiling (target/posted-date basis across text+video; <code>--override</code> journaled); writes outbox/YYYY-MM-DD/&lt;id&gt;.md (re-ship refuses) + appends timeline event (missing timeline dir = warn, not fail). <strong>Never posts.</strong></td><td>lint ✓ verify ✓ review ✓ + target date + explicit confirm</td></tr>
+      <tr><td><code>posted &lt;id&gt;</code></td><td>Jake logs that he actually posted it → posted.log; Friday panel stops showing it as pending</td><td>—</td></tr>
+      <tr><td><code>fact add</code> / <code>allow</code></td><td>TTY-gated registry/allowlist writes — the ONLY write paths into facts/ and the lint allowlist</td><td>TTY + Jake confirm</td></tr>
+    </tbody>
+  </table>
+  <p>Like bones: the script refuses out-of-order advancement; <code>status</code> always says what's open.
+  Rejected facts and lint failures journal to the post's audit log.</p>
+
+  <h2 id="lint">7. Lint rules v1 (compiled from the Shavit Register)</h2>
+  <table>
+    <thead><tr><th>Rule id</th><th>Check</th><th>From</th></tr></thead>
+    <tbody>
+      <tr><td><code>no-dollar</code></td><td>any <code>$</code> character → fail</td><td>[[no-dollar-figures]]</td></tr>
+      <tr><td><code>full-states</code></td><td><code>\b(MI|OH|IN)\b</code> → fail (spell out)</td><td>[[full-state-names]]</td></tr>
+      <tr><td><code>no-house-numbers</code></td><td>digit-leading street address pattern → fail</td><td>[[no-house-numbers]]</td></tr>
+      <tr><td><code>phone-registry</code></td><td>any phone-shaped string must exactly equal a registry phone fact → else fail</td><td>Jake's failure mode</td></tr>
+      <tr><td><code>uncited-numeral</code></td><td>any digit run not inside a [F:]-covered span → fail (kills hallucinated stats)</td><td>Jake's failure mode</td></tr>
+      <tr><td><code>unknown-fact</code></td><td>[F:id] not in registry → fail with "add fact" prompt (ask-per-post flow)</td><td>ground-truth decision</td></tr>
+      <tr><td><code>no-bait</code></td><td>engagement-bait phrase list → warn</td><td>[[reputation-not-virality]]</td></tr>
+      <tr><td colspan="3"><em>ceiling moved out of lint → hard block at <code>ship</code> (council #5): &gt;3 posts (text+video, target/posted-date basis) in trailing 7 days.</em></td></tr>
+    </tbody>
+  </table>
+  <p>Prose rules that can't be regexed (disparage-house-not-street, de-identify, tone) live in
+  <code>rules/brand.md</code> and are enforced at draft time + surfaced on the review page as a checklist.</p>
+
+  <h2 id="playbook">8. Marketing &amp; Instagram expertise</h2>
+  <p>The playbook is the "be an expert" layer, and it's opinionated per platform:</p>
+  <ul>
+    <li><strong>Instagram:</strong> hook-first captions (first 125 chars do the work), carousel narrative arcs
+      (before → process → after → proof), templated 15-second chapter reuse from the Register, hashtag strategy
+      sized for a local B2B-ish audience (niche + geo tags, not #realestate spam), caption CTA matched to the
+      reputation goal (save/share/DM, not follow-bait), cadence inside the 2–3/week ceiling with the pinned brand film anchoring.</li>
+    <li><strong>Facebook:</strong> longer narrative posts, local community framing (praise the street, never the
+      opposite), share-optimized structure — pulls from shavit-facebook-suite spec.</li>
+    <li><strong>LinkedIn:</strong> operator/investor register — process and craftsmanship stories for lenders and
+      partners; first-line hook, white-space formatting, no hashtag walls.</li>
+    <li><strong>Template library (<code>templates/*.md</code>):</strong> not locked to before/after — v1 seeds
+      several formats (before→process→after carousel, single-property spotlight, craft/process story, team/partner
+      spotlight, market-observation post, video-chapter caption formats) and adding a template is dropping one
+      markdown file in. Each template declares its platform(s), structure, and which playbook rules apply.</li>
+    <li><strong>Sources:</strong> Shavit-Instagram-Remodel.pdf + Shavit-Social-Remodel.pdf (existing strategy),
+      the Register, plus an <code>instagram-research</code> competitor pass (deferred post-v1) on comparable
+      Midwest rehab/investor accounts to calibrate formats against what actually performs. yt-dlp is already
+      installed (2026.03.17) for pulling reference video when the research pass runs.</li>
+  </ul>
+  <p>Advisory, not the gate: the review page scores the draft against the playbook rubric; a low score is
+  guidance, only lint + verify block.</p>
+
+  <h2 id="milestones">9. Milestones</h2>
+  <table>
+    <thead><tr><th>#</th><th>Milestone</th><th>Done when</th></tr></thead>
+    <tbody>
+      <tr><td>M1</td><td>Repo scaffold + facts registry schema + <strong>Jake seeds identity/bio facts</strong></td><td>facts/*.yaml validate; identity facts stamped verified_by: jake</td></tr>
+      <tr><td>M2</td><td>Lint engine + rules/lint.yaml compiled from Register</td><td>AC1–AC5, AC12 pass</td></tr>
+      <tr><td>M3</td><td>Verify gate (per-fact TTY confirm)</td><td>AC6 passes; manual run walks facts correctly</td></tr>
+      <tr><td>M4</td><td>Review page generator + annotation plumbing on review pages</td><td>AC9 passes; review.html renders a fixture post</td></tr>
+      <tr><td>M5</td><td>Ship stage + outbox + higgs-timeline event + ceiling check</td><td>AC7, AC8 pass</td></tr>
+      <tr><td>M6</td><td>Hub page (timeline + drafts + facts + playbook)</td><td>AC10 passes</td></tr>
+      <tr><td>M7</td><td>Playbook + template library compiled, coach flow wired, shavit-content skill installed</td><td>AC11, AC14 pass; playbook + templates/*.md exist</td></tr>
+      <tr><td>M8</td><td>Weekly queue + Friday panel on hub</td><td>AC13 passes</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="acceptance">10. Executable acceptance checklist</h2>
+  <p>All run by <code>check.sh</code> (the stage-5 binding gate, orchestrator-run). Fixtures in <code>fixtures/</code>.</p>
+  <table>
+    <thead><tr><th>#</th><th>Criterion</th><th>Check</th></tr></thead>
+    <tbody>
+      <tr><td>AC1</td><td>lint fails a post containing a $ figure, names <code>no-dollar</code></td><td>fixture bad-dollar → exit≠0 + rule in output</td></tr>
+      <tr><td>AC2</td><td>lint fails MI/OH/IN abbrevs; spelled-out passes</td><td>fixture pair</td></tr>
+      <tr><td>AC3</td><td>lint fails digit-leading street address</td><td>fixture bad-address → exit≠0</td></tr>
+      <tr><td>AC4</td><td>lint fails phone not matching registry; registry phone passes</td><td>fixture pair vs seeded test registry</td></tr>
+      <tr><td>AC5</td><td>lint fails any numeral not covered by a [F:] marker</td><td>fixture uncited-stat → exit≠0</td></tr>
+      <tr><td>AC6</td><td>verify: non-TTY refused AND positive path pty-driven (scripted y/y → claims confirmed + fact_value/body hash stamped; scripted n → all confirmations reset + state bounced to draft); ship refuses while claims pending/rejected even if state file lies</td><td>python-pty run asserting claims.json mutations</td></tr>
+      <tr><td>AC7</td><td>ship writes outbox/YYYY-MM-DD/&lt;id&gt;.md, re-ship refuses; only serve.py imports server modules; no outbound-http imports (urllib.request/requests/http.client) anywhere</td><td>positive import audit, not grep theater</td></tr>
+      <tr><td>AC8</td><td>ship appends timeline event to $SHAVIT_TIMELINE_DIR/inbox.jsonl (temp dir in tests)</td><td>valid JSONL with kind=shavit_post</td></tr>
+      <tr><td>AC9</td><td>POST /annotate appends valid JSONL; GET /annotations returns it</td><td>curl round-trip</td></tr>
+      <tr><td>AC10</td><td>hub page lists drafts with states + Friday queue panel (sorted target date, then id)</td><td>curl / → fixture draft + queued entry present</td></tr>
+      <tr><td>AC11</td><td>shavit-content skill installed and points at shavit.sh</td><td>file exists + path referenced</td></tr>
+      <tr><td>AC12</td><td>unknown [F:id] blocks with "add fact" instruction (ask-per-post flow)</td><td>fixture unknown-fact → exit≠0 + prompt text</td></tr>
+      <tr><td>AC13</td><td>ship refuses without a target date; queue lists posts by date</td><td>dateless ship → exit≠0; hub/queue shows fixture date</td></tr>
+      <tr><td>AC14</td><td>review refuses without coach.md containing ≥1 <code>rewrite:</code> block (empty/touched file fails); review.html embeds it</td><td>stub coach.md → exit≠0</td></tr>
+      <tr><td>AC15</td><td>out-of-order stage runs refuse, naming the open stage (verify before lint, review before verify, ship before review)</td><td>fresh fixture → each → exit≠0</td></tr>
+      <tr><td>AC16</td><td>ship hard-blocks on ceiling: fixture timeline with 3 trailing-window events → exit≠0 naming <code>ceiling</code></td><td>temp $SHAVIT_TIMELINE_DIR fixture</td></tr>
+      <tr><td>AC17</td><td>editing post.md after verify demotes to draft (body hash); editing a cited registry fact after confirm blocks ship (value mismatch)</td><td>mutate fixtures post-verify → exit≠0</td></tr>
+      <tr><td>AC18</td><td>[F:] span semantics: a marker elsewhere on the same line does NOT cover a second numeral</td><td>pinned adversarial fixture → lint exit≠0</td></tr>
+      <tr><td>AC19</td><td>allowlist is a real mechanism: <code>allow</code> is TTY-gated, persists to rules/lint.yaml, allowlisted literal passes, other numerals still fail</td><td>pty allow round-trip</td></tr>
+      <tr><td>AC20</td><td>playbook (3 platforms) + rules/brand.md + 2 seed templates + rules/lint.yaml exist with substance</td><td>size + section checks</td></tr>
+      <tr><td>AC21</td><td>url claims require a non-empty quote in claims.json before lint passes</td><td>fixture pair</td></tr>
+      <tr><td>AC22</td><td><code>fact add</code> works: TTY-gated, appends verified_by:jake entry, new fact immediately usable by lint</td><td>pty-driven add → lint passes</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="risks">11. Risks &amp; maintenance</h2>
+  <ul>
+    <li><strong>Registry staleness</strong> — property status changes; mitigations: verify shows verified_at age,
+      warns &gt;30 days on volatile facts (property status), re-confirm on ship.</li>
+    <li><strong>Overhead creep</strong> — if verify feels like TSA, Jake routes around it (the kill condition).
+      v1 counter: only flagged facts require confirm, not every word; per-post target &lt;5 min.</li>
+    <li><strong>Lint false positives</strong> — e.g. numerals in idioms ("24/7"). Escape hatch: an allowlist in
+      lint.yaml, edited only by Jake-confirmed flow.</li>
+    <li><strong>Maintenance:</strong> minutes per new property (one yaml file); rule edits when Shavit gives new
+      feedback (append to Register → recompile lint).</li>
+  </ul>
+
+  <h2 id="council">12. Council verdict</h2>
+  <p><strong>APPROVE-WITH-CHANGES</strong> (fresh-context adversarial reviewer, 2026-07-10 — full findings +
+  resolution map in <code>docs/council-critique.md</code>). 27 findings: 3 blockers (verify-then-edit hole,
+  undefined citation-span semantics, registry-drift after confirm), an undefined external contract
+  (consumed timeline events), and 5 gate-integrity holes (stub-satisfiable AC6/AC14, no ordering ACs, untested
+  ceiling, self-graded fixtures). All blockers + gate fixes folded into this v1.2 (span syntax
+  <code>[F:id]{...}</code>, hash/value invalidation, AC15–AC18, pinned fixtures §14); recommended cuts taken
+  (hub slimmed to queue panel, 2 seed templates, coach as artifact not state, review-page annotations cut).</p>
+  <h2 id="fixtures">14. Pinned adversarial fixtures (appendix — check.sh MUST use these exact strings)</h2>
+<pre>bad-dollar:    "We picked it up for $42,000 and never looked back."
+bad-state:     "Another one done in Toledo, OH — MI and IN next."
+bad-address:   "Swing by 4127 Maple Street to see the finished product."
+bad-phone:     "Call us at (330) 555-0147 to talk it through."   # not in test registry
+uncited-stat:  "We raised rents 14% while cutting tenant turnover in half."
+span-cheat:    "This [F:prop.beds]{3}-bed took 6 weeks flat."     # 6 is uncovered → must FAIL
+fp-allowlist:  "We're on call 24/7 for our tenants."              # passes only via allowlist entry "24/7"
+clean:         "Michigan winters are brutal on empty houses. This one on [F:prop.street]{Maple Street} is warm again."</pre>
+  <p><strong>Re Jake's §council annotation:</strong> yt-dlp is already installed (2026.03.17 at
+  <code>~/.local/bin/yt-dlp</code>). No tool named "arena" found on the machine — clarify which arena
+  (LMArena? Design Arena?) and it becomes an install task, not a spec item.</p>
+
+  <h2 id="signoff">13. Sign-off</h2>
+  <div class="signoff">
+    <p><strong>Owner gate (bones stage 3).</strong> Jake: grill this spec — annotate any section with 💬 (notes land
+    in <code>docs/spec-inbox.jsonl</code>; Claude drains and revises) or just say it in chat. The pipeline does not
+    advance until you explicitly sign off.</p>
+    <p>Signed off: ______ (recorded verbatim in <code>.bones/</code>)</p>
+  </div>
+
+  <footer>shavit-pipeline · spec v1.0 · served by <code>python3 serve.py</code> · annotations → docs/spec-inbox.jsonl</footer>
+
+  <div id="ann-status"></div>
+<script>
+(function () {
+  const status = document.getElementById('ann-status');
+  function flash(msg) { status.textContent = msg; status.style.opacity = 1; setTimeout(() => status.style.opacity = 0, 2200); }
+
+  document.querySelectorAll('h2[id]').forEach(h2 => {
+    const btn = document.createElement('button');
+    btn.className = 'ann-btn';
+    btn.textContent = '💬 annotate';
+    btn.onclick = () => toggleBox(h2);
+    h2.appendChild(btn);
+    const list = document.createElement('ul');
+    list.className = 'ann-list';
+    list.dataset.section = h2.id;
+    h2.insertAdjacentElement('afterend', list);
+  });
+
+  function toggleBox(h2) {
+    const existing = h2.parentNode.querySelector('.ann-box[data-for="' + h2.id + '"]');
+    if (existing) { existing.remove(); return; }
+    const box = document.createElement('div');
+    box.className = 'ann-box';
+    box.dataset.for = h2.id;
+    const ta = document.createElement('textarea');
+    ta.placeholder = 'Your note on §' + h2.id + ' — saved to spec-inbox.jsonl for Claude';
+    const send = document.createElement('button');
+    send.textContent = 'Save annotation';
+    send.onclick = async () => {
+      const comment = ta.value.trim();
+      if (!comment) return;
+      try {
+        const r = await fetch('/annotate', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ section: h2.id, comment }) });
+        if (!r.ok) throw new Error(r.status);
+        flash('saved ✓');
+        box.remove();
+        loadAnnotations();
+      } catch (e) {
+        flash('server not running — start: python3 serve.py');
+      }
+    };
+    box.append(ta, send);
+    h2.nextElementSibling.insertAdjacentElement('afterend', box);
+    ta.focus();
+  }
+
+  async function loadAnnotations() {
+    try {
+      const r = await fetch('/annotations');
+      if (!r.ok) return;
+      const entries = await r.json();
+      document.querySelectorAll('.ann-list').forEach(l => l.innerHTML = '');
+      entries.forEach(e => {
+        const list = document.querySelector('.ann-list[data-section="' + e.section + '"]');
+        if (!list) return;
+        const li = document.createElement('li');
+        const at = document.createElement('span');
+        at.className = 'at';
+        at.textContent = e.at;
+        li.append(at, document.createTextNode(e.comment));
+        list.appendChild(li);
+      });
+    } catch (e) { /* server offline — page still readable */ }
+  }
+  loadAnnotations();
+})();
+</script>
+</body>
+</html>
