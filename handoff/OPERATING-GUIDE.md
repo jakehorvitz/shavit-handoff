@@ -8,9 +8,9 @@ Shavit's brand presents a real Midwest property operator and the teams doing the
 
 - Use direct, restrained copy. State the standard and the advantage; avoid generic praise and competing-property comparisons.
 - Credit the real team where appropriate. Get name-specific permission for crew features.
-- Common content treatment: black canvas, white uppercase type, brass rules and gold mark, Inter. Some approved social designs use SF Pro/DM Sans substitutions. The website has its own navy/orange/gold tokens: preserve the actual implementation rather than imposing the reel palette on it.
+- Common content treatment: black canvas, white uppercase type, brass rules and gold mark, Inter. Some approved social designs use SF Pro/DM Sans substitutions. The current website uses black, white, brass and gold, with secondary navy surfaces. Preserve its actual design tokens and surface-specific treatment; early navy/orange specs are historical.
 - Use real, source-traced property photographs. Do not manufacture architectural proof or combine different houses into a before/after.
-- Public content uses street names or project nicknames, full state names and verified facts. The current content pipeline prohibits dollar figures and house numbers. Full identifiers may remain in internal source filenames and stable URL slugs; their presence is not an instruction to display them publicly.
+- Social/reel editorial overlays use street names or project nicknames, full state names and verified facts. The current social content pipeline prohibits dollar figures and house numbers. The authored website has surface-specific approved listing addresses and case-study figures; preserve those exceptions and check the website guide instead of applying social-overlay rules globally. Full identifiers also remain in internal filenames and stable URL slugs.
 - Copy should add the WHY instead of narrating the visible WHAT. The August 25 Howder feedback is the reference for advantage-led copy.
 - The current brand rules state a 2–3 posts/week ceiling. Older two-per-day and 4–6/week planning documents are historical proposals.
 

@@ -2,6 +2,8 @@
 
 Private archive of Jake's Shavit website, design, marketing, content, editing and operating work, assembled **September 8, 2026** for the person taking over.
 
+**[Media delivery status](handoff/UPLOAD-STATUS.md)** — check here before downloading the full media set.
+
 **Start with [START HERE](handoff/START-HERE.md).** The code, written specs, PDFs, captions and guides are browsable here. Original photos, video/audio, render frames and editor media are attached to this repository's private [handoff release](https://github.com/jakehorvitz/shavit-handoff/releases/tag/handoff-2026-09-08). They restore to their original project-relative locations with the command below. The inventory includes finished work, alternatives, experiments and unfinished drafts; an archived file is not evidence of permission to publish it.
 
 ## Get the files

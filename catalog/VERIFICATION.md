@@ -15,3 +15,5 @@
 Remote upload verification is added after all release assets arrive.
 
 The adjacent August 29 competitor report was subsequently added and hashed, bringing the recovered source catalog to 10,595 files.
+
+The complete GitHub source snapshot was published through the GitHub API; its Git tree SHA exactly matched the local source snapshot. Large release uploads are still running; see `handoff/UPLOAD-STATUS.md`. A resumable job verifies every remote media checksum before publishing the release and updating that status.

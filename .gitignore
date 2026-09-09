@@ -1,3 +1,4 @@
+/.handoff-upload/
 # Restored media and download cache are local; authoritative copies are in private releases.
 .handoff-cache/
 node_modules/
