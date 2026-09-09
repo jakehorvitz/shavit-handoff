@@ -1,0 +1,152 @@
+{
+  "status": "complete",
+  "verified_at": "2026-09-09T11:31:01.152852+00:00",
+  "repository_private": true,
+  "media_archives": 23,
+  "assets": [
+    {
+      "name": "shavit-media-001.tar",
+      "bytes": 888606720,
+      "sha256": "b5762ce41e5ea4698039832be9a4d5c9b678d36ebe3a78cada13d6259472b2ff",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-002.tar",
+      "bytes": 835358720,
+      "sha256": "9afb3fc3aef1de79daa48a3c038d0aedade184ab4ffca6defa28646f561cc0fa",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-003.tar",
+      "bytes": 744622080,
+      "sha256": "b6f1cc2ab2afc9f671c7fbcbb05690fa88ac8c39b3e4b2aa96fa9c7adca85c33",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-004.tar",
+      "bytes": 592865280,
+      "sha256": "9347ca5fbd8d9a849d89113eca50e4456aaca314dec472c468bead623b155d7c",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-005.tar",
+      "bytes": 889651200,
+      "sha256": "9e319c605bb05b3c3b2a84f53ec7121d29873a2fb07330105ba6217c78bc4c73",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-006.tar",
+      "bytes": 786974720,
+      "sha256": "c2b3392acff565e556bf1806b8cef5de362f1497ec5be208ee503d465e846ee0",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-007.tar",
+      "bytes": 890071040,
+      "sha256": "30ff59de591e1792e6a7b34d3a76f72dc895ff1351b60e23e86bbc75e736ea94",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-008.tar",
+      "bytes": 880394240,
+      "sha256": "c783271e845e4b588d5f1209146a66ded55039ac2c58065833bd543faea0565a",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-009.tar",
+      "bytes": 850155520,
+      "sha256": "49cec191a9b67e285e3eb861bc4e4149eb4e8b9c95d34dbe96a1411c7d524b31",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-010.tar",
+      "bytes": 874905600,
+      "sha256": "fea29627962820a09db50aede5ec1bb4d668de1d32241c5390def58defc20172",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-011.tar",
+      "bytes": 760166400,
+      "sha256": "15617731481a7e47159c491cf99cab1f3842ae76b55cfdf177fbe9d6b035bf6a",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-012.tar",
+      "bytes": 811980800,
+      "sha256": "3b16788ebb8c442cc8f71000ffb0f956f8b7a33a973e6393c180a53fbb9dcf00",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-013.tar",
+      "bytes": 878090240,
+      "sha256": "d475433dde9e4470542c876837ed9480fae2259ffd8458528581a75f363f87b5",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-014.tar",
+      "bytes": 840314880,
+      "sha256": "b1aee963a2c86c19409ca1b790ad3c5f1998c8188a5804e2d4ff9978f5c6f1c9",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-015.tar",
+      "bytes": 843417600,
+      "sha256": "83bb50f4fea06d04300ef7448731f90e9fd05a7209744fb08d3a390ef0d95564",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-016.tar",
+      "bytes": 888995840,
+      "sha256": "bd2e4df4637f38a82075bd24f468e9b071beef86e0bccbe9a97fb25819bff13c",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-017.tar",
+      "bytes": 890050560,
+      "sha256": "82980d709736c00e66c0d83c163bd81ff010446fcd5b67714ba0877417606195",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-018.tar",
+      "bytes": 879011840,
+      "sha256": "4dc56959e2199498417237989338cc435e504a84449da923708d66d15833d578",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-019.tar",
+      "bytes": 867174400,
+      "sha256": "c8269cad1bfb41da6f02580d50359a26b3c5ff96c63ead877b50696ab0e8b86d",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-020.tar",
+      "bytes": 889671680,
+      "sha256": "d62add5c1510e94a0641c3478b186a9a7676894a8c8fc37606a5e2f1ffbee434",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-021.tar",
+      "bytes": 887941120,
+      "sha256": "9804a1a1b0cc9d61567cfc11d6a2abf51947168e26b5a692d66f360a575aa9a8",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-022.tar",
+      "bytes": 890327040,
+      "sha256": "75156457c0cf0bdbbc9cb1f154d3b38fdbeb2a63ab0b87a25c3d1c87f1ac0d7f",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "shavit-media-023.tar",
+      "bytes": 518707200,
+      "sha256": "5e365fef664f4c7e30b41133ed97a41240946688e825adea6cca1333623b8137",
+      "verification": "GitHub SHA-256 digest"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 2001,
+      "sha256": "f3da4fcd987d112253c180a61414affc78f436451786d468cc868edf88759678",
+      "verification": "GitHub SHA-256 digest"
+    }
+  ]
+}
